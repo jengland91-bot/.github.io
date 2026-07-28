@@ -19,7 +19,8 @@
 | Open desert | Freeroam around the course | — |
 
 CA300 reference: [`source/reference/ca300/`](source/reference/ca300/)  
-Elevation bake: [`source/reference/elevation/`](source/reference/elevation/)
+Elevation bake: [`source/reference/elevation/`](source/reference/elevation/)  
+Google Earth paint guide: [`docs/EARTH_PAINT_GUIDE.md`](docs/EARTH_PAINT_GUIDE.md)
 
 ## Build the terrain in BeamNG (required once)
 
