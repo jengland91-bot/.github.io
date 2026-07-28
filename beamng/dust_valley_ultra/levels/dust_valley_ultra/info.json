@@ -1,14 +1,14 @@
 {
   "title": "Dust Valley Ultra",
-  "description": "Mid-to-big fast desert Ultra 4 park: sandy race loop with whoops, a valley speed cut, southern jump line, and technical rock trails off to the sides.",
+  "description": "Big desert Ultra 4 park (~16 km across): outer long course ~20 miles with whoops, valley, jumps, and side rock trails, plus a ~5 mile short course in the middle.",
   "authors": "Josh",
-  "features": "Fast desert loop, whoops field, valley cut, jump/tabletops, side rock trails, pits staging",
-  "suitablefor": "Ultra 4, desert racing, freestyle jumping, light rock crawling",
-  "roads": "Packed desert race corridor with dirt berms; no paved highway network",
+  "features": "20-mile long course, 5-mile short course, whoops, valley cut, jump line, side rock trails, pits staging",
+  "suitablefor": "Ultra 4, desert racing, short-course practice, freestyle jumping, light rock crawling",
+  "roads": "Packed desert long/short race corridors with dirt berms; no paved highway network",
   "biome": "Arid desert mesa / wash country",
   "country": "United States",
   "region": "northAmerica",
-  "size": [4096, 4096],
+  "size": [16384, 16384],
   "defaultSpawnPointName": "spawns_pits",
   "supportsTraffic": false,
   "supportsTimeOfDay": true,
@@ -26,31 +26,43 @@
   "spawnPoints": [
     {
       "translationId": "Pits / Staging",
-      "description": "Flat staging pad at the southwest corner. Default Ultra 4 start.",
+      "description": "Flat staging pad. Default start for long or short course.",
       "objectname": "spawns_pits",
       "preview": "preview.png"
     },
     {
+      "translationId": "Long Course Start",
+      "description": "Outer ~20 mile Ultra 4 desert loop.",
+      "objectname": "spawns_long_course",
+      "preview": "preview.png"
+    },
+    {
+      "translationId": "Short Course Start",
+      "description": "Inner ~5 mile short course in the middle of the park.",
+      "objectname": "spawns_short_course",
+      "preview": "preview.png"
+    },
+    {
       "translationId": "Whoops Entry",
-      "description": "Roll into the west whoops field on the main desert loop.",
+      "description": "West whoops field on the long course.",
       "objectname": "spawns_whoops",
       "preview": "preview.png"
     },
     {
       "translationId": "Valley Cut",
-      "description": "North valley speed section — keep it straight and committed.",
+      "description": "North valley speed section on the long course.",
       "objectname": "spawns_valley",
       "preview": "preview.png"
     },
     {
       "translationId": "Jump Line",
-      "description": "South tabletop / jump line for big Ultra 4 hits.",
+      "description": "South tabletop / jump line on the long course.",
       "objectname": "spawns_jumps",
       "preview": "preview.png"
     },
     {
       "translationId": "East Rock Trail",
-      "description": "Technical rock trail off the east side of the desert loop.",
+      "description": "Technical rock trail outside the east long-course arc.",
       "objectname": "spawns_rocks_east",
       "preview": "preview.png"
     },
@@ -64,8 +76,8 @@
   "minimap": [
     {
       "file": "minimap/terrain.png",
-      "size": [4096, 4096],
-      "offset": [-2048, 2048]
+      "size": [16384, 16384],
+      "offset": [-8192, 8192]
     }
   ],
   "timeOfDayPresets": [

@@ -1,0 +1,11 @@
+{
+  "worldSizeMeters": 16384.0,
+  "worldSizeMiles": 10.18,
+  "squareSize": 4.0,
+  "resolution": 4096,
+  "longCourseMiles": 20.52,
+  "shortCourseMiles": 4.93,
+  "longCourseMeters": 33019.8,
+  "shortCourseMeters": 7936.0,
+  "note": "Lengths are design polylines; final race distance may vary slightly after World Editor sculpting."
+}

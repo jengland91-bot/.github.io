@@ -1,28 +1,46 @@
 # Dust Valley Ultra
 
-Mid-to-big **fast desert Ultra 4** map for BeamNG.drive.
+Big **fast desert Ultra 4** map for BeamNG.drive.
 
-- **Size:** 4 km × 4 km (`4096` m)
-- **Feel:** open desert speed, whoops, valley cut, jumps
-- **Side content:** technical rock trails off the main loop
-- **Default spawn:** pits / staging (southwest)
+- **Park size:** ~16.4 km across (`16384` m / ~10.2 miles)
+- **Long course:** ~**20 miles** outer Ultra 4 desert loop (gold on minimap)
+- **Short course:** ~**5 miles** inner loop in the middle (cyan)
+- **Extras:** whoops, valley cut, jump line, side rock trails
+- **Default spawn:** pits / staging
 
 This repo ships the design, a 16-bit heightmap, spawn metadata, and World Editor build steps. BeamNG still needs a binary `.ter` terrain created/imported in the World Editor (that step is in-game).
 
+## Difficulty / feasibility
+
+Making the **bigger dual-course layout** is very doable from the design side — already updated here.
+
+What gets harder in BeamNG as the park grows:
+
+| Piece | Difficulty | Notes |
+| --- | --- | --- |
+| Design + heightmap + minimap colors | Easy–moderate | Done in this package |
+| World Editor heightmap import | Moderate | One-time; use `squareSize=4`, `maxHeight~280` |
+| Performance on a 16 km terrain | Moderate | 4 m samples keep memory sane; expect more LOD/prop care |
+| Exact measured 20.00 mi race | Harder later | Needs DecalRoads / checkpoints and a driven distance check |
+| Fine rock detail everywhere | Harder | 4 m grid is coarser than the old 2 m / 4 km park |
+
+So: **scaling to a literal ~20 mile course with a short course in the middle is realistic.** Perfect race-length certification and dense detailing are the longer follow-ups.
+
 ## Layout
 
-| Zone | What it is |
-| --- | --- |
-| Main desert loop | Fast Ultra 4 sand corridor with soft berms |
-| Whoops field | West/SW rhythmic whoops on the loop |
-| Valley cut | North speed wash / carved valley |
-| Jump line | South tabletops and lips |
-| East + NW rock trails | Technical rocky shelves off to the side |
-| Pits | Flat staging pad |
+| Zone | What it is | Minimap color |
+| --- | --- | --- |
+| Long course | Outer ~20 mi Ultra 4 desert loop | Gold |
+| Short course | Inner ~5 mi practice / sprint loop | Cyan |
+| Whoops field | West long-course whoops | Orange |
+| Valley cut | North speed wash | Blue |
+| Jump line | South tabletops | Red |
+| East / NW rock trails | Technical trails off the sides | Purple / Teal |
+| Pits | Staging pad | Green |
 
 Color overview: [`source/layout_overview.png`](source/layout_overview.png)
 
-**Minimap:** each trail is a different color (gold loop, orange whoops, blue valley, red jumps, purple east rocks, teal NW rocks, green pits). See [`source/trail_colors.json`](source/trail_colors.json).
+Measured lengths: [`source/course_lengths.json`](source/course_lengths.json) · color key: [`source/trail_colors.json`](source/trail_colors.json)
 
 ## Quick install (after terrain is built)
 
@@ -39,22 +57,19 @@ zip -r DustValleyUltra.zip levels
 
 ## Build the terrain in BeamNG (required once)
 
-BeamNG stores terrain in a binary `.ter` file. Use the heightmap we generated:
-
 1. In BeamNG, open **World Editor**.
 2. Create a **Starter Level**, rename/move it to `levels/dust_valley_ultra` (or copy our `info.json` + `main/` into your new level folder).
 3. Terrain Editor → **Heightmap Import**.
-4. Import `source/heightmap_2048.png` with:
-   - **Resolution:** 2048
-   - **squareSize:** `2` (world = 4096 m)
-   - **maxHeight:** about `180`
+4. Import `source/heightmap_4096.png` with:
+   - **Resolution:** 4096
+   - **squareSize:** `4` (world = 16384 m)
+   - **maxHeight:** about `280`
 5. Save the level (this writes the `.ter`).
 6. Paint materials:
-   - loop / whoops / valley floor → desert sand / dirt groundmodels
-   - rock trails → rock / gravel groundmodels
+   - long + short courses → packed desert sand / dirt
+   - rock trails → rock / gravel
 7. Nudge spawn spheres so their Z sits just above terrain.
 8. Export a `preview.png` screenshot into the level folder.
-9. Optional: copy `source/layout_overview.png` to `levels/dust_valley_ultra/minimap/terrain.png` as a temporary minimap.
 
 Full author notes: [`docs/DESIGN.md`](docs/DESIGN.md)
 
@@ -72,7 +87,7 @@ beamng/dust_valley_ultra/
 ├── docs/DESIGN.md
 ├── source/                 # authoring (keep out of final mod zip if you want)
 │   ├── generate_heightmap.py
-│   ├── heightmap_2048.png
+│   ├── heightmap_4096.png
 │   ├── layout_overview.png
 │   └── ...
 └── levels/dust_valley_ultra/

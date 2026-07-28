@@ -1,15 +1,17 @@
 {"class":"SimGroup","name":"MissionGroup"}
 {"class":"SimGroup","name":"PlayerDropPoints","__parent":"MissionGroup"}
-{"class":"SpawnSphere","name":"spawns_pits","__parent":"PlayerDropPoints","position":[-1300,-1400,62],"rotationMatrix":[0.0,1.0,0.0,-1.0,0.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":12,"spineRadius":2,"canSaveDynamicFields":1}
-{"class":"SpawnSphere","name":"spawns_whoops","__parent":"PlayerDropPoints","position":[-900,-500,68],"rotationMatrix":[0.7071,0.7071,0.0,-0.7071,0.7071,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":10,"spineRadius":2,"canSaveDynamicFields":1}
-{"class":"SpawnSphere","name":"spawns_valley","__parent":"PlayerDropPoints","position":[200,1100,48],"rotationMatrix":[1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":10,"spineRadius":2,"canSaveDynamicFields":1}
-{"class":"SpawnSphere","name":"spawns_jumps","__parent":"PlayerDropPoints","position":[200,-1600,70],"rotationMatrix":[1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":10,"spineRadius":2,"canSaveDynamicFields":1}
-{"class":"SpawnSphere","name":"spawns_rocks_east","__parent":"PlayerDropPoints","position":[1550,-100,95],"rotationMatrix":[0.0,-1.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":8,"spineRadius":2,"canSaveDynamicFields":1}
-{"class":"SpawnSphere","name":"spawns_rocks_nw","__parent":"PlayerDropPoints","position":[-1450,1100,100],"rotationMatrix":[0.7071,-0.7071,0.0,0.7071,0.7071,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":8,"spineRadius":2,"canSaveDynamicFields":1}
+{"class":"SpawnSphere","name":"spawns_pits","__parent":"PlayerDropPoints","position":[-2620,-5570,95],"rotationMatrix":[0.0,1.0,0.0,-1.0,0.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":14,"spineRadius":2,"canSaveDynamicFields":1}
+{"class":"SpawnSphere","name":"spawns_long_course","__parent":"PlayerDropPoints","position":[-5660,0,100],"rotationMatrix":[0.0,1.0,0.0,-1.0,0.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":12,"spineRadius":2,"canSaveDynamicFields":1}
+{"class":"SpawnSphere","name":"spawns_short_course","__parent":"PlayerDropPoints","position":[1380,0,105],"rotationMatrix":[0.0,1.0,0.0,-1.0,0.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":10,"spineRadius":2,"canSaveDynamicFields":1}
+{"class":"SpawnSphere","name":"spawns_whoops","__parent":"PlayerDropPoints","position":[-5000,0,102],"rotationMatrix":[0.0,1.0,0.0,-1.0,0.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":10,"spineRadius":2,"canSaveDynamicFields":1}
+{"class":"SpawnSphere","name":"spawns_valley","__parent":"PlayerDropPoints","position":[0,5400,80],"rotationMatrix":[1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":10,"spineRadius":2,"canSaveDynamicFields":1}
+{"class":"SpawnSphere","name":"spawns_jumps","__parent":"PlayerDropPoints","position":[0,-5000,110],"rotationMatrix":[1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":10,"spineRadius":2,"canSaveDynamicFields":1}
+{"class":"SpawnSphere","name":"spawns_rocks_east","__parent":"PlayerDropPoints","position":[6800,0,140],"rotationMatrix":[0.0,-1.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":8,"spineRadius":2,"canSaveDynamicFields":1}
+{"class":"SpawnSphere","name":"spawns_rocks_nw","__parent":"PlayerDropPoints","position":[-5600,4300,145],"rotationMatrix":[0.7071,-0.7071,0.0,0.7071,0.7071,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":8,"spineRadius":2,"canSaveDynamicFields":1}
 {"class":"SimGroup","name":"LevelObjects","__parent":"MissionGroup"}
 {"class":"SimGroup","name":"Environment","__parent":"MissionGroup"}
-{"class":"LevelInfo","name":"theLevelInfo","__parent":"Environment","visible":true,"canSave":true,"canSaveDynamicFields":true,"blurClamp":0.12,"blurMin":0.05,"blurSlope":0.85,"ambient":[0.45,0.38,0.28,1],"fogColor":[0.72,0.58,0.38,1],"fogDensity":0.00035,"fogDensityOffset":80,"nearClip":0.1,"visibleDistance":4500,"gravity":-9.81}
+{"class":"LevelInfo","name":"theLevelInfo","__parent":"Environment","visible":true,"canSave":true,"canSaveDynamicFields":true,"blurClamp":0.12,"blurMin":0.05,"blurSlope":0.85,"ambient":[0.45,0.38,0.28,1],"fogColor":[0.72,0.58,0.38,1],"fogDensity":0.00022,"fogDensityOffset":120,"nearClip":0.1,"visibleDistance":8000,"gravity":-9.81}
 {"class":"TimeOfDay","name":"tod","__parent":"Environment","time":0.5,"dayLength":120,"azimuthOverride":0,"startTime":0.5}
 {"class":"CloudLayer","name":"clouds","__parent":"Environment","coverage":0.18,"windSpeed":0.4}
 {"class":"SimGroup","name":"TODO_WorldEditor","__parent":"MissionGroup"}
-{"class":"Note","name":"build_notes","__parent":"TODO_WorldEditor","position":[0,0,80],"text":"Create terrain via Starter Level or Terrain Editor, then import source/heightmap_2048.png (squareSize=2, maxHeight~180). Paint desert sand on the loop, rock materials on side trails. Adjust spawn Z after import."}
+{"class":"Note","name":"build_notes","__parent":"TODO_WorldEditor","position":[0,0,120],"text":"Import source/heightmap_4096.png (squareSize=4, maxHeight~280). Gold = ~20 mi long course, cyan = ~5 mi short course in the middle. Adjust spawn Z after import."}

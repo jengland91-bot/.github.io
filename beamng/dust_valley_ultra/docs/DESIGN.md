@@ -2,85 +2,63 @@
 
 ## Goal
 
-A **mid-to-big** Ultra 4 park that feels like a **fast desert**: long sandy speed sections, whoops, valleys, and jumps on the main line, with **rock trails parked off to the sides** so you can peel off for technical driving without killing the desert flow.
+A **big** Ultra 4 desert park with:
+
+1. An outer **~20 mile long course** for full Ultra 4 desert racing
+2. A **~5 mile short course** in the middle for practice / sprint sessions
+3. Whoops, valleys, jumps on the long course
+4. Rock trails parked off to the sides
 
 ## Map scale
 
 | Setting | Value |
 | --- | --- |
-| World size | 4096 m × 4096 m |
-| Heightmap resolution | 2048 × 2048 |
-| squareSize | 2 m |
-| Target maxHeight | ~180 m |
-| Origin / terrain corner | TerrainBlock typically at `[-2048, -2048, 0]` |
+| World size | 16384 m × 16384 m (~10.2 mi across) |
+| Heightmap resolution | 4096 × 4096 |
+| squareSize | 4 m |
+| Target maxHeight | ~280 m |
+| Origin / terrain corner | TerrainBlock typically at `[-8192, -8192, 0]` |
+| Long course | ~20.5 miles (design polyline) |
+| Short course | ~4.9 miles (design polyline) |
 
-Coordinates in `items.level.json` spawns assume a centered park (roughly −2048…+2048 on X/Y).
+Coordinates in `items.level.json` spawns assume a centered park (roughly −8192…+8192 on X/Y).
+
+## Difficulty
+
+- **Design / heightmap / minimap:** straightforward — this package.
+- **Getting it driveable in BeamNG:** one World Editor heightmap import.
+- **Keeping ~20.0 mi exact after sculpting:** extra pass with DecalRoads + distance check.
+- **Performance:** 4 m samples are the practical compromise for a 16 km park; finer grids (2 m @ 8192) are heavier.
 
 ## Driving fantasy
 
-1. Leave the **pits**, hammer the desert loop.
-2. Hit the **whoops** — keep momentum, don’t get bucked offline.
-3. Commit the **valley cut** — walls close in, speed stays high.
-4. South **jump line** for tabletops / step-ups.
-5. Anytime: bail to **east** or **NW rock trails** for Ultra 4 technical work, then rejoin the sand.
+1. Leave the **pits**, choose long or short.
+2. **Short course (cyan):** tight middle loop for warm-ups and short-course style runs.
+3. **Long course (gold):** hammer the outer desert — whoops west, valley north, jumps south.
+4. Anytime: peel to **east / NW rock trails**, then rejoin the sand.
 
 ## Minimap trail colors
 
-The in-game minimap (`levels/dust_valley_ultra/minimap/terrain.png`) draws **each trail in its own color**:
+| Trail | Color | Hex | Approx length |
+| --- | --- | --- | --- |
+| Long course | Gold | `#F2C747` | ~20.5 mi |
+| Short course | Cyan | `#5AD2FF` | ~4.9 mi |
+| Whoops field | Orange | `#F27326` | feature |
+| Valley speed cut | Blue | `#408CDC` | feature |
+| Jump / tabletop line | Red | `#E63746` | feature |
+| East rock trail | Purple | `#A85CDC` | feature |
+| NW rock trail | Teal | `#28BEAF` | feature |
+| Pits / staging | Green | `#32C86E` | feature |
 
-| Trail | Color | Hex |
-| --- | --- | --- |
-| Main Ultra 4 loop | Gold | `#F2C747` |
-| Whoops field | Orange | `#F27326` |
-| Valley speed cut | Blue | `#408CDC` |
-| Jump / tabletop line | Red | `#E63746` |
-| East rock trail | Purple | `#A85CDC` |
-| NW rock trail | Teal | `#28BEAF` |
-| Pits / staging | Green | `#32C86E` |
-
-Source of truth: `source/trail_colors.json` (regenerated with the heightmap script).
-
-## Zone breakdown
-
-### 1. Main desert loop (gold)
-
-- Wide packed-sand corridor, soft berm edges.
-- Primary Ultra 4 racing line.
-- Keep props light so high-speed sightlines stay clean.
-
-### 2. Whoops field (orange)
-
-- West / southwest of the loop.
-- Rhythmic sine whoops along the travel direction.
-- Good for suspension torture and throttle control.
-
-### 3. Valley cut (blue)
-
-- North-central carved wash.
-- Lower floor, raised walls — a speed funnel.
-- Pair later with DecalRoad dirt if you want a clearer racing line.
-
-### 4. Jump line (red)
-
-- Southern arc of tabletops + lips.
-- Designed as terrain shapes first; you can refine lips in Terrain Editor with Set Height / Slope brushes.
-
-### 5. Rock trails (purple east / teal NW)
-
-- **East ridge (purple):** longer rocky shelf trail parallel to the loop.
-- **Northwest (teal):** tighter climb / broken rock.
-- Narrower troughs carved through high-frequency rock noise so there’s a readable line without flattening the whole ridge.
-
-### 6. Pits / staging (green)
-
-- Flat SW pad for grid, recovery, and photo spawns.
-- Default spawn: `spawns_pits`.
+Source of truth: `source/trail_colors.json` / `source/course_lengths.json`.
 
 ## Spawn list
 
 | Name | Role |
 | --- | --- |
 | `spawns_pits` | Default staging |
+| `spawns_long_course` | Outer ~20 mi start |
+| `spawns_short_course` | Inner ~5 mi start |
 | `spawns_whoops` | Whoops entry |
 | `spawns_valley` | Valley speed section |
 | `spawns_jumps` | Jump line |
@@ -91,44 +69,28 @@ After heightmap import, always re-check spawn Z heights in World Editor.
 
 ## Material / groundmodel direction
 
-Use BeamNG terrain materials named to match groundmodels where possible:
-
 | Area | Look | Suggested ground feel |
 | --- | --- | --- |
-| Loop + pits | Light tan sand / packed dirt | dirt / sand aliases |
+| Long + short courses + pits | Light tan packed dirt/sand | dirt / sand |
 | Whoops | Soft sand | sand |
 | Valley floor | Harder wash dirt | dirt / gravel |
 | Rock trails | Broken rock + gravel | rock / gravel |
 | Berms | Slightly darker dirt | dirt |
 
-Exact material names should match aliases in `art/groundmodels.json` so tire friction feels right.
-
 ## Props / atmosphere (later pass)
 
-Keep the first playable lean:
-
 1. Terrain + materials + spawns
-2. A few rock TSStatics on the side trails (or Forest items)
-3. Sparse desert shrubs — don’t clog the fast line
-4. Hot dry TOD, light dust fog (`fogDensity` already nudged warm in LevelInfo)
-5. Optional race checkpoints / quickrace once the nav line exists
+2. Rock TSStatics / Forest on side trails only
+3. Sparse desert shrubs — don’t clog either race line
+4. Hot dry TOD, light dust fog
+5. Optional quickrace definitions: `long_course` and `short_course`
 
-## What this package cannot do alone
+## Next build iterations
 
-BeamNG’s driveable terrain lives in a binary `.ter` created by the engine/World Editor. We provide:
-
-- design + heightmap source
-- `info.json` metadata
-- spawn / environment scene stubs
-
-You import the heightmap once in-game to produce the `.ter`, then iterate sculpt/paint there.
-
-## Next build iterations (suggested order)
-
-1. Import heightmap → drive the loop once
-2. Soften any spikes on whoops / jump lips
+1. Import heightmap → drive short course, then long course
+2. Soften whoops / jump lips as needed
 3. Paint sand vs rock materials
 4. Place rock meshes on side trails
-5. Add DecalRoad race ribbon if AI/quickrace is desired
-6. Capture real `preview.png` + minimap screenshot
+5. Add DecalRoad ribbons if you want AI / measured race distance
+6. Capture real `preview.png` + verify minimap alignment
 7. Package `levels/dust_valley_ultra` as the mod zip
