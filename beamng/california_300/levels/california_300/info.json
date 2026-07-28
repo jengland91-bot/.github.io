@@ -1,0 +1,64 @@
+{
+  "title": "Dust Valley Ultra",
+  "description": "CA300-focused desert race park (~16 km). Built around the 2024 California 300 Race Ready course (~74 mi, nearly 1:1 fit) with pit row and danger-inspired g-outs, rocks, and washouts.",
+  "authors": "Josh",
+  "features": "CA300 course, pit row, danger markers, open desert freeroam",
+  "suitablefor": "Ultra 4, desert racing, CA300-style prerunning",
+  "roads": "Packed desert race corridor with dirt berms; open freeroam desert around the course",
+  "biome": "Arid desert mesa / wash country (Lucerne-area inspired)",
+  "country": "United States",
+  "region": "northAmerica",
+  "size": [16384, 16384],
+  "defaultSpawnPointName": "spawns_pits",
+  "supportsTraffic": false,
+  "supportsTimeOfDay": true,
+  "localUnits": {
+    "gasoline": "gallonUS",
+    "diesel": "gallonUS"
+  },
+  "roadRules": {
+    "rightHandDrive": false,
+    "turnOnRed": true
+  },
+  "previews": [
+    "preview.png"
+  ],
+  "spawnPoints": [
+    {
+      "translationId": "Pits / Start-Finish",
+      "description": "Pit row / staging. Default CA300 start.",
+      "objectname": "spawns_pits",
+      "preview": "preview.png"
+    },
+    {
+      "translationId": "Course Start",
+      "description": "On the CA300 race line near start/finish.",
+      "objectname": "spawns_course",
+      "preview": "preview.png"
+    }
+  ],
+  "minimap": [
+    {
+      "file": "minimap/terrain.png",
+      "size": [16384, 16384],
+      "offset": [-8192, 8192]
+    }
+  ],
+  "timeOfDayPresets": [
+    {
+      "key": "sunrise",
+      "value": 0.23,
+      "label": "Desert sunrise"
+    },
+    {
+      "key": "noon",
+      "value": 0.5,
+      "label": "High sun"
+    },
+    {
+      "key": "golden",
+      "value": 0.72,
+      "label": "Golden hour"
+    }
+  ]
+}
