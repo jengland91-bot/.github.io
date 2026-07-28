@@ -24,9 +24,25 @@ Coordinates in `items.level.json` spawns assume a centered park (roughly −2048
 4. South **jump line** for tabletops / step-ups.
 5. Anytime: bail to **east** or **NW rock trails** for Ultra 4 technical work, then rejoin the sand.
 
+## Minimap trail colors
+
+The in-game minimap (`levels/dust_valley_ultra/minimap/terrain.png`) draws **each trail in its own color**:
+
+| Trail | Color | Hex |
+| --- | --- | --- |
+| Main Ultra 4 loop | Gold | `#F2C747` |
+| Whoops field | Orange | `#F27326` |
+| Valley speed cut | Blue | `#408CDC` |
+| Jump / tabletop line | Red | `#E63746` |
+| East rock trail | Purple | `#A85CDC` |
+| NW rock trail | Teal | `#28BEAF` |
+| Pits / staging | Green | `#32C86E` |
+
+Source of truth: `source/trail_colors.json` (regenerated with the heightmap script).
+
 ## Zone breakdown
 
-### 1. Main desert loop (gold on overview)
+### 1. Main desert loop (gold)
 
 - Wide packed-sand corridor, soft berm edges.
 - Primary Ultra 4 racing line.
@@ -49,10 +65,10 @@ Coordinates in `items.level.json` spawns assume a centered park (roughly −2048
 - Southern arc of tabletops + lips.
 - Designed as terrain shapes first; you can refine lips in Terrain Editor with Set Height / Slope brushes.
 
-### 5. Rock trails (gray)
+### 5. Rock trails (purple east / teal NW)
 
-- **East ridge:** longer rocky shelf trail parallel to the loop.
-- **Northwest:** tighter climb / broken rock.
+- **East ridge (purple):** longer rocky shelf trail parallel to the loop.
+- **Northwest (teal):** tighter climb / broken rock.
 - Narrower troughs carved through high-frequency rock noise so there’s a readable line without flattening the whole ridge.
 
 ### 6. Pits / staging (green)

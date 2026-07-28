@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
-"""Generate Dust Valley Ultra heightmap + layout overview for BeamNG World Editor import.
+"""Generate Dust Valley Ultra heightmap, colored minimap, and layout overview.
 
-Outputs (16-bit PNG heightmap recommended by BeamNG docs):
-  - heightmap_2048.png  (16-bit grayscale)
-  - layout_overview.png (color-coded design map)
-  - heightmap_preview.png (8-bit shaded preview)
+Outputs:
+  - heightmap_2048.png      (16-bit grayscale for World Editor)
+  - heightmap_preview.png   (8-bit shaded preview)
+  - layout_overview.png     (design map + legend)
+  - minimap_terrain.png     (in-game minimap with each trail a unique color)
+  - trail_colors.json       (color key for docs / UI)
 """
 
 from __future__ import annotations
 
+import json
 import math
 from pathlib import Path
 
@@ -19,6 +22,95 @@ SIZE = 2048  # resolution (power of two)
 WORLD_M = 4096.0  # map size in meters (mid-big Ultra 4 park)
 SQUARE_SIZE = WORLD_M / SIZE  # 2 m per sample
 MAX_HEIGHT_M = 180.0  # BeamNG TerrainBlock maxHeight target
+
+# Each trail gets a unique minimap color (RGB 0-255).
+TRAILS: dict[str, dict] = {
+    "race": {
+        "label": "Main Ultra 4 loop",
+        "color": (242, 199, 71),  # gold
+        "width": 0.055,
+        "points": [
+            (0.22, 0.72),
+            (0.38, 0.82),
+            (0.58, 0.84),
+            (0.76, 0.74),
+            (0.82, 0.58),
+            (0.78, 0.42),
+            (0.62, 0.30),
+            (0.42, 0.26),
+            (0.26, 0.34),
+            (0.18, 0.50),
+            (0.20, 0.64),
+            (0.22, 0.72),
+        ],
+    },
+    "whoops": {
+        "label": "Whoops field",
+        "color": (242, 115, 38),  # orange
+        "width": 0.04,
+        "points": [
+            (0.18, 0.70),
+            (0.22, 0.64),
+            (0.26, 0.58),
+            (0.30, 0.52),
+            (0.34, 0.48),
+        ],
+    },
+    "valley": {
+        "label": "Valley speed cut",
+        "color": (64, 140, 220),  # blue
+        "width": 0.035,
+        "points": [
+            (0.30, 0.18),
+            (0.48, 0.22),
+            (0.66, 0.20),
+            (0.80, 0.28),
+        ],
+    },
+    "jumps": {
+        "label": "Jump / tabletop line",
+        "color": (230, 55, 70),  # red
+        "width": 0.028,
+        "points": [
+            (0.40, 0.88),
+            (0.52, 0.90),
+            (0.64, 0.88),
+            (0.74, 0.82),
+        ],
+    },
+    "rocks_east": {
+        "label": "East rock trail",
+        "color": (168, 92, 220),  # purple
+        "width": 0.018,
+        "points": [
+            (0.84, 0.68),
+            (0.90, 0.55),
+            (0.88, 0.40),
+            (0.82, 0.32),
+        ],
+    },
+    "rocks_nw": {
+        "label": "NW rock trail",
+        "color": (40, 190, 175),  # teal
+        "width": 0.018,
+        "points": [
+            (0.10, 0.30),
+            (0.16, 0.22),
+            (0.24, 0.16),
+            (0.32, 0.20),
+        ],
+    },
+    "pits": {
+        "label": "Pits / staging",
+        "color": (50, 200, 110),  # green
+        "width": 0.03,
+        "points": [
+            (0.14, 0.84),
+            (0.18, 0.82),
+            (0.22, 0.80),
+        ],
+    },
+}
 
 
 def hash2(x: np.ndarray, y: np.ndarray) -> np.ndarray:
@@ -80,6 +172,13 @@ def polyline_distance(px: np.ndarray, py: np.ndarray, points: list[tuple[float, 
     return best
 
 
+def trail_mask(u: np.ndarray, v: np.ndarray, key: str) -> np.ndarray:
+    trail = TRAILS[key]
+    dist = polyline_distance(u, v, trail["points"])
+    w = trail["width"]
+    return 1.0 - smoothstep(w * 0.45, w * 1.25, dist)
+
+
 def build_height() -> tuple[np.ndarray, dict[str, np.ndarray]]:
     ys, xs = np.mgrid[0:SIZE, 0:SIZE]
     u = xs / (SIZE - 1)
@@ -92,27 +191,12 @@ def build_height() -> tuple[np.ndarray, dict[str, np.ndarray]]:
 
     masks: dict[str, np.ndarray] = {}
 
-    # Main Ultra 4 desert loop (fast sandy corridor)
-    loop = [
-        (0.22, 0.72),
-        (0.38, 0.82),
-        (0.58, 0.84),
-        (0.76, 0.74),
-        (0.82, 0.58),
-        (0.78, 0.42),
-        (0.62, 0.30),
-        (0.42, 0.26),
-        (0.26, 0.34),
-        (0.18, 0.50),
-        (0.20, 0.64),
-        (0.22, 0.72),
-    ]
+    loop = TRAILS["race"]["points"]
     d_loop = polyline_distance(u, v, loop)
-    race_w = 0.055
-    race_mask = 1.0 - smoothstep(race_w * 0.55, race_w * 1.35, d_loop)
+    race_w = TRAILS["race"]["width"]
+    race_mask = trail_mask(u, v, "race")
     masks["race"] = race_mask
 
-    # Flatten race surface slightly above dune floor, with soft berms
     race_height = 0.36 + 0.01 * fbm(u * 14, v * 14, octaves=2)
     berm = smoothstep(race_w * 0.7, race_w * 1.15, d_loop) * (1.0 - smoothstep(race_w * 1.15, race_w * 1.7, d_loop))
     race_height = race_height + berm * 0.035
@@ -123,30 +207,22 @@ def build_height() -> tuple[np.ndarray, dict[str, np.ndarray]]:
     along = (u - 0.18) * 0.6 + (v - 0.55) * 0.8
     whoops = whoops_center * (0.028 * np.sin(along * 55.0) ** 2 + 0.012 * np.sin(along * 28.0))
     h += whoops
-    masks["whoops"] = whoops_center
+    masks["whoops"] = np.maximum(whoops_center, trail_mask(u, v, "whoops"))
 
-    # Long valley cut — north-central speed section
-    valley_line = [(0.30, 0.18), (0.48, 0.22), (0.66, 0.20), (0.80, 0.28)]
-    d_valley = polyline_distance(u, v, valley_line)
-    valley_mask = 1.0 - smoothstep(0.02, 0.075, d_valley)
+    valley_mask = trail_mask(u, v, "valley")
+    d_valley = polyline_distance(u, v, TRAILS["valley"]["points"])
     h -= valley_mask * 0.09
-    # Valley walls
     wall = smoothstep(0.02, 0.045, d_valley) * (1.0 - smoothstep(0.045, 0.10, d_valley))
     h += wall * 0.05
     masks["valley"] = valley_mask
 
-    # Jump line / tabletops — south arc
-    jump_line = [(0.40, 0.88), (0.52, 0.90), (0.64, 0.88), (0.74, 0.82)]
-    d_jump = polyline_distance(u, v, jump_line)
-    jump_band = 1.0 - smoothstep(0.012, 0.05, d_jump)
-    # Series of ramp/tabletop pulses along the line
+    jump_band = trail_mask(u, v, "jumps")
     jump_phase = u * 38.0 + v * 6.0
     tablets = np.clip(np.sin(jump_phase), 0.0, 1.0) ** 1.6
     lips = np.clip(np.sin(jump_phase + 0.8), 0.0, 1.0) ** 3
     h += jump_band * (0.045 * tablets + 0.02 * lips)
     masks["jumps"] = jump_band
 
-    # Rock trails off to the sides (east ridge + NW technical)
     rock_east = gaussian_blob(u, v, 0.88, 0.48, 0.08, 0.16)
     rock_nw = gaussian_blob(u, v, 0.18, 0.22, 0.09, 0.10)
     rock_se = gaussian_blob(u, v, 0.86, 0.78, 0.07, 0.08)
@@ -154,20 +230,18 @@ def build_height() -> tuple[np.ndarray, dict[str, np.ndarray]]:
     rock_detail = fbm(u * 28.0, v * 28.0, octaves=5, lac=2.1, gain=0.55)
     rock_ridges = np.abs(fbm(u * 18.0 + 3, v * 18.0 - 2, octaves=4) * 2.0 - 1.0)
     h += rock_mask * (0.07 + 0.08 * rock_detail + 0.05 * rock_ridges)
-    # Keep a narrow trailable trough through rock zones
-    rock_trail_e = polyline_distance(u, v, [(0.84, 0.68), (0.90, 0.55), (0.88, 0.40), (0.82, 0.32)])
-    rock_trail_nw = polyline_distance(u, v, [(0.10, 0.30), (0.16, 0.22), (0.24, 0.16), (0.32, 0.20)])
-    # Carve a readable trough through the rock noise
-    trail_carve = rock_mask * (1.0 - smoothstep(0.008, 0.028, np.minimum(rock_trail_e, rock_trail_nw)))
-    h -= trail_carve * 0.035
+
+    rocks_east_m = trail_mask(u, v, "rocks_east")
+    rocks_nw_m = trail_mask(u, v, "rocks_nw")
+    h -= rock_mask * np.maximum(rocks_east_m, rocks_nw_m) * 0.035
+    masks["rocks_east"] = np.maximum(rock_east, rocks_east_m)
+    masks["rocks_nw"] = np.maximum(rock_nw, rocks_nw_m)
     masks["rocks"] = rock_mask
 
-    # Staging / pits — flat pad SW
     pits = gaussian_blob(u, v, 0.18, 0.82, 0.07, 0.05)
     h = h * (1.0 - pits * 0.85) + 0.33 * pits
     masks["pits"] = pits
 
-    # Soft rim mountains so the world feels enclosed without blocking the park
     edge = np.minimum.reduce([u, v, 1 - u, 1 - v])
     rim = 1.0 - smoothstep(0.02, 0.12, edge)
     h += rim * (0.08 + 0.04 * fbm(u * 6, v * 6, octaves=3))
@@ -177,7 +251,6 @@ def build_height() -> tuple[np.ndarray, dict[str, np.ndarray]]:
 
 
 def save_heightmap(h: np.ndarray, path: Path) -> None:
-    # 16-bit PNG for World Editor heightmap import
     data = (h * 65535.0).astype(np.uint16)
     Image.fromarray(data).save(path)
 
@@ -187,84 +260,129 @@ def save_preview(h: np.ndarray, path: Path) -> None:
     Image.fromarray(data, mode="L").save(path)
 
 
-def save_layout(h: np.ndarray, masks: dict[str, np.ndarray], path: Path) -> None:
-    # Colored overview for the design doc
-    rgb = np.zeros((SIZE, SIZE, 3), dtype=np.float64)
-    # Shade from height
+def _desert_base(h: np.ndarray) -> np.ndarray:
     shade = (h - h.min()) / (h.max() - h.min() + 1e-9)
-    rgb[..., 0] = 0.45 + 0.40 * shade
-    rgb[..., 1] = 0.32 + 0.28 * shade
-    rgb[..., 2] = 0.16 + 0.12 * shade
+    rgb = np.zeros((SIZE, SIZE, 3), dtype=np.float64)
+    rgb[..., 0] = 0.42 + 0.38 * shade
+    rgb[..., 1] = 0.30 + 0.26 * shade
+    rgb[..., 2] = 0.15 + 0.12 * shade
+    return rgb
 
-    def tint(mask: np.ndarray, color: tuple[float, float, float], strength: float = 0.55) -> None:
-        m = np.clip(mask, 0, 1)[..., None]
-        c = np.array(color)[None, None, :]
-        rgb[:] = rgb * (1 - m * strength) + c * (m * strength)
 
-    tint(masks["race"], (0.95, 0.78, 0.28), 0.45)  # gold race line
-    tint(masks["whoops"], (0.95, 0.45, 0.15), 0.50)  # orange whoops
-    tint(masks["valley"], (0.25, 0.45, 0.75), 0.45)  # blue valley
-    tint(masks["jumps"], (0.95, 0.20, 0.25), 0.55)  # red jumps
-    tint(masks["rocks"], (0.45, 0.40, 0.38), 0.55)  # rock gray
-    tint(masks["pits"], (0.20, 0.75, 0.45), 0.55)  # green pits
+def _draw_trail_strokes(draw: ImageDraw.ImageDraw, size: int, outline: bool = True) -> None:
+    """Draw each trail as a solid colored stroke on a PIL image."""
+    for trail in TRAILS.values():
+        pts = [(int(x * (size - 1)), int(y * (size - 1))) for x, y in trail["points"]]
+        # Stroke width scales with trail design width
+        width = max(4, int(trail["width"] * size * 0.85))
+        if outline:
+            draw.line(pts, fill=(20, 16, 12), width=width + 6, joint="curve")
+        draw.line(pts, fill=trail["color"], width=width, joint="curve")
+        # End caps so short trails read clearly
+        r = max(3, width // 2)
+        for x, y in (pts[0], pts[-1]):
+            if outline:
+                draw.ellipse([x - r - 2, y - r - 2, x + r + 2, y + r + 2], fill=(20, 16, 12))
+            draw.ellipse([x - r, y - r, x + r, y + r], fill=trail["color"])
 
+
+def save_minimap(h: np.ndarray, path: Path) -> None:
+    """In-game BeamNG minimap: desert shade + every trail a different color."""
+    rgb = _desert_base(h)
     img = Image.fromarray((np.clip(rgb, 0, 1) * 255).astype(np.uint8), mode="RGB")
-    # Downscale for docs + draw legend
+    draw = ImageDraw.Draw(img)
+    _draw_trail_strokes(draw, SIZE, outline=True)
+    img.save(path)
+
+
+def save_layout(h: np.ndarray, path: Path) -> None:
+    rgb = _desert_base(h)
+    img = Image.fromarray((np.clip(rgb, 0, 1) * 255).astype(np.uint8), mode="RGB")
+    draw = ImageDraw.Draw(img)
+    _draw_trail_strokes(draw, SIZE, outline=True)
+
     preview = img.resize((1024, 1024), Image.Resampling.LANCZOS)
-    canvas = Image.new("RGB", (1024, 1180), (18, 16, 14))
+    canvas = Image.new("RGB", (1024, 1220), (18, 16, 14))
     canvas.paste(preview, (0, 0))
     draw = ImageDraw.Draw(canvas)
     try:
         font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 22)
-        font_sm = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 16)
+        font_sm = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 15)
     except OSError:
         font = ImageFont.load_default()
         font_sm = font
 
-    draw.text((24, 1040), "Dust Valley Ultra — 4 km desert park", fill=(245, 235, 210), font=font)
-    legend = [
-        ((242, 199, 71), "Main Ultra 4 desert loop"),
-        ((242, 115, 38), "Whoops field"),
-        ((64, 115, 191), "Valley speed cut"),
-        ((242, 51, 64), "Jump / tabletop line"),
-        ((115, 102, 97), "Side rock trails"),
-        ((51, 191, 115), "Pits / staging"),
-    ]
-    x = 24
-    y = 1080
-    for color, label in legend:
-        draw.rectangle([x, y, x + 16, y + 16], fill=color)
-        draw.text((x + 24, y - 2), label, fill=(220, 210, 195), font=font_sm)
-        x += 170
-        if x > 850:
+    draw.text((24, 1040), "Dust Valley Ultra — colored trail minimap", fill=(245, 235, 210), font=font)
+    x, y = 24, 1078
+    for trail in TRAILS.values():
+        draw.rectangle([x, y, x + 16, y + 16], fill=trail["color"])
+        draw.text((x + 24, y - 1), trail["label"], fill=(220, 210, 195), font=font_sm)
+        x += 240
+        if x > 780:
             x = 24
             y += 28
     canvas.save(path)
 
 
+def save_trail_colors(path: Path) -> None:
+    payload = {
+        "description": "Minimap trail color key for Dust Valley Ultra",
+        "trails": {
+            key: {
+                "label": meta["label"],
+                "rgb": list(meta["color"]),
+                "hex": "#{:02X}{:02X}{:02X}".format(*meta["color"]),
+            }
+            for key, meta in TRAILS.items()
+        },
+    }
+    path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+
 def main() -> None:
     out = Path(__file__).resolve().parent
+    level_minimap = out.parent / "levels" / "dust_valley_ultra" / "minimap"
+    level_minimap.mkdir(parents=True, exist_ok=True)
+
     print(f"Generating {SIZE}x{SIZE} heightmap ({WORLD_M:.0f} m, squareSize={SQUARE_SIZE:.2f} m)...")
-    h, masks = build_height()
+    h, _masks = build_height()
     save_heightmap(h, out / "heightmap_2048.png")
     save_preview(h, out / "heightmap_preview.png")
-    save_layout(h, masks, out / "layout_overview.png")
+    save_layout(h, out / "layout_overview.png")
+    save_minimap(h, out / "minimap_terrain.png")
+    save_minimap(h, level_minimap / "terrain.png")
+    save_trail_colors(out / "trail_colors.json")
 
-    meta = out / "heightmap_meta.json"
-    meta.write_text(
-        "{\n"
-        f'  "resolution": {SIZE},\n'
-        f'  "worldSizeMeters": {WORLD_M},\n'
-        f'  "squareSize": {SQUARE_SIZE},\n'
-        f'  "recommendedMaxHeight": {MAX_HEIGHT_M},\n'
-        f'  "format": "16-bit PNG grayscale",\n'
-        f'  "importNotes": "In World Editor: Terrain > Heightmap Import. Use squareSize={SQUARE_SIZE} and maxHeight around {MAX_HEIGHT_M}."\n'
-        "}\n",
-        encoding="utf-8",
-    )
+    # Keep level preview in sync with the colored trail map
+    preview_src = out / "layout_overview.png"
+    preview_dst = out.parent / "levels" / "dust_valley_ultra" / "preview.png"
+    Image.open(preview_src).convert("RGB").save(preview_dst)
+
+    meta = {
+        "resolution": SIZE,
+        "worldSizeMeters": WORLD_M,
+        "squareSize": SQUARE_SIZE,
+        "recommendedMaxHeight": MAX_HEIGHT_M,
+        "format": "16-bit PNG grayscale",
+        "minimap": "Each trail uses a unique color — see trail_colors.json",
+        "importNotes": (
+            f"In World Editor: Terrain > Heightmap Import. "
+            f"Use squareSize={SQUARE_SIZE} and maxHeight around {MAX_HEIGHT_M}."
+        ),
+    }
+    (out / "heightmap_meta.json").write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
+
     print("Wrote:")
-    for name in ("heightmap_2048.png", "heightmap_preview.png", "layout_overview.png", "heightmap_meta.json"):
+    for name in (
+        "heightmap_2048.png",
+        "heightmap_preview.png",
+        "layout_overview.png",
+        "minimap_terrain.png",
+        "trail_colors.json",
+        "heightmap_meta.json",
+    ):
         print(" -", out / name)
+    print(" -", level_minimap / "terrain.png")
 
 
 if __name__ == "__main__":

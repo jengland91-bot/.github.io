@@ -22,6 +22,8 @@ This repo ships the design, a 16-bit heightmap, spawn metadata, and World Editor
 
 Color overview: [`source/layout_overview.png`](source/layout_overview.png)
 
+**Minimap:** each trail is a different color (gold loop, orange whoops, blue valley, red jumps, purple east rocks, teal NW rocks, green pits). See [`source/trail_colors.json`](source/trail_colors.json).
+
 ## Quick install (after terrain is built)
 
 1. Zip so the archive root contains `levels/dust_valley_ultra/`:

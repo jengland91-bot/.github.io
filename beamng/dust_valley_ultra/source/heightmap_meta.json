@@ -4,5 +4,6 @@
   "squareSize": 2.0,
   "recommendedMaxHeight": 180.0,
   "format": "16-bit PNG grayscale",
+  "minimap": "Each trail uses a unique color \u2014 see trail_colors.json",
   "importNotes": "In World Editor: Terrain > Heightmap Import. Use squareSize=2.0 and maxHeight around 180.0."
 }

@@ -1,0 +1,68 @@
+{
+  "description": "Minimap trail color key for Dust Valley Ultra",
+  "trails": {
+    "race": {
+      "label": "Main Ultra 4 loop",
+      "rgb": [
+        242,
+        199,
+        71
+      ],
+      "hex": "#F2C747"
+    },
+    "whoops": {
+      "label": "Whoops field",
+      "rgb": [
+        242,
+        115,
+        38
+      ],
+      "hex": "#F27326"
+    },
+    "valley": {
+      "label": "Valley speed cut",
+      "rgb": [
+        64,
+        140,
+        220
+      ],
+      "hex": "#408CDC"
+    },
+    "jumps": {
+      "label": "Jump / tabletop line",
+      "rgb": [
+        230,
+        55,
+        70
+      ],
+      "hex": "#E63746"
+    },
+    "rocks_east": {
+      "label": "East rock trail",
+      "rgb": [
+        168,
+        92,
+        220
+      ],
+      "hex": "#A85CDC"
+    },
+    "rocks_nw": {
+      "label": "NW rock trail",
+      "rgb": [
+        40,
+        190,
+        175
+      ],
+      "hex": "#28BEAF"
+    },
+    "pits": {
+      "label": "Pits / staging",
+      "rgb": [
+        50,
+        200,
+        110
+      ],
+      "hex": "#32C86E"
+    }
+  }
+}
