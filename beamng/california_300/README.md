@@ -2,6 +2,20 @@
 
 I can’t create folders on your Windows PC from here, so this package is ready for you to copy.
 
+## If the `levels` folder “disappears”
+
+It usually did **not** get deleted. Windows AppData is easy to click out of.
+
+Permanent path (Win+R, paste, Enter):
+
+`%LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels`
+
+Or download and run:
+
+`beamng/california_300/scripts/OPEN_LEVELS_FOLDER.bat`
+
+That opens the folder and puts a **BeamNG Levels** shortcut on your Desktop.
+
 ## Fastest way on your PC
 
 ### 1) Download this folder from GitHub
