@@ -1,6 +1,6 @@
 {
-  "title": "Dust Valley Ultra",
-  "description": "CA300-focused desert race park (~16 km). Built around the 2024 California 300 Race Ready course (~74 mi, nearly 1:1 fit) with pit row and danger-inspired g-outs, rocks, and washouts.",
+  "title": "California 300",
+  "description": "CA300-focused desert race park (~16 km). Built around the 2024 California 300 Race Ready course (~74 mi, nearly 1:1 fit) with pit row and danger-inspired g-outs, rocks, and washouts. Import heightmap_4096.png with squareSize=4 and maxHeight=900.",
   "authors": "Josh",
   "features": "CA300 course, pit row, danger markers, open desert freeroam",
   "suitablefor": "Ultra 4, desert racing, CA300-style prerunning",
