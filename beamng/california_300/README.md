@@ -16,6 +16,25 @@ Or download and run:
 
 That opens the folder and puts a **BeamNG Levels** shortcut on your Desktop.
 
+## Fix GPX scale (map too small)
+
+I can’t press Import inside BeamNG on your PC. Run this on Windows instead:
+
+`beamng/california_300/scripts/FIX_SCALE.bat`
+
+It will:
+- recreate `levels\california_300` if needed
+- recover `theTerrain.ter` from BeamNG cleanup/backup folders when possible
+- patch paths from `template` → `california_300`
+- force scale fields toward **squareSize=4** / **maxHeight=900**
+- open a short checklist for the one Import click BeamNG still needs
+
+Import settings that match the CA300 GPX footprint:
+- heightmap: `heightmap_4096.png`
+- meters per pixel: **4**
+- max height: **900**
+- position after import: **-8192, -8192, 0**
+
 ## Fastest way on your PC
 
 ### 1) Download this folder from GitHub
