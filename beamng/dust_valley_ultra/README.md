@@ -73,6 +73,8 @@ zip -r DustValleyUltra.zip levels
 
 Full author notes: [`docs/DESIGN.md`](docs/DESIGN.md)
 
+Inspiration (ideas only, no asset rip): [`docs/REFERENCE_MAPS.md`](docs/REFERENCE_MAPS.md) — LACR MX, BDR High Desert, Echo Valley, CF Baja 1K.
+
 ## Regenerate the heightmap
 
 ```bash
