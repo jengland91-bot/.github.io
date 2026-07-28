@@ -8,4 +8,4 @@
 {"class":"TimeOfDay","name":"tod","__parent":"Environment","time":0.5,"dayLength":120,"azimuthOverride":0,"startTime":0.5}
 {"class":"CloudLayer","name":"clouds","__parent":"Environment","coverage":0.18,"windSpeed":0.4}
 {"class":"SimGroup","name":"TODO_WorldEditor","__parent":"MissionGroup"}
-{"class":"Note","name":"build_notes","__parent":"TODO_WorldEditor","position":[0,0,120],"text":"Import source/heightmap_4096.png (squareSize=4, maxHeight~280). Gold = CA300 course, green = pit row, orange/red = dangers. Adjust spawn Z after import."}
+{"class":"Note","name":"build_notes","__parent":"TODO_WorldEditor","position":[0,0,120],"text":"Import source/heightmap_4096.png (squareSize=4, maxHeight=900 — real SRTM elevation). Gold = CA300 course, green = pit row, orange/red = dangers. Adjust spawn Z after import."}

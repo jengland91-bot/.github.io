@@ -4,11 +4,10 @@
 
 - **Park size:** ~16.4 km across (`16384` m / ~10.2 miles)
 - **Course:** **2024 CA300 Race Ready** path (~**74 miles**, nearly 1:1 fit) — gold on minimap
+- **Elevation:** **real SRTM** Lucerne-area ground under that path (~777 m relief)
 - **Pit row:** from the same GPX — green
-- **Dangers:** 68 CA300 markers (g-outs, rocks, washouts, poles…) — orange/red
+- **Dangers:** 68 CA300 markers — orange/red
 - **Freeroam:** open desert around the race line (no short course)
-
-This repo ships the design, a 16-bit heightmap, spawn metadata, and World Editor build steps. BeamNG still needs a binary `.ter` terrain created/imported in the World Editor (that step is in-game).
 
 ## Layout
 
@@ -20,20 +19,19 @@ This repo ships the design, a 16-bit heightmap, spawn metadata, and World Editor
 | Open desert | Freeroam around the course | — |
 
 CA300 reference: [`source/reference/ca300/`](source/reference/ca300/)  
-Color overview: [`source/layout_overview.png`](source/layout_overview.png)
+Elevation bake: [`source/reference/elevation/`](source/reference/elevation/)
 
 ## Build the terrain in BeamNG (required once)
 
 1. World Editor → create/rename level to `dust_valley_ultra`
 2. Terrain Editor → **Heightmap Import** → `source/heightmap_4096.png`
-3. Use **squareSize = 4**, **maxHeight ≈ 280**
+3. Use **squareSize = 4**, **maxHeight = 900** (needed for real CA300 relief)
 4. Save (writes `.ter`), paint packed dirt on the race line, nudge spawn Z
-
-Full notes: [`docs/DESIGN.md`](docs/DESIGN.md) · CA300 files: [`source/reference/ca300/README.md`](source/reference/ca300/README.md)
 
 ## Regenerate
 
 ```bash
 python3 source/reference/ca300/convert_ca300_to_map.py
 python3 source/generate_heightmap.py
+# (downloads SRTM once, then bakes real elevation + minimap)
 ```

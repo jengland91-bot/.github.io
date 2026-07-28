@@ -11,7 +11,8 @@ A **CA300-focused** desert race park: one race line based on the **2024 Californ
 | World size | 16384 m × 16384 m (~10.2 mi across) |
 | Heightmap resolution | 4096 × 4096 |
 | squareSize | 4 m |
-| Target maxHeight | ~280 m |
+| Target maxHeight | **900 m** (real CA300 SRTM relief ~777 m) |
+| Elevation source | SRTM 1-arcsec tile N34W118 |
 | Course source | 2024 CA300 C/T/U Race Ready GPX |
 | Course length | ~74 mi source (~68 mi downsampled corridor) |
 | Fit scale | ~0.97× geographic |

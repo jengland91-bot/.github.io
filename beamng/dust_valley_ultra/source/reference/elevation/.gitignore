@@ -1,0 +1,3 @@
+# Large SRTM binaries — downloaded on demand by bake_srtm_heightmap.py
+*.hgt
+*.hgt.gz

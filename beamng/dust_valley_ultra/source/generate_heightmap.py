@@ -28,10 +28,11 @@ from PIL import Image, ImageDraw, ImageFont
 SIZE = 4096  # resolution (power of two)
 WORLD_M = 16384.0  # ~10.2 miles across — fits CA300 footprint nearly 1:1
 SQUARE_SIZE = WORLD_M / SIZE  # 4 m per sample
-MAX_HEIGHT_M = 280.0  # more vertical room on the bigger park
+MAX_HEIGHT_M = 900.0  # real CA300 SRTM relief ~777 m + headroom
 ROOT = Path(__file__).resolve().parent
 CA300_COURSE_JSON = ROOT / "reference" / "ca300" / "ca300_map_course.json"
 CA300_DANGERS_JSON = ROOT / "reference" / "ca300" / "ca300_map_dangers.json"
+SRTM_BAKE = ROOT / "reference" / "elevation" / "bake_srtm_heightmap.py"
 
 
 def _loop(n: int, r0: float, amp3: float, amp5: float, sx: float, sy: float) -> list[tuple[float, float]]:
@@ -342,29 +343,47 @@ def save_course_lengths(path: Path) -> None:
     path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
+def load_heightmap_png(path: Path) -> np.ndarray:
+    """Load 16-bit heightmap PNG as float 0..1."""
+    arr = np.array(Image.open(path))
+    if arr.dtype == np.uint16:
+        return arr.astype(np.float32) / 65535.0
+    return arr.astype(np.float32) / 255.0
+
+
 def main() -> None:
+    import subprocess
+    import sys
+
     out = Path(__file__).resolve().parent
     level_minimap = out.parent / "levels" / "dust_valley_ultra" / "minimap"
     level_minimap.mkdir(parents=True, exist_ok=True)
 
-    # Remove old smaller heightmap if present
     old = out / "heightmap_2048.png"
     if old.exists():
         old.unlink()
 
     print(
-        f"Generating {SIZE}x{SIZE} heightmap "
+        f"Building {SIZE}x{SIZE} CA300 map "
         f"({WORLD_M:.0f} m / {WORLD_M/1609.34:.1f} mi across, squareSize={SQUARE_SIZE:.2f} m)..."
     )
     print(
         f"  CA300 course ~{polyline_length_m(COURSE)/1609.34:.1f} mi | "
         f"{len(CA300_DANGERS)} danger markers"
     )
-    h = build_height()
-    save_heightmap(h, out / "heightmap_4096.png")
-    save_preview(h, out / "heightmap_preview.png")
+
+    # Prefer real SRTM elevation under the CA300 footprint
+    if SRTM_BAKE.exists():
+        print("  Baking REAL SRTM elevation into heightmap...")
+        subprocess.check_call([sys.executable, str(SRTM_BAKE)])
+        h = load_heightmap_png(out / "heightmap_4096.png")
+    else:
+        print("  SRTM bake script missing — falling back to synthetic desert height...")
+        h = build_height()
+        save_heightmap(h, out / "heightmap_4096.png")
+        save_preview(h, out / "heightmap_preview.png")
+
     save_layout(h, out / "layout_overview.png")
-    # Full-res minimap for the game; keep file reasonable via 2048 export
     save_minimap(h, out / "minimap_terrain.png", out_size=2048)
     save_minimap(h, level_minimap / "terrain.png", out_size=2048)
     save_trail_colors(out / "trail_colors.json")
@@ -374,24 +393,29 @@ def main() -> None:
     preview_dst = out.parent / "levels" / "dust_valley_ultra" / "preview.png"
     Image.open(preview_src).convert("RGB").save(preview_dst)
 
-    meta = {
-        "resolution": SIZE,
-        "worldSizeMeters": WORLD_M,
-        "worldSizeMiles": round(WORLD_M / 1609.34, 2),
-        "squareSize": SQUARE_SIZE,
-        "recommendedMaxHeight": MAX_HEIGHT_M,
-        "format": "16-bit PNG grayscale",
-        "focus": "california_300_only",
-        "courseMiles": round(polyline_length_m(COURSE) / 1609.34, 2),
-        "ca300SourceMiles": CA300_MILES,
-        "dangerMarkers": len(CA300_DANGERS),
-        "minimap": "CA300 course + pit row + danger markers — see trail_colors.json",
-        "importNotes": (
-            f"In World Editor: Terrain > Heightmap Import. "
-            f"Use squareSize={SQUARE_SIZE} and maxHeight around {MAX_HEIGHT_M}."
-        ),
-    }
-    (out / "heightmap_meta.json").write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
+    # Merge / keep elevation meta if SRTM wrote it
+    meta_path = out / "heightmap_meta.json"
+    meta = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
+    meta.update(
+        {
+            "resolution": SIZE,
+            "worldSizeMeters": WORLD_M,
+            "worldSizeMiles": round(WORLD_M / 1609.34, 2),
+            "squareSize": SQUARE_SIZE,
+            "recommendedMaxHeight": MAX_HEIGHT_M,
+            "focus": "california_300_only",
+            "courseMiles": round(polyline_length_m(COURSE) / 1609.34, 2),
+            "ca300SourceMiles": CA300_MILES,
+            "dangerMarkers": len(CA300_DANGERS),
+            "elevation": "SRTM 1-arcsec real elevation under CA300 footprint",
+            "importNotes": (
+                f"In World Editor: Terrain > Heightmap Import. "
+                f"Use squareSize={SQUARE_SIZE} and maxHeight={MAX_HEIGHT_M} "
+                f"(real CA300 relief needs the higher maxHeight)."
+            ),
+        }
+    )
+    meta_path.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
 
     print("Wrote:")
     for name in (

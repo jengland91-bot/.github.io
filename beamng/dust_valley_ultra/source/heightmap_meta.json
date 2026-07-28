@@ -1,14 +1,18 @@
 {
+  "source": "SRTM 1-arcsec N34W118 under 2024 CA300 footprint",
   "resolution": 4096,
   "worldSizeMeters": 16384.0,
-  "worldSizeMiles": 10.18,
   "squareSize": 4.0,
-  "recommendedMaxHeight": 280.0,
-  "format": "16-bit PNG grayscale",
+  "recommendedMaxHeight": 900.0,
+  "elevMinMeters": 693.8,
+  "elevMaxMeters": 1489.3,
+  "reliefMeters": 795.4,
+  "geographicScale": 0.9666,
+  "importNotes": "In World Editor: Terrain > Heightmap Import. Use squareSize=4.0 and maxHeight=900.0 (real CA300 relief needs the higher maxHeight).",
+  "worldSizeMiles": 10.18,
   "focus": "california_300_only",
   "courseMiles": 68.4,
   "ca300SourceMiles": 74.18,
   "dangerMarkers": 68,
-  "minimap": "CA300 course + pit row + danger markers \u2014 see trail_colors.json",
-  "importNotes": "In World Editor: Terrain > Heightmap Import. Use squareSize=4.0 and maxHeight around 280.0."
+  "elevation": "SRTM 1-arcsec real elevation under CA300 footprint"
 }
