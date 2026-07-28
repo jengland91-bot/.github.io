@@ -2,75 +2,75 @@
 
 I can’t create folders on your Windows PC from here, so this package is ready for you to copy.
 
+## Fix GPX scale NOW (recommended)
+
+Your map must be **16384 m × 16384 m** to match the 2024 CA300 Race Ready GPX (~74 mi course, ~15.3×15.6 km footprint at ~0.97×).
+
+### 1) Download and run this on your PC
+
+https://github.com/jengland91-bot/.github.io/raw/cursor/dust-valley-ultra-map-65dc/beamng/california_300/scripts/ONE_CLICK_FIX.bat
+
+It installs into:
+
+`%LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels\california_300`
+
+and downloads:
+- `heightmap_4096.png`
+- Import preset `ca300_gpx_scale.preset.json` (**squareSize=4**, **maxHeight=900**, pos **-8192,-8192**)
+- GPX-baked DecalRoad course + pit row
+- `DO_THIS_NOW.txt` checklist
+
+### 2) In BeamNG (one Import click)
+
+1. Open **California 300**
+2. F11 → Terrain → **Import Terrain**
+3. **Load preset** → `import/ca300_gpx_scale.preset.json`
+4. Confirm **Meters per Pixel = 4**, **Max Height = 900**
+5. **Import** → **Ctrl+S**
+
+Do **not** use meters/pixel = 1 (that makes a tiny ~4 km map).
+
 ## If the `levels` folder “disappears”
 
-It usually did **not** get deleted. Windows AppData is easy to click out of.
+BeamNG cleanup moves custom folders into backup dirs next to `current`.
 
-Permanent path (Win+R, paste, Enter):
+Permanent path (Win+R):
 
 `%LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels`
 
-Or download and run:
+Helpers:
+- `scripts/OPEN_LEVELS_FOLDER.bat`
+- `scripts/FIX_SCALE.bat`
+- `scripts/ONE_CLICK_FIX.bat` ← use this first
 
-`beamng/california_300/scripts/OPEN_LEVELS_FOLDER.bat`
+## Scale facts (locked to GPX)
 
-That opens the folder and puts a **BeamNG Levels** shortcut on your Desktop.
+| Setting | Value |
+|---|---|
+| Heightmap | `heightmap_4096.png` (4096×4096, 16-bit) |
+| squareSize / m per pixel | **4** |
+| maxHeight | **900** (SRTM relief ~795 m) |
+| World size | **16384 × 16384 m** |
+| Terrain position | **-8192, -8192, 0** |
+| Geo scale vs real CA300 | **~0.9666×** |
 
-## Fix GPX scale (map too small)
+## Package layout
 
-I can’t press Import inside BeamNG on your PC. Run this on Windows instead:
-
-`beamng/california_300/scripts/FIX_SCALE.bat`
-
-It will:
-- recreate `levels\california_300` if needed
-- recover `theTerrain.ter` from BeamNG cleanup/backup folders when possible
-- patch paths from `template` → `california_300`
-- force scale fields toward **squareSize=4** / **maxHeight=900**
-- open a short checklist for the one Import click BeamNG still needs
-
-Import settings that match the CA300 GPX footprint:
-- heightmap: `heightmap_4096.png`
-- meters per pixel: **4**
-- max height: **900**
-- position after import: **-8192, -8192, 0**
-
-## Fastest way on your PC
-
-### 1) Download this folder from GitHub
-From branch `cursor/dust-valley-ultra-map-65dc`:
-
-`beamng/california_300/levels/california_300/`
-
-### 2) Put it here
-Copy the whole `california_300` folder to:
-
-`C:\Users\Josh England\AppData\Local\BeamNG\BeamNG.drive\current\levels\california_300`
-
-Final path must look like:
-
-`...\levels\california_300\info.json`
-
-### 3) Optional: auto-fix your current messed-up levels folder
-If files like `theTerrain.ter` are sitting directly in `levels`, run:
-
-`beamng/california_300/scripts/fix_levels_folder.ps1`
-
-In PowerShell:
-```powershell
-cd path\to\fix_levels_folder.ps1
-powershell -ExecutionPolicy Bypass -File .\fix_levels_folder.ps1
 ```
-
-### 4) Open in BeamNG
-1. F11
-2. File → Open Level → `california_300`
-3. Terrain → Heightmap Import
-4. Use file from:
-   `beamng/california_300/import/heightmap_4096.png`
-5. Settings:
-   - squareSize = **4**
-   - maxHeight = **900**
-6. Save
-
-That’s it.
+california_300/
+  DO_THIS_NOW.txt
+  import/
+    heightmap_4096.png
+    ca300_gpx_scale.preset.json
+  levels/california_300/
+    info.json
+    preview.png
+    import/          (same heightmap + preset for in-game paths)
+    main/items.level.json   (TerrainBlock + ca300_race_ready DecalRoad)
+    minimap/
+  scripts/
+    ONE_CLICK_FIX.bat
+    FIX_SCALE.bat
+    OPEN_LEVELS_FOLDER.bat
+    bake_gpx_scaled_level.py
+```

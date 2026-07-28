@@ -1,0 +1,16 @@
+{
+  "worldSizeMeters": 16384.0,
+  "squareSize": 4.0,
+  "maxHeight": 900.0,
+  "geographicScale": 0.9666,
+  "courseMiles": 74.18,
+  "courseNodes": 350,
+  "pitNodes": 27,
+  "terrainPosition": [
+    -8192,
+    -8192,
+    0
+  ],
+  "importPreset": "import/ca300_gpx_scale.preset.json",
+  "heightmap": "import/heightmap_4096.png"
+}

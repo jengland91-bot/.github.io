@@ -1,6 +1,6 @@
 {
   "title": "California 300",
-  "description": "CA300-focused desert race park (~16 km). Built around the 2024 California 300 Race Ready course (~74 mi, nearly 1:1 fit) with pit row and danger-inspired g-outs, rocks, and washouts. Import heightmap_4096.png with squareSize=4 and maxHeight=900.",
+  "description": "CA300-focused desert race park (16384 m). 2024 California 300 Race Ready GPX (~74 mi) at ~0.97x geo scale, with DecalRoad course + pit row. MUST import heightmap via import/ca300_gpx_scale.preset.json (squareSize=4, maxHeight=900, pos -8192,-8192).",
   "authors": "Josh",
   "features": "CA300 course, pit row, danger markers, open desert freeroam",
   "suitablefor": "Ultra 4, desert racing, CA300-style prerunning",

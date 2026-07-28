@@ -1,0 +1,58 @@
+CALIFORNIA 300 — DO THIS NOW (GPX scale fix)
+============================================
+
+Goal: park size 16384 m x 16384 m (~10.2 mi across)
+      matching the 2024 CA300 Race Ready GPX (~74 mi course)
+      at ~0.97x real geographic scale.
+
+You already ran ONE_CLICK_FIX.bat if this file is in:
+  %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels\california_300\
+
+
+STEP A — Fully quit BeamNG, then reopen it
+
+
+STEP B — Open the map
+  Freeroam → search "cal" → California 300
+  OR any map → F11 → File → Open Level → california_300
+
+
+STEP C — Import terrain with the GPX preset (critical)
+  1. F11 World Editor
+  2. Terrain → Import Terrain
+  3. Click "Load preset"
+  4. Open:
+       levels/california_300/import/ca300_gpx_scale.preset.json
+  5. Confirm these numbers:
+       Meters per Pixel / squareSize = 4
+       Max Height / heightScale     = 900
+       Position                     = -8192, -8192, 0
+       Height Map                   = import/heightmap_4096.png
+  6. If Height Map is empty, click ... and pick heightmap_4096.png
+     from the same import folder
+  7. Click Import
+  8. Ctrl+S to save
+
+
+STEP D — Prove scale is correct
+  Select theTerrain in Scene Tree → Inspector:
+    squareSize = 4
+    maxHeight  = 900
+    position   = -8192, -8192, 0
+  World size should be about 16384 x 16384 (NOT 4096).
+
+
+STEP E — Drive
+  Hide Water if it covers the desert.
+  Pink NO MATERIAL is OK for now.
+  You should see DecalRoad "ca300_race_ready" along the GPX course.
+
+
+If Load Preset fails, set manually:
+  Height Map Image = heightmap_4096.png
+  Meters per Pixel = 4
+  Max Height       = 900
+  then Import, then set position -8192 -8192 0
+
+
+Do NOT use Meters per Pixel = 1 — that makes a tiny ~4 km map.
