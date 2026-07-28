@@ -1,17 +1,19 @@
 {
-  "description": "Minimap trail color key for Dust Valley Ultra",
+  "description": "Minimap trail color key for Dust Valley Ultra (CA300-based long course)",
   "worldSizeMeters": 16384.0,
+  "ca300Miles": 74.18,
+  "dangerCount": 68,
   "trails": {
     "long_course": {
-      "label": "Long course (~20 mi)",
+      "label": "CA300 long course (~74 mi)",
       "rgb": [
         242,
         199,
         71
       ],
       "hex": "#F2C747",
-      "lengthMeters": 33019.8,
-      "lengthMiles": 20.52
+      "lengthMeters": 110083.4,
+      "lengthMiles": 68.4
     },
     "short_course": {
       "label": "Short course (~5 mi)",
@@ -24,38 +26,16 @@
       "lengthMeters": 7936.0,
       "lengthMiles": 4.93
     },
-    "whoops": {
-      "label": "Whoops field",
+    "pit_row": {
+      "label": "Pit row",
       "rgb": [
-        242,
-        115,
-        38
+        50,
+        200,
+        110
       ],
-      "hex": "#F27326",
-      "lengthMeters": 3266.5,
-      "lengthMiles": 2.03
-    },
-    "valley": {
-      "label": "Valley speed cut",
-      "rgb": [
-        64,
-        140,
-        220
-      ],
-      "hex": "#408CDC",
-      "lengthMeters": 5445.7,
-      "lengthMiles": 3.38
-    },
-    "jumps": {
-      "label": "Jump / tabletop line",
-      "rgb": [
-        230,
-        55,
-        70
-      ],
-      "hex": "#E63746",
-      "lengthMeters": 5397.7,
-      "lengthMiles": 3.35
+      "hex": "#32C86E",
+      "lengthMeters": 786.7,
+      "lengthMiles": 0.49
     },
     "rocks_east": {
       "label": "East rock trail",
@@ -78,17 +58,6 @@
       "hex": "#28BEAF",
       "lengthMeters": 4395.7,
       "lengthMiles": 2.73
-    },
-    "pits": {
-      "label": "Pits / staging",
-      "rgb": [
-        50,
-        200,
-        110
-      ],
-      "hex": "#32C86E",
-      "lengthMeters": 1408.2,
-      "lengthMiles": 0.88
     }
   }
 }

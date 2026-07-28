@@ -3,9 +3,12 @@
   "worldSizeMiles": 10.18,
   "squareSize": 4.0,
   "resolution": 4096,
-  "longCourseMiles": 20.52,
+  "source": "2024 CA300 C_T_U Course - Race Ready GPX",
+  "longCourseMiles": 68.4,
   "shortCourseMiles": 4.93,
-  "longCourseMeters": 33019.8,
+  "longCourseMeters": 110083.4,
   "shortCourseMeters": 7936.0,
-  "note": "Lengths are design polylines; final race distance may vary slightly after World Editor sculpting."
+  "ca300SourceMiles": 74.18,
+  "dangerMarkers": 68,
+  "note": "Long course follows CA300 GPX fitted into the park at ~0.97 geographic scale."
 }

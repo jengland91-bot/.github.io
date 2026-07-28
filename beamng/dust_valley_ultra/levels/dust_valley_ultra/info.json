@@ -1,11 +1,11 @@
 {
   "title": "Dust Valley Ultra",
-  "description": "Big desert Ultra 4 park (~16 km across): outer long course ~20 miles with whoops, valley, jumps, and side rock trails, plus a ~5 mile short course in the middle.",
+  "description": "Big desert Ultra 4 park (~16 km). Long course follows the 2024 CA300 Race Ready path (~74 mi, nearly 1:1 fit) with danger-inspired g-outs/rocks/washouts, plus a ~5 mi short course in the middle and side rock trails.",
   "authors": "Josh",
-  "features": "20-mile long course, 5-mile short course, whoops, valley cut, jump line, side rock trails, pits staging",
-  "suitablefor": "Ultra 4, desert racing, short-course practice, freestyle jumping, light rock crawling",
+  "features": "CA300-inspired long course, short course, pit row, danger markers, side rock trails",
+  "suitablefor": "Ultra 4, desert racing, CA300-style prerunning, short-course practice, light rock crawling",
   "roads": "Packed desert long/short race corridors with dirt berms; no paved highway network",
-  "biome": "Arid desert mesa / wash country",
+  "biome": "Arid desert mesa / wash country (Lucerne-area inspired)",
   "country": "United States",
   "region": "northAmerica",
   "size": [16384, 16384],
@@ -26,13 +26,13 @@
   "spawnPoints": [
     {
       "translationId": "Pits / Staging",
-      "description": "Flat staging pad. Default start for long or short course.",
+      "description": "Flat staging / pit row area. Default start.",
       "objectname": "spawns_pits",
       "preview": "preview.png"
     },
     {
       "translationId": "Long Course Start",
-      "description": "Outer ~20 mile Ultra 4 desert loop.",
+      "description": "CA300-inspired ~74 mile desert loop.",
       "objectname": "spawns_long_course",
       "preview": "preview.png"
     },
@@ -43,26 +43,8 @@
       "preview": "preview.png"
     },
     {
-      "translationId": "Whoops Entry",
-      "description": "West whoops field on the long course.",
-      "objectname": "spawns_whoops",
-      "preview": "preview.png"
-    },
-    {
-      "translationId": "Valley Cut",
-      "description": "North valley speed section on the long course.",
-      "objectname": "spawns_valley",
-      "preview": "preview.png"
-    },
-    {
-      "translationId": "Jump Line",
-      "description": "South tabletop / jump line on the long course.",
-      "objectname": "spawns_jumps",
-      "preview": "preview.png"
-    },
-    {
       "translationId": "East Rock Trail",
-      "description": "Technical rock trail outside the east long-course arc.",
+      "description": "Technical rock trail off the east side.",
       "objectname": "spawns_rocks_east",
       "preview": "preview.png"
     },

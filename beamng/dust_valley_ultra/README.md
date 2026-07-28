@@ -3,9 +3,10 @@
 Big **fast desert Ultra 4** map for BeamNG.drive.
 
 - **Park size:** ~16.4 km across (`16384` m / ~10.2 miles)
-- **Long course:** ~**20 miles** outer Ultra 4 desert loop (gold on minimap)
+- **Long course:** **2024 CA300 Race Ready** path (~**74 miles**, nearly 1:1 fit) — gold on minimap
 - **Short course:** ~**5 miles** inner loop in the middle (cyan)
-- **Extras:** whoops, valley cut, jump line, side rock trails
+- **Dangers:** 68 CA300 markers (g-outs, rocks, washouts, poles…) — orange/red on minimap
+- **Extras:** pit row, side rock trails
 - **Default spawn:** pits / staging
 
 This repo ships the design, a 16-bit heightmap, spawn metadata, and World Editor build steps. BeamNG still needs a binary `.ter` terrain created/imported in the World Editor (that step is in-game).
