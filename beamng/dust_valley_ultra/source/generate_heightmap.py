@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Generate Dust Valley Ultra heightmap, colored minimap, and layout overview.
 
-Big desert park:
+CA300-focused desert park:
   - World ~16.4 km across (squareSize 4 m @ 4096)
-  - Long course from 2024 CA300 Race Ready GPX (~74 mi, nearly 1:1 fit)
-  - Inner short course ~5 miles in the middle
+  - Course from 2024 CA300 Race Ready GPX (~74 mi, nearly 1:1 fit)
+  - Pit row from the same GPX
   - Danger markers from CA300 (g-outs, rocks, washouts, etc.)
 
 Outputs:
@@ -47,12 +47,12 @@ def _loop(n: int, r0: float, amp3: float, amp5: float, sx: float, sy: float) -> 
 
 
 def _load_ca300_course() -> tuple[list[tuple[float, float]], list[tuple[float, float]], float]:
-    """Return (long_course_uv, pit_row_uv, course_miles). Falls back to synthetic loop."""
+    """Return (course_uv, pit_row_uv, course_miles). Falls back to synthetic loop."""
     if CA300_COURSE_JSON.exists():
         data = json.loads(CA300_COURSE_JSON.read_text(encoding="utf-8"))
-        long_uv = [(float(u), float(v)) for u, v in data["longCourseUv"]]
+        course_uv = [(float(u), float(v)) for u, v in data["longCourseUv"]]
         pit_uv = [(float(u), float(v)) for u, v in data.get("pitRowUv", [])]
-        return long_uv, pit_uv, float(data.get("courseMiles", 0))
+        return course_uv, pit_uv, float(data.get("courseMiles", 0))
     return _loop(40, 0.30, 0.035, 0.02, 1.08, 0.95), [], 20.5
 
 
@@ -63,53 +63,22 @@ def _load_ca300_dangers() -> list[dict]:
     return list(data.get("markers", []))
 
 
-LONG_COURSE, PIT_ROW, CA300_MILES = _load_ca300_course()
-SHORT_COURSE = _loop(20, 0.065, 0.008, 0.005, 1.2, 1.05)
+COURSE, PIT_ROW, CA300_MILES = _load_ca300_course()
 CA300_DANGERS = _load_ca300_dangers()
 
-# Each trail gets a unique minimap color (RGB 0-255).
+# Minimap / terrain ribbons — CA300 only (no short course).
 TRAILS: dict[str, dict] = {
-    "long_course": {
-        "label": f"CA300 long course (~{CA300_MILES:.0f} mi)" if CA300_MILES else "Long course",
+    "course": {
+        "label": f"CA300 course (~{CA300_MILES:.0f} mi)" if CA300_MILES else "CA300 course",
         "color": (242, 199, 71),  # gold
         "width": 0.012,
-        "points": LONG_COURSE,
-    },
-    "short_course": {
-        "label": "Short course (~5 mi)",
-        "color": (90, 210, 255),  # cyan
-        "width": 0.018,
-        "points": SHORT_COURSE,
+        "points": COURSE,
     },
     "pit_row": {
         "label": "Pit row",
         "color": (50, 200, 110),  # green
         "width": 0.010,
         "points": PIT_ROW if PIT_ROW else [(0.34, 0.84), (0.36, 0.83), (0.38, 0.83)],
-    },
-    "rocks_east": {
-        "label": "East rock trail",
-        "color": (168, 92, 220),  # purple
-        "width": 0.010,
-        "points": [
-            (0.88, 0.62),
-            (0.92, 0.54),
-            (0.93, 0.46),
-            (0.90, 0.38),
-            (0.86, 0.32),
-        ],
-    },
-    "rocks_nw": {
-        "label": "NW rock trail",
-        "color": (40, 190, 175),  # teal
-        "width": 0.010,
-        "points": [
-            (0.10, 0.34),
-            (0.12, 0.28),
-            (0.16, 0.22),
-            (0.22, 0.18),
-            (0.28, 0.17),
-        ],
     },
 }
 
@@ -195,21 +164,18 @@ def build_height() -> np.ndarray:
     base += 0.045 * fbm(u * 8.0 + 20, v * 8.0 - 7, octaves=3)
     base += 0.02 * np.sin(u * math.pi * 2.0) * np.cos(v * math.pi * 1.5)
 
-    # CA300 / long-course corridor
-    d_long = polyline_distance(u, v, LONG_COURSE)
-    long_w = TRAILS["long_course"]["width"]
-    long_mask = trail_mask(u, v, "long_course")
+    # CA300 race corridor
+    d_course = polyline_distance(u, v, COURSE)
+    course_w = TRAILS["course"]["width"]
+    course_mask = trail_mask(u, v, "course")
     race_height = 0.36 + 0.01 * fbm(u * 12, v * 12, octaves=2)
-    berm = smoothstep(long_w * 0.7, long_w * 1.15, d_long) * (1.0 - smoothstep(long_w * 1.15, long_w * 1.8, d_long))
+    berm = smoothstep(course_w * 0.7, course_w * 1.15, d_course) * (
+        1.0 - smoothstep(course_w * 1.15, course_w * 1.8, d_course)
+    )
     race_height = race_height + berm * 0.025
-    h = base * (1.0 - long_mask) + race_height * long_mask
+    h = base * (1.0 - course_mask) + race_height * course_mask
 
-    # Short course in the middle
-    short_mask = trail_mask(u, v, "short_course")
-    short_height = 0.37 + 0.008 * fbm(u * 16 + 3, v * 16 - 2, octaves=2)
-    h = h * (1.0 - short_mask * 0.85) + short_height * (short_mask * 0.85)
-
-    # Pit row flattened pad if present
+    # Pit row flattened pad
     if TRAILS["pit_row"]["points"] and len(TRAILS["pit_row"]["points"]) >= 2:
         pit_mask = trail_mask(u, v, "pit_row")
         h = h * (1.0 - pit_mask * 0.7) + 0.34 * (pit_mask * 0.7)
@@ -226,7 +192,6 @@ def build_height() -> np.ndarray:
         elif "Wash" in name:
             h -= blob * 0.025
         elif "G Out" in name or "G Puts" in name or "Drop" in name:
-            # depression then lip — classic desert g-out feel
             h -= blob * 0.03
             lip = gaussian_blob(u, v, cu, cv, sx * 1.6, sx * 1.6) - blob
             h += np.clip(lip, 0, None) * 0.02
@@ -235,23 +200,12 @@ def build_height() -> np.ndarray:
         else:
             h += blob * (0.012 * fbm(u * 30, v * 30, octaves=2))
 
-    # Mild whoops flavor along stretches of the long course
-    along = d_long * 80.0
-    whoops = (1.0 - smoothstep(0.0, long_w * 1.1, d_long)) * (0.012 * np.sin(along) ** 2)
+    # Mild whoops flavor along the race line
+    along = d_course * 80.0
+    whoops = (1.0 - smoothstep(0.0, course_w * 1.1, d_course)) * (0.012 * np.sin(along) ** 2)
     h += whoops
 
-    # Side rock trails
-    rock_east = gaussian_blob(u, v, 0.90, 0.48, 0.05, 0.10)
-    rock_nw = gaussian_blob(u, v, 0.16, 0.24, 0.06, 0.07)
-    rock_mask = np.clip(rock_east + rock_nw, 0.0, 1.0)
-    rock_detail = fbm(u * 24.0, v * 24.0, octaves=4, lac=2.1, gain=0.55)
-    rock_ridges = np.abs(fbm(u * 14.0 + 3, v * 14.0 - 2, octaves=3) * 2.0 - 1.0)
-    h += rock_mask * (0.06 + 0.07 * rock_detail + 0.045 * rock_ridges)
-    rocks_east_m = trail_mask(u, v, "rocks_east")
-    rocks_nw_m = trail_mask(u, v, "rocks_nw")
-    h -= rock_mask * np.maximum(rocks_east_m, rocks_nw_m) * 0.03
-
-    # Soft rim
+    # Soft desert rim — freeroam desert remains around the course
     edge = np.minimum.reduce([u, v, 1 - u, 1 - v])
     rim = 1.0 - smoothstep(0.015, 0.09, edge)
     h += rim * (0.07 + 0.035 * fbm(u * 5, v * 5, octaves=3))
@@ -279,15 +233,14 @@ def _desert_base(h: np.ndarray) -> np.ndarray:
 
 
 def _draw_trail_strokes(draw: ImageDraw.ImageDraw, size: int, outline: bool = True) -> None:
-    order = ["long_course", "rocks_east", "rocks_nw", "pit_row", "short_course"]
+    order = ["course", "pit_row"]
     for key in order:
         trail = TRAILS[key]
         if len(trail["points"]) < 2:
             continue
         pts = [(int(x * (size - 1)), int(y * (size - 1))) for x, y in trail["points"]]
         width = max(2, int(trail["width"] * size * 0.9))
-        # CA300 is dense — keep stroke readable but not huge
-        if key == "long_course":
+        if key == "course":
             width = max(2, int(size * 0.0035))
         if outline:
             draw.line(pts, fill=(20, 16, 12), width=width + 4, joint="curve")
@@ -318,7 +271,7 @@ def save_layout(h: np.ndarray, path: Path) -> None:
     tmp = Path(path).with_name("_tmp_minimap_layout.png")
     save_minimap(h, tmp, out_size=1024)
     preview = Image.open(tmp).convert("RGB")
-    canvas = Image.new("RGB", (1024, 1280), (18, 16, 14))
+    canvas = Image.new("RGB", (1024, 1220), (18, 16, 14))
     canvas.paste(preview, (0, 0))
     draw = ImageDraw.Draw(canvas)
     try:
@@ -328,11 +281,10 @@ def save_layout(h: np.ndarray, path: Path) -> None:
         font = ImageFont.load_default()
         font_sm = font
 
-    long_mi = polyline_length_m(LONG_COURSE) / 1609.34
-    short_mi = polyline_length_m(SHORT_COURSE) / 1609.34
+    course_mi = polyline_length_m(COURSE) / 1609.34
     draw.text(
         (24, 1040),
-        f"Dust Valley Ultra + CA300 path  |  long ~{long_mi:.1f} mi · short ~{short_mi:.1f} mi",
+        f"Dust Valley Ultra — CA300 focus  |  course ~{course_mi:.1f} mi",
         fill=(245, 235, 210),
         font=font,
     )
@@ -354,7 +306,7 @@ def save_layout(h: np.ndarray, path: Path) -> None:
 
 def save_trail_colors(path: Path) -> None:
     payload = {
-        "description": "Minimap trail color key for Dust Valley Ultra (CA300-based long course)",
+        "description": "Minimap color key — CA300-focused Dust Valley Ultra",
         "worldSizeMeters": WORLD_M,
         "ca300Miles": CA300_MILES,
         "dangerCount": len(CA300_DANGERS),
@@ -379,13 +331,13 @@ def save_course_lengths(path: Path) -> None:
         "squareSize": SQUARE_SIZE,
         "resolution": SIZE,
         "source": "2024 CA300 C_T_U Course - Race Ready GPX" if CA300_COURSE_JSON.exists() else "synthetic",
-        "longCourseMiles": round(polyline_length_m(LONG_COURSE) / 1609.34, 2),
-        "shortCourseMiles": round(polyline_length_m(SHORT_COURSE) / 1609.34, 2),
-        "longCourseMeters": round(polyline_length_m(LONG_COURSE), 1),
-        "shortCourseMeters": round(polyline_length_m(SHORT_COURSE), 1),
+        "focus": "california_300_only",
+        "courseMiles": round(polyline_length_m(COURSE) / 1609.34, 2),
+        "courseMeters": round(polyline_length_m(COURSE), 1),
+        "pitRowMiles": round(polyline_length_m(PIT_ROW) / 1609.34, 2) if len(PIT_ROW) > 1 else 0,
         "ca300SourceMiles": CA300_MILES,
         "dangerMarkers": len(CA300_DANGERS),
-        "note": "Long course follows CA300 GPX fitted into the park at ~0.97 geographic scale.",
+        "note": "Map is focused on the CA300 race path only (short course removed).",
     }
     path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
@@ -405,8 +357,8 @@ def main() -> None:
         f"({WORLD_M:.0f} m / {WORLD_M/1609.34:.1f} mi across, squareSize={SQUARE_SIZE:.2f} m)..."
     )
     print(
-        f"  Long course ~{polyline_length_m(LONG_COURSE)/1609.34:.1f} mi | "
-        f"Short course ~{polyline_length_m(SHORT_COURSE)/1609.34:.1f} mi"
+        f"  CA300 course ~{polyline_length_m(COURSE)/1609.34:.1f} mi | "
+        f"{len(CA300_DANGERS)} danger markers"
     )
     h = build_height()
     save_heightmap(h, out / "heightmap_4096.png")
@@ -429,9 +381,11 @@ def main() -> None:
         "squareSize": SQUARE_SIZE,
         "recommendedMaxHeight": MAX_HEIGHT_M,
         "format": "16-bit PNG grayscale",
-        "longCourseMiles": round(polyline_length_m(LONG_COURSE) / 1609.34, 2),
-        "shortCourseMiles": round(polyline_length_m(SHORT_COURSE) / 1609.34, 2),
-        "minimap": "Each trail uses a unique color — see trail_colors.json",
+        "focus": "california_300_only",
+        "courseMiles": round(polyline_length_m(COURSE) / 1609.34, 2),
+        "ca300SourceMiles": CA300_MILES,
+        "dangerMarkers": len(CA300_DANGERS),
+        "minimap": "CA300 course + pit row + danger markers — see trail_colors.json",
         "importNotes": (
             f"In World Editor: Terrain > Heightmap Import. "
             f"Use squareSize={SQUARE_SIZE} and maxHeight around {MAX_HEIGHT_M}."

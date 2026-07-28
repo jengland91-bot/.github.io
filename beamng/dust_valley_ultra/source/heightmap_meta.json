@@ -5,8 +5,10 @@
   "squareSize": 4.0,
   "recommendedMaxHeight": 280.0,
   "format": "16-bit PNG grayscale",
-  "longCourseMiles": 68.4,
-  "shortCourseMiles": 4.93,
-  "minimap": "Each trail uses a unique color \u2014 see trail_colors.json",
+  "focus": "california_300_only",
+  "courseMiles": 68.4,
+  "ca300SourceMiles": 74.18,
+  "dangerMarkers": 68,
+  "minimap": "CA300 course + pit row + danger markers \u2014 see trail_colors.json",
   "importNotes": "In World Editor: Terrain > Heightmap Import. Use squareSize=4.0 and maxHeight around 280.0."
 }
