@@ -1,0 +1,88 @@
+{
+  "title": "Dust Valley Ultra",
+  "description": "Mid-to-big fast desert Ultra 4 park: sandy race loop with whoops, a valley speed cut, southern jump line, and technical rock trails off to the sides.",
+  "authors": "Josh",
+  "features": "Fast desert loop, whoops field, valley cut, jump/tabletops, side rock trails, pits staging",
+  "suitablefor": "Ultra 4, desert racing, freestyle jumping, light rock crawling",
+  "roads": "Packed desert race corridor with dirt berms; no paved highway network",
+  "biome": "Arid desert mesa / wash country",
+  "country": "United States",
+  "region": "northAmerica",
+  "size": [4096, 4096],
+  "defaultSpawnPointName": "spawns_pits",
+  "supportsTraffic": false,
+  "supportsTimeOfDay": true,
+  "localUnits": {
+    "gasoline": "gallonUS",
+    "diesel": "gallonUS"
+  },
+  "roadRules": {
+    "rightHandDrive": false,
+    "turnOnRed": true
+  },
+  "previews": [
+    "preview.png"
+  ],
+  "spawnPoints": [
+    {
+      "translationId": "Pits / Staging",
+      "description": "Flat staging pad at the southwest corner. Default Ultra 4 start.",
+      "objectname": "spawns_pits",
+      "preview": "preview.png"
+    },
+    {
+      "translationId": "Whoops Entry",
+      "description": "Roll into the west whoops field on the main desert loop.",
+      "objectname": "spawns_whoops",
+      "preview": "preview.png"
+    },
+    {
+      "translationId": "Valley Cut",
+      "description": "North valley speed section — keep it straight and committed.",
+      "objectname": "spawns_valley",
+      "preview": "preview.png"
+    },
+    {
+      "translationId": "Jump Line",
+      "description": "South tabletop / jump line for big Ultra 4 hits.",
+      "objectname": "spawns_jumps",
+      "preview": "preview.png"
+    },
+    {
+      "translationId": "East Rock Trail",
+      "description": "Technical rock trail off the east side of the desert loop.",
+      "objectname": "spawns_rocks_east",
+      "preview": "preview.png"
+    },
+    {
+      "translationId": "NW Rock Trail",
+      "description": "Northwest rocky climb and shelf trail.",
+      "objectname": "spawns_rocks_nw",
+      "preview": "preview.png"
+    }
+  ],
+  "minimap": [
+    {
+      "file": "minimap/terrain.png",
+      "size": [4096, 4096],
+      "offset": [-2048, 2048]
+    }
+  ],
+  "timeOfDayPresets": [
+    {
+      "key": "sunrise",
+      "value": 0.23,
+      "label": "Desert sunrise"
+    },
+    {
+      "key": "noon",
+      "value": 0.5,
+      "label": "High sun"
+    },
+    {
+      "key": "golden",
+      "value": 0.72,
+      "label": "Golden hour"
+    }
+  ]
+}
