@@ -7,15 +7,26 @@ Desert race park for BeamNG.drive, built around the **2024 California 300 Race R
 
 ## Install into BeamNG (do this)
 
-1. Download and run:
+### Easiest download (ZIP — works when .bat opens in a browser)
 
-https://github.com/jengland91-bot/.github.io/raw/cursor/dust-valley-ultra-map-65dc/beamng/california_300/scripts/INSTALL_CALIFORNIA_300.bat
+Open this page and tap **Download Install ZIP**:
 
-2. Follow `DO_THIS_NOW.txt` (opens automatically):
-   - Freeroam → **California 300**
-   - Import Terrain → **Load preset** `ca300_gpx_scale.preset.json`
-   - Confirm **Meters per Pixel = 4**, **Max Height = 900**
-   - Import → Ctrl+S
+https://jengland91-bot.github.io/ca300.html
+
+Or direct ZIP:
+
+https://jengland91-bot.github.io/beamng/california_300/California_300_Install.zip
+
+1. Extract the ZIP
+2. Double-click `INSTALL_CALIFORNIA_300.bat`
+3. Follow `DO_THIS_NOW.txt`
+
+### In BeamNG after install
+
+1. Freeroam → **California 300**
+2. Import Terrain → **Load preset** `ca300_gpx_scale.preset.json`
+3. Confirm **Meters per Pixel = 4**, **Max Height = 900**
+4. Import → Ctrl+S
 
 ## Scale (locked to GPX)
 

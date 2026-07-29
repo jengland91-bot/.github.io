@@ -1,4 +1,5 @@
 # Josh's projects
 
 - Personal links page: [`index.html`](index.html)
-- BeamNG.drive map — **Dust Valley Ultra** (fast desert Ultra 4 park): [`beamng/dust_valley_ultra/`](beamng/dust_valley_ultra/)
+- **California 300** BeamNG download page: [`ca300.html`](ca300.html)
+- California 300 package: [`beamng/california_300/`](beamng/california_300/)
