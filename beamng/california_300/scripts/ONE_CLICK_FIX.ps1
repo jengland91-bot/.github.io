@@ -10,8 +10,10 @@ $levels = Join-Path $current "levels"
 $target = Join-Path $levels "california_300"
 
 Write-Host "========================================"
-Write-Host " California 300 GPX-scale installer"
+Write-Host " INSTALL California 300 into BeamNG"
 Write-Host "========================================"
+Write-Host "Map name: California 300  (folder: california_300)"
+Write-Host "Old name Dust Valley is retired."
 Write-Host "User: $env:USERNAME"
 Write-Host "Target: $target"
 Write-Host ""
@@ -100,7 +102,7 @@ foreach ($desk in @("$env:USERPROFILE\Desktop", "$env:USERPROFILE\OneDrive\Deskt
     $s = $ws.CreateShortcut("$desk\BeamNG Levels.lnk")
     $s.TargetPath = $levels
     $s.Save()
-    $s2 = $ws.CreateShortcut("$desk\CA300 DO THIS NOW.lnk")
+    $s2 = $ws.CreateShortcut("$desk\California 300 - READ ME.lnk")
     $s2.TargetPath = "$target\DO_THIS_NOW.txt"
     $s2.Save()
   }

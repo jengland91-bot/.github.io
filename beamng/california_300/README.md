@@ -1,76 +1,43 @@
-# California 300 — ready-to-copy BeamNG package
+# California 300 — BeamNG package
 
-I can’t create folders on your Windows PC from here, so this package is ready for you to copy.
+Desert race park for BeamNG.drive, built around the **2024 California 300 Race Ready** GPX.
 
-## Fix GPX scale NOW (recommended)
+**Name:** California 300 only (`california_300`)  
+**Not used:** Dust Valley / `dust_valley_ultra` (retired name)
 
-Your map must be **16384 m × 16384 m** to match the 2024 CA300 Race Ready GPX (~74 mi course, ~15.3×15.6 km footprint at ~0.97×).
+## Install into BeamNG (do this)
 
-### 1) Download and run this on your PC
+1. Download and run:
 
-https://github.com/jengland91-bot/.github.io/raw/cursor/dust-valley-ultra-map-65dc/beamng/california_300/scripts/ONE_CLICK_FIX.bat
+https://github.com/jengland91-bot/.github.io/raw/cursor/dust-valley-ultra-map-65dc/beamng/california_300/scripts/INSTALL_CALIFORNIA_300.bat
 
-It installs into:
+2. Follow `DO_THIS_NOW.txt` (opens automatically):
+   - Freeroam → **California 300**
+   - Import Terrain → **Load preset** `ca300_gpx_scale.preset.json`
+   - Confirm **Meters per Pixel = 4**, **Max Height = 900**
+   - Import → Ctrl+S
 
-`%LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels\california_300`
-
-and downloads:
-- `heightmap_4096.png`
-- Import preset `ca300_gpx_scale.preset.json` (**squareSize=4**, **maxHeight=900**, pos **-8192,-8192**)
-- GPX-baked DecalRoad course + pit row
-- `DO_THIS_NOW.txt` checklist
-
-### 2) In BeamNG (one Import click)
-
-1. Open **California 300**
-2. F11 → Terrain → **Import Terrain**
-3. **Load preset** → `import/ca300_gpx_scale.preset.json`
-4. Confirm **Meters per Pixel = 4**, **Max Height = 900**
-5. **Import** → **Ctrl+S**
-
-Do **not** use meters/pixel = 1 (that makes a tiny ~4 km map).
-
-## If the `levels` folder “disappears”
-
-BeamNG cleanup moves custom folders into backup dirs next to `current`.
-
-Permanent path (Win+R):
-
-`%LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels`
-
-Helpers:
-- `scripts/OPEN_LEVELS_FOLDER.bat`
-- `scripts/FIX_SCALE.bat`
-- `scripts/ONE_CLICK_FIX.bat` ← use this first
-
-## Scale facts (locked to GPX)
+## Scale (locked to GPX)
 
 | Setting | Value |
 |---|---|
-| Heightmap | `heightmap_4096.png` (4096×4096, 16-bit) |
-| squareSize / m per pixel | **4** |
-| maxHeight | **900** (SRTM relief ~795 m) |
 | World size | **16384 × 16384 m** |
+| Heightmap | `import/heightmap_4096.png` |
+| squareSize | **4** |
+| maxHeight | **900** |
 | Terrain position | **-8192, -8192, 0** |
-| Geo scale vs real CA300 | **~0.9666×** |
+| Geo scale | **~0.9666×** real CA300 footprint |
 
-## Package layout
+## What’s in the level
 
-```
-california_300/
-  DO_THIS_NOW.txt
-  import/
-    heightmap_4096.png
-    ca300_gpx_scale.preset.json
-  levels/california_300/
-    info.json
-    preview.png
-    import/          (same heightmap + preset for in-game paths)
-    main/items.level.json   (TerrainBlock + ca300_race_ready DecalRoad)
-    minimap/
-  scripts/
-    ONE_CLICK_FIX.bat
-    FIX_SCALE.bat
-    OPEN_LEVELS_FOLDER.bat
-    bake_gpx_scaled_level.py
-```
+- SRTM elevation under the CA300 course area
+- DecalRoad `ca300_race_ready` + pit row from GPX
+- Spawns at pits / course start
+- Google Earth paint notes: `docs/EARTH_PAINT_GUIDE.md`
+- Course GPX/KML: `source/reference/ca300/`
+
+## After a BeamNG update
+
+Major updates may move `levels` into a backup folder. Re-run `INSTALL_CALIFORNIA_300.bat` or copy `california_300` back into:
+
+`%LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels\`

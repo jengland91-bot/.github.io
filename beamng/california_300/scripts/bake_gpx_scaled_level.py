@@ -15,10 +15,10 @@ from pathlib import Path
 
 from PIL import Image
 
-ROOT = Path(__file__).resolve().parents[2]
-CA300 = ROOT / "dust_valley_ultra" / "source" / "reference" / "ca300"
-LEVEL = ROOT / "california_300" / "levels" / "california_300"
-IMPORT = ROOT / "california_300" / "import"
+ROOT = Path(__file__).resolve().parents[1]  # beamng/california_300
+CA300 = ROOT / "source" / "reference" / "ca300"
+LEVEL = ROOT / "levels" / "california_300"
+IMPORT = ROOT / "import"
 HEIGHTMAP = IMPORT / "heightmap_4096.png"
 
 WORLD_M = 16384.0
