@@ -1,0 +1,7 @@
+*.hgt
+*.hgt.gz
+import/heightmap_8192.png
+import/heightmap_preview.png
+import/heightmap_color.png
+levels/parker_400/import/heightmap_8192.png
+__pycache__/

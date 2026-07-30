@@ -1,0 +1,21 @@
+{
+  "source": "SRTM 1-arcsec Skadi mosaic N33/N34 W114/W115 under 2026 Parker 400 CTUTV",
+  "resolution": 4096,
+  "worldSizeMeters": 65536.0,
+  "squareSize": 16.0,
+  "recommendedMaxHeight": 1500.0,
+  "elevMinMeters": 109.3,
+  "elevMaxMeters": 1407.3,
+  "reliefMeters": 1298.0,
+  "geographicScale": 1.0,
+  "courseMiles": 125.79,
+  "tiles": [
+    "N33W115",
+    "N33W114",
+    "N34W115",
+    "N34W114"
+  ],
+  "importNotes": "World Editor Heightmap Import: squareSize=16.0, maxHeight=1500.0, position=[-32768, -32768, 0]. Real Parker elevation is baked in. Shipped default is 4096 (16 m/px). Rebuild scripts/bake_srtm_heightmap.py for 8192 HD.",
+  "shippedDefault": true,
+  "hdAlternative": "Run bake_srtm_heightmap.py for 8192 @ 8 m/px"
+}

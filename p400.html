@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parker 400 — Download</title>
+  <style>
+    :root {
+      --bg: #100c08;
+      --text: #f3ebe1;
+      --muted: #b6a48c;
+      --accent: #e0a23a;
+      --card: #1a140e;
+      --line: #3a2d20;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background:
+        radial-gradient(ellipse at 20% 0%, #2c1a0c 0%, transparent 50%),
+        linear-gradient(180deg, #100c08, #070605);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding: 40px 18px;
+    }
+    main { width: 100%; max-width: 560px; }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+    }
+    .tag {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    p { color: var(--muted); line-height: 1.55; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      margin-top: 22px;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      background: var(--accent);
+      color: #1a1206;
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: 16px 18px;
+      border-radius: 12px;
+      margin: 14px 0 8px;
+    }
+    .btn.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+      font-weight: 650;
+      font-size: 0.95rem;
+    }
+    ol { padding-left: 1.2rem; color: var(--muted); }
+    li { margin: 8px 0; }
+    code { color: #f8d9a8; font-size: 0.92em; }
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .stat strong {
+      display: block;
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+    .stat span { color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="tag">BeamNG.drive · 2026 CTUTV</div>
+    <h1>Parker 400</h1>
+    <p>
+      True 1:1 desert race map from the official 2026 Parker 400 C/T/UTV final racer GPS.
+      Real SRTM elevation, ~125.8 mi race corridor, pits, VCPs, and danger markers.
+    </p>
+
+    <div class="stats">
+      <div class="stat"><strong>125.8 mi</strong><span>CTUTV lap</span></div>
+      <div class="stat"><strong>1:1</strong><span>geographic scale</span></div>
+      <div class="stat"><strong>65.5 km</strong><span>world square</span></div>
+      <div class="stat"><strong>16 m/px</strong><span>heightmap (HD 8 optional)</span></div>
+    </div>
+
+    <div class="card">
+      <a class="btn" href="beamng/parker_400/Parker_400_Install.zip" download="Parker_400_Install.zip">
+        Download Install ZIP
+      </a>
+      <a class="btn secondary" href="https://github.com/jengland91-bot/.github.io/tree/cursor/parker-400-beamng-a8ad/beamng/parker_400">
+        Browse source on GitHub
+      </a>
+      <ol>
+        <li>Extract the ZIP</li>
+        <li>Run <code>INSTALL_PARKER_400.bat</code></li>
+        <li>Freeroam → <strong>Parker 400</strong></li>
+        <li>Import terrain preset: squareSize <code>16</code>, maxHeight <code>1500</code></li>
+      </ol>
+      <p style="margin-bottom:0">Details: <code>DO_THIS_NOW.txt</code> inside the package.</p>
+    </div>
+  </main>
+</body>
+</html>

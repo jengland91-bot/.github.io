@@ -1,0 +1,17 @@
+{
+  "worldSizeMeters": 65536.0,
+  "squareSize": 16.0,
+  "maxHeight": 1500.0,
+  "geographicScale": 1.0,
+  "courseMiles": 125.79,
+  "courseNodes": 2487,
+  "pitNodes": 5,
+  "waypointFile": "source/reference/p400/p400_map_waypoints.json",
+  "terrainPosition": [
+    -32768.0,
+    -32768.0,
+    0
+  ],
+  "importPreset": "import/p400_gpx_scale.preset.json",
+  "heightmap": "import/heightmap_4096.png"
+}

@@ -1,0 +1,39 @@
+================================================================================
+PARKER 400 — DO THIS NOW (BeamNG.drive)
+================================================================================
+
+1) Run INSTALL_PARKER_400.bat  (copies levels\parker_400 into BeamNG)
+
+2) Launch BeamNG.drive → Freeroam → open "Parker 400"
+
+3) Press F11 (World Editor)
+
+4) Terrain tools → Import Terrain → Load preset:
+      levels\parker_400\import\p400_gpx_scale.preset.json
+
+5) Confirm these values BEFORE clicking Import:
+      Meters per Pixel (squareSize) = 16
+      Max Height                   = 1500
+      Position                     = -32768, -32768, 0
+
+6) Import → Ctrl+S to save the level
+
+7) Quit World Editor and respawn at Main Pit
+
+--------------------------------------------------------------------------------
+WHY THIS MATTERS
+--------------------------------------------------------------------------------
+The heightmap is real SRTM elevation under the 2026 Parker 400 CTUTV course.
+If squareSize/maxHeight are wrong, the hills squash or the 126-mile loop
+won't match the GPS.
+
+--------------------------------------------------------------------------------
+COURSE FACTS
+--------------------------------------------------------------------------------
+- Official file: 2026 Parker 400 CTUTV Final Racer (GPX/KML/USR)
+- Lap length: ~125.8 miles
+- Footprint: ~55.4 km E-W × 28.5 km N-S around Parker, AZ
+- Map: 65536 m world @ 16 m/px shipped (true 1:1; HD 8 m/px optional)
+
+Optional next: satellite paint — see docs\EARTH_PAINT_GUIDE.md
+================================================================================
