@@ -8,8 +8,11 @@
   "biome": "Arid desert mesa / wash country (Lucerne-area inspired)",
   "country": "United States",
   "region": "northAmerica",
-  "size": [16384, 16384],
-  "defaultSpawnPointName": "spawns_pits",
+  "size": [
+    16384,
+    16384
+  ],
+  "defaultSpawnPointName": "spawns_course",
   "supportsTraffic": false,
   "supportsTimeOfDay": true,
   "localUnits": {
@@ -31,8 +34,8 @@
       "preview": "preview.png"
     },
     {
-      "translationId": "Course Start",
-      "description": "On the CA300 race line near start/finish.",
+      "translationId": "Start / Finish",
+      "description": "CA300 Start/Finish line (Google Earth 34\u00b048'34.91\"N 117\u00b005'03.39\"W).",
       "objectname": "spawns_course",
       "preview": "preview.png"
     }
@@ -40,8 +43,14 @@
   "minimap": [
     {
       "file": "minimap/terrain.png",
-      "size": [16384, 16384],
-      "offset": [-8192, 8192]
+      "size": [
+        16384,
+        16384
+      ],
+      "offset": [
+        -8192,
+        8192
+      ]
     }
   ],
   "timeOfDayPresets": [

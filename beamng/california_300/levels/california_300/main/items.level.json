@@ -1,7 +1,7 @@
 {"class":"SimGroup","name":"MissionGroup"}
 {"class":"SimGroup","name":"PlayerDropPoints","__parent":"MissionGroup"}
 {"class":"SpawnSphere","name":"spawns_pits","__parent":"PlayerDropPoints","position":[-2081.91,-1242.56,245.68],"rotationMatrix":[0.0,1.0,0.0,-1.0,0.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":14,"spineRadius":2,"canSaveDynamicFields":1}
-{"class":"SpawnSphere","name":"spawns_course","__parent":"PlayerDropPoints","position":[1825.01,6937.15,537.42],"rotationMatrix":[0.0,1.0,0.0,-1.0,0.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":12,"spineRadius":2,"canSaveDynamicFields":1}
+{"class":"SpawnSphere","name":"spawns_course","__parent":"PlayerDropPoints","position":[1825.47,6942.5,539.33],"rotationMatrix":[0.0,1.0,0.0,-1.0,0.0,0.0,0.0,0.0,1.0],"scale":[1,1,1],"radius":12,"spineRadius":2,"canSaveDynamicFields":1}
 {"class":"SimGroup","name":"LevelObjects","__parent":"MissionGroup"}
 {"class":"TerrainBlock","name":"theTerrain","__parent":"LevelObjects","position":[-8192,-8192,0],"rotationMatrix":[1,0,0,0,1,0,0,0,1],"scale":[1,1,1],"terrainFile":"/levels/california_300/theTerrain.ter","squareSize":4.0,"maxHeight":900.0,"baseTexSize":1024,"lightMapSize":256,"screenError":16,"castShadows":true,"canSave":true,"canSaveDynamicFields":true,"materialTextureSet":"california_300TerrainMaterialTextureSet"}
 {"class":"SimGroup","name":"Roads","__parent":"LevelObjects"}
@@ -13,4 +13,4 @@
 {"class":"ScatterSky","name":"theScatterSky","__parent":"Environment","canSave":true,"canSaveDynamicFields":true,"skyBrightness":25,"mieScattering":0.0045,"rayleighScattering":0.0035,"exposure":1.0,"colorizeAmount":0.0}
 {"class":"CloudLayer","name":"clouds","__parent":"Environment","coverage":0.18,"windSpeed":0.4}
 {"class":"SimGroup","name":"TODO_WorldEditor","__parent":"MissionGroup"}
-{"class":"Note","name":"build_notes","__parent":"TODO_WorldEditor","position":[0,0,120],"text":"GPX scale locked: Import import/heightmap_4096.png with Load Preset ca300_gpx_scale.preset.json (squareSize=4, maxHeight=900, pos -8192,-8192). DecalRoad ca300_race_ready follows 2024 Race Ready course."}
+{"class":"Note","name":"build_notes","__parent":"TODO_WorldEditor","position":[0,0,120],"text":"Start/Finish spawn from Google Earth 34\u00b048'34.91\"N 117\u00b005'03.39\"W -> world [1825.47, 6942.5, 539.33]. Import preset squareSize=4 maxHeight=900 pos -8192,-8192."}
