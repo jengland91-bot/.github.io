@@ -25,11 +25,27 @@ Your satellite image should cover **that same square**.
 
 ---
 
-## Option A — Google Earth Pro (easiest for you)
+## Don’t have Google Earth Pro?
+
+Use any of these instead (all free):
+
+| Program | Best for | Difficulty |
+|---|---|---|
+| **QGIS** | Best free option — exact corners + export | Medium |
+| **USGS National Map Downloader** | Official US aerial (NAIP) downloads | Easy |
+| **Bing Maps / Google Maps in browser** | Quick screenshot (lower quality) | Easy |
+| **SAS.Planet** | Popular with sim racers / map makers | Medium |
+| **Google Earth (web)** | Viewing only — weak export tools | Easy |
+
+**Recommended if you want one install:** [QGIS](https://qgis.org) (free). Steps further below under **Option A2**.
+
+---
+
+## Option A — Google Earth Pro (if you have it)
 
 ### 1) Install / open Google Earth Pro (desktop)
 
-Phone/web Google Earth is harder for exact exports. Use **Google Earth Pro** on PC.
+Phone/web Google Earth is harder for exact exports. Use **Google Earth Pro** on PC if you already have it.
 
 ### 2) Load the race course
 
@@ -103,14 +119,53 @@ beamng/parker_400/levels/parker_400/art/terrains/parker400_base_color.png
 
 ---
 
-## Option B — Esri / NAIP (cleaner for mods, a bit more work)
+## Option A2 — QGIS (best free replacement for Earth Pro)
 
-If Google Earth licensing worries you for a public mod:
+1. Install [QGIS](https://qgis.org) (Windows installer is fine).
+2. Open QGIS → Browser panel → **XYZ Tiles** → right‑click → New Connection.
+3. Name: `Esri World Imagery`  
+   URL:
+   ```
+   https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}
+   ```
+4. Double‑click that layer so satellite appears.
+5. Project → Import/Export → **Export Map to Image**
+6. Extent → calculate from the four corner coords (or draw a box around Parker covering them).
+7. Resolution: aim for **2048** or **4096** px square, north up.
+8. Save as `parker400_base_color.png` and continue at **§ Put the file in the BeamNG level** above.
 
-1. Go to [USGS National Map Downloader](https://apps.nationalmap.gov/downloader/) or an Esri imagery export tool
-2. Draw a box using the same four corners
-3. Download imagery GeoTIFF / JPEG
-4. Same as above: square crop, north up, drop into `art/terrains/`
+Optional: Layer → Add Layer → Add Vector Layer → open the Parker KML so the race line shows while you frame the export.
+
+---
+
+## Option A3 — USGS National Map (no special map app)
+
+1. Open [USGS National Map Downloader](https://apps.nationalmap.gov/downloader/).
+2. Zoom to Parker, AZ / draw a box using the corner coords.
+3. Dataset: **Imagery - NAIP** (aerial photos).
+4. Find → download the overlapping tiles.
+5. Open the downloaded images in any viewer, stitch/crop to a square north‑up image, save as `parker400_base_color.png`.
+
+Good for official US aerial; files can be large.
+
+---
+
+## Option A4 — Browser only (quick & dirty)
+
+1. Open [Bing Maps](https://www.bing.com/maps) or Google Maps.
+2. Switch to **Aerial / Satellite**.
+3. Go to `34.086139, -113.897239`, zoom out to cover the loop.
+4. Fullscreen screenshot (Windows: `Win+Shift+S` or Snipping Tool).
+5. Crop square in Photopea / Paint.
+6. Quality won’t match QGIS/USGS, but it’s enough to test paint in BeamNG.
+
+---
+
+## Option B — Esri / NAIP notes (licensing)
+
+If you plan to **publish** the mod publicly, prefer **USGS NAIP** or other open imagery over Google Earth screenshots. For private/personal use, any of the options above are fine.
+
+Target size for BeamNG base colormap: **2048² or 4096²**.
 
 ---
 
