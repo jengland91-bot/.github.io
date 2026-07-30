@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>California 300 — Download</title>
+  <title>California 300 — Download Installer</title>
   <style>
     :root {
       --bg: #120e0a;
@@ -26,22 +26,15 @@
       justify-content: center;
       padding: 40px 18px;
     }
-    main {
-      width: 100%;
-      max-width: 520px;
-    }
-    h1 {
-      margin: 0 0 8px;
-      font-size: 2rem;
-      letter-spacing: -0.02em;
-    }
+    main { width: 100%; max-width: 560px; }
+    h1 { margin: 0 0 8px; font-size: 2rem; }
     p { color: var(--muted); line-height: 1.5; }
     .card {
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 16px;
       padding: 22px;
-      margin-top: 22px;
+      margin-top: 18px;
     }
     .btn {
       display: block;
@@ -51,10 +44,10 @@
       background: var(--accent);
       color: #1a1006;
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       padding: 16px 18px;
       border-radius: 12px;
-      margin: 14px 0 8px;
+      margin: 12px 0 8px;
     }
     .btn.secondary {
       background: transparent;
@@ -65,35 +58,40 @@
     }
     ol { padding-left: 1.2rem; color: var(--muted); }
     li { margin: 8px 0; }
-    code {
-      color: #f8d9a8;
-      font-size: 0.92em;
-    }
+    code { color: #f8d9a8; }
+    .note { font-size: 0.92rem; color: var(--muted); }
   </style>
 </head>
 <body>
   <main>
     <h1>California 300</h1>
-    <p>BeamNG desert map installer. Use the ZIP button — Internet Explorer often opens <code>.bat</code> files as a webpage instead of downloading them.</p>
+    <p>Download the installer below. Use the <strong>ZIP</strong> if Windows blocks the .bat.</p>
 
     <div class="card">
-      <a class="btn" href="https://github.com/jengland91-bot/.github.io/raw/cursor/dust-valley-ultra-map-65dc/beamng/california_300/California_300_Install.zip" download="California_300_Install.zip">
+      <a class="btn" href="https://github.com/jengland91-bot/.github.io/raw/cursor/dust-valley-ultra-map-65dc/beamng/california_300/California_300_Install.zip" download>
         Download Install ZIP
       </a>
-      <a class="btn secondary" href="https://github.com/jengland91-bot/.github.io/raw/cursor/dust-valley-ultra-map-65dc/beamng/california_300/DO_THIS_NOW.txt" download="DO_THIS_NOW.txt">
-        Download instructions (.txt)
+      <p class="note">Contains INSTALL_CALIFORNIA_300.bat + ONE_CLICK_FIX.ps1 together.</p>
+
+      <a class="btn secondary" href="https://github.com/jengland91-bot/.github.io/raw/cursor/dust-valley-ultra-map-65dc/beamng/california_300/scripts/INSTALL_CALIFORNIA_300.bat" download>
+        Download single .bat only
+      </a>
+      <p class="note">This .bat can auto-download ONE_CLICK_FIX.ps1 if missing. If antivirus blocks it, use the ZIP.</p>
+
+      <a class="btn secondary" href="https://github.com/jengland91-bot/.github.io/raw/cursor/dust-valley-ultra-map-65dc/beamng/california_300/desert_materials.zip" download>
+        Download desert materials only
       </a>
     </div>
 
     <div class="card">
-      <strong>After download</strong>
+      <strong>How to install</strong>
       <ol>
-        <li>Open your <strong>Downloads</strong> folder</li>
-        <li>Right-click <code>California_300_Install.zip</code> → <strong>Extract All…</strong></li>
+        <li>Download <strong>Install ZIP</strong></li>
+        <li>Right-click → <strong>Extract All…</strong></li>
         <li>Open the extracted folder</li>
         <li>Double-click <code>INSTALL_CALIFORNIA_300.bat</code></li>
-        <li>If Windows warns you, click <strong>More info</strong> → <strong>Run anyway</strong></li>
-        <li>Follow the checklist that opens (Import with meters/pixel <strong>4</strong>, max height <strong>900</strong>)</li>
+        <li>If Windows warns: More info → Run anyway</li>
+        <li>Restart BeamNG → Freeroam → California 300</li>
       </ol>
     </div>
   </main>
