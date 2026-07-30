@@ -82,6 +82,22 @@ if (-not (Test-Path $hm) -or (Get-Item $hm).Length -lt 1MB) {
   Write-Host "heightmap already present: $hm"
 }
 
+# Desert materials (dirt/rock) — empty library is normal without these
+New-Item -ItemType Directory -Force -Path "$target\art\terrains" | Out-Null
+$matZip = Join-Path $env:TEMP "california_300_desert_materials.zip"
+Write-Host "Downloading desert materials..."
+if (Get-GitFile "desert_materials.zip" $matZip) {
+  try {
+    Expand-Archive -Path $matZip -DestinationPath "$target\art" -Force
+    Write-Host "Desert materials installed to art\terrains"
+  } catch {
+    Write-Host "Could not extract materials zip: $($_.Exception.Message)"
+    $ok = $false
+  }
+} else {
+  $ok = $false
+}
+
 # Patch any leftover template paths in local JSON
 Get-ChildItem -Path $target -Include *.json,*.level.json -Recurse -File -ErrorAction SilentlyContinue | ForEach-Object {
   $raw = Get-Content $_.FullName -Raw -ErrorAction SilentlyContinue

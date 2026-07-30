@@ -57,3 +57,18 @@ If Load Preset fails, set manually:
   then Import, then position -8192 -8192 0
 
 NEVER use Meters per Pixel = 1 (tiny wrong map).
+
+
+DIRT MATERIALS (if library has no sand/dirt)
+-------------------------------------------
+Re-run INSTALL_CALIFORNIA_300.bat (now includes desert materials),
+OR download desert_materials.zip and extract into:
+  levels\california_300\art\
+
+You should get:
+  art\terrains\main.materials.json
+  art\terrains\desert_base_*.png
+
+Then restart BeamNG / reload California 300.
+Terrain Painter -> Terrain Material Library -> desert_base
+Paint with a big brush, then Ctrl+S.
