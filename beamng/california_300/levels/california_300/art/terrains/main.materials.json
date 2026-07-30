@@ -93,7 +93,15 @@
     "detailDistAtten": [
       1,
       1
-    ]
+    ],
+    "diffuseMap": "/levels/california_300/art/terrains/desert_base_base_b.png",
+    "macroMap": "/levels/california_300/art/terrains/desert_base_macro_b.png",
+    "detailMap": "/levels/california_300/art/terrains/desert_base_detail_b.png",
+    "normalMap": "/levels/california_300/art/terrains/desert_base_detail_nm.png",
+    "detailSize": 4,
+    "detailDistance": 50,
+    "macroSize": 64,
+    "useSideProjection": false
   },
   "course_pack": {
     "class": "TerrainMaterial",
@@ -173,7 +181,15 @@
     "detailDistAtten": [
       1,
       1
-    ]
+    ],
+    "diffuseMap": "/levels/california_300/art/terrains/course_pack_base_b.png",
+    "macroMap": "/levels/california_300/art/terrains/course_pack_macro_b.png",
+    "detailMap": "/levels/california_300/art/terrains/course_pack_detail_b.png",
+    "normalMap": "/levels/california_300/art/terrains/course_pack_detail_nm.png",
+    "detailSize": 4,
+    "detailDistance": 50,
+    "macroSize": 64,
+    "useSideProjection": false
   },
   "rock_slope": {
     "class": "TerrainMaterial",
@@ -253,6 +269,14 @@
     "detailDistAtten": [
       1,
       1
-    ]
+    ],
+    "diffuseMap": "/levels/california_300/art/terrains/rock_slope_base_b.png",
+    "macroMap": "/levels/california_300/art/terrains/rock_slope_macro_b.png",
+    "detailMap": "/levels/california_300/art/terrains/rock_slope_detail_b.png",
+    "normalMap": "/levels/california_300/art/terrains/rock_slope_detail_nm.png",
+    "detailSize": 4,
+    "detailDistance": 50,
+    "macroSize": 64,
+    "useSideProjection": false
   }
 }
