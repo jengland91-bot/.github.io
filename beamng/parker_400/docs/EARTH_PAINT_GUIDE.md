@@ -2,7 +2,7 @@
 
 The map already has **real hills** (SRTM). This guide adds **real-looking desert color** on top.
 
-You do **not** need coding for the Google Earth part. Just export an image, drop it in a folder, then paint in BeamNG World Editor.
+You do **not** need Google Earth Pro. QGIS, USGS, or even a browser screenshot works. Export an image, drop it in a folder, then paint in BeamNG.
 
 ---
 
@@ -27,17 +27,95 @@ Your satellite image should cover **that same square**.
 
 ## Don’t have Google Earth Pro?
 
-Use any of these instead (all free):
+**Best pick for BeamNG:** [MapNG](https://mapng.com/) — made for this. Exports heightmap + satellite texture ready for World Editor.
+
+Other free options:
 
 | Program | Best for | Difficulty |
 |---|---|---|
-| **QGIS** | Best free option — exact corners + export | Medium |
+| **[MapNG](https://mapng.com/)** | Heightmap + satellite for BeamNG in one tool | Easy |
+| **QGIS** | Exact corners + Esri export | Medium |
 | **USGS National Map Downloader** | Official US aerial (NAIP) downloads | Easy |
 | **Bing Maps / Google Maps in browser** | Quick screenshot (lower quality) | Easy |
 | **SAS.Planet** | Popular with sim racers / map makers | Medium |
-| **Google Earth (web)** | Viewing only — weak export tools | Easy |
 
-**Recommended if you want one install:** [QGIS](https://qgis.org) (free). Steps further below under **Option A2**.
+---
+
+## Option MapNG (recommended) — https://mapng.com/
+
+Use a **desktop browser** (MapNG needs mouse/keyboard).
+
+### Why this works well for Parker 400
+
+MapNG can give you:
+
+1. **16-bit heightmap** (real elevation — USGS 1 m in the US if available, or global DEM)
+2. **Satellite texture** (Esri imagery) — this replaces the Google Earth paint step
+3. Optional BeamNG `.ter` / experimental level ZIP
+
+Keep our package for the **official race line** (your CTUTV GPX → DecalRoad). MapNG won’t know the Parker race course; OSM roads are not the same as the race.
+
+### Settings that match our map
+
+Our level is a **65,536 m** square around Parker.
+
+| Goal | MapNG setting |
+|---|---|
+| Cover the full CTUTV loop | Area must include corners below (~65 km square) |
+| Match shipped map | **4096** resolution → about **16 m per pixel** |
+| Sharper HD later | **8192** resolution → about **8 m per pixel** |
+| Elevation | Prefer **USGS** if offered for Arizona; else global DEM |
+| Textures | Export **Satellite** (and Hybrid if you want) |
+
+### Exact area to select in MapNG
+
+Center near: `34.086139, -113.897239` (Parker / Shea Rd area)
+
+Cover all four corners:
+
+| Corner | Lat | Lon |
+|---|---|---|
+| SW | `33.791781` | `-114.252473` |
+| SE | `33.791781` | `-113.544084` |
+| NW | `34.380498` | `-114.252851` |
+| NE | `34.380498` | `-113.539519` |
+
+If MapNG’s single tile can’t stretch that far at 1 m/px: that’s normal. For a ~65 km map you want **coarser m/px** (8–16), not 1 m/px. Use **Batch / tile grid** in MapNG if you want multiple high-res tiles later.
+
+### What to export
+
+Download at least:
+
+- `heightmap` 16-bit PNG
+- `satellite` texture PNG
+
+Optional: `.ter` or level ZIP if MapNG offers it.
+
+### How to use the exports with our Parker 400 level
+
+1. Install our Parker 400 ZIP as usual (`INSTALL_PARKER_400.bat`).
+2. Copy MapNG files into:
+   ```
+   %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels\parker_400\import\
+   ```
+   e.g. `mapng_heightmap.png`, `mapng_satellite.png`
+3. Also copy the satellite PNG into:
+   ```
+   ...\levels\parker_400\art\terrains\parker400_base_color.png
+   ```
+4. In BeamNG → F11 → Import Terrain:
+   - Use MapNG’s heightmap
+   - **Meters per Pixel** = world size ÷ resolution  
+     (for full 65536 m @ 4096 → **16**; @ 8192 → **8**)
+   - **Max Height** = whatever MapNG reports for relief (or start with **1500** and adjust)
+   - Position **-32768, -32768, 0** if you kept our world size
+5. Ctrl+S
+6. Send me the MapNG heightmap + satellite (or a screenshot of your MapNG export settings) and I can wire textures + re-align the DecalRoad if the origin shifted.
+
+### Important
+
+- If MapNG’s export box isn’t **exactly** our corners, the race line may sit slightly off the washes. Fixable — just tell me the MapNG bounds you used.
+- Don’t replace the DecalRoad with OSM roads; keep the GPX race corridor.
 
 ---
 
