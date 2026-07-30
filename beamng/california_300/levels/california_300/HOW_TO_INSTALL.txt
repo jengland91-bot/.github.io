@@ -1,0 +1,20 @@
+CALIFORNIA 300 — ONE PACKAGE INSTALL (no .bat)
+=============================================
+
+1) Close BeamNG completely
+
+2) Open this folder on your PC (Win+R, paste, Enter):
+   %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels
+
+3) If a california_300 folder is already there, that is fine.
+   Extract THIS zip INTO the levels folder so you get:
+   ...\levels\california_300\info.json
+
+   Windows may ask to replace files — choose Replace / Yes for
+   info.json, items.level.json, art files, etc.
+   Keep your theTerrain.ter if asked and you already painted.
+
+4) Open BeamNG → Freeroam → California 300
+
+Start/Finish spawn is set from Google Earth:
+  34°48'34.91"N 117°05'03.39"W

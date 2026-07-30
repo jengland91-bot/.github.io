@@ -3,95 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>California 300 — Download Installer</title>
+  <title>California 300 — Download</title>
   <style>
     :root {
-      --bg: #120e0a;
-      --text: #f4ebe0;
-      --muted: #b7a790;
-      --accent: #d97706;
-      --card: #1c1610;
-      --line: #3a2e22;
+      --bg: #120e0a; --text: #f4ebe0; --muted: #b7a790;
+      --accent: #d97706; --card: #1c1610; --line: #3a2e22;
     }
     * { box-sizing: border-box; }
     body {
-      margin: 0;
-      min-height: 100vh;
+      margin: 0; min-height: 100vh;
       font-family: "Segoe UI", Tahoma, sans-serif;
-      background:
-        radial-gradient(ellipse at top, #2a1c10 0%, transparent 55%),
-        linear-gradient(180deg, #120e0a, #0a0806);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      padding: 40px 18px;
+      background: radial-gradient(ellipse at top, #2a1c10 0%, transparent 55%), linear-gradient(180deg, #120e0a, #0a0806);
+      color: var(--text); display: flex; justify-content: center; padding: 40px 18px;
     }
     main { width: 100%; max-width: 560px; }
     h1 { margin: 0 0 8px; font-size: 2rem; }
     p { color: var(--muted); line-height: 1.5; }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 22px;
-      margin-top: 18px;
-    }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin-top: 18px; }
     .btn {
-      display: block;
-      width: 100%;
-      text-align: center;
-      text-decoration: none;
-      background: var(--accent);
-      color: #1a1006;
-      font-weight: 800;
-      font-size: 1.15rem;
-      padding: 16px 18px;
-      border-radius: 12px;
-      margin: 12px 0 8px;
+      display: block; width: 100%; text-align: center; text-decoration: none;
+      background: var(--accent); color: #1a1006; font-weight: 800; font-size: 1.15rem;
+      padding: 16px 18px; border-radius: 12px; margin: 12px 0 8px;
     }
-    .btn.secondary {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--line);
-      font-weight: 650;
-      font-size: 0.95rem;
-    }
+    .btn.secondary { background: transparent; color: var(--text); border: 1px solid var(--line); font-weight: 650; font-size: 0.95rem; }
     ol { padding-left: 1.2rem; color: var(--muted); }
     li { margin: 8px 0; }
     code { color: #f8d9a8; }
-    .note { font-size: 0.92rem; color: var(--muted); }
   </style>
 </head>
 <body>
   <main>
     <h1>California 300</h1>
-    <p>Download the installer below. Use the <strong>ZIP</strong> if Windows blocks the .bat.</p>
+    <p>One package install. <strong>No .bat</strong> — Windows kept blocking the script as a virus false alarm.</p>
 
     <div class="card">
-      <a class="btn" href="https://github.com/jengland91-bot/.github.io/raw/cursor/dust-valley-ultra-map-65dc/beamng/california_300/California_300_Install.zip" download>
-        Download Install ZIP
+      <a class="btn" href="https://github.com/jengland91-bot/.github.io/raw/cursor/dust-valley-ultra-map-65dc/beamng/california_300/California_300_READY.zip" download>
+        Download California 300 READY.zip
       </a>
-      <p class="note">Contains INSTALL_CALIFORNIA_300.bat + ONE_CLICK_FIX.ps1 together.</p>
-
-      <a class="btn secondary" href="https://github.com/jengland91-bot/.github.io/raw/cursor/dust-valley-ultra-map-65dc/beamng/california_300/scripts/INSTALL_CALIFORNIA_300.bat" download>
-        Download single .bat only
-      </a>
-      <p class="note">This .bat can auto-download ONE_CLICK_FIX.ps1 if missing. If antivirus blocks it, use the ZIP.</p>
-
-      <a class="btn secondary" href="https://github.com/jengland91-bot/.github.io/raw/cursor/dust-valley-ultra-map-65dc/beamng/california_300/desert_materials.zip" download>
-        Download desert materials only
-      </a>
+      <p>Map files + dirt materials + Start/Finish spawn. Just extract.</p>
     </div>
 
     <div class="card">
-      <strong>How to install</strong>
+      <strong>Do this</strong>
       <ol>
-        <li>Download <strong>Install ZIP</strong></li>
-        <li>Right-click → <strong>Extract All…</strong></li>
-        <li>Open the extracted folder</li>
-        <li>Double-click <code>INSTALL_CALIFORNIA_300.bat</code></li>
-        <li>If Windows warns: More info → Run anyway</li>
-        <li>Restart BeamNG → Freeroam → California 300</li>
+        <li>Close BeamNG</li>
+        <li>Press <strong>Win + R</strong>, paste this, Enter:<br><code>%LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels</code></li>
+        <li>Put the ZIP in that folder</li>
+        <li>Right-click ZIP → <strong>Extract All</strong> → extract here</li>
+        <li>Confirm you see folder <code>california_300</code></li>
+        <li>Open BeamNG → Freeroam → <strong>California 300</strong></li>
       </ol>
     </div>
   </main>
