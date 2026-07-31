@@ -3,5 +3,7 @@
 import/heightmap_8192.png
 import/heightmap_preview.png
 import/heightmap_color.png
+import/parker400_base_color.png
 levels/parker_400/import/heightmap_8192.png
+source/reference/satellite_cache/
 __pycache__/

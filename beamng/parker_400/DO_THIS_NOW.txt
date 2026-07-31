@@ -35,6 +35,8 @@ COURSE FACTS
 - Footprint: ~55.4 km E-W × 28.5 km N-S around Parker, AZ
 - Map: 65536 m world @ 16 m/px shipped (true 1:1; HD 8 m/px optional)
 
-Optional next: satellite / MapNG — see docs\MAPNG_EASY.md (clearest steps)
+Satellite base is already included (Esri imagery locked to the GPX frame).
+After import: Terrain Painter → paint desert_base over the map.
+Optional MapNG HD pits: docs\MAPNG_EASY.md
 Also: docs\EARTH_PAINT_GUIDE.md
 ================================================================================

@@ -3,8 +3,8 @@
     "class": "TerrainMaterialTextureSet",
     "name": "parker_400TerrainMaterialTextureSet",
     "baseTexSize": [
-      512,
-      512
+      4096,
+      4096
     ],
     "macroTexSize": [
       1024,
@@ -20,19 +20,19 @@
     "internalName": "desert_base",
     "annotation": "DIRT",
     "groundmodelName": "DIRT",
-    "baseColorBaseTex": "/levels/parker_400/art/terrains/desert_base_base_b.png",
-    "baseColorBaseTexSize": 512,
+    "baseColorBaseTex": "/levels/parker_400/art/terrains/parker400_base_color.png",
+    "baseColorBaseTexSize": 4096,
     "baseColorMacroTex": "/levels/parker_400/art/terrains/desert_base_macro_b.png",
     "baseColorMacroTexSize": 64,
     "baseColorMacroStrength": [
-      0.15,
-      0.35
+      0.08,
+      0.18
     ],
     "baseColorDetailTex": "/levels/parker_400/art/terrains/desert_base_detail_b.png",
     "baseColorDetailTexSize": 4,
     "baseColorDetailStrength": [
-      0.35,
-      0.1
+      0.25,
+      0.08
     ],
     "normalBaseTex": "/levels/parker_400/art/terrains/desert_base_base_nm.png",
     "normalBaseTexSize": 512,
@@ -94,7 +94,7 @@
       1,
       1
     ],
-    "diffuseMap": "/levels/parker_400/art/terrains/desert_base_base_b.png",
+    "diffuseMap": "/levels/parker_400/art/terrains/parker400_base_color.png",
     "macroMap": "/levels/parker_400/art/terrains/desert_base_macro_b.png",
     "detailMap": "/levels/parker_400/art/terrains/desert_base_detail_b.png",
     "normalMap": "/levels/parker_400/art/terrains/desert_base_detail_nm.png",

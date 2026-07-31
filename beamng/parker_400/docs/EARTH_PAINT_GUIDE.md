@@ -319,6 +319,8 @@ Drop these in chat / uploads and I can wire them into the materials for you:
 
 - Blender
 - Coding
-- Rebuilding the heightmap
+- Rebuilding our SRTM heightmap (MapNG can replace that)
 
-Just: **Google Earth export → square crop → drop in `art/terrains/` → tell me and I’ll finish the material hookup.**
+Just: **MapNG export (heightmap + satellite) → drop into the Parker 400 level folders → tell me and I’ll finish wiring.**
+
+Or: Google Earth / QGIS / USGS crop → `art/terrains/` → same.

@@ -1,0 +1,18 @@
+{
+  "source": "Esri World Imagery tiles (same family MapNG uses for satellite)",
+  "zoom": 13,
+  "resolution": 4096,
+  "worldSizeMeters": 65536.0,
+  "geographicScale": 1.0,
+  "tileRange": {
+    "x0": 1496,
+    "x1": 1512,
+    "y0": 3261,
+    "y1": 3278
+  },
+  "center": {
+    "lat": 34.086139,
+    "lon": -113.897239
+  },
+  "note": "Locked to Parker 400 GPX 1:1 frame \u2014 race line should align."
+}
