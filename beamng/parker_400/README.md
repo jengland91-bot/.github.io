@@ -6,6 +6,8 @@ Desert race map for BeamNG.drive built from the **2026 Parker 400 C/T/UTV Final 
 **Scale:** true **1:1** (1 map meter = 1 real meter)  
 **Course:** ~125.8 mi / 202.4 km loop around Parker, AZ
 
+**Full beginner guide:** [`docs/STEP_BY_STEP_BUILD.md`](docs/STEP_BY_STEP_BUILD.md)
+
 ## Install into BeamNG
 
 ### Easiest (ZIP)
