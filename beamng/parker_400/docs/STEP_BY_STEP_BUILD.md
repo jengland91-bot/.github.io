@@ -42,8 +42,12 @@ MapNG settings if you redo sat:
 ## Step-by-step — build & run
 
 ### Step 1 — Install the level
-1. Unzip `Parker_400_Install.zip`
-2. Double-click **`INSTALL_PARKER_400.bat`**
+1. Download `Parker_400_Install.zip`
+2. Right-click → **Extract All** (extract the whole ZIP, not just the .bat)
+3. Open the extracted folder — you must see BOTH:
+   - `INSTALL_PARKER_400.bat`
+   - `levels\parker_400\` folder
+4. Double-click **`INSTALL_PARKER_400.bat`** inside that folder
 3. It copies the level to:
    ```
    %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels\parker_400
