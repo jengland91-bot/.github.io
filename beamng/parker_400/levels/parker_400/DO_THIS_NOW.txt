@@ -35,5 +35,6 @@ COURSE FACTS
 - Footprint: ~55.4 km E-W × 28.5 km N-S around Parker, AZ
 - Map: 65536 m world @ 16 m/px shipped (true 1:1; HD 8 m/px optional)
 
-Optional next: satellite paint — see docs\EARTH_PAINT_GUIDE.md
+Optional next: satellite / MapNG — see docs\MAPNG_EASY.md (clearest steps)
+Also: docs\EARTH_PAINT_GUIDE.md
 ================================================================================

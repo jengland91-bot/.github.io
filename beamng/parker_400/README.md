@@ -53,9 +53,11 @@ python3 scripts/bake_srtm_heightmap.py
 python3 scripts/bake_level.py
 ```
 
-## Next upgrades (bring these when ready)
+## Bring next (optional)
 
-- Google Earth / Esri satellite base colormap for the footprint
-- Higher-res DEM (USGS 1 m / 10 m NED) for whoops and wash detail
-- Qualifying / Youth / Motorcycle / Unlimited course variants from their GPS files
-- Pit lane props, banners, and start-gate mesh
+**Clearest MapNG instructions:** [`docs/MAPNG_EASY.md`](docs/MAPNG_EASY.md)
+
+- MapNG for satellite / sharper local terrain ([mapng.com](https://mapng.com/))
+- USGS 10 m or 1 m DEM for whoops (or MapNG USGS + batch stitch)
+- Qualifying / Youth / Motorcycle / Unlimited GPS variants
+- Pit lane props, banners, start-gate mesh
