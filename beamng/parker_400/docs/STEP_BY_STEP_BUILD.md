@@ -6,20 +6,28 @@ Follow this in order. Don’t skip ahead.
 
 ## What you need (download these)
 
-### 1) Required — our Parker 400 install
-Download the install ZIP from the project:
+### 1) Required — our Parker 400 install (**BeamNG 0.39 / 0.39.1**)
+
+**Best for Freeroam (recommended):** download the mod zip only:
+
+- **File:** [`mods_drop_in/parker_400.zip`](https://github.com/jengland91-bot/.github.io/raw/cursor/parker-400-beamng-a8ad/beamng/parker_400/mods_drop_in/parker_400.zip)
+- Put it in: `%LOCALAPPDATA%\BeamNG\BeamNG.drive\current\mods\` (**do not unzip**)
+- Full guide: [`INSTALL_FOR_039.md`](../INSTALL_FOR_039.md)
+
+Or use the full package + bat:
 
 - **File:** `Parker_400_Install.zip`  
-- **From:** `p400.html` on the site, or the GitHub PR / `beamng/parker_400/Parker_400_Install.zip`
+- **From:** `p400.html` on the site, or GitHub `beamng/parker_400/Parker_400_Install.zip`
 
-Inside it you already get:
+Inside the full package:
 | File | What it is |
 |---|---|
-| `levels/parker_400/` | The BeamNG level |
+| `mods_drop_in/parker_400.zip` | **0.39 Freeroam mod** (preferred) |
+| `levels/parker_400/` | Level files (used to rebuild the mod) |
 | `import/heightmap_4096.png` | **Hills** (full course) |
 | `import/p400_gpx_scale.preset.json` | Import settings |
-| `art/terrains/parker400_base_color.png` | Satellite ground color (already included) |
-| `INSTALL_PARKER_400.bat` | One-click install |
+| `art/terrains/parker400_base_color.png` | Satellite ground color |
+| `INSTALL_PARKER_400.bat` / `FIX_AND_INSTALL.bat` | Install into `mods\` |
 
 ### 2) Optional — MapNG satellite (only if you want to replace the ground photo)
 From [mapng.com](https://mapng.com/) after Generate:
@@ -41,21 +49,26 @@ MapNG settings if you redo sat:
 
 ## Step-by-step — build & run
 
-### Step 1 — Install the level
-1. Download `Parker_400_Install.zip`
-2. Right-click → **Extract All** (extract the whole ZIP, not just the .bat)
-3. Open the extracted folder — you must see BOTH:
-   - `INSTALL_PARKER_400.bat`
-   - `levels\parker_400\` folder
-4. Double-click **`INSTALL_PARKER_400.bat`** inside that folder
-3. It copies the level to:
+### Step 1 — Install as a mod (required on 0.39.1)
+**Fast path (no bat):**
+1. Download [`parker_400.zip`](https://github.com/jengland91-bot/.github.io/raw/cursor/parker-400-beamng-a8ad/beamng/parker_400/mods_drop_in/parker_400.zip)
+2. BeamNG launcher → **Manage User Folder** → **Open**
+3. Copy the zip into the **`mods`** folder (leave it zipped)
+4. Delete any old `levels\parker_400` folder if you made one earlier
+5. Fully quit BeamNG and start again; enable the mod if asked
+
+**Or with the install package:**
+1. Download `Parker_400_Install.zip` → Extract All
+2. Double-click **`FIX_AND_INSTALL.bat`** (or `INSTALL_PARKER_400.bat`)
+3. It installs to:
    ```
-   %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels\parker_400
+   %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\mods\parker_400.zip
    ```
+   Loose `levels\parker_400` copies are **ignored** by Freeroam after the 0.39 update — that is why the map was missing.
 
 ### Step 2 — Open in BeamNG
 1. Launch **BeamNG.drive**
-2. **Freeroam** → find **Parker 400** → load it  
+2. **Freeroam** → search **parker** → **Parker 400**  
    (First load may look flat until you import the heightmap)
 
 ### Step 3 — Import the heightmap (hills)

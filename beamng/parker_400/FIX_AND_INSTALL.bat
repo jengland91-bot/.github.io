@@ -1,122 +1,137 @@
 @echo off
-setlocal EnableExtensions EnableDelayedExpansion
-title Parker 400 - FIND AND FIX INSTALL
-
+setlocal EnableExtensions
+title Parker 400 - BeamNG 0.39 install
+color 0A
 echo.
-echo ============================================
-echo  Parker 400 - Find BeamNG folder + install
-echo ============================================
+echo ============================================================
+echo   PARKER 400 - INSTALL FOR BEAMNG 0.39 / 0.39.1
+echo ============================================================
+echo.
+echo After 0.39, Freeroam often IGNORES loose levels\ folders.
+echo This installer puts a MOD ZIP into your mods\ folder instead.
 echo.
 
-rem --- Find source level (where you extracted the ZIP) ---
+set "SCRIPT_DIR=%~dp0"
+set "SCRIPT_DIR=%SCRIPT_DIR:~0,-1%"
+
+REM Prefer ready-made mod zip beside this bat
+set "MODZIP="
+if exist "%SCRIPT_DIR%\mods_drop_in\parker_400.zip" set "MODZIP=%SCRIPT_DIR%\mods_drop_in\parker_400.zip"
+if not defined MODZIP if exist "%SCRIPT_DIR%\parker_400.zip" set "MODZIP=%SCRIPT_DIR%\parker_400.zip"
+if not defined MODZIP if exist "%SCRIPT_DIR%\parker_400_mod.zip" set "MODZIP=%SCRIPT_DIR%\parker_400_mod.zip"
+
+REM Or build from extracted levels\parker_400 next to bat
 set "SRC="
-if exist "%~dp0levels\parker_400\info.json" set "SRC=%~dp0levels\parker_400"
-if not defined SRC if exist "%~dp0parker_400\info.json" set "SRC=%~dp0parker_400"
-if not defined SRC if exist "D:\Parker_400_Install\levels\parker_400\info.json" set "SRC=D:\Parker_400_Install\levels\parker_400"
-if not defined SRC if exist "%USERPROFILE%\Downloads\Parker_400_Install\levels\parker_400\info.json" set "SRC=%USERPROFILE%\Downloads\Parker_400_Install\levels\parker_400"
-if not defined SRC if exist "%USERPROFILE%\Downloads\levels\parker_400\info.json" set "SRC=%USERPROFILE%\Downloads\levels\parker_400"
+if exist "%SCRIPT_DIR%\levels\parker_400\info.json" set "SRC=%SCRIPT_DIR%\levels\parker_400"
+if not defined SRC if exist "%SCRIPT_DIR%\parker_400\info.json" set "SRC=%SCRIPT_DIR%\parker_400"
 
-if not defined SRC (
-  echo Could not find the extracted map files.
+if not defined MODZIP if not defined SRC (
+  echo ERROR: Cannot find mod zip or level folder next to this bat.
   echo.
-  echo Put this FIX bat INSIDE your extracted Parker_400_Install folder
-  echo ^(same place as the levels folder^), then run it again.
+  echo Put this bat next to either:
+  echo   mods_drop_in\parker_400.zip
+  echo   OR levels\parker_400\info.json
   echo.
-  echo This bat is currently at:
-  echo   %~f0
+  echo Download:
+  echo   https://github.com/jengland91-bot/.github.io/raw/cursor/parker-400-beamng-a8ad/beamng/parker_400/mods_drop_in/parker_400.zip
   echo.
   pause
   exit /b 1
 )
 
-echo Found map source:
-echo   %SRC%
-echo.
+echo Looking for BeamNG user folder...
+set "USER="
 
-rem --- Candidate BeamNG levels folders ---
-set "D1=%LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels"
-set "D2=%USERPROFILE%\Documents\BeamNG.drive\levels"
-set "D3=%USERPROFILE%\Documents\BeamNG.Drive\levels"
-set "D4=%LOCALAPPDATA%\BeamNG.drive\levels"
+if defined BEAMNG_USER_FOLDER if exist "%BEAMNG_USER_FOLDER%\mods" set "USER=%BEAMNG_USER_FOLDER%"
 
-echo Checking BeamNG levels folders...
-echo.
-
-set "DEST="
-if exist "%D1%" (
-  echo [OK] Found: %D1%
-  set "DEST=%D1%\parker_400"
-) else (
-  echo [ ] Missing: %D1%
-)
-if exist "%D2%" (
-  echo [OK] Found: %D2%
-  if not defined DEST set "DEST=%D2%\parker_400"
-) else (
-  echo [ ] Missing: %D2%
-)
-if exist "%D3%" (
-  echo [OK] Found: %D3%
-  if not defined DEST set "DEST=%D3%\parker_400"
-) else (
-  echo [ ] Missing: %D3%
-)
-if exist "%D4%" (
-  echo [OK] Found: %D4%
-  if not defined DEST set "DEST=%D4%\parker_400"
-) else (
-  echo [ ] Missing: %D4%
+if not defined USER if exist "%LOCALAPPDATA%\BeamNG\BeamNG.drive\current\mods" (
+  set "USER=%LOCALAPPDATA%\BeamNG\BeamNG.drive\current"
 )
 
-echo.
-
-if not defined DEST (
-  echo No BeamNG levels folder found yet.
-  echo Creating the modern one:
-  echo   %D1%
-  mkdir "%D1%" 2>nul
-  set "DEST=%D1%\parker_400"
+if not defined USER if exist "%USERPROFILE%\AppData\Local\BeamNG\BeamNG.drive\current\mods" (
+  set "USER=%USERPROFILE%\AppData\Local\BeamNG\BeamNG.drive\current"
 )
 
-echo Will install to:
-echo   %DEST%
-echo.
-echo Close BeamNG if it is open.
-pause
-
-if exist "%DEST%" (
-  echo Removing old Parker 400 copy...
-  rmdir /s /q "%DEST%"
+if not defined USER if exist "%USERPROFILE%\Documents\BeamNG.drive\mods" (
+  set "USER=%USERPROFILE%\Documents\BeamNG.drive"
 )
 
-echo Copying files...
-mkdir "%DEST%" 2>nul
-xcopy "%SRC%" "%DEST%\" /E /I /Y
-if errorlevel 1 (
+if not defined USER (
   echo.
-  echo COPY FAILED. Try running this bat as Administrator.
+  echo Could not auto-find BeamNG.
+  echo.
+  echo 1^) Open BeamNG launcher
+  echo 2^) Manage User Folder -^> Open
+  echo 3^) Copy the full path from the address bar here
+  echo.
+  set /p "USER=Paste path: "
+)
+
+if not exist "%USER%\mods" (
+  echo.
+  echo ERROR: That folder has no "mods" subfolder.
+  echo You need the folder that CONTAINS mods, for example:
+  echo   C:\Users\YOU\AppData\Local\BeamNG\BeamNG.drive\current
+  echo.
   pause
   exit /b 1
 )
 
 echo.
-echo ============================================
-echo  SUCCESS
-echo ============================================
-echo Parker 400 is installed at:
-echo   %DEST%
+echo User folder: %USER%
 echo.
-echo Next:
-echo  1. Open BeamNG.drive
-echo  2. Freeroam -^> Parker 400
-echo  3. Press F11 -^> Import terrain preset
-echo     import\p400_gpx_scale.preset.json
-echo     Meters per Pixel = 16
-echo     Max Height = 1500
-echo  4. Ctrl+S, paint desert_base, drive
+
+REM Remove old broken loose install that 0.39 may ignore
+if exist "%USER%\levels\parker_400" (
+  echo Removing old loose levels\parker_400 so Freeroam uses the mod instead...
+  rmdir /s /q "%USER%\levels\parker_400" 2>nul
+)
+
+set "DESTZIP=%USER%\mods\parker_400.zip"
+echo Installing mod zip to:
+echo   %DESTZIP%
 echo.
-echo Opening the install folder now...
-explorer "%DEST%\.."
+
+if defined MODZIP (
+  copy /Y "%MODZIP%" "%DESTZIP%" >nul
+) else (
+  echo Building zip from %SRC% ...
+  where powershell >nul 2>&1
+  if errorlevel 1 (
+    echo ERROR: Need PowerShell to build zip, or download parker_400.zip first.
+    pause
+    exit /b 1
+  )
+  set "STAGING=%TEMP%\parker_400_mod_build"
+  if exist "%STAGING%" rmdir /s /q "%STAGING%"
+  mkdir "%STAGING%\levels\parker_400"
+  xcopy "%SRC%\*" "%STAGING%\levels\parker_400\" /E /I /Y /Q >nul
+  if exist "%DESTZIP%" del /f /q "%DESTZIP%"
+  powershell -NoProfile -Command "Compress-Archive -Path '%STAGING%\levels' -DestinationPath '%DESTZIP%' -Force"
+  rmdir /s /q "%STAGING%" 2>nul
+)
+
+if not exist "%DESTZIP%" (
+  echo ERROR: Install failed — zip not created.
+  pause
+  exit /b 1
+)
+
+echo.
+echo ============================================================
+echo   SUCCESS
+echo ============================================================
+echo.
+echo Mod installed:
+echo   %DESTZIP%
+echo.
+echo NEXT:
+echo   1. Fully QUIT BeamNG
+echo   2. Start BeamNG again
+echo   3. Mods - make sure Parker 400 is ENABLED
+echo   4. Play -^> Freeroam -^> search "parker"
+echo.
+echo If it still does not show, read INSTALL_FOR_039.md
 echo.
 pause
 endlocal

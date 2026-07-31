@@ -7,3 +7,6 @@ import/parker400_base_color.png
 levels/parker_400/import/heightmap_8192.png
 source/reference/satellite_cache/
 __pycache__/
+# Duplicate of mods_drop_in/parker_400.zip
+parker_400_mod.zip
+READ_ME_FIRST.txt

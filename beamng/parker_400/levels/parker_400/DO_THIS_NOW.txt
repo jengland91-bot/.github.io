@@ -1,44 +1,44 @@
-Full guide: docs\STEP_BY_STEP_BUILD.md
+Full guide: INSTALL_FOR_039.md  and  docs\STEP_BY_STEP_BUILD.md
 
 ================================================================================
-PARKER 400 — DO THIS NOW (BeamNG.drive)
+PARKER 400 — BEAMNG 0.39 / 0.39.1
 ================================================================================
 
-1) Run INSTALL_PARKER_400.bat  (copies levels\parker_400 into BeamNG)
+INSTALL (why Freeroam was empty):
+  After 0.39, loose levels\parker_400 often does NOT show in Freeroam.
+  Put the mod zip here instead:
 
-2) Launch BeamNG.drive → Freeroam → open "Parker 400"
+    %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\mods\parker_400.zip
 
-3) Press F11 (World Editor)
+  Or: launcher → Manage User Folder → Open → copy into mods\ (do NOT unzip)
+  Or: run FIX_AND_INSTALL.bat / INSTALL_PARKER_400.bat from the install package
 
-4) Terrain tools → Import Terrain → Load preset:
+  Then: quit BeamNG fully → start → enable mod → Freeroam → search "parker"
+
+AFTER IT LOADS:
+1) Press F11 (World Editor)
+
+2) Terrain tools → Import Terrain → Load preset:
       levels\parker_400\import\p400_gpx_scale.preset.json
 
-5) Confirm these values BEFORE clicking Import:
+3) Confirm BEFORE Import:
       Meters per Pixel (squareSize) = 16
       Max Height                   = 1500
       Position                     = -32768, -32768, 0
 
-6) Import → Ctrl+S to save the level
+4) Import → Ctrl+S
 
-7) Quit World Editor and respawn at Main Pit
+5) Terrain Painter → paint material desert_base over the map → Ctrl+S
 
---------------------------------------------------------------------------------
-WHY THIS MATTERS
---------------------------------------------------------------------------------
-The heightmap is real SRTM elevation under the 2026 Parker 400 CTUTV course.
-If squareSize/maxHeight are wrong, the hills squash or the 126-mile loop
-won't match the GPS.
+6) Respawn at Main Pit / Staging and drive the DecalRoad course
 
 --------------------------------------------------------------------------------
 COURSE FACTS
 --------------------------------------------------------------------------------
 - Official file: 2026 Parker 400 CTUTV Final Racer (GPX/KML/USR)
 - Lap length: ~125.8 miles
-- Footprint: ~55.4 km E-W × 28.5 km N-S around Parker, AZ
-- Map: 65536 m world @ 16 m/px shipped (true 1:1; HD 8 m/px optional)
+- Map: 65536 m world @ 16 m/px (true 1:1; HD 8 m/px optional)
+- Satellite base included (Esri, locked to GPX frame)
 
-Satellite base is already included (Esri imagery locked to the GPX frame).
-After import: Terrain Painter → paint desert_base over the map.
-Optional MapNG HD pits: docs\MAPNG_EASY.md
-Also: docs\EARTH_PAINT_GUIDE.md
+Stuck? FIX_INSTALL.md
 ================================================================================

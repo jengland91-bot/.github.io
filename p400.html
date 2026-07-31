@@ -88,11 +88,21 @@
       color: var(--text);
     }
     .stat span { color: var(--muted); font-size: 0.85rem; }
+    .warn {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border: 1px solid #6a4a20;
+      background: #2a1c0c;
+      border-radius: 12px;
+      color: #f0d2a0;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
   </style>
 </head>
 <body>
   <main>
-    <div class="tag">BeamNG.drive · 2026 CTUTV</div>
+    <div class="tag">BeamNG.drive 0.39.1 · 2026 CTUTV</div>
     <h1>Parker 400</h1>
     <p>
       True 1:1 desert race map from the official 2026 Parker 400 C/T/UTV final racer GPS.
@@ -107,20 +117,32 @@
     </div>
 
     <div class="card">
-      <a class="btn" href="beamng/parker_400/Parker_400_Install.zip" download="Parker_400_Install.zip">
-        Download Install ZIP
+      <p style="margin-top:0;color:var(--text);font-weight:650">
+        BeamNG 0.39.1 — use the mod zip (Freeroam fix)
+      </p>
+      <a class="btn" href="beamng/parker_400/mods_drop_in/parker_400.zip" download="parker_400.zip">
+        Download parker_400.zip (mod)
       </a>
-      <a class="btn secondary" href="https://github.com/jengland91-bot/.github.io/tree/cursor/parker-400-beamng-a8ad/beamng/parker_400">
-        Browse source on GitHub
+      <a class="btn secondary" href="beamng/parker_400/Parker_400_Install.zip" download="Parker_400_Install.zip">
+        Full package + installer bat
       </a>
+      <a class="btn secondary" href="https://github.com/jengland91-bot/.github.io/blob/cursor/parker-400-beamng-a8ad/beamng/parker_400/INSTALL_FOR_039.md">
+        0.39.1 install guide
+      </a>
+      <div class="warn">
+        Do <strong>not</strong> only copy into <code>levels\</code> — Freeroam often hides it after 0.39.
+        Put <code>parker_400.zip</code> in <code>mods\</code> and leave it zipped.
+      </div>
       <ol>
-        <li>Extract the ZIP</li>
-        <li>Run <code>INSTALL_PARKER_400.bat</code></li>
-        <li>Freeroam → <strong>Parker 400</strong></li>
-        <li>Import terrain preset: squareSize <code>16</code>, maxHeight <code>1500</code></li>
+        <li>Launcher → Manage User Folder → Open</li>
+        <li>Copy <code>parker_400.zip</code> into <code>mods\</code> (do not unzip)</li>
+        <li>Quit BeamNG fully → start → enable mod if needed</li>
+        <li>Freeroam → search <strong>parker</strong></li>
+        <li>F11 → import preset <code>p400_gpx_scale</code> (16 m/px, max 1500)</li>
       </ol>
-      <p style="margin-bottom:0">Details: <code>DO_THIS_NOW.txt</code> inside the package.</p>
-      <p>Want MapNG satellite/heightmaps for the full course? Follow <code>docs/MAPNG_EASY.md</code> — install our map first, then drop MapNG files in.</p>
+      <p style="margin-bottom:0">
+        Stuck? See <code>FIX_INSTALL.md</code> / <code>INSTALL_FOR_039.md</code> in the repo.
+      </p>
     </div>
   </main>
 </body>

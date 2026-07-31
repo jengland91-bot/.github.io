@@ -8,14 +8,25 @@ Desert race map for BeamNG.drive built from the **2026 Parker 400 C/T/UTV Final 
 
 **Full beginner guide:** [`docs/STEP_BY_STEP_BUILD.md`](docs/STEP_BY_STEP_BUILD.md)
 
-## Install into BeamNG
+## Install into BeamNG **0.39 / 0.39.1**
 
-### Easiest (ZIP)
+After the 0.39 update, Freeroam often **ignores** a loose `levels\parker_400` folder.  
+Install as a **mod zip** instead.
 
-1. Download `Parker_400_Install.zip` from the site download page (`p400.html`)
-2. Extract the ZIP
-3. Double-click `INSTALL_PARKER_400.bat`
-4. Follow `DO_THIS_NOW.txt`
+### Recommended (Freeroam fix)
+
+1. Download [`mods_drop_in/parker_400.zip`](mods_drop_in/parker_400.zip)
+2. Launcher → **Manage User Folder** → **Open**
+3. Put the zip in **`mods\`** (do **not** unzip)
+4. Enable mod → full restart → Freeroam → search **parker**
+
+Guide: [`INSTALL_FOR_039.md`](INSTALL_FOR_039.md) · troubleshooting: [`FIX_INSTALL.md`](FIX_INSTALL.md)
+
+### Full package + bat
+
+1. Download `Parker_400_Install.zip` (`p400.html`)
+2. Extract → run `FIX_AND_INSTALL.bat` or `INSTALL_PARKER_400.bat`
+3. Confirms install path: `...\current\mods\parker_400.zip`
 
 ### In BeamNG after install
 
