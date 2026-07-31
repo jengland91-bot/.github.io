@@ -55,9 +55,12 @@ python3 scripts/bake_level.py
 
 ## Bring next (optional)
 
-**Clearest MapNG instructions:** [`docs/MAPNG_EASY.md`](docs/MAPNG_EASY.md)
+**Clearest MapNG instructions:** [`docs/MAPNG_EASY.md`](docs/MAPNG_EASY.md)  
+**Match GPX ↔ MapNG / Google Earth:** [`docs/MATCH_GPX_TO_MAPNG.md`](docs/MATCH_GPX_TO_MAPNG.md)  
+**Alignment KML:** [`source/reference/p400/parker400_mapng_frame.kml`](source/reference/p400/parker400_mapng_frame.kml)
 
 - MapNG for satellite / sharper local terrain ([mapng.com](https://mapng.com/))
+- Google Earth photo can replace/blend satellite color; use MapNG/USGS for real hills
 - USGS 10 m or 1 m DEM for whoops (or MapNG USGS + batch stitch)
 - Qualifying / Youth / Motorcycle / Unlimited GPS variants
 - Pit lane props, banners, start-gate mesh
