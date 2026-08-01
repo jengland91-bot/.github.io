@@ -355,9 +355,15 @@ def main() -> None:
     make_wood(TEX / "post_wood.png")
     make_metal(TEX / "sign_metal.png")
     make_sign("MILE", "--", TEX / "sign_blank.png")
-    for n in range(0, 51):
-        if n <= 20 or n % 5 == 0:
-            make_sign("MILE", str(n), TEX / f"mile_{n:02d}.png")
+    # Full Parker-length set: Mile 1 through Mile 100
+    for n in range(1, 101):
+        make_sign("MILE", str(n), TEX / f"mile_{n:03d}.png")
+        # Keep 2-digit aliases for 1-99 used by older scripts
+        if n < 100:
+            src = TEX / f"mile_{n:03d}.png"
+            dst = TEX / f"mile_{n:02d}.png"
+            if src.exists():
+                dst.write_bytes(src.read_bytes())
 
 
 if __name__ == "__main__":

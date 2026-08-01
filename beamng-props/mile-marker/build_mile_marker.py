@@ -184,7 +184,9 @@ def create_sign(col, mile_number: int):
     frame.scale = (SIGN_WIDTH + 0.02, SIGN_THICKNESS * 0.45, SIGN_HEIGHT + 0.02)
     apply_object(frame)
 
-    tex = TEXTURE_DIR / f"mile_{mile_number:02d}.png"
+    tex = TEXTURE_DIR / f"mile_{mile_number:03d}.png"
+    if not tex.exists():
+        tex = TEXTURE_DIR / f"mile_{mile_number:02d}.png"
     if not tex.exists():
         tex = TEXTURE_DIR / "sign_blank.png"
 
