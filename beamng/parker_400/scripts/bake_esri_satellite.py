@@ -202,10 +202,11 @@ def main() -> None:
             dy0, dx0 = gy0 - y0c, gx0 - x0c
             patch = disk[dy0 : dy0 + (gy1 - gy0), dx0 : dx0 + (gx1 - gx0)]
             mask[gy0:gy1, gx0:gx1][patch] = 1
-        dirt = np.array([168, 138, 96], dtype=np.float32)
+        # Pale wash silt tint (matches course_pack shoulder)
+        silt = np.array([208, 196, 172], dtype=np.float32)
         m = mask.astype(np.float32)[..., None] * COURSE_BURN_STRENGTH
         out_f = out.astype(np.float32)
-        out = np.clip(out_f * (1.0 - m) + dirt * m, 0, 255).astype(np.uint8)
+        out = np.clip(out_f * (1.0 - m) + silt * m, 0, 255).astype(np.uint8)
         print(f"  course burn pixels: {int(mask.sum())}")
 
     IMPORT.mkdir(parents=True, exist_ok=True)

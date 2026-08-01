@@ -20,10 +20,10 @@ MAX_HEIGHT = 1500.0
 SQUARE = 16.0
 # Only materials with matching 4096 base textures
 MATERIALS = ["desert_base", "course_pack"]
-# Packed-dirt ribbon beside DecalRoad. Keep modest so satellite still shows.
-# Must paint along segments (not only GPX nodes) — median node spacing ~66 m
-# while a 2-px stamp is only ~32 m, which left big gaps in the trail.
-COURSE_HALF_WIDTH_M = 36.0
+# Wash-silt shoulder beside DecalRoad (pale course_pack). Wider than the road
+# so silt reads clearly outside the packed race line; sat still shows beyond.
+# Must paint along segments (not only GPX nodes).
+COURSE_HALF_WIDTH_M = 48.0
 
 
 def read_png16_gray(path: Path) -> np.ndarray:
