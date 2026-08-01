@@ -98,6 +98,11 @@
       font-size: 0.92rem;
       line-height: 1.45;
     }
+    .contains {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
   </style>
 </head>
 <body>
@@ -118,34 +123,34 @@
 
     <div class="card">
       <p style="margin-top:0;color:var(--text);font-weight:650">
-        BeamNG 0.39.1 — use the mod zip (Freeroam fix)
+        One download — mod zip + installer
       </p>
-      <a class="btn" href="beamng/parker_400/mods_drop_in/parker_400.zip" download="parker_400.zip">
-        Download parker_400.zip (mod)
+      <a class="btn" href="beamng/parker_400/Parker400_Download_Both.zip" download="Parker400_Download_Both.zip">
+        Download both (zip + bat)
       </a>
-      <a class="btn secondary" href="beamng/parker_400/Parker_400_Install.zip" download="Parker_400_Install.zip">
-        Full package + installer bat
+      <p class="contains">
+        Includes <code>parker_400.zip</code>, <code>INSTALL_UNPACKED.bat</code>, and <code>BLACK_VOID_FIX.md</code>
+      </p>
+      <ol>
+        <li>Extract <code>Parker400_Download_Both.zip</code></li>
+        <li>Double-click <code>INSTALL_UNPACKED.bat</code> (keep it next to <code>parker_400.zip</code>)</li>
+        <li>Quit BeamNG fully → start → enable mod</li>
+        <li>Freeroam → search <strong>parker</strong></li>
+      </ol>
+      <div class="warn">
+        Do <strong>not</strong> drop the outer download into <code>mods\</code>.
+        Extract it first, then run the bat. The bat installs into
+        <code>mods\unpacked\parker_400\</code>.
+      </div>
+      <a class="btn secondary" href="beamng/parker_400/mods_drop_in/parker_400.zip" download="parker_400.zip">
+        Mod only (parker_400.zip)
       </a>
-      <a class="btn secondary" href="https://github.com/jengland91-bot/.github.io/raw/cursor/parker-400-beamng-a8ad/beamng/parker_400/INSTALL_UNPACKED.bat" download="INSTALL_UNPACKED.bat">
-        Download INSTALL_UNPACKED.bat
+      <a class="btn secondary" href="beamng/parker_400/INSTALL_UNPACKED.bat" download="INSTALL_UNPACKED.bat">
+        Installer only (INSTALL_UNPACKED.bat)
       </a>
       <a class="btn secondary" href="https://github.com/jengland91-bot/.github.io/blob/cursor/parker-400-beamng-a8ad/beamng/parker_400/BLACK_VOID_FIX.md">
         Black void fix guide
       </a>
-      <div class="warn">
-        Black void? Download the zip + <code>INSTALL_UNPACKED.bat</code>, run the bat,
-        confirm <code>theTerrain.ter</code> is ~48&nbsp;MB under <code>mods\unpacked\parker_400\</code>.
-        See <code>BLACK_VOID_FIX.md</code>.
-      </div>
-      <ol>
-        <li>Download <code>parker_400.zip</code> and <code>INSTALL_UNPACKED.bat</code> into the same folder</li>
-        <li>Run <code>INSTALL_UNPACKED.bat</code></li>
-        <li>Quit BeamNG fully → start → enable mod</li>
-        <li>Freeroam → search <strong>parker</strong> — desert, not black</li>
-      </ol>
-      <p style="margin-bottom:0">
-        Stuck? See <code>FIX_INSTALL.md</code> / <code>INSTALL_FOR_039.md</code> in the repo.
-      </p>
     </div>
   </main>
 </body>
