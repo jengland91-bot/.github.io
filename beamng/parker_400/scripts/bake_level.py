@@ -161,6 +161,7 @@ def main() -> None:
             "rotationMatrix": [1, 0, 0, 0, 1, 0, 0, 0, 1],
             "scale": [1, 1, 1],
             "terrainFile": "/levels/parker_400/theTerrain.ter",
+            "materialTextureSet": "parker_400TerrainMaterialTextureSet",
             "squareSize": SQUARE,
             "maxHeight": MAX_H,
             "baseTexSize": 1024,

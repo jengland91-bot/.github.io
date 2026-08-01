@@ -2,66 +2,39 @@
   "parker_400TerrainMaterialTextureSet": {
     "class": "TerrainMaterialTextureSet",
     "name": "parker_400TerrainMaterialTextureSet",
-    "baseTexSize": [
-      512,
-      512
-    ],
-    "macroTexSize": [
-      1024,
-      1024
-    ],
-    "detailTexSize": [
-      1024,
-      1024
-    ]
+    "baseTexSize": [512, 512],
+    "macroTexSize": [1024, 1024],
+    "detailTexSize": [1024, 1024]
   },
   "desert_base": {
     "class": "TerrainMaterial",
     "internalName": "desert_base",
     "annotation": "DIRT",
     "groundmodelName": "DIRT",
-    "baseColorBaseTex": "/levels/parker_400/art/terrains/desert_base_base_b.png",
-    "baseColorBaseTexSize": 512,
+    "baseColorBaseTex": "/levels/parker_400/art/terrains/desert_base_sat512_b.png",
+    "baseColorBaseTexSize": 65536,
     "baseColorMacroTex": "/levels/parker_400/art/terrains/desert_base_macro_b.png",
     "baseColorMacroTexSize": 64,
-    "baseColorMacroStrength": [
-      0.08,
-      0.18
-    ],
+    "baseColorMacroStrength": [0.08, 0.18],
     "baseColorDetailTex": "/levels/parker_400/art/terrains/desert_base_detail_b.png",
     "baseColorDetailTexSize": 4,
-    "baseColorDetailStrength": [
-      0.25,
-      0.08
-    ],
+    "baseColorDetailStrength": [0.25, 0.08],
     "normalBaseTex": "/levels/parker_400/art/terrains/desert_base_base_nm.png",
     "normalBaseTexSize": 512,
     "normalMacroTex": "/levels/parker_400/art/terrains/desert_base_macro_nm.png",
     "normalMacroTexSize": 64,
-    "normalMacroStrength": [
-      0.2,
-      0.4
-    ],
+    "normalMacroStrength": [0.2, 0.4],
     "normalDetailTex": "/levels/parker_400/art/terrains/desert_base_detail_nm.png",
     "normalDetailTexSize": 4,
-    "normalDetailStrength": [
-      0.6,
-      0.2
-    ],
+    "normalDetailStrength": [0.6, 0.2],
     "roughnessBaseTex": "/levels/parker_400/art/terrains/desert_base_base_r.png",
     "roughnessBaseTexSize": 512,
     "roughnessMacroTex": "/levels/parker_400/art/terrains/desert_base_macro_r.png",
     "roughnessMacroTexSize": 64,
-    "roughnessMacroStrength": [
-      0.2,
-      0.7
-    ],
+    "roughnessMacroStrength": [0.2, 0.7],
     "roughnessDetailTex": "/levels/parker_400/art/terrains/desert_base_detail_r.png",
     "roughnessDetailTexSize": 4,
-    "roughnessDetailStrength": [
-      0.3,
-      0.3
-    ],
+    "roughnessDetailStrength": [0.3, 0.3],
     "aoBaseTex": "/levels/parker_400/art/terrains/desert_base_base_ao.png",
     "aoBaseTexSize": 512,
     "aoMacroTex": "/levels/parker_400/art/terrains/desert_base_macro_ao.png",
@@ -74,27 +47,11 @@
     "heightMacroTexSize": 64,
     "heightDetailTex": "/levels/parker_400/art/terrains/desert_base_detail_h.png",
     "heightDetailTexSize": 4,
-    "macroDistances": [
-      0,
-      10,
-      100,
-      3000
-    ],
-    "detailDistances": [
-      0,
-      0,
-      30,
-      60
-    ],
-    "macroDistAtten": [
-      1,
-      1
-    ],
-    "detailDistAtten": [
-      1,
-      1
-    ],
-    "diffuseMap": "/levels/parker_400/art/terrains/parker400_base_color.png",
+    "macroDistances": [0, 10, 100, 3000],
+    "detailDistances": [0, 0, 30, 60],
+    "macroDistAtten": [1, 1],
+    "detailDistAtten": [1, 1],
+    "diffuseMap": "/levels/parker_400/art/terrains/desert_base_sat512_b.png",
     "macroMap": "/levels/parker_400/art/terrains/desert_base_macro_b.png",
     "detailMap": "/levels/parker_400/art/terrains/desert_base_detail_b.png",
     "normalMap": "/levels/parker_400/art/terrains/desert_base_detail_nm.png",
@@ -112,44 +69,26 @@
     "baseColorBaseTexSize": 512,
     "baseColorMacroTex": "/levels/parker_400/art/terrains/course_pack_macro_b.png",
     "baseColorMacroTexSize": 64,
-    "baseColorMacroStrength": [
-      0.15,
-      0.35
-    ],
+    "baseColorMacroStrength": [0.15, 0.35],
     "baseColorDetailTex": "/levels/parker_400/art/terrains/course_pack_detail_b.png",
     "baseColorDetailTexSize": 4,
-    "baseColorDetailStrength": [
-      0.35,
-      0.1
-    ],
+    "baseColorDetailStrength": [0.35, 0.1],
     "normalBaseTex": "/levels/parker_400/art/terrains/course_pack_base_nm.png",
     "normalBaseTexSize": 512,
     "normalMacroTex": "/levels/parker_400/art/terrains/course_pack_macro_nm.png",
     "normalMacroTexSize": 64,
-    "normalMacroStrength": [
-      0.2,
-      0.4
-    ],
+    "normalMacroStrength": [0.2, 0.4],
     "normalDetailTex": "/levels/parker_400/art/terrains/course_pack_detail_nm.png",
     "normalDetailTexSize": 4,
-    "normalDetailStrength": [
-      0.6,
-      0.2
-    ],
+    "normalDetailStrength": [0.6, 0.2],
     "roughnessBaseTex": "/levels/parker_400/art/terrains/course_pack_base_r.png",
     "roughnessBaseTexSize": 512,
     "roughnessMacroTex": "/levels/parker_400/art/terrains/course_pack_macro_r.png",
     "roughnessMacroTexSize": 64,
-    "roughnessMacroStrength": [
-      0.2,
-      0.7
-    ],
+    "roughnessMacroStrength": [0.2, 0.7],
     "roughnessDetailTex": "/levels/parker_400/art/terrains/course_pack_detail_r.png",
     "roughnessDetailTexSize": 4,
-    "roughnessDetailStrength": [
-      0.3,
-      0.3
-    ],
+    "roughnessDetailStrength": [0.3, 0.3],
     "aoBaseTex": "/levels/parker_400/art/terrains/course_pack_base_ao.png",
     "aoBaseTexSize": 512,
     "aoMacroTex": "/levels/parker_400/art/terrains/course_pack_macro_ao.png",
@@ -162,26 +101,10 @@
     "heightMacroTexSize": 64,
     "heightDetailTex": "/levels/parker_400/art/terrains/course_pack_detail_h.png",
     "heightDetailTexSize": 4,
-    "macroDistances": [
-      0,
-      10,
-      100,
-      3000
-    ],
-    "detailDistances": [
-      0,
-      0,
-      30,
-      60
-    ],
-    "macroDistAtten": [
-      1,
-      1
-    ],
-    "detailDistAtten": [
-      1,
-      1
-    ],
+    "macroDistances": [0, 10, 100, 3000],
+    "detailDistances": [0, 0, 30, 60],
+    "macroDistAtten": [1, 1],
+    "detailDistAtten": [1, 1],
     "diffuseMap": "/levels/parker_400/art/terrains/course_pack_base_b.png",
     "macroMap": "/levels/parker_400/art/terrains/course_pack_macro_b.png",
     "detailMap": "/levels/parker_400/art/terrains/course_pack_detail_b.png",
@@ -200,44 +123,26 @@
     "baseColorBaseTexSize": 512,
     "baseColorMacroTex": "/levels/parker_400/art/terrains/rock_slope_macro_b.png",
     "baseColorMacroTexSize": 64,
-    "baseColorMacroStrength": [
-      0.15,
-      0.35
-    ],
+    "baseColorMacroStrength": [0.15, 0.35],
     "baseColorDetailTex": "/levels/parker_400/art/terrains/rock_slope_detail_b.png",
     "baseColorDetailTexSize": 4,
-    "baseColorDetailStrength": [
-      0.35,
-      0.1
-    ],
+    "baseColorDetailStrength": [0.35, 0.1],
     "normalBaseTex": "/levels/parker_400/art/terrains/rock_slope_base_nm.png",
     "normalBaseTexSize": 512,
     "normalMacroTex": "/levels/parker_400/art/terrains/rock_slope_macro_nm.png",
     "normalMacroTexSize": 64,
-    "normalMacroStrength": [
-      0.2,
-      0.4
-    ],
+    "normalMacroStrength": [0.2, 0.4],
     "normalDetailTex": "/levels/parker_400/art/terrains/rock_slope_detail_nm.png",
     "normalDetailTexSize": 4,
-    "normalDetailStrength": [
-      0.6,
-      0.2
-    ],
+    "normalDetailStrength": [0.6, 0.2],
     "roughnessBaseTex": "/levels/parker_400/art/terrains/rock_slope_base_r.png",
     "roughnessBaseTexSize": 512,
     "roughnessMacroTex": "/levels/parker_400/art/terrains/rock_slope_macro_r.png",
     "roughnessMacroTexSize": 64,
-    "roughnessMacroStrength": [
-      0.2,
-      0.7
-    ],
+    "roughnessMacroStrength": [0.2, 0.7],
     "roughnessDetailTex": "/levels/parker_400/art/terrains/rock_slope_detail_r.png",
     "roughnessDetailTexSize": 4,
-    "roughnessDetailStrength": [
-      0.3,
-      0.3
-    ],
+    "roughnessDetailStrength": [0.3, 0.3],
     "aoBaseTex": "/levels/parker_400/art/terrains/rock_slope_base_ao.png",
     "aoBaseTexSize": 512,
     "aoMacroTex": "/levels/parker_400/art/terrains/rock_slope_macro_ao.png",
@@ -250,26 +155,10 @@
     "heightMacroTexSize": 64,
     "heightDetailTex": "/levels/parker_400/art/terrains/rock_slope_detail_h.png",
     "heightDetailTexSize": 4,
-    "macroDistances": [
-      0,
-      10,
-      100,
-      3000
-    ],
-    "detailDistances": [
-      0,
-      0,
-      30,
-      60
-    ],
-    "macroDistAtten": [
-      1,
-      1
-    ],
-    "detailDistAtten": [
-      1,
-      1
-    ],
+    "macroDistances": [0, 10, 100, 3000],
+    "detailDistances": [0, 0, 30, 60],
+    "macroDistAtten": [1, 1],
+    "detailDistAtten": [1, 1],
     "diffuseMap": "/levels/parker_400/art/terrains/rock_slope_base_b.png",
     "macroMap": "/levels/parker_400/art/terrains/rock_slope_macro_b.png",
     "detailMap": "/levels/parker_400/art/terrains/rock_slope_detail_b.png",
