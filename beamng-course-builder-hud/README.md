@@ -17,7 +17,20 @@ Aim the camera → pick from the library → **Place**. Select placed items to r
 - **Random yaw / scale** — natural rock fields
 - Save / Load JSON + Prefab guide for F11 permanence
 
-## Install
+## Easy download (recommended)
+
+Download this zip and drag it straight into your BeamNG **`mods`** folder:
+
+**https://github.com/jengland91-bot/.github.io/raw/cursor/beamng-course-builder-hud-ac84/downloads/courseBuilderHud.zip**
+
+Or open the downloads folder:  
+https://github.com/jengland91-bot/.github.io/tree/cursor/beamng-course-builder-hud-ac84/downloads
+
+1. Drop `courseBuilderHud.zip` into `Documents/BeamNG.drive/<version>/mods/`
+2. Start BeamNG → enable the mod
+3. Freeroam → **Esc → UI Apps → Add App → Course Builder**
+
+## Install (unpacked alternative)
 
 1. Put the mod in your BeamNG unpacked mods folder so it looks like:
 

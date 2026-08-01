@@ -9,9 +9,9 @@
     "left": "12px",
     "top": "72px",
     "width": "340px",
-    "height": "640px",
+    "height": "720px",
     "min-width": "300px",
-    "min-height": "480px"
+    "min-height": "520px"
   },
   "author": "Course Builder HUD",
   "version": "2.1.0",
