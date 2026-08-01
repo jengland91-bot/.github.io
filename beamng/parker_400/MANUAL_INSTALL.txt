@@ -1,0 +1,66 @@
+PARKER 400 — MANUAL INSTALL (if the .bat does nothing)
+======================================================
+
+Use this if INSTALL_UNPACKED.bat never opens a window,
+closes instantly, or Windows blocks it.
+
+--------------------------------------------------
+A) Extract the download first
+--------------------------------------------------
+1. Download Parker400_Download_Both.zip
+2. Right-click → Extract All… (do not open and run from inside the zip)
+3. You should have a folder containing:
+     parker_400.zip
+     INSTALL_UNPACKED.bat
+     MANUAL_INSTALL.txt
+
+--------------------------------------------------
+B) Open your BeamNG user folder
+--------------------------------------------------
+1. Open the BeamNG.drive launcher
+2. Manage User Folder → Open
+3. You should see folders like: mods, settings, temp
+
+--------------------------------------------------
+C) Install the map (unpacked)
+--------------------------------------------------
+1. Open the mods folder
+2. Create a folder named: unpacked   (if it is not there)
+3. Inside unpacked, create a folder named: parker_400
+4. Right-click parker_400.zip → Extract All…
+5. Extract into:  mods\unpacked\parker_400\
+
+Final path must look like this:
+
+  ...\BeamNG.drive\current\mods\unpacked\parker_400\levels\parker_400\theTerrain.ter
+
+Check:
+- theTerrain.ter exists
+- Size is about 48 MB (50331692 bytes)
+- info.json is next to it
+
+--------------------------------------------------
+D) Clean old installs (important)
+--------------------------------------------------
+Delete these if they exist:
+- mods\parker_400.zip
+- levels\parker_400\
+- temp\art\terrainMaterialCache\
+
+--------------------------------------------------
+E) Play
+--------------------------------------------------
+1. Fully quit BeamNG
+2. Start BeamNG
+3. Mods → enable Parker 400 / parker_400
+4. Freeroam → search “parker”
+
+--------------------------------------------------
+If the .bat window never appears
+--------------------------------------------------
+- Windows SmartScreen may be blocking it → right-click bat → Run as administrator
+  or Properties → Unblock → Apply, then run again
+- Or skip the bat and do steps A–E above
+- Or open Command Prompt, cd to the extracted folder, then type:
+    INSTALL_UNPACKED.bat
+  so you can read any error text
