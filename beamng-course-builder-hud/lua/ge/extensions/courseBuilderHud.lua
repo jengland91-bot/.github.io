@@ -325,6 +325,16 @@ local function snapPosToGrid(pos)
   )
 end
 
+local function markGhostActive(seconds)
+  ghostActiveUntil = os.clock() + (tonumber(seconds) or 8)
+end
+
+local function ghostShouldShow()
+  if not ghostEnabled then return false end
+  if paintMode or paintHeld then return true end
+  return os.clock() <= ghostActiveUntil
+end
+
 local function resolvePlaceYaw()
   if randomYaw then
     return math.random() * 360
@@ -642,6 +652,7 @@ end
 local function selectProp(propId)
   selectedPropId = tostring(propId or selectedPropId)
   mode = "place"
+  markGhostActive(8)
   pushUiState()
 end
 
@@ -972,6 +983,13 @@ end
 
 local function setGhost(on)
   ghostEnabled = on and true or false
+  if ghostEnabled then
+    markGhostActive(12)
+    notify("Ghost ON — auto-hides when idle")
+  else
+    ghostActiveUntil = 0
+    notify("Ghost OFF")
+  end
   pushUiState()
 end
 
@@ -1007,17 +1025,6 @@ local function maybePaintAtAim()
     if d < paintSpacing then return end
   end
   placeSelected(true)
-end
-
-local function markGhostActive(seconds)
-  ghostActiveUntil = os.clock() + (tonumber(seconds) or 8)
-end
-
-local function ghostShouldShow()
-  if not ghostEnabled then return false end
-  -- Stay on while painting; otherwise only briefly after you place/aim
-  if paintMode or paintHeld then return true end
-  return os.clock() <= ghostActiveUntil
 end
 
 local function drawGhost()

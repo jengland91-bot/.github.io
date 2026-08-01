@@ -27,7 +27,7 @@ angular.module('beamng.apps')
       $scope.paintSpacing = 3
       $scope.gridSnap = false
       $scope.gridSize = 1
-      $scope.ghostEnabled = true
+      $scope.ghostEnabled = false
       $scope.randomYaw = false
       $scope.randomScale = false
 
