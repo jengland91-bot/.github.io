@@ -30,8 +30,9 @@ WORLD_M = 65536.0
 HALF = WORLD_M / 2.0
 SQUARE = 16.0
 MAX_H = 1500.0
-COURSE_WIDTH = 28.0  # wide visible race ribbon on 65 km 1:1 world
+COURSE_WIDTH = 22.0  # packed-dirt race corridor width (meters)
 PIT_WIDTH = 18.0
+SPAWN_CLEARANCE_M = 25.0  # drop-in height so vehicles don't spawn under terrain
 
 
 def load_png16_gray(path: Path) -> np.ndarray:
@@ -121,9 +122,11 @@ def main() -> None:
     else:
         su, sv = course["longCourseUv"][0]
     sx, sy = uv_to_world(su, sv)
-    sz = sample_height(img, su, sv) + 3.0
+    sz = sample_height(img, su, sv) + SPAWN_CLEARANCE_M
     if pit_nodes:
-        px, py, pz = pit_nodes[len(pit_nodes) // 2][0], pit_nodes[len(pit_nodes) // 2][1], pit_nodes[len(pit_nodes) // 2][2] + 3.0
+        mid = pit_nodes[len(pit_nodes) // 2]
+        px, py = mid[0], mid[1]
+        pz = mid[2] + SPAWN_CLEARANCE_M
     else:
         px, py, pz = sx, sy, sz
 
@@ -134,6 +137,7 @@ def main() -> None:
             "class": "SpawnSphere",
             "name": "spawns_pits",
             "__parent": "PlayerDropPoints",
+            "dataBlock": "SpawnSphereMarker",
             "position": [round(px, 2), round(py, 2), round(pz, 2)],
             "rotationMatrix": [0.0, 1.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 1.0],
             "scale": [1, 1, 1],
@@ -145,6 +149,7 @@ def main() -> None:
             "class": "SpawnSphere",
             "name": "spawns_course",
             "__parent": "PlayerDropPoints",
+            "dataBlock": "SpawnSphereMarker",
             "position": [round(sx, 2), round(sy, 2), round(sz, 2)],
             "rotationMatrix": [0.0, 1.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 1.0],
             "scale": [1, 1, 1],
@@ -176,16 +181,19 @@ def main() -> None:
             "class": "DecalRoad",
             "name": "p400_ctutv_course",
             "__parent": "Roads",
-            "material": "road_asphalt_2lane",
-            "textureLength": 18,
-            "drivability": 1,
+            "material": "p400_dirt_road",
+            "textureLength": 24,
+            "drivability": 0.5,
             "oneWay": False,
             "autoLanes": True,
             "autoJunction": True,
-            "overObjects": True,
+            "overObjects": False,
             "renderPriority": 10,
             "improvedSpline": True,
-            "breakAngle": 3.0,
+            "smoothness": 0.5,
+            "detail": 0.15,
+            "decalBias": 0.002,
+            "distanceFade": [8000, 800],
             "nodes": course_nodes,
         },
     ]
@@ -196,14 +204,16 @@ def main() -> None:
                 "class": "DecalRoad",
                 "name": "p400_main_pit",
                 "__parent": "Roads",
-                "material": "road_asphalt_2lane",
-                "textureLength": 10,
-                "drivability": 1,
+                "material": "p400_dirt_road",
+                "textureLength": 16,
+                "drivability": 0.5,
                 "oneWay": False,
                 "autoLanes": True,
                 "autoJunction": True,
-                "overObjects": True,
+                "overObjects": False,
                 "renderPriority": 11,
+                "decalBias": 0.002,
+                "distanceFade": [8000, 800],
                 "nodes": pit_nodes,
             }
         )
