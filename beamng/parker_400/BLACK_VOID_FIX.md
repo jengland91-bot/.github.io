@@ -58,8 +58,20 @@ If `theTerrain.ter` is missing, the download was incomplete — download again.
 
 Send those lines if it is still black.
 
+## Hills but pink/gray checkerboard ground
+
+That means terrain loaded, but materials failed (BeamNG warning texture).
+
+1. Re-download **Parker400_Download_Both.zip** (latest)
+2. Run `INSTALL_UNPACKED.bat` again (it wipes the old unpack)
+3. Delete `temp\art\terrainMaterialCache` (or Clear cache once)
+4. Restart → load Parker 400 again
+
+Latest package uses matching v1.5 terrain materials + a desert satellite base.
+
 ## What we fixed in the latest package
 
 1. Shipped pre-baked `theTerrain.ter` (missing before = empty world)
-2. Removed a broken PBR texture-set mismatch (4096 set vs 512 textures → black/warning materials)
-3. Unpacked install path so the big `.ter` cannot be skipped inside a zip
+2. Matching PBR texture-set (512/1024/1024) + `materialTextureSet` on the terrain
+3. Desert satellite base (`desert_base_sat512_b.png`) painted across the map
+4. Unpacked install path so the big `.ter` cannot be skipped inside a zip
