@@ -228,12 +228,55 @@
       font-size: 12px;
       color: var(--muted);
     }
+    .cbh-toggles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .cbh-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.16);
+      border-radius: 7px;
+      padding: 6px 8px;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 650;
+    }
+    .cbh-toggle.on {
+      color: #1a140c;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .cbh-star {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 13px;
+      padding: 0 2px;
+      line-height: 1;
+    }
+    .cbh-star.on { color: var(--accent); }
+    .cbh-keys {
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.45;
+      padding: 6px 8px;
+      border: 1px dashed var(--line);
+      border-radius: 7px;
+    }
+    .cbh-keys b { color: var(--text); font-weight: 650; }
   </style>
 
   <div class="cbh-head">
     <p class="cbh-brand">BeamNG</p>
     <h2 class="cbh-title">Course Builder</h2>
-    <p class="cbh-hint">Aim camera → Place. Rocks, barriers, clutter — no World Editor needed.</p>
+    <p class="cbh-hint">Aim → Place. Paint cones, snap to grid, pin favorites. Hotkeys ready.</p>
   </div>
 
   <div class="cbh-body">
@@ -252,6 +295,42 @@
       <button class="cbh-btn danger" ng-click="clear()">Clear</button>
     </div>
 
+    <div class="cbh-toggles">
+      <button class="cbh-toggle" ng-class="{on: paintMode || paintHeld}" ng-click="togglePaint()">
+        <span>Paint</span><span>{{ paintMode || paintHeld ? 'ON' : 'Off' }}</span>
+      </button>
+      <button class="cbh-toggle" ng-class="{on: gridSnap}" ng-click="toggleGrid()">
+        <span>Grid</span><span>{{ gridSnap ? (gridSize + 'm') : 'Off' }}</span>
+      </button>
+      <button class="cbh-toggle" ng-class="{on: ghostEnabled}" ng-click="toggleGhost()">
+        <span>Ghost</span><span>{{ ghostEnabled ? 'ON' : 'Off' }}</span>
+      </button>
+      <button class="cbh-toggle" ng-class="{on: randomYaw}" ng-click="toggleRandomYaw()">
+        <span>Rnd yaw</span><span>{{ randomYaw ? 'ON' : 'Off' }}</span>
+      </button>
+      <button class="cbh-toggle" ng-class="{on: randomScale}" ng-click="toggleRandomScale()">
+        <span>Rnd scale</span><span>{{ randomScale ? 'ON' : 'Off' }}</span>
+      </button>
+      <div class="cbh-toggle" style="cursor:default;">
+        <span>Spacing</span>
+        <span class="cbh-row" style="gap:4px;">
+          <button class="cbh-btn tiny" style="width:28px;padding:4px 0;" ng-click="bumpPaintSpacing(-0.5)">−</button>
+          <b style="min-width:34px;text-align:center;color:inherit;">{{ paintSpacing | number:1 }}m</b>
+          <button class="cbh-btn tiny" style="width:28px;padding:4px 0;" ng-click="bumpPaintSpacing(0.5)">+</button>
+        </span>
+      </div>
+    </div>
+
+    <div class="cbh-row" ng-if="gridSnap" style="justify-content:space-between;">
+      <span class="cbh-meta">Grid size</span>
+      <div class="cbh-row">
+        <button class="cbh-chip" ng-class="{on: gridSize==0.5}" ng-click="setGridSize(0.5)">0.5</button>
+        <button class="cbh-chip" ng-class="{on: gridSize==1}" ng-click="setGridSize(1)">1</button>
+        <button class="cbh-chip" ng-class="{on: gridSize==2}" ng-click="setGridSize(2)">2</button>
+        <button class="cbh-chip" ng-class="{on: gridSize==5}" ng-click="setGridSize(5)">5</button>
+      </div>
+    </div>
+
     <div class="cbh-split">
       <div class="cbh-pane">
         <div class="cbh-pane-h">Library</div>
@@ -260,10 +339,11 @@
                   ng-repeat="p in filtered track by p.id"
                   ng-class="{active: selectedPropId === p.id}"
                   ng-click="selectProp(p.id)">
+            <span class="cbh-star" ng-class="{on: p.favorite}" ng-click="toggleFavorite(p.id, $event)">{{ p.favorite ? '★' : '☆' }}</span>
             <span class="cbh-kind">{{ p.kind }}</span>
             <span>{{ p.label }}</span>
           </button>
-          <div class="cbh-empty" ng-if="!filtered.length">Nothing in this category. Try Scan.</div>
+          <div class="cbh-empty" ng-if="!filtered.length">Nothing here. Star favorites or try Scan.</div>
         </div>
       </div>
 
@@ -327,6 +407,11 @@
       </div>
     </div>
 
+    <div class="cbh-keys">
+      <b>U</b> place · <b>I</b> hold paint · <b>Alt+I</b> paint toggle · <b>[ ]</b> rotate<br>
+      <b>Alt+Z</b> undo · <b>Alt+Backspace</b> delete · <b>Alt+G</b> grid · <b>Alt+H</b> ghost
+    </div>
+
     <div class="cbh-row">
       <button class="cbh-btn ghost" ng-click="scan()">Scan for rocks / props</button>
     </div>
@@ -343,7 +428,7 @@
   </div>
 
   <div class="cbh-foot">
-    <span>Freeroam placement tool</span>
-    <span>{{ mode === 'edit' ? 'Edit mode' : 'Place mode' }}</span>
+    <span>{{ paintMode || paintHeld ? 'Painting' : (mode === 'edit' ? 'Edit mode' : 'Place mode') }}</span>
+    <span>{{ count }} placed</span>
   </div>
 </div>

@@ -6,13 +6,16 @@ Aim the camera → pick from the library → **Place**. Select placed items to r
 
 ## Features
 
-- Categories: **Course**, **Rocks**, **Nature**, **Clutter**, **Static**, **Found**
-- Physics props (cones, barriers, tire walls, barrels, …)
-- Rocks via stock / installed rock packs + **Scan for rocks / props**
-- Static mesh rocks (TSStatic) when mesh paths exist on the map
-- Edit tools: yaw snap, scale, nudge pad, move-to-aim, duplicate, delete
-- Save / Load JSON layouts
-- **Save + Prefab guide** for turning a layout into permanent map content in F11
+- Categories: **Favs**, Course, Rocks, Nature, Clutter, Static, Found
+- Physics props + rock scan + static meshes
+- Edit: yaw snap, scale, nudge, move-to-aim, duplicate, delete
+- **Hotkeys** for place / undo / rotate / delete / paint / grid / ghost
+- **Paint mode** — drop props along your aim path with spacing
+- **Grid snap** — align placements to 0.5 / 1 / 2 / 5 m
+- **Favorites** — star props; open the Favs tab
+- **Ghost preview** — sphere + facing arrow at the aim point
+- **Random yaw / scale** — natural rock fields
+- Save / Load JSON + Prefab guide for F11 permanence
 
 ## Install
 
@@ -22,6 +25,8 @@ Aim the camera → pick from the library → **Place**. Select placed items to r
    Documents/BeamNG.drive/<version>/mods/unpacked/courseBuilderHud/
      scripts/courseBuilderHud/modScript.lua
      lua/ge/extensions/courseBuilderHud.lua
+     lua/ge/extensions/core/input/actions/courseBuilderHud.json
+     settings/inputmaps/keyboard_courseBuilderHud.json
      ui/modules/apps/CourseBuilderHud/...
    ```
 
@@ -29,41 +34,45 @@ Aim the camera → pick from the library → **Place**. Select placed items to r
 
 2. Enable the mod, load **freeroam**.
 3. **Esc → UI Apps → Add App → Course Builder**.
+4. If hotkeys don’t show up, check **Options → Controls** for “Course Builder” actions (zipped mods bind more reliably than unpacked on some versions).
+
+## Hotkeys (defaults)
+
+| Key | Action |
+| --- | --- |
+| **U** | Place |
+| **I** (hold) | Paint along aim |
+| **Alt+I** | Toggle paint mode |
+| **[** / **]** | Rotate left / right |
+| **Alt+Z** | Undo |
+| **Alt+Backspace** | Delete selected |
+| **Alt+G** | Toggle grid snap |
+| **Alt+H** | Toggle ghost preview |
+
+Rebind anytime in Controls.
+
+## Paint + grid
+
+1. Pick a prop (cones work great).
+2. Set **Spacing** (e.g. 3 m).
+3. Turn on **Paint** or hold **I**, then look/drive along the line you want.
+4. Optional: turn on **Grid** for straight barrier rows.
 
 ## Rocks
 
-Rocks work best as **spawnable props** (same family as Esc → Vehicles → Props → Rocks & Boulders).
-
-1. Open the **Rocks** tab and try **Rocks & Boulders**.
-2. If nothing spawns, click **Scan for rocks / props** — it searches installed models and fills the **Found** tab.
-3. **Static** tab tries map mesh rocks (West Coast paths). Those only work if that mesh exists on the loaded level; use Scan / physics rocks when static fails.
-
-## Editing
-
-| Control | What it does |
-| --- | --- |
-| Place | Spawns selected library item at camera aim |
-| Placed list | Click to select for editing |
-| ⟲ ⟳ | Rotate (uses snap) |
-| Scale − / + | Scale selected (best on statics) |
-| Nudge pad | Move selected relative to facing |
-| Move to aim | Teleport selected to where you look |
-| Duplicate / Delete | Copy or remove selected |
-| Save / Load | JSON in `settings/courseBuilderHud/` |
+1. Open **Rocks** and try **Rocks & Boulders**.
+2. If nothing spawns, click **Scan for rocks / props** → use **Found**.
+3. Star favorites with ★ for quick access.
 
 ## Permanent map content
 
-This tool is for **fast freeroam layouts**. To bake into a level:
+Build / Load a layout → **Save + Prefab guide** → **F11** → select objects → Make Prefab → save under the level’s `art/prefabs`.
 
-1. Build / Load the layout.
-2. Click **Save + Prefab guide** (writes layout + a short checklist).
-3. **F11** → select objects → **Make selection a Prefab** → save under the level’s `art/prefabs`.
+Terrain, full roads, and lighting still need World Editor.
 
-Terrain sculpt, road painting, and full lighting still need World Editor.
-
-## Customize catalog
+## Customize
 
 Edit `lua/ge/extensions/courseBuilderHud.lua` → `BASE_CATALOG`.
 
-- `kind = "vehicle"` + `model = "folder_name"` for props
-- `kind = "static"` + `shape = "path/to/mesh.dae"` for static meshes
+- `kind = "vehicle"` + `model = "folder_name"`
+- `kind = "static"` + `shape = "path/to/mesh.dae"`

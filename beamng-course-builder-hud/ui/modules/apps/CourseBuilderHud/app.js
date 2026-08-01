@@ -22,6 +22,14 @@ angular.module('beamng.apps')
       $scope.saveName = 'course'
       $scope.saves = []
       $scope.query = ''
+      $scope.paintMode = false
+      $scope.paintHeld = false
+      $scope.paintSpacing = 3
+      $scope.gridSnap = false
+      $scope.gridSize = 1
+      $scope.ghostEnabled = true
+      $scope.randomYaw = false
+      $scope.randomScale = false
 
       function lua(cmd) {
         bngApi.engineLua(cmd)
@@ -30,7 +38,11 @@ angular.module('beamng.apps')
       function filterCatalog() {
         var q = ($scope.query || '').toLowerCase()
         $scope.filtered = ($scope.catalog || []).filter(function (p) {
-          if ($scope.category && p.category !== $scope.category) return false
+          if ($scope.category === 'favs') {
+            if (!p.favorite) return false
+          } else if ($scope.category && p.category !== $scope.category) {
+            return false
+          }
           if (!q) return true
           return (p.label || '').toLowerCase().indexOf(q) !== -1
         })
@@ -50,6 +62,14 @@ angular.module('beamng.apps')
         $scope.count = state.count
         $scope.mode = state.mode
         $scope.category = state.category
+        $scope.paintMode = !!state.paintMode
+        $scope.paintHeld = !!state.paintHeld
+        $scope.paintSpacing = state.paintSpacing
+        $scope.gridSnap = !!state.gridSnap
+        $scope.gridSize = state.gridSize
+        $scope.ghostEnabled = !!state.ghostEnabled
+        $scope.randomYaw = !!state.randomYaw
+        $scope.randomScale = !!state.randomScale
         filterCatalog()
         $scope.$digest()
       })
@@ -65,13 +85,16 @@ angular.module('beamng.apps')
         filterCatalog()
       }
 
-      $scope.onSearch = function () {
-        filterCatalog()
-      }
+      $scope.onSearch = function () { filterCatalog() }
 
       $scope.selectProp = function (id) {
         $scope.selectedPropId = id
         lua('extensions.courseBuilderHud.selectProp("' + id + '")')
+      }
+
+      $scope.toggleFavorite = function (id, $event) {
+        if ($event) $event.stopPropagation()
+        lua('extensions.courseBuilderHud.toggleFavorite("' + id + '")')
       }
 
       $scope.selectPlaced = function (id) {
@@ -104,6 +127,40 @@ angular.module('beamng.apps')
       $scope.bumpScale = function (d) {
         var next = Math.max(0.1, Math.round((($scope.scale || 1) + d) * 10) / 10)
         $scope.setScale(next)
+      }
+
+      $scope.togglePaint = function () {
+        lua('extensions.courseBuilderHud.togglePaintMode()')
+      }
+      $scope.setPaintSpacing = function (v) {
+        lua('extensions.courseBuilderHud.setPaintSpacing(' + v + ')')
+      }
+      $scope.bumpPaintSpacing = function (d) {
+        var next = Math.max(0.5, Math.round((($scope.paintSpacing || 3) + d) * 10) / 10)
+        $scope.paintSpacing = next
+        $scope.setPaintSpacing(next)
+      }
+
+      $scope.toggleGrid = function () {
+        lua('extensions.courseBuilderHud.toggleGridSnap()')
+      }
+      $scope.setGridSize = function (v) {
+        lua('extensions.courseBuilderHud.setGridSize(' + v + ')')
+      }
+      $scope.bumpGrid = function (d) {
+        var next = Math.max(0.25, Math.round((($scope.gridSize || 1) + d) * 100) / 100)
+        $scope.gridSize = next
+        $scope.setGridSize(next)
+      }
+
+      $scope.toggleGhost = function () {
+        lua('extensions.courseBuilderHud.toggleGhost()')
+      }
+      $scope.toggleRandomYaw = function () {
+        lua('extensions.courseBuilderHud.toggleRandomYaw()')
+      }
+      $scope.toggleRandomScale = function () {
+        lua('extensions.courseBuilderHud.toggleRandomScale()')
       }
 
       $scope.deleteSelected = function () { lua('extensions.courseBuilderHud.deleteSelected()') }

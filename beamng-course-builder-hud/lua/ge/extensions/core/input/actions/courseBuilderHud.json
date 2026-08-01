@@ -1,0 +1,93 @@
+{
+  "cbh_place": {
+    "cat": "gameplay",
+    "order": 910,
+    "ctx": "tlua",
+    "actionMap": "Normal",
+    "onDown": "if extensions.courseBuilderHud then extensions.courseBuilderHud.hotkeyPlace() end",
+    "title": "Course Builder: Place",
+    "desc": "Place the selected Course Builder prop at the camera aim point",
+    "isBasic": true
+  },
+  "cbh_undo": {
+    "cat": "gameplay",
+    "order": 911,
+    "ctx": "tlua",
+    "actionMap": "Normal",
+    "onDown": "if extensions.courseBuilderHud then extensions.courseBuilderHud.hotkeyUndo() end",
+    "title": "Course Builder: Undo",
+    "desc": "Undo the last Course Builder placement",
+    "isBasic": true
+  },
+  "cbh_delete": {
+    "cat": "gameplay",
+    "order": 912,
+    "ctx": "tlua",
+    "actionMap": "Normal",
+    "onDown": "if extensions.courseBuilderHud then extensions.courseBuilderHud.hotkeyDelete() end",
+    "title": "Course Builder: Delete selected",
+    "desc": "Delete the currently selected Course Builder object",
+    "isBasic": true
+  },
+  "cbh_rotate_left": {
+    "cat": "gameplay",
+    "order": 913,
+    "ctx": "tlua",
+    "actionMap": "Normal",
+    "onDown": "if extensions.courseBuilderHud then extensions.courseBuilderHud.hotkeyRotateLeft() end",
+    "title": "Course Builder: Rotate left",
+    "desc": "Rotate placement yaw left by snap amount",
+    "isBasic": true
+  },
+  "cbh_rotate_right": {
+    "cat": "gameplay",
+    "order": 914,
+    "ctx": "tlua",
+    "actionMap": "Normal",
+    "onDown": "if extensions.courseBuilderHud then extensions.courseBuilderHud.hotkeyRotateRight() end",
+    "title": "Course Builder: Rotate right",
+    "desc": "Rotate placement yaw right by snap amount",
+    "isBasic": true
+  },
+  "cbh_paint": {
+    "cat": "gameplay",
+    "order": 915,
+    "ctx": "tlua",
+    "actionMap": "Normal",
+    "onDown": "if extensions.courseBuilderHud then extensions.courseBuilderHud.hotkeyPaintDown() end",
+    "onUp": "if extensions.courseBuilderHud then extensions.courseBuilderHud.hotkeyPaintUp() end",
+    "title": "Course Builder: Paint (hold)",
+    "desc": "Hold to paint props along your aim path with spacing",
+    "isBasic": true
+  },
+  "cbh_paint_toggle": {
+    "cat": "gameplay",
+    "order": 916,
+    "ctx": "tlua",
+    "actionMap": "Normal",
+    "onDown": "if extensions.courseBuilderHud then extensions.courseBuilderHud.togglePaintMode() end",
+    "title": "Course Builder: Toggle paint mode",
+    "desc": "Toggle continuous paint mode on or off",
+    "isBasic": true
+  },
+  "cbh_grid_toggle": {
+    "cat": "gameplay",
+    "order": 917,
+    "ctx": "tlua",
+    "actionMap": "Normal",
+    "onDown": "if extensions.courseBuilderHud then extensions.courseBuilderHud.toggleGridSnap() end",
+    "title": "Course Builder: Toggle grid snap",
+    "desc": "Toggle position grid snapping",
+    "isBasic": true
+  },
+  "cbh_ghost_toggle": {
+    "cat": "gameplay",
+    "order": 918,
+    "ctx": "tlua",
+    "actionMap": "Normal",
+    "onDown": "if extensions.courseBuilderHud then extensions.courseBuilderHud.toggleGhost() end",
+    "title": "Course Builder: Toggle ghost preview",
+    "desc": "Toggle the aim-point ghost preview",
+    "isBasic": true
+  }
+}

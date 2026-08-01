@@ -17,6 +17,22 @@ local selectedPlacedId = nil
 local activeCategory = "course"
 local mode = "place" -- place | edit
 
+-- Easy tools
+local paintMode = false      -- auto-place while aiming when spacing exceeded
+local paintHeld = false      -- true while paint hotkey held
+local paintSpacing = 3.0     -- metres between paint drops
+local lastPaintPos = nil
+local gridSnap = false
+local gridSize = 1.0
+local ghostEnabled = true
+local randomYaw = false
+local randomScale = false
+local randomScaleMin = 0.8
+local randomScaleMax = 1.3
+local favorites = {}         -- [propId] = true
+local lastAimPos = nil
+local uiDirtyTimer = 0
+
 -- kind: "vehicle" uses core_vehicles; "static" uses TSStatic shapeName
 local BASE_CATALOG = {
   -- Course
@@ -56,6 +72,7 @@ local BASE_CATALOG = {
 }
 
 local CATEGORIES = {
+  { id = "favs",    label = "Favs" },
   { id = "course",  label = "Course" },
   { id = "rocks",   label = "Rocks" },
   { id = "nature",  label = "Nature" },
@@ -165,8 +182,13 @@ local function catalogForUi()
       label = p.label,
       category = p.category,
       kind = p.kind,
+      favorite = favorites[p.id] == true,
     }
   end
+  table.sort(out, function(a, b)
+    if a.favorite ~= b.favorite then return a.favorite end
+    return tostring(a.label) < tostring(b.label)
+  end)
   return out
 end
 
@@ -197,6 +219,14 @@ local function pushUiState()
     categories = CATEGORIES,
     catalog = catalogForUi(),
     placed = placedForUi(),
+    paintMode = paintMode,
+    paintHeld = paintHeld,
+    paintSpacing = paintSpacing,
+    gridSnap = gridSnap,
+    gridSize = gridSize,
+    ghostEnabled = ghostEnabled,
+    randomYaw = randomYaw,
+    randomScale = randomScale,
   })
 end
 
@@ -283,6 +313,33 @@ local function spawnStaticProp(prop, pos, yaw, scale)
   return obj
 end
 
+local function snapPosToGrid(pos)
+  if not gridSnap or not pos then return pos end
+  local g = gridSize
+  if not g or g <= 0 then return pos end
+  return vec3(
+    math.floor(pos.x / g + 0.5) * g,
+    math.floor(pos.y / g + 0.5) * g,
+    pos.z
+  )
+end
+
+local function resolvePlaceYaw()
+  if randomYaw then
+    return math.random() * 360
+  end
+  return currentYaw
+end
+
+local function resolvePlaceScale()
+  if randomScale then
+    local a, b = randomScaleMin, randomScaleMax
+    if b < a then a, b = b, a end
+    return a + math.random() * (b - a)
+  end
+  return currentScale
+end
+
 local function trackEntry(prop, obj, pos, yaw, scale)
   local entry = {
     id = nextId,
@@ -301,39 +358,48 @@ local function trackEntry(prop, obj, pos, yaw, scale)
   nextId = nextId + 1
   placed[#placed + 1] = entry
   selectedPlacedId = entry.id
+  lastPaintPos = vec3(pos.x, pos.y, pos.z)
   return entry
 end
 
-local function placeSelected()
+--- silent=true skips toast (used by paint mode)
+local function placeSelected(silent)
   local prop = findProp(selectedPropId)
   if not prop then
-    notify("Pick something from the list", "warning")
-    return
+    if not silent then notify("Pick something from the list", "warning") end
+    return false
   end
 
   local pos = aimPoint()
   if not pos then
-    notify("No aim point", "warning")
-    return
+    if not silent then notify("No aim point", "warning") end
+    return false
   end
+  pos = snapPosToGrid(pos)
 
-  local scale = currentScale
+  local yaw = resolvePlaceYaw()
+  local scale = resolvePlaceScale()
   local obj
   if prop.kind == "static" then
-    obj = spawnStaticProp(prop, pos, currentYaw, scale)
+    obj = spawnStaticProp(prop, pos, yaw, scale)
   else
-    obj = spawnVehicleProp(prop, pos, currentYaw, scale)
+    obj = spawnVehicleProp(prop, pos, yaw, scale)
   end
 
   if not obj then
-    notify("Could not place " .. prop.label .. " (missing on this install?)", "error")
-    return
+    if not silent then
+      notify("Could not place " .. prop.label .. " (missing on this install?)", "error")
+    end
+    return false
   end
 
-  trackEntry(prop, obj, pos, currentYaw, scale)
+  trackEntry(prop, obj, pos, yaw, scale)
+  if not randomYaw then currentYaw = yaw end
+  if not randomScale then currentScale = scale end
   mode = "edit"
-  notify("Placed " .. prop.label)
+  if not silent then notify("Placed " .. prop.label) end
   pushUiState()
+  return true
 end
 
 local function deleteObjectByEntry(entry)
@@ -795,7 +861,7 @@ local function scanInstalledProps()
 end
 
 -- Public API
-M.place = placeSelected
+M.place = function() placeSelected(false) end
 M.undo = undoLast
 M.clear = clearAll
 M.rotate = rotateYaw
@@ -819,13 +885,195 @@ M.listSaves = listSaves
 M.exportPrefab = exportPrefabNotes
 M.refresh = pushUiState
 
+local function favPath()
+  return saveDir .. "/favorites.json"
+end
+
+local function loadFavorites()
+  ensureSaveDir()
+  favorites = {}
+  if FS:fileExists(favPath()) then
+    local data = jsonReadFile(favPath())
+    if type(data) == "table" then
+      for _, id in ipairs(data) do
+        favorites[tostring(id)] = true
+      end
+    end
+  end
+end
+
+local function saveFavorites()
+  ensureSaveDir()
+  local list = {}
+  for id, on in pairs(favorites) do
+    if on then list[#list + 1] = id end
+  end
+  table.sort(list)
+  jsonWriteFile(favPath(), list, true)
+end
+
+local function toggleFavorite(propId)
+  propId = tostring(propId or selectedPropId)
+  if favorites[propId] then
+    favorites[propId] = nil
+    notify("Removed favorite")
+  else
+    favorites[propId] = true
+    notify("Favorited")
+  end
+  saveFavorites()
+  pushUiState()
+end
+
+local function setPaintMode(on)
+  paintMode = on and true or false
+  if not paintMode then
+    paintHeld = false
+    lastPaintPos = nil
+  end
+  notify(paintMode and "Paint mode ON" or "Paint mode OFF")
+  pushUiState()
+end
+
+local function togglePaintMode()
+  setPaintMode(not paintMode)
+end
+
+local function setPaintHeld(on)
+  paintHeld = on and true or false
+  if paintHeld then
+    lastPaintPos = nil
+    placeSelected(true)
+  end
+  pushUiState()
+end
+
+local function setPaintSpacing(v)
+  paintSpacing = math.max(0.5, tonumber(v) or 3)
+  pushUiState()
+end
+
+local function setGridSnap(on)
+  gridSnap = on and true or false
+  notify(gridSnap and ("Grid " .. tostring(gridSize) .. "m") or "Grid off")
+  pushUiState()
+end
+
+local function toggleGridSnap()
+  setGridSnap(not gridSnap)
+end
+
+local function setGridSize(v)
+  gridSize = math.max(0.25, tonumber(v) or 1)
+  pushUiState()
+end
+
+local function setGhost(on)
+  ghostEnabled = on and true or false
+  pushUiState()
+end
+
+local function toggleGhost()
+  setGhost(not ghostEnabled)
+end
+
+local function setRandomYaw(on)
+  randomYaw = on and true or false
+  pushUiState()
+end
+
+local function setRandomScale(on)
+  randomScale = on and true or false
+  pushUiState()
+end
+
+local function toggleRandomYaw()
+  setRandomYaw(not randomYaw)
+end
+
+local function toggleRandomScale()
+  setRandomScale(not randomScale)
+end
+
+local function maybePaintAtAim()
+  if not (paintMode or paintHeld) then return end
+  local pos = aimPoint()
+  if not pos then return end
+  pos = snapPosToGrid(pos)
+  if lastPaintPos then
+    local d = (pos - lastPaintPos):length()
+    if d < paintSpacing then return end
+  end
+  placeSelected(true)
+end
+
+local function drawGhost()
+  if not ghostEnabled then return end
+  local pos = aimPoint()
+  if not pos then return end
+  pos = snapPosToGrid(pos)
+  lastAimPos = pos
+
+  local yaw = currentYaw
+  local rad = math.rad(yaw)
+  local fx, fy = -math.sin(rad), math.cos(rad)
+  local tip = vec3(pos.x + fx * 1.2, pos.y + fy * 1.2, pos.z + 0.15)
+  local col = ColorF(0.88, 0.64, 0.35, 0.65)
+  local colLine = ColorF(0.95, 0.78, 0.45, 0.9)
+
+  pcall(function()
+    if debugDrawer then
+      debugDrawer:drawSphere(pos + vec3(0, 0, 0.2), 0.35, col)
+      debugDrawer:drawLine(pos + vec3(0, 0, 0.2), tip, colLine)
+      if gridSnap then
+        local g = gridSize
+        local c = ColorF(0.88, 0.64, 0.35, 0.25)
+        debugDrawer:drawLine(pos + vec3(-g, 0, 0.05), pos + vec3(g, 0, 0.05), c)
+        debugDrawer:drawLine(pos + vec3(0, -g, 0.05), pos + vec3(0, g, 0.05), c)
+      end
+    end
+  end)
+end
+
+M.toggleFavorite = toggleFavorite
+M.setPaintMode = setPaintMode
+M.togglePaintMode = togglePaintMode
+M.setPaintHeld = setPaintHeld
+M.setPaintSpacing = setPaintSpacing
+M.setGridSnap = setGridSnap
+M.toggleGridSnap = toggleGridSnap
+M.setGridSize = setGridSize
+M.setGhost = setGhost
+M.toggleGhost = toggleGhost
+M.setRandomYaw = setRandomYaw
+M.setRandomScale = setRandomScale
+M.toggleRandomYaw = toggleRandomYaw
+M.toggleRandomScale = toggleRandomScale
+
+-- Hotkey wrappers
+M.hotkeyPlace = function() placeSelected(false) end
+M.hotkeyUndo = undoLast
+M.hotkeyDelete = deleteSelected
+M.hotkeyRotateLeft = function() rotateYaw(-snapDegrees) end
+M.hotkeyRotateRight = function() rotateYaw(snapDegrees) end
+M.hotkeyPaintDown = function() setPaintHeld(true) end
+M.hotkeyPaintUp = function() setPaintHeld(false) end
+
+M.onUpdate = function(dtReal, dtSim, dtRaw)
+  drawGhost()
+  maybePaintAtAim()
+end
+
 M.onExtensionLoaded = function()
-  logI("Course Builder HUD v2 loaded")
+  logI("Course Builder HUD v2.1 loaded")
   rebuildCatalog()
+  loadFavorites()
   pushUiState()
 end
 
 M.onExtensionUnloaded = function()
+  paintHeld = false
+  paintMode = false
   logI("Course Builder HUD unloaded")
 end
 
