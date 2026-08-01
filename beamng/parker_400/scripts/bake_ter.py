@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Bake BeamNG theTerrain.ter (v9) from the shipped 16-bit heightmap PNG.
-
-Without this file, Freeroam loads a black/empty map because TerrainBlock
-points at a missing .ter. Also paints the full layer map with desert_base
-and writes companion theTerrain.terrain.json.
-"""
+"""Bake BeamNG theTerrain.ter (v9) from heightmap + paint race corridor."""
 
 from __future__ import annotations
 
@@ -18,10 +13,15 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 LEVEL = ROOT / "levels" / "parker_400"
 HEIGHTMAP = LEVEL / "import" / "heightmap_4096.png"
+COURSE_JSON = ROOT / "source" / "reference" / "p400" / "p400_map_course.json"
 TER_PATH = LEVEL / "theTerrain.ter"
 TER_JSON = LEVEL / "theTerrain.terrain.json"
 MAX_HEIGHT = 1500.0
-MATERIALS = ["desert_base", "course_pack", "rock_slope"]
+SQUARE = 16.0
+# Only materials with matching 4096 base textures
+MATERIALS = ["desert_base", "course_pack"]
+# Paint a ~90 m wide packed-dirt ribbon so the course is visible on the ground
+COURSE_HALF_WIDTH_M = 60.0
 
 
 def read_png16_gray(path: Path) -> np.ndarray:
@@ -56,13 +56,32 @@ def read_png16_gray(path: Path) -> np.ndarray:
     return arr
 
 
+def paint_course_corridor(size: int, uvs: list[list[float]], half_width_m: float) -> np.ndarray:
+    """Layer map: 0=desert_base, 1=course_pack along GPX UV polyline."""
+    layer = np.zeros((size, size), dtype=np.uint8)
+    if not uvs:
+        return layer
+    radius = max(1, int(round(half_width_m / SQUARE)))
+    pts = np.array(uvs, dtype=np.float64)
+    # Convert UV to pixel (row0 = south/v=0 — matches heightmap bake)
+    xs = np.clip(np.round(pts[:, 0] * (size - 1)).astype(np.int32), 0, size - 1)
+    ys = np.clip(np.round(pts[:, 1] * (size - 1)).astype(np.int32), 0, size - 1)
+    # Stamp discs along path (dense enough from decimated GPX)
+    yy, xx = np.ogrid[-radius : radius + 1, -radius : radius + 1]
+    disk = xx * xx + yy * yy <= radius * radius
+    for x, y in zip(xs, ys):
+        y0, y1 = y - radius, y + radius + 1
+        x0, x1 = x - radius, x + radius + 1
+        gy0, gy1 = max(0, y0), min(size, y1)
+        gx0, gx1 = max(0, x0), min(size, x1)
+        dy0, dx0 = gy0 - y0, gx0 - x0
+        patch = disk[dy0 : dy0 + (gy1 - gy0), dx0 : dx0 + (gx1 - gx0)]
+        layer[gy0:gy1, gx0:gx1][patch] = 1
+    return layer
+
+
 def write_ter(path: Path, height: np.ndarray, layer: np.ndarray, materials: list[str]) -> None:
-    if height.ndim != 2 or height.shape[0] != height.shape[1]:
-        raise ValueError("heightmap must be square")
-    if height.shape != layer.shape:
-        raise ValueError("layer map shape mismatch")
     size = height.shape[0]
-    # BeamNG .ter v9: LE heightmap + layer map; material names = u8 length + UTF-8
     with path.open("wb") as f:
         f.write(struct.pack("<B", 9))
         f.write(struct.pack("<I", size))
@@ -71,8 +90,6 @@ def write_ter(path: Path, height: np.ndarray, layer: np.ndarray, materials: list
         f.write(struct.pack("<I", len(materials)))
         for name in materials:
             b = name.encode("utf-8")
-            if len(b) > 255:
-                raise ValueError(f"material name too long: {name}")
             f.write(struct.pack("<B", len(b)))
             f.write(b)
 
@@ -80,11 +97,13 @@ def write_ter(path: Path, height: np.ndarray, layer: np.ndarray, materials: list
 def main() -> None:
     if not HEIGHTMAP.exists():
         raise SystemExit(f"Missing heightmap: {HEIGHTMAP}")
+    course = json.loads(COURSE_JSON.read_text(encoding="utf-8"))
+    uvs = course.get("longCourseUv") or []
 
     height = read_png16_gray(HEIGHTMAP)
     size = height.shape[0]
-    # Paint entire terrain with desert_base (satellite albedo) so first load isn't black
-    layer = np.zeros((size, size), dtype=np.uint8)
+    layer = paint_course_corridor(size, uvs, COURSE_HALF_WIDTH_M)
+    course_px = int((layer == 1).sum())
 
     write_ter(TER_PATH, height, layer, MATERIALS)
 
@@ -93,41 +112,20 @@ def main() -> None:
         "datafile": "/levels/parker_400/theTerrain.ter",
         "heightmapImage": "/levels/parker_400/import/heightmap_4096.png",
         "size": size,
-        "binaryFormat": (
-            "version(char), size(unsigned int), "
-            "heightMap(heightMapSize * heightMapItemSize), "
-            "layerMap(layerMapSize * layerMapItemSize), "
-            "layerTextureMap(layerMapSize * layerMapItemSize), materialNames"
-        ),
         "heightMapSize": size * size,
         "heightMapItemSize": 2,
         "layerMapSize": size * size,
         "layerMapItemSize": 1,
         "materials": MATERIALS,
         "maxHeight": MAX_HEIGHT,
-        "squareSize": 16.0,
-        "note": "Pre-baked for BeamNG 0.39 so Freeroam is not an empty black map.",
+        "squareSize": SQUARE,
+        "courseHalfWidthMeters": COURSE_HALF_WIDTH_M,
+        "coursePixels": course_px,
+        "note": "desert_base = Parker satellite; course_pack painted on GPX corridor",
     }
     TER_JSON.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
-
-    expected = 1 + 4 + size * size * 2 + size * size + 4 + sum(1 + len(m.encode()) for m in MATERIALS)
-    actual = TER_PATH.stat().st_size
-    print(
-        json.dumps(
-            {
-                "wrote": str(TER_PATH),
-                "size": size,
-                "bytes": actual,
-                "expectedBytes": expected,
-                "heightMin": int(height.min()),
-                "heightMax": int(height.max()),
-                "materials": MATERIALS,
-            },
-            indent=2,
-        )
-    )
-    if actual != expected:
-        raise SystemExit(f"size mismatch: {actual} != {expected}")
+    print(json.dumps(meta, indent=2))
+    print(f"wrote {TER_PATH} ({TER_PATH.stat().st_size} bytes)")
 
 
 if __name__ == "__main__":

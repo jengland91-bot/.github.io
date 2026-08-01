@@ -30,8 +30,8 @@ WORLD_M = 65536.0
 HALF = WORLD_M / 2.0
 SQUARE = 16.0
 MAX_H = 1500.0
-COURSE_WIDTH = 10.0  # desert race ribbon meters
-PIT_WIDTH = 14.0
+COURSE_WIDTH = 28.0  # wide visible race ribbon on 65 km 1:1 world
+PIT_WIDTH = 18.0
 
 
 def load_png16_gray(path: Path) -> np.ndarray:
@@ -177,13 +177,15 @@ def main() -> None:
             "name": "p400_ctutv_course",
             "__parent": "Roads",
             "material": "road_asphalt_2lane",
-            "textureLength": 14,
+            "textureLength": 18,
             "drivability": 1,
             "oneWay": False,
             "autoLanes": True,
             "autoJunction": True,
-            "overObjects": False,
+            "overObjects": True,
             "renderPriority": 10,
+            "improvedSpline": True,
+            "breakAngle": 3.0,
             "nodes": course_nodes,
         },
     ]
@@ -200,7 +202,7 @@ def main() -> None:
                 "oneWay": False,
                 "autoLanes": True,
                 "autoJunction": True,
-                "overObjects": False,
+                "overObjects": True,
                 "renderPriority": 11,
                 "nodes": pit_nodes,
             }

@@ -41,6 +41,7 @@ write_png16_gray(Path("import/heightmap_4096.png"), ds)
 write_png16_gray(Path("levels/parker_400/import/heightmap_4096.png"), ds)
 print("wrote heightmap_4096.png")
 PY
+python3 scripts/prepare_hd_materials.py
 python3 scripts/bake_level.py
 python3 scripts/bake_ter.py
 echo "Rebuild complete."

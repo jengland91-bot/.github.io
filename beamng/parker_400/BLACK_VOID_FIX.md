@@ -67,11 +67,25 @@ That means terrain loaded, but materials failed (BeamNG warning texture).
 3. Delete `temp\art\terrainMaterialCache` (or Clear cache once)
 4. Restart → load Parker 400 again
 
-Latest package uses matching v1.5 terrain materials + a desert satellite base.
+Latest package uses matching 4096 PBR texture-set + full Esri satellite base.
+
+## Hills load but ground looks fake / course only on minimap
+
+That is the old package (low-res sat, no painted course ribbon).
+
+1. Re-download **Parker400_Download_Both.zip** (latest from this branch)
+2. Run **`RUN_INSTALL.cmd`** (keeps the window open) or `INSTALL_UNPACKED.bat`
+3. Delete `temp\art\terrainMaterialCache` (or Clear cache once)
+4. Restart → spawn **Main Pit / Staging**
+5. You should see:
+   - Real Parker satellite desert color (not flat brown tiles)
+   - Tan packed-dirt corridor painted on the GPX line
+   - Dark asphalt DecalRoad on top of that corridor (same line as the minimap)
 
 ## What we fixed in the latest package
 
 1. Shipped pre-baked `theTerrain.ter` (missing before = empty world)
-2. Matching PBR texture-set (512/1024/1024) + `materialTextureSet` on the terrain
-3. Desert satellite base (`desert_base_sat512_b.png`) painted across the map
-4. Unpacked install path so the big `.ter` cannot be skipped inside a zip
+2. Matching PBR texture-set (4096 base / 1024 macro+detail) + `materialTextureSet`
+3. Full Esri World Imagery satellite (`parker400_base_color.png`) on `desert_base`
+4. GPX course painted as `course_pack` (~120 m dirt ribbon) + wider DecalRoad
+5. Unpacked install path so the big `.ter` cannot be skipped inside a zip

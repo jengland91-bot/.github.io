@@ -2,31 +2,30 @@
 PARKER 400 — BeamNG 0.39.1
 ================================================================================
 
-This package now includes a pre-baked terrain file (theTerrain.ter).
-After a correct mod install you should see desert hills + satellite ground,
-NOT a black void.
+This package includes:
+  - Pre-baked terrain (theTerrain.ter) with SRTM hills
+  - Full Esri satellite color on desert_base (parker400_base_color.png)
+  - Painted packed-dirt course corridor (course_pack) on the GPX line
+  - Wide DecalRoad race ribbon (visible on the ground, not only minimap)
 
-INSTALL (mod zip — required on 0.39.1):
-  Put parker_400.zip here (do NOT unzip):
+INSTALL (recommended on 0.39.1):
+  Extract Parker400_Download_Both.zip
+  Run RUN_INSTALL.cmd  (or INSTALL_UNPACKED.bat)
 
-    %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\mods\parker_400.zip
+  Result path:
+    %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\mods\unpacked\parker_400\levels\parker_400\
 
-  Launcher → Manage User Folder → Open → copy into mods\
-  Delete any old loose levels\parker_400 folder
-  Quit BeamNG fully → start → enable mod → Freeroam → search "parker"
+  Confirm theTerrain.ter is ~48 MB
+  Delete temp\art\terrainMaterialCache  (or Clear cache)
+  Quit BeamNG fully → start → Freeroam → search "parker"
 
-IF THE MAP IS STILL BLACK:
-  Run INSTALL_UNPACKED.bat (extracts to mods\unpacked\parker_400\)
-  Read BLACK_VOID_FIX.md
-  Confirm theTerrain.ter is ~48 MB on disk
-  Clear BeamNG cache / delete temp\art\terrainMaterialCache
-  Quit fully and reload
-
-OPTIONAL TWEAKS:
-  Terrain Painter → desert_base / course_pack / rock_slope
-  Ctrl+S to save
-
-COURSE:
-  ~125.8 mi CTUTV DecalRoad from official 2026 racer GPS
+COURSE ("the train" / race line):
   Spawn: Main Pit / Staging
+  Look for the dark asphalt DecalRoad + tan packed-dirt strip on the ground
+  Minimap white line = same official ~125.8 mi CTUTV GPX
+
+IF GROUND LOOKS FLAT / COURSE MISSING:
+  You are on an old install — re-run RUN_INSTALL.cmd with the latest Download Both
+  Clear terrainMaterialCache again and restart
+
 ================================================================================
