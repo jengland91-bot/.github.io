@@ -5,8 +5,8 @@ PARKER 400 — BeamNG 0.39.1
 This package includes:
   - Pre-baked terrain (theTerrain.ter) with USGS 3DEP hills/washes (MapNG US DEM)
   - HD Esri satellite on desert_base (12288 JPG unique sat)
-  - Course burned into satellite + painted course_pack on the GPX line
-  - Wide DecalRoad race ribbon (visible on the ground, not only minimap)
+  - Pale wash-silt shoulder (course_pack) outside the DecalRoad race line
+  - Wide DecalRoad race ribbon on packed dirt; silt beside it
 
 INSTALL (recommended on 0.39.1):
   Extract Parker400_Download_Both.zip
