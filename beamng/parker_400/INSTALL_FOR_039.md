@@ -86,15 +86,21 @@ Copy the **contents** of the install package so `levels\parker_400` sits under `
 
 ---
 
-## After it loads once
+## After it loads
 
-1. Press **F11** → World Editor.
-2. **File → Import** → `levels/parker_400/import/p400_gpx_scale.preset.json`
-   - Heightmap: **4096**, meters/px: **16**, max height: **1500**
-3. Paint material **`desert_base`** (satellite texture) over the terrain.
-4. **Ctrl+S**.
+Latest package includes a pre-baked **`theTerrain.ter`** — you should see desert hills and satellite ground immediately (not a black void).
 
-Then race the DecalRoad course (orange line in the editor).
+Spawn at **Main Pit / Staging** and follow the DecalRoad race corridor.
+
+### If it is still black
+
+You are on an **old zip** (before the terrain bake). Re-download `parker_400.zip` from the branch and replace the one in `mods\`.
+
+Optional re-import (only if needed):
+
+1. **F11** → World Editor  
+2. Terrain tools → Import → `import/p400_gpx_scale.preset.json` (16 m/px, max 1500)  
+3. Paint **`desert_base`** → **Ctrl+S**
 
 ---
 

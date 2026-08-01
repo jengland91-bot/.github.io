@@ -69,39 +69,18 @@ MapNG settings if you redo sat:
 ### Step 2 — Open in BeamNG
 1. Launch **BeamNG.drive**
 2. **Freeroam** → search **parker** → **Parker 400**  
-   (First load may look flat until you import the heightmap)
+3. You should see **desert hills + satellite ground** (pre-baked `theTerrain.ter`)
 
-### Step 3 — Import the heightmap (hills)
-1. Press **F11** (World Editor)
-2. Open **Terrain tools** → **Import Terrain** / Heightmap Import
-3. **Load preset:**
-   ```
-   levels\parker_400\import\p400_gpx_scale.preset.json
-   ```
-4. Confirm these numbers:
+If it is **black**, re-download the latest `parker_400.zip` (old packages were missing the `.ter` file).
 
-| Setting | Value |
-|---|---|
-| Heightmap | `heightmap_4096.png` |
-| Meters per Pixel | **16** |
-| Max Height | **1500** |
-| Position | **-32768, -32768, 0** |
+### Step 3 — Drive
+1. Spawn at **Main Pit / Staging** (default) or **Start Line**  
+2. Follow the DecalRoad race corridor = official 2026 CTUTV GPX line  
 
-5. Click **Import**
-6. **Ctrl + S** to save the level
-
-### Step 4 — Paint the ground (satellite look)
-1. Still in World Editor (F11)
-2. **Terrain Painter**
-3. Select material **`desert_base`**
-4. Paint over the whole map (big brush)
-5. Optional: paint **`course_pack`** lightly along the race ribbon
-6. **Ctrl + S**
-
-### Step 5 — Drive
-1. Exit World Editor / freeroam respawn  
-2. Spawn at **Main Pit / Staging** (default) or **Start Line**  
-3. Follow the DecalRoad race corridor = official 2026 CTUTV GPX line  
+### Optional — re-import / re-paint (only if needed)
+1. **F11** → Terrain tools → Import → `import/p400_gpx_scale.preset.json`  
+   (16 m/px, maxHeight 1500, pos -32768,-32768)  
+2. Terrain Painter → **`desert_base`** → Ctrl+S
 
 ---
 

@@ -1,44 +1,32 @@
-Full guide: INSTALL_FOR_039.md  and  docs\STEP_BY_STEP_BUILD.md
-
 ================================================================================
-PARKER 400 — BEAMNG 0.39 / 0.39.1
+PARKER 400 — BeamNG 0.39.1
 ================================================================================
 
-INSTALL (why Freeroam was empty):
-  After 0.39, loose levels\parker_400 often does NOT show in Freeroam.
-  Put the mod zip here instead:
+This package now includes a pre-baked terrain file (theTerrain.ter).
+After a correct mod install you should see desert hills + satellite ground,
+NOT a black void.
+
+INSTALL (mod zip — required on 0.39.1):
+  Put parker_400.zip here (do NOT unzip):
 
     %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\mods\parker_400.zip
 
-  Or: launcher → Manage User Folder → Open → copy into mods\ (do NOT unzip)
-  Or: run FIX_AND_INSTALL.bat / INSTALL_PARKER_400.bat from the install package
+  Launcher → Manage User Folder → Open → copy into mods\
+  Delete any old loose levels\parker_400 folder
+  Quit BeamNG fully → start → enable mod → Freeroam → search "parker"
 
-  Then: quit BeamNG fully → start → enable mod → Freeroam → search "parker"
+IF THE MAP IS STILL BLACK:
+  1) Confirm theTerrain.ter exists inside the zip (levels/parker_400/theTerrain.ter)
+  2) Re-download the latest mod zip from the PR branch (old zips had no .ter)
+  3) In World Editor (F11): Terrain tools → Import Terrain →
+       load import/p400_gpx_scale.preset.json (needs heightmap PNG)
+       then paint material desert_base → Ctrl+S
 
-AFTER IT LOADS:
-1) Press F11 (World Editor)
+OPTIONAL TWEAKS:
+  Terrain Painter → desert_base / course_pack / rock_slope
+  Ctrl+S to save
 
-2) Terrain tools → Import Terrain → Load preset:
-      levels\parker_400\import\p400_gpx_scale.preset.json
-
-3) Confirm BEFORE Import:
-      Meters per Pixel (squareSize) = 16
-      Max Height                   = 1500
-      Position                     = -32768, -32768, 0
-
-4) Import → Ctrl+S
-
-5) Terrain Painter → paint material desert_base over the map → Ctrl+S
-
-6) Respawn at Main Pit / Staging and drive the DecalRoad course
-
---------------------------------------------------------------------------------
-COURSE FACTS
---------------------------------------------------------------------------------
-- Official file: 2026 Parker 400 CTUTV Final Racer (GPX/KML/USR)
-- Lap length: ~125.8 miles
-- Map: 65536 m world @ 16 m/px (true 1:1; HD 8 m/px optional)
-- Satellite base included (Esri, locked to GPX frame)
-
-Stuck? FIX_INSTALL.md
+COURSE:
+  ~125.8 mi CTUTV DecalRoad from official 2026 racer GPS
+  Spawn: Main Pit / Staging
 ================================================================================

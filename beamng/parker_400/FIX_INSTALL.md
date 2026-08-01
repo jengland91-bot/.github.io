@@ -68,3 +68,11 @@ You must see a **`mods`** folder inside what you opened.
 4. Full restart after install
 5. Search Freeroam for `parker` (not only scrolling)
 6. Check `logs\` for load errors mentioning `parker_400`
+
+## Map loads but is black
+
+Old packages were missing **`theTerrain.ter`**. Re-download the latest:
+
+[parker_400.zip](https://github.com/jengland91-bot/.github.io/raw/cursor/parker-400-beamng-a8ad/beamng/parker_400/mods_drop_in/parker_400.zip)
+
+Inside the zip you must see `levels/parker_400/theTerrain.ter` (~48 MB).

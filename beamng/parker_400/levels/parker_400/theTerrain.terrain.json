@@ -1,0 +1,19 @@
+{
+  "version": 9,
+  "datafile": "/levels/parker_400/theTerrain.ter",
+  "heightmapImage": "/levels/parker_400/import/heightmap_4096.png",
+  "size": 4096,
+  "binaryFormat": "version(char), size(unsigned int), heightMap(heightMapSize * heightMapItemSize), layerMap(layerMapSize * layerMapItemSize), layerTextureMap(layerMapSize * layerMapItemSize), materialNames",
+  "heightMapSize": 16777216,
+  "heightMapItemSize": 2,
+  "layerMapSize": 16777216,
+  "layerMapItemSize": 1,
+  "materials": [
+    "desert_base",
+    "course_pack",
+    "rock_slope"
+  ],
+  "maxHeight": 1500.0,
+  "squareSize": 16.0,
+  "note": "Pre-baked for BeamNG 0.39 so Freeroam is not an empty black map."
+}

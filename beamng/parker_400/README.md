@@ -31,10 +31,9 @@ Guide: [`INSTALL_FOR_039.md`](INSTALL_FOR_039.md) · troubleshooting: [`FIX_INST
 ### In BeamNG after install
 
 1. Freeroam → **Parker 400**
-2. World Editor (F11) → Terrain tools → Import Terrain
-3. **Load preset** `import/p400_gpx_scale.preset.json`
-4. Confirm **Meters per Pixel = 16**, **Max Height = 1500**, position **-32768, -32768**
-5. Import → Ctrl+S
+2. Terrain is **pre-baked** (`theTerrain.ter`) — desert should appear on first load  
+3. If black: you have an old zip; re-download `mods_drop_in/parker_400.zip`  
+4. Optional re-import: F11 → `import/p400_gpx_scale.preset.json` (16 / 1500)
 
 ## Scale (locked to GPX 1:1)
 
