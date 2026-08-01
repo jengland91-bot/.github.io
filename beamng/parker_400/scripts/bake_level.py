@@ -30,9 +30,11 @@ WORLD_M = 65536.0
 HALF = WORLD_M / 2.0
 SQUARE = 16.0
 MAX_H = 1500.0
-COURSE_WIDTH = 22.0  # packed-dirt race corridor width (meters)
+COURSE_WIDTH = 26.0  # packed-dirt DecalRoad width (meters)
 PIT_WIDTH = 18.0
 SPAWN_CLEARANCE_M = 25.0  # drop-in height so vehicles don't spawn under terrain
+# Insert intermediate DecalRoad nodes so long GPX gaps don't leave broken ribbon
+COURSE_MAX_NODE_SPACING_M = 40.0
 
 
 def load_png16_gray(path: Path) -> np.ndarray:
@@ -85,9 +87,28 @@ def sample_height(img: np.ndarray, u: float, v: float) -> float:
     return (float(img[y, x]) / 65535.0) * MAX_H
 
 
+def densify_uvs(uvs: list[list[float]], max_spacing_m: float) -> list[list[float]]:
+    """Subdivide long GPX segments so DecalRoad / paint stay continuous."""
+    if len(uvs) < 2:
+        return list(uvs)
+    out: list[list[float]] = [list(uvs[0])]
+    for i in range(1, len(uvs)):
+        u0, v0 = out[-1]
+        u1, v1 = uvs[i]
+        x0, y0 = uv_to_world(u0, v0)
+        x1, y1 = uv_to_world(u1, v1)
+        dist = float(np.hypot(x1 - x0, y1 - y0))
+        n = max(1, int(np.ceil(dist / max_spacing_m)))
+        for k in range(1, n + 1):
+            t = k / n
+            out.append([u0 + (u1 - u0) * t, v0 + (v1 - v0) * t])
+    return out
+
+
 def nodes_from_uv(uvs: list[list[float]], img: np.ndarray, width: float) -> list[list[float]]:
+    dense = densify_uvs(uvs, COURSE_MAX_NODE_SPACING_M)
     out = []
-    for u, v in uvs:
+    for u, v in dense:
         x, y = uv_to_world(u, v)
         z = sample_height(img, u, v)
         out.append([round(x, 2), round(y, 2), round(z, 2), width])

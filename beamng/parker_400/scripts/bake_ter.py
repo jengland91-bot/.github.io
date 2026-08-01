@@ -20,9 +20,10 @@ MAX_HEIGHT = 1500.0
 SQUARE = 16.0
 # Only materials with matching 4096 base textures
 MATERIALS = ["desert_base", "course_pack"]
-# Paint a ~90 m wide packed-dirt ribbon so the course is visible on the ground
-# Narrower paint so more satellite desert shows beside the DecalRoad
-COURSE_HALF_WIDTH_M = 28.0
+# Packed-dirt ribbon beside DecalRoad. Keep modest so satellite still shows.
+# Must paint along segments (not only GPX nodes) — median node spacing ~66 m
+# while a 2-px stamp is only ~32 m, which left big gaps in the trail.
+COURSE_HALF_WIDTH_M = 36.0
 
 
 def read_png16_gray(path: Path) -> np.ndarray:
@@ -58,19 +59,18 @@ def read_png16_gray(path: Path) -> np.ndarray:
 
 
 def paint_course_corridor(size: int, uvs: list[list[float]], half_width_m: float) -> np.ndarray:
-    """Layer map: 0=desert_base, 1=course_pack along GPX UV polyline."""
+    """Layer map: 0=desert_base, 1=course_pack along GPX UV polyline.
+
+    Stamps discs densely along every segment so long GPX gaps stay connected.
+    """
     layer = np.zeros((size, size), dtype=np.uint8)
     if not uvs:
         return layer
     radius = max(1, int(round(half_width_m / SQUARE)))
-    pts = np.array(uvs, dtype=np.float64)
-    # Convert UV to pixel (row0 = south/v=0 — matches heightmap bake)
-    xs = np.clip(np.round(pts[:, 0] * (size - 1)).astype(np.int32), 0, size - 1)
-    ys = np.clip(np.round(pts[:, 1] * (size - 1)).astype(np.int32), 0, size - 1)
-    # Stamp discs along path (dense enough from decimated GPX)
     yy, xx = np.ogrid[-radius : radius + 1, -radius : radius + 1]
     disk = xx * xx + yy * yy <= radius * radius
-    for x, y in zip(xs, ys):
+
+    def stamp(x: int, y: int) -> None:
         y0, y1 = y - radius, y + radius + 1
         x0, x1 = x - radius, x + radius + 1
         gy0, gy1 = max(0, y0), min(size, y1)
@@ -78,6 +78,23 @@ def paint_course_corridor(size: int, uvs: list[list[float]], half_width_m: float
         dy0, dx0 = gy0 - y0, gx0 - x0
         patch = disk[dy0 : dy0 + (gy1 - gy0), dx0 : dx0 + (gx1 - gx0)]
         layer[gy0:gy1, gx0:gx1][patch] = 1
+
+    # UV → pixel (row0 = south / v=0 — matches heightmap bake)
+    scale = float(size - 1)
+    pts = [(float(u) * scale, float(v) * scale) for u, v in uvs]
+    # Step ≤ 0.5 px so discs overlap continuously at any radius ≥ 1
+    step = 0.5
+    for i in range(len(pts) - 1):
+        x0, y0 = pts[i]
+        x1, y1 = pts[i + 1]
+        dist = ((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5
+        n = max(1, int(np.ceil(dist / step)))
+        for k in range(n + 1):
+            t = k / n
+            x = int(round(x0 + (x1 - x0) * t))
+            y = int(round(y0 + (y1 - y0) * t))
+            if 0 <= x < size and 0 <= y < size:
+                stamp(x, y)
     return layer
 
 

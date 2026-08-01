@@ -4,7 +4,7 @@
   "maxHeight": 1500.0,
   "geographicScale": 1.0,
   "courseMiles": 125.79,
-  "courseNodes": 2487,
+  "courseNodes": 6426,
   "pitNodes": 5,
   "waypointFile": "source/reference/p400/p400_map_waypoints.json",
   "terrainPosition": [
