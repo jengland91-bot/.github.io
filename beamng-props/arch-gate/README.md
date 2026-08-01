@@ -18,6 +18,8 @@ Uses these three textures (edit any of them):
 
 **Clearance:** ~7 m wide × ~4.6 m tall.
 
+**Collision:** Split into three convex boxes (left leg, right leg, header) so vehicles can drive through. Never one concave hull. Set **collisionType** = `Collision Mesh`. See `../COLLISION.md`.
+
 ## How to customize
 
 ### Change colors

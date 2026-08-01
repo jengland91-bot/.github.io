@@ -25,3 +25,5 @@ Or copy a preset fabric (`tent_fabric_orange.png`, etc.) over `tent_fabric.png`.
 Paint guides: `logo_templates/paint_tent_logo.png`
 
 Copy `export/dae/` into your map props folder. Place as **TSStatic**.
+
+**Collision:** Four pole boxes + roof slab only (open under the canopy). Set **collisionType** = `Collision Mesh`. See `../COLLISION.md`.

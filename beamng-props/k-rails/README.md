@@ -32,7 +32,10 @@ levels/YourParkerMap/art/shapes/props/krails/
 
 Place as **TSStatic**. Stack along **+Y** end-to-end to make long walls.
 
+**Collision:** Each DAE includes a dedicated bevel-free `Colmesh_*-1` box (not the visual mesh). In World Editor set **collisionType** = `Collision Mesh`. See `../COLLISION.md`.
+
 ## Specs
 
 - Jersey/K-rail profile ~0.81 m tall, ~0.61 m wide at base
 - Meters, Z-up, origin at ground at the start end of the section
+- Collider: single axis-aligned box (no bevels / no vertex seams for bumper snagging)

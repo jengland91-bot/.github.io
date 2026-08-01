@@ -25,6 +25,8 @@ levels/YourParkerMap/art/shapes/props/milemarkers/
 
 Each `.dae` already has its matching sign texture beside it (`mile_001.png`, wood, metal).
 
+**Collision:** Dedicated 8-sided post cylinder + thin sign box (`Colmesh_*-1`). In World Editor set **collisionType** = `Collision Mesh` (not Visible Mesh). See `../COLLISION.md`.
+
 ## What’s in this kit
 
 | Path | Contents |
