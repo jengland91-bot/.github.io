@@ -1,0 +1,19 @@
+{
+  "domElement": "<course-builder-hud></course-builder-hud>",
+  "name": "Course Builder",
+  "types": [
+    "ui.apps.categories.info"
+  ],
+  "description": "Place rocks, barriers, and course props without World Editor",
+  "css": {
+    "left": "12px",
+    "top": "72px",
+    "width": "340px",
+    "height": "720px",
+    "min-width": "300px",
+    "min-height": "520px"
+  },
+  "author": "Course Builder HUD",
+  "version": "2.1.0",
+  "directive": "courseBuilderHud"
+}

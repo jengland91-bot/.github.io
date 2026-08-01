@@ -1,0 +1,13 @@
+{
+  "bindings": [
+    { "control": "u", "action": "cbh_place" },
+    { "control": "alt+z", "action": "cbh_undo" },
+    { "control": "alt+backspace", "action": "cbh_delete" },
+    { "control": "[", "action": "cbh_rotate_left" },
+    { "control": "]", "action": "cbh_rotate_right" },
+    { "control": "i", "action": "cbh_paint" },
+    { "control": "alt+i", "action": "cbh_paint_toggle" },
+    { "control": "alt+g", "action": "cbh_grid_toggle" },
+    { "control": "alt+h", "action": "cbh_ghost_toggle" }
+  ]
+}
