@@ -20,14 +20,14 @@ LEVEL_MINIMAP = ROOT / "levels" / "parker_400" / "minimap"
 SAT = ROOT / "levels" / "parker_400" / "art" / "terrains" / "parker400_base_color.jpg"
 IMPORT = ROOT / "import"
 
-MINIMAP = 2048  # sharper than old 1024 nearest-neighbor dump
+MINIMAP = 2048  # keep 2048 so the race line stays readable in Freeroam nav
 SUPERSAMPLE = 2  # draw at 2× then area-downsample for clean AA
-# Widths are in final minimap pixels (scaled up while drawing)
-TRAIL_HALF_PX = 2.0
-OUTLINE_HALF_PX = 3.2
-TRAIL_COLOR = np.array([250, 250, 248], dtype=np.float32)
-OUTLINE_COLOR = np.array([28, 22, 14], dtype=np.float32)
-TRAIL_EDGE = np.array([200, 160, 70], dtype=np.float32)
+# Widths are in final minimap pixels — thick enough to read on the circular UI
+TRAIL_HALF_PX = 3.4
+OUTLINE_HALF_PX = 5.2
+TRAIL_COLOR = np.array([255, 230, 120], dtype=np.float32)  # race-gold (high contrast)
+OUTLINE_COLOR = np.array([20, 14, 8], dtype=np.float32)
+TRAIL_EDGE = np.array([220, 170, 60], dtype=np.float32)
 
 
 def load_jpg_rgb(path: Path) -> np.ndarray:

@@ -40,7 +40,7 @@ def write_png16_gray(path: Path | str, arr: np.ndarray) -> None:
 
 
 def write_png8(path: Path | str, arr: np.ndarray) -> None:
-    """Write HxW uint8 (L) or HxWx3 uint8 (RGB) PNG."""
+    """Write HxW uint8 (L), HxWx3 (RGB), or HxWx4 (RGBA) PNG."""
     if arr.dtype != np.uint8:
         raise TypeError("expected uint8")
     if arr.ndim == 2:
@@ -51,8 +51,12 @@ def write_png8(path: Path | str, arr: np.ndarray) -> None:
         h, w, _ = arr.shape
         color_type = 2
         channels = 3
+    elif arr.ndim == 3 and arr.shape[2] == 4:
+        h, w, _ = arr.shape
+        color_type = 6
+        channels = 4
     else:
-        raise ValueError("expected HxW or HxWx3")
+        raise ValueError("expected HxW, HxWx3, or HxWx4")
     rows = []
     flat = arr.reshape(h, w * channels)
     for y in range(h):

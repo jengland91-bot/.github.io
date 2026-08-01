@@ -30,7 +30,7 @@ WORLD_M = 65536.0
 HALF = WORLD_M / 2.0
 SQUARE = 16.0
 MAX_H = 1500.0
-COURSE_WIDTH = 26.0  # packed-dirt DecalRoad width (meters)
+COURSE_WIDTH = 30.0  # off-road dirt DecalRoad width (meters)
 PIT_WIDTH = 18.0
 SPAWN_CLEARANCE_M = 25.0  # drop-in height so vehicles don't spawn under terrain
 # Insert intermediate DecalRoad nodes so long GPX gaps don't leave broken ribbon
@@ -203,20 +203,21 @@ def main() -> None:
             "name": "p400_ctutv_course",
             "__parent": "Roads",
             "material": "p400_dirt_road",
-            "textureLength": 24,
-            "drivability": 0.5,
+            "textureLength": 14,
+            "drivability": 0.55,
             "oneWay": False,
             "autoLanes": True,
             "autoJunction": True,
             "overObjects": False,
-            # Hide engine nav overlay — clean trail is baked into minimap/terrain.png
-            "hiddenInNavi": True,
+            # Baked gold trail is in minimap/terrain.png; keep DecalRoad visible in
+            # nav too (large maps often clip engine roads — baked PNG is the backup)
+            "hiddenInNavi": False,
             "renderPriority": 10,
             "improvedSpline": True,
-            "smoothness": 0.5,
-            "detail": 0.15,
-            "decalBias": 0.002,
-            "distanceFade": [8000, 800],
+            "smoothness": 0.45,
+            "detail": 0.2,
+            "decalBias": 0.003,
+            "distanceFade": [12000, 1200],
             "nodes": course_nodes,
         },
     ]
@@ -228,15 +229,15 @@ def main() -> None:
                 "name": "p400_main_pit",
                 "__parent": "Roads",
                 "material": "p400_dirt_road",
-                "textureLength": 16,
-                "drivability": 0.5,
+                "textureLength": 12,
+                "drivability": 0.55,
                 "oneWay": False,
                 "autoLanes": True,
                 "autoJunction": True,
                 "overObjects": False,
-                "hiddenInNavi": True,
+                "hiddenInNavi": False,
                 "renderPriority": 11,
-                "decalBias": 0.002,
+                "decalBias": 0.003,
                 "distanceFade": [8000, 800],
                 "nodes": pit_nodes,
             }
