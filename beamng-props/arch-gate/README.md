@@ -1,31 +1,62 @@
-# Parker 400 — Inflatable Drive-Through Arch
+# Parker 400 — Blank Inflatable Arch (recolor + logo)
 
-Start / finish / checkpoint gate cars can drive under. Center panel is **blank for logos**.
+Drive-through start/finish/checkpoint gate. **Everything is blank / swappable** so you can change tube color, block color, and logo.
 
-## Ready to place (`export/dae/`)
-
-| File | Look |
-|------|------|
-| `arch_yellow_blank.dae` | Yellow tubes + black logo panel (like your photo) |
-| `arch_orange_blank.dae` | Desert orange tubes + black logo panel |
-| `arch_white_blank.dae` | White tubes + navy logo panel |
-| `arch_yellow_logo_white.dae` | Yellow tubes + white logo panel |
-
-**Clearance:** ~7 m wide × ~4.6 m tall under the arch (fits BeamNG cars / Ultra4-size rigs).
-
-## Add a logo
-
-1. Open `logo_templates/logo_template_black.png` (or white/navy) in Photoshop / GIMP
-2. Paste your logo inside the dashed box
-3. Export PNG (**1024×512**)
-4. Overwrite the matching texture next to the DAE, e.g.:
+## Main file
 
 ```text
-export/dae/arch_logo_blank_black.png
+export/dae/arch_blank.dae
 ```
 
-Keep the **same filename** so the arch still finds it.  
-Duplicate the whole DAE + texture set if you want several branded arches (start, finish, checkpoint).
+Uses these three textures (edit any of them):
+
+| Texture | Controls |
+|---------|----------|
+| `arch_tube.png` | Legs, arms, feet color |
+| `arch_block.png` | Center block color |
+| `arch_logo.png` | Front & back logo panel |
+
+**Clearance:** ~7 m wide × ~4.6 m tall.
+
+## How to customize
+
+### Change colors
+1. Open `arch_tube.png` or `arch_block.png` in Photoshop / GIMP  
+   (or copy a preset over them — see below)
+2. Fill with your color / save
+3. Keep the **same filename**
+
+### Add a logo
+1. Open `logo_templates/paint_logo.png`
+2. Paste your logo in the dashed box
+3. Export as PNG **1024×512**
+4. Overwrite `export/dae/arch_logo.png`
+
+### Quick color presets (copy over the three masters)
+In `export/dae/` you’ll find ready solids:
+
+- Tubes: `arch_tube_yellow.png`, `arch_tube_orange.png`, `arch_tube_white.png`, `arch_tube_black.png`, `arch_tube_red.png`, `arch_tube_blue.png`
+- Block: `arch_block_white.png`, `arch_block_black.png`, `arch_block_gray.png`
+- Logo base: `arch_logo_white.png`, `arch_logo_black.png`, `arch_logo_gray.png`
+
+Example — yellow tubes + black block + black logo face (like your photo):
+
+```text
+copy arch_tube_yellow.png  →  arch_tube.png
+copy arch_block_black.png  →  arch_block.png
+copy arch_logo_black.png   →  arch_logo.png
+```
+
+Then paint your brand onto `arch_logo.png`.
+
+## Optional presets (already assembled)
+If you want a starting look without copying files:
+
+- `arch_preset_yellow_black.dae`
+- `arch_preset_orange_black.dae`
+- `arch_preset_white_navyish.dae`
+
+These still use swappable PNGs next to them — same idea, different starting filenames.
 
 ## Drop into BeamNG
 
@@ -35,10 +66,4 @@ Copy `export/dae/` into:
 levels/YourParkerMap/art/shapes/props/arch/
 ```
 
-Place as **TSStatic**. Drive direction is along **Y** through the opening (rotate in World Editor as needed).
-
-## Specs
-
-- Meters, Z-up, origin at ground center
-- Inflatable-style round tubes + beveled center block
-- Logo plates on **front and back** of the center block
+Place `arch_blank.dae` as a **TSStatic**. Duplicate the folder for start/finish/checkpoint if each needs different logos.

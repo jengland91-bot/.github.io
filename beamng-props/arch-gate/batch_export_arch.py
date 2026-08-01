@@ -1,6 +1,6 @@
 """
-Build inflatable drive-through arch gates with blank logo panels.
-Cars can drive under; swap the logo PNG to brand it.
+Build a fully blank / recolorable inflatable arch.
+Swap arch_tube.png, arch_block.png, arch_logo.png to change colors & branding.
 
 Run:
   blender --background --python batch_export_arch.py
@@ -20,20 +20,31 @@ TEX = ROOT / "textures"
 OUT = ROOT / "export" / "dae"
 BLEND_OUT = ROOT / "export" / "arch_gates.blend"
 
-# Drive-through clearance for BeamNG vehicles
-CLEAR_W = 7.0  # inner width between legs
-CLEAR_H = 4.6  # clear height under center
-TUBE_R = 0.55  # chunky inflatable radius
+CLEAR_W = 7.0
+CLEAR_H = 4.6
+TUBE_R = 0.55
 BLOCK_W = 3.2
 BLOCK_H = 1.35
 BLOCK_D = 0.85
 
+# One blank arch + optional preset recolors (still editable via PNG overwrite)
 VARIANTS = {
-    # name: (tube_tex, logo_tex)
-    "arch_yellow_blank": ("arch_tube_yellow.png", "arch_logo_blank_black.png"),
-    "arch_orange_blank": ("arch_tube_orange.png", "arch_logo_blank_black.png"),
-    "arch_white_blank": ("arch_tube_white.png", "arch_logo_blank_navy.png"),
-    "arch_yellow_logo_white": ("arch_tube_yellow.png", "arch_logo_blank_white.png"),
+    "arch_blank": ("arch_tube.png", "arch_block.png", "arch_logo.png"),
+    "arch_preset_yellow_black": (
+        "arch_tube_yellow.png",
+        "arch_block_black.png",
+        "arch_logo_black.png",
+    ),
+    "arch_preset_orange_black": (
+        "arch_tube_orange.png",
+        "arch_block_black.png",
+        "arch_logo_black.png",
+    ),
+    "arch_preset_white_navyish": (
+        "arch_tube_white.png",
+        "arch_block_gray.png",
+        "arch_logo_black.png",
+    ),
 }
 
 
@@ -113,7 +124,6 @@ def add_bevel(obj, width=0.04, segments=3):
 
 
 def cylinder_between(p0, p1, radius, name, verts=16):
-    """Create a cylinder from point p0 to p1."""
     p0 = Vector(p0)
     p1 = Vector(p1)
     mid = (p0 + p1) / 2
@@ -124,7 +134,6 @@ def cylinder_between(p0, p1, radius, name, verts=16):
     )
     obj = bpy.context.active_object
     obj.name = name
-    # orient Z of cylinder along direction
     obj.rotation_mode = "QUATERNION"
     obj.rotation_quaternion = Vector((0, 0, 1)).rotation_difference(direction.normalized())
     apply_object(obj)
@@ -141,39 +150,30 @@ def rounded_block(name, size, location):
     return obj
 
 
-def build_arch(tube_tex: str, logo_tex: str):
+def build_arch(tube_tex: str, block_tex: str, logo_tex: str):
     root_empty = bpy.data.objects.new("arch_root", None)
     bpy.context.scene.collection.objects.link(root_empty)
 
-    tube_mat = make_mat("ARCH_tube", (0.9, 0.75, 0.1), 0.5, 0.0, TEX / tube_tex)
-    block_mat = make_mat(
-        "ARCH_block", (0.08, 0.08, 0.08), 0.55, 0.0, TEX / "arch_block_black.png"
-    )
-    logo_mat = make_mat("ARCH_logo", (0.05, 0.05, 0.05), 0.45, 0.0, TEX / logo_tex)
+    tube_mat = make_mat("ARCH_tube", (0.9, 0.9, 0.9), 0.5, 0.0, TEX / tube_tex)
+    block_mat = make_mat("ARCH_block", (0.7, 0.7, 0.7), 0.55, 0.0, TEX / block_tex)
+    logo_mat = make_mat("ARCH_logo", (0.4, 0.4, 0.4), 0.45, 0.0, TEX / logo_tex)
 
     half_w = CLEAR_W / 2 + TUBE_R
     leg_top_z = CLEAR_H + TUBE_R * 0.3
-    # Angled arms meet above center block
     block_z = CLEAR_H + BLOCK_H / 2 + 0.15
     arm_inner_x = BLOCK_W / 2 + TUBE_R * 0.2
     arm_top_z = block_z + BLOCK_H / 2 + TUBE_R * 0.4
 
     parts = []
 
-    # Left & right legs
     for side, sx in (("L", -half_w), ("R", half_w)):
         leg = cylinder_between(
-            (sx, 0, TUBE_R),
-            (sx, 0, leg_top_z),
-            TUBE_R,
-            f"arch_leg_{side}",
-            verts=18,
+            (sx, 0, TUBE_R), (sx, 0, leg_top_z), TUBE_R, f"arch_leg_{side}", verts=18
         )
         leg.data.materials.append(tube_mat)
         uv_smart(leg)
         parts.append(leg)
 
-        # Angled arm from leg top to near center block
         arm = cylinder_between(
             (sx, 0, leg_top_z),
             (math.copysign(arm_inner_x, sx), 0, arm_top_z),
@@ -185,7 +185,6 @@ def build_arch(tube_tex: str, logo_tex: str):
         uv_smart(arm)
         parts.append(arm)
 
-        # Ground foot disc
         bpy.ops.mesh.primitive_cylinder_add(
             vertices=20, radius=TUBE_R * 1.35, depth=0.12, location=(sx, 0, 0.06)
         )
@@ -196,17 +195,11 @@ def build_arch(tube_tex: str, logo_tex: str):
         foot.data.materials.append(tube_mat)
         parts.append(foot)
 
-    # Center black block
-    block = rounded_block(
-        "arch_block",
-        (BLOCK_W, BLOCK_D, BLOCK_H),
-        (0, 0, block_z),
-    )
+    block = rounded_block("arch_block", (BLOCK_W, BLOCK_D, BLOCK_H), (0, 0, block_z))
     block.data.materials.append(block_mat)
     uv_smart(block)
     parts.append(block)
 
-    # Front + back logo plates (thin cards for clean UV / easy logo swap)
     for i, y in enumerate((-BLOCK_D / 2 - 0.02, BLOCK_D / 2 + 0.02)):
         bpy.ops.mesh.primitive_cube_add(size=1.0, location=(0, y, block_z))
         plate = bpy.context.active_object
@@ -215,17 +208,13 @@ def build_arch(tube_tex: str, logo_tex: str):
         apply_object(plate)
         add_bevel(plate, 0.02, 2)
         plate.data.materials.append(logo_mat)
-        # Project UVs from view-ish: smart is fine for a flat plate
         uv_smart(plate)
         parts.append(plate)
 
-    # Small horizontal connector tubes into the block sides
     for side, sx in (("L", -1), ("R", 1)):
-        x0 = sx * (BLOCK_W / 2)
-        x1 = sx * arm_inner_x
         conn = cylinder_between(
-            (x0, 0, arm_top_z - TUBE_R * 0.2),
-            (x1, 0, arm_top_z),
+            (sx * (BLOCK_W / 2), 0, arm_top_z - TUBE_R * 0.2),
+            (sx * arm_inner_x, 0, arm_top_z),
             TUBE_R * 0.85,
             f"arch_conn_{side}",
             verts=16,
@@ -236,7 +225,6 @@ def build_arch(tube_tex: str, logo_tex: str):
 
     for p in parts:
         p.parent = root_empty
-
     return root_empty
 
 
@@ -259,6 +247,7 @@ def export_dae(root, name):
         include_children=True,
         include_armatures=False,
         include_shapekeys=False,
+        # Keep shared simple names for the blank arch; presets copy their own
         use_texture_copies=True,
         export_global_forward_selection="Y",
         export_global_up_selection="Z",
@@ -268,17 +257,17 @@ def export_dae(root, name):
 
 
 def main():
-    for tube, logo in VARIANTS.values():
-        for f in (tube, logo, "arch_block_black.png"):
+    for tube, block, logo in VARIANTS.values():
+        for f in (tube, block, logo):
             if not (TEX / f).exists():
                 print(f"Missing {f}", file=sys.stderr)
                 sys.exit(1)
 
     reset_scene()
     first = True
-    for name, (tube, logo) in VARIANTS.items():
+    for name, (tube, block, logo) in VARIANTS.items():
         clear_all()
-        root = build_arch(tube, logo)
+        root = build_arch(tube, block, logo)
         if first:
             BLEND_OUT.parent.mkdir(parents=True, exist_ok=True)
             bpy.ops.wm.save_as_mainfile(filepath=str(BLEND_OUT))
@@ -286,7 +275,14 @@ def main():
             first = False
         export_dae(root, name)
 
-    print(f"DONE: exported {len(VARIANTS)} arch gates")
+    # Ensure blank arch folder has the three master swappable names clearly present
+    for master in ("arch_tube.png", "arch_block.png", "arch_logo.png"):
+        src = TEX / master
+        dst = OUT / master
+        if src.exists():
+            dst.write_bytes(src.read_bytes())
+
+    print(f"DONE: exported {len(VARIANTS)} arch gates (fully recolorable)")
 
 
 if __name__ == "__main__":

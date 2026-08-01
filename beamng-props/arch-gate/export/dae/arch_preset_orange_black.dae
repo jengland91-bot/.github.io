@@ -5,22 +5,22 @@
       <author>Blender User</author>
       <authoring_tool>Blender 4.2.9 LTS commit date:2025-04-14, commit time:12:24, hash:a10f621e649a</authoring_tool>
     </contributor>
-    <created>2026-08-01T07:23:45</created>
-    <modified>2026-08-01T07:23:45</modified>
+    <created>2026-08-01T07:26:29</created>
+    <modified>2026-08-01T07:26:29</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_effects>
     <effect id="ARCH_tube-effect">
       <profile_COMMON>
-        <newparam sid="arch_tube_yellow_png-surface">
+        <newparam sid="arch_tube_orange_png-surface">
           <surface type="2D">
-            <init_from>arch_tube_yellow_png</init_from>
+            <init_from>arch_tube_orange_png</init_from>
           </surface>
         </newparam>
-        <newparam sid="arch_tube_yellow_png-sampler">
+        <newparam sid="arch_tube_orange_png-sampler">
           <sampler2D>
-            <source>arch_tube_yellow_png-surface</source>
+            <source>arch_tube_orange_png-surface</source>
           </sampler2D>
         </newparam>
         <technique sid="common">
@@ -29,7 +29,7 @@
               <color sid="emission">0 0 0 1</color>
             </emission>
             <diffuse>
-              <texture texture="arch_tube_yellow_png-sampler" texcoord="UVMap"/>
+              <texture texture="arch_tube_orange_png-sampler" texcoord="UVMap"/>
             </diffuse>
             <index_of_refraction>
               <float sid="ior">1.5</float>
@@ -40,14 +40,14 @@
     </effect>
     <effect id="ARCH_logo-effect">
       <profile_COMMON>
-        <newparam sid="arch_logo_blank_black_png-surface">
+        <newparam sid="arch_logo_black_png-surface">
           <surface type="2D">
-            <init_from>arch_logo_blank_black_png</init_from>
+            <init_from>arch_logo_black_png</init_from>
           </surface>
         </newparam>
-        <newparam sid="arch_logo_blank_black_png-sampler">
+        <newparam sid="arch_logo_black_png-sampler">
           <sampler2D>
-            <source>arch_logo_blank_black_png-surface</source>
+            <source>arch_logo_black_png-surface</source>
           </sampler2D>
         </newparam>
         <technique sid="common">
@@ -56,7 +56,7 @@
               <color sid="emission">0 0 0 1</color>
             </emission>
             <diffuse>
-              <texture texture="arch_logo_blank_black_png-sampler" texcoord="UVMap"/>
+              <texture texture="arch_logo_black_png-sampler" texcoord="UVMap"/>
             </diffuse>
             <index_of_refraction>
               <float sid="ior">1.5</float>
@@ -97,11 +97,11 @@
     <image id="arch_block_black_png" name="arch_block_black_png">
       <init_from>arch_block_black.png</init_from>
     </image>
-    <image id="arch_logo_blank_black_png" name="arch_logo_blank_black_png">
-      <init_from>arch_logo_blank_black.png</init_from>
+    <image id="arch_logo_black_png" name="arch_logo_black_png">
+      <init_from>arch_logo_black.png</init_from>
     </image>
-    <image id="arch_tube_yellow_png" name="arch_tube_yellow_png">
-      <init_from>arch_tube_yellow.png</init_from>
+    <image id="arch_tube_orange_png" name="arch_tube_orange_png">
+      <init_from>arch_tube_orange.png</init_from>
     </image>
   </library_images>
   <library_materials>
