@@ -20,6 +20,8 @@ Uses these three textures (edit any of them):
 
 **Collision:** Split into three convex boxes (left leg, right leg, header) so vehicles can drive through. Never one concave hull. Set **collisionType** = `Collision Mesh`. See `../COLLISION.md`.
 
+**LODs:** `_a800` / `_a200` / `_a50` billboard + cull. Base pivot at ground. See `../GEOMETRY_LODS.md`.
+
 ## How to customize
 
 ### Change colors

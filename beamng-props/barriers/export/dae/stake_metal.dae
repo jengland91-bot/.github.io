@@ -5,32 +5,12 @@
       <author>Blender User</author>
       <authoring_tool>Blender 4.2.9 LTS commit date:2025-04-14, commit time:12:24, hash:a10f621e649a</authoring_tool>
     </contributor>
-    <created>2026-08-01T07:51:24</created>
-    <modified>2026-08-01T07:51:24</modified>
+    <created>2026-08-01T07:55:09</created>
+    <modified>2026-08-01T07:55:09</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_effects>
-    <effect id="Colmesh_Material-effect">
-      <profile_COMMON>
-        <technique sid="common">
-          <lambert>
-            <emission>
-              <color sid="emission">0 0 0 1</color>
-            </emission>
-            <diffuse>
-              <color sid="diffuse">1 0 1 1</color>
-            </diffuse>
-            <transparent opaque="A_ONE">
-              <color sid="alpha">0 0 0 0.15</color>
-            </transparent>
-            <index_of_refraction>
-              <float sid="ior">1.5</float>
-            </index_of_refraction>
-          </lambert>
-        </technique>
-      </profile_COMMON>
-    </effect>
     <effect id="stake_002-effect">
       <profile_COMMON>
         <newparam sid="stake_metal_png-surface">
@@ -61,6 +41,26 @@
         </technique>
       </profile_COMMON>
     </effect>
+    <effect id="Colmesh_Material-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">1 0 1 1</color>
+            </diffuse>
+            <transparent opaque="A_ONE">
+              <color sid="alpha">0 0 0 0.15</color>
+            </transparent>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
   </library_effects>
   <library_images>
     <image id="stake_metal_png" name="stake_metal_png">
@@ -68,18 +68,102 @@
     </image>
   </library_images>
   <library_materials>
-    <material id="Colmesh_Material-material" name="Colmesh_Material">
-      <instance_effect url="#Colmesh_Material-effect"/>
-    </material>
     <material id="stake_002-material" name="stake.002">
       <instance_effect url="#stake_002-effect"/>
     </material>
+    <material id="Colmesh_Material-material" name="Colmesh_Material">
+      <instance_effect url="#Colmesh_Material-effect"/>
+    </material>
   </library_materials>
   <library_geometries>
+    <geometry id="stake_metal_a50-mesh" name="stake_metal_a50">
+      <mesh>
+        <source id="stake_metal_a50-mesh-positions">
+          <float_array id="stake_metal_a50-mesh-positions-array" count="24">-0.03674995 0 -0.01099997 0.03674995 0 -0.01099997 0.03674995 0 1.111 -0.03674995 0 1.111 0 -0.03674995 -0.01099997 0 0.03674995 -0.01099997 0 0.03674995 1.111 0 -0.03674995 1.111</float_array>
+          <technique_common>
+            <accessor source="#stake_metal_a50-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="stake_metal_a50-mesh-normals">
+          <float_array id="stake_metal_a50-mesh-normals-array" count="12">0 -1 0 1 0 0 0 -1 0 1 0 0</float_array>
+          <technique_common>
+            <accessor source="#stake_metal_a50-mesh-normals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="stake_metal_a50-mesh-map-0">
+          <float_array id="stake_metal_a50-mesh-map-0-array" count="24">1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 0 1 1 0 1 1 0 1</float_array>
+          <technique_common>
+            <accessor source="#stake_metal_a50-mesh-map-0-array" count="12" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="stake_metal_a50-mesh-vertices">
+          <input semantic="POSITION" source="#stake_metal_a50-mesh-positions"/>
+        </vertices>
+        <triangles material="stake_002-material" count="4">
+          <input semantic="VERTEX" source="#stake_metal_a50-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#stake_metal_a50-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#stake_metal_a50-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 3 0 1 0 0 2 5 1 3 7 1 4 4 1 5 1 2 6 2 2 7 3 2 8 5 3 9 6 3 10 7 3 11</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="stake_metal_a200-mesh" name="stake_metal_a200">
+      <mesh>
+        <source id="stake_metal_a200-mesh-positions">
+          <float_array id="stake_metal_a200-mesh-positions-array" count="27">0.01109582 0.03486466 0 -0.01109582 0.03486466 1.1 0.03499996 0 0 0.03486466 0.01109582 1.1 0.02474874 -0.02474874 0 -0.01109582 -0.03486466 0 0.01109582 -0.03486466 1.1 -0.03486466 0.01109582 0 -0.03486466 -0.01109582 1.1</float_array>
+          <technique_common>
+            <accessor source="#stake_metal_a200-mesh-positions-array" count="9" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="stake_metal_a200-mesh-normals">
+          <float_array id="stake_metal_a200-mesh-normals-array" count="42">0.82475 0.5654698 -0.005602478 0.2716041 -0.9623935 -0.005479395 -0.88821 -0.4593443 -0.009266912 0.8882276 -0.4593534 0.006799995 -0.4593443 0.88821 -0.009266912 0.4593443 0.88821 0.009266912 0 0 1 -0.4593443 -0.88821 0.009266912 -0.88821 0.4593443 0.009266912 0 0 -1 0.9238722 -0.3826804 0.003973782 0 0 1 0 0 -1 0 0 -1</float_array>
+          <technique_common>
+            <accessor source="#stake_metal_a200-mesh-normals-array" count="14" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="stake_metal_a200-mesh-map-0">
+          <float_array id="stake_metal_a200-mesh-map-0-array" count="84">0.05380171 0.00182259 0.0604006 0.9981774 0.0283119 0.9981774 0.07460397 0.00182259 0.0905351 0.9981774 0.06404578 0.9981774 0.1160249 0.00182259 0.1226238 0.9981774 0.0905351 0.9981774 0.1505328 0.9981774 0.126269 0.00182259 0.1505328 0.00182259 0.01238077 0.00182259 0.0283119 0.9981774 0.00182259 0.9981774 0.01238077 0.00182259 0.05380171 0.00182259 0.0283119 0.9981774 0.240665 0.0283119 0.182087 0.03391122 0.2085763 0.00182259 0.07460397 0.00182259 0.1160249 0.00182259 0.0905351 0.9981774 0.154178 0.00182259 0.1784418 0.00182259 0.1635102 0.9981774 0.223508 0.06404578 0.2141757 0.1226238 0.1992441 0.06404578 0.1505328 0.9981774 0.126269 0.9981774 0.126269 0.00182259 0.240665 0.0283119 0.2141757 0.0604006 0.182087 0.03391122 0.240665 0.0905351 0.2141757 0.1226238 0.223508 0.06404578 0.2141757 0.1226238 0.182087 0.09613448 0.1992441 0.06404578</float_array>
+          <technique_common>
+            <accessor source="#stake_metal_a200-mesh-map-0-array" count="42" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="stake_metal_a200-mesh-vertices">
+          <input semantic="POSITION" source="#stake_metal_a200-mesh-positions"/>
+        </vertices>
+        <triangles material="stake_002-material" count="14">
+          <input semantic="VERTEX" source="#stake_metal_a200-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#stake_metal_a200-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#stake_metal_a200-mesh-map-0" offset="2" set="0"/>
+          <p>3 0 0 2 0 1 0 0 2 6 1 3 5 1 4 4 1 5 8 2 6 7 2 7 5 2 8 4 3 9 3 3 10 6 3 11 1 4 12 0 4 13 7 4 14 1 5 15 3 5 16 0 5 17 6 6 18 1 6 19 8 6 20 6 7 21 8 7 22 5 7 23 8 8 24 1 8 25 7 8 26 4 9 27 7 9 28 2 9 29 4 10 30 2 10 31 3 10 32 6 11 33 3 11 34 1 11 35 5 12 36 7 12 37 4 12 38 7 13 39 0 13 40 2 13 41</p>
+        </triangles>
+      </mesh>
+    </geometry>
     <geometry id="Colmesh_stake-1-mesh" name="Colmesh_stake-1">
       <mesh>
         <source id="Colmesh_stake-1-mesh-positions">
-          <float_array id="Colmesh_stake-1-mesh-positions-array" count="48">0 0.04499995 -0.55 0 0.04499995 0.55 0.03181976 0.03181976 -0.55 0.03181976 0.03181976 0.55 0.04499995 0 -0.55 0.04499995 0 0.55 0.03181976 -0.03181976 -0.55 0.03181976 -0.03181976 0.55 0 -0.04499995 -0.55 0 -0.04499995 0.55 -0.03181976 -0.03181976 -0.55 -0.03181976 -0.03181976 0.55 -0.04499995 0 -0.55 -0.04499995 0 0.55 -0.03181976 0.03181976 -0.55 -0.03181976 0.03181976 0.55</float_array>
+          <float_array id="Colmesh_stake-1-mesh-positions-array" count="48">0 0.04499995 0 0 0.04499995 1.1 0.03181976 0.03181976 0 0.03181976 0.03181976 1.1 0.04499995 0 0 0.04499995 0 1.1 0.03181976 -0.03181976 0 0.03181976 -0.03181976 1.1 0 -0.04499995 0 0 -0.04499995 1.1 -0.03181976 -0.03181976 0 -0.03181976 -0.03181976 1.1 -0.04499995 0 0 -0.04499995 0 1.1 -0.03181976 0.03181976 0 -0.03181976 0.03181976 1.1</float_array>
           <technique_common>
             <accessor source="#Colmesh_stake-1-mesh-positions-array" count="16" stride="3">
               <param name="X" type="float"/>
@@ -121,7 +205,7 @@
     <geometry id="stake_metal_a800-mesh" name="stake_metal_a800">
       <mesh>
         <source id="stake_metal_a800-mesh-positions">
-          <float_array id="stake_metal_a800-mesh-positions-array" count="48">0 0.03499996 -0.55 0 0.03499996 0.55 0.02474874 0.02474874 -0.55 0.02474874 0.02474874 0.55 0.03499996 0 -0.55 0.03499996 0 0.55 0.02474874 -0.02474874 -0.55 0.02474874 -0.02474874 0.55 0 -0.03499996 -0.55 0 -0.03499996 0.55 -0.02474874 -0.02474874 -0.55 -0.02474874 -0.02474874 0.55 -0.03499996 0 -0.55 -0.03499996 0 0.55 -0.02474874 0.02474874 -0.55 -0.02474874 0.02474874 0.55</float_array>
+          <float_array id="stake_metal_a800-mesh-positions-array" count="48">0 0.03499996 0 0 0.03499996 1.1 0.02474874 0.02474874 0 0.02474874 0.02474874 1.1 0.03499996 0 0 0.03499996 0 1.1 0.02474874 -0.02474874 0 0.02474874 -0.02474874 1.1 0 -0.03499996 0 0 -0.03499996 1.1 -0.02474874 -0.02474874 0 -0.02474874 -0.02474874 1.1 -0.03499996 0 0 -0.03499996 0 1.1 -0.02474874 0.02474874 0 -0.02474874 0.02474874 1.1</float_array>
           <technique_common>
             <accessor source="#stake_metal_a800-mesh-positions-array" count="16" stride="3">
               <param name="X" type="float"/>
@@ -168,7 +252,7 @@
         <node id="start01" name="start01" type="NODE">
           <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
           <node id="stake_metal_a800" name="stake_metal_a800" type="NODE">
-            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0.55 0 0 0 1</matrix>
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
             <instance_geometry url="#stake_metal_a800-mesh" name="stake_metal_a800">
               <bind_material>
                 <technique_common>
@@ -179,11 +263,38 @@
               </bind_material>
             </instance_geometry>
           </node>
+          <node id="stake_metal_a200" name="stake_metal_a200" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#stake_metal_a200-mesh" name="stake_metal_a200">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="stake_002-material" target="#stake_002-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="stake_metal_a50" name="stake_metal_a50" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#stake_metal_a50-mesh" name="stake_metal_a50">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="stake_002-material" target="#stake_002-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="nulldetail20" name="nulldetail20" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+          </node>
         </node>
         <node id="collision-1" name="collision-1" type="NODE">
           <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
           <node id="Colmesh_stake-1" name="Colmesh_stake-1" type="NODE">
-            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0.55 0 0 0 1</matrix>
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
             <instance_geometry url="#Colmesh_stake-1-mesh" name="Colmesh_stake-1">
               <bind_material>
                 <technique_common>

@@ -5,32 +5,12 @@
       <author>Blender User</author>
       <authoring_tool>Blender 4.2.9 LTS commit date:2025-04-14, commit time:12:24, hash:a10f621e649a</authoring_tool>
     </contributor>
-    <created>2026-08-01T07:51:24</created>
-    <modified>2026-08-01T07:51:24</modified>
+    <created>2026-08-01T07:55:08</created>
+    <modified>2026-08-01T07:55:08</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_effects>
-    <effect id="Colmesh_Material-effect">
-      <profile_COMMON>
-        <technique sid="common">
-          <lambert>
-            <emission>
-              <color sid="emission">0 0 0 1</color>
-            </emission>
-            <diffuse>
-              <color sid="diffuse">1 0 1 1</color>
-            </diffuse>
-            <transparent opaque="A_ONE">
-              <color sid="alpha">0 0 0 0.15</color>
-            </transparent>
-            <index_of_refraction>
-              <float sid="ior">1.5</float>
-            </index_of_refraction>
-          </lambert>
-        </technique>
-      </profile_COMMON>
-    </effect>
     <effect id="rock_002-effect">
       <profile_COMMON>
         <newparam sid="rock_red_png-surface">
@@ -58,6 +38,26 @@
         </technique>
       </profile_COMMON>
     </effect>
+    <effect id="Colmesh_Material-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">1 0 1 1</color>
+            </diffuse>
+            <transparent opaque="A_ONE">
+              <color sid="alpha">0 0 0 0.15</color>
+            </transparent>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
   </library_effects>
   <library_images>
     <image id="rock_red_png" name="rock_red_png">
@@ -65,18 +65,102 @@
     </image>
   </library_images>
   <library_materials>
-    <material id="Colmesh_Material-material" name="Colmesh_Material">
-      <instance_effect url="#Colmesh_Material-effect"/>
-    </material>
     <material id="rock_002-material" name="rock.002">
       <instance_effect url="#rock_002-effect"/>
     </material>
+    <material id="Colmesh_Material-material" name="Colmesh_Material">
+      <instance_effect url="#Colmesh_Material-effect"/>
+    </material>
   </library_materials>
   <library_geometries>
+    <geometry id="rock_small_red_a_a50-mesh" name="rock_small_red_a_a50">
+      <mesh>
+        <source id="rock_small_red_a_a50-mesh-positions">
+          <float_array id="rock_small_red_a_a50-mesh-positions-array" count="24">-0.2578758 -0.01728034 0.4986489 0.2578758 -0.01728034 0.4986489 0.2578758 -0.01728034 0.6364637 -0.2578758 -0.01728034 0.6364637 0 -0.2751562 0.4986489 0 0.2405954 0.4986489 0 0.2405954 0.6364637 0 -0.2751562 0.6364637</float_array>
+          <technique_common>
+            <accessor source="#rock_small_red_a_a50-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_small_red_a_a50-mesh-normals">
+          <float_array id="rock_small_red_a_a50-mesh-normals-array" count="12">0 -1 0 1 0 0 0 -1 0 1 0 0</float_array>
+          <technique_common>
+            <accessor source="#rock_small_red_a_a50-mesh-normals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_small_red_a_a50-mesh-map-0">
+          <float_array id="rock_small_red_a_a50-mesh-map-0-array" count="24">1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 0 1 1 0 1 1 0 1</float_array>
+          <technique_common>
+            <accessor source="#rock_small_red_a_a50-mesh-map-0-array" count="12" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="rock_small_red_a_a50-mesh-vertices">
+          <input semantic="POSITION" source="#rock_small_red_a_a50-mesh-positions"/>
+        </vertices>
+        <triangles material="rock_002-material" count="4">
+          <input semantic="VERTEX" source="#rock_small_red_a_a50-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#rock_small_red_a_a50-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#rock_small_red_a_a50-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 3 0 1 0 0 2 5 1 3 7 1 4 4 1 5 1 2 6 2 2 7 3 2 8 5 3 9 6 3 10 7 3 11</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="rock_small_red_a_a200-mesh" name="rock_small_red_a_a200">
+      <mesh>
+        <source id="rock_small_red_a_a200-mesh-positions">
+          <float_array id="rock_small_red_a_a200-mesh-positions-array" count="21">-0.05130463 0.1637745 0.5 -0.01980507 -0.2055687 0.5179972 -0.2280872 -0.04637402 0.5201565 -0.1903261 0.1235041 0.5650497 0.145316 0.1466529 0.5167051 0.2617576 -0.05540531 0.5323649 0.01204371 0 0.6351126</float_array>
+          <technique_common>
+            <accessor source="#rock_small_red_a_a200-mesh-positions-array" count="7" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_small_red_a_a200-mesh-normals">
+          <float_array id="rock_small_red_a_a200-mesh-normals-array" count="30">0.07340037 -0.04229223 -0.9964054 0.08202993 -0.02993309 -0.9961803 -0.05079364 -0.05292809 -0.9973057 -0.4761647 0.3220796 -0.8182494 0.02410918 0.8261317 0.5629611 0.2287811 -0.5084053 0.8301707 -0.3206009 -0.4308996 0.8435286 -0.4034386 -0.1489049 0.9028093 0.07620835 0.5835323 0.8085063 0.4196566 0.3080109 0.8538252</float_array>
+          <technique_common>
+            <accessor source="#rock_small_red_a_a200-mesh-normals-array" count="10" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_small_red_a_a200-mesh-map-0">
+          <float_array id="rock_small_red_a_a200-mesh-map-0-array" count="60">0.4207092 0.2825263 0.08138942 0.5437635 0.002977907 0.1495656 0.08138942 0.5437635 0.4207092 0.2825263 0.275108 0.5350651 0.4207092 0.2825263 0.002977907 0.1495656 0.2927985 0.002977907 0.4207092 0.2825263 0.2927985 0.002977907 0.4188354 0.1074331 0.7656913 0.1913819 0.8025472 0.002977848 0.8680647 0.39294 0.458287 0.2296621 0.6922451 0.003775119 0.7284527 0.2439603 0.5603194 0.5060134 0.458287 0.2296621 0.7284527 0.2439603 0.7597355 0.5377563 0.5603194 0.5060134 0.7284527 0.2439603 0.8680647 0.39294 0.8025472 0.002977848 0.9970222 0.1855372 0.9970222 0.4760301 0.8680647 0.39294 0.9970222 0.1855372</float_array>
+          <technique_common>
+            <accessor source="#rock_small_red_a_a200-mesh-map-0-array" count="30" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="rock_small_red_a_a200-mesh-vertices">
+          <input semantic="POSITION" source="#rock_small_red_a_a200-mesh-positions"/>
+        </vertices>
+        <triangles material="rock_002-material" count="10">
+          <input semantic="VERTEX" source="#rock_small_red_a_a200-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#rock_small_red_a_a200-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#rock_small_red_a_a200-mesh-map-0" offset="2" set="0"/>
+          <p>0 0 0 5 0 1 1 0 2 5 1 3 0 1 4 4 1 5 0 2 6 1 2 7 2 2 8 0 3 9 2 3 10 3 3 11 0 4 12 3 4 13 4 4 14 1 5 15 5 5 16 6 5 17 2 6 18 1 6 19 6 6 20 3 7 21 2 7 22 6 7 23 4 8 24 3 8 25 6 8 26 5 9 27 4 9 28 6 9 29</p>
+        </triangles>
+      </mesh>
+    </geometry>
     <geometry id="Colmesh_rock-1-mesh" name="Colmesh_rock-1">
       <mesh>
         <source id="Colmesh_rock-1-mesh-positions">
-          <float_array id="Colmesh_rock-1-mesh-positions-array" count="48">0 0.225 -0.1615 0 0.225 0.1615 0.159099 0.159099 -0.1615 0.159099 0.159099 0.1615 0.225 0 -0.1615 0.225 0 0.1615 0.159099 -0.159099 -0.1615 0.159099 -0.159099 0.1615 0 -0.225 -0.1615 0 -0.225 0.1615 -0.159099 -0.159099 -0.1615 -0.159099 -0.159099 0.1615 -0.225 0 -0.1615 -0.225 0 0.1615 -0.159099 0.159099 -0.1615 -0.159099 0.159099 0.1615</float_array>
+          <float_array id="Colmesh_rock-1-mesh-positions-array" count="48">0.01204371 0.225 0 0.01204371 0.225 0.323 0.1711427 0.159099 0 0.1711427 0.159099 0.323 0.2370437 0 0 0.2370437 0 0.323 0.1711427 -0.159099 0 0.1711427 -0.159099 0.323 0.01204371 -0.225 0 0.01204371 -0.225 0.323 -0.1470552 -0.159099 0 -0.1470552 -0.159099 0.323 -0.2129562 0 0 -0.2129562 0 0.323 -0.1470552 0.159099 0 -0.1470552 0.159099 0.323</float_array>
           <technique_common>
             <accessor source="#Colmesh_rock-1-mesh-positions-array" count="16" stride="3">
               <param name="X" type="float"/>
@@ -118,7 +202,7 @@
     <geometry id="rock_small_red_a_a800-mesh" name="rock_small_red_a_a800">
       <mesh>
         <source id="rock_small_red_a_a800-mesh-positions">
-          <float_array id="rock_small_red_a_a800-mesh-positions-array" count="36">0 0 0.01999998 0.1992354 -0.1215911 0.01999998 -0.0767166 -0.1983352 0.01999998 -0.2576398 0 0.01999998 -0.06334841 0.1637745 0.01999998 0.1700088 0.1037545 0.01999998 0.06231391 -0.1611001 0.06856399 -0.169662 -0.1035428 0.0713036 -0.2023699 0.1235041 0.08504968 0.0618593 0.1599248 0.06806379 0.2335522 0 0.07940816 0 0 0.1551126</float_array>
+          <float_array id="rock_small_red_a_a800-mesh-positions-array" count="36">0.01204371 0 0.5 0.2112792 -0.1215911 0.5 -0.06467282 -0.1983352 0.5 -0.245596 0 0.5 -0.05130463 0.1637745 0.5 0.1820526 0.1037545 0.5 0.07435768 -0.1611001 0.548564 -0.1576182 -0.1035428 0.5513036 -0.1903261 0.1235041 0.5650497 0.07390308 0.1599248 0.5480638 0.245596 0 0.5594082 0.01204371 0 0.6351126</float_array>
           <technique_common>
             <accessor source="#rock_small_red_a_a800-mesh-positions-array" count="12" stride="3">
               <param name="X" type="float"/>
@@ -128,7 +212,7 @@
           </technique_common>
         </source>
         <source id="rock_small_red_a_a800-mesh-normals">
-          <float_array id="rock_small_red_a_a800-mesh-normals-array" count="60">0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0.760807 0.09867405 -0.6414329 0.2678304 -0.9630486 -0.02836191 -0.7356017 -0.6710224 -0.09283912 -0.4780889 0.5671734 -0.6706305 0.2162842 0.8409106 -0.496075 0.4136319 -0.4912601 0.7665325 -0.131449 -0.5684422 0.8121543 -0.6132257 -0.1354548 0.778207 -0.1057814 0.9307168 0.3501095 0.5641633 0.6424654 0.5186116 0.2871006 -0.3647891 0.8857212 -0.1150128 -0.5042786 0.8558477 -0.3849162 -0.1109233 0.9162617 -0.009947359 0.4810194 0.8766534 0.2864409 0.3702036 0.883686</float_array>
+          <float_array id="rock_small_red_a_a800-mesh-normals-array" count="60">0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0.7608068 0.09867411 -0.6414331 0.2678304 -0.9630485 -0.02836179 -0.7356017 -0.6710223 -0.092839 -0.4780889 0.5671733 -0.6706306 0.2162842 0.8409106 -0.4960749 0.4136317 -0.49126 0.7665327 -0.1314489 -0.5684419 0.8121544 -0.6132254 -0.1354548 0.7782073 -0.1057814 0.9307168 0.3501096 0.5641633 0.6424652 0.5186117 0.2871006 -0.3647892 0.8857212 -0.1150129 -0.5042786 0.8558476 -0.3849163 -0.1109234 0.9162617 -0.009947478 0.4810193 0.8766535 0.2864409 0.3702034 0.8836861</float_array>
           <technique_common>
             <accessor source="#rock_small_red_a_a800-mesh-normals-array" count="20" stride="3">
               <param name="X" type="float"/>
@@ -165,7 +249,7 @@
         <node id="start01" name="start01" type="NODE">
           <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
           <node id="rock_small_red_a_a800" name="rock_small_red_a_a800" type="NODE">
-            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0.48 0 0 0 1</matrix>
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
             <instance_geometry url="#rock_small_red_a_a800-mesh" name="rock_small_red_a_a800">
               <bind_material>
                 <technique_common>
@@ -176,11 +260,38 @@
               </bind_material>
             </instance_geometry>
           </node>
+          <node id="rock_small_red_a_a200" name="rock_small_red_a_a200" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#rock_small_red_a_a200-mesh" name="rock_small_red_a_a200">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="rock_002-material" target="#rock_002-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="rock_small_red_a_a50" name="rock_small_red_a_a50" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#rock_small_red_a_a50-mesh" name="rock_small_red_a_a50">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="rock_002-material" target="#rock_002-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="nulldetail20" name="nulldetail20" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+          </node>
         </node>
         <node id="collision-1" name="collision-1" type="NODE">
           <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
           <node id="Colmesh_rock-1" name="Colmesh_rock-1" type="NODE">
-            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0.1615 0 0 0 1</matrix>
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
             <instance_geometry url="#Colmesh_rock-1-mesh" name="Colmesh_rock-1">
               <bind_material>
                 <technique_common>

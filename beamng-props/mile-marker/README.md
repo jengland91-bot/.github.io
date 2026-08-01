@@ -27,6 +27,8 @@ Each `.dae` already has its matching sign texture beside it (`mile_001.png`, woo
 
 **Collision:** Dedicated 8-sided post cylinder + thin sign box (`Colmesh_*-1`). In World Editor set **collisionType** = `Collision Mesh` (not Visible Mesh). See `../COLLISION.md`.
 
+**LODs:** `_a800` / `_a200` / `_a50` + `nulldetail20`. Origin at post base. See `../GEOMETRY_LODS.md`.
+
 ## What’s in this kit
 
 | Path | Contents |

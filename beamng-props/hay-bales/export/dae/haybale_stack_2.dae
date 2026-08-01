@@ -5,32 +5,12 @@
       <author>Blender User</author>
       <authoring_tool>Blender 4.2.9 LTS commit date:2025-04-14, commit time:12:24, hash:a10f621e649a</authoring_tool>
     </contributor>
-    <created>2026-08-01T07:51:24</created>
-    <modified>2026-08-01T07:51:24</modified>
+    <created>2026-08-01T07:55:08</created>
+    <modified>2026-08-01T07:55:08</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_effects>
-    <effect id="Colmesh_Material-effect">
-      <profile_COMMON>
-        <technique sid="common">
-          <lambert>
-            <emission>
-              <color sid="emission">0 0 0 1</color>
-            </emission>
-            <diffuse>
-              <color sid="diffuse">1 0 1 1</color>
-            </diffuse>
-            <transparent opaque="A_ONE">
-              <color sid="alpha">0 0 0 0.15</color>
-            </transparent>
-            <index_of_refraction>
-              <float sid="ior">1.5</float>
-            </index_of_refraction>
-          </lambert>
-        </technique>
-      </profile_COMMON>
-    </effect>
     <effect id="hay_003-effect">
       <profile_COMMON>
         <newparam sid="hay_gold_png-surface">
@@ -58,6 +38,26 @@
         </technique>
       </profile_COMMON>
     </effect>
+    <effect id="Colmesh_Material-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">1 0 1 1</color>
+            </diffuse>
+            <transparent opaque="A_ONE">
+              <color sid="alpha">0 0 0 0.15</color>
+            </transparent>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
   </library_effects>
   <library_images>
     <image id="hay_gold_png" name="hay_gold_png">
@@ -65,18 +65,102 @@
     </image>
   </library_images>
   <library_materials>
-    <material id="Colmesh_Material-material" name="Colmesh_Material">
-      <instance_effect url="#Colmesh_Material-effect"/>
-    </material>
     <material id="hay_003-material" name="hay.003">
       <instance_effect url="#hay_003-effect"/>
     </material>
+    <material id="Colmesh_Material-material" name="Colmesh_Material">
+      <instance_effect url="#Colmesh_Material-effect"/>
+    </material>
   </library_materials>
   <library_geometries>
+    <geometry id="haybale_stack_2_a50-mesh" name="haybale_stack_2_a50">
+      <mesh>
+        <source id="haybale_stack_2_a50-mesh-positions">
+          <float_array id="haybale_stack_2_a50-mesh-positions-array" count="24">-0.525 0 -0.006999969 0.525 0 -0.006999969 0.525 0 0.707 -0.525 0 0.707 0 -0.525 -0.006999969 0 0.525 -0.006999969 0 0.525 0.707 0 -0.525 0.707</float_array>
+          <technique_common>
+            <accessor source="#haybale_stack_2_a50-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="haybale_stack_2_a50-mesh-normals">
+          <float_array id="haybale_stack_2_a50-mesh-normals-array" count="12">0 -1 0 1 0 0 0 -1 0 1 0 0</float_array>
+          <technique_common>
+            <accessor source="#haybale_stack_2_a50-mesh-normals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="haybale_stack_2_a50-mesh-map-0">
+          <float_array id="haybale_stack_2_a50-mesh-map-0-array" count="24">1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 0 1 1 0 1 1 0 1</float_array>
+          <technique_common>
+            <accessor source="#haybale_stack_2_a50-mesh-map-0-array" count="12" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="haybale_stack_2_a50-mesh-vertices">
+          <input semantic="POSITION" source="#haybale_stack_2_a50-mesh-positions"/>
+        </vertices>
+        <triangles material="hay_003-material" count="4">
+          <input semantic="VERTEX" source="#haybale_stack_2_a50-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#haybale_stack_2_a50-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#haybale_stack_2_a50-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 3 0 1 0 0 2 5 1 3 7 1 4 4 1 5 1 2 6 2 2 7 3 2 8 5 3 9 6 3 10 7 3 11</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="haybale_stack_2_a200-mesh" name="haybale_stack_2_a200">
+      <mesh>
+        <source id="haybale_stack_2_a200-mesh-positions">
+          <float_array id="haybale_stack_2_a200-mesh-positions-array" count="30">-0.5 -0.225 0.1166666 -0.5 0.225 0 -0.5 0.225 0.35 0.5 -0.225 0 0.5 -0.225 0.35 0.5 0.225 0.1166666 -0.5 -0.225 0.4666666 -0.5 0.225 0.5833333 0.5 -0.225 0.5833333 0.5 0.225 0.4666666</float_array>
+          <technique_common>
+            <accessor source="#haybale_stack_2_a200-mesh-positions-array" count="10" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="haybale_stack_2_a200-mesh-normals">
+          <float_array id="haybale_stack_2_a200-mesh-normals-array" count="36">0 1 0 0 -1 0 -0.1122196 -0.2493769 -0.9618825 -1 0 0 1 0 0 -0.2028367 0.4507483 0.8693004 0.1122196 0.2493769 -0.9618825 -0.1122196 0.2493769 0.9618825 0.1122196 0.2493769 -0.9618825 0.2028367 -0.4507483 0.8693004 -0.1122196 -0.2493769 -0.9618825 0.1122196 -0.2493769 0.9618825</float_array>
+          <technique_common>
+            <accessor source="#haybale_stack_2_a200-mesh-normals-array" count="12" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="haybale_stack_2_a200-mesh-map-0">
+          <float_array id="haybale_stack_2_a200-mesh-map-0-array" count="72">0.5645074 0.6089399 0.7056567 0.004014968 0.7762312 0.60894 0.7842612 0.6089399 0.9254104 0.004014968 0.9959849 0.6089399 0.2762312 0.004014968 0.004014968 0.6089399 0.004015028 0.004014968 0.1451641 0.889186 0.004014968 0.6169698 0.2157387 0.6169699 0.3649179 0.889186 0.2237687 0.6169699 0.4354925 0.6169699 0.5564775 0.004014968 0.2842612 0.6089399 0.2842613 0.004014909 0.2762312 0.004014968 0.004014968 0.6089399 0.004015028 0.004014968 0.5564775 0.004014968 0.2842612 0.6089399 0.2842613 0.004014909 0.2762312 0.004014968 0.2762312 0.60894 0.004014968 0.6089399 0.5564775 0.004014968 0.5564774 0.6089399 0.2842612 0.6089399 0.2762312 0.004014968 0.2762312 0.60894 0.004014968 0.6089399 0.5564775 0.004014968 0.5564774 0.6089399 0.2842612 0.6089399</float_array>
+          <technique_common>
+            <accessor source="#haybale_stack_2_a200-mesh-map-0-array" count="36" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="haybale_stack_2_a200-mesh-vertices">
+          <input semantic="POSITION" source="#haybale_stack_2_a200-mesh-positions"/>
+        </vertices>
+        <triangles material="hay_003-material" count="12">
+          <input semantic="VERTEX" source="#haybale_stack_2_a200-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#haybale_stack_2_a200-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#haybale_stack_2_a200-mesh-map-0" offset="2" set="0"/>
+          <p>2 0 0 5 0 1 1 0 2 4 1 3 0 1 4 3 1 5 1 2 6 3 2 7 0 2 8 0 3 9 2 3 10 1 3 11 5 4 12 4 4 13 3 4 14 5 5 15 0 5 16 4 5 17 7 6 18 8 6 19 6 6 20 9 7 21 6 7 22 8 7 23 1 8 24 5 8 25 3 8 26 5 9 27 2 9 28 0 9 29 7 10 30 9 10 31 8 10 32 9 11 33 7 11 34 6 11 35</p>
+        </triangles>
+      </mesh>
+    </geometry>
     <geometry id="Colmesh_stack-1-mesh" name="Colmesh_stack-1">
       <mesh>
         <source id="Colmesh_stack-1-mesh-positions">
-          <float_array id="Colmesh_stack-1-mesh-positions-array" count="24">-0.5 -0.225 -0.35 -0.5 -0.225 0.35 -0.5 0.225 -0.35 -0.5 0.225 0.35 0.5 -0.225 -0.35 0.5 -0.225 0.35 0.5 0.225 -0.35 0.5 0.225 0.35</float_array>
+          <float_array id="Colmesh_stack-1-mesh-positions-array" count="24">-0.5 -0.225 0 -0.5 -0.225 0.7 -0.5 0.225 0 -0.5 0.225 0.7 0.5 -0.225 0 0.5 -0.225 0.7 0.5 0.225 0 0.5 0.225 0.7</float_array>
           <technique_common>
             <accessor source="#Colmesh_stack-1-mesh-positions-array" count="8" stride="3">
               <param name="X" type="float"/>
@@ -115,87 +199,45 @@
         </triangles>
       </mesh>
     </geometry>
-    <geometry id="Cube_001-mesh" name="Cube.001">
+    <geometry id="haybale_stack_2_a800-mesh" name="haybale_stack_2_a800">
       <mesh>
-        <source id="Cube_001-mesh-positions">
-          <float_array id="Cube_001-mesh-positions-array" count="24">-0.5 -0.225 -0.175 -0.5 -0.225 0.175 -0.5 0.225 -0.175 -0.5 0.225 0.175 0.5 -0.225 -0.175 0.5 -0.225 0.175 0.5 0.225 -0.175 0.5 0.225 0.175</float_array>
+        <source id="haybale_stack_2_a800-mesh-positions">
+          <float_array id="haybale_stack_2_a800-mesh-positions-array" count="48">-0.5 -0.225 0 -0.5 -0.225 0.35 -0.5 0.225 0 -0.5 0.225 0.35 0.5 -0.225 0 0.5 -0.225 0.35 0.5 0.225 0 0.5 0.225 0.35 -0.5 -0.225 0.35 -0.5 -0.225 0.7 -0.5 0.225 0.35 -0.5 0.225 0.7 0.5 -0.225 0.35 0.5 -0.225 0.7 0.5 0.225 0.35 0.5 0.225 0.7</float_array>
           <technique_common>
-            <accessor source="#Cube_001-mesh-positions-array" count="8" stride="3">
+            <accessor source="#haybale_stack_2_a800-mesh-positions-array" count="16" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
             </accessor>
           </technique_common>
         </source>
-        <source id="Cube_001-mesh-normals">
-          <float_array id="Cube_001-mesh-normals-array" count="36">-1 0 0 0 1 0 1 0 0 0 -1 0 0 0 -1 0 0 1 -1 0 0 0 1 0 1 0 0 0 -1 0 0 0 -1 0 0 1</float_array>
+        <source id="haybale_stack_2_a800-mesh-normals">
+          <float_array id="haybale_stack_2_a800-mesh-normals-array" count="72">-1 0 0 0 1 0 1 0 0 0 -1 0 0 0 -1 0 0 1 -1 0 0 0 1 0 1 0 0 0 -1 0 0 0 -1 0 0 1 -1 0 0 0 1 0 1 0 0 0 -1 0 0 0 -1 0 0 1 -1 0 0 0 1 0 1 0 0 0 -1 0 0 0 -1 0 0 1</float_array>
           <technique_common>
-            <accessor source="#Cube_001-mesh-normals-array" count="12" stride="3">
+            <accessor source="#haybale_stack_2_a800-mesh-normals-array" count="24" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
             </accessor>
           </technique_common>
         </source>
-        <source id="Cube_001-mesh-map-0">
-          <float_array id="Cube_001-mesh-map-0-array" count="72">0.004014968 0.889186 0.2157387 0.6169699 0.2157387 0.8891861 0.5645074 0.6089399 0.7762312 0.004014968 0.7762312 0.60894 0.2237687 0.8891861 0.4354925 0.6169699 0.4354925 0.8891861 0.7842612 0.6089399 0.995985 0.004014968 0.9959849 0.6089399 0.2762312 0.60894 0.004015028 0.004014968 0.2762312 0.004014968 0.5564774 0.6089399 0.2842613 0.004014909 0.5564775 0.004014968 0.004014968 0.889186 0.004014968 0.6169698 0.2157387 0.6169699 0.5645074 0.6089399 0.5645075 0.004014968 0.7762312 0.004014968 0.2237687 0.8891861 0.2237687 0.6169699 0.4354925 0.6169699 0.7842612 0.6089399 0.7842612 0.004014909 0.995985 0.004014968 0.2762312 0.60894 0.004014968 0.6089399 0.004015028 0.004014968 0.5564774 0.6089399 0.2842612 0.6089399 0.2842613 0.004014909</float_array>
+        <source id="haybale_stack_2_a800-mesh-map-0">
+          <float_array id="haybale_stack_2_a800-mesh-map-0-array" count="144">0.004014968 0.889186 0.2157387 0.6169699 0.2157387 0.8891861 0.5645074 0.6089399 0.7762312 0.004014968 0.7762312 0.60894 0.2237687 0.8891861 0.4354925 0.6169699 0.4354925 0.8891861 0.7842612 0.6089399 0.995985 0.004014968 0.9959849 0.6089399 0.2762312 0.60894 0.004015028 0.004014968 0.2762312 0.004014968 0.5564774 0.6089399 0.2842613 0.004014909 0.5564775 0.004014968 0.004014968 0.889186 0.2157387 0.6169699 0.2157387 0.8891861 0.5645074 0.6089399 0.7762312 0.004014968 0.7762312 0.60894 0.2237687 0.8891861 0.4354925 0.6169699 0.4354925 0.8891861 0.7842612 0.6089399 0.995985 0.004014968 0.9959849 0.6089399 0.2762312 0.60894 0.004015028 0.004014968 0.2762312 0.004014968 0.5564774 0.6089399 0.2842613 0.004014909 0.5564775 0.004014968 0.004014968 0.889186 0.004014968 0.6169698 0.2157387 0.6169699 0.5645074 0.6089399 0.5645075 0.004014968 0.7762312 0.004014968 0.2237687 0.8891861 0.2237687 0.6169699 0.4354925 0.6169699 0.7842612 0.6089399 0.7842612 0.004014909 0.995985 0.004014968 0.2762312 0.60894 0.004014968 0.6089399 0.004015028 0.004014968 0.5564774 0.6089399 0.2842612 0.6089399 0.2842613 0.004014909 0.004014968 0.889186 0.004014968 0.6169698 0.2157387 0.6169699 0.5645074 0.6089399 0.5645075 0.004014968 0.7762312 0.004014968 0.2237687 0.8891861 0.2237687 0.6169699 0.4354925 0.6169699 0.7842612 0.6089399 0.7842612 0.004014909 0.995985 0.004014968 0.2762312 0.60894 0.004014968 0.6089399 0.004015028 0.004014968 0.5564774 0.6089399 0.2842612 0.6089399 0.2842613 0.004014909</float_array>
           <technique_common>
-            <accessor source="#Cube_001-mesh-map-0-array" count="36" stride="2">
+            <accessor source="#haybale_stack_2_a800-mesh-map-0-array" count="72" stride="2">
               <param name="S" type="float"/>
               <param name="T" type="float"/>
             </accessor>
           </technique_common>
         </source>
-        <vertices id="Cube_001-mesh-vertices">
-          <input semantic="POSITION" source="#Cube_001-mesh-positions"/>
+        <vertices id="haybale_stack_2_a800-mesh-vertices">
+          <input semantic="POSITION" source="#haybale_stack_2_a800-mesh-positions"/>
         </vertices>
-        <triangles material="hay_003-material" count="12">
-          <input semantic="VERTEX" source="#Cube_001-mesh-vertices" offset="0"/>
-          <input semantic="NORMAL" source="#Cube_001-mesh-normals" offset="1"/>
-          <input semantic="TEXCOORD" source="#Cube_001-mesh-map-0" offset="2" set="0"/>
-          <p>1 0 0 2 0 1 0 0 2 3 1 3 6 1 4 2 1 5 7 2 6 4 2 7 6 2 8 5 3 9 0 3 10 4 3 11 6 4 12 0 4 13 2 4 14 3 5 15 5 5 16 7 5 17 1 6 18 3 6 19 2 6 20 3 7 21 7 7 22 6 7 23 7 8 24 5 8 25 4 8 26 5 9 27 1 9 28 0 9 29 6 10 30 4 10 31 0 10 32 3 11 33 1 11 34 5 11 35</p>
-        </triangles>
-      </mesh>
-    </geometry>
-    <geometry id="Cube-mesh" name="Cube">
-      <mesh>
-        <source id="Cube-mesh-positions">
-          <float_array id="Cube-mesh-positions-array" count="24">-0.5 -0.225 -0.175 -0.5 -0.225 0.175 -0.5 0.225 -0.175 -0.5 0.225 0.175 0.5 -0.225 -0.175 0.5 -0.225 0.175 0.5 0.225 -0.175 0.5 0.225 0.175</float_array>
-          <technique_common>
-            <accessor source="#Cube-mesh-positions-array" count="8" stride="3">
-              <param name="X" type="float"/>
-              <param name="Y" type="float"/>
-              <param name="Z" type="float"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <source id="Cube-mesh-normals">
-          <float_array id="Cube-mesh-normals-array" count="36">-1 0 0 0 1 0 1 0 0 0 -1 0 0 0 -1 0 0 1 -1 0 0 0 1 0 1 0 0 0 -1 0 0 0 -1 0 0 1</float_array>
-          <technique_common>
-            <accessor source="#Cube-mesh-normals-array" count="12" stride="3">
-              <param name="X" type="float"/>
-              <param name="Y" type="float"/>
-              <param name="Z" type="float"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <source id="Cube-mesh-map-0">
-          <float_array id="Cube-mesh-map-0-array" count="72">0.004014968 0.889186 0.2157387 0.6169699 0.2157387 0.8891861 0.5645074 0.6089399 0.7762312 0.004014968 0.7762312 0.60894 0.2237687 0.8891861 0.4354925 0.6169699 0.4354925 0.8891861 0.7842612 0.6089399 0.995985 0.004014968 0.9959849 0.6089399 0.2762312 0.60894 0.004015028 0.004014968 0.2762312 0.004014968 0.5564774 0.6089399 0.2842613 0.004014909 0.5564775 0.004014968 0.004014968 0.889186 0.004014968 0.6169698 0.2157387 0.6169699 0.5645074 0.6089399 0.5645075 0.004014968 0.7762312 0.004014968 0.2237687 0.8891861 0.2237687 0.6169699 0.4354925 0.6169699 0.7842612 0.6089399 0.7842612 0.004014909 0.995985 0.004014968 0.2762312 0.60894 0.004014968 0.6089399 0.004015028 0.004014968 0.5564774 0.6089399 0.2842612 0.6089399 0.2842613 0.004014909</float_array>
-          <technique_common>
-            <accessor source="#Cube-mesh-map-0-array" count="36" stride="2">
-              <param name="S" type="float"/>
-              <param name="T" type="float"/>
-            </accessor>
-          </technique_common>
-        </source>
-        <vertices id="Cube-mesh-vertices">
-          <input semantic="POSITION" source="#Cube-mesh-positions"/>
-        </vertices>
-        <triangles material="hay_003-material" count="12">
-          <input semantic="VERTEX" source="#Cube-mesh-vertices" offset="0"/>
-          <input semantic="NORMAL" source="#Cube-mesh-normals" offset="1"/>
-          <input semantic="TEXCOORD" source="#Cube-mesh-map-0" offset="2" set="0"/>
-          <p>1 0 0 2 0 1 0 0 2 3 1 3 6 1 4 2 1 5 7 2 6 4 2 7 6 2 8 5 3 9 0 3 10 4 3 11 6 4 12 0 4 13 2 4 14 3 5 15 5 5 16 7 5 17 1 6 18 3 6 19 2 6 20 3 7 21 7 7 22 6 7 23 7 8 24 5 8 25 4 8 26 5 9 27 1 9 28 0 9 29 6 10 30 4 10 31 0 10 32 3 11 33 1 11 34 5 11 35</p>
+        <triangles material="hay_003-material" count="24">
+          <input semantic="VERTEX" source="#haybale_stack_2_a800-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#haybale_stack_2_a800-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#haybale_stack_2_a800-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 2 0 1 0 0 2 3 1 3 6 1 4 2 1 5 7 2 6 4 2 7 6 2 8 5 3 9 0 3 10 4 3 11 6 4 12 0 4 13 2 4 14 3 5 15 5 5 16 7 5 17 9 6 18 10 6 19 8 6 20 11 7 21 14 7 22 10 7 23 15 8 24 12 8 25 14 8 26 13 9 27 8 9 28 12 9 29 14 10 30 8 10 31 10 10 32 11 11 33 13 11 34 15 11 35 1 12 36 3 12 37 2 12 38 3 13 39 7 13 40 6 13 41 7 14 42 5 14 43 4 14 44 5 15 45 1 15 46 0 15 47 6 16 48 4 16 49 0 16 50 3 17 51 1 17 52 5 17 53 9 18 54 11 18 55 10 18 56 11 19 57 15 19 58 14 19 59 15 20 60 13 20 61 12 20 62 13 21 63 9 21 64 8 21 65 14 22 66 12 22 67 8 22 68 11 23 69 9 23 70 13 23 71</p>
         </triangles>
       </mesh>
     </geometry>
@@ -208,36 +250,48 @@
           <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
           <node id="haybale_stack_2_a800" name="haybale_stack_2_a800" type="NODE">
             <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
-            <node id="bale0" name="bale0" type="NODE">
-              <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0.175 0 0 0 1</matrix>
-              <instance_geometry url="#Cube-mesh" name="bale0">
-                <bind_material>
-                  <technique_common>
-                    <instance_material symbol="hay_003-material" target="#hay_003-material">
-                      <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
-                    </instance_material>
-                  </technique_common>
-                </bind_material>
-              </instance_geometry>
-            </node>
-            <node id="bale1" name="bale1" type="NODE">
-              <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0.525 0 0 0 1</matrix>
-              <instance_geometry url="#Cube_001-mesh" name="bale1">
-                <bind_material>
-                  <technique_common>
-                    <instance_material symbol="hay_003-material" target="#hay_003-material">
-                      <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
-                    </instance_material>
-                  </technique_common>
-                </bind_material>
-              </instance_geometry>
-            </node>
+            <instance_geometry url="#haybale_stack_2_a800-mesh" name="haybale_stack_2_a800">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="hay_003-material" target="#hay_003-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="haybale_stack_2_a200" name="haybale_stack_2_a200" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#haybale_stack_2_a200-mesh" name="haybale_stack_2_a200">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="hay_003-material" target="#hay_003-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="haybale_stack_2_a50" name="haybale_stack_2_a50" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#haybale_stack_2_a50-mesh" name="haybale_stack_2_a50">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="hay_003-material" target="#hay_003-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="nulldetail20" name="nulldetail20" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
           </node>
         </node>
         <node id="collision-1" name="collision-1" type="NODE">
           <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
           <node id="Colmesh_stack-1" name="Colmesh_stack-1" type="NODE">
-            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0.35 0 0 0 1</matrix>
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
             <instance_geometry url="#Colmesh_stack-1-mesh" name="Colmesh_stack-1">
               <bind_material>
                 <technique_common>

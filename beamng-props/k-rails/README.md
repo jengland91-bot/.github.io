@@ -34,6 +34,8 @@ Place as **TSStatic**. Stack along **+Y** end-to-end to make long walls.
 
 **Collision:** Each DAE includes a dedicated bevel-free `Colmesh_*-1` box (not the visual mesh). In World Editor set **collisionType** = `Collision Mesh`. See `../COLLISION.md`.
 
+**LODs:** `_a800` full / `_a200` decimated / `_a50` billboard + `nulldetail20`. Pivots at ground base; all transforms applied. See `../GEOMETRY_LODS.md`.
+
 ## Specs
 
 - Jersey/K-rail profile ~0.81 m tall, ~0.61 m wide at base

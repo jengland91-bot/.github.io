@@ -5,32 +5,12 @@
       <author>Blender User</author>
       <authoring_tool>Blender 4.2.9 LTS commit date:2025-04-14, commit time:12:24, hash:a10f621e649a</authoring_tool>
     </contributor>
-    <created>2026-08-01T07:51:24</created>
-    <modified>2026-08-01T07:51:24</modified>
+    <created>2026-08-01T07:55:08</created>
+    <modified>2026-08-01T07:55:08</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_effects>
-    <effect id="Colmesh_Material-effect">
-      <profile_COMMON>
-        <technique sid="common">
-          <lambert>
-            <emission>
-              <color sid="emission">0 0 0 1</color>
-            </emission>
-            <diffuse>
-              <color sid="diffuse">1 0 1 1</color>
-            </diffuse>
-            <transparent opaque="A_ONE">
-              <color sid="alpha">0 0 0 0.15</color>
-            </transparent>
-            <index_of_refraction>
-              <float sid="ior">1.5</float>
-            </index_of_refraction>
-          </lambert>
-        </technique>
-      </profile_COMMON>
-    </effect>
     <effect id="rock_009-effect">
       <profile_COMMON>
         <newparam sid="rock_dark_png-surface">
@@ -58,6 +38,26 @@
         </technique>
       </profile_COMMON>
     </effect>
+    <effect id="Colmesh_Material-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">1 0 1 1</color>
+            </diffuse>
+            <transparent opaque="A_ONE">
+              <color sid="alpha">0 0 0 0.15</color>
+            </transparent>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
   </library_effects>
   <library_images>
     <image id="rock_dark_png" name="rock_dark_png">
@@ -65,18 +65,102 @@
     </image>
   </library_images>
   <library_materials>
-    <material id="Colmesh_Material-material" name="Colmesh_Material">
-      <instance_effect url="#Colmesh_Material-effect"/>
-    </material>
     <material id="rock_009-material" name="rock.009">
       <instance_effect url="#rock_009-effect"/>
     </material>
+    <material id="Colmesh_Material-material" name="Colmesh_Material">
+      <instance_effect url="#Colmesh_Material-effect"/>
+    </material>
   </library_materials>
   <library_geometries>
+    <geometry id="rock_large_dark_a_a50-mesh" name="rock_large_dark_a_a50">
+      <mesh>
+        <source id="rock_large_dark_a_a50-mesh-positions">
+          <float_array id="rock_large_dark_a_a50-mesh-positions-array" count="24">-1.634104 -0.008720815 0.488747 1.65136 -0.008720815 0.488747 1.65136 -0.008720815 1.636549 -1.634104 -0.008720815 1.636549 0.00862801 -1.651453 0.488747 0.00862801 1.634011 0.488747 0.00862801 1.634011 1.636549 0.00862801 -1.651453 1.636549</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a50-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_large_dark_a_a50-mesh-normals">
+          <float_array id="rock_large_dark_a_a50-mesh-normals-array" count="12">0 -1 0 1 0 0 0 -1 0 1 0 0</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a50-mesh-normals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_large_dark_a_a50-mesh-map-0">
+          <float_array id="rock_large_dark_a_a50-mesh-map-0-array" count="24">1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 0 1 1 0 1 1 0 1</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a50-mesh-map-0-array" count="12" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="rock_large_dark_a_a50-mesh-vertices">
+          <input semantic="POSITION" source="#rock_large_dark_a_a50-mesh-positions"/>
+        </vertices>
+        <triangles material="rock_009-material" count="4">
+          <input semantic="VERTEX" source="#rock_large_dark_a_a50-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#rock_large_dark_a_a50-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#rock_large_dark_a_a50-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 3 0 1 0 0 2 5 1 3 7 1 4 4 1 5 1 2 6 2 2 7 3 2 8 5 3 9 6 3 10 7 3 11</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="rock_large_dark_a_a200-mesh" name="rock_large_dark_a_a200">
+      <mesh>
+        <source id="rock_large_dark_a_a200-mesh-positions">
+          <float_array id="rock_large_dark_a_a200-mesh-positions-array" count="21">1.28177 -0.6917855 0.5 0.1606345 1.317196 0.5896385 1.626424 0.309252 0.7145577 0.1175155 -1.322524 0.6996045 -1.548044 -0.4206803 0.6868776 -1.283069 0.6924864 0.978451 0 0 1.625296</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a200-mesh-positions-array" count="7" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_large_dark_a_a200-mesh-normals">
+          <float_array id="rock_large_dark_a_a200-mesh-normals-array" count="30">-0.148427 -0.03874063 -0.9881643 0.1828746 0.1454391 -0.972319 -0.0147702 -0.0413767 -0.9990345 -0.3721379 0.3170758 -0.8723396 0.3177201 -0.3020331 0.8987935 0.4979497 -0.467151 0.7306272 -0.3109104 -0.563399 0.7654517 -0.493592 -0.1085262 0.8628956 -0.05848634 0.6214263 0.7812867 0.3207009 0.560962 0.7631988</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a200-mesh-normals-array" count="10" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_large_dark_a_a200-mesh-map-0">
+          <float_array id="rock_large_dark_a_a200-mesh-map-0-array" count="60">0.9716259 0.3896976 0.678169 0.3770849 0.678169 0.03502738 0.678169 0.3770849 0.9716259 0.3896976 0.8396553 0.5517407 0.9716259 0.3896976 0.678169 0.03502738 0.8407316 0.003598272 0.9716259 0.3896976 0.8407316 0.003598272 0.9964017 0.1064965 0.1898137 0.6123719 0.003598272 0.6277626 0.2886015 0.3766778 0.2886015 0.3766778 0.003598272 0.6277626 0.003598272 0.2860869 0.2444562 0.0406624 0.2886015 0.3766778 0.003598272 0.2860869 0.04262 0.01504349 0.2444562 0.0406624 0.003598272 0.2860869 0.6558449 0.3536904 0.5090277 0.6169352 0.3612277 0.3150954 0.5740837 0.04010653 0.6558449 0.3536904 0.3612277 0.3150954</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a200-mesh-map-0-array" count="30" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="rock_large_dark_a_a200-mesh-vertices">
+          <input semantic="POSITION" source="#rock_large_dark_a_a200-mesh-positions"/>
+        </vertices>
+        <triangles material="rock_009-material" count="10">
+          <input semantic="VERTEX" source="#rock_large_dark_a_a200-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#rock_large_dark_a_a200-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#rock_large_dark_a_a200-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 0 0 1 3 0 2 0 1 3 1 1 4 2 1 5 1 2 6 3 2 7 4 2 8 1 3 9 4 3 10 5 3 11 0 4 12 2 4 13 3 4 14 3 5 15 2 5 16 6 5 17 4 6 18 3 6 19 6 6 20 5 7 21 4 7 22 6 7 23 1 8 24 5 8 25 6 8 26 2 9 27 1 9 28 6 9 29</p>
+        </triangles>
+      </mesh>
+    </geometry>
     <geometry id="Colmesh_rock-1-mesh" name="Colmesh_rock-1">
       <mesh>
         <source id="Colmesh_rock-1-mesh-positions">
-          <float_array id="Colmesh_rock-1-mesh-positions-array" count="48">0 1.575 -1.045 0 1.575 1.045 1.113693 1.113693 -1.045 1.113693 1.113693 1.045 1.575 0 -1.045 1.575 0 1.045 1.113693 -1.113693 -1.045 1.113693 -1.113693 1.045 0 -1.575 -1.045 0 -1.575 1.045 -1.113693 -1.113693 -1.045 -1.113693 -1.113693 1.045 -1.575 0 -1.045 -1.575 0 1.045 -1.113693 1.113693 -1.045 -1.113693 1.113693 1.045</float_array>
+          <float_array id="Colmesh_rock-1-mesh-positions-array" count="48">0 1.575 0 0 1.575 2.09 1.113693 1.113693 0 1.113693 1.113693 2.09 1.575 0 0 1.575 0 2.09 1.113693 -1.113693 0 1.113693 -1.113693 2.09 0 -1.575 0 0 -1.575 2.09 -1.113693 -1.113693 0 -1.113693 -1.113693 2.09 -1.575 0 0 -1.575 0 2.09 -1.113693 1.113693 0 -1.113693 1.113693 2.09</float_array>
           <technique_common>
             <accessor source="#Colmesh_rock-1-mesh-positions-array" count="16" stride="3">
               <param name="X" type="float"/>
@@ -118,7 +202,7 @@
     <geometry id="rock_large_dark_a_a800-mesh" name="rock_large_dark_a_a800">
       <mesh>
         <source id="rock_large_dark_a_a800-mesh-positions">
-          <float_array id="rock_large_dark_a_a800-mesh-positions-array" count="36">0 0 0.01999998 1.28177 -0.6917855 0.01999998 -0.4960535 -1.134136 0.01999998 -1.555879 0 0.01999998 -0.4911508 1.122927 0.01999998 1.298996 0.7010822 0.01999998 0.4987795 -1.140368 0.5073003 -1.252078 -0.6757605 0.4864116 -1.283069 0.6924864 0.4984509 0.4901193 1.120569 0.4984923 1.573135 0 0.4944165 0 0 1.145296</float_array>
+          <float_array id="rock_large_dark_a_a800-mesh-positions-array" count="36">0 0 0.5 1.28177 -0.6917855 0.5 -0.4960535 -1.134136 0.5 -1.555879 0 0.5 -0.4911508 1.122927 0.5 1.298996 0.7010822 0.5 0.4987795 -1.140368 0.9873003 -1.252078 -0.6757605 0.9664117 -1.283069 0.6924864 0.978451 0.4901193 1.120569 0.9784923 1.573135 0 0.9744165 0 0 1.625296</float_array>
           <technique_common>
             <accessor source="#rock_large_dark_a_a800-mesh-positions-array" count="12" stride="3">
               <param name="X" type="float"/>
@@ -128,7 +212,7 @@
           </technique_common>
         </source>
         <source id="rock_large_dark_a_a800-mesh-normals">
-          <float_array id="rock_large_dark_a_a800-mesh-normals-array" count="60">0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0.8589113 -0.0106219 -0.5120142 0.2155002 -0.8661038 -0.4510252 -0.650003 -0.6074135 -0.4566674 -0.6271516 0.5946476 -0.5030657 0.2079342 0.882393 -0.4220736 0.6414732 -0.5989238 0.479377 -0.2324236 -0.8550381 0.4635615 -0.8531734 -0.02390915 0.5210791 -0.2110737 0.8742603 0.437169 0.6150333 0.5925296 0.5202333 0.3608802 -0.3301354 0.8722249 -0.1511545 -0.5321672 0.8330369 -0.4579048 -0.01819217 0.8888151 -0.129821 0.5376599 0.8331077 0.3590075 0.3438202 0.8676989</float_array>
+          <float_array id="rock_large_dark_a_a800-mesh-normals-array" count="60">0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0.8589113 -0.0106219 -0.5120142 0.2155002 -0.8661039 -0.4510253 -0.650003 -0.6074135 -0.4566674 -0.6271516 0.5946476 -0.5030657 0.2079342 0.882393 -0.4220736 0.6414731 -0.5989238 0.4793771 -0.2324236 -0.8550381 0.4635615 -0.8531734 -0.02390915 0.5210791 -0.2110737 0.8742603 0.437169 0.6150333 0.5925296 0.5202333 0.3608802 -0.3301354 0.8722248 -0.1511545 -0.5321672 0.8330369 -0.4579048 -0.01819217 0.8888151 -0.129821 0.5376599 0.8331077 0.3590076 0.3438202 0.8676989</float_array>
           <technique_common>
             <accessor source="#rock_large_dark_a_a800-mesh-normals-array" count="20" stride="3">
               <param name="X" type="float"/>
@@ -165,7 +249,7 @@
         <node id="start01" name="start01" type="NODE">
           <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
           <node id="rock_large_dark_a_a800" name="rock_large_dark_a_a800" type="NODE">
-            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0.48 0 0 0 1</matrix>
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
             <instance_geometry url="#rock_large_dark_a_a800-mesh" name="rock_large_dark_a_a800">
               <bind_material>
                 <technique_common>
@@ -176,11 +260,38 @@
               </bind_material>
             </instance_geometry>
           </node>
+          <node id="rock_large_dark_a_a200" name="rock_large_dark_a_a200" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#rock_large_dark_a_a200-mesh" name="rock_large_dark_a_a200">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="rock_009-material" target="#rock_009-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="rock_large_dark_a_a50" name="rock_large_dark_a_a50" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#rock_large_dark_a_a50-mesh" name="rock_large_dark_a_a50">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="rock_009-material" target="#rock_009-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="nulldetail20" name="nulldetail20" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+          </node>
         </node>
         <node id="collision-1" name="collision-1" type="NODE">
           <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
           <node id="Colmesh_rock-1" name="Colmesh_rock-1" type="NODE">
-            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 1.045 0 0 0 1</matrix>
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
             <instance_geometry url="#Colmesh_rock-1-mesh" name="Colmesh_rock-1">
               <bind_material>
                 <technique_common>
