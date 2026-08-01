@@ -5,13 +5,13 @@
       <author>Blender User</author>
       <authoring_tool>Blender 4.2.9 LTS commit date:2025-04-14, commit time:12:24, hash:a10f621e649a</authoring_tool>
     </contributor>
-    <created>2026-08-01T08:05:54</created>
-    <modified>2026-08-01T08:05:54</modified>
+    <created>2026-08-01T08:09:21</created>
+    <modified>2026-08-01T08:09:21</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_effects>
-    <effect id="ParkerVegAtlas-effect">
+    <effect id="ParkerVegBark-effect">
       <profile_COMMON>
         <newparam sid="vegetation_atlas_2048_png-surface">
           <surface type="2D">
@@ -65,8 +65,8 @@
     </image>
   </library_images>
   <library_materials>
-    <material id="ParkerVegAtlas-material" name="ParkerVegAtlas">
-      <instance_effect url="#ParkerVegAtlas-effect"/>
+    <material id="ParkerVegBark-material" name="ParkerVegBark">
+      <instance_effect url="#ParkerVegBark-effect"/>
     </material>
     <material id="Colmesh_Material-material" name="Colmesh_Material">
       <instance_effect url="#Colmesh_Material-effect"/>
@@ -107,7 +107,7 @@
         <vertices id="saguaro_tall_a50-mesh-vertices">
           <input semantic="POSITION" source="#saguaro_tall_a50-mesh-positions"/>
         </vertices>
-        <triangles material="ParkerVegAtlas-material" count="4">
+        <triangles material="ParkerVegBark-material" count="4">
           <input semantic="VERTEX" source="#saguaro_tall_a50-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#saguaro_tall_a50-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#saguaro_tall_a50-mesh-map-0" offset="2" set="0"/>
@@ -149,7 +149,7 @@
         <vertices id="saguaro_tall_a200-mesh-vertices">
           <input semantic="POSITION" source="#saguaro_tall_a200-mesh-positions"/>
         </vertices>
-        <triangles material="ParkerVegAtlas-material" count="44">
+        <triangles material="ParkerVegBark-material" count="44">
           <input semantic="VERTEX" source="#saguaro_tall_a200-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#saguaro_tall_a200-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#saguaro_tall_a200-mesh-map-0" offset="2" set="0"/>
@@ -233,7 +233,7 @@
         <vertices id="saguaro_tall_a800-mesh-vertices">
           <input semantic="POSITION" source="#saguaro_tall_a800-mesh-positions"/>
         </vertices>
-        <triangles material="ParkerVegAtlas-material" count="88">
+        <triangles material="ParkerVegBark-material" count="88">
           <input semantic="VERTEX" source="#saguaro_tall_a800-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#saguaro_tall_a800-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#saguaro_tall_a800-mesh-map-0" offset="2" set="0"/>
@@ -253,7 +253,7 @@
             <instance_geometry url="#saguaro_tall_a800-mesh" name="saguaro_tall_a800">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
+                  <instance_material symbol="ParkerVegBark-material" target="#ParkerVegBark-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>
@@ -265,7 +265,7 @@
             <instance_geometry url="#saguaro_tall_a200-mesh" name="saguaro_tall_a200">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
+                  <instance_material symbol="ParkerVegBark-material" target="#ParkerVegBark-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>
@@ -277,7 +277,7 @@
             <instance_geometry url="#saguaro_tall_a50-mesh" name="saguaro_tall_a50">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
+                  <instance_material symbol="ParkerVegBark-material" target="#ParkerVegBark-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>

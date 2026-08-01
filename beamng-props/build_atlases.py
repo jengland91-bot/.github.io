@@ -16,6 +16,7 @@ No external deps (pure Python PNG via _shared/pngutil.py).
 from __future__ import annotations
 
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -84,7 +85,7 @@ def place(
 
 
 def procedural_tile(w, h, kind: str):
-    """Generate desert flora / ground tiles for vegetation atlas."""
+    """Generate desert flora / ground tiles. Leaf kinds use real alpha cutouts."""
     px = []
     for y in range(h):
         for x in range(w):
@@ -92,31 +93,74 @@ def procedural_tile(w, h, kind: str):
             n2 = ((x * 3 + y * 5) % 23) - 11
             if kind == "creosote_bark":
                 v = 70 + n1 + (x % 6) * 2
-                r, g, b = v + 15, v - 5, v - 20
+                r, g, b, a = v + 15, v - 5, v - 20, 255
             elif kind == "creosote_leaf":
-                r, g, b = 55 + n1, 70 + n1 + n2 // 2, 35 + n1 // 2
+                # Opaque leaf clusters only — transparent elsewhere (cuts overdraw)
+                r, g, b, a = _foliage_alpha_pixel(x, y, w, h, "creosote", n1, n2)
             elif kind == "saguaro_skin":
-                r, g, b = 70 + n1, 95 + n1, 55 + n1 // 2
+                r, g, b, a = 70 + n1, 95 + n1, 55 + n1 // 2, 255
             elif kind == "saguaro_rib":
                 stripe = 20 if (x % 32) < 6 else 0
-                r, g, b = 55 + n1 + stripe, 80 + n1 + stripe, 45 + n1
+                r, g, b, a = 55 + n1 + stripe, 80 + n1 + stripe, 45 + n1, 255
             elif kind == "dry_bush":
-                r, g, b = 95 + n1, 85 + n1 // 2, 45 + n2
+                r, g, b, a = _foliage_alpha_pixel(x, y, w, h, "scrub", n1, n2)
             elif kind == "sand_ground":
-                r, g, b = 180 + n1 // 2, 150 + n1 // 2, 105 + n2 // 2
+                r, g, b, a = 180 + n1 // 2, 150 + n1 // 2, 105 + n2 // 2, 255
             elif kind == "ocotillo_stem":
-                r, g, b = 90 + n1, 55 + n1 // 2, 35
+                r, g, b, a = 90 + n1, 55 + n1 // 2, 35, 255
             else:
-                r, g, b = 128, 128, 128
+                r, g, b, a = 128, 128, 128, 255
             px.append(
                 (
-                    max(10, min(255, r)),
-                    max(10, min(255, g)),
-                    max(10, min(255, b)),
-                    255,
+                    max(0, min(255, int(r))),
+                    max(0, min(255, int(g))),
+                    max(0, min(255, int(b))),
+                    max(0, min(255, int(a))),
                 )
             )
     return px
+
+
+def _foliage_alpha_pixel(x, y, w, h, style: str, n1: int, n2: int):
+    """
+    Paint several leaf blobs; everything else alpha=0.
+    Keeps opaque coverage tight so silhouette meshes waste less transparent fill.
+    """
+    nx = (x + 0.5) / w
+    ny = (y + 0.5) / h
+    # Seeded blob centers (normalized)
+    if style == "creosote":
+        blobs = [
+            (0.50, 0.55, 0.22, 0.28),
+            (0.32, 0.40, 0.14, 0.18),
+            (0.68, 0.42, 0.13, 0.17),
+            (0.45, 0.28, 0.12, 0.14),
+            (0.58, 0.70, 0.11, 0.13),
+        ]
+        base = (55 + n1, 70 + n1 + n2 // 2, 35 + n1 // 2)
+    else:  # scrub / dry bush
+        blobs = [
+            (0.50, 0.50, 0.26, 0.24),
+            (0.30, 0.55, 0.12, 0.14),
+            (0.70, 0.48, 0.12, 0.13),
+            (0.48, 0.32, 0.10, 0.12),
+        ]
+        base = (95 + n1, 85 + n1 // 2, 45 + n2)
+
+    covered = False
+    for cx, cy, rx, ry in blobs:
+        dx = (nx - cx) / rx
+        dy = (ny - cy) / ry
+        # Slightly irregular ellipse
+        jag = 0.08 * math.sin((nx + ny) * 40 + n1)
+        if dx * dx + dy * dy < 1.0 + jag:
+            covered = True
+            break
+    if not covered:
+        return (0, 0, 0, 0)
+    r, g, b = base
+    # Edge darken within blob for AO-ish read
+    return (r, g, b, 255)
 
 
 def place_generated(

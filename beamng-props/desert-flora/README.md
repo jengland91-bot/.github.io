@@ -36,8 +36,9 @@ Set **collisionType** = `Collision Mesh` — colliders are simple cylinders/caps
 
 ## Tech
 
-- Textures: `vegetation_atlas_2048.png` + `vegetation_orm_2048.png` (see `../TEXTURES.md`)
-- LODs: `_a800` / `_a200` / `_a50` billboard (see `../GEOMETRY_LODS.md`)
+- Textures: `vegetation_atlas_2048.png` + ORM (see `../TEXTURES.md`)
+- **Foliage:** silhouette-cut single-sided meshes + alpha clip — enable **Two-Sided** in BeamNG (see `../VEGETATION.md`)
+- LODs: `_a800` / `_a200` / `_a50` (see `../GEOMETRY_LODS.md`)
 - Collision: trunk/bush capsules only (see `../COLLISION.md`)
 
 ## Rebuild

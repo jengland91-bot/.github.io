@@ -5,13 +5,40 @@
       <author>Blender User</author>
       <authoring_tool>Blender 4.2.9 LTS commit date:2025-04-14, commit time:12:24, hash:a10f621e649a</authoring_tool>
     </contributor>
-    <created>2026-08-01T08:05:54</created>
-    <modified>2026-08-01T08:05:54</modified>
+    <created>2026-08-01T08:09:21</created>
+    <modified>2026-08-01T08:09:21</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_effects>
-    <effect id="ParkerVegAtlas-effect">
+    <effect id="ParkerVegBark-effect">
+      <profile_COMMON>
+        <newparam sid="vegetation_atlas_2048_png-surface">
+          <surface type="2D">
+            <init_from>vegetation_atlas_2048_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="vegetation_atlas_2048_png-sampler">
+          <sampler2D>
+            <source>vegetation_atlas_2048_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="vegetation_atlas_2048_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="ParkerVegFoliage-effect">
       <profile_COMMON>
         <newparam sid="vegetation_atlas_2048_png-surface">
           <surface type="2D">
@@ -65,8 +92,11 @@
     </image>
   </library_images>
   <library_materials>
-    <material id="ParkerVegAtlas-material" name="ParkerVegAtlas">
-      <instance_effect url="#ParkerVegAtlas-effect"/>
+    <material id="ParkerVegBark-material" name="ParkerVegBark">
+      <instance_effect url="#ParkerVegBark-effect"/>
+    </material>
+    <material id="ParkerVegFoliage-material" name="ParkerVegFoliage">
+      <instance_effect url="#ParkerVegFoliage-effect"/>
     </material>
     <material id="Colmesh_Material-material" name="Colmesh_Material">
       <instance_effect url="#Colmesh_Material-effect"/>
@@ -76,7 +106,7 @@
     <geometry id="scrub_small_a50-mesh" name="scrub_small_a50">
       <mesh>
         <source id="scrub_small_a50-mesh-positions">
-          <float_array id="scrub_small_a50-mesh-positions-array" count="24">-0.2885661 0 -0.004499971 0.2885661 0 -0.004499971 0.2885661 0 0.4545 -0.2885661 0 0.4545 0 -0.2885661 -0.004499971 0 0.2885661 -0.004499971 0 0.2885661 0.4545 0 -0.2885661 0.4545</float_array>
+          <float_array id="scrub_small_a50-mesh-positions-array" count="24">-0.1962944 0 -0.003725945 0.1962944 0 -0.003725945 0.1962944 0 0.376326 -0.1962944 0 0.376326 0 -0.1962944 -0.003725945 0 0.1962944 -0.003725945 0 0.1962944 0.376326 0 -0.1962944 0.376326</float_array>
           <technique_common>
             <accessor source="#scrub_small_a50-mesh-positions-array" count="8" stride="3">
               <param name="X" type="float"/>
@@ -107,7 +137,7 @@
         <vertices id="scrub_small_a50-mesh-vertices">
           <input semantic="POSITION" source="#scrub_small_a50-mesh-positions"/>
         </vertices>
-        <triangles material="ParkerVegAtlas-material" count="4">
+        <triangles material="ParkerVegBark-material" count="4">
           <input semantic="VERTEX" source="#scrub_small_a50-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#scrub_small_a50-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#scrub_small_a50-mesh-map-0" offset="2" set="0"/>
@@ -118,9 +148,9 @@
     <geometry id="scrub_small_a200-mesh" name="scrub_small_a200">
       <mesh>
         <source id="scrub_small_a200-mesh-positions">
-          <float_array id="scrub_small_a200-mesh-positions-array" count="72">0.02405625 0.008333325 0.1025 0.02405625 -0.008333325 0.02249997 -0.02405625 0.008333325 0.02249997 -0.02405625 -0.008333325 0.1025 -0.2748249 0.009813666 0 0.2748249 -0.009813666 0 -0.2748249 0.009813666 0.45 0.2748249 -0.009813666 0.45 -0.1058079 -0.25383 0 0.1058079 0.25383 0 -0.1058079 -0.25383 0.45 0.1058079 0.25383 0.45 0.2051964 -0.1830831 0 -0.2051964 0.1830831 0 0.2051964 -0.1830831 0.45 -0.2051964 0.1830831 0.45 0.2007511 0.1879468 0 -0.2007511 -0.1879468 0 0.2007511 0.1879468 0.45 -0.2007511 -0.1879468 0.45 -0.09107118 0.2594823 0 0.09107118 -0.2594823 0 -0.09107118 0.2594823 0.45 0.09107118 -0.2594823 0.45</float_array>
+          <float_array id="scrub_small_a200-mesh-positions-array" count="84">0.02405625 0.008333325 0.07999998 0.02405625 -0.008333325 0 -0.02405625 0.008333325 0 -0.02405625 -0.008333325 0.07999998 0 0 0.3726 0.1402103 -0.003337025 0.3159 0.1869471 -0.004449367 0.2025 0.1308629 -0.003114521 0.0891 0 0 0.04049998 -0.1308629 0.003114581 0.0891 -0.1869471 0.004449367 0.2025 -0.1402103 0.003337025 0.3159 0 0 0.3726 -0.06348508 0.1250588 0.3159 -0.08464682 0.166745 0.2025 -0.05925273 0.1167215 0.0891 0 0 0.04049998 0.05925273 -0.1167215 0.0891 0.08464682 -0.166745 0.2025 0.06348508 -0.1250588 0.3159 0 0 0.3726 -0.07807523 -0.1165089 0.3159 -0.1041004 -0.1553452 0.2025 -0.07287019 -0.1087416 0.0891 0 0 0.04049998 0.07287025 0.1087416 0.0891 0.1041004 0.1553452 0.2025 0.07807523 0.1165089 0.3159</float_array>
           <technique_common>
-            <accessor source="#scrub_small_a200-mesh-positions-array" count="24" stride="3">
+            <accessor source="#scrub_small_a200-mesh-positions-array" count="28" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
@@ -128,9 +158,9 @@
           </technique_common>
         </source>
         <source id="scrub_small_a200-mesh-normals">
-          <float_array id="scrub_small_a200-mesh-normals-array" count="42">0.3211631 0.9271179 -0.1931495 -0.3211631 -0.9271179 -0.1931495 0.3211631 -0.9271179 0.1931495 -0.03568619 -0.999363 0 -0.3211631 0.9271179 0.1931495 0.9230183 -0.3847561 0 0.6657567 0.7461689 0 -0.683443 0.7300039 0 -0.9435718 -0.3311679 0 -0.03568619 -0.999363 0 0.9230183 -0.3847561 0 0.6657567 0.7461689 0 -0.683443 0.7300039 0 -0.9435718 -0.3311679 0</float_array>
+          <float_array id="scrub_small_a200-mesh-normals-array" count="66">0.3211631 0.9271179 -0.1931495 -0.3211631 -0.9271179 -0.1931495 0.02379357 0.9997169 0 0.02379357 0.9997168 0 0.02379357 0.9997169 0 0.02379357 0.9997169 0 0.02379357 0.9997168 0 0.02379357 0.9997169 0 -0.8916848 -0.4526569 0 -0.8916848 -0.4526569 0 -0.8916848 -0.4526568 0 -0.8916848 -0.4526569 0 -0.8916848 -0.4526569 0 -0.8916848 -0.4526568 0 0.8307228 -0.5566864 0 0.8307227 -0.5566865 0 0.8307228 -0.5566864 0 0.8307228 -0.5566864 0 0.8307228 -0.5566864 0 0.8307228 -0.5566865 0 0.3211631 -0.9271179 0.1931495 -0.3211631 0.9271179 0.1931495</float_array>
           <technique_common>
-            <accessor source="#scrub_small_a200-mesh-normals-array" count="14" stride="3">
+            <accessor source="#scrub_small_a200-mesh-normals-array" count="22" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
@@ -138,9 +168,9 @@
           </technique_common>
         </source>
         <source id="scrub_small_a200-mesh-map-0">
-          <float_array id="scrub_small_a200-mesh-map-0-array" count="84">0.75 0.4362486 0.5 0.5 0.5 0.25 0.75 0.4362486 0.5 0.5 0.5 0.25 0.75 0.25 0.75 0.5 0.5 0.3137515 0 0.25 0.25 0.5 0 0.5 0.75 0.25 0.75 0.5 0.5 0.3137515 0 0.25 0.25 0.5 0 0.5 0 0.25 0.25 0.5 0 0.5 0 0.25 0.25 0.5 0 0.5 0 0.25 0.25 0.5 0 0.5 0 0.25 0.25 0.25 0.25 0.5 0 0.25 0.25 0.25 0.25 0.5 0 0.25 0.25 0.25 0.25 0.5 0 0.25 0.25 0.25 0.25 0.5 0 0.25 0.25 0.25 0.25 0.5</float_array>
+          <float_array id="scrub_small_a200-mesh-map-0-array" count="132">0.75 0.4362486 0.5 0.5 0.5 0.25 0.75 0.4362486 0.5 0.5 0.5 0.25 0.125 0.4632 0.188 0.4338 0.125 0.291 0.188 0.4338 0.209 0.375 0.125 0.291 0.209 0.375 0.1838 0.3162 0.125 0.291 0.06619995 0.3162 0.04099994 0.375 0.125 0.291 0.04099994 0.375 0.06199997 0.4338 0.125 0.291 0.06199997 0.4338 0.125 0.4632 0.125 0.291 0.125 0.4632 0.188 0.4338 0.125 0.291 0.188 0.4338 0.209 0.375 0.125 0.291 0.209 0.375 0.1838 0.3162 0.125 0.291 0.06619995 0.3162 0.04099994 0.375 0.125 0.291 0.04099994 0.375 0.06199997 0.4338 0.125 0.291 0.06199997 0.4338 0.125 0.4632 0.125 0.291 0.125 0.4632 0.188 0.4338 0.125 0.291 0.188 0.4338 0.209 0.375 0.125 0.291 0.209 0.375 0.1838 0.3162 0.125 0.291 0.06619995 0.3162 0.04099994 0.375 0.125 0.291 0.04099994 0.375 0.06199997 0.4338 0.125 0.291 0.06199997 0.4338 0.125 0.4632 0.125 0.291 0.75 0.25 0.75 0.5 0.5 0.3137515 0.75 0.25 0.75 0.5 0.5 0.3137515</float_array>
           <technique_common>
-            <accessor source="#scrub_small_a200-mesh-map-0-array" count="42" stride="2">
+            <accessor source="#scrub_small_a200-mesh-map-0-array" count="66" stride="2">
               <param name="S" type="float"/>
               <param name="T" type="float"/>
             </accessor>
@@ -149,18 +179,24 @@
         <vertices id="scrub_small_a200-mesh-vertices">
           <input semantic="POSITION" source="#scrub_small_a200-mesh-positions"/>
         </vertices>
-        <triangles material="ParkerVegAtlas-material" count="14">
+        <triangles material="ParkerVegBark-material" count="4">
           <input semantic="VERTEX" source="#scrub_small_a200-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#scrub_small_a200-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#scrub_small_a200-mesh-map-0" offset="2" set="0"/>
-          <p>0 0 0 1 0 1 2 0 2 3 1 3 2 1 4 1 1 5 0 2 6 3 2 7 1 2 8 4 3 9 7 3 10 6 3 11 3 4 12 0 4 13 2 4 14 8 5 15 11 5 16 10 5 17 12 6 18 15 6 19 14 6 20 16 7 21 19 7 22 18 7 23 20 8 24 23 8 25 22 8 26 4 9 27 5 9 28 7 9 29 8 10 30 9 10 31 11 10 32 12 11 33 13 11 34 15 11 35 16 12 36 17 12 37 19 12 38 20 13 39 21 13 40 23 13 41</p>
+          <p>0 0 0 1 0 1 2 0 2 3 1 3 2 1 4 1 1 5 0 20 60 3 20 61 1 20 62 3 21 63 0 21 64 2 21 65</p>
+        </triangles>
+        <triangles material="ParkerVegFoliage-material" count="18">
+          <input semantic="VERTEX" source="#scrub_small_a200-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#scrub_small_a200-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#scrub_small_a200-mesh-map-0" offset="2" set="0"/>
+          <p>4 2 6 5 2 7 8 2 8 5 3 9 6 3 10 8 3 11 6 4 12 7 4 13 8 4 14 9 5 15 10 5 16 8 5 17 10 6 18 11 6 19 8 6 20 11 7 21 4 7 22 8 7 23 12 8 24 13 8 25 16 8 26 13 9 27 14 9 28 16 9 29 14 10 30 15 10 31 16 10 32 17 11 33 18 11 34 16 11 35 18 12 36 19 12 37 16 12 38 19 13 39 12 13 40 16 13 41 20 14 42 21 14 43 24 14 44 21 15 45 22 15 46 24 15 47 22 16 48 23 16 49 24 16 50 25 17 51 26 17 52 24 17 53 26 18 54 27 18 55 24 18 56 27 19 57 20 19 58 24 19 59</p>
         </triangles>
       </mesh>
     </geometry>
     <geometry id="Colmesh_scrub-1-mesh" name="Colmesh_scrub-1">
       <mesh>
         <source id="Colmesh_scrub-1-mesh-positions">
-          <float_array id="Colmesh_scrub-1-mesh-positions-array" count="48">0 0.22 0.02249997 0 0.22 0.4725 0.1555635 0.1555635 0.02249997 0.1555635 0.1555635 0.4725 0.22 0 0.02249997 0.22 0 0.4725 0.1555635 -0.1555635 0.02249997 0.1555635 -0.1555635 0.4725 0 -0.22 0.02249997 0 -0.22 0.4725 -0.1555635 -0.1555635 0.02249997 -0.1555635 -0.1555635 0.4725 -0.22 0 0.02249997 -0.22 0 0.4725 -0.1555635 0.1555635 0.02249997 -0.1555635 0.1555635 0.4725</float_array>
+          <float_array id="Colmesh_scrub-1-mesh-positions-array" count="48">0 0.22 0 0 0.22 0.45 0.1555635 0.1555635 0 0.1555635 0.1555635 0.45 0.22 0 0 0.22 0 0.45 0.1555635 -0.1555635 0 0.1555635 -0.1555635 0.45 0 -0.22 0 0 -0.22 0.45 -0.1555635 -0.1555635 0 -0.1555635 -0.1555635 0.45 -0.22 0 0 -0.22 0 0.45 -0.1555635 0.1555635 0 -0.1555635 0.1555635 0.45</float_array>
           <technique_common>
             <accessor source="#Colmesh_scrub-1-mesh-positions-array" count="16" stride="3">
               <param name="X" type="float"/>
@@ -202,9 +238,9 @@
     <geometry id="scrub_small_a800-mesh" name="scrub_small_a800">
       <mesh>
         <source id="scrub_small_a800-mesh-positions">
-          <float_array id="scrub_small_a800-mesh-positions-array" count="96">0 0.02499997 0.02249997 0 0.02499997 0.1025 0.02165061 0.01249998 0.02249997 0.02165061 0.01249998 0.1025 0.02165061 -0.01249998 0.02249997 0.02165061 -0.01249998 0.1025 0 -0.02499997 0.02249997 0 -0.02499997 0.1025 -0.02165061 -0.01249998 0.02249997 -0.02165061 -0.01249998 0.1025 -0.02165061 0.01249998 0.02249997 -0.02165061 0.01249998 0.1025 -0.2748249 0.009813666 0 0.2748249 -0.009813666 0 -0.2748249 0.009813666 0.45 0.2748249 -0.009813666 0.45 -0.1058079 -0.25383 0 0.1058079 0.25383 0 -0.1058079 -0.25383 0.45 0.1058079 0.25383 0.45 0.2051964 -0.1830831 0 -0.2051964 0.1830831 0 0.2051964 -0.1830831 0.45 -0.2051964 0.1830831 0.45 0.2007511 0.1879468 0 -0.2007511 -0.1879468 0 0.2007511 0.1879468 0.45 -0.2007511 -0.1879468 0.45 -0.09107118 0.2594823 0 0.09107118 -0.2594823 0 -0.09107118 0.2594823 0.45 0.09107118 -0.2594823 0.45</float_array>
+          <float_array id="scrub_small_a800-mesh-positions-array" count="117">0 0.02499997 0 0 0.02499997 0.07999998 0.02165061 0.01249998 0 0.02165061 0.01249998 0.07999998 0.02165061 -0.01249998 0 0.02165061 -0.01249998 0.07999998 0 -0.02499997 0 0 -0.02499997 0.07999998 -0.02165061 -0.01249998 0 -0.02165061 -0.01249998 0.07999998 -0.02165061 0.01249998 0 -0.02165061 0.01249998 0.07999998 0 0 0.3726 0.1402103 -0.003337025 0.3159 0.1869471 -0.004449367 0.2025 0.1308629 -0.003114521 0.0891 0 0 0.04049998 -0.1308629 0.003114581 0.0891 -0.1869471 0.004449367 0.2025 -0.1402103 0.003337025 0.3159 0 0 0.2035125 0 0 0.3726 -0.06348508 0.1250588 0.3159 -0.08464682 0.166745 0.2025 -0.05925273 0.1167215 0.0891 0 0 0.04049998 0.05925273 -0.1167215 0.0891 0.08464682 -0.166745 0.2025 0.06348508 -0.1250588 0.3159 0 0 0.2035125 0 0 0.3726 -0.07807523 -0.1165089 0.3159 -0.1041004 -0.1553452 0.2025 -0.07287019 -0.1087416 0.0891 0 0 0.04049998 0.07287025 0.1087416 0.0891 0.1041004 0.1553452 0.2025 0.07807523 0.1165089 0.3159 0 0 0.2035125</float_array>
           <technique_common>
-            <accessor source="#scrub_small_a800-mesh-positions-array" count="32" stride="3">
+            <accessor source="#scrub_small_a800-mesh-positions-array" count="39" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
@@ -212,9 +248,9 @@
           </technique_common>
         </source>
         <source id="scrub_small_a800-mesh-normals">
-          <float_array id="scrub_small_a800-mesh-normals-array" count="90">0.5 0.8660253 0 1 0 0 0.5 -0.8660253 0 -0.5 -0.8660253 0 0 0 1 -1 0 0 -0.5 0.8660253 0 0 0 -1 -0.03568619 -0.999363 0 0.9230183 -0.3847561 0 0.6657567 0.7461689 0 -0.683443 0.7300039 0 -0.9435718 -0.3311679 0 0.5 0.8660253 0 1 0 0 0.5 -0.8660253 0 -0.5 -0.8660253 0 0 0 1 0 0 1 0 0 1 -1 0 0 -0.5 0.8660253 0 0 0 -1 0 0 -1 0 0 -1 -0.03568619 -0.999363 0 0.9230183 -0.3847561 0 0.6657567 0.7461689 0 -0.683443 0.7300039 0 -0.9435718 -0.3311679 0</float_array>
+          <float_array id="scrub_small_a800-mesh-normals-array" count="132">0.5 0.8660253 0 1 0 0 0.5 -0.8660253 0 -0.5 -0.8660253 0 0 0 1 -1 0 0 -0.5 0.8660253 0 0 0 -1 0.02379357 0.9997168 0 0.02379357 0.9997169 0 0.02379357 0.9997169 0 0.02379357 0.9997169 0 0.02379357 0.9997169 0 0.02379357 0.9997169 0 0.02379357 0.9997169 0 0.02379357 0.9997168 0 -0.8916848 -0.4526568 0 -0.8916848 -0.4526569 0 -0.8916848 -0.4526569 0 -0.8916848 -0.4526569 0 -0.8916848 -0.4526569 0 -0.8916848 -0.4526569 0 -0.8916848 -0.4526569 0 -0.8916848 -0.4526569 0 0.8307228 -0.5566864 0 0.8307227 -0.5566864 0 0.8307228 -0.5566864 0 0.8307228 -0.5566864 0 0.8307228 -0.5566864 0 0.8307228 -0.5566864 0 0.8307228 -0.5566864 0 0.8307228 -0.5566864 0 0.5 0.8660253 0 1 0 0 0.5 -0.8660253 0 -0.5 -0.8660253 0 0 0 1 0 0 1 0 0 1 -1 0 0 -0.5 0.8660253 0 0 0 -1 0 0 -1 0 0 -1</float_array>
           <technique_common>
-            <accessor source="#scrub_small_a800-mesh-normals-array" count="30" stride="3">
+            <accessor source="#scrub_small_a800-mesh-normals-array" count="44" stride="3">
               <param name="X" type="float"/>
               <param name="Y" type="float"/>
               <param name="Z" type="float"/>
@@ -222,9 +258,9 @@
           </technique_common>
         </source>
         <source id="scrub_small_a800-mesh-map-0">
-          <float_array id="scrub_small_a800-mesh-map-0-array" count="180">0.75 0.25 0.5 0.5 0.5 0.25 0.75 0.25 0.5 0.5 0.5 0.25 0.75 0.25 0.5 0.5 0.5 0.25 0.75 0.25 0.5 0.5 0.5 0.25 0.25 0.49 0.04215389 0.1299999 0.4578461 0.1299999 0.75 0.25 0.5 0.5 0.5 0.25 0.75 0.25 0.5 0.5 0.5 0.25 0.9578461 0.37 0.75 0.00999999 0.542154 0.37 0.25 0.25 0 0.5 0 0.25 0.25 0.25 0 0.5 0 0.25 0.25 0.25 0 0.5 0 0.25 0.25 0.25 0 0.5 0 0.25 0.25 0.25 0 0.5 0 0.25 0.75 0.25 0.75 0.5 0.5 0.5 0.75 0.25 0.75 0.5 0.5 0.5 0.75 0.25 0.75 0.5 0.5 0.5 0.75 0.25 0.75 0.5 0.5 0.5 0.4578461 0.1299999 0.4578461 0.37 0.25 0.49 0.25 0.49 0.04215389 0.37 0.04215389 0.1299999 0.04215389 0.1299999 0.25 0.00999999 0.4578461 0.1299999 0.75 0.25 0.75 0.5 0.5 0.5 0.75 0.25 0.75 0.5 0.5 0.5 0.542154 0.37 0.75 0.49 0.9578461 0.37 0.9578461 0.37 0.9578461 0.1299999 0.75 0.00999999 0.75 0.00999999 0.542154 0.1299999 0.542154 0.37 0.25 0.25 0.25 0.5 0 0.5 0.25 0.25 0.25 0.5 0 0.5 0.25 0.25 0.25 0.5 0 0.5 0.25 0.25 0.25 0.5 0 0.5 0.25 0.25 0.25 0.5 0 0.5</float_array>
+          <float_array id="scrub_small_a800-mesh-map-0-array" count="264">0.75 0.25 0.5 0.5 0.5 0.25 0.75 0.25 0.5 0.5 0.5 0.25 0.75 0.25 0.5 0.5 0.5 0.25 0.75 0.25 0.5 0.5 0.5 0.25 0.25 0.49 0.04215389 0.1299999 0.4578461 0.1299999 0.75 0.25 0.5 0.5 0.5 0.25 0.75 0.25 0.5 0.5 0.5 0.25 0.9578461 0.37 0.75 0.00999999 0.542154 0.37 0.125 0.4632 0.188 0.4338 0.125 0.375 0.188 0.4338 0.209 0.375 0.125 0.375 0.209 0.375 0.1838 0.3162 0.125 0.375 0.1838 0.3162 0.125 0.291 0.125 0.375 0.125 0.291 0.06619995 0.3162 0.125 0.375 0.06619995 0.3162 0.04099994 0.375 0.125 0.375 0.04099994 0.375 0.06199997 0.4338 0.125 0.375 0.06199997 0.4338 0.125 0.4632 0.125 0.375 0.125 0.4632 0.188 0.4338 0.125 0.375 0.188 0.4338 0.209 0.375 0.125 0.375 0.209 0.375 0.1838 0.3162 0.125 0.375 0.1838 0.3162 0.125 0.291 0.125 0.375 0.125 0.291 0.06619995 0.3162 0.125 0.375 0.06619995 0.3162 0.04099994 0.375 0.125 0.375 0.04099994 0.375 0.06199997 0.4338 0.125 0.375 0.06199997 0.4338 0.125 0.4632 0.125 0.375 0.125 0.4632 0.188 0.4338 0.125 0.375 0.188 0.4338 0.209 0.375 0.125 0.375 0.209 0.375 0.1838 0.3162 0.125 0.375 0.1838 0.3162 0.125 0.291 0.125 0.375 0.125 0.291 0.06619995 0.3162 0.125 0.375 0.06619995 0.3162 0.04099994 0.375 0.125 0.375 0.04099994 0.375 0.06199997 0.4338 0.125 0.375 0.06199997 0.4338 0.125 0.4632 0.125 0.375 0.75 0.25 0.75 0.5 0.5 0.5 0.75 0.25 0.75 0.5 0.5 0.5 0.75 0.25 0.75 0.5 0.5 0.5 0.75 0.25 0.75 0.5 0.5 0.5 0.4578461 0.1299999 0.4578461 0.37 0.25 0.49 0.25 0.49 0.04215389 0.37 0.04215389 0.1299999 0.04215389 0.1299999 0.25 0.00999999 0.4578461 0.1299999 0.75 0.25 0.75 0.5 0.5 0.5 0.75 0.25 0.75 0.5 0.5 0.5 0.542154 0.37 0.75 0.49 0.9578461 0.37 0.9578461 0.37 0.9578461 0.1299999 0.75 0.00999999 0.75 0.00999999 0.542154 0.1299999 0.542154 0.37</float_array>
           <technique_common>
-            <accessor source="#scrub_small_a800-mesh-map-0-array" count="90" stride="2">
+            <accessor source="#scrub_small_a800-mesh-map-0-array" count="132" stride="2">
               <param name="S" type="float"/>
               <param name="T" type="float"/>
             </accessor>
@@ -233,11 +269,17 @@
         <vertices id="scrub_small_a800-mesh-vertices">
           <input semantic="POSITION" source="#scrub_small_a800-mesh-positions"/>
         </vertices>
-        <triangles material="ParkerVegAtlas-material" count="30">
+        <triangles material="ParkerVegBark-material" count="20">
           <input semantic="VERTEX" source="#scrub_small_a800-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#scrub_small_a800-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#scrub_small_a800-mesh-map-0" offset="2" set="0"/>
-          <p>1 0 0 2 0 1 0 0 2 3 1 3 4 1 4 2 1 5 5 2 6 6 2 7 4 2 8 7 3 9 8 3 10 6 3 11 1 4 12 9 4 13 5 4 14 9 5 15 10 5 16 8 5 17 11 6 18 0 6 19 10 6 20 2 7 21 6 7 22 10 7 23 13 8 24 14 8 25 12 8 26 17 9 27 18 9 28 16 9 29 21 10 30 22 10 31 20 10 32 25 11 33 26 11 34 24 11 35 29 12 36 30 12 37 28 12 38 1 13 39 3 13 40 2 13 41 3 14 42 5 14 43 4 14 44 5 15 45 7 15 46 6 15 47 7 16 48 9 16 49 8 16 50 5 17 51 3 17 52 1 17 53 1 18 54 11 18 55 9 18 56 9 19 57 7 19 58 5 19 59 9 20 60 11 20 61 10 20 62 11 21 63 1 21 64 0 21 65 10 22 66 0 22 67 2 22 68 2 23 69 4 23 70 6 23 71 6 24 72 8 24 73 10 24 74 13 25 75 15 25 76 14 25 77 17 26 78 19 26 79 18 26 80 21 27 81 23 27 82 22 27 83 25 28 84 27 28 85 26 28 86 29 29 87 31 29 88 30 29 89</p>
+          <p>1 0 0 2 0 1 0 0 2 3 1 3 4 1 4 2 1 5 5 2 6 6 2 7 4 2 8 7 3 9 8 3 10 6 3 11 1 4 12 9 4 13 5 4 14 9 5 15 10 5 16 8 5 17 11 6 18 0 6 19 10 6 20 2 7 21 6 7 22 10 7 23 1 32 96 3 32 97 2 32 98 3 33 99 5 33 100 4 33 101 5 34 102 7 34 103 6 34 104 7 35 105 9 35 106 8 35 107 5 36 108 3 36 109 1 36 110 1 37 111 11 37 112 9 37 113 9 38 114 7 38 115 5 38 116 9 39 117 11 39 118 10 39 119 11 40 120 1 40 121 0 40 122 10 41 123 0 41 124 2 41 125 2 42 126 4 42 127 6 42 128 6 43 129 8 43 130 10 43 131</p>
+        </triangles>
+        <triangles material="ParkerVegFoliage-material" count="24">
+          <input semantic="VERTEX" source="#scrub_small_a800-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#scrub_small_a800-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#scrub_small_a800-mesh-map-0" offset="2" set="0"/>
+          <p>12 8 24 13 8 25 20 8 26 13 9 27 14 9 28 20 9 29 14 10 30 15 10 31 20 10 32 15 11 33 16 11 34 20 11 35 16 12 36 17 12 37 20 12 38 17 13 39 18 13 40 20 13 41 18 14 42 19 14 43 20 14 44 19 15 45 12 15 46 20 15 47 21 16 48 22 16 49 29 16 50 22 17 51 23 17 52 29 17 53 23 18 54 24 18 55 29 18 56 24 19 57 25 19 58 29 19 59 25 20 60 26 20 61 29 20 62 26 21 63 27 21 64 29 21 65 27 22 66 28 22 67 29 22 68 28 23 69 21 23 70 29 23 71 30 24 72 31 24 73 38 24 74 31 25 75 32 25 76 38 25 77 32 26 78 33 26 79 38 26 80 33 27 81 34 27 82 38 27 83 34 28 84 35 28 85 38 28 86 35 29 87 36 29 88 38 29 89 36 30 90 37 30 91 38 30 92 37 31 93 30 31 94 38 31 95</p>
         </triangles>
       </mesh>
     </geometry>
@@ -253,7 +295,10 @@
             <instance_geometry url="#scrub_small_a800-mesh" name="scrub_small_a800">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
+                  <instance_material symbol="ParkerVegBark-material" target="#ParkerVegBark-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                  <instance_material symbol="ParkerVegFoliage-material" target="#ParkerVegFoliage-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>
@@ -265,7 +310,10 @@
             <instance_geometry url="#scrub_small_a200-mesh" name="scrub_small_a200">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
+                  <instance_material symbol="ParkerVegBark-material" target="#ParkerVegBark-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                  <instance_material symbol="ParkerVegFoliage-material" target="#ParkerVegFoliage-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>
@@ -277,7 +325,7 @@
             <instance_geometry url="#scrub_small_a50-mesh" name="scrub_small_a50">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
+                  <instance_material symbol="ParkerVegBark-material" target="#ParkerVegBark-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>
