@@ -1,0 +1,196 @@
+<div class="bngApp cbh-root" style="width:100%;height:100%;">
+  <style>
+    .cbh-root {
+      --cbh-bg: rgba(12, 14, 18, 0.88);
+      --cbh-panel: rgba(28, 32, 40, 0.95);
+      --cbh-line: rgba(255, 255, 255, 0.08);
+      --cbh-text: #f2f4f7;
+      --cbh-muted: #9aa3b2;
+      --cbh-accent: #3dd6c6;
+      --cbh-warn: #ff6b4a;
+      font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+      color: var(--cbh-text);
+      background: var(--cbh-bg);
+      border: 1px solid var(--cbh-line);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+    .cbh-header {
+      padding: 10px 12px 8px;
+      border-bottom: 1px solid var(--cbh-line);
+      background: linear-gradient(180deg, rgba(61,214,198,0.12), transparent);
+    }
+    .cbh-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .cbh-sub {
+      margin: 2px 0 0;
+      font-size: 11px;
+      color: var(--cbh-muted);
+    }
+    .cbh-body {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px;
+    }
+    .cbh-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .cbh-row.wrap { flex-wrap: wrap; }
+    .cbh-btn {
+      flex: 1;
+      border: 1px solid var(--cbh-line);
+      background: var(--cbh-panel);
+      color: var(--cbh-text);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .cbh-btn:hover { border-color: var(--cbh-accent); }
+    .cbh-btn.primary {
+      background: rgba(61, 214, 198, 0.18);
+      border-color: rgba(61, 214, 198, 0.45);
+      color: #dffcf8;
+    }
+    .cbh-btn.danger {
+      border-color: rgba(255, 107, 74, 0.4);
+      color: #ffc8bb;
+    }
+    .cbh-btn.small { flex: 0 0 auto; padding: 6px 8px; min-width: 36px; }
+    .cbh-label {
+      font-size: 11px;
+      color: var(--cbh-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .cbh-meta {
+      font-size: 12px;
+      color: var(--cbh-muted);
+    }
+    .cbh-meta strong { color: var(--cbh-text); }
+    .cbh-list {
+      flex: 1;
+      min-height: 120px;
+      overflow-y: auto;
+      border: 1px solid var(--cbh-line);
+      border-radius: 6px;
+      background: rgba(0,0,0,0.25);
+    }
+    .cbh-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--cbh-line);
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .cbh-item:hover { background: rgba(255,255,255,0.04); }
+    .cbh-item.active {
+      background: rgba(61, 214, 198, 0.12);
+      box-shadow: inset 3px 0 0 var(--cbh-accent);
+    }
+    .cbh-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cbh-accent);
+      flex: 0 0 auto;
+    }
+    .cbh-input {
+      flex: 1;
+      background: var(--cbh-panel);
+      border: 1px solid var(--cbh-line);
+      border-radius: 6px;
+      color: var(--cbh-text);
+      padding: 7px 9px;
+      font-size: 12px;
+      min-width: 0;
+    }
+    .cbh-footer {
+      padding: 8px 10px 10px;
+      border-top: 1px solid var(--cbh-line);
+      font-size: 11px;
+      color: var(--cbh-muted);
+    }
+    .cbh-chip {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.06);
+      margin-right: 4px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+    .cbh-chip.active { background: rgba(61,214,198,0.2); color: #dffcf8; }
+  </style>
+
+  <div class="cbh-header">
+    <h2 class="cbh-title">Course Builder</h2>
+    <p class="cbh-sub">Place props without World Editor</p>
+  </div>
+
+  <div class="cbh-body">
+    <div class="cbh-row">
+      <button class="cbh-btn primary" ng-click="place()">Place</button>
+      <button class="cbh-btn" ng-click="undo()">Undo</button>
+      <button class="cbh-btn danger" ng-click="clear()">Clear</button>
+    </div>
+
+    <div class="cbh-row">
+      <span class="cbh-meta">Yaw <strong>{{ yaw | number:0 }}°</strong></span>
+      <button class="cbh-btn small" ng-click="rotateLeft()">⟲</button>
+      <button class="cbh-btn small" ng-click="rotateRight()">⟳</button>
+    </div>
+
+    <div>
+      <div class="cbh-label">Snap</div>
+      <div class="cbh-row wrap" style="margin-top:4px;">
+        <span class="cbh-chip" ng-class="{active: snap==5}" ng-click="setSnap(5)">5°</span>
+        <span class="cbh-chip" ng-class="{active: snap==15}" ng-click="setSnap(15)">15°</span>
+        <span class="cbh-chip" ng-class="{active: snap==45}" ng-click="setSnap(45)">45°</span>
+        <span class="cbh-chip" ng-class="{active: snap==90}" ng-click="setSnap(90)">90°</span>
+      </div>
+    </div>
+
+    <div class="cbh-label">Props</div>
+    <div class="cbh-list">
+      <div class="cbh-item"
+           ng-repeat="p in catalog track by p.id"
+           ng-class="{active: selectedPropId === p.id}"
+           ng-click="selectProp(p.id)">
+        <span class="cbh-dot"></span>
+        <span>{{ p.label }}</span>
+      </div>
+    </div>
+
+    <div class="cbh-meta">Placed: <strong>{{ count }}</strong></div>
+
+    <div class="cbh-label">Save / Load</div>
+    <div class="cbh-row">
+      <input class="cbh-input" ng-model="saveName" placeholder="layout name">
+      <button class="cbh-btn small" ng-click="save()">Save</button>
+      <button class="cbh-btn small" ng-click="load()">Load</button>
+    </div>
+    <div class="cbh-row wrap" ng-if="saves.length">
+      <span class="cbh-chip" ng-repeat="s in saves track by s" ng-click="saveName=s; load(s)">{{ s }}</span>
+    </div>
+  </div>
+
+  <div class="cbh-footer">
+    Aim with the camera, pick a prop, hit Place. Layouts save to settings/courseBuilderHud/
+  </div>
+</div>
