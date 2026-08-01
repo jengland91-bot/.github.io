@@ -54,6 +54,7 @@ Guide: [`INSTALL_FOR_039.md`](INSTALL_FOR_039.md) · troubleshooting: [`FIX_INST
 - Course markers: pits, VCPs, dangers, speed zones, start/finish
 - Desert terrain materials (reuseable pack)
 - Google Earth paint notes: `docs/EARTH_PAINT_GUIDE.md`
+- Close-up multi-tile / Google Earth patches: `docs/CLOSEUP_MULTI_TILE.md`
 - Source GPS: `source/reference/p400/`
 
 ## Rebuild from GPS
