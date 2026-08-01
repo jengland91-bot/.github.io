@@ -1,0 +1,4 @@
+# Large mesh exports — regenerate with apply_heightmap_blender.py
+export/parker_terrain_mesh.dae
+export/parker_terrain.blend
+*.blend1
