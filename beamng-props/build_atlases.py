@@ -237,6 +237,7 @@ def build_sign_atlas():
         ("arrow_double_right", "course-signs/textures/arrow_double_right.png"),
         ("arrow_triple_left", "course-signs/textures/arrow_triple_left.png"),
         ("arrow_triple_right", "course-signs/textures/arrow_triple_right.png"),
+        ("turn_ahead", "course-signs/textures/turn_ahead.png"),
         ("wrong_way", "course-signs/textures/sign_wrong_way.png"),
         ("danger_x", "course-signs/textures/sign_danger_x.png"),
         ("arrow_back_wrong_way", "course-signs/textures/arrow_back_wrong_way.png"),

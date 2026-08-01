@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 4.2.9 LTS commit date:2025-04-14, commit time:12:24, hash:a10f621e649a</authoring_tool>
     </contributor>
-    <created>2026-08-01T08:03:49</created>
-    <modified>2026-08-01T08:03:49</modified>
+    <created>2026-08-01T08:24:21</created>
+    <modified>2026-08-01T08:24:21</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -79,7 +79,7 @@
     <geometry id="milemarker_064_a50-mesh" name="milemarker_064_a50">
       <mesh>
         <source id="milemarker_064_a50-mesh-positions">
-          <float_array id="milemarker_064_a50-mesh-positions-array" count="24">-0.2204999 0 -0.01449996 0.2204999 0 -0.01449996 0.2204999 0 1.4645 -0.2204999 0 1.4645 0 -0.2204999 -0.01449996 0 0.2204999 -0.01449996 0 0.2204999 1.4645 0 -0.2204999 1.4645</float_array>
+          <float_array id="milemarker_064_a50-mesh-positions-array" count="24">-0.1995 0 -0.01549994 0.1995 0 -0.01549994 0.1995 0 1.5655 -0.1995 0 1.5655 0 -0.1995 -0.01549994 0 0.1995 -0.01549994 0 0.1995 1.5655 0 -0.1995 1.5655</float_array>
           <technique_common>
             <accessor source="#milemarker_064_a50-mesh-positions-array" count="8" stride="3">
               <param name="X" type="float"/>
@@ -121,7 +121,7 @@
     <geometry id="milemarker_064_a200-mesh" name="milemarker_064_a200">
       <mesh>
         <source id="milemarker_064_a200-mesh-positions">
-          <float_array id="milemarker_064_a200-mesh-positions-array" count="30">-0.04999995 -0.02749997 0 -0.04999995 -0.02749997 1.45 -0.04999995 0.07249999 0 0.01666665 0.07249999 1.45 0.04999995 0.03916662 0 0.04999995 -0.02749997 1.45 -0.21 -0.05249994 1.38 -0.21 -0.0625 1.1 0.21 -0.05249994 1.1 0.21 -0.0625 1.38</float_array>
+          <float_array id="milemarker_064_a200-mesh-positions-array" count="30">-0.04999995 -0.02749997 0 -0.04999995 -0.02749997 1.55 -0.04999995 0.07249999 0 0.01666665 0.07249999 1.55 0.04999995 0.03916662 0 0.04999995 -0.02749997 1.55 -0.1899999 -0.05249994 1.426 -0.1899999 -0.0625 0.8060001 0.1899999 -0.05249994 0.8060001 0.1899999 -0.0625 1.426</float_array>
           <technique_common>
             <accessor source="#milemarker_064_a200-mesh-positions-array" count="10" stride="3">
               <param name="X" type="float"/>
@@ -131,7 +131,7 @@
           </technique_common>
         </source>
         <source id="milemarker_064_a200-mesh-normals">
-          <float_array id="milemarker_064_a200-mesh-normals-array" count="36">0.3161943 0.9485831 -0.01453763 -0.8314421 0.5542947 0.0382272 0 0 -1 0 -1 0 0.9485831 0.3161943 0.01453763 -0.02378761 0.9990801 0.03568142 0 -1.19209e-6 1 0.02378761 -0.9990801 0.03568142 -1 0 0 0.5542947 -0.8314421 -0.0382272 0.02378761 0.9990801 -0.03568142 -0.02378761 -0.9990801 -0.03568142</float_array>
+          <float_array id="milemarker_064_a200-mesh-normals-array" count="36">0.3161984 0.9485957 -0.01359993 -0.831518 0.5543453 0.03576421 0 0 -1 0 -1 0 0.9485956 0.3161985 0.01359993 -0.02630323 0.999524 0.01612132 0 0 1 0.02630323 -0.999524 0.01612132 -1 0 0 0.5543453 -0.831518 -0.03576421 0.02630323 0.999524 -0.01612132 -0.02630323 -0.999524 -0.01612132</float_array>
           <technique_common>
             <accessor source="#milemarker_064_a200-mesh-normals-array" count="12" stride="3">
               <param name="X" type="float"/>
@@ -163,7 +163,7 @@
     <geometry id="Colmesh_sign-1-mesh" name="Colmesh_sign-1">
       <mesh>
         <source id="Colmesh_sign-1-mesh-positions">
-          <float_array id="Colmesh_sign-1-mesh-positions-array" count="24">-0.21 -0.08249998 1.1 -0.21 -0.08249998 1.38 -0.21 -0.03249996 1.1 -0.21 -0.03249996 1.38 0.21 -0.08249998 1.1 0.21 -0.08249998 1.38 0.21 -0.03249996 1.1 0.21 -0.03249996 1.38</float_array>
+          <float_array id="Colmesh_sign-1-mesh-positions-array" count="24">-0.1899999 -0.08249998 0.8060001 -0.1899999 -0.08249998 1.426 -0.1899999 -0.03249996 0.8060001 -0.1899999 -0.03249996 1.426 0.1899999 -0.08249998 0.8060001 0.1899999 -0.08249998 1.426 0.1899999 -0.03249996 0.8060001 0.1899999 -0.03249996 1.426</float_array>
           <technique_common>
             <accessor source="#Colmesh_sign-1-mesh-positions-array" count="8" stride="3">
               <param name="X" type="float"/>
@@ -205,7 +205,7 @@
     <geometry id="Colmesh_post-1-mesh" name="Colmesh_post-1">
       <mesh>
         <source id="Colmesh_post-1-mesh-positions">
-          <float_array id="Colmesh_post-1-mesh-positions-array" count="48">0 0.08249998 0 0 0.08249998 1.45 0.0424264 0.06492638 0 0.0424264 0.06492638 1.45 0.06 0.02249997 0 0.06 0.02249997 1.45 0.0424264 -0.01992636 0 0.0424264 -0.01992636 1.45 0 -0.03749996 0 0 -0.03749996 1.45 -0.0424264 -0.01992636 0 -0.0424264 -0.01992636 1.45 -0.06 0.02249997 0 -0.06 0.02249997 1.45 -0.0424264 0.06492638 0 -0.0424264 0.06492638 1.45</float_array>
+          <float_array id="Colmesh_post-1-mesh-positions-array" count="48">0 0.08249998 0 0 0.08249998 1.55 0.0424264 0.06492638 0 0.0424264 0.06492638 1.55 0.06 0.02249997 0 0.06 0.02249997 1.55 0.0424264 -0.01992636 0 0.0424264 -0.01992636 1.55 0 -0.03749996 0 0 -0.03749996 1.55 -0.0424264 -0.01992636 0 -0.0424264 -0.01992636 1.55 -0.06 0.02249997 0 -0.06 0.02249997 1.55 -0.0424264 0.06492638 0 -0.0424264 0.06492638 1.55</float_array>
           <technique_common>
             <accessor source="#Colmesh_post-1-mesh-positions-array" count="16" stride="3">
               <param name="X" type="float"/>
@@ -215,7 +215,7 @@
           </technique_common>
         </source>
         <source id="Colmesh_post-1-mesh-normals">
-          <float_array id="Colmesh_post-1-mesh-normals-array" count="84">0.3826835 0.9238796 0 0.9238795 0.3826835 0 0.9238796 -0.3826835 0 0.3826835 -0.9238796 0 -0.3826835 -0.9238796 0 -0.9238796 -0.3826835 0 0 0 1 -0.9238795 0.3826835 0 -0.3826835 0.9238796 0 0 0 -1 0.3826835 0.9238796 0 0.9238795 0.3826835 0 0.9238796 -0.3826835 0 0.3826835 -0.9238796 0 -0.3826835 -0.9238796 0 -0.9238796 -0.3826835 0 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 -0.9238795 0.3826835 0 -0.3826835 0.9238796 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1</float_array>
+          <float_array id="Colmesh_post-1-mesh-normals-array" count="84">0.3826835 0.9238795 0 0.9238795 0.3826835 0 0.9238795 -0.3826835 0 0.3826835 -0.9238795 0 -0.3826835 -0.9238795 0 -0.9238795 -0.3826835 0 0 0 1 -0.9238795 0.3826835 0 -0.3826835 0.9238795 0 0 0 -1 0.3826835 0.9238795 0 0.9238795 0.3826835 0 0.9238795 -0.3826835 0 0.3826835 -0.9238795 0 -0.3826835 -0.9238795 0 -0.9238795 -0.3826835 0 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 -0.9238795 0.3826835 0 -0.3826835 0.9238795 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1</float_array>
           <technique_common>
             <accessor source="#Colmesh_post-1-mesh-normals-array" count="28" stride="3">
               <param name="X" type="float"/>
@@ -247,7 +247,7 @@
     <geometry id="milemarker_064_a800-mesh" name="milemarker_064_a800">
       <mesh>
         <source id="milemarker_064_a800-mesh-positions">
-          <float_array id="milemarker_064_a800-mesh-positions-array" count="48">-0.04999995 -0.02749997 0 -0.04999995 -0.02749997 1.45 -0.04999995 0.07249999 0 -0.04999995 0.07249999 1.45 0.04999995 -0.02749997 0 0.04999995 -0.02749997 1.45 0.04999995 0.07249999 0 0.04999995 0.07249999 1.45 -0.21 -0.07249999 1.1 -0.21 -0.07249999 1.38 -0.21 -0.04249995 1.1 -0.21 -0.04249995 1.38 0.21 -0.07249999 1.1 0.21 -0.07249999 1.38 0.21 -0.04249995 1.1 0.21 -0.04249995 1.38</float_array>
+          <float_array id="milemarker_064_a800-mesh-positions-array" count="48">-0.04999995 -0.02749997 0 -0.04999995 -0.02749997 1.55 -0.04999995 0.07249999 0 -0.04999995 0.07249999 1.55 0.04999995 -0.02749997 0 0.04999995 -0.02749997 1.55 0.04999995 0.07249999 0 0.04999995 0.07249999 1.55 -0.1899999 -0.07249999 0.8060001 -0.1899999 -0.07249999 1.426 -0.1899999 -0.04249995 0.8060001 -0.1899999 -0.04249995 1.426 0.1899999 -0.07249999 0.8060001 0.1899999 -0.07249999 1.426 0.1899999 -0.04249995 0.8060001 0.1899999 -0.04249995 1.426</float_array>
           <technique_common>
             <accessor source="#milemarker_064_a800-mesh-positions-array" count="16" stride="3">
               <param name="X" type="float"/>

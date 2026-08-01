@@ -42,3 +42,11 @@ base00
 
 Helpers: `beamng-props/_shared/beamng_export.py`  
 Also see `COLLISION.md` for physics meshes.
+
+## Typical prop sizes (meters)
+
+| Prop | Approx. size | Collision |
+|------|--------------|-----------|
+| Mile marker plate | ~0.38 × 0.62 (portrait) | Thin box + post cylinder |
+| Course / turn / TURN AHEAD | ~0.40 × 0.68 (portrait) | Thin box + post cylinder |
+

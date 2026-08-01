@@ -1,5 +1,11 @@
 # Parker 400 — Mile Markers 1–100
 
+Vertical race plates (white / black), inspired by desert-series markers:
+
+- **"ILLEGAL TO REMOVE"** header  
+- **MILE** + large number  
+- Bottom logo row  
+
 Ready-to-place BeamNG mile markers. **No Blender work required** — exports are already built.
 
 ## Quick drop-in (tomorrow on your PC)
@@ -49,7 +55,8 @@ Each `.dae` already has its matching sign texture beside it (`mile_001.png`, woo
 - Post ≈ **1.45 m** tall
 - Origin at the **ground** under the post
 - Sign faces **-Y** (rotate in World Editor as needed)
-- Look: wood post, metal band, framed cream sign, desert orange stripe, “MILE N”
+- Portrait plate ≈ **0.38 × 0.62 m**
+- Look: white / black race plate — “ILLEGAL TO REMOVE !”, **MILE** + big number, logo row
 
 ## Rebuild (optional)
 

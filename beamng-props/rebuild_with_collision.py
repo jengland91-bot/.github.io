@@ -666,10 +666,11 @@ def build_signpost(
     out_dir: Path,
     name: str,
     atlas_key: str,
-    post_h=1.45,
-    sign_w=0.42,
-    sign_h=0.28,
+    post_h=1.55,
+    sign_w=0.38,
+    sign_h=0.62,
 ):
+    """Portrait race plates (taller than wide) — matches BITD-style markers."""
     clear_scene()
     layout = load_sign_layout()["rects"]
     mat = get_sign_atlas_mat()
@@ -679,8 +680,10 @@ def build_signpost(
         print(f"WARNING: no atlas rect for {atlas_key}, skipping")
         return
 
+    # Sign center height on post
+    sign_z = post_h * 0.72
     post = mesh_box("post", (0, 0, post_h / 2), (0.1, 0.1, post_h), mat)
-    sign = mesh_box("sign", (0, -0.08, 1.24), (sign_w, 0.03, sign_h), mat)
+    sign = mesh_box("sign", (0, -0.08, sign_z), (sign_w, 0.03, sign_h), mat)
     if wood_rect:
         uv_set_rect(post, wood_rect)
     uv_set_rect(sign, sign_rect)
@@ -688,7 +691,7 @@ def build_signpost(
 
     def cols(parent):
         cylinder_collider("post", (0, 0, post_h / 2), 0.06, post_h, parent, verts=8)
-        box_collider("sign", (0, -0.08, 1.24), (sign_w, 0.05, sign_h), parent)
+        box_collider("sign", (0, -0.08, sign_z), (sign_w, 0.05, sign_h), parent)
 
     root = wrap_beamng_hierarchy(parts, [cols], f"{name}_a800")
     export_dae(root, out_dir / f"{name}.dae")
@@ -972,18 +975,18 @@ def main():
         "arrow_double_right",
         "arrow_triple_left",
         "arrow_triple_right",
+        "turn_ahead",
         "wrong_way",
         "danger_x",
     ]
     rects = load_sign_layout()["rects"]
     for key in course_keys:
         if key in rects:
-            build_signpost(sdir, key, key, post_h=1.55, sign_w=0.55, sign_h=0.55)
-    # Alias filenames used by older kits
+            build_signpost(sdir, key, key, post_h=1.65, sign_w=0.40, sign_h=0.68)
     if "wrong_way" in rects:
-        build_signpost(sdir, "sign_wrong_way", "wrong_way", post_h=1.55, sign_w=0.55, sign_h=0.55)
+        build_signpost(sdir, "sign_wrong_way", "wrong_way", post_h=1.65, sign_w=0.40, sign_h=0.68)
     if "danger_x" in rects:
-        build_signpost(sdir, "sign_danger_x", "danger_x", post_h=1.55, sign_w=0.55, sign_h=0.55)
+        build_signpost(sdir, "sign_danger_x", "danger_x", post_h=1.65, sign_w=0.40, sign_h=0.68)
 
     lps = ROOT / "lap-signs" / "export" / "dae"
     for n in range(1, 11):
