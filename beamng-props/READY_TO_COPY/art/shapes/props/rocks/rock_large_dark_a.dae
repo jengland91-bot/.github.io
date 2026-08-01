@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 4.2.9 LTS commit date:2025-04-14, commit time:12:24, hash:a10f621e649a</authoring_tool>
+    </contributor>
+    <created>2026-08-01T08:24:19</created>
+    <modified>2026-08-01T08:24:19</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="ParkerVegAtlas-effect">
+      <profile_COMMON>
+        <newparam sid="vegetation_atlas_2048_png-surface">
+          <surface type="2D">
+            <init_from>vegetation_atlas_2048_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="vegetation_atlas_2048_png-sampler">
+          <sampler2D>
+            <source>vegetation_atlas_2048_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="vegetation_atlas_2048_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <reflectivity>
+              <float sid="specular">0.05</float>
+            </reflectivity>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Colmesh_Material-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">1 0 1 1</color>
+            </diffuse>
+            <transparent opaque="A_ONE">
+              <color sid="alpha">0 0 0 0.15</color>
+            </transparent>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images>
+    <image id="vegetation_atlas_2048_png" name="vegetation_atlas_2048_png">
+      <init_from>vegetation_atlas_2048.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="ParkerVegAtlas-material" name="ParkerVegAtlas">
+      <instance_effect url="#ParkerVegAtlas-effect"/>
+    </material>
+    <material id="Colmesh_Material-material" name="Colmesh_Material">
+      <instance_effect url="#Colmesh_Material-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="rock_large_dark_a_a50-mesh" name="rock_large_dark_a_a50">
+      <mesh>
+        <source id="rock_large_dark_a_a50-mesh-positions">
+          <float_array id="rock_large_dark_a_a50-mesh-positions-array" count="24">-1.634104 -0.008720815 0.488747 1.65136 -0.008720815 0.488747 1.65136 -0.008720815 1.636549 -1.634104 -0.008720815 1.636549 0.00862801 -1.651453 0.488747 0.00862801 1.634011 0.488747 0.00862801 1.634011 1.636549 0.00862801 -1.651453 1.636549</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a50-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_large_dark_a_a50-mesh-normals">
+          <float_array id="rock_large_dark_a_a50-mesh-normals-array" count="12">0 -1 0 1 0 0 0 -1 0 1 0 0</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a50-mesh-normals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_large_dark_a_a50-mesh-map-0">
+          <float_array id="rock_large_dark_a_a50-mesh-map-0-array" count="24">1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 0 1 1 0 1 1 0 1</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a50-mesh-map-0-array" count="12" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="rock_large_dark_a_a50-mesh-vertices">
+          <input semantic="POSITION" source="#rock_large_dark_a_a50-mesh-positions"/>
+        </vertices>
+        <triangles material="ParkerVegAtlas-material" count="4">
+          <input semantic="VERTEX" source="#rock_large_dark_a_a50-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#rock_large_dark_a_a50-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#rock_large_dark_a_a50-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 3 0 1 0 0 2 5 1 3 7 1 4 4 1 5 1 2 6 2 2 7 3 2 8 5 3 9 6 3 10 7 3 11</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="rock_large_dark_a_a200-mesh" name="rock_large_dark_a_a200">
+      <mesh>
+        <source id="rock_large_dark_a_a200-mesh-positions">
+          <float_array id="rock_large_dark_a_a200-mesh-positions-array" count="21">1.28177 -0.6917855 0.5 0.1606345 1.317196 0.5896385 1.626424 0.309252 0.7145577 0.1175155 -1.322524 0.6996045 -1.548044 -0.4206803 0.6868776 -1.283069 0.6924864 0.978451 0 0 1.625296</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a200-mesh-positions-array" count="7" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_large_dark_a_a200-mesh-normals">
+          <float_array id="rock_large_dark_a_a200-mesh-normals-array" count="30">-0.148427 -0.03874063 -0.9881643 0.1828746 0.1454391 -0.972319 -0.0147702 -0.0413767 -0.9990345 -0.3721379 0.3170758 -0.8723396 0.3177201 -0.3020331 0.8987935 0.4979497 -0.467151 0.7306272 -0.3109104 -0.563399 0.7654517 -0.493592 -0.1085262 0.8628956 -0.05848634 0.6214263 0.7812867 0.3207009 0.560962 0.7631988</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a200-mesh-normals-array" count="10" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_large_dark_a_a200-mesh-map-0">
+          <float_array id="rock_large_dark_a_a200-mesh-map-0-array" count="60">0.5 0.6430569 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.6430569 0.5 0.75 0.5 0.6430569 0.5 0.5 0.5 0.75 0.393057 0.643057 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.3944028 0.6444028 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.3944028 0.5 0.5 0.75 0.25 0.5 0.3719269 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a200-mesh-map-0-array" count="30" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="rock_large_dark_a_a200-mesh-vertices">
+          <input semantic="POSITION" source="#rock_large_dark_a_a200-mesh-positions"/>
+        </vertices>
+        <triangles material="ParkerVegAtlas-material" count="10">
+          <input semantic="VERTEX" source="#rock_large_dark_a_a200-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#rock_large_dark_a_a200-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#rock_large_dark_a_a200-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 0 0 1 3 0 2 0 1 3 1 1 4 2 1 5 1 2 6 3 2 7 4 2 8 1 3 9 4 3 10 5 3 11 0 4 12 2 4 13 3 4 14 3 5 15 2 5 16 6 5 17 4 6 18 3 6 19 6 6 20 5 7 21 4 7 22 6 7 23 1 8 24 5 8 25 6 8 26 2 9 27 1 9 28 6 9 29</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="Colmesh_rock-1-mesh" name="Colmesh_rock-1">
+      <mesh>
+        <source id="Colmesh_rock-1-mesh-positions">
+          <float_array id="Colmesh_rock-1-mesh-positions-array" count="48">0 1.575 0 0 1.575 2.09 1.113693 1.113693 0 1.113693 1.113693 2.09 1.575 0 0 1.575 0 2.09 1.113693 -1.113693 0 1.113693 -1.113693 2.09 0 -1.575 0 0 -1.575 2.09 -1.113693 -1.113693 0 -1.113693 -1.113693 2.09 -1.575 0 0 -1.575 0 2.09 -1.113693 1.113693 0 -1.113693 1.113693 2.09</float_array>
+          <technique_common>
+            <accessor source="#Colmesh_rock-1-mesh-positions-array" count="16" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Colmesh_rock-1-mesh-normals">
+          <float_array id="Colmesh_rock-1-mesh-normals-array" count="84">0.3826834 0.9238796 0 0.9238796 0.3826834 0 0.9238796 -0.3826834 0 0.3826834 -0.9238796 0 -0.3826834 -0.9238796 0 -0.9238796 -0.3826834 0 0 0 1 -0.9238796 0.3826834 0 -0.3826834 0.9238796 0 0 0 -1 0.3826834 0.9238796 0 0.9238796 0.3826834 0 0.9238796 -0.3826834 0 0.3826834 -0.9238796 0 -0.3826834 -0.9238796 0 -0.9238796 -0.3826834 0 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 -0.9238796 0.3826834 0 -0.3826834 0.9238796 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1</float_array>
+          <technique_common>
+            <accessor source="#Colmesh_rock-1-mesh-normals-array" count="28" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Colmesh_rock-1-mesh-map-0">
+          <float_array id="Colmesh_rock-1-mesh-map-0-array" count="168">1 1 0.875 0.5 1 0.5 0.875 1 0.75 0.5 0.875 0.5 0.75 1 0.625 0.5 0.75 0.5 0.625 1 0.5 0.5 0.625 0.5 0.5 1 0.375 0.5 0.5 0.5 0.375 1 0.25 0.5 0.375 0.5 0.4197056 0.08029437 0.49 0.25 0.00999999 0.25 0.25 1 0.125 0.5 0.25 0.5 0.125 1 0 0.5 0.125 0.5 0.51 0.25 0.5802944 0.4197056 0.9197056 0.08029437 1 1 0.875 1 0.875 0.5 0.875 1 0.75 1 0.75 0.5 0.75 1 0.625 1 0.625 0.5 0.625 1 0.5 1 0.5 0.5 0.5 1 0.375 1 0.375 0.5 0.375 1 0.25 1 0.25 0.5 0.49 0.25 0.4197056 0.4197056 0.25 0.49 0.25 0.49 0.08029437 0.4197056 0.49 0.25 0.08029437 0.4197056 0.00999999 0.25 0.49 0.25 0.00999999 0.25 0.08029437 0.08029437 0.25 0.00999999 0.25 0.00999999 0.4197056 0.08029437 0.00999999 0.25 0.25 1 0.125 1 0.125 0.5 0.125 1 0 1 0 0.5 0.5802944 0.4197056 0.75 0.49 0.9197056 0.4197056 0.9197056 0.4197056 0.99 0.25 0.5802944 0.4197056 0.99 0.25 0.9197056 0.08029437 0.5802944 0.4197056 0.9197056 0.08029437 0.75 0.00999999 0.5802944 0.08029437 0.5802944 0.08029437 0.51 0.25 0.9197056 0.08029437</float_array>
+          <technique_common>
+            <accessor source="#Colmesh_rock-1-mesh-map-0-array" count="84" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Colmesh_rock-1-mesh-vertices">
+          <input semantic="POSITION" source="#Colmesh_rock-1-mesh-positions"/>
+        </vertices>
+        <triangles material="Colmesh_Material-material" count="28">
+          <input semantic="VERTEX" source="#Colmesh_rock-1-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Colmesh_rock-1-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Colmesh_rock-1-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 2 0 1 0 0 2 3 1 3 4 1 4 2 1 5 5 2 6 6 2 7 4 2 8 7 3 9 8 3 10 6 3 11 9 4 12 10 4 13 8 4 14 11 5 15 12 5 16 10 5 17 7 6 18 5 6 19 13 6 20 13 7 21 14 7 22 12 7 23 15 8 24 0 8 25 14 8 26 12 9 27 14 9 28 6 9 29 1 10 30 3 10 31 2 10 32 3 11 33 5 11 34 4 11 35 5 12 36 7 12 37 6 12 38 7 13 39 9 13 40 8 13 41 9 14 42 11 14 43 10 14 44 11 15 45 13 15 46 12 15 47 5 16 48 3 16 49 1 16 50 1 17 51 15 17 52 5 17 53 15 18 54 13 18 55 5 18 56 13 19 57 11 19 58 9 19 59 9 20 60 7 20 61 13 20 62 13 21 63 15 21 64 14 21 65 15 22 66 1 22 67 0 22 68 14 23 69 0 23 70 2 23 71 2 24 72 4 24 73 14 24 74 4 25 75 6 25 76 14 25 77 6 26 78 8 26 79 10 26 80 10 27 81 12 27 82 6 27 83</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="rock_large_dark_a_a800-mesh" name="rock_large_dark_a_a800">
+      <mesh>
+        <source id="rock_large_dark_a_a800-mesh-positions">
+          <float_array id="rock_large_dark_a_a800-mesh-positions-array" count="36">0 0 0.5 1.28177 -0.6917855 0.5 -0.4960535 -1.134136 0.5 -1.555879 0 0.5 -0.4911508 1.122927 0.5 1.298996 0.7010822 0.5 0.4987795 -1.140368 0.9873003 -1.252078 -0.6757605 0.9664117 -1.283069 0.6924864 0.978451 0.4901193 1.120569 0.9784923 1.573135 0 0.9744165 0 0 1.625296</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a800-mesh-positions-array" count="12" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_large_dark_a_a800-mesh-normals">
+          <float_array id="rock_large_dark_a_a800-mesh-normals-array" count="60">0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0.8589113 -0.0106219 -0.5120142 0.2155002 -0.8661039 -0.4510253 -0.650003 -0.6074135 -0.4566674 -0.6271516 0.5946476 -0.5030657 0.2079342 0.882393 -0.4220736 0.6414731 -0.5989238 0.4793771 -0.2324236 -0.8550381 0.4635615 -0.8531734 -0.02390915 0.5210791 -0.2110737 0.8742603 0.437169 0.6150333 0.5925296 0.5202333 0.3608802 -0.3301354 0.8722248 -0.1511545 -0.5321672 0.8330369 -0.4579048 -0.01819217 0.8888151 -0.129821 0.5376599 0.8331077 0.3590076 0.3438202 0.8676989</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a800-mesh-normals-array" count="20" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="rock_large_dark_a_a800-mesh-map-0">
+          <float_array id="rock_large_dark_a_a800-mesh-map-0-array" count="120">0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75</float_array>
+          <technique_common>
+            <accessor source="#rock_large_dark_a_a800-mesh-map-0-array" count="60" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="rock_large_dark_a_a800-mesh-vertices">
+          <input semantic="POSITION" source="#rock_large_dark_a_a800-mesh-positions"/>
+        </vertices>
+        <triangles material="ParkerVegAtlas-material" count="20">
+          <input semantic="VERTEX" source="#rock_large_dark_a_a800-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#rock_large_dark_a_a800-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#rock_large_dark_a_a800-mesh-map-0" offset="2" set="0"/>
+          <p>0 0 0 1 0 1 2 0 2 1 1 3 0 1 4 5 1 5 0 2 6 2 2 7 3 2 8 0 3 9 3 3 10 4 3 11 0 4 12 4 4 13 5 4 14 1 5 15 5 5 16 10 5 17 2 6 18 1 6 19 6 6 20 3 7 21 2 7 22 7 7 23 4 8 24 3 8 25 8 8 26 5 9 27 4 9 28 9 9 29 1 10 30 10 10 31 6 10 32 2 11 33 6 11 34 7 11 35 3 12 36 7 12 37 8 12 38 4 13 39 8 13 40 9 13 41 5 14 42 9 14 43 10 14 44 6 15 45 10 15 46 11 15 47 7 16 48 6 16 49 11 16 50 8 17 51 7 17 52 11 17 53 9 18 54 8 18 55 11 18 56 10 19 57 9 19 58 11 19 59</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="base00" name="base00" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <node id="start01" name="start01" type="NODE">
+          <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+          <node id="rock_large_dark_a_a800" name="rock_large_dark_a_a800" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#rock_large_dark_a_a800-mesh" name="rock_large_dark_a_a800">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="rock_large_dark_a_a200" name="rock_large_dark_a_a200" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#rock_large_dark_a_a200-mesh" name="rock_large_dark_a_a200">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="rock_large_dark_a_a50" name="rock_large_dark_a_a50" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#rock_large_dark_a_a50-mesh" name="rock_large_dark_a_a50">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="nulldetail20" name="nulldetail20" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+          </node>
+        </node>
+        <node id="collision-1" name="collision-1" type="NODE">
+          <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+          <node id="Colmesh_rock-1" name="Colmesh_rock-1" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#Colmesh_rock-1-mesh" name="Colmesh_rock-1">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="Colmesh_Material-material" target="#Colmesh_Material-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+        </node>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

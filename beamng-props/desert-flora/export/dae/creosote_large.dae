@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 4.2.9 LTS commit date:2025-04-14, commit time:12:24, hash:a10f621e649a</authoring_tool>
+    </contributor>
+    <created>2026-08-01T08:09:21</created>
+    <modified>2026-08-01T08:09:21</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="ParkerVegBark-effect">
+      <profile_COMMON>
+        <newparam sid="vegetation_atlas_2048_png-surface">
+          <surface type="2D">
+            <init_from>vegetation_atlas_2048_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="vegetation_atlas_2048_png-sampler">
+          <sampler2D>
+            <source>vegetation_atlas_2048_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="vegetation_atlas_2048_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="ParkerVegFoliage-effect">
+      <profile_COMMON>
+        <newparam sid="vegetation_atlas_2048_png-surface">
+          <surface type="2D">
+            <init_from>vegetation_atlas_2048_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="vegetation_atlas_2048_png-sampler">
+          <sampler2D>
+            <source>vegetation_atlas_2048_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="vegetation_atlas_2048_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Colmesh_Material-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <color sid="diffuse">1 0 1 1</color>
+            </diffuse>
+            <transparent opaque="A_ONE">
+              <color sid="alpha">0 0 0 0.15</color>
+            </transparent>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images>
+    <image id="vegetation_atlas_2048_png" name="vegetation_atlas_2048_png">
+      <init_from>vegetation_atlas_2048.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="ParkerVegBark-material" name="ParkerVegBark">
+      <instance_effect url="#ParkerVegBark-effect"/>
+    </material>
+    <material id="ParkerVegFoliage-material" name="ParkerVegFoliage">
+      <instance_effect url="#ParkerVegFoliage-effect"/>
+    </material>
+    <material id="Colmesh_Material-material" name="Colmesh_Material">
+      <instance_effect url="#Colmesh_Material-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="creosote_large_a50-mesh" name="creosote_large_a50">
+      <mesh>
+        <source id="creosote_large_a50-mesh-positions">
+          <float_array id="creosote_large_a50-mesh-positions-array" count="24">-0.4039226 -0.006347 -0.01518034 0.439409 -0.006347 -0.01518034 0.439409 -0.006347 1.533215 -0.4039226 -0.006347 1.533215 0.01774322 -0.4280128 -0.01518034 0.01774322 0.4153188 -0.01518034 0.01774322 0.4153188 1.533215 0.01774322 -0.4280128 1.533215</float_array>
+          <technique_common>
+            <accessor source="#creosote_large_a50-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="creosote_large_a50-mesh-normals">
+          <float_array id="creosote_large_a50-mesh-normals-array" count="12">0 -1 0 1 0 0 0 -1 0 1 0 0</float_array>
+          <technique_common>
+            <accessor source="#creosote_large_a50-mesh-normals-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="creosote_large_a50-mesh-map-0">
+          <float_array id="creosote_large_a50-mesh-map-0-array" count="24">1 0 0 1 0 0 1 0 0 1 0 0 1 0 1 1 0 1 1 0 1 1 0 1</float_array>
+          <technique_common>
+            <accessor source="#creosote_large_a50-mesh-map-0-array" count="12" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="creosote_large_a50-mesh-vertices">
+          <input semantic="POSITION" source="#creosote_large_a50-mesh-positions"/>
+        </vertices>
+        <triangles material="ParkerVegBark-material" count="4">
+          <input semantic="VERTEX" source="#creosote_large_a50-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#creosote_large_a50-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#creosote_large_a50-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 3 0 1 0 0 2 5 1 3 7 1 4 4 1 5 1 2 6 2 2 7 3 2 8 5 3 9 6 3 10 7 3 11</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="creosote_large_a200-mesh" name="creosote_large_a200">
+      <mesh>
+        <source id="creosote_large_a200-mesh-positions">
+          <float_array id="creosote_large_a200-mesh-positions-array" count="135">0.0653553 0.01707106 0.6650001 0 0 0 -0.0653553 -0.01707106 0.6650001 0.1814315 -0.06593829 1.181624 0.1752505 0.2269752 1.119162 0.1718255 0.3892862 0.8981615 0.1722536 0.3689973 0.6369785 0.1752505 0.2269752 0.3958865 0.1788896 0.05451965 0.2753405 0.183813 -0.1788024 0.3155225 0.1876662 -0.3614024 0.5164325 0.1885225 -0.4019802 0.76757 0.1863819 -0.3005358 1.018707 0.0120173 0.1795984 1.502952 -0.2120044 0.1945882 1.441585 -0.3749294 0.2054898 1.216573 -0.3545638 0.2041271 0.9506507 -0.2120044 0.1945881 0.7051834 -0.03889667 0.1830051 0.5824498 0.1953079 0.167334 0.623361 0.3785985 0.1550696 0.827917 0.4193297 0.1523442 1.083612 0.3175016 0.1591577 1.339307 0.1342111 0.1714221 1.482496 -0.1859393 0.03713041 1.14837 -0.1549369 -0.2143753 1.088545 -0.1376925 -0.3542692 0.8765251 -0.1398481 -0.3367824 0.6259562 -0.1549369 -0.2143753 0.3946618 -0.173259 -0.0657382 0.2790146 -0.1980477 0.1353591 0.3175637 -0.2174476 0.2927395 0.510309 -0.2217587 0.327713 0.7512406 -0.210981 0.2402794 0.9921723 0.006322979 -0.1798889 1.518035 0.2209145 -0.1723461 1.455551 0.376981 -0.1668605 1.226442 0.3574727 -0.1675462 0.9556782 0.2209145 -0.1723461 0.705742 0.05509382 -0.1781746 0.5807738 -0.1692517 -0.1860602 0.6224299 -0.3448266 -0.1922316 0.8307101 -0.3838433 -0.193603 1.09106 -0.2863017 -0.1901745 1.35141 -0.1107268 -0.1840031 1.497207</float_array>
+          <technique_common>
+            <accessor source="#creosote_large_a200-mesh-positions-array" count="45" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="creosote_large_a200-mesh-normals">
+          <float_array id="creosote_large_a200-mesh-normals-array" count="108">-0.9997775 -0.02109694 0 -0.9997774 -0.02109694 0 -0.9997774 -0.02109694 0 -0.9997774 -0.02109694 0 -0.9997774 -0.021097 0 -0.9997775 -0.02109688 0 -0.9997774 -0.02109688 0 -0.9997774 -0.02109688 0 -0.06676298 -0.9977689 0 -0.06676292 -0.9977689 0 -0.06676292 -0.9977689 0 -0.06676292 -0.9977689 0 -0.06676298 -0.9977689 0 -0.06676292 -0.9977689 0 -0.0667631 -0.9977688 1.20573e-7 -0.0667631 -0.9977688 0 -0.06676292 -0.9977689 0 0.9924881 0.1223415 0 0.9924881 0.1223415 0 0.992488 0.1223415 0 0.992488 0.1223415 0 0.992488 0.1223415 0 0.9924881 0.1223413 0 0.992488 0.1223415 0 0.9924881 0.1223414 0 -0.03512769 0.9993829 0 -0.03512775 0.9993828 0 -0.03512775 0.9993829 0 -0.03512775 0.9993828 0 -0.03512775 0.9993829 0 -0.03512769 0.9993828 0 -0.03512775 0.9993828 0 -0.03512763 0.9993829 0 -0.03512775 0.9993828 0 0.2527247 -0.9675382 0 -0.2527247 0.9675382 0</float_array>
+          <technique_common>
+            <accessor source="#creosote_large_a200-mesh-normals-array" count="36" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="creosote_large_a200-mesh-map-0">
+          <float_array id="creosote_large_a200-mesh-map-0-array" count="216">0.8610194 0.9692699 0.9212 0.959 0.791 0.8855 0.9212 0.959 0.9548 0.9128 0.791 0.8855 0.9548 0.9128 0.9506 0.8582 0.791 0.8855 0.9506 0.8582 0.9212 0.8078 0.791 0.8855 0.9212 0.8078 0.8855 0.7826 0.791 0.8855 0.8855 0.7826 0.8372 0.791 0.791 0.8855 0.8372 0.791 0.7994 0.833 0.791 0.8855 0.812 0.938 0.8610194 0.9692699 0.791 0.8855 0.875 0.9716 0.9212 0.959 0.791 0.8855 0.9212 0.959 0.9548 0.9128 0.791 0.8855 0.9548 0.9128 0.9506 0.8582 0.791 0.8855 0.9506 0.8582 0.9212 0.8078 0.791 0.8855 0.9212 0.8078 0.8855 0.7826 0.791 0.8855 0.8855 0.7826 0.8372 0.791 0.791 0.8855 0.8372 0.791 0.7994 0.833 0.791 0.8855 0.812 0.938 0.8498 0.9674 0.791 0.8855 0.8498 0.9674 0.875 0.9716 0.791 0.8855 0.8613341 0.9693223 0.9212 0.959 0.791 0.8855 0.9212 0.959 0.9548 0.9128 0.791 0.8855 0.9548 0.9128 0.9506 0.8582 0.791 0.8855 0.9506 0.8582 0.9212 0.8078 0.791 0.8855 0.9212 0.8078 0.8855 0.7826 0.791 0.8855 0.8855 0.7826 0.8372 0.791 0.791 0.8855 0.8372 0.791 0.7994 0.833 0.791 0.8855 0.812 0.938 0.8613341 0.9693223 0.791 0.8855 0.875 0.9716 0.9212 0.959 0.791 0.8855 0.9212 0.959 0.9548 0.9128 0.791 0.8855 0.9548 0.9128 0.9506 0.8582 0.791 0.8855 0.9506 0.8582 0.9212 0.8078 0.791 0.8855 0.9212 0.8078 0.8855 0.7826 0.791 0.8855 0.8855 0.7826 0.8372 0.791 0.791 0.8855 0.8372 0.791 0.7994 0.833 0.791 0.8855 0.812 0.938 0.8498 0.9674 0.791 0.8855 0.8498 0.9674 0.875 0.9716 0.791 0.8855 0.75 0.75 0.75 1 0.5 0.8461539 0.75 0.75 0.75 1 0.5 0.8461539</float_array>
+          <technique_common>
+            <accessor source="#creosote_large_a200-mesh-map-0-array" count="108" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="creosote_large_a200-mesh-vertices">
+          <input semantic="POSITION" source="#creosote_large_a200-mesh-positions"/>
+        </vertices>
+        <triangles material="ParkerVegBark-material" count="2">
+          <input semantic="VERTEX" source="#creosote_large_a200-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#creosote_large_a200-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#creosote_large_a200-mesh-map-0" offset="2" set="0"/>
+          <p>0 34 102 2 34 103 1 34 104 2 35 105 0 35 106 1 35 107</p>
+        </triangles>
+        <triangles material="ParkerVegFoliage-material" count="34">
+          <input semantic="VERTEX" source="#creosote_large_a200-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#creosote_large_a200-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#creosote_large_a200-mesh-map-0" offset="2" set="0"/>
+          <p>3 0 0 4 0 1 11 0 2 4 1 3 5 1 4 11 1 5 5 2 6 6 2 7 11 2 8 6 3 9 7 3 10 11 3 11 7 4 12 8 4 13 11 4 14 8 5 15 9 5 16 11 5 17 9 6 18 10 6 19 11 6 20 12 7 21 3 7 22 11 7 23 13 8 24 14 8 25 21 8 26 14 9 27 15 9 28 21 9 29 15 10 30 16 10 31 21 10 32 16 11 33 17 11 34 21 11 35 17 12 36 18 12 37 21 12 38 18 13 39 19 13 40 21 13 41 19 14 42 20 14 43 21 14 44 22 15 45 23 15 46 21 15 47 23 16 48 13 16 49 21 16 50 24 17 51 25 17 52 32 17 53 25 18 54 26 18 55 32 18 56 26 19 57 27 19 58 32 19 59 27 20 60 28 20 61 32 20 62 28 21 63 29 21 64 32 21 65 29 22 66 30 22 67 32 22 68 30 23 69 31 23 70 32 23 71 33 24 72 24 24 73 32 24 74 34 25 75 35 25 76 42 25 77 35 26 78 36 26 79 42 26 80 36 27 81 37 27 82 42 27 83 37 28 84 38 28 85 42 28 86 38 29 87 39 29 88 42 29 89 39 30 90 40 30 91 42 30 92 40 31 93 41 31 94 42 31 95 43 32 96 44 32 97 42 32 98 44 33 99 34 33 100 42 33 101</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="Colmesh_bush-1-mesh" name="Colmesh_bush-1">
+      <mesh>
+        <source id="Colmesh_bush-1-mesh-positions">
+          <float_array id="Colmesh_bush-1-mesh-positions-array" count="48">0 0.525 0 0 0.525 1.615 0.371231 0.371231 0 0.371231 0.371231 1.615 0.525 0 0 0.525 0 1.615 0.371231 -0.371231 0 0.371231 -0.371231 1.615 0 -0.525 0 0 -0.525 1.615 -0.371231 -0.371231 0 -0.371231 -0.371231 1.615 -0.525 0 0 -0.525 0 1.615 -0.371231 0.371231 0 -0.371231 0.371231 1.615</float_array>
+          <technique_common>
+            <accessor source="#Colmesh_bush-1-mesh-positions-array" count="16" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Colmesh_bush-1-mesh-normals">
+          <float_array id="Colmesh_bush-1-mesh-normals-array" count="84">0.3826834 0.9238796 0 0.9238796 0.3826834 0 0.9238796 -0.3826834 0 0.3826834 -0.9238796 0 -0.3826834 -0.9238796 0 -0.9238796 -0.3826834 0 0 0 1 -0.9238796 0.3826834 0 -0.3826834 0.9238796 0 0 0 -1 0.3826834 0.9238796 0 0.9238796 0.3826834 0 0.9238796 -0.3826834 0 0.3826834 -0.9238796 0 -0.3826834 -0.9238796 0 -0.9238796 -0.3826834 0 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 -0.9238796 0.3826834 0 -0.3826834 0.9238796 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1</float_array>
+          <technique_common>
+            <accessor source="#Colmesh_bush-1-mesh-normals-array" count="28" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Colmesh_bush-1-mesh-map-0">
+          <float_array id="Colmesh_bush-1-mesh-map-0-array" count="168">1 1 0.875 0.5 1 0.5 0.875 1 0.75 0.5 0.875 0.5 0.75 1 0.625 0.5 0.75 0.5 0.625 1 0.5 0.5 0.625 0.5 0.5 1 0.375 0.5 0.5 0.5 0.375 1 0.25 0.5 0.375 0.5 0.4197056 0.08029437 0.49 0.25 0.00999999 0.25 0.25 1 0.125 0.5 0.25 0.5 0.125 1 0 0.5 0.125 0.5 0.51 0.25 0.5802944 0.4197056 0.9197056 0.08029437 1 1 0.875 1 0.875 0.5 0.875 1 0.75 1 0.75 0.5 0.75 1 0.625 1 0.625 0.5 0.625 1 0.5 1 0.5 0.5 0.5 1 0.375 1 0.375 0.5 0.375 1 0.25 1 0.25 0.5 0.49 0.25 0.4197056 0.4197056 0.25 0.49 0.25 0.49 0.08029437 0.4197056 0.49 0.25 0.08029437 0.4197056 0.00999999 0.25 0.49 0.25 0.00999999 0.25 0.08029437 0.08029437 0.25 0.00999999 0.25 0.00999999 0.4197056 0.08029437 0.00999999 0.25 0.25 1 0.125 1 0.125 0.5 0.125 1 0 1 0 0.5 0.5802944 0.4197056 0.75 0.49 0.9197056 0.4197056 0.9197056 0.4197056 0.99 0.25 0.5802944 0.4197056 0.99 0.25 0.9197056 0.08029437 0.5802944 0.4197056 0.9197056 0.08029437 0.75 0.00999999 0.5802944 0.08029437 0.5802944 0.08029437 0.51 0.25 0.9197056 0.08029437</float_array>
+          <technique_common>
+            <accessor source="#Colmesh_bush-1-mesh-map-0-array" count="84" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Colmesh_bush-1-mesh-vertices">
+          <input semantic="POSITION" source="#Colmesh_bush-1-mesh-positions"/>
+        </vertices>
+        <triangles material="Colmesh_Material-material" count="28">
+          <input semantic="VERTEX" source="#Colmesh_bush-1-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Colmesh_bush-1-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Colmesh_bush-1-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 2 0 1 0 0 2 3 1 3 4 1 4 2 1 5 5 2 6 6 2 7 4 2 8 7 3 9 8 3 10 6 3 11 9 4 12 10 4 13 8 4 14 11 5 15 12 5 16 10 5 17 7 6 18 5 6 19 13 6 20 13 7 21 14 7 22 12 7 23 15 8 24 0 8 25 14 8 26 12 9 27 14 9 28 6 9 29 1 10 30 3 10 31 2 10 32 3 11 33 5 11 34 4 11 35 5 12 36 7 12 37 6 12 38 7 13 39 9 13 40 8 13 41 9 14 42 11 14 43 10 14 44 11 15 45 13 15 46 12 15 47 5 16 48 3 16 49 1 16 50 1 17 51 15 17 52 5 17 53 15 18 54 13 18 55 5 18 56 13 19 57 11 19 58 9 19 59 9 20 60 7 20 61 13 20 62 13 21 63 15 21 64 14 21 65 15 22 66 1 22 67 0 22 68 14 23 69 0 23 70 2 23 71 2 24 72 4 24 73 14 24 74 4 25 75 6 25 76 14 25 77 6 26 78 8 26 79 10 26 80 10 27 81 12 27 82 6 27 83</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="creosote_large_a800-mesh" name="creosote_large_a800">
+      <mesh>
+        <source id="creosote_large_a800-mesh-positions">
+          <float_array id="creosote_large_a800-mesh-positions-array" count="192">0 0.06 0 0 0.06 0.665 0.0424264 0.0424264 0 0.0424264 0.0424264 0.665 0.06 0 0 0.06 0 0.665 0.0424264 -0.0424264 0 0.0424264 -0.0424264 0.665 0 -0.06 0 0 -0.06 0.665 -0.0424264 -0.0424264 0 -0.0424264 -0.0424264 0.665 -0.06 0 0 -0.06 0 0.665 -0.0424264 0.0424264 0 -0.0424264 0.0424264 0.665 0.1799599 0.003797411 1.179435 0.1752505 0.2269752 1.119162 0.1718255 0.3892862 0.8981615 0.1722536 0.3689973 0.6369785 0.1752505 0.2269752 0.3958865 0.1788896 0.05451965 0.2753405 0.183813 -0.1788024 0.3155225 0.1876662 -0.3614024 0.5164325 0.1885225 -0.4019802 0.76757 0.1863819 -0.3005358 1.018707 0.1825287 -0.1179358 1.159344 0.1802129 -0.008191406 0.7529584 0.0120173 0.1795984 1.502952 -0.2120044 0.1945882 1.441585 -0.3749294 0.2054898 1.216573 -0.3545638 0.2041271 0.9506507 -0.2120044 0.1945881 0.7051834 -0.03889667 0.1830051 0.5824498 0.1953079 0.167334 0.623361 0.3785985 0.1550696 0.827917 0.4193297 0.1523442 1.083612 0.3175016 0.1591577 1.339307 0.1342111 0.1714221 1.482496 0.02405154 0.1787931 1.068735 -0.1786478 -0.02202141 1.146368 -0.1549369 -0.2143753 1.088545 -0.1376925 -0.3542692 0.8765251 -0.1398481 -0.3367824 0.6259562 -0.1549369 -0.2143753 0.3946618 -0.173259 -0.0657382 0.2790146 -0.1980477 0.1353591 0.3175637 -0.2174476 0.2927395 0.510309 -0.2217587 0.327713 0.7512406 -0.210981 0.2402794 0.9921723 -0.1915811 0.08289885 1.127094 -0.1799216 -0.01168835 0.7372228 0.006322979 -0.1798889 1.518035 0.2209145 -0.1723461 1.455551 0.376981 -0.1668605 1.226442 0.3574727 -0.1675462 0.9556782 0.2209145 -0.1723461 0.705742 0.05509382 -0.1781746 0.5807738 -0.1692517 -0.1860602 0.6224299 -0.3448266 -0.1922316 0.8307101 -0.3838433 -0.193603 1.09106 -0.2863017 -0.1901745 1.35141 -0.1107268 -0.1840031 1.497207 -0.005204558 -0.180294 1.075913</float_array>
+          <technique_common>
+            <accessor source="#creosote_large_a800-mesh-positions-array" count="64" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="creosote_large_a800-mesh-normals">
+          <float_array id="creosote_large_a800-mesh-normals-array" count="216">0.3826835 0.9238795 0 0.9238795 0.3826835 0 0.9238795 -0.3826835 0 0.3826835 -0.9238795 0 -0.3826835 -0.9238795 0 -0.9238795 -0.3826835 0 0 0 1 -0.9238795 0.3826835 0 -0.3826835 0.9238795 0 0 0 -1 -0.9997775 -0.02109694 0 -0.9997774 -0.021097 0 -0.9997774 -0.02109694 0 -0.9997774 -0.02109694 0 -0.9997774 -0.021097 0 -0.9997774 -0.02109688 0 -0.9997774 -0.02109694 0 -0.9997774 -0.02109694 0 -0.9997774 -0.02109694 0 -0.9997774 -0.02109694 0 -0.9997774 -0.021097 0 -0.06676298 -0.9977689 0 -0.06676292 -0.9977689 0 -0.06676292 -0.9977689 0 -0.06676292 -0.9977688 0 -0.06676298 -0.9977689 0 -0.06676292 -0.9977688 0 -0.06676298 -0.9977688 0 -0.06676298 -0.9977689 0 -0.06676298 -0.9977688 0 -0.06676298 -0.9977689 0 -0.06676286 -0.9977689 0 0.9924881 0.1223415 0 0.9924881 0.1223415 0 0.9924881 0.1223415 0 0.9924881 0.1223414 0 0.9924881 0.1223415 0 0.992488 0.1223413 0 0.9924881 0.1223415 0 0.992488 0.1223414 0 0.9924881 0.1223414 0 0.9924881 0.1223414 0 0.9924881 0.1223415 0 -0.03512763 0.9993829 0 -0.03512775 0.9993828 0 -0.03512769 0.9993828 0 -0.03512775 0.9993829 0 -0.03512775 0.9993828 0 -0.03512769 0.9993829 0 -0.03512775 0.9993829 0 -0.03512775 0.9993828 0 -0.03512775 0.9993829 0 -0.03512769 0.9993829 0 -0.03512775 0.9993829 0 0.3826835 0.9238795 0 0.9238795 0.3826835 0 0.9238795 -0.3826835 0 0.3826835 -0.9238795 0 -0.3826835 -0.9238795 0 -0.9238795 -0.3826835 0 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 -0.9238795 0.3826835 0 -0.3826835 0.9238795 0 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 -1</float_array>
+          <technique_common>
+            <accessor source="#creosote_large_a800-mesh-normals-array" count="72" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="creosote_large_a800-mesh-map-0">
+          <float_array id="creosote_large_a800-mesh-map-0-array" count="432">0.75 0.75 0.5 1 0.5 0.75 0.75 0.75 0.5 1 0.5 0.75 0.75 0.75 0.5 1 0.5 0.75 0.75 0.75 0.5 1 0.5 0.75 0.75 0.75 0.5 1 0.5 0.75 0.75 0.75 0.5 1 0.5 0.75 0.4197056 0.08029437 0.49 0.25 0.00999999 0.25 0.75 0.75 0.5 1 0.5 0.75 0.75 0.75 0.5 1 0.5 0.75 0.9197056 0.08029437 0.5802944 0.08029437 0.5802944 0.4197056 0.875 0.9716 0.9212 0.959 0.875 0.875 0.9212 0.959 0.9548 0.9128 0.875 0.875 0.9548 0.9128 0.9506 0.8582 0.875 0.875 0.9506 0.8582 0.9212 0.8078 0.875 0.875 0.9212 0.8078 0.8855 0.7826 0.875 0.875 0.8855 0.7826 0.8372 0.791 0.875 0.875 0.8372 0.791 0.7994 0.833 0.875 0.875 0.7994 0.833 0.791 0.8855 0.875 0.875 0.791 0.8855 0.812 0.938 0.875 0.875 0.812 0.938 0.8498 0.9674 0.875 0.875 0.8498 0.9674 0.875 0.9716 0.875 0.875 0.875 0.9716 0.9212 0.959 0.875 0.875 0.9212 0.959 0.9548 0.9128 0.875 0.875 0.9548 0.9128 0.9506 0.8582 0.875 0.875 0.9506 0.8582 0.9212 0.8078 0.875 0.875 0.9212 0.8078 0.8855 0.7826 0.875 0.875 0.8855 0.7826 0.8372 0.791 0.875 0.875 0.8372 0.791 0.7994 0.833 0.875 0.875 0.7994 0.833 0.791 0.8855 0.875 0.875 0.791 0.8855 0.812 0.938 0.875 0.875 0.812 0.938 0.8498 0.9674 0.875 0.875 0.8498 0.9674 0.875 0.9716 0.875 0.875 0.875 0.9716 0.9212 0.959 0.875 0.875 0.9212 0.959 0.9548 0.9128 0.875 0.875 0.9548 0.9128 0.9506 0.8582 0.875 0.875 0.9506 0.8582 0.9212 0.8078 0.875 0.875 0.9212 0.8078 0.8855 0.7826 0.875 0.875 0.8855 0.7826 0.8372 0.791 0.875 0.875 0.8372 0.791 0.7994 0.833 0.875 0.875 0.7994 0.833 0.791 0.8855 0.875 0.875 0.791 0.8855 0.812 0.938 0.875 0.875 0.812 0.938 0.8498 0.9674 0.875 0.875 0.8498 0.9674 0.875 0.9716 0.875 0.875 0.875 0.9716 0.9212 0.959 0.875 0.875 0.9212 0.959 0.9548 0.9128 0.875 0.875 0.9548 0.9128 0.9506 0.8582 0.875 0.875 0.9506 0.8582 0.9212 0.8078 0.875 0.875 0.9212 0.8078 0.8855 0.7826 0.875 0.875 0.8855 0.7826 0.8372 0.791 0.875 0.875 0.8372 0.791 0.7994 0.833 0.875 0.875 0.7994 0.833 0.791 0.8855 0.875 0.875 0.791 0.8855 0.812 0.938 0.875 0.875 0.812 0.938 0.8498 0.9674 0.875 0.875 0.8498 0.9674 0.875 0.9716 0.875 0.875 0.75 0.75 0.75 1 0.5 1 0.75 0.75 0.75 1 0.5 1 0.75 0.75 0.75 1 0.5 1 0.75 0.75 0.75 1 0.5 1 0.75 0.75 0.75 1 0.5 1 0.75 0.75 0.75 1 0.5 1 0.49 0.25 0.4197056 0.4197056 0.25 0.49 0.25 0.49 0.08029437 0.4197056 0.49 0.25 0.08029437 0.4197056 0.00999999 0.25 0.49 0.25 0.00999999 0.25 0.08029437 0.08029437 0.25 0.00999999 0.25 0.00999999 0.4197056 0.08029437 0.00999999 0.25 0.75 0.75 0.75 1 0.5 1 0.75 0.75 0.75 1 0.5 1 0.5802944 0.4197056 0.75 0.49 0.9197056 0.4197056 0.9197056 0.4197056 0.99 0.25 0.9197056 0.08029437 0.9197056 0.08029437 0.75 0.00999999 0.5802944 0.08029437 0.5802944 0.08029437 0.51 0.25 0.5802944 0.4197056 0.5802944 0.4197056 0.9197056 0.4197056 0.9197056 0.08029437</float_array>
+          <technique_common>
+            <accessor source="#creosote_large_a800-mesh-map-0-array" count="216" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="creosote_large_a800-mesh-vertices">
+          <input semantic="POSITION" source="#creosote_large_a800-mesh-positions"/>
+        </vertices>
+        <triangles material="ParkerVegBark-material" count="28">
+          <input semantic="VERTEX" source="#creosote_large_a800-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#creosote_large_a800-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#creosote_large_a800-mesh-map-0" offset="2" set="0"/>
+          <p>1 0 0 2 0 1 0 0 2 3 1 3 4 1 4 2 1 5 5 2 6 6 2 7 4 2 8 7 3 9 8 3 10 6 3 11 9 4 12 10 4 13 8 4 14 11 5 15 12 5 16 10 5 17 7 6 18 5 6 19 13 6 20 13 7 21 14 7 22 12 7 23 15 8 24 0 8 25 14 8 26 6 9 27 10 9 28 14 9 29 1 54 162 3 54 163 2 54 164 3 55 165 5 55 166 4 55 167 5 56 168 7 56 169 6 56 170 7 57 171 9 57 172 8 57 173 9 58 174 11 58 175 10 58 176 11 59 177 13 59 178 12 59 179 5 60 180 3 60 181 1 60 182 1 61 183 15 61 184 5 61 185 15 62 186 13 62 187 5 62 188 13 63 189 11 63 190 9 63 191 9 64 192 7 64 193 13 64 194 13 65 195 15 65 196 14 65 197 15 66 198 1 66 199 0 66 200 14 67 201 0 67 202 2 67 203 2 68 204 4 68 205 6 68 206 6 69 207 8 69 208 10 69 209 10 70 210 12 70 211 14 70 212 14 71 213 2 71 214 6 71 215</p>
+        </triangles>
+        <triangles material="ParkerVegFoliage-material" count="44">
+          <input semantic="VERTEX" source="#creosote_large_a800-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#creosote_large_a800-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#creosote_large_a800-mesh-map-0" offset="2" set="0"/>
+          <p>16 10 30 17 10 31 27 10 32 17 11 33 18 11 34 27 11 35 18 12 36 19 12 37 27 12 38 19 13 39 20 13 40 27 13 41 20 14 42 21 14 43 27 14 44 21 15 45 22 15 46 27 15 47 22 16 48 23 16 49 27 16 50 23 17 51 24 17 52 27 17 53 24 18 54 25 18 55 27 18 56 25 19 57 26 19 58 27 19 59 26 20 60 16 20 61 27 20 62 28 21 63 29 21 64 39 21 65 29 22 66 30 22 67 39 22 68 30 23 69 31 23 70 39 23 71 31 24 72 32 24 73 39 24 74 32 25 75 33 25 76 39 25 77 33 26 78 34 26 79 39 26 80 34 27 81 35 27 82 39 27 83 35 28 84 36 28 85 39 28 86 36 29 87 37 29 88 39 29 89 37 30 90 38 30 91 39 30 92 38 31 93 28 31 94 39 31 95 40 32 96 41 32 97 51 32 98 41 33 99 42 33 100 51 33 101 42 34 102 43 34 103 51 34 104 43 35 105 44 35 106 51 35 107 44 36 108 45 36 109 51 36 110 45 37 111 46 37 112 51 37 113 46 38 114 47 38 115 51 38 116 47 39 117 48 39 118 51 39 119 48 40 120 49 40 121 51 40 122 49 41 123 50 41 124 51 41 125 50 42 126 40 42 127 51 42 128 52 43 129 53 43 130 63 43 131 53 44 132 54 44 133 63 44 134 54 45 135 55 45 136 63 45 137 55 46 138 56 46 139 63 46 140 56 47 141 57 47 142 63 47 143 57 48 144 58 48 145 63 48 146 58 49 147 59 49 148 63 49 149 59 50 150 60 50 151 63 50 152 60 51 153 61 51 154 63 51 155 61 52 156 62 52 157 63 52 158 62 53 159 52 53 160 63 53 161</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="base00" name="base00" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <node id="start01" name="start01" type="NODE">
+          <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+          <node id="creosote_large_a800" name="creosote_large_a800" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#creosote_large_a800-mesh" name="creosote_large_a800">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="ParkerVegBark-material" target="#ParkerVegBark-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                  <instance_material symbol="ParkerVegFoliage-material" target="#ParkerVegFoliage-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="creosote_large_a200" name="creosote_large_a200" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#creosote_large_a200-mesh" name="creosote_large_a200">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="ParkerVegBark-material" target="#ParkerVegBark-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                  <instance_material symbol="ParkerVegFoliage-material" target="#ParkerVegFoliage-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="creosote_large_a50" name="creosote_large_a50" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#creosote_large_a50-mesh" name="creosote_large_a50">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="ParkerVegBark-material" target="#ParkerVegBark-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+          <node id="nulldetail20" name="nulldetail20" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+          </node>
+        </node>
+        <node id="collision-1" name="collision-1" type="NODE">
+          <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+          <node id="Colmesh_bush-1" name="Colmesh_bush-1" type="NODE">
+            <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+            <instance_geometry url="#Colmesh_bush-1-mesh" name="Colmesh_bush-1">
+              <bind_material>
+                <technique_common>
+                  <instance_material symbol="Colmesh_Material-material" target="#Colmesh_Material-material">
+                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+                  </instance_material>
+                </technique_common>
+              </bind_material>
+            </instance_geometry>
+          </node>
+        </node>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>
