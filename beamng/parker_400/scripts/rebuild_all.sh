@@ -8,6 +8,7 @@ python3 scripts/bake_usgs_heightmap.py
 python3 scripts/prepare_hd_materials.py
 python3 scripts/bake_silt_shoulder.py
 python3 scripts/bake_dirt_road.py
+python3 scripts/bake_forest_scatter.py
 python3 scripts/bake_esri_satellite.py
 python3 scripts/bake_level.py
 python3 scripts/bake_ter.py

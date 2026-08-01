@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><up_axis>Z_UP</up_axis></asset>
+  <library_images>
+    <image id="bush_img" name="bush_img"><init_from>/levels/parker_400/art/shapes/bushes/p400_bush_d.png</init_from></image>
+  </library_images>
+  <library_effects>
+    <effect id="p400_bush_mat-fx"><profile_COMMON>
+      <newparam sid="bush_surface"><surface type="2D"><init_from>bush_img</init_from></surface></newparam>
+      <newparam sid="bush_sampler"><sampler2D><source>bush_surface</source></sampler2D></newparam>
+      <technique sid="common"><lambert>
+        <diffuse><texture texture="bush_sampler" texcoord="UVSET0"/></diffuse>
+        <transparent opaque="A_ONE"><texture texture="bush_sampler" texcoord="UVSET0"/></transparent>
+      </lambert></technique>
+    </profile_COMMON></effect>
+  </library_effects>
+  <library_materials>
+    <material id="p400_bush_mat" name="p400_bush_mat"><instance_effect url="#p400_bush_mat-fx"/></material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="p400_bush_a-mesh" name="p400_bush_a">
+      <mesh>
+        <source id="p400_bush_a-pos"><float_array id="p400_bush_a-pos-array" count="24">-0.6000 0.0000 0.0000 0.6000 0.0000 0.0000 0.6000 0.0000 1.0000 -0.6000 0.0000 1.0000 0.0000 -0.6000 0.0000 0.0000 0.6000 0.0000 0.0000 0.6000 1.0000 0.0000 -0.6000 1.0000</float_array>
+          <technique_common><accessor source="#p400_bush_a-pos-array" count="8" stride="3">
+            <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+          </accessor></technique_common>
+        </source>
+        <source id="p400_bush_a-uv"><float_array id="p400_bush_a-uv-array" count="16">0.0000 1.0000 1.0000 1.0000 1.0000 0.0000 0.0000 0.0000 0.0000 1.0000 1.0000 1.0000 1.0000 0.0000 0.0000 0.0000</float_array>
+          <technique_common><accessor source="#p400_bush_a-uv-array" count="8" stride="2">
+            <param name="S" type="float"/><param name="T" type="float"/>
+          </accessor></technique_common>
+        </source>
+        <vertices id="p400_bush_a-verts"><input semantic="POSITION" source="#p400_bush_a-pos"/></vertices>
+        <triangles material="p400_bush_mat" count="4">
+          <input semantic="VERTEX" source="#p400_bush_a-verts" offset="0"/>
+          <input semantic="TEXCOORD" source="#p400_bush_a-uv" offset="1" set="0"/>
+          <p>0 0 1 1 2 2 0 0 2 2 3 3 4 4 5 5 6 6 4 4 6 6 7 7</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="p400_bush_a" name="p400_bush_a" type="NODE">
+        <instance_geometry url="#p400_bush_a-mesh">
+          <bind_material><technique_common>
+            <instance_material symbol="p400_bush_mat" target="#p400_bush_mat">
+              <bind_vertex_input semantic="UVSET0" input_semantic="TEXCOORD" input_set="0"/>
+            </instance_material>
+          </technique_common></bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

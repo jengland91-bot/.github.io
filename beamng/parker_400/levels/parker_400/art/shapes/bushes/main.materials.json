@@ -1,0 +1,27 @@
+{
+  "p400_bush_mat": {
+    "name": "p400_bush_mat",
+    "mapTo": "p400_bush_mat",
+    "class": "Material",
+    "persistentId": "p400bushmat000001",
+    "Stages": [
+      {
+        "colorMap": "/levels/parker_400/art/shapes/bushes/p400_bush_d.png",
+        "roughnessFactor": 0.85,
+        "metallicFactor": 0.0,
+        "alphaRef": 80,
+        "castShadows": true,
+        "useAnisotropic": true
+      },
+      {},
+      {},
+      {}
+    ],
+    "alphaRef": 80,
+    "translucent": true,
+    "translucentBlendOp": "None",
+    "materialTag0": "beamng",
+    "materialTag1": "vegetation",
+    "annotation": "FOLIAGE"
+  }
+}

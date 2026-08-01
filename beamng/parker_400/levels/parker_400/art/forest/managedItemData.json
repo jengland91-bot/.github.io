@@ -1,0 +1,36 @@
+{
+  "p400_rock_a": {
+    "class": "TSForestItemData",
+    "internalName": "p400_rock_a",
+    "shapeFile": "/levels/parker_400/art/shapes/rocks/p400_rock_a.dae",
+    "collidable": true,
+    "radius": 1.2,
+    "snapRotationToTerrain": false,
+    "windScale": 0,
+    "annotation": "ROCK"
+  },
+  "p400_rock_b": {
+    "class": "TSForestItemData",
+    "internalName": "p400_rock_b",
+    "shapeFile": "/levels/parker_400/art/shapes/rocks/p400_rock_b.dae",
+    "collidable": true,
+    "radius": 1.4,
+    "snapRotationToTerrain": false,
+    "windScale": 0,
+    "annotation": "ROCK"
+  },
+  "p400_bush_a": {
+    "class": "TSForestItemData",
+    "internalName": "p400_bush_a",
+    "shapeFile": "/levels/parker_400/art/shapes/bushes/p400_bush_a.dae",
+    "collidable": false,
+    "radius": 1.0,
+    "snapRotationToTerrain": false,
+    "windScale": 0.35,
+    "trunkBendScale": 0.15,
+    "branchAmp": 0.4,
+    "detailAmp": 0.2,
+    "detailFreq": 1.0,
+    "annotation": "FOLIAGE"
+  }
+}

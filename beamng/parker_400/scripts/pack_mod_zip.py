@@ -19,6 +19,7 @@ EXCLUDE = {
     "art/terrains/parker400_base_color.png",  # replaced by JPG
     "art/terrains/desert_base_base_b.png",  # unused — unique sat is the base color
     "preview.png",  # Freeroam uses compact preview.jpg instead
+    "forest/scatter_meta.json",  # bake stats only
 }
 EXCLUDE_PREFIXES = (
     "art/terrains/hd4096/",
@@ -78,6 +79,8 @@ def main() -> None:
         assert any(n.endswith("parker400_base_color.jpg") for n in names)
         assert any(n.endswith("info.json") for n in names)
         assert any(n.endswith("preview.jpg") for n in names), "Freeroam needs preview.jpg"
+        assert any("forest/" in n and n.endswith(".forest4.json") for n in names), "forest scatter missing"
+        assert any(n.endswith("managedItemData.json") for n in names), "forest item data missing"
         assert not any(n.endswith("parker400_base_color.png") for n in names)
         print("files", len(names), "uncompressed_MB", round(sum(i.file_size for i in z.infolist()) / 1e6, 1))
 

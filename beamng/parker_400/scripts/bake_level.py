@@ -197,6 +197,15 @@ def main() -> None:
             "canSave": True,
             "canSaveDynamicFields": True,
         },
+        {
+            "class": "Forest",
+            "name": "theForest",
+            "__parent": "MissionGroup",
+            "position": [0, 0, 0],
+            "rotationMatrix": [1, 0, 0, 0, 1, 0, 0, 0, 1],
+            "scale": [1, 1, 1],
+            "lodReflectScalar": 2,
+        },
         {"class": "SimGroup", "name": "Roads", "__parent": "LevelObjects"},
         {
             "class": "DecalRoad",
