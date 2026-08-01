@@ -1,14 +1,17 @@
 {
   "title": "Parker 400",
-  "description": "2026 Parker 400 C/T/UTV final race course at true 1:1 scale (65536 m world). HD Esri satellite, USGS 3DEP hills/washes (MapNG US DEM family), painted GPX course corridor + DecalRoad from official racer GPS. Optional HD: import/p400_usgs_hd_8192.preset.json (squareSize=8). Default: import/p400_gpx_scale.preset.json (squareSize=16, maxHeight=1500, pos -32768,-32768).",
+  "description": "2026 Parker 400 C/T/UTV final race course at true 1:1 scale (65536 m world). HD Esri satellite, USGS 3DEP hills/washes, rutted dirt DecalRoad, silt shoulders, desert rocks/bushes, Colorado River water. Optional HD: import/p400_usgs_hd_8192.preset.json (squareSize=8). Default: import/p400_gpx_scale.preset.json (squareSize=16, maxHeight=1500, pos -32768,-32768).",
   "authors": "Josh",
-  "features": "Parker 400 CTUTV course, Main Pit spawn, VCPs, danger markers, open desert freeroam",
+  "features": "Parker 400 CTUTV course, Main Pit spawn, rocks & bushes, Colorado River, open desert freeroam",
   "suitablefor": "UTV, Trophy Truck, desert racing, Parker 400 prerunning",
-  "roads": "Packed desert race corridor with wash/berm character; open freeroam desert around the course",
-  "biome": "Sonoran / Parker AZ desert washes and mesa country",
+  "roads": "Rutted packed-dirt two-track with wash silt shoulders; open freeroam desert around the course",
+  "biome": "Sonoran / Parker AZ desert washes, mesa country, Colorado River",
   "country": "United States",
   "region": "northAmerica",
-  "size": [65536, 65536],
+  "size": [
+    65536,
+    65536
+  ],
   "defaultSpawnPointName": "spawns_pits",
   "supportsTraffic": false,
   "supportsTimeOfDay": true,
@@ -40,8 +43,14 @@
   "minimap": [
     {
       "file": "minimap/terrain.png",
-      "size": [65536, 65536],
-      "offset": [-32768, 32768]
+      "size": [
+        65536,
+        65536
+      ],
+      "offset": [
+        -32768,
+        32768
+      ]
     }
   ],
   "timeOfDayPresets": [

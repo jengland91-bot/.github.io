@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Bake a rutted off-road dirt DecalRoad texture (diffuse/normal/spec)."""
+"""Bake a rutted off-road dirt DecalRoad texture (diffuse/normal/spec).
+
+Parker desert two-track: pale silt shoulders, darker packed ruts, washboard
+chatter, and sparse gravel — tuned to sit on the wash-silt terrain paint.
+"""
 
 from __future__ import annotations
 
@@ -50,7 +54,7 @@ def fbm(h: int, w: int, octaves: int = 5, seed: int = 1) -> np.ndarray:
     return out / total
 
 
-def height_to_normal(height: np.ndarray, strength: float = 5.5) -> np.ndarray:
+def height_to_normal(height: np.ndarray, strength: float = 6.2) -> np.ndarray:
     dy, dx = np.gradient(height.astype(np.float32))
     nx = -dx * strength
     ny = -dy * strength
@@ -72,42 +76,76 @@ def main() -> None:
     xs, ys = np.meshgrid(x, y)
 
     n = fbm(h, w, 6, seed=42)
-    grain = fbm(h, w, 7, seed=99)
+    grain = fbm(h, w, 8, seed=99)
+    fine = fbm(h, w, 9, seed=17)
 
-    # Soft edge alpha
+    # Soft feather into silt shoulder (wider fade = less hard road edge)
     edge = np.minimum(xs, 1.0 - xs) * 2.0
-    alpha = np.clip((edge - 0.02) / 0.18, 0.0, 1.0)
-    alpha = np.clip(alpha * (0.85 + 0.15 * grain), 0.0, 1.0)
+    alpha = np.clip((edge - 0.015) / 0.22, 0.0, 1.0)
+    alpha = np.clip(alpha * (0.82 + 0.18 * grain), 0.0, 1.0)
 
     def rut(cx: float, width: float, depth: float) -> np.ndarray:
         d = np.abs(xs - cx) / width
-        return (depth * np.exp(-0.5 * (d**2) * 8.0)).astype(np.float32)
+        return (depth * np.exp(-0.5 * (d**2) * 7.5)).astype(np.float32)
 
-    ruts = rut(0.32, 0.07, 1.0) + rut(0.68, 0.07, 1.0)
-    chatter = (0.35 * np.sin(ys * 70.0 + n * 8.0) * ruts).astype(np.float32)
+    # Dual tire tracks + faint center pack + outer berms
+    ruts = (
+        rut(0.30, 0.075, 1.15)
+        + rut(0.70, 0.075, 1.12)
+        + rut(0.50, 0.11, 0.22)
+    )
+    washboard = (
+        0.42 * np.sin(ys * 92.0 + n * 10.0) * (ruts * 0.85 + 0.15)
+    ).astype(np.float32)
     berm = (
-        0.25 * np.exp(-0.5 * ((np.abs(xs - 0.5) - 0.42) / 0.06) ** 2)
+        0.32 * np.exp(-0.5 * ((np.abs(xs - 0.5) - 0.44) / 0.055) ** 2)
+    ).astype(np.float32)
+    # Lateral sand drifts across tracks
+    drifts = (
+        0.12 * np.sin(xs * 18.0 + ys * 3.0 + grain * 4.0) * (1.0 - ruts * 0.5)
     ).astype(np.float32)
 
-    height = np.clip(0.55 + 0.12 * n + 0.08 * grain - 0.22 * ruts + 0.05 * chatter + berm, 0, 1)
+    height = np.clip(
+        0.52
+        + 0.11 * n
+        + 0.07 * grain
+        + 0.03 * fine
+        - 0.28 * ruts
+        + 0.07 * washboard
+        + berm
+        + drifts,
+        0,
+        1,
+    )
 
-    base = np.array([148.0, 118.0, 82.0], dtype=np.float32)
-    dust = np.array([186.0, 158.0, 118.0], dtype=np.float32)
-    rut_col = np.array([112.0, 88.0, 62.0], dtype=np.float32)
+    # Parker wash palette — pale silt vs packed brown two-track
+    base = np.array([168.0, 138.0, 98.0], dtype=np.float32)
+    dust = np.array([204.0, 178.0, 138.0], dtype=np.float32)
+    rut_col = np.array([118.0, 92.0, 64.0], dtype=np.float32)
+    wet = np.array([98.0, 78.0, 56.0], dtype=np.float32)
 
-    t = np.clip(0.4 + 0.4 * n + 0.2 * grain, 0.0, 1.0)
+    t = np.clip(0.35 + 0.45 * n + 0.25 * grain, 0.0, 1.0)
     rgb = np.empty((h, w, 3), dtype=np.float32)
     for c in range(3):
         rgb[..., c] = base[c] * (1.0 - t) + dust[c] * t
-        rgb[..., c] = rgb[..., c] * (1.0 - ruts * 0.55) + rut_col[c] * (ruts * 0.55)
+        rgb[..., c] = rgb[..., c] * (1.0 - ruts * 0.62) + rut_col[c] * (ruts * 0.62)
+        # Slightly darker packed bottoms in deepest ruts
+        deep = np.clip(ruts - 0.55, 0, 1)
+        rgb[..., c] = rgb[..., c] * (1.0 - deep * 0.35) + wet[c] * (deep * 0.35)
 
     rng = np.random.default_rng(7)
-    pebble_mask = (rng.random((h, w)) > 0.992) & (alpha > 0.35)
-    rgb[pebble_mask, 0] = 160.0
-    rgb[pebble_mask, 1] = 145.0
-    rgb[pebble_mask, 2] = 125.0
+    # Gravel / pebble flecks
+    pebble_mask = (rng.random((h, w)) > 0.988) & (alpha > 0.3)
+    rgb[pebble_mask, 0] = 168.0
+    rgb[pebble_mask, 1] = 152.0
+    rgb[pebble_mask, 2] = 128.0
+    # Pale silt flecks on shoulders
+    silt_mask = (rng.random((h, w)) > 0.985) & (alpha > 0.2) & (ruts < 0.25)
+    rgb[silt_mask, 0] = 220.0
+    rgb[silt_mask, 1] = 205.0
+    rgb[silt_mask, 2] = 178.0
 
-    streak = 0.92 + 0.08 * np.sin(ys * 40.0 + xs * 3.0)
+    streak = 0.90 + 0.10 * np.sin(ys * 48.0 + xs * 2.5 + fine * 6.0)
     for c in range(3):
         rgb[..., c] *= streak
 
@@ -115,8 +153,8 @@ def main() -> None:
     rgba[..., :3] = np.clip(rgb, 0, 255).astype(np.uint8)
     rgba[..., 3] = (alpha * 255.0).astype(np.uint8)
 
-    normal = height_to_normal(height, strength=5.5)
-    spec = np.clip(0.18 + 0.08 * (1.0 - ruts) + 0.05 * grain, 0.0, 1.0)
+    normal = height_to_normal(height, strength=6.4)
+    spec = np.clip(0.14 + 0.10 * (1.0 - ruts) + 0.06 * grain - 0.04 * fine, 0.0, 1.0)
     spec8 = (spec * 255.0).astype(np.uint8)
 
     write_png8(ROAD / "p400_dirt_d.png", rgba)

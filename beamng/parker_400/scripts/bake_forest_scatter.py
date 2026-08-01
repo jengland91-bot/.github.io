@@ -37,10 +37,14 @@ HALF = WORLD_M / 2.0
 MAX_H = 1500.0
 # Keep clear of DecalRoad (~15 m half) + silt; place in outer shoulder band
 ROAD_CLEAR_M = 18.0
-BAND_INNER_M = 22.0
-BAND_OUTER_M = 85.0
-STEP_M = 55.0  # spacing along course between scatter stations
+BAND_INNER_M = 20.0
+BAND_OUTER_M = 220.0
+STEP_M = 38.0  # denser stations along course for Parker scrub look
 RNG_SEED = 4002026
+ROCK_P = 0.82
+BUSH_P = 0.78
+OUTER_ROCK_P = 0.35  # sparse rocks farther out
+OUTER_BUSH_P = 0.42
 
 
 def load_png16_gray(path: Path) -> np.ndarray:
@@ -452,34 +456,55 @@ def main() -> None:
         nx, ny = -ty, tx
 
         for side in (-1.0, 1.0):
-            # rocks
-            if rng.random() < 0.72:
-                dist = float(rng.uniform(BAND_INNER_M, BAND_OUTER_M * 0.75))
-                along = float(rng.uniform(0.15, 0.85))
+            # Near-shoulder rocks (desert rubble along two-track)
+            if rng.random() < ROCK_P:
+                dist = float(rng.uniform(BAND_INNER_M, min(95.0, BAND_OUTER_M * 0.45)))
+                along = float(rng.uniform(0.12, 0.88))
                 px = x0 + tx * seg * along + nx * side * dist
                 py = y0 + ty * seg * along + ny * side * dist
-                # reject if somehow inside road clear
-                # (dist already >= BAND_INNER)
                 u = (px + HALF) / WORLD_M
                 v = (py + HALF) / WORLD_M
-                if not (0.0 <= u <= 1.0 and 0.0 <= v <= 1.0):
-                    continue
-                z = sample_height(img, u, v) - float(rng.uniform(0.05, 0.35))
-                kind = "p400_rock_a" if rng.random() < 0.55 else "p400_rock_b"
-                scale = float(rng.uniform(0.7, 2.2))
-                yaw = float(rng.uniform(0, math.tau))
-                placements[kind].append(
-                    {
-                        "type": kind,
-                        "pos": [round(px, 2), round(py, 2), round(z, 2)],
-                        "rotationMatrix": [round(v, 5) for v in yaw_matrix(yaw)],
-                        "scale": round(scale, 3),
-                    }
-                )
-            # bushes (a bit closer / denser scrub look)
-            if rng.random() < 0.55:
-                dist = float(rng.uniform(BAND_INNER_M * 0.95, BAND_OUTER_M))
+                if 0.0 <= u <= 1.0 and 0.0 <= v <= 1.0:
+                    z = sample_height(img, u, v) - float(rng.uniform(0.05, 0.35))
+                    kind = "p400_rock_a" if rng.random() < 0.55 else "p400_rock_b"
+                    scale = float(rng.uniform(0.65, 2.4))
+                    yaw = float(rng.uniform(0, math.tau))
+                    placements[kind].append(
+                        {
+                            "type": kind,
+                            "pos": [round(px, 2), round(py, 2), round(z, 2)],
+                            "rotationMatrix": [round(v, 5) for v in yaw_matrix(yaw)],
+                            "scale": round(scale, 3),
+                        }
+                    )
+            # Farther sparse rock piles
+            if rng.random() < OUTER_ROCK_P:
+                dist = float(rng.uniform(90.0, BAND_OUTER_M))
                 along = float(rng.uniform(0.1, 0.9))
+                px = x0 + tx * seg * along + nx * side * dist
+                py = y0 + ty * seg * along + ny * side * dist
+                u = (px + HALF) / WORLD_M
+                v = (py + HALF) / WORLD_M
+                if 0.0 <= u <= 1.0 and 0.0 <= v <= 1.0:
+                    z = sample_height(img, u, v) - float(rng.uniform(0.05, 0.4))
+                    kind = "p400_rock_b" if rng.random() < 0.6 else "p400_rock_a"
+                    scale = float(rng.uniform(0.9, 2.8))
+                    yaw = float(rng.uniform(0, math.tau))
+                    placements[kind].append(
+                        {
+                            "type": kind,
+                            "pos": [round(px, 2), round(py, 2), round(z, 2)],
+                            "rotationMatrix": [round(v, 5) for v in yaw_matrix(yaw)],
+                            "scale": round(scale, 3),
+                        }
+                    )
+            # Creosote / brush clumps near road
+            bush_n = 1 + int(rng.random() < 0.45)
+            for _ in range(bush_n):
+                if rng.random() > BUSH_P:
+                    continue
+                dist = float(rng.uniform(BAND_INNER_M * 0.9, min(120.0, BAND_OUTER_M * 0.55)))
+                along = float(rng.uniform(0.08, 0.92))
                 px = x0 + tx * seg * along + nx * side * dist
                 py = y0 + ty * seg * along + ny * side * dist
                 u = (px + HALF) / WORLD_M
@@ -487,7 +512,7 @@ def main() -> None:
                 if not (0.0 <= u <= 1.0 and 0.0 <= v <= 1.0):
                     continue
                 z = sample_height(img, u, v) - 0.02
-                scale = float(rng.uniform(0.8, 1.8))
+                scale = float(rng.uniform(0.75, 2.1))
                 yaw = float(rng.uniform(0, math.tau))
                 placements["p400_bush_a"].append(
                     {
@@ -497,6 +522,26 @@ def main() -> None:
                         "scale": round(scale, 3),
                     }
                 )
+            # Sparse outer scrub
+            if rng.random() < OUTER_BUSH_P:
+                dist = float(rng.uniform(100.0, BAND_OUTER_M))
+                along = float(rng.uniform(0.1, 0.9))
+                px = x0 + tx * seg * along + nx * side * dist
+                py = y0 + ty * seg * along + ny * side * dist
+                u = (px + HALF) / WORLD_M
+                v = (py + HALF) / WORLD_M
+                if 0.0 <= u <= 1.0 and 0.0 <= v <= 1.0:
+                    z = sample_height(img, u, v) - 0.02
+                    scale = float(rng.uniform(0.7, 1.9))
+                    yaw = float(rng.uniform(0, math.tau))
+                    placements["p400_bush_a"].append(
+                        {
+                            "type": "p400_bush_a",
+                            "pos": [round(px, 2), round(py, 2), round(z, 2)],
+                            "rotationMatrix": [round(v, 5) for v in yaw_matrix(yaw)],
+                            "scale": round(scale, 3),
+                        }
+                    )
 
     FOREST_DIR.mkdir(parents=True, exist_ok=True)
     # clear old forest4

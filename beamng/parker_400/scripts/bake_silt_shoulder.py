@@ -18,9 +18,10 @@ from pngio import write_png8  # noqa: E402
 
 ART = ROOT / "levels" / "parker_400" / "art" / "terrains"
 
-SILT_LIGHT = np.array([228, 216, 192], dtype=np.float32)
-SILT_MID = np.array([208, 196, 172], dtype=np.float32)
-SILT_DARK = np.array([182, 172, 152], dtype=np.float32)
+# Parker wash silt — pale cream / tan (matches satellite desert shoulders)
+SILT_LIGHT = np.array([232, 218, 190], dtype=np.float32)
+SILT_MID = np.array([214, 198, 168], dtype=np.float32)
+SILT_DARK = np.array([188, 174, 148], dtype=np.float32)
 
 
 def fbm(h: int, w: int, octaves: int = 4, seed: int = 7) -> np.ndarray:

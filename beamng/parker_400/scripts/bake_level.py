@@ -212,7 +212,7 @@ def main() -> None:
             "name": "p400_ctutv_course",
             "__parent": "Roads",
             "material": "p400_dirt_road",
-            "textureLength": 14,
+            "textureLength": 16,
             "drivability": 0.55,
             "oneWay": False,
             "autoLanes": True,
@@ -314,6 +314,15 @@ def main() -> None:
             },
         ]
     )
+
+    # Colorado River / lakes (from bake_water.py)
+    water_path = IMPORT / "p400_water_objects.json"
+    if water_path.exists():
+        water_objs = json.loads(water_path.read_text(encoding="utf-8")).get("objects", [])
+        lines.extend(water_objs)
+        print(f"Injected {len(water_objs)} water objects")
+    else:
+        print("No p400_water_objects.json — run bake_water.py for Colorado River")
 
     LEVEL.joinpath("main").mkdir(parents=True, exist_ok=True)
     LEVEL_IMPORT.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,43 @@
+{
+  "p400_water": {
+    "name": "p400_water",
+    "mapTo": "unmapped_mat",
+    "class": "Material",
+    "persistentId": "p400water00000001",
+    "translucent": true,
+    "translucentBlendOp": "LerpAlpha",
+    "castShadows": false,
+    "alphaRef": 1,
+    "Stages": [
+      {
+        "diffuseColor": [
+          0.06,
+          0.2,
+          0.26,
+          0.78
+        ],
+        "specular": [
+          0.85,
+          0.92,
+          1.0,
+          1.0
+        ],
+        "specularPower": 56,
+        "pixelSpecular": true,
+        "glow": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "useAnisotropic": true
+      },
+      {},
+      {},
+      {}
+    ],
+    "materialTag0": "beamng",
+    "materialTag1": "water",
+    "annotation": "WATER"
+  }
+}
