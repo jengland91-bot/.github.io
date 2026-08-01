@@ -45,5 +45,6 @@ python3 scripts/prepare_hd_materials.py
 python3 scripts/bake_esri_satellite.py
 python3 scripts/bake_level.py
 python3 scripts/bake_ter.py
+python3 scripts/bake_minimap.py
 python3 scripts/pack_mod_zip.py
 echo "Rebuild complete."

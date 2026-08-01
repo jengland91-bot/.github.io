@@ -188,6 +188,8 @@ def main() -> None:
             "autoLanes": True,
             "autoJunction": True,
             "overObjects": False,
+            # Hide engine nav overlay — clean trail is baked into minimap/terrain.png
+            "hiddenInNavi": True,
             "renderPriority": 10,
             "improvedSpline": True,
             "smoothness": 0.5,
@@ -211,6 +213,7 @@ def main() -> None:
                 "autoLanes": True,
                 "autoJunction": True,
                 "overObjects": False,
+                "hiddenInNavi": True,
                 "renderPriority": 11,
                 "decalBias": 0.002,
                 "distanceFade": [8000, 800],
