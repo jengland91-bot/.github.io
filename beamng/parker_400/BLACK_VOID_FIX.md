@@ -46,7 +46,7 @@ You must see:
 | `theTerrain.ter` | ~48 MB (50331692 bytes) |
 | `info.json` | small |
 | `main\items.level.json` | ~80 KB |
-| `art\terrains\parker400_base_color.png` | ~38 MB |
+| `art\terrains\parker400_base_color.jpg` | ~29 MB (8192 HD sat) |
 
 If `theTerrain.ter` is missing, the download was incomplete — download again.
 
@@ -86,6 +86,6 @@ That is the old package (low-res sat, no painted course ribbon).
 
 1. Shipped pre-baked `theTerrain.ter` (missing before = empty world)
 2. Matching PBR texture-set (4096 base / 1024 macro+detail) + `materialTextureSet`
-3. Full Esri World Imagery satellite (`parker400_base_color.png`) on `desert_base`
-4. GPX course painted as `course_pack` (~120 m dirt ribbon) + wider DecalRoad
+3. HD Esri World Imagery satellite (`parker400_base_color.jpg` 8192², ~8 m/px)
+4. GPX course burned into sat + painted `course_pack` + wider DecalRoad
 5. Unpacked install path so the big `.ter` cannot be skipped inside a zip

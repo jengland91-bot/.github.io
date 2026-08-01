@@ -11,7 +11,7 @@ ART = ROOT / "levels" / "parker_400" / "art" / "terrains"
 TARGET = 4096
 
 # Source base maps (typically 512) → TARGET PNG with _4096 suffix.
-# desert_base color stays as parker400_base_color.png (unique satellite).
+# desert_base color stays as parker400_base_color.jpg (unique satellite).
 UPSCALE = [
     # desert_base PBR bases (color is satellite unique map)
     "desert_base_base_nm.png",
@@ -145,11 +145,12 @@ def out_name(src_name: str) -> str:
 
 
 def main() -> None:
-    sat = ART / "parker400_base_color.png"
+    sat = ART / "parker400_base_color.jpg"
     if not sat.exists():
-        raise SystemExit(f"missing satellite: {sat}")
-    sw, sh, _ = decode_png_rgba(sat)
-    print(f"satellite: {sat.name} {sw}x{sh}")
+        sat = ART / "parker400_base_color.png"
+    if not sat.exists():
+        raise SystemExit("missing satellite: parker400_base_color.jpg/.png")
+    print(f"satellite present: {sat.name} ({sat.stat().st_size / 1e6:.1f} MB)")
 
     for name in UPSCALE:
         src = ART / name

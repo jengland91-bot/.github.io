@@ -1,6 +1,6 @@
 {
   "title": "Parker 400",
-  "description": "2026 Parker 400 C/T/UTV final race course at true 1:1 scale (65536 m world). Pre-baked SRTM terrain (theTerrain.ter), DecalRoad race corridor, pits from the official racer GPS. Optional re-import: import/p400_gpx_scale.preset.json (squareSize=16, maxHeight=1500, pos -32768,-32768).",
+  "description": "2026 Parker 400 C/T/UTV final race course at true 1:1 scale (65536 m world). HD Esri satellite (8192), SRTM hills, painted GPX course corridor + DecalRoad from official racer GPS. Optional re-import: import/p400_gpx_scale.preset.json (squareSize=16, maxHeight=1500, pos -32768,-32768).",
   "authors": "Josh",
   "features": "Parker 400 CTUTV course, Main Pit spawn, VCPs, danger markers, open desert freeroam",
   "suitablefor": "UTV, Trophy Truck, desert racing, Parker 400 prerunning",

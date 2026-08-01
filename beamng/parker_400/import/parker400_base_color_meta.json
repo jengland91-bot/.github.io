@@ -1,18 +1,24 @@
 {
   "source": "Esri World Imagery tiles (same family MapNG uses for satellite)",
-  "zoom": 13,
-  "resolution": 4096,
+  "zoom": 15,
+  "resolution": 8192,
+  "metersPerPixelApprox": 8.0,
+  "format": "jpeg",
+  "jpegQualityHint": 96,
   "worldSizeMeters": 65536.0,
   "geographicScale": 1.0,
   "tileRange": {
-    "x0": 1496,
-    "x1": 1512,
-    "y0": 3261,
-    "y1": 3278
+    "x0": 5984,
+    "x1": 6049,
+    "y0": 13047,
+    "y1": 13112,
+    "count": 4356
   },
   "center": {
     "lat": 34.086139,
     "lon": -113.897239
   },
-  "note": "Locked to Parker 400 GPX 1:1 frame \u2014 race line should align."
+  "courseBurnHalfWidthMeters": 40,
+  "courseBurnStrength": 0.28,
+  "note": "8192 unique sat (~8 m/px) from Esri z15. Heightmap stays 4096 (16 m) — .ter size limit for GitHub."
 }
