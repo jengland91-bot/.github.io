@@ -7,27 +7,50 @@ angular.module('beamng.apps')
     scope: true,
     controller: ['$scope', function ($scope) {
       $scope.catalog = []
+      $scope.filtered = []
       $scope.placed = []
+      $scope.categories = []
       $scope.selectedPropId = null
+      $scope.selectedPlacedId = null
+      $scope.category = 'course'
+      $scope.mode = 'place'
       $scope.yaw = 0
+      $scope.scale = 1
       $scope.snap = 15
+      $scope.nudge = 0.5
       $scope.count = 0
       $scope.saveName = 'course'
       $scope.saves = []
-      $scope.status = 'Ready — look where you want it, then Place'
+      $scope.query = ''
 
       function lua(cmd) {
         bngApi.engineLua(cmd)
       }
 
+      function filterCatalog() {
+        var q = ($scope.query || '').toLowerCase()
+        $scope.filtered = ($scope.catalog || []).filter(function (p) {
+          if ($scope.category && p.category !== $scope.category) return false
+          if (!q) return true
+          return (p.label || '').toLowerCase().indexOf(q) !== -1
+        })
+      }
+
       $scope.$on('CourseBuilderHudState', function (_, state) {
         if (!state) return
-        $scope.catalog = state.catalog || $scope.catalog
+        $scope.catalog = state.catalog || []
         $scope.placed = state.placed || []
+        $scope.categories = state.categories || $scope.categories
         $scope.selectedPropId = state.selectedPropId
+        $scope.selectedPlacedId = state.selectedPlacedId
         $scope.yaw = state.yaw
+        $scope.scale = state.scale
         $scope.snap = state.snap
+        $scope.nudge = state.nudge
         $scope.count = state.count
+        $scope.mode = state.mode
+        $scope.category = state.category
+        filterCatalog()
         $scope.$digest()
       })
 
@@ -36,52 +59,71 @@ angular.module('beamng.apps')
         $scope.$digest()
       })
 
+      $scope.setCategory = function (id) {
+        $scope.category = id
+        lua('extensions.courseBuilderHud.setCategory("' + id + '")')
+        filterCatalog()
+      }
+
+      $scope.onSearch = function () {
+        filterCatalog()
+      }
+
       $scope.selectProp = function (id) {
         $scope.selectedPropId = id
         lua('extensions.courseBuilderHud.selectProp("' + id + '")')
       }
 
-      $scope.place = function () {
-        $scope.status = 'Placing…'
-        lua('extensions.courseBuilderHud.place()')
+      $scope.selectPlaced = function (id) {
+        lua('extensions.courseBuilderHud.selectPlaced(' + id + ')')
       }
 
-      $scope.undo = function () {
-        lua('extensions.courseBuilderHud.undo()')
-      }
-
-      $scope.clear = function () {
-        lua('extensions.courseBuilderHud.clear()')
-      }
+      $scope.place = function () { lua('extensions.courseBuilderHud.place()') }
+      $scope.undo = function () { lua('extensions.courseBuilderHud.undo()') }
+      $scope.clear = function () { lua('extensions.courseBuilderHud.clear()') }
+      $scope.scan = function () { lua('extensions.courseBuilderHud.scan()') }
 
       $scope.rotateLeft = function () {
         lua('extensions.courseBuilderHud.rotate(-' + ($scope.snap || 15) + ')')
       }
-
       $scope.rotateRight = function () {
         lua('extensions.courseBuilderHud.rotate(' + ($scope.snap || 15) + ')')
       }
-
       $scope.setSnap = function (snap) {
         lua('extensions.courseBuilderHud.setSnap(' + snap + ')')
       }
+
+      $scope.nudgeRel = function (f, r, u) {
+        var s = $scope.nudge || 0.5
+        lua('extensions.courseBuilderHud.nudgeRel(' + (f * s) + ',' + (r * s) + ',' + (u * s) + ')')
+      }
+
+      $scope.setScale = function (v) {
+        lua('extensions.courseBuilderHud.setScale(' + v + ')')
+      }
+      $scope.bumpScale = function (d) {
+        var next = Math.max(0.1, Math.round((($scope.scale || 1) + d) * 10) / 10)
+        $scope.setScale(next)
+      }
+
+      $scope.deleteSelected = function () { lua('extensions.courseBuilderHud.deleteSelected()') }
+      $scope.duplicateSelected = function () { lua('extensions.courseBuilderHud.duplicateSelected()') }
+      $scope.reaimSelected = function () { lua('extensions.courseBuilderHud.reaimSelected()') }
 
       $scope.save = function () {
         var name = ($scope.saveName || 'course').replace(/[^a-zA-Z0-9\-_]/g, '_')
         lua('extensions.courseBuilderHud.save("' + name + '")')
         lua('extensions.courseBuilderHud.listSaves()')
       }
-
       $scope.load = function (name) {
         var n = name || $scope.saveName || 'course'
         lua('extensions.courseBuilderHud.load("' + n + '")')
       }
-
-      $scope.refreshSaves = function () {
-        lua('extensions.courseBuilderHud.listSaves()')
+      $scope.exportPrefab = function () {
+        var name = ($scope.saveName || 'course').replace(/[^a-zA-Z0-9\-_]/g, '_')
+        lua('extensions.courseBuilderHud.exportPrefab("' + name + '")')
       }
 
-      // Pull initial state once the app mounts
       lua('extensions.courseBuilderHud.refresh()')
       lua('extensions.courseBuilderHud.listSaves()')
     }]

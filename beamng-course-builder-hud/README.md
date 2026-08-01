@@ -1,22 +1,22 @@
 # Course Builder HUD (BeamNG.drive)
 
-A freeroam **UI App** for laying out course props **without opening World Editor (F11)**.
+Clean freeroam **UI App** for laying out courses with props, rocks, and clutter — **without opening World Editor**.
 
-Look with the camera → pick a prop on the HUD → **Place**. Undo, rotate yaw, clear, and save/load layouts.
+Aim the camera → pick from the library → **Place**. Select placed items to rotate, scale, nudge, duplicate, or delete. Save layouts and reload them later.
 
-## Is this possible?
+## Features
 
-Yes. BeamNG UI Apps can call Lua via `bngApi.engineLua`, and Lua can spawn props with `core_vehicles.spawnNewVehicle` at a camera raycast hit. That is enough for quick course mocking in freeroam.
-
-| Approach | Good for | Limitation |
-| --- | --- | --- |
-| **This HUD** (spawned props) | Fast cones / barriers / tire walls while driving around | Session objects; not a permanent map edit unless you save layout or convert in World Editor |
-| **World Editor + Prefabs** | Permanent level content | Slower; full editor UI |
-| **Scene Manager** (community) | Broader scene staging | Separate mod |
+- Categories: **Course**, **Rocks**, **Nature**, **Clutter**, **Static**, **Found**
+- Physics props (cones, barriers, tire walls, barrels, …)
+- Rocks via stock / installed rock packs + **Scan for rocks / props**
+- Static mesh rocks (TSStatic) when mesh paths exist on the map
+- Edit tools: yaw snap, scale, nudge pad, move-to-aim, duplicate, delete
+- Save / Load JSON layouts
+- **Save + Prefab guide** for turning a layout into permanent map content in F11
 
 ## Install
 
-1. Copy the folder `beamng-course-builder-hud` into your BeamNG mods unpacked folder, **or** zip its **contents** (not the outer folder name alone — the zip root must contain `scripts/`, `lua/`, `ui/`):
+1. Put the mod in your BeamNG unpacked mods folder so it looks like:
 
    ```
    Documents/BeamNG.drive/<version>/mods/unpacked/courseBuilderHud/
@@ -25,58 +25,45 @@ Yes. BeamNG UI Apps can call Lua via `bngApi.engineLua`, and Lua can spawn props
      ui/modules/apps/CourseBuilderHud/...
    ```
 
-2. Enable the mod in the in-game Repository / Mods menu (unpacked mods usually auto-load).
+   Or run `./pack-mod.sh` and drop the zip into `mods/`.
 
-3. Load a freeroam map.
+2. Enable the mod, load **freeroam**.
+3. **Esc → UI Apps → Add App → Course Builder**.
 
-4. Press **Esc → UI Apps → Add App → Course Builder**.
+## Rocks
 
-5. Resize / dock the app like any other HUD widget.
+Rocks work best as **spawnable props** (same family as Esc → Vehicles → Props → Rocks & Boulders).
 
-## How to use
+1. Open the **Rocks** tab and try **Rocks & Boulders**.
+2. If nothing spawns, click **Scan for rocks / props** — it searches installed models and fills the **Found** tab.
+3. **Static** tab tries map mesh rocks (West Coast paths). Those only work if that mesh exists on the loaded level; use Scan / physics rocks when static fails.
 
-1. Free-look or drive so the camera aims at the ground where you want the prop.
-2. Select a prop in the list (cone, barrier, tire wall, etc.).
-3. Set yaw with ⟲ / ⟳ (snap 5° / 15° / 45° / 90°).
-4. Click **Place**.
-5. **Undo** removes the last prop. **Clear** removes all props tracked by this app.
-6. **Save** writes `settings/courseBuilderHud/<name>.json` in your user folder. **Load** respawns that layout.
+## Editing
 
-## Prop catalog
+| Control | What it does |
+| --- | --- |
+| Place | Spawns selected library item at camera aim |
+| Placed list | Click to select for editing |
+| ⟲ ⟳ | Rotate (uses snap) |
+| Scale − / + | Scale selected (best on statics) |
+| Nudge pad | Move selected relative to facing |
+| Move to aim | Teleport selected to where you look |
+| Duplicate / Delete | Copy or remove selected |
+| Save / Load | JSON in `settings/courseBuilderHud/` |
 
-Default list uses stock spawnable models (`cones`, `barrels`, `cardboard_box`, `barrier`, `tirewall`, …). Exact names vary by game version — if something fails to spawn, you will get a toast and a log line under `courseBuilderHud`.
+## Permanent map content
 
-Edit the `PROP_CATALOG` table in:
+This tool is for **fast freeroam layouts**. To bake into a level:
 
-`lua/ge/extensions/courseBuilderHud.lua`
+1. Build / Load the layout.
+2. Click **Save + Prefab guide** (writes layout + a short checklist).
+3. **F11** → select objects → **Make selection a Prefab** → save under the level’s `art/prefabs`.
 
-Add entries with the same model name you would pick from the vehicle/prop spawner.
+Terrain sculpt, road painting, and full lighting still need World Editor.
 
-## Saving permanently into a map
+## Customize catalog
 
-This HUD is for **fast layout**, not replacing World Editor:
+Edit `lua/ge/extensions/courseBuilderHud.lua` → `BASE_CATALOG`.
 
-1. Build the course with the HUD (or Load a saved JSON).
-2. Open **F11**, select the spawned objects in the Scene Tree (`Spawned Vehicles` / clones).
-3. **Make selection a Prefab** and save under your level’s `art/prefabs`.
-4. Or keep using **Save/Load** in this app for temporary / replayable freeroam courses.
-
-## Files
-
-```
-beamng-course-builder-hud/
-  scripts/courseBuilderHud/modScript.lua
-  lua/ge/extensions/courseBuilderHud.lua
-  ui/modules/apps/CourseBuilderHud/
-    app.json
-    app.js
-    app.html
-    app.png
-```
-
-## Notes
-
-- Works best in **freeroam**.
-- Placed props are physics objects (same family as Esc → Vehicles props), so cars can hit them.
-- If a model name is wrong for your BeamNG version, remove or fix that catalog entry.
-- Collision / multiplayer sync is not handled; this is a single-player layout tool.
+- `kind = "vehicle"` + `model = "folder_name"` for props
+- `kind = "static"` + `shape = "path/to/mesh.dae"` for static meshes
