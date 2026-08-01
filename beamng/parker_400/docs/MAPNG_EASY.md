@@ -4,12 +4,14 @@
 
 You do **not** have to use MapNG yourself for the full course.
 
-I already pulled the **exact Parker 400 map square** (same corners as our 1:1 GPX frame) from **Esri World Imagery** — the same satellite family MapNG uses — and baked it into the level:
+I already pulled the **exact Parker 400 map square** (same corners as our 1:1 GPX frame) from:
 
-- `levels/parker_400/art/terrains/parker400_base_color.png`
-- Preview with race line: `import/parker400_base_color_preview.png`
+- **Esri World Imagery** — same satellite family MapNG uses  
+- **USGS 3DEP elevation** — same US DEM family MapNG’s 3D preview uses (real hills / washes)
 
-So the full ~126‑mile loop already has matching satellite color + our SRTM hills + official DecalRoad.
+So the full ~126‑mile loop already has matching satellite color + real USGS hills + official DecalRoad.
+
+**MapNG “3D” explained:** [`MAPNG_3D_HILLS.md`](MAPNG_3D_HILLS.md)
 
 ---
 

@@ -1,0 +1,16 @@
+{
+  "type": "TerrainData",
+  "name": "theTerrain",
+  "heightMapPath": "/levels/parker_400/import/heightmap_8192.png",
+  "heightScale": 1500.0,
+  "holeMapPath": "",
+  "opacityMaps": [],
+  "pos": {
+    "x": -32768.0,
+    "y": -32768.0,
+    "z": 0
+  },
+  "squareSize": 8.0,
+  "applyTransform": true,
+  "flipYAxis": false
+}

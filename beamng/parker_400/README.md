@@ -48,7 +48,7 @@ Guide: [`INSTALL_FOR_039.md`](INSTALL_FOR_039.md) · troubleshooting: [`FIX_INST
 
 ## What’s in the level
 
-- SRTM elevation under the full CTUTV course area
+- USGS 3DEP elevation (MapNG US DEM family) under the full CTUTV course area — see `docs/MAPNG_3D_HILLS.md`
 - DecalRoad `p400_ctutv_course` from the official race line
 - Main Pit pad + spawns at Main Pit / Start Line
 - Course markers: pits, VCPs, dangers, speed zones, start/finish

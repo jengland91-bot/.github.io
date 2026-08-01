@@ -13,6 +13,8 @@ BOTH_ZIP = ROOT / "Parker400_Download_Both.zip"
 # Omit bulky / unused assets from the shipped mod
 EXCLUDE = {
     "import/heightmap_4096.png",  # optional re-import only; .ter is baked
+    "import/heightmap_8192.png",  # HD optional (~115 MB) — cannot ship in GitHub zip
+    "import/heightmap_meta.json",  # tiny but keep repo; not needed at runtime
     "art/terrains/desert_base_sat512_b.png",  # replaced by HD JPG
     "art/terrains/parker400_base_color.png",  # replaced by JPG
     "art/terrains/desert_base_base_b.png",  # unused — unique sat is the base color

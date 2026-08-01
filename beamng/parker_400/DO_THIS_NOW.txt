@@ -25,7 +25,7 @@ PARKER 400 — DO THIS NOW (BeamNG.drive)
 --------------------------------------------------------------------------------
 WHY THIS MATTERS
 --------------------------------------------------------------------------------
-The heightmap is real SRTM elevation under the 2026 Parker 400 CTUTV course.
+The heightmap is real USGS 3DEP elevation (MapNG's US DEM family) under the 2026 Parker 400 CTUTV course.
 If squareSize/maxHeight are wrong, the hills squash or the 126-mile loop
 won't match the GPS.
 
