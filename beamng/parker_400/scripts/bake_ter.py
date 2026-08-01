@@ -21,7 +21,8 @@ SQUARE = 16.0
 # Only materials with matching 4096 base textures
 MATERIALS = ["desert_base", "course_pack"]
 # Paint a ~90 m wide packed-dirt ribbon so the course is visible on the ground
-COURSE_HALF_WIDTH_M = 60.0
+# Narrower paint so more satellite desert shows beside the DecalRoad
+COURSE_HALF_WIDTH_M = 28.0
 
 
 def read_png16_gray(path: Path) -> np.ndarray:

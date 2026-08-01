@@ -13,7 +13,7 @@
   ],
   "maxHeight": 1500.0,
   "squareSize": 16.0,
-  "courseHalfWidthMeters": 60.0,
-  "coursePixels": 82469,
+  "courseHalfWidthMeters": 28.0,
+  "coursePixels": 30617,
   "note": "desert_base = Parker satellite; course_pack painted on GPX corridor"
 }

@@ -34,13 +34,14 @@ IMPORT = ROOT / "import"
 LEVEL_ART = ROOT / "levels" / "parker_400" / "art" / "terrains"
 
 WORLD_M = 65536.0
-OUT = 8192  # 2× sharper than prior 4096 (~8 m/px) — ships in main zip
-ZOOM = 15  # source ~4 m/px → cleaner 8 m/px after resample
-JPEG_Q = 96
+OUT = 16000  # bake mosaic at ~4.1 m/px (ffmpeg cannot encode full 16384² MJPEG)
+SHIP = 12288  # shipped unique sat (~5.3 m/px) — sharp enough, packs under GitHub 100 MiB
+ZOOM = 15  # source ~4 m/px
+JPEG_Q = 92
 WORKERS = 28
-# Soft-burn GPX corridor into satellite so the race line reads on the ground
-COURSE_BURN_HALF_WIDTH_M = 40.0
-COURSE_BURN_STRENGTH = 0.28  # darken toward packed-dirt
+# Light burn only — DecalRoad carries the race line; keep sat readable on/near course
+COURSE_BURN_HALF_WIDTH_M = 18.0
+COURSE_BURN_STRENGTH = 0.12
 USER_AGENT = "Parker400BeamNGBaker/1.0 (personal mod; Esri World Imagery tiles)"
 
 
@@ -210,43 +211,9 @@ def main() -> None:
     IMPORT.mkdir(parents=True, exist_ok=True)
     LEVEL_ART.mkdir(parents=True, exist_ok=True)
 
-    # Shipped asset: JPEG (BeamNG loads JPG for terrain base color)
-    jpg_level = LEVEL_ART / "parker400_base_color.jpg"
-    jpg_import = IMPORT / "parker400_base_color.jpg"
-    # ffmpeg -q:v: 2 = best MJPEG quality
-    qv = 2 if JPEG_Q >= 95 else max(2, min(8, int(round((100 - JPEG_Q) * 0.2 + 2))))
-    for dest in (jpg_level, jpg_import):
-        subprocess.run(
-            [
-                "ffmpeg",
-                "-v",
-                "error",
-                "-y",
-                "-f",
-                "rawvideo",
-                "-pix_fmt",
-                "rgb24",
-                "-s",
-                f"{OUT}x{OUT}",
-                "-i",
-                "-",
-                "-q:v",
-                str(qv),
-                str(dest),
-            ],
-            input=out.tobytes(),
-            check=True,
-        )
-        print(f"wrote {dest} ({dest.stat().st_size / 1e6:.1f} MB)")
-
-    # Remove old PNG satellite from level art so the zip does not ship both
-    old_png = LEVEL_ART / "parker400_base_color.png"
-    if old_png.exists():
-        old_png.unlink()
-        print(f"removed {old_png.name} (replaced by JPG)")
-
-    # Preview (north-up, course gold)
-    north_up = np.flipud(out[::8, ::8].copy())  # 1024
+    # Preview before freeing the big array
+    step = max(1, OUT // 1024)
+    north_up = np.flipud(out[::step, ::step].copy())
     ph, pw = north_up.shape[:2]
     for u, v in course["longCourseUv"][::2]:
         x = int(round(u * (pw - 1)))
@@ -261,18 +228,69 @@ def main() -> None:
     art.mkdir(parents=True, exist_ok=True)
     write_png8(art / "parker400_satellite.png", north_up)
 
+    # Encode: write full mosaic PPM, then Lanczos-scale to SHIP JPEG (encoder-safe size).
+    jpg_level = LEVEL_ART / "parker400_base_color.jpg"
+    jpg_import = IMPORT / "parker400_base_color.jpg"
+    qv = 2 if JPEG_Q >= 95 else max(2, min(8, int(round((100 - JPEG_Q) * 0.2 + 2))))
+    ppm = IMPORT / f"_sat_{OUT}.ppm"
+    print(f"Writing temp PPM ({OUT}x{OUT})...")
+    with ppm.open("wb") as f:
+        f.write(f"P6\n{OUT} {OUT}\n255\n".encode("ascii"))
+        flat = out.reshape(-1)
+        del out
+        chunk = OUT * 3 * 64
+        for i in range(0, flat.size, chunk):
+            f.write(flat[i : i + chunk].tobytes())
+        del flat
+    for dest in (jpg_level, jpg_import):
+        print(f"Encoding {dest.name} at {SHIP}² (q={qv})...")
+        subprocess.run(
+            [
+                "ffmpeg",
+                "-hide_banner",
+                "-loglevel",
+                "error",
+                "-y",
+                "-threads",
+                "1",
+                "-max_pixels",
+                "400000000",
+                "-i",
+                str(ppm),
+                "-vf",
+                f"scale={SHIP}:{SHIP}:flags=lanczos",
+                "-frames:v",
+                "1",
+                "-update",
+                "1",
+                "-q:v",
+                str(qv),
+                str(dest),
+            ],
+            check=True,
+        )
+        print(f"wrote {dest} ({dest.stat().st_size / 1e6:.1f} MB)")
+    ppm.unlink(missing_ok=True)
+
+    old_png = LEVEL_ART / "parker400_base_color.png"
+    if old_png.exists():
+        old_png.unlink()
+
     meta = {
         "source": "Esri World Imagery tiles (same family MapNG uses for satellite)",
         "zoom": ZOOM,
-        "resolution": OUT,
-        "metersPerPixelApprox": round(WORLD_M / OUT, 3),
+        "bakeResolution": OUT,
+        "resolution": SHIP,
+        "metersPerPixelApprox": round(WORLD_M / SHIP, 3),
         "format": "jpeg",
         "jpegQualityHint": JPEG_Q,
         "worldSizeMeters": WORLD_M,
         "geographicScale": course["geographicScale"],
         "tileRange": {"x0": x0, "x1": x1, "y0": y0, "y1": y1, "count": len(coords)},
         "center": {"lat": 34.086139, "lon": -113.897239},
-        "note": "8192 unique sat (~8 m/px). Heightmap stays 4096 (16 m) — .ter size limit for GitHub.",
+        "courseBurnHalfWidthMeters": COURSE_BURN_HALF_WIDTH_M,
+        "courseBurnStrength": COURSE_BURN_STRENGTH,
+        "note": "12288 unique sat (~5.3 m/px) from z15/16000 bake. Color detail/macro off so sat shows.",
     }
     (IMPORT / "parker400_base_color_meta.json").write_text(json.dumps(meta, indent=2) + "\n")
     print(json.dumps(meta, indent=2))
