@@ -20,8 +20,9 @@ INSTALL (recommended on 0.39.1):
   Quit BeamNG fully → start → Freeroam → search "parker"
 
 COURSE ("the train" / race line):
-  Spawn: Main Pit / Staging
-  Look for the dark asphalt DecalRoad + tan packed-dirt strip on the ground
+  Spawn: Main Pit / Staging (spawns above ground — vehicle drops onto dirt)
+  Look for packed-dirt DecalRoad (brown with tire tracks) on the GPX line
+  Bright yellow road = old missing material — reinstall latest Download Both
   Minimap white line = same official ~125.8 mi CTUTV GPX
 
 IF GROUND LOOKS FLAT / COURSE MISSING:
