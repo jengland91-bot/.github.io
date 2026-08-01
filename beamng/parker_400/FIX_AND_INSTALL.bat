@@ -8,7 +8,10 @@ echo   PARKER 400 - INSTALL FOR BEAMNG 0.39 / 0.39.1
 echo ============================================================
 echo.
 echo After 0.39, Freeroam often IGNORES loose levels\ folders.
-echo This installer puts a MOD ZIP into your mods\ folder instead.
+echo This installer puts a MOD ZIP into your mods\ folder.
+echo.
+echo If the map is a BLACK VOID, close this and run INSTALL_UNPACKED.bat
+echo instead (more reliable for theTerrain.ter).
 echo.
 
 set "SCRIPT_DIR=%~dp0"

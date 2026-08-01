@@ -16,11 +16,11 @@ INSTALL (mod zip — required on 0.39.1):
   Quit BeamNG fully → start → enable mod → Freeroam → search "parker"
 
 IF THE MAP IS STILL BLACK:
-  1) Confirm theTerrain.ter exists inside the zip (levels/parker_400/theTerrain.ter)
-  2) Re-download the latest mod zip from the PR branch (old zips had no .ter)
-  3) In World Editor (F11): Terrain tools → Import Terrain →
-       load import/p400_gpx_scale.preset.json (needs heightmap PNG)
-       then paint material desert_base → Ctrl+S
+  Run INSTALL_UNPACKED.bat (extracts to mods\unpacked\parker_400\)
+  Read BLACK_VOID_FIX.md
+  Confirm theTerrain.ter is ~48 MB on disk
+  Clear BeamNG cache / delete temp\art\terrainMaterialCache
+  Quit fully and reload
 
 OPTIONAL TWEAKS:
   Terrain Painter → desert_base / course_pack / rock_slope
