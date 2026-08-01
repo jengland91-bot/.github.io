@@ -705,12 +705,6 @@ local function exportPrefabNotes(name)
 end
 
 -- Discover rock/nature models from whatever is installed
-local NATURE_KEYS = {
-  rock = true, rocks = true, boulder = true, boulders = true,
-  log = true, logs = true, wood = true, crate = true,
-  bale = true, bales = true, tree = true, stump = true,
-}
-
 local function looksNature(key, name)
   local s = string.lower(tostring(key or "") .. " " .. tostring(name or ""))
   if s:find("rock", 1, true) or s:find("boulder", 1, true) then return "rocks" end
