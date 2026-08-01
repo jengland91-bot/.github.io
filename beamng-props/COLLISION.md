@@ -2,7 +2,7 @@
 
 **Never use the detailed visual mesh for game physics.** Complex visuals cause hitching and vehicle clipping. Every prop DAE rebuilt by `rebuild_with_collision.py` ships a separate ultra-simple collider.
 
-Also see **`GEOMETRY_LODS.md`** for Apply All Transforms, base pivots, and LOD0/1/2 chains.
+Also see **`GEOMETRY_LODS.md`** (transforms / LODs) and **`TEXTURES.md`** (atlases / ORM).
 
 ## Hierarchy (required)
 

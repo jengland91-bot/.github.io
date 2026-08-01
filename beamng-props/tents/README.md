@@ -27,3 +27,5 @@ Paint guides: `logo_templates/paint_tent_logo.png`
 Copy `export/dae/` into your map props folder. Place as **TSStatic**.
 
 **Collision:** Four pole boxes + roof slab only (open under the canopy). Set **collisionType** = `Collision Mesh`. See `../COLLISION.md`.
+
+**LODs:** `_a800` / `_a200` / `_a50` billboard. See `../GEOMETRY_LODS.md`.

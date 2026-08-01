@@ -5,22 +5,22 @@
       <author>Blender User</author>
       <authoring_tool>Blender 4.2.9 LTS commit date:2025-04-14, commit time:12:24, hash:a10f621e649a</authoring_tool>
     </contributor>
-    <created>2026-08-01T07:55:08</created>
-    <modified>2026-08-01T07:55:08</modified>
+    <created>2026-08-01T08:03:47</created>
+    <modified>2026-08-01T08:03:47</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_effects>
-    <effect id="rock_001-effect">
+    <effect id="ParkerVegAtlas-effect">
       <profile_COMMON>
-        <newparam sid="rock_tan_png-surface">
+        <newparam sid="vegetation_atlas_2048_png-surface">
           <surface type="2D">
-            <init_from>rock_tan_png</init_from>
+            <init_from>vegetation_atlas_2048_png</init_from>
           </surface>
         </newparam>
-        <newparam sid="rock_tan_png-sampler">
+        <newparam sid="vegetation_atlas_2048_png-sampler">
           <sampler2D>
-            <source>rock_tan_png-surface</source>
+            <source>vegetation_atlas_2048_png-surface</source>
           </sampler2D>
         </newparam>
         <technique sid="common">
@@ -29,8 +29,11 @@
               <color sid="emission">0 0 0 1</color>
             </emission>
             <diffuse>
-              <texture texture="rock_tan_png-sampler" texcoord="UVMap"/>
+              <texture texture="vegetation_atlas_2048_png-sampler" texcoord="UVMap"/>
             </diffuse>
+            <reflectivity>
+              <float sid="specular">0.05</float>
+            </reflectivity>
             <index_of_refraction>
               <float sid="ior">1.5</float>
             </index_of_refraction>
@@ -60,13 +63,13 @@
     </effect>
   </library_effects>
   <library_images>
-    <image id="rock_tan_png" name="rock_tan_png">
-      <init_from>rock_tan.png</init_from>
+    <image id="vegetation_atlas_2048_png" name="vegetation_atlas_2048_png">
+      <init_from>vegetation_atlas_2048.png</init_from>
     </image>
   </library_images>
   <library_materials>
-    <material id="rock_001-material" name="rock.001">
-      <instance_effect url="#rock_001-effect"/>
+    <material id="ParkerVegAtlas-material" name="ParkerVegAtlas">
+      <instance_effect url="#ParkerVegAtlas-effect"/>
     </material>
     <material id="Colmesh_Material-material" name="Colmesh_Material">
       <instance_effect url="#Colmesh_Material-effect"/>
@@ -107,7 +110,7 @@
         <vertices id="rock_small_tan_b_a50-mesh-vertices">
           <input semantic="POSITION" source="#rock_small_tan_b_a50-mesh-positions"/>
         </vertices>
-        <triangles material="rock_001-material" count="4">
+        <triangles material="ParkerVegAtlas-material" count="4">
           <input semantic="VERTEX" source="#rock_small_tan_b_a50-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#rock_small_tan_b_a50-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#rock_small_tan_b_a50-mesh-map-0" offset="2" set="0"/>
@@ -138,7 +141,7 @@
           </technique_common>
         </source>
         <source id="rock_small_tan_b_a200-mesh-map-0">
-          <float_array id="rock_small_tan_b_a200-mesh-map-0-array" count="60">0.50078 0.3029417 0.01158779 0.4927037 0.08866858 0.05808734 0.01158779 0.4927037 0.50078 0.3029417 0.4467535 0.5134459 0.50078 0.3029417 0.08866858 0.05808734 0.4647033 0.1074039 0.01158779 0.4927037 0.4467535 0.5134459 0.1698472 0.5920289 0.8842129 0.7687816 0.9568212 0.5859691 0.9568212 0.9453456 0.5112541 0.2916738 0.6810576 0.00393033 0.7198311 0.2485103 0.61392 0.5363926 0.5112541 0.2916738 0.7198311 0.2485103 0.9960696 0.4392381 0.61392 0.5363926 0.7198311 0.2485103 0.9960696 0.08880984 0.9960696 0.4392381 0.7198311 0.2485103 0.792708 0.8740797 0.5453472 0.7248513 0.792708 0.5859691</float_array>
+          <float_array id="rock_small_tan_b_a200-mesh-map-0-array" count="60">0.25 0.75 0.25 0.8419385 0.25 1 0.09193843 0.8419385 0.25 0.75 0.25 1 0.25 0.75 0.25 0.8940231 0.25 1 0.09193843 0.8419385 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.1590394 0.9090395 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.1590394 0.75 0.25 1</float_array>
           <technique_common>
             <accessor source="#rock_small_tan_b_a200-mesh-map-0-array" count="30" stride="2">
               <param name="S" type="float"/>
@@ -149,7 +152,7 @@
         <vertices id="rock_small_tan_b_a200-mesh-vertices">
           <input semantic="POSITION" source="#rock_small_tan_b_a200-mesh-positions"/>
         </vertices>
-        <triangles material="rock_001-material" count="10">
+        <triangles material="ParkerVegAtlas-material" count="10">
           <input semantic="VERTEX" source="#rock_small_tan_b_a200-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#rock_small_tan_b_a200-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#rock_small_tan_b_a200-mesh-map-0" offset="2" set="0"/>
@@ -222,7 +225,7 @@
           </technique_common>
         </source>
         <source id="rock_small_tan_b_a800-mesh-map-0">
-          <float_array id="rock_small_tan_b_a800-mesh-map-0-array" count="120">0.2562215 0.3076559 0.01158779 0.4927037 0.003930389 0.131687 0.01158779 0.4927037 0.2562215 0.3076559 0.3477219 0.5718297 0.2562215 0.3076559 0.003930389 0.131687 0.3309897 0.06149387 0.2562215 0.3076559 0.3309897 0.06149387 0.5007801 0.3029417 0.2562215 0.3076559 0.5007801 0.3029417 0.3477219 0.5718297 0.01158779 0.4927037 0.3477219 0.5718297 0.1698472 0.5920289 0.003930389 0.9609876 0.00393033 0.5998897 0.06870877 0.7802302 0.3309897 0.06149387 0.003930389 0.131687 0.1510217 0.00393033 0.5007801 0.3029417 0.3309897 0.06149387 0.5033934 0.120688 0.3477219 0.5718297 0.5007801 0.3029417 0.5033934 0.4800541 0.1934033 0.7415415 0.07656961 0.7196923 0.1934033 0.5998896 0.5483078 0.4797007 0.5112541 0.2916738 0.6621996 0.5781083 0.8005689 0.7756695 0.8763522 0.5859692 0.8763522 0.957199 0.8842129 0.7687816 0.9568212 0.5859691 0.9568212 0.9453456 0.6049569 0.8330866 0.5112541 0.6629474 0.792708 0.8740797 0.5112541 0.2916738 0.6810576 0.00393033 0.7198311 0.2485103 0.6621996 0.5781083 0.5112541 0.2916738 0.7198311 0.2485103 0.9960696 0.4392381 0.6621996 0.5781083 0.7198311 0.2485103 0.9960696 0.08880984 0.9960696 0.4392381 0.7198311 0.2485103 0.792708 0.8740797 0.5112541 0.6629474 0.792708 0.5859691</float_array>
+          <float_array id="rock_small_tan_b_a800-mesh-map-0-array" count="120">0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1 0 0.75 0.25 0.75 0.25 1</float_array>
           <technique_common>
             <accessor source="#rock_small_tan_b_a800-mesh-map-0-array" count="60" stride="2">
               <param name="S" type="float"/>
@@ -233,7 +236,7 @@
         <vertices id="rock_small_tan_b_a800-mesh-vertices">
           <input semantic="POSITION" source="#rock_small_tan_b_a800-mesh-positions"/>
         </vertices>
-        <triangles material="rock_001-material" count="20">
+        <triangles material="ParkerVegAtlas-material" count="20">
           <input semantic="VERTEX" source="#rock_small_tan_b_a800-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#rock_small_tan_b_a800-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#rock_small_tan_b_a800-mesh-map-0" offset="2" set="0"/>
@@ -253,7 +256,7 @@
             <instance_geometry url="#rock_small_tan_b_a800-mesh" name="rock_small_tan_b_a800">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="rock_001-material" target="#rock_001-material">
+                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>
@@ -265,7 +268,7 @@
             <instance_geometry url="#rock_small_tan_b_a200-mesh" name="rock_small_tan_b_a200">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="rock_001-material" target="#rock_001-material">
+                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>
@@ -277,7 +280,7 @@
             <instance_geometry url="#rock_small_tan_b_a50-mesh" name="rock_small_tan_b_a50">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="rock_001-material" target="#rock_001-material">
+                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>

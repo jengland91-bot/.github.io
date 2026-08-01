@@ -9,3 +9,5 @@
 Copy `export/dae/` into your map props folder. Place as **TSStatic**.
 
 **Collision:** Each stack uses one 8-sided `Colmesh_*-1` cylinder (not the torus visual). Rows use one cylinder per tire. Set **collisionType** = `Collision Mesh`. See `../COLLISION.md`.
+
+**LODs:** `_a800` / `_a200` / `_a50` billboard. See `../GEOMETRY_LODS.md`.

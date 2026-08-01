@@ -5,39 +5,22 @@
       <author>Blender User</author>
       <authoring_tool>Blender 4.2.9 LTS commit date:2025-04-14, commit time:12:24, hash:a10f621e649a</authoring_tool>
     </contributor>
-    <created>2026-08-01T07:55:09</created>
-    <modified>2026-08-01T07:55:09</modified>
+    <created>2026-08-01T08:03:48</created>
+    <modified>2026-08-01T08:03:48</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_effects>
-    <effect id="wood_008-effect">
+    <effect id="ParkerSignAtlas-effect">
       <profile_COMMON>
-        <technique sid="common">
-          <lambert>
-            <emission>
-              <color sid="emission">0 0 0 1</color>
-            </emission>
-            <diffuse>
-              <color sid="diffuse">0.35 0.22 0.12 1</color>
-            </diffuse>
-            <index_of_refraction>
-              <float sid="ior">1.5</float>
-            </index_of_refraction>
-          </lambert>
-        </technique>
-      </profile_COMMON>
-    </effect>
-    <effect id="sign_008-effect">
-      <profile_COMMON>
-        <newparam sid="mile_009_png-surface">
+        <newparam sid="sign_atlas_2048_png-surface">
           <surface type="2D">
-            <init_from>mile_009_png</init_from>
+            <init_from>sign_atlas_2048_png</init_from>
           </surface>
         </newparam>
-        <newparam sid="mile_009_png-sampler">
+        <newparam sid="sign_atlas_2048_png-sampler">
           <sampler2D>
-            <source>mile_009_png-surface</source>
+            <source>sign_atlas_2048_png-surface</source>
           </sampler2D>
         </newparam>
         <technique sid="common">
@@ -46,10 +29,10 @@
               <color sid="emission">0 0 0 1</color>
             </emission>
             <diffuse>
-              <texture texture="mile_009_png-sampler" texcoord="UVMap"/>
+              <texture texture="sign_atlas_2048_png-sampler" texcoord="UVMap"/>
             </diffuse>
             <reflectivity>
-              <float sid="specular">0.1</float>
+              <float sid="specular">0.05</float>
             </reflectivity>
             <index_of_refraction>
               <float sid="ior">1.5</float>
@@ -80,16 +63,13 @@
     </effect>
   </library_effects>
   <library_images>
-    <image id="mile_009_png" name="mile_009_png">
-      <init_from>mile_009.png</init_from>
+    <image id="sign_atlas_2048_png" name="sign_atlas_2048_png">
+      <init_from>sign_atlas_2048.png</init_from>
     </image>
   </library_images>
   <library_materials>
-    <material id="wood_008-material" name="wood.008">
-      <instance_effect url="#wood_008-effect"/>
-    </material>
-    <material id="sign_008-material" name="sign.008">
-      <instance_effect url="#sign_008-effect"/>
+    <material id="ParkerSignAtlas-material" name="ParkerSignAtlas">
+      <instance_effect url="#ParkerSignAtlas-effect"/>
     </material>
     <material id="Colmesh_Material-material" name="Colmesh_Material">
       <instance_effect url="#Colmesh_Material-effect"/>
@@ -130,7 +110,7 @@
         <vertices id="milemarker_009_a50-mesh-vertices">
           <input semantic="POSITION" source="#milemarker_009_a50-mesh-positions"/>
         </vertices>
-        <triangles material="wood_008-material" count="4">
+        <triangles material="ParkerSignAtlas-material" count="4">
           <input semantic="VERTEX" source="#milemarker_009_a50-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#milemarker_009_a50-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#milemarker_009_a50-mesh-map-0" offset="2" set="0"/>
@@ -161,7 +141,7 @@
           </technique_common>
         </source>
         <source id="milemarker_009_a200-mesh-map-0">
-          <float_array id="milemarker_009_a200-mesh-map-0-array" count="72">0.1214953 0.002365469 0.144375 0.9976345 0.0757358 0.9976345 0.07100474 0.9976345 0.002365469 0.002365469 0.07100474 0.002365469 0.3416061 0.07100474 0.2958467 0.002365469 0.3644859 0.002365469 0.2911156 0.9976345 0.2224764 0.002365469 0.2911156 0.002365469 0.149106 0.002365469 0.2177453 0.002365469 0.1719858 0.9976345 0.3512289 0.9967662 0.1895212 0.00323385 0.351229 0.003233909 0.3644859 0.09861552 0.2958467 0.144375 0.2958467 0.0757358 0.516979 0.9967662 0.3552713 0.00323385 0.516979 0.003233909 0.07100474 0.9976345 0.002365469 0.9976345 0.002365469 0.002365469 0.2911156 0.9976345 0.2224764 0.9976345 0.2224764 0.002365469 0.3512289 0.9967662 0.1895211 0.9967662 0.1895212 0.00323385 0.516979 0.9967662 0.3552713 0.9967662 0.3552713 0.00323385</float_array>
+          <float_array id="milemarker_009_a200-mesh-map-0-array" count="72">0.04166662 0.875 0 1 0 0.875 0 1 0.125 0.875 0.125 1 0.125 0.9166667 0 1 0 0.875 0 1 0.125 0.875 0.125 1 0.125 0.875 0.125 1 0 0.9166667 0.5 0.7291667 0.5625 0.75 0.5 0.75 0.04166662 0.875 0.125 1 0 1 0.5 0.6875 0.5625 0.7083334 0.5 0.7291667 0 1 0 0.875 0.125 0.875 0 1 0 0.875 0.125 0.875 0.5 0.7291667 0.5625 0.7083334 0.5625 0.75 0.5 0.6875 0.5625 0.6875 0.5625 0.7083334</float_array>
           <technique_common>
             <accessor source="#milemarker_009_a200-mesh-map-0-array" count="36" stride="2">
               <param name="S" type="float"/>
@@ -172,17 +152,11 @@
         <vertices id="milemarker_009_a200-mesh-vertices">
           <input semantic="POSITION" source="#milemarker_009_a200-mesh-positions"/>
         </vertices>
-        <triangles material="wood_008-material" count="8">
+        <triangles material="ParkerSignAtlas-material" count="12">
           <input semantic="VERTEX" source="#milemarker_009_a200-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#milemarker_009_a200-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#milemarker_009_a200-mesh-map-0" offset="2" set="0"/>
-          <p>3 0 0 4 0 1 2 0 2 2 1 3 1 1 4 3 1 5 4 2 6 0 2 7 2 2 8 0 3 9 5 3 10 1 3 11 3 4 12 5 4 13 4 4 14 3 6 18 1 6 19 5 6 20 2 8 24 0 8 25 1 8 26 0 9 27 4 9 28 5 9 29</p>
-        </triangles>
-        <triangles material="sign_008-material" count="4">
-          <input semantic="VERTEX" source="#milemarker_009_a200-mesh-vertices" offset="0"/>
-          <input semantic="NORMAL" source="#milemarker_009_a200-mesh-normals" offset="1"/>
-          <input semantic="TEXCOORD" source="#milemarker_009_a200-mesh-map-0" offset="2" set="0"/>
-          <p>7 5 15 9 5 16 8 5 17 8 7 21 6 7 22 7 7 23 7 10 30 6 10 31 9 10 32 8 11 33 9 11 34 6 11 35</p>
+          <p>3 0 0 4 0 1 2 0 2 2 1 3 1 1 4 3 1 5 4 2 6 0 2 7 2 2 8 0 3 9 5 3 10 1 3 11 3 4 12 5 4 13 4 4 14 7 5 15 9 5 16 8 5 17 3 6 18 1 6 19 5 6 20 8 7 21 6 7 22 7 7 23 2 8 24 0 8 25 1 8 26 0 9 27 4 9 28 5 9 29 7 10 30 6 10 31 9 10 32 8 11 33 9 11 34 6 11 35</p>
         </triangles>
       </mesh>
     </geometry>
@@ -293,7 +267,7 @@
           </technique_common>
         </source>
         <source id="milemarker_009_a800-mesh-map-0">
-          <float_array id="milemarker_009_a800-mesh-map-0-array" count="144">0.002365469 0.002365469 0.07100474 0.9976345 0.002365469 0.9976345 0.0757358 0.002365469 0.144375 0.9976345 0.0757358 0.9976345 0.149106 0.002365469 0.2177453 0.9976345 0.149106 0.9976345 0.2224764 0.002365469 0.2911156 0.9976345 0.2224764 0.9976345 0.3644859 0.07100474 0.2958467 0.002365469 0.3644859 0.002365469 0.3644859 0.144375 0.2958467 0.0757358 0.3644859 0.0757358 0.5637579 0.00323385 0.5914792 0.4172057 0.5637579 0.4172057 0.1895211 0.9967662 0.351229 0.003233909 0.3512289 0.9967662 0.5637579 0.4236735 0.5914792 0.8376453 0.5637579 0.8376453 0.3552713 0.9967662 0.516979 0.003233909 0.516979 0.9967662 0.5383473 0.9967662 0.5210215 0.00323385 0.5383473 0.00323385 0.5597155 0.9967662 0.5423896 0.00323385 0.5597155 0.00323385 0.002365469 0.002365469 0.07100474 0.002365469 0.07100474 0.9976345 0.0757358 0.002365469 0.144375 0.002365469 0.144375 0.9976345 0.149106 0.002365469 0.2177453 0.002365469 0.2177453 0.9976345 0.2224764 0.002365469 0.2911156 0.002365469 0.2911156 0.9976345 0.3644859 0.07100474 0.2958467 0.07100474 0.2958467 0.002365469 0.3644859 0.144375 0.2958467 0.144375 0.2958467 0.0757358 0.5637579 0.00323385 0.5914792 0.00323385 0.5914792 0.4172057 0.1895211 0.9967662 0.1895212 0.00323385 0.351229 0.003233909 0.5637579 0.4236735 0.5914792 0.4236735 0.5914792 0.8376453 0.3552713 0.9967662 0.3552713 0.00323385 0.516979 0.003233909 0.5383473 0.9967662 0.5210214 0.9967662 0.5210215 0.00323385 0.5597155 0.9967662 0.5423896 0.9967662 0.5423896 0.00323385</float_array>
+          <float_array id="milemarker_009_a800-mesh-map-0-array" count="144">0.125 0.875 0 1 0 0.875 0.125 0.875 0 1 0 0.875 0.125 0.875 0 1 0 0.875 0.125 0.875 0 1 0 0.875 0.125 0.875 0 1 0 0.875 0.125 0.875 0 1 0 0.875 0.5625 0.6875 0.5 0.75 0.5 0.6875 0.5625 0.6875 0.5 0.75 0.5 0.6875 0.5625 0.6875 0.5 0.75 0.5 0.6875 0.5625 0.6875 0.5 0.75 0.5 0.6875 0.5625 0.6875 0.5 0.75 0.5 0.6875 0.5625 0.6875 0.5 0.75 0.5 0.6875 0.125 0.875 0.125 1 0 1 0.125 0.875 0.125 1 0 1 0.125 0.875 0.125 1 0 1 0.125 0.875 0.125 1 0 1 0.125 0.875 0.125 1 0 1 0.125 0.875 0.125 1 0 1 0.5625 0.6875 0.5625 0.75 0.5 0.75 0.5625 0.6875 0.5625 0.75 0.5 0.75 0.5625 0.6875 0.5625 0.75 0.5 0.75 0.5625 0.6875 0.5625 0.75 0.5 0.75 0.5625 0.6875 0.5625 0.75 0.5 0.75 0.5625 0.6875 0.5625 0.75 0.5 0.75</float_array>
           <technique_common>
             <accessor source="#milemarker_009_a800-mesh-map-0-array" count="72" stride="2">
               <param name="S" type="float"/>
@@ -304,17 +278,11 @@
         <vertices id="milemarker_009_a800-mesh-vertices">
           <input semantic="POSITION" source="#milemarker_009_a800-mesh-positions"/>
         </vertices>
-        <triangles material="wood_008-material" count="12">
+        <triangles material="ParkerSignAtlas-material" count="24">
           <input semantic="VERTEX" source="#milemarker_009_a800-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#milemarker_009_a800-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#milemarker_009_a800-mesh-map-0" offset="2" set="0"/>
-          <p>1 0 0 2 0 1 0 0 2 3 1 3 6 1 4 2 1 5 7 2 6 4 2 7 6 2 8 5 3 9 0 3 10 4 3 11 6 4 12 0 4 13 2 4 14 3 5 15 5 5 16 7 5 17 1 12 36 3 12 37 2 12 38 3 13 39 7 13 40 6 13 41 7 14 42 5 14 43 4 14 44 5 15 45 1 15 46 0 15 47 6 16 48 4 16 49 0 16 50 3 17 51 1 17 52 5 17 53</p>
-        </triangles>
-        <triangles material="sign_008-material" count="12">
-          <input semantic="VERTEX" source="#milemarker_009_a800-mesh-vertices" offset="0"/>
-          <input semantic="NORMAL" source="#milemarker_009_a800-mesh-normals" offset="1"/>
-          <input semantic="TEXCOORD" source="#milemarker_009_a800-mesh-map-0" offset="2" set="0"/>
-          <p>9 6 18 10 6 19 8 6 20 11 7 21 14 7 22 10 7 23 15 8 24 12 8 25 14 8 26 13 9 27 8 9 28 12 9 29 14 10 30 8 10 31 10 10 32 11 11 33 13 11 34 15 11 35 9 18 54 11 18 55 10 18 56 11 19 57 15 19 58 14 19 59 15 20 60 13 20 61 12 20 62 13 21 63 9 21 64 8 21 65 14 22 66 12 22 67 8 22 68 11 23 69 9 23 70 13 23 71</p>
+          <p>1 0 0 2 0 1 0 0 2 3 1 3 6 1 4 2 1 5 7 2 6 4 2 7 6 2 8 5 3 9 0 3 10 4 3 11 6 4 12 0 4 13 2 4 14 3 5 15 5 5 16 7 5 17 9 6 18 10 6 19 8 6 20 11 7 21 14 7 22 10 7 23 15 8 24 12 8 25 14 8 26 13 9 27 8 9 28 12 9 29 14 10 30 8 10 31 10 10 32 11 11 33 13 11 34 15 11 35 1 12 36 3 12 37 2 12 38 3 13 39 7 13 40 6 13 41 7 14 42 5 14 43 4 14 44 5 15 45 1 15 46 0 15 47 6 16 48 4 16 49 0 16 50 3 17 51 1 17 52 5 17 53 9 18 54 11 18 55 10 18 56 11 19 57 15 19 58 14 19 59 15 20 60 13 20 61 12 20 62 13 21 63 9 21 64 8 21 65 14 22 66 12 22 67 8 22 68 11 23 69 9 23 70 13 23 71</p>
         </triangles>
       </mesh>
     </geometry>
@@ -330,10 +298,7 @@
             <instance_geometry url="#milemarker_009_a800-mesh" name="milemarker_009_a800">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="wood_008-material" target="#wood_008-material">
-                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
-                  </instance_material>
-                  <instance_material symbol="sign_008-material" target="#sign_008-material">
+                  <instance_material symbol="ParkerSignAtlas-material" target="#ParkerSignAtlas-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>
@@ -345,10 +310,7 @@
             <instance_geometry url="#milemarker_009_a200-mesh" name="milemarker_009_a200">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="wood_008-material" target="#wood_008-material">
-                    <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
-                  </instance_material>
-                  <instance_material symbol="sign_008-material" target="#sign_008-material">
+                  <instance_material symbol="ParkerSignAtlas-material" target="#ParkerSignAtlas-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>
@@ -360,7 +322,7 @@
             <instance_geometry url="#milemarker_009_a50-mesh" name="milemarker_009_a50">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="wood_008-material" target="#wood_008-material">
+                  <instance_material symbol="ParkerSignAtlas-material" target="#ParkerSignAtlas-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>

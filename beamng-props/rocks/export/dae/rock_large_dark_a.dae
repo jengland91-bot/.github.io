@@ -5,22 +5,22 @@
       <author>Blender User</author>
       <authoring_tool>Blender 4.2.9 LTS commit date:2025-04-14, commit time:12:24, hash:a10f621e649a</authoring_tool>
     </contributor>
-    <created>2026-08-01T07:55:08</created>
-    <modified>2026-08-01T07:55:08</modified>
+    <created>2026-08-01T08:03:47</created>
+    <modified>2026-08-01T08:03:47</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_effects>
-    <effect id="rock_009-effect">
+    <effect id="ParkerVegAtlas-effect">
       <profile_COMMON>
-        <newparam sid="rock_dark_png-surface">
+        <newparam sid="vegetation_atlas_2048_png-surface">
           <surface type="2D">
-            <init_from>rock_dark_png</init_from>
+            <init_from>vegetation_atlas_2048_png</init_from>
           </surface>
         </newparam>
-        <newparam sid="rock_dark_png-sampler">
+        <newparam sid="vegetation_atlas_2048_png-sampler">
           <sampler2D>
-            <source>rock_dark_png-surface</source>
+            <source>vegetation_atlas_2048_png-surface</source>
           </sampler2D>
         </newparam>
         <technique sid="common">
@@ -29,8 +29,11 @@
               <color sid="emission">0 0 0 1</color>
             </emission>
             <diffuse>
-              <texture texture="rock_dark_png-sampler" texcoord="UVMap"/>
+              <texture texture="vegetation_atlas_2048_png-sampler" texcoord="UVMap"/>
             </diffuse>
+            <reflectivity>
+              <float sid="specular">0.05</float>
+            </reflectivity>
             <index_of_refraction>
               <float sid="ior">1.5</float>
             </index_of_refraction>
@@ -60,13 +63,13 @@
     </effect>
   </library_effects>
   <library_images>
-    <image id="rock_dark_png" name="rock_dark_png">
-      <init_from>rock_dark.png</init_from>
+    <image id="vegetation_atlas_2048_png" name="vegetation_atlas_2048_png">
+      <init_from>vegetation_atlas_2048.png</init_from>
     </image>
   </library_images>
   <library_materials>
-    <material id="rock_009-material" name="rock.009">
-      <instance_effect url="#rock_009-effect"/>
+    <material id="ParkerVegAtlas-material" name="ParkerVegAtlas">
+      <instance_effect url="#ParkerVegAtlas-effect"/>
     </material>
     <material id="Colmesh_Material-material" name="Colmesh_Material">
       <instance_effect url="#Colmesh_Material-effect"/>
@@ -107,7 +110,7 @@
         <vertices id="rock_large_dark_a_a50-mesh-vertices">
           <input semantic="POSITION" source="#rock_large_dark_a_a50-mesh-positions"/>
         </vertices>
-        <triangles material="rock_009-material" count="4">
+        <triangles material="ParkerVegAtlas-material" count="4">
           <input semantic="VERTEX" source="#rock_large_dark_a_a50-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#rock_large_dark_a_a50-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#rock_large_dark_a_a50-mesh-map-0" offset="2" set="0"/>
@@ -138,7 +141,7 @@
           </technique_common>
         </source>
         <source id="rock_large_dark_a_a200-mesh-map-0">
-          <float_array id="rock_large_dark_a_a200-mesh-map-0-array" count="60">0.9716259 0.3896976 0.678169 0.3770849 0.678169 0.03502738 0.678169 0.3770849 0.9716259 0.3896976 0.8396553 0.5517407 0.9716259 0.3896976 0.678169 0.03502738 0.8407316 0.003598272 0.9716259 0.3896976 0.8407316 0.003598272 0.9964017 0.1064965 0.1898137 0.6123719 0.003598272 0.6277626 0.2886015 0.3766778 0.2886015 0.3766778 0.003598272 0.6277626 0.003598272 0.2860869 0.2444562 0.0406624 0.2886015 0.3766778 0.003598272 0.2860869 0.04262 0.01504349 0.2444562 0.0406624 0.003598272 0.2860869 0.6558449 0.3536904 0.5090277 0.6169352 0.3612277 0.3150954 0.5740837 0.04010653 0.6558449 0.3536904 0.3612277 0.3150954</float_array>
+          <float_array id="rock_large_dark_a_a200-mesh-map-0-array" count="60">0.5 0.6430569 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.6430569 0.5 0.75 0.5 0.6430569 0.5 0.5 0.5 0.75 0.393057 0.643057 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.3944028 0.6444028 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.3944028 0.5 0.5 0.75 0.25 0.5 0.3719269 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75</float_array>
           <technique_common>
             <accessor source="#rock_large_dark_a_a200-mesh-map-0-array" count="30" stride="2">
               <param name="S" type="float"/>
@@ -149,7 +152,7 @@
         <vertices id="rock_large_dark_a_a200-mesh-vertices">
           <input semantic="POSITION" source="#rock_large_dark_a_a200-mesh-positions"/>
         </vertices>
-        <triangles material="rock_009-material" count="10">
+        <triangles material="ParkerVegAtlas-material" count="10">
           <input semantic="VERTEX" source="#rock_large_dark_a_a200-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#rock_large_dark_a_a200-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#rock_large_dark_a_a200-mesh-map-0" offset="2" set="0"/>
@@ -222,7 +225,7 @@
           </technique_common>
         </source>
         <source id="rock_large_dark_a_a800-mesh-map-0">
-          <float_array id="rock_large_dark_a_a800-mesh-map-0-array" count="120">0.7957104 0.2551841 0.678169 0.3770849 0.678169 0.03502738 0.678169 0.3770849 0.7957104 0.2551841 0.8396553 0.5517407 0.7957104 0.2551841 0.678169 0.03502738 0.8407316 0.003598272 0.7957104 0.2551841 0.8407316 0.003598272 0.9405142 0.3143265 0.7957104 0.2551841 0.9405142 0.3143265 0.8396553 0.5517407 0.5731616 0.6241319 0.5437706 0.769419 0.4730083 0.6241319 0.678169 0.9453109 0.678169 0.5589373 0.7933174 0.7420265 0.3612276 0.8290154 0.3612276 0.6241317 0.4658117 0.7084823 0.9405142 0.3143265 0.8407316 0.003598272 0.9964017 0.1064965 0.8396553 0.5517407 0.9405142 0.3143265 0.9948837 0.4460415 0.1898137 0.6123719 0.003598272 0.6277626 0.2407547 0.4561566 0.3540311 0.2679918 0.2407547 0.4561566 0.261233 0.07959496 0.2284845 0.003598213 0.261233 0.07959496 0.04262 0.01504349 0.6709725 0.4765103 0.5090277 0.6169352 0.6445363 0.2618756 0.6709725 0.09240472 0.6445363 0.2618756 0.5064476 0.003598213 0.2407547 0.4561566 0.003598272 0.6277626 0.003598272 0.2860869 0.261233 0.07959496 0.2407547 0.4561566 0.003598272 0.2860869 0.04262 0.01504349 0.261233 0.07959496 0.003598272 0.2860869 0.6445363 0.2618756 0.5090277 0.6169352 0.3612277 0.3150954 0.5064476 0.003598213 0.6445363 0.2618756 0.3612277 0.3150954</float_array>
+          <float_array id="rock_large_dark_a_a800-mesh-map-0-array" count="120">0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75 0.25 0.5 0.5 0.5 0.5 0.75</float_array>
           <technique_common>
             <accessor source="#rock_large_dark_a_a800-mesh-map-0-array" count="60" stride="2">
               <param name="S" type="float"/>
@@ -233,7 +236,7 @@
         <vertices id="rock_large_dark_a_a800-mesh-vertices">
           <input semantic="POSITION" source="#rock_large_dark_a_a800-mesh-positions"/>
         </vertices>
-        <triangles material="rock_009-material" count="20">
+        <triangles material="ParkerVegAtlas-material" count="20">
           <input semantic="VERTEX" source="#rock_large_dark_a_a800-mesh-vertices" offset="0"/>
           <input semantic="NORMAL" source="#rock_large_dark_a_a800-mesh-normals" offset="1"/>
           <input semantic="TEXCOORD" source="#rock_large_dark_a_a800-mesh-map-0" offset="2" set="0"/>
@@ -253,7 +256,7 @@
             <instance_geometry url="#rock_large_dark_a_a800-mesh" name="rock_large_dark_a_a800">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="rock_009-material" target="#rock_009-material">
+                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>
@@ -265,7 +268,7 @@
             <instance_geometry url="#rock_large_dark_a_a200-mesh" name="rock_large_dark_a_a200">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="rock_009-material" target="#rock_009-material">
+                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>
@@ -277,7 +280,7 @@
             <instance_geometry url="#rock_large_dark_a_a50-mesh" name="rock_large_dark_a_a50">
               <bind_material>
                 <technique_common>
-                  <instance_material symbol="rock_009-material" target="#rock_009-material">
+                  <instance_material symbol="ParkerVegAtlas-material" target="#ParkerVegAtlas-material">
                     <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
                   </instance_material>
                 </technique_common>

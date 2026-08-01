@@ -22,3 +22,5 @@ levels/YourParkerMap/art/shapes/props/rocks/
 ```
 
 Place as **TSStatic**. Rotate/duplicate for variety. Origin is at ground under the rock.
+
+**Textures:** All rocks share `vegetation_atlas_2048.png` (+ ORM). Flora tiles (creosote, saguaro, sand) are on the same sheet for future props. See `../TEXTURES.md`.

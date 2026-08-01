@@ -29,6 +29,8 @@ Each `.dae` already has its matching sign texture beside it (`mile_001.png`, woo
 
 **LODs:** `_a800` / `_a200` / `_a50` + `nulldetail20`. Origin at post base. See `../GEOMETRY_LODS.md`.
 
+**Textures:** All mile markers share one `sign_atlas_2048.png` (+ `sign_orm_2048.png` ORM pack). See `../TEXTURES.md`.
+
 ## What’s in this kit
 
 | Path | Contents |

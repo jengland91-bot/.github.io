@@ -34,6 +34,20 @@ from beamng_export import (  # noqa: E402
 
 BLENDER = True
 
+# Shared atlases (one material / one albedo bind for all signs; one for vegetation)
+ATLAS_DIR = ROOT / "atlases"
+SIGN_ATLAS = ATLAS_DIR / "sign_atlas_2048.png"
+SIGN_ORM = ATLAS_DIR / "sign_orm_2048.png"
+SIGN_LAYOUT_PATH = ATLAS_DIR / "sign_atlas_layout.json"
+VEG_ATLAS = ATLAS_DIR / "vegetation_atlas_2048.png"
+VEG_ORM = ATLAS_DIR / "vegetation_orm_2048.png"
+VEG_LAYOUT_PATH = ATLAS_DIR / "vegetation_atlas_layout.json"
+
+_SIGN_LAYOUT = None
+_VEG_LAYOUT = None
+_SIGN_MAT = None
+_VEG_MAT = None
+
 
 def reset_units():
     sc = bpy.context.scene
@@ -43,12 +57,135 @@ def reset_units():
 
 
 def load_image(path: Path):
+    path = Path(path)
     for img in bpy.data.images:
+        if img.filepath and Path(bpy.path.abspath(img.filepath)) == path.resolve():
+            return img
         if img.name == path.name:
             return img
     if path.exists():
         return bpy.data.images.load(str(path))
     return None
+
+
+def load_sign_layout():
+    global _SIGN_LAYOUT
+    if _SIGN_LAYOUT is None:
+        import json
+
+        _SIGN_LAYOUT = json.loads(SIGN_LAYOUT_PATH.read_text())
+    return _SIGN_LAYOUT
+
+
+def load_veg_layout():
+    global _VEG_LAYOUT
+    if _VEG_LAYOUT is None:
+        import json
+
+        _VEG_LAYOUT = json.loads(VEG_LAYOUT_PATH.read_text())
+    return _VEG_LAYOUT
+
+
+def make_orm_atlas_mat(name: str, albedo: Path, orm: Path):
+    """
+    Shared atlas material for Collada export.
+
+    Collada only reliably exports Image Texture → Principled Base Color.
+    Albedo atlas is bound for draw-call batching; ORM PNG is copied beside
+    the DAE for manual PBR wiring (R=AO G=Roughness B=Metallic).
+    """
+    mat = bpy.data.materials.get(name)
+    if mat is not None:
+        return mat
+    mat = bpy.data.materials.new(name=name)
+    mat.use_nodes = True
+    nt = mat.node_tree
+    nodes, links = nt.nodes, nt.links
+    nodes.clear()
+    out = nodes.new("ShaderNodeOutputMaterial")
+    bsdf = nodes.new("ShaderNodeBsdfPrincipled")
+    links.new(bsdf.outputs["BSDF"], out.inputs["Surface"])
+
+    tex_alb = nodes.new("ShaderNodeTexImage")
+    tex_alb.image = load_image(albedo)
+    tex_alb.interpolation = "Closest"
+    # Direct link required for Blender Collada texture export
+    links.new(tex_alb.outputs["Color"], bsdf.inputs["Base Color"])
+
+    # Sensible scalars if ORM isn't wired in-engine yet
+    bsdf.inputs["Roughness"].default_value = 0.65
+    if "Metallic" in bsdf.inputs:
+        bsdf.inputs["Metallic"].default_value = 0.05
+
+    # Keep ORM image loaded/packed so it ships with use_texture_copies when referenced
+    # via a custom property path (and for artists opening the .blend later).
+    if Path(orm).exists():
+        orm_img = load_image(orm)
+        mat["orm_map"] = Path(orm).name
+        # Secondary unused texture node — some exporters skip it; file is still copied by us
+        tex_orm = nodes.new("ShaderNodeTexImage")
+        tex_orm.image = orm_img
+        tex_orm.interpolation = "Linear"
+        tex_orm.location = (-600, -300)
+        if orm_img:
+            try:
+                orm_img.colorspace_settings.name = "Non-Color"
+            except Exception:
+                pass
+
+    return mat
+
+
+def get_sign_atlas_mat():
+    global _SIGN_MAT
+    if _SIGN_MAT is None:
+        _SIGN_MAT = make_orm_atlas_mat("ParkerSignAtlas", SIGN_ATLAS, SIGN_ORM)
+    return _SIGN_MAT
+
+
+def get_veg_atlas_mat():
+    global _VEG_MAT
+    if _VEG_MAT is None:
+        _VEG_MAT = make_orm_atlas_mat("ParkerVegAtlas", VEG_ATLAS, VEG_ORM)
+    return _VEG_MAT
+
+
+def uv_set_rect(obj, rect: dict):
+    """Map every face of obj into the atlas UV rectangle."""
+    me = obj.data
+    if not me.uv_layers:
+        me.uv_layers.new(name="UVMap")
+    uv = me.uv_layers.active.data
+    u0, v0, u1, v1 = rect["u0"], rect["v0"], rect["u1"], rect["v1"]
+    corners4 = [(u0, v0), (u1, v0), (u1, v1), (u0, v1)]
+    corners3 = [(u0, v0), (u1, v0), (u1, v1)]
+    for poly in me.polygons:
+        idxs = list(poly.loop_indices)
+        if len(idxs) == 4:
+            for li, uvco in zip(idxs, corners4):
+                uv[li].uv = uvco
+        elif len(idxs) == 3:
+            for li, uvco in zip(idxs, corners3):
+                uv[li].uv = uvco
+        else:
+            for i, li in enumerate(idxs):
+                t = i / max(1, len(idxs) - 1)
+                uv[li].uv = (u0 + (u1 - u0) * t, v0 + (v1 - v0) * (i % 2))
+
+
+def copy_atlas_set(out_dir: Path, kind: str):
+    """Copy albedo + ORM into the DAE folder so BeamNG finds textures beside the mesh."""
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    if kind == "sign":
+        files = (SIGN_ATLAS, SIGN_ORM)
+    else:
+        files = (VEG_ATLAS, VEG_ORM)
+    for f in files:
+        if f.exists():
+            dest = out_dir / f.name
+            if not dest.exists() or dest.stat().st_size != f.stat().st_size:
+                dest.write_bytes(f.read_bytes())
 
 
 def make_mat(name, color, roughness=0.7, metallic=0.0, image_path=None):
@@ -303,12 +440,15 @@ def build_tire_row(out_dir: Path, count: int, name: str):
 
 
 # ---------------------------------------------------------------------------
-# ROCKS — low-poly visual + simple cylinder/capsule collider
+# ROCKS — vegetation atlas tile + simple cylinder collider
 # ---------------------------------------------------------------------------
 def build_rock(out_dir: Path, name: str, tex_name: str, scale, seed: int):
     clear_scene()
-    tex = ROOT / "rocks" / "textures" / tex_name
-    mat = make_mat("rock", (0.5, 0.4, 0.3), 0.92, 0.0, tex)
+    key = tex_name.replace(".png", "")
+    layout = load_veg_layout()["rects"]
+    rect = layout.get(key) or layout.get("rock_tan")
+    mat = get_veg_atlas_mat()
+
     rng = random.Random(seed)
     bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, radius=0.5, location=(0, 0, 0.5))
     rock = bpy.context.active_object
@@ -323,10 +463,10 @@ def build_rock(out_dir: Path, name: str, tex_name: str, scale, seed: int):
     rock.data.update()
     min_z = min(v.co.z for v in rock.data.vertices)
     rock.location.z -= min_z
+    rock.data.materials.clear()
     rock.data.materials.append(mat)
-    uv_smart(rock)
+    uv_set_rect(rock, rect)
 
-    # collider radius/height from scale
     rx, ry, rz = scale
     rad = max(rx, ry) * 0.45
     height = rz * 0.95
@@ -336,8 +476,7 @@ def build_rock(out_dir: Path, name: str, tex_name: str, scale, seed: int):
 
     root = wrap_beamng_hierarchy([rock], [cols], f"{name}_a800")
     export_dae(root, out_dir / f"{name}.dae")
-    if tex.exists():
-        (out_dir / tex.name).write_bytes(tex.read_bytes())
+    copy_atlas_set(out_dir, "veg")
 
 
 # ---------------------------------------------------------------------------
@@ -521,16 +660,31 @@ def build_lighttower(out_dir: Path, name: str, mast_h: float, body_tex: Path | N
 
 
 # ---------------------------------------------------------------------------
-# SIGNS / MILE MARKERS — post cylinder + thin sign box
+# SIGNS / MILE MARKERS — shared sign atlas (one material / one draw texture)
 # ---------------------------------------------------------------------------
-def build_signpost(out_dir: Path, name: str, sign_tex: Path, post_h=1.45, sign_w=0.42, sign_h=0.28):
+def build_signpost(
+    out_dir: Path,
+    name: str,
+    atlas_key: str,
+    post_h=1.45,
+    sign_w=0.42,
+    sign_h=0.28,
+):
     clear_scene()
-    wood = make_mat("wood", (0.35, 0.22, 0.12), 0.85, 0.0)
-    sign_m = make_mat("sign", (0.9, 0.9, 0.85), 0.45, 0.1, sign_tex)
-    parts = [
-        mesh_box("post", (0, 0, post_h / 2), (0.1, 0.1, post_h), wood),
-        mesh_box("sign", (0, -0.08, 1.24), (sign_w, 0.03, sign_h), sign_m),
-    ]
+    layout = load_sign_layout()["rects"]
+    mat = get_sign_atlas_mat()
+    wood_rect = layout.get("post_wood")
+    sign_rect = layout.get(atlas_key)
+    if sign_rect is None:
+        print(f"WARNING: no atlas rect for {atlas_key}, skipping")
+        return
+
+    post = mesh_box("post", (0, 0, post_h / 2), (0.1, 0.1, post_h), mat)
+    sign = mesh_box("sign", (0, -0.08, 1.24), (sign_w, 0.03, sign_h), mat)
+    if wood_rect:
+        uv_set_rect(post, wood_rect)
+    uv_set_rect(sign, sign_rect)
+    parts = [post, sign]
 
     def cols(parent):
         cylinder_collider("post", (0, 0, post_h / 2), 0.06, post_h, parent, verts=8)
@@ -538,6 +692,7 @@ def build_signpost(out_dir: Path, name: str, sign_tex: Path, post_h=1.45, sign_w
 
     root = wrap_beamng_hierarchy(parts, [cols], f"{name}_a800")
     export_dae(root, out_dir / f"{name}.dae")
+    copy_atlas_set(out_dir, "sign")
 
 
 # ---------------------------------------------------------------------------
@@ -634,9 +789,18 @@ def build_chainlink_gate(out_dir: Path, name: str):
 
 
 def main():
+    global _SIGN_MAT, _VEG_MAT, _SIGN_LAYOUT, _VEG_LAYOUT
     bpy.ops.wm.read_factory_settings(use_empty=True)
     reset_units()
-    print("=== Rebuilding props with dedicated Colmesh collision ===")
+    _SIGN_MAT = _VEG_MAT = None
+    _SIGN_LAYOUT = _VEG_LAYOUT = None
+
+    if not SIGN_ATLAS.exists() or not VEG_ATLAS.exists():
+        raise SystemExit(
+            "Atlases missing — run: python3 beamng-props/build_atlases.py"
+        )
+
+    print("=== Rebuilding props with Colmesh + atlases + LODs ===")
 
     # K-rails — bevel-free single box colliders
     kdir = ROOT / "k-rails" / "export" / "dae"
@@ -789,47 +953,48 @@ def main():
         if src.exists():
             build_lighttower(ldir, cname, 7.5, body_tex=src)
 
-    # Mile markers 1–100
+    # Mile markers 1–100 — UV islands on shared sign atlas
     mdir = ROOT / "mile-marker" / "export" / "dae"
     for n in range(1, 101):
-        tex = ROOT / "mile-marker" / "textures" / f"mile_{n:03d}.png"
-        if tex.exists():
-            build_signpost(mdir, f"milemarker_{n:03d}", tex)
+        key = f"mile_{n:03d}"
+        if key in load_sign_layout()["rects"]:
+            build_signpost(mdir, f"milemarker_{n:03d}", key)
 
-    # Course / lap / exit signs
+    # Course / lap / exit signs — same ParkerSignAtlas material
     sdir = ROOT / "course-signs" / "export" / "dae"
-    stx = ROOT / "course-signs" / "textures"
-    course_map = {
-        "arrow_straight": "arrow_straight.png",
-        "arrow_slight_left": "arrow_slight_left.png",
-        "arrow_slight_right": "arrow_slight_right.png",
-        "arrow_turn_left": "arrow_turn_left.png",
-        "arrow_turn_right": "arrow_turn_right.png",
-        "arrow_double_left": "arrow_double_left.png",
-        "arrow_double_right": "arrow_double_right.png",
-        "arrow_triple_left": "arrow_triple_left.png",
-        "arrow_triple_right": "arrow_triple_right.png",
-        "wrong_way": "sign_wrong_way.png",
-        "danger_x": "sign_danger_x.png",
-        "sign_wrong_way": "sign_wrong_way.png",
-        "sign_danger_x": "sign_danger_x.png",
-    }
-    for name, fname in course_map.items():
-        tex = stx / fname
-        if tex.exists():
-            build_signpost(sdir, name, tex, post_h=1.55, sign_w=0.55, sign_h=0.55)
+    course_keys = [
+        "arrow_straight",
+        "arrow_slight_left",
+        "arrow_slight_right",
+        "arrow_turn_left",
+        "arrow_turn_right",
+        "arrow_double_left",
+        "arrow_double_right",
+        "arrow_triple_left",
+        "arrow_triple_right",
+        "wrong_way",
+        "danger_x",
+    ]
+    rects = load_sign_layout()["rects"]
+    for key in course_keys:
+        if key in rects:
+            build_signpost(sdir, key, key, post_h=1.55, sign_w=0.55, sign_h=0.55)
+    # Alias filenames used by older kits
+    if "wrong_way" in rects:
+        build_signpost(sdir, "sign_wrong_way", "wrong_way", post_h=1.55, sign_w=0.55, sign_h=0.55)
+    if "danger_x" in rects:
+        build_signpost(sdir, "sign_danger_x", "danger_x", post_h=1.55, sign_w=0.55, sign_h=0.55)
 
     lps = ROOT / "lap-signs" / "export" / "dae"
     for n in range(1, 11):
-        tex = ROOT / "lap-signs" / "textures" / f"lap_{n:02d}.png"
-        if tex.exists():
-            build_signpost(lps, f"lapsign_{n:02d}", tex, post_h=1.5, sign_w=0.5, sign_h=0.4)
+        key = f"lap_{n:02d}"
+        if key in rects:
+            build_signpost(lps, f"lapsign_{n:02d}", key, post_h=1.5, sign_w=0.5, sign_h=0.4)
 
     pit = ROOT / "pits" / "export" / "dae"
     for ex in ("exit", "exit_left", "exit_right", "exit_up"):
-        tex = ROOT / "pits" / "textures" / f"{ex}.png"
-        if tex.exists():
-            build_signpost(pit, ex, tex, post_h=1.5, sign_w=0.7, sign_h=0.45)
+        if ex in rects:
+            build_signpost(pit, ex, ex, post_h=1.5, sign_w=0.7, sign_h=0.45)
 
     # Pit mats — thin ground boxes
     ptex = ROOT / "pits" / "textures"
