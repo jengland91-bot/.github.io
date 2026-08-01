@@ -4,12 +4,18 @@ If Freeroam loads Parker 400 but the world is **black**, do this in order.
 
 ## 1) Use the UNPACKED installer (most reliable)
 
-1. Download the latest:  
-   [parker_400.zip](https://github.com/jengland91-bot/.github.io/raw/cursor/parker-400-beamng-a8ad/beamng/parker_400/mods_drop_in/parker_400.zip)
-2. Also grab [`INSTALL_UNPACKED.bat`](https://github.com/jengland91-bot/.github.io/raw/cursor/parker-400-beamng-a8ad/beamng/parker_400/INSTALL_UNPACKED.bat) into the **same folder** as the zip (rename zip to `parker_400.zip` if needed).
+**Easiest — one file with both:**
+
+1. Download [Parker400_Download_Both.zip](https://github.com/jengland91-bot/.github.io/raw/cursor/parker-400-beamng-a8ad/beamng/parker_400/Parker400_Download_Both.zip)
+2. Extract it (you get `parker_400.zip` + `INSTALL_UNPACKED.bat`)
 3. Run **`INSTALL_UNPACKED.bat`**
 4. Confirm it prints terrain size ≈ **50331692** bytes
 5. Fully quit BeamNG → start → Freeroam → **parker**
+
+Or download the two pieces separately into the same folder:
+
+- [parker_400.zip](https://github.com/jengland91-bot/.github.io/raw/cursor/parker-400-beamng-a8ad/beamng/parker_400/mods_drop_in/parker_400.zip)
+- [INSTALL_UNPACKED.bat](https://github.com/jengland91-bot/.github.io/raw/cursor/parker-400-beamng-a8ad/beamng/parker_400/INSTALL_UNPACKED.bat)
 
 Correct result path:
 
