@@ -24,7 +24,7 @@ local paintSpacing = 3.0     -- metres between paint drops
 local lastPaintPos = nil
 local gridSnap = false
 local gridSize = 1.0
-local ghostEnabled = true
+local ghostEnabled = false   -- off by default; turn on from HUD or Alt+H while placing
 local randomYaw = false
 local randomScale = false
 local randomScaleMin = 0.8
@@ -32,6 +32,7 @@ local randomScaleMax = 1.3
 local favorites = {}         -- [propId] = true
 local lastAimPos = nil
 local uiDirtyTimer = 0
+local ghostActiveUntil = 0   -- auto-hide ghost shortly after you stop placing
 
 -- kind: "vehicle" uses core_vehicles; "static" uses TSStatic shapeName
 local BASE_CATALOG = {
@@ -397,6 +398,7 @@ local function placeSelected(silent)
   if not randomYaw then currentYaw = yaw end
   if not randomScale then currentScale = scale end
   mode = "edit"
+  markGhostActive(8)
   if not silent then notify("Placed " .. prop.label) end
   pushUiState()
   return true
@@ -1007,8 +1009,19 @@ local function maybePaintAtAim()
   placeSelected(true)
 end
 
+local function markGhostActive(seconds)
+  ghostActiveUntil = os.clock() + (tonumber(seconds) or 8)
+end
+
+local function ghostShouldShow()
+  if not ghostEnabled then return false end
+  -- Stay on while painting; otherwise only briefly after you place/aim
+  if paintMode or paintHeld then return true end
+  return os.clock() <= ghostActiveUntil
+end
+
 local function drawGhost()
-  if not ghostEnabled then return end
+  if not ghostShouldShow() then return end
   local pos = aimPoint()
   if not pos then return end
   pos = snapPosToGrid(pos)
