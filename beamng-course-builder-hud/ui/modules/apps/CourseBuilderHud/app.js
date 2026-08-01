@@ -35,6 +35,12 @@ angular.module('beamng.apps')
         bngApi.engineLua(cmd)
       }
 
+      // Tell Lua the app is on-screen so the ghost ball only draws while open
+      lua('extensions.courseBuilderHud.setHudOpen(true)')
+      $scope.$on('$destroy', function () {
+        lua('extensions.courseBuilderHud.setHudOpen(false)')
+      })
+
       function filterCatalog() {
         var q = ($scope.query || '').toLowerCase()
         $scope.filtered = ($scope.catalog || []).filter(function (p) {

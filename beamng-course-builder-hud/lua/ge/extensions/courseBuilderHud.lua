@@ -25,6 +25,7 @@ local lastPaintPos = nil
 local gridSnap = false
 local gridSize = 1.0
 local ghostEnabled = false   -- off by default; turn on from HUD or Alt+H while placing
+local hudOpen = false        -- true only while Course Builder UI app is on screen
 local randomYaw = false
 local randomScale = false
 local randomScaleMin = 0.8
@@ -330,6 +331,8 @@ local function markGhostActive(seconds)
 end
 
 local function ghostShouldShow()
+  -- Never show the aim ball unless the Course Builder app is actually open
+  if not hudOpen then return false end
   if not ghostEnabled then return false end
   if paintMode or paintHeld then return true end
   return os.clock() <= ghostActiveUntil
@@ -985,7 +988,7 @@ local function setGhost(on)
   ghostEnabled = on and true or false
   if ghostEnabled then
     markGhostActive(12)
-    notify("Ghost ON — auto-hides when idle")
+    notify("Ghost ON — only while app is open")
   else
     ghostActiveUntil = 0
     notify("Ghost OFF")
@@ -995,6 +998,17 @@ end
 
 local function toggleGhost()
   setGhost(not ghostEnabled)
+end
+
+local function setHudOpen(on)
+  hudOpen = on and true or false
+  if not hudOpen then
+    -- App closed/removed: kill ghost immediately
+    ghostActiveUntil = 0
+    paintHeld = false
+  else
+    pushUiState()
+  end
 end
 
 local function setRandomYaw(on)
@@ -1065,6 +1079,7 @@ M.toggleGridSnap = toggleGridSnap
 M.setGridSize = setGridSize
 M.setGhost = setGhost
 M.toggleGhost = toggleGhost
+M.setHudOpen = setHudOpen
 M.setRandomYaw = setRandomYaw
 M.setRandomScale = setRandomScale
 M.toggleRandomYaw = toggleRandomYaw
@@ -1094,6 +1109,8 @@ end
 M.onExtensionUnloaded = function()
   paintHeld = false
   paintMode = false
+  hudOpen = false
+  ghostActiveUntil = 0
   logI("Course Builder HUD unloaded")
 end
 
