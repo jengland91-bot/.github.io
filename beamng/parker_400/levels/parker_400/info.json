@@ -21,20 +21,20 @@
     "turnOnRed": true
   },
   "previews": [
-    "preview.png"
+    "preview.jpg"
   ],
   "spawnPoints": [
     {
       "translationId": "Main Pit / Staging",
       "description": "Main Pit area near start/finish. Default Parker 400 spawn.",
       "objectname": "spawns_pits",
-      "preview": "preview.png"
+      "preview": "preview.jpg"
     },
     {
       "translationId": "Start Line",
       "description": "On the CTUTV race line at the Start Line waypoint.",
       "objectname": "spawns_course",
-      "preview": "preview.png"
+      "preview": "preview.jpg"
     }
   ],
   "minimap": [

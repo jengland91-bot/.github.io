@@ -52,36 +52,80 @@ try {
   }
   Write-Log "User: $user"
 
+  # Clean old installs (zip mod, unpacked mod, AND loose levels copy)
   $oldZip = Join-Path $user "mods\parker_400.zip"
   $oldLevel = Join-Path $user "levels\parker_400"
   $dest = Join-Path $user "mods\unpacked\parker_400"
-  if (Test-Path $oldZip) { Remove-Item $oldZip -Force }
-  if (Test-Path $oldLevel) { Remove-Item $oldLevel -Recurse -Force }
-  if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
+  if (Test-Path $oldZip) { Remove-Item $oldZip -Force; Write-Log "Removed old mods\parker_400.zip" }
+  if (Test-Path $oldLevel) { Remove-Item $oldLevel -Recurse -Force; Write-Log "Removed old levels\parker_400" }
+  if (Test-Path $dest) { Remove-Item $dest -Recurse -Force; Write-Log "Removed old unpacked mod" }
   New-Item -ItemType Directory -Path $dest -Force | Out-Null
 
-  Write-Host "Extracting (1-2 minutes)... wait"
+  Write-Host "Extracting to mods\unpacked\parker_400 ... wait"
   Expand-Archive -LiteralPath $modZip -DestinationPath $dest -Force
 
-  $ter = Join-Path $dest "levels\parker_400\theTerrain.ter"
+  $levelRoot = Join-Path $dest "levels\parker_400"
+  $ter = Join-Path $levelRoot "theTerrain.ter"
+  $info = Join-Path $levelRoot "info.json"
+  $preview = Join-Path $levelRoot "preview.jpg"
+
   if (-not (Test-Path $ter)) {
     Write-Host "ERROR: theTerrain.ter missing after extract"
     Write-Log "ERROR missing ter"
     Read-Host "Press Enter to close"
     exit 1
   }
+  if (-not (Test-Path $info)) {
+    Write-Host "ERROR: info.json missing — Freeroam will not list Parker 400"
+    Write-Log "ERROR missing info.json"
+    Read-Host "Press Enter to close"
+    exit 1
+  }
+  if (-not (Test-Path $preview)) {
+    Write-Host "ERROR: preview.jpg missing — Freeroam thumbnail will be blank"
+    Write-Log "ERROR missing preview.jpg"
+    Read-Host "Press Enter to close"
+    exit 1
+  }
+
+  # Also install into user levels\ so Freeroam always discovers the map
+  # (some 0.39 installs miss unpacked mods in the level selector)
+  $levelsParent = Join-Path $user "levels"
+  New-Item -ItemType Directory -Path $levelsParent -Force | Out-Null
+  Write-Host "Copying level into levels\parker_400 for Freeroam..."
+  Copy-Item -LiteralPath $levelRoot -Destination $oldLevel -Recurse -Force
+  Write-Log "Copied level to $oldLevel"
+
   $len = (Get-Item $ter).Length
   Write-Log "Terrain bytes: $len"
 
   $cache = Join-Path $user "temp\art\terrainMaterialCache"
   if (Test-Path $cache) { Remove-Item $cache -Recurse -Force -ErrorAction SilentlyContinue }
 
+  # Clear level list / mod DB caches that can hide maps
+  foreach ($extra in @(
+    (Join-Path $user "temp\cache"),
+    (Join-Path $user "temp\shaders")
+  )) {
+    if (Test-Path $extra) {
+      Write-Log "Note: left $extra (optional clear via launcher Clear cache)"
+    }
+  }
+
   Write-Host ""
   Write-Host "SUCCESS"
-  Write-Host "Installed: $ter"
-  Write-Host "Terrain bytes: $len  (want ~50331692)"
+  Write-Host "Mod path:   $levelRoot"
+  Write-Host "Level path: $oldLevel"
+  Write-Host "Terrain bytes: $len  (want ~50331681)"
+  Write-Host "preview.jpg: OK"
+  Write-Host "info.json:   OK"
   Write-Host ""
-  Write-Host "NEXT: quit BeamNG fully -> start -> Mods enable -> Freeroam -> parker"
+  Write-Host "NEXT:"
+  Write-Host "  1) Fully quit BeamNG (and launcher)"
+  Write-Host "  2) Start BeamNG"
+  Write-Host "  3) Repository / Mods -> make sure nothing blocks local mods"
+  Write-Host "  4) Freeroam -> search PARKER -> select Parker 400"
+  Write-Host "     (desert thumbnail, NOT West Coast / Belasco City)"
   Write-Log "SUCCESS"
 } catch {
   Write-Host "ERROR: $($_.Exception.Message)"

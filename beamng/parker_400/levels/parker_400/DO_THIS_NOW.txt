@@ -4,29 +4,37 @@ PARKER 400 — BeamNG 0.39.1
 
 This package includes:
   - Pre-baked terrain (theTerrain.ter) with USGS 3DEP hills/washes (MapNG US DEM)
-  - HD Esri satellite on desert_base (12288 JPG unique sat)
+  - HD Esri satellite on desert_base
   - Pale wash-silt shoulder (course_pack) outside the DecalRoad race line
   - Wide DecalRoad race ribbon on packed dirt; silt beside it
+  - Freeroam preview.jpg (required so Parker shows in the map list)
 
 INSTALL (recommended on 0.39.1):
   Extract Parker400_Download_Both.zip
   Run RUN_INSTALL.cmd  (or INSTALL_UNPACKED.bat)
 
-  Result path:
+  Result paths (installer creates BOTH):
     %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\mods\unpacked\parker_400\levels\parker_400\
+    %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels\parker_400\
 
-  Confirm theTerrain.ter is ~48 MB
+  Confirm in either folder:
+    theTerrain.ter  (~48 MB)
+    info.json
+    preview.jpg     (Freeroam thumbnail — must exist)
+
   Delete temp\art\terrainMaterialCache  (or Clear cache)
   Quit BeamNG fully → start → Freeroam → search "parker"
+  Pick Parker 400 (desert picture). NOT West Coast / Belasco City.
+
+IF IT ALWAYS LOADS WEST COAST / NO PARKER THUMBNAIL:
+  1. Re-run RUN_INSTALL.cmd from the LATEST Download Both zip
+  2. Confirm preview.jpg + info.json exist under levels\parker_400\
+  3. Launcher → Clear cache → full restart
+  4. Freeroam search bar: type parker
 
 COURSE ("the train" / race line):
   Spawn: Main Pit / Staging (spawns above ground — vehicle drops onto dirt)
   Look for packed-dirt DecalRoad (brown with tire tracks) on the GPX line
-  Bright yellow road = old missing material — reinstall latest Download Both
-  Minimap white line = same official ~125.8 mi CTUTV GPX
-
-IF GROUND LOOKS FLAT / COURSE MISSING:
-  You are on an old install — re-run RUN_INSTALL.cmd with the latest Download Both
-  Clear terrainMaterialCache again and restart
+  Pale silt beside the road = course shoulder
 
 ================================================================================

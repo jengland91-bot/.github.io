@@ -18,7 +18,7 @@ EXCLUDE = {
     "art/terrains/desert_base_sat512_b.png",  # replaced by HD JPG
     "art/terrains/parker400_base_color.png",  # replaced by JPG
     "art/terrains/desert_base_base_b.png",  # unused — unique sat is the base color
-    "preview.png",  # reclaim space for 16k sat
+    "preview.png",  # Freeroam uses compact preview.jpg instead
 }
 EXCLUDE_PREFIXES = (
     "art/terrains/hd4096/",
@@ -76,6 +76,8 @@ def main() -> None:
         names = z.namelist()
         assert any(n.endswith("theTerrain.ter") for n in names)
         assert any(n.endswith("parker400_base_color.jpg") for n in names)
+        assert any(n.endswith("info.json") for n in names)
+        assert any(n.endswith("preview.jpg") for n in names), "Freeroam needs preview.jpg"
         assert not any(n.endswith("parker400_base_color.png") for n in names)
         print("files", len(names), "uncompressed_MB", round(sum(i.file_size for i in z.infolist()) / 1e6, 1))
 

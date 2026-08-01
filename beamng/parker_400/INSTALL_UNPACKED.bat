@@ -114,6 +114,29 @@ if not exist "%DEST%\levels\parker_400\theTerrain.ter" (
   goto :END
 )
 
+if not exist "%DEST%\levels\parker_400\info.json" (
+  echo ERROR: info.json missing — Freeroam will not list Parker 400
+  echo ERROR: missing info.json >> "%LOG%"
+  goto :END
+)
+
+if not exist "%DEST%\levels\parker_400\preview.jpg" (
+  echo ERROR: preview.jpg missing — Freeroam thumbnail will be blank
+  echo ERROR: missing preview.jpg >> "%LOG%"
+  goto :END
+)
+
+rem Also copy into user levels\ so Freeroam always discovers the map
+echo Copying into levels\parker_400 for Freeroam...
+mkdir "%USER%\levels" 2>nul
+if exist "%USER%\levels\parker_400" rmdir /s /q "%USER%\levels\parker_400"
+xcopy "%DEST%\levels\parker_400\*" "%USER%\levels\parker_400\" /E /I /Y >nul
+if not exist "%USER%\levels\parker_400\info.json" (
+  echo ERROR: failed to copy into levels\parker_400
+  echo ERROR: levels copy failed >> "%LOG%"
+  goto :END
+)
+
 if exist "%USER%\temp\art\terrainMaterialCache" (
   echo Clearing terrain material cache...
   rmdir /s /q "%USER%\temp\art\terrainMaterialCache" 2>nul
@@ -126,16 +149,20 @@ echo ============================================================
 echo.
 echo Installed to:
 echo   %DEST%\levels\parker_400\
-for %%A in ("%DEST%\levels\parker_400\theTerrain.ter") do echo Terrain bytes: %%~zA  ^(want ~50331692^)
+echo   %USER%\levels\parker_400\
+for %%A in ("%DEST%\levels\parker_400\theTerrain.ter") do echo Terrain bytes: %%~zA  ^(want ~50331681^)
+echo preview.jpg: OK
+echo info.json:   OK
 echo.
 echo NEXT:
-echo   1. Fully quit BeamNG
+echo   1. Fully quit BeamNG and the launcher
 echo   2. Start BeamNG
-echo   3. Mods - enable Parker 400
-echo   4. Freeroam - search parker
+echo   3. Freeroam - search PARKER
+echo   4. Pick Parker 400 ^(desert thumbnail — NOT West Coast^)
 echo.
 echo SUCCESS >> "%LOG%"
 echo DEST=%DEST% >> "%LOG%"
+echo LEVELS=%USER%\levels\parker_400 >> "%LOG%"
 
 :END
 echo.
