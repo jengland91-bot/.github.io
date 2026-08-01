@@ -180,10 +180,10 @@ def draw_logo_row(px, w, h, cy: int, ink, bg):
 
 
 def draw_header(px, w, h, ink):
-    # Two lines; sit below the painted border with clear gap between lines
-    sc = max(1, w // 62)
-    draw_text(px, w, h, "ILLEGAL TO", w // 2, int(h * 0.048), sc, ink)
-    draw_text(px, w, h, "REMOVE !", w // 2, int(h * 0.105), sc, ink)
+    # Two lines with enough vertical gap for 5x7 glyphs at this scale
+    sc = max(1, w // 70)
+    draw_text(px, w, h, "ILLEGAL TO", w // 2, int(h * 0.050), sc, ink)
+    draw_text(px, w, h, "REMOVE !", w // 2, int(h * 0.118), sc, ink)
 
 
 def thick_line(px, w, h, x0, y0, x1, y1, thickness, c):
