@@ -1,24 +1,14 @@
 {
   "source": "Esri World Imagery tiles (same family MapNG uses for satellite)",
   "zoom": 15,
-  "resolution": 8192,
-  "metersPerPixelApprox": 8.0,
+  "bakeResolution": 16000,
+  "resolution": 12288,
+  "metersPerPixelApprox": 5.333,
   "format": "jpeg",
-  "jpegQualityHint": 96,
+  "jpegQualityHint": 92,
   "worldSizeMeters": 65536.0,
   "geographicScale": 1.0,
-  "tileRange": {
-    "x0": 5984,
-    "x1": 6049,
-    "y0": 13047,
-    "y1": 13112,
-    "count": 4356
-  },
-  "center": {
-    "lat": 34.086139,
-    "lon": -113.897239
-  },
-  "courseBurnHalfWidthMeters": 40,
-  "courseBurnStrength": 0.28,
-  "note": "8192 unique sat (~8 m/px) from Esri z15. Heightmap stays 4096 (16 m) — .ter size limit for GitHub."
+  "courseBurnHalfWidthMeters": 18,
+  "courseBurnStrength": 0.12,
+  "note": "12288 unique sat (~5.3 m/px). desert_base color detail/macro strength zeroed so sat dominates."
 }
