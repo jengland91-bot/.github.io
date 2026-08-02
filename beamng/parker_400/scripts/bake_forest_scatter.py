@@ -150,7 +150,7 @@ def write_dae_rock(path: Path, name: str, seed: int) -> None:
   <library_effects>
     <effect id="{mat}-fx"><profile_COMMON>
       <technique sid="common"><lambert>
-        <diffuse><color>0.45 0.38 0.30 1</color></diffuse>
+        <diffuse><color>0.42 0.36 0.30 1</color></diffuse>
       </lambert></technique>
     </profile_COMMON></effect>
   </library_effects>
@@ -192,48 +192,46 @@ def write_dae_rock(path: Path, name: str, seed: int) -> None:
 
 
 def write_bush_texture(path: Path) -> None:
-    """Soft desert scrub silhouette (RGBA)."""
+    """Sparse desert scrub silhouette (RGBA) — short brown-olive clumps."""
     s = 256
     yy, xx = np.mgrid[0:s, 0:s]
-    cx, cy = (s - 1) / 2.0, (s - 1) * 0.62
-    dx = (xx - cx) / (s * 0.38)
-    dy = (yy - cy) / (s * 0.42)
-    # lobed bush blob
-    r = np.sqrt(dx * dx + dy * dy * 1.15)
-    lobe = 0.15 * np.sin(np.arctan2(dy, dx) * 5.0)
-    cover = np.clip(1.15 - (r + lobe), 0, 1)
-    alpha = (cover**1.4 * 255).astype(np.uint8)
-    # dusty olive / creosote color
+    cx, cy = (s - 1) / 2.0, (s - 1) * 0.68
+    dx = (xx - cx) / (s * 0.36)
+    dy = (yy - cy) / (s * 0.36)
+    # low wide scrub (refs are short, not tall bushes)
+    r = np.sqrt(dx * dx + dy * dy * 1.35)
+    lobe = 0.18 * np.sin(np.arctan2(dy, dx) * 6.0)
+    cover = np.clip(1.12 - (r + lobe), 0, 1)
+    # ragged edge / holes
+    rng = np.random.default_rng(11)
+    noise = rng.random((s, s)).astype(np.float32)
+    cover = np.clip(cover * (0.75 + 0.35 * noise) - 0.08, 0, 1)
+    alpha = (cover**1.55 * 255).astype(np.uint8)
+    # dusty brown-olive creosote (Ben refs: dark green/brown scrub)
     rgb = np.zeros((s, s, 3), dtype=np.float32)
-    rgb[..., 0] = 72 + 40 * cover
-    rgb[..., 1] = 78 + 35 * cover
-    rgb[..., 2] = 42 + 20 * cover
-    # stem darker at bottom center
-    stem = np.exp(-((xx - cx) ** 2) / 80.0) * np.clip((yy - cy) / (s * 0.35), 0, 1)
-    rgb[..., 0] *= 1.0 - 0.35 * stem
-    rgb[..., 1] *= 1.0 - 0.25 * stem
+    rgb[..., 0] = 68 + 38 * cover
+    rgb[..., 1] = 70 + 28 * cover
+    rgb[..., 2] = 38 + 14 * cover
+    stem = np.exp(-((xx - cx) ** 2) / 70.0) * np.clip((yy - cy) / (s * 0.28), 0, 1)
+    rgb[..., 0] *= 1.0 - 0.40 * stem
+    rgb[..., 1] *= 1.0 - 0.30 * stem
     rgba = np.dstack([np.clip(rgb, 0, 255).astype(np.uint8), alpha])
     write_png8(path, rgba)
 
 
 def write_dae_bush(path: Path, name: str) -> None:
     """Two crossed planes with bush texture (billboard-style scrub)."""
-    # plane verts: width 1.2m, height 1.0m
-    # plane A in XZ, plane B in YZ
-    # UVs
+    # Short wide scrub — refs are knee/waist height clumps, not tall bushes
     mat = "p400_bush_mat"
-    # positions for two quads (8 verts)
-    # quad A
     verts = [
-        (-0.6, 0.0, 0.0),
-        (0.6, 0.0, 0.0),
-        (0.6, 0.0, 1.0),
-        (-0.6, 0.0, 1.0),
-        # quad B
-        (0.0, -0.6, 0.0),
-        (0.0, 0.6, 0.0),
-        (0.0, 0.6, 1.0),
-        (0.0, -0.6, 1.0),
+        (-0.7, 0.0, 0.0),
+        (0.7, 0.0, 0.0),
+        (0.7, 0.0, 0.72),
+        (-0.7, 0.0, 0.72),
+        (0.0, -0.7, 0.0),
+        (0.0, 0.7, 0.0),
+        (0.0, 0.7, 0.72),
+        (0.0, -0.7, 0.72),
     ]
     uvs = [
         (0, 1),
@@ -359,7 +357,7 @@ def main() -> None:
             "persistentId": "p400rockmat000001",
             "Stages": [
                 {
-                    "diffuseColor": [0.45, 0.38, 0.30, 1],
+                    "diffuseColor": [0.42, 0.36, 0.30, 1],
                     "roughnessFactor": 0.92,
                     "metallicFactor": 0.0,
                     "useAnisotropic": True,
@@ -512,7 +510,8 @@ def main() -> None:
                 if not (0.0 <= u <= 1.0 and 0.0 <= v <= 1.0):
                     continue
                 z = sample_height(img, u, v) - 0.02
-                scale = float(rng.uniform(0.75, 2.1))
+                # Shorter scrub scales to match open-desert refs
+                scale = float(rng.uniform(0.55, 1.45))
                 yaw = float(rng.uniform(0, math.tau))
                 placements["p400_bush_a"].append(
                     {
@@ -532,7 +531,7 @@ def main() -> None:
                 v = (py + HALF) / WORLD_M
                 if 0.0 <= u <= 1.0 and 0.0 <= v <= 1.0:
                     z = sample_height(img, u, v) - 0.02
-                    scale = float(rng.uniform(0.7, 1.9))
+                    scale = float(rng.uniform(0.5, 1.35))
                     yaw = float(rng.uniform(0, math.tau))
                     placements["p400_bush_a"].append(
                         {

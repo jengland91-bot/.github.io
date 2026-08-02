@@ -18,10 +18,10 @@ from pngio import write_png8  # noqa: E402
 
 ART = ROOT / "levels" / "parker_400" / "art" / "terrains"
 
-# Parker wash silt — pale cream / tan (matches satellite desert shoulders)
-SILT_LIGHT = np.array([232, 218, 190], dtype=np.float32)
-SILT_MID = np.array([214, 198, 168], dtype=np.float32)
-SILT_DARK = np.array([188, 174, 148], dtype=np.float32)
+# Parker wash silt — pale tan + gravel (Ben desert snapshot palette)
+SILT_LIGHT = np.array([228, 208, 172], dtype=np.float32)
+SILT_MID = np.array([206, 184, 148], dtype=np.float32)
+SILT_DARK = np.array([172, 152, 122], dtype=np.float32)
 
 
 def fbm(h: int, w: int, octaves: int = 4, seed: int = 7) -> np.ndarray:
@@ -65,8 +65,17 @@ def make_albedo(size: int, seed: int) -> np.ndarray:
     t = np.clip(t * 0.88 + streak[..., None] * 0.12, 0, 1)
     rgb = SILT_DARK * (1 - t) + SILT_MID * t
     rgb = rgb * 0.62 + SILT_LIGHT * (0.38 * (1.0 - t))
-    rgb[..., 0] *= 0.97
-    rgb[..., 2] *= 1.04
+    rgb[..., 0] *= 0.99
+    rgb[..., 2] *= 0.96
+    # Rock / pebble litter like snapshot desert floor
+    rng = np.random.default_rng(seed + 7)
+    peb = rng.random((size, size))
+    small = peb > 0.978
+    big = peb > 0.995
+    rgb[small, 0] = rng.uniform(130, 170, size=int(small.sum()))
+    rgb[small, 1] = rng.uniform(118, 155, size=int(small.sum()))
+    rgb[small, 2] = rng.uniform(98, 130, size=int(small.sum()))
+    rgb[big] = np.array([88, 80, 68], dtype=np.float32)
     return np.clip(rgb, 0, 255).astype(np.uint8)
 
 
