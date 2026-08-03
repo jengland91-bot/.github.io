@@ -1,0 +1,19 @@
+*.hgt
+*.hgt.gz
+import/heightmap_8192.png
+import/heightmap_preview.png
+import/heightmap_color.png
+import/parker400_terrain.glb
+import/parker400_base_color.png
+import/parker400_base_color.jpg
+import/parker400_base_color_preview.png
+levels/parker_400/import/heightmap_8192.png
+source/reference/satellite_cache/
+source/reference/elevation/usgs_3dep/
+import/sat_tiles/*
+!import/sat_tiles/README.txt
+!import/sat_tiles/tiles.json.example
+__pycache__/
+# Duplicate of mods_drop_in/parker_400.zip
+parker_400_mod.zip
+READ_ME_FIRST.txt

@@ -1,0 +1,14 @@
+{
+  "source": "BlenderGIS SRTM glb (parker400_terrain.glb) + USGS fill outside coverage",
+  "glb": "import/parker400_terrain.glb",
+  "gridSource": "1050625 verts splat+holefill",
+  "resolutionShipped": 4096,
+  "resolutionHD": 8192,
+  "worldSizeMeters": 65536.0,
+  "squareSizeShipped": 16.0,
+  "maxHeight": 1500.0,
+  "elevMinMeters": 102.7,
+  "elevMaxMeters": 1390.4,
+  "reliefMeters": 1287.7,
+  "blenderCoverPercent4096": 72.5
+}

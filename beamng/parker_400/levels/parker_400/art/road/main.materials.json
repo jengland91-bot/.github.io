@@ -1,0 +1,27 @@
+{
+  "p400_dirt_road": {
+    "name": "p400_dirt_road",
+    "mapTo": "unmapped_mat",
+    "class": "Material",
+    "persistentId": "p400dirtroad0001",
+    "Stages": [
+      {
+        "colorMap": "/levels/parker_400/art/road/p400_dirt_d.png",
+        "normalMap": "/levels/parker_400/art/road/p400_dirt_n.png",
+        "specularMap": "/levels/parker_400/art/road/p400_dirt_s.png",
+        "useAnisotropic": true
+      },
+      {},
+      {},
+      {}
+    ],
+    "alphaRef": 1,
+    "castShadows": false,
+    "translucent": true,
+    "translucentZWrite": true,
+    "materialTag0": "RoadAndPath",
+    "materialTag1": "beamng",
+    "materialTag2": "dirt",
+    "annotation": "DIRT"
+  }
+}

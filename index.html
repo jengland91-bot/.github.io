@@ -3,58 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Links</title>
+    <title>Josh — BeamNG desert maps</title>
     <style>
         :root {
             --bg-color: #0d0d0d;
             --text-color: #ffffff;
-            --accent-color: #ff4500; /* Change to your brand color */
+            --accent-color: #e0a23a;
             --button-bg: #1a1a1a;
         }
-
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: Georgia, "Times New Roman", serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 40px 20px;
             margin: 0;
+            background-image:
+              radial-gradient(ellipse at top, #2a1a0c 0%, transparent 55%),
+              linear-gradient(180deg, #120e0a, #0a0806);
+            min-height: 100vh;
         }
-
-        .profile {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .profile img {
-            width: 96px;
-            height: 96px;
-            border-radius: 50%;
-            border: 2px solid var(--accent-color);
-            object-fit: cover;
-        }
-
-        .profile h1 {
-            font-size: 1.5rem;
-            margin: 10px 0 5px 0;
-        }
-
-        .profile p {
-            color: #888;
-            margin: 0;
-            font-size: 0.9rem;
-        }
-
+        .profile { text-align: center; margin-bottom: 30px; }
+        .profile h1 { font-size: 1.8rem; margin: 10px 0 5px 0; }
+        .profile p { color: #a89880; margin: 0; font-size: 0.95rem; font-family: system-ui, sans-serif; }
         .links-container {
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
-
         .link-card {
             background-color: var(--button-bg);
             color: var(--text-color);
@@ -64,10 +44,9 @@
             border-radius: 12px;
             border: 1px solid #2a2a2a;
             font-weight: 600;
+            font-family: system-ui, sans-serif;
             transition: all 0.2s ease-in-out;
         }
-
-        /* Hover animation effect */
         .link-card:hover {
             transform: translateY(-2px);
             border-color: var(--accent-color);
@@ -76,18 +55,14 @@
     </style>
 </head>
 <body>
-
     <div class="profile">
-        <img src="your-avatar.jpg" alt="Profile Picture">
-        <h1>Your Name</h1>
-        <p>Photographer & Creator</p>
+        <h1>Desert race maps</h1>
+        <p>BeamNG.drive courses from real GPS</p>
     </div>
-
     <div class="links-container">
-        <a href="https://yourwebsite.com" class="link-card" target="_blank">Main Website</a>
-        <a href="https://youtube.com" class="link-card" target="_blank">Latest Video</a>
-        <a href="https://instagram.com" class="link-card" target="_blank">Instagram Portfolio</a>
+        <a href="p400.html" class="link-card">Parker 400 — 2026 CTUTV (1:1)</a>
+        <a href="https://theparker400.com/racer-info/" class="link-card" target="_blank" rel="noopener">Official Parker 400 racer info</a>
+        <a href="https://theparker400.com/race-format/" class="link-card" target="_blank" rel="noopener">Parker 400 race format</a>
     </div>
-
 </body>
 </html>

@@ -1,0 +1,22 @@
+{
+  "source": "USGS 3DEP Elevation ImageServer (MapNG US DEM family) under 2026 Parker 400 CTUTV",
+  "note": "MapNG 3D preview = this height data. Full loop cannot be one MapNG 1 m tile (~8 km max). Shipped terrain uses 4096 @ 16 m/px from USGS 3DEP; import heightmap_8192.png at squareSize=8 for sharper local washes.",
+  "resolutionShipped": 4096,
+  "resolutionHD": 8192,
+  "worldSizeMeters": 65536.0,
+  "squareSizeShipped": 16.0,
+  "squareSizeHD": 8.0,
+  "recommendedMaxHeight": 1500.0,
+  "elevMinMeters": 111.5,
+  "elevMaxMeters": 1406.6,
+  "reliefMeters": 1295.1,
+  "geographicScale": 1.0,
+  "courseMiles": 125.79,
+  "bboxWGS84": {
+    "south": 33.79178088511643,
+    "west": -114.25285106149079,
+    "north": 34.380498096758544,
+    "east": -113.53951880628654
+  },
+  "importNotes": "Default .ter: squareSize=16, maxHeight=1500.0, pos=[-32768,-32768,0]. HD: World Editor import heightmap_8192.png with squareSize=8, maxHeight=1500.0, same position \u2014 then re-save terrain."
+}

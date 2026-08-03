@@ -1,0 +1,27 @@
+{
+  "p400_rock_mat": {
+    "name": "p400_rock_mat",
+    "mapTo": "p400_rock_mat",
+    "class": "Material",
+    "persistentId": "p400rockmat000001",
+    "Stages": [
+      {
+        "diffuseColor": [
+          0.42,
+          0.36,
+          0.3,
+          1
+        ],
+        "roughnessFactor": 0.92,
+        "metallicFactor": 0.0,
+        "useAnisotropic": true
+      },
+      {},
+      {},
+      {}
+    ],
+    "materialTag0": "beamng",
+    "materialTag1": "rock",
+    "annotation": "ROCK"
+  }
+}

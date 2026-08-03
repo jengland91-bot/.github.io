@@ -1,0 +1,20 @@
+{
+  "tiles": [
+    {
+      "file": "main_pit.jpg",
+      "lat": 34.1500,
+      "lon": -114.2900,
+      "widthMeters": 4000,
+      "heightMeters": 4000,
+      "northUp": true,
+      "strength": 1.0
+    },
+    {
+      "file": "wash_sample.jpg",
+      "lat": 34.086139,
+      "lon": -113.897239,
+      "widthMeters": 6000,
+      "heightMeters": 6000
+    }
+  ]
+}

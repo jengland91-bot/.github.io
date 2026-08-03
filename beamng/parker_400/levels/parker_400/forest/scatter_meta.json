@@ -1,0 +1,11 @@
+{
+  "totalItems": 35819,
+  "bandInnerM": 20.0,
+  "bandOuterM": 220.0,
+  "stepM": 38.0,
+  "types": {
+    "p400_rock_a": 7761,
+    "p400_rock_b": 7714,
+    "p400_bush_a": 20344
+  }
+}

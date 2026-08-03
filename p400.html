@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parker 400 — Download</title>
+  <style>
+    :root {
+      --bg: #100c08;
+      --text: #f3ebe1;
+      --muted: #b6a48c;
+      --accent: #e0a23a;
+      --card: #1a140e;
+      --line: #3a2d20;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background:
+        radial-gradient(ellipse at 20% 0%, #2c1a0c 0%, transparent 50%),
+        linear-gradient(180deg, #100c08, #070605);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding: 40px 18px;
+    }
+    main { width: 100%; max-width: 560px; }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+    }
+    .tag {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    p { color: var(--muted); line-height: 1.55; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      margin-top: 22px;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      background: var(--accent);
+      color: #1a1206;
+      font-weight: 800;
+      font-size: 1.1rem;
+      padding: 16px 18px;
+      border-radius: 12px;
+      margin: 14px 0 8px;
+    }
+    .btn.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+      font-weight: 650;
+      font-size: 0.95rem;
+    }
+    ol { padding-left: 1.2rem; color: var(--muted); }
+    li { margin: 8px 0; }
+    code { color: #f8d9a8; font-size: 0.92em; }
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .stat strong {
+      display: block;
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+    .stat span { color: var(--muted); font-size: 0.85rem; }
+    .warn {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border: 1px solid #6a4a20;
+      background: #2a1c0c;
+      border-radius: 12px;
+      color: #f0d2a0;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+    .contains {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="tag">BeamNG.drive 0.39.1 · 2026 CTUTV</div>
+    <h1>Parker 400</h1>
+    <p>
+      True 1:1 desert race map from the official 2026 Parker 400 C/T/UTV final racer GPS.
+      HD Esri satellite, real SRTM hills, ~125.8 mi race corridor painted on the ground.
+    </p>
+
+    <div class="stats">
+      <div class="stat"><strong>125.8 mi</strong><span>CTUTV lap</span></div>
+      <div class="stat"><strong>1:1</strong><span>geographic scale</span></div>
+      <div class="stat"><strong>65.5 km</strong><span>world square</span></div>
+      <div class="stat"><strong>8 m/px</strong><span>HD satellite (hills 16 m)</span></div>
+    </div>
+
+    <div class="card">
+      <p style="margin-top:0;color:var(--text);font-weight:650">
+        One download — mod zip + installer
+      </p>
+      <a class="btn" href="beamng/parker_400/Parker400_Download_Both.zip" download="Parker400_Download_Both.zip">
+        Download both (zip + bat)
+      </a>
+      <p class="contains">
+        Includes <code>parker_400.zip</code>, <code>INSTALL_UNPACKED.bat</code>, and <code>BLACK_VOID_FIX.md</code>
+      </p>
+      <ol>
+        <li>Extract <code>Parker400_Download_Both.zip</code> (do not run files from inside the zip)</li>
+        <li>Double-click <code>RUN_INSTALL.cmd</code> (window stays open)</li>
+        <li>If that fails → right-click <code>INSTALL_UNPACKED.ps1</code> → Run with PowerShell</li>
+        <li>Or follow <code>MANUAL_INSTALL.txt</code></li>
+        <li>Quit BeamNG → start → Freeroam → <strong>parker</strong></li>
+      </ol>
+      <div class="warn">
+        Do <strong>not</strong> drop the outer download into <code>mods\</code>.
+        Extract it first, then run the bat. The bat installs into
+        <code>mods\unpacked\parker_400\</code>.
+      </div>
+      <a class="btn secondary" href="beamng/parker_400/mods_drop_in/parker_400.zip" download="parker_400.zip">
+        Mod only (parker_400.zip)
+      </a>
+      <a class="btn secondary" href="beamng/parker_400/INSTALL_UNPACKED.bat" download="INSTALL_UNPACKED.bat">
+        Installer only (INSTALL_UNPACKED.bat)
+      </a>
+      <a class="btn secondary" href="https://github.com/jengland91-bot/.github.io/blob/cursor/parker-400-beamng-a8ad/beamng/parker_400/BLACK_VOID_FIX.md">
+        Black void fix guide
+      </a>
+    </div>
+  </main>
+</body>
+</html>
