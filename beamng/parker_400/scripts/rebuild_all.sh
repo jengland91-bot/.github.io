@@ -5,6 +5,10 @@ cd "$(dirname "$0")/.."
 python3 scripts/convert_p400_to_map.py
 # USGS 3DEP = MapNG's US elevation source (real hills / washes for full loop)
 python3 scripts/bake_usgs_heightmap.py
+# Optional: if import/parker400_terrain.glb exists, overlay BlenderGIS SRTM
+if [[ -f import/parker400_terrain.glb ]]; then
+  python3 scripts/bake_blender_glb.py
+fi
 python3 scripts/prepare_hd_materials.py
 python3 scripts/bake_silt_shoulder.py
 python3 scripts/bake_dirt_road.py
