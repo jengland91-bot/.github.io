@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>2024 CA300 C_T_U Dangers</name>
+    <Style id="icon-503-DB4436-nodesc-normal">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-503-DB4436-nodesc-highlight">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="16" xunits="pixels" y="32" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1.1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-503-DB4436-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-503-DB4436-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-503-DB4436-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>Danger</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.084199,34.798285,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.08463,34.797179,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Dangers Very Rough</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.082254,34.784805,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.073596,34.776914,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.079322,34.802237,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.058687,34.801747,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.056187,34.800202,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Drop Down</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.049874,34.775355,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.106293,34.785884,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.109086,34.755664,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Small Face</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.079826,34.766027,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Pole</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.07132,34.748693,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Pole Line</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.083948,34.74244,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Pole Line</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.085763,34.741522,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Ledge</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.146007,34.719829,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Tight Rocks</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.139509,34.717851,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Wash Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.149907,34.718953,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Wash Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.159377,34.730215,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Rut On Left</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.165503,34.749611,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Small G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.175018,34.727854,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Face</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.171272,34.721715,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.168082,34.722337,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Wash Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.166791,34.721236,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Face</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.163856,34.718335,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.160554,34.715867,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Off Camber, Ledge On Right</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.150268,34.702919,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Ledge On Right</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.159118,34.688556,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Rain Ruts On Right</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.180543,34.686699,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Cross Grain</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.176416,34.679013,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Small G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.170696,34.678657,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.144156,34.676459,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Small G</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.139895,34.675363,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Extreme Danger Double Roller Into Pole On Left</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.119852,34.719866,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.071633,34.777039,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Extreme Danger</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.0697,34.784767,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Extreme Danger</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.070519,34.783743,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.077003,34.785448,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Extreme Danger</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.073999,34.783646,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Rocks</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.053535,34.79788,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Rock</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.049158,34.789247,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Rocks</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.052375,34.785827,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Rocks</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.052859,34.785325,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Rocks</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.05375,34.785012,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.054066,34.78164,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Drop Down</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.051681,34.775169,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Rocks</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.047845,34.77666,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Double G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.107473,34.784376,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Extreme Danger Through Pole Lines</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.080443,34.744347,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Pole</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.141228,34.696771,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.176441,34.685114,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.14877,34.705639,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Extreme Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.161732,34.716693,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Extreme Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.162608,34.717313,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.169605,34.722162,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.118293,34.681945,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Dangers - Pole Lines Begin</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.143166,34.691599,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Extreme Danger Boulder</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.053621,34.797372,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Cross Grain</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.051643,34.805187,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.057067,34.812802,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.057914,34.812828,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Rough G Puts</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.049428,34.798642,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Extreme Danger G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.075081,34.766166,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Small G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.131791,34.728984,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Pole</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.12459,34.716472,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Pole</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.122665,34.71777,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Top Peak</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.097785,34.728371,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Extreme G Out</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.10304,34.756568,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Danger Washouts</name>
+      <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+      <Point>
+        <coordinates>
+          -117.052961,34.744852,0
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>

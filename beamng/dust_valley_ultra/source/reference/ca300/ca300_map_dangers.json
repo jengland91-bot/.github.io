@@ -1,0 +1,928 @@
+{
+  "source": "2024 CA300 C_T_U Dangers",
+  "count": 68,
+  "types": {
+    "Danger": 9,
+    "Dangers Very Rough": 1,
+    "Danger G Out": 11,
+    "Danger Drop Down": 2,
+    "Danger Small Face": 1,
+    "Danger Pole": 4,
+    "Danger Pole Line": 2,
+    "Danger Ledge": 1,
+    "Danger Tight Rocks": 1,
+    "Danger Wash Out": 3,
+    "Danger Rut On Left": 1,
+    "Danger Small G Out": 3,
+    "Danger Face": 2,
+    "Danger Off Camber, Ledge On Right": 1,
+    "Danger Ledge On Right": 1,
+    "Danger Rain Ruts On Right": 1,
+    "Danger Cross Grain": 2,
+    "Danger Small G": 1,
+    "Extreme Danger Double Roller Into Pole On Left": 1,
+    "Extreme Danger": 3,
+    "Danger Rocks": 5,
+    "Danger Rock": 1,
+    "Danger Double G Out": 1,
+    "Extreme Danger Through Pole Lines": 1,
+    "Extreme Danger G Out": 3,
+    "Dangers - Pole Lines Begin": 1,
+    "Extreme Danger Boulder": 1,
+    "Danger Rough G Puts": 1,
+    "Danger Top Peak": 1,
+    "Danger Extreme G Out": 1,
+    "Danger Washouts": 1
+  },
+  "markers": [
+    {
+      "name": "Danger",
+      "severity": "danger",
+      "uv": [
+        0.61191,
+        0.84887
+      ],
+      "lat": 34.798285,
+      "lon": -117.084199
+    },
+    {
+      "name": "Danger",
+      "severity": "danger",
+      "uv": [
+        0.60959,
+        0.84161
+      ],
+      "lat": 34.797179,
+      "lon": -117.08463
+    },
+    {
+      "name": "Dangers Very Rough",
+      "severity": "danger",
+      "uv": [
+        0.62248,
+        0.76044
+      ],
+      "lat": 34.784805,
+      "lon": -117.082254
+    },
+    {
+      "name": "Danger",
+      "severity": "danger",
+      "uv": [
+        0.66919,
+        0.70867
+      ],
+      "lat": 34.776914,
+      "lon": -117.073596
+    },
+    {
+      "name": "Danger G Out",
+      "severity": "danger",
+      "uv": [
+        0.63815,
+        0.8748
+      ],
+      "lat": 34.802237,
+      "lon": -117.079322
+    },
+    {
+      "name": "Danger G Out",
+      "severity": "danger",
+      "uv": [
+        0.74931,
+        0.87158
+      ],
+      "lat": 34.801747,
+      "lon": -117.058687
+    },
+    {
+      "name": "Danger G Out",
+      "severity": "danger",
+      "uv": [
+        0.76279,
+        0.86145
+      ],
+      "lat": 34.800202,
+      "lon": -117.056187
+    },
+    {
+      "name": "Danger Drop Down",
+      "severity": "danger",
+      "uv": [
+        0.79702,
+        0.69844
+      ],
+      "lat": 34.775355,
+      "lon": -117.049874
+    },
+    {
+      "name": "Danger G Out",
+      "severity": "danger",
+      "uv": [
+        0.49295,
+        0.76752
+      ],
+      "lat": 34.785884,
+      "lon": -117.106293
+    },
+    {
+      "name": "Danger",
+      "severity": "danger",
+      "uv": [
+        0.47806,
+        0.56927
+      ],
+      "lat": 34.755664,
+      "lon": -117.109086
+    },
+    {
+      "name": "Danger Small Face",
+      "severity": "danger",
+      "uv": [
+        0.63569,
+        0.63725
+      ],
+      "lat": 34.766027,
+      "lon": -117.079826
+    },
+    {
+      "name": "Danger Pole",
+      "severity": "danger",
+      "uv": [
+        0.68167,
+        0.52353
+      ],
+      "lat": 34.748693,
+      "lon": -117.07132
+    },
+    {
+      "name": "Danger Pole Line",
+      "severity": "danger",
+      "uv": [
+        0.61364,
+        0.48251
+      ],
+      "lat": 34.74244,
+      "lon": -117.083948
+    },
+    {
+      "name": "Danger Pole Line",
+      "severity": "danger",
+      "uv": [
+        0.60386,
+        0.47649
+      ],
+      "lat": 34.741522,
+      "lon": -117.085763
+    },
+    {
+      "name": "Danger Ledge",
+      "severity": "danger",
+      "uv": [
+        0.27916,
+        0.33418
+      ],
+      "lat": 34.719829,
+      "lon": -117.146007
+    },
+    {
+      "name": "Danger Tight Rocks",
+      "severity": "danger",
+      "uv": [
+        0.31421,
+        0.3212
+      ],
+      "lat": 34.717851,
+      "lon": -117.139509
+    },
+    {
+      "name": "Danger Wash Out",
+      "severity": "danger",
+      "uv": [
+        0.25814,
+        0.32843
+      ],
+      "lat": 34.718953,
+      "lon": -117.149907
+    },
+    {
+      "name": "Danger Wash Out",
+      "severity": "danger",
+      "uv": [
+        0.20705,
+        0.40231
+      ],
+      "lat": 34.730215,
+      "lon": -117.159377
+    },
+    {
+      "name": "Danger Rut On Left",
+      "severity": "danger",
+      "uv": [
+        0.17399,
+        0.52956
+      ],
+      "lat": 34.749611,
+      "lon": -117.165503
+    },
+    {
+      "name": "Danger Small G Out",
+      "severity": "danger",
+      "uv": [
+        0.12272,
+        0.38683
+      ],
+      "lat": 34.727854,
+      "lon": -117.175018
+    },
+    {
+      "name": "Danger Face",
+      "severity": "danger",
+      "uv": [
+        0.14293,
+        0.34655
+      ],
+      "lat": 34.721715,
+      "lon": -117.171272
+    },
+    {
+      "name": "Danger",
+      "severity": "danger",
+      "uv": [
+        0.16013,
+        0.35063
+      ],
+      "lat": 34.722337,
+      "lon": -117.168082
+    },
+    {
+      "name": "Danger Wash Out",
+      "severity": "danger",
+      "uv": [
+        0.16709,
+        0.34341
+      ],
+      "lat": 34.721236,
+      "lon": -117.166791
+    },
+    {
+      "name": "Danger Face",
+      "severity": "danger",
+      "uv": [
+        0.18292,
+        0.32438
+      ],
+      "lat": 34.718335,
+      "lon": -117.163856
+    },
+    {
+      "name": "Danger",
+      "severity": "danger",
+      "uv": [
+        0.20073,
+        0.30819
+      ],
+      "lat": 34.715867,
+      "lon": -117.160554
+    },
+    {
+      "name": "Danger Off Camber, Ledge On Right",
+      "severity": "danger",
+      "uv": [
+        0.25623,
+        0.22325
+      ],
+      "lat": 34.702919,
+      "lon": -117.150268
+    },
+    {
+      "name": "Danger Ledge On Right",
+      "severity": "danger",
+      "uv": [
+        0.20853,
+        0.12902
+      ],
+      "lat": 34.688556,
+      "lon": -117.159118
+    },
+    {
+      "name": "Danger Rain Ruts On Right",
+      "severity": "danger",
+      "uv": [
+        0.09296,
+        0.11684
+      ],
+      "lat": 34.686699,
+      "lon": -117.180543
+    },
+    {
+      "name": "Danger Cross Grain",
+      "severity": "danger",
+      "uv": [
+        0.11523,
+        0.06642
+      ],
+      "lat": 34.679013,
+      "lon": -117.176416
+    },
+    {
+      "name": "Danger Small G Out",
+      "severity": "danger",
+      "uv": [
+        0.14608,
+        0.06408
+      ],
+      "lat": 34.678657,
+      "lon": -117.170696
+    },
+    {
+      "name": "Danger G Out",
+      "severity": "danger",
+      "uv": [
+        0.28927,
+        0.04966
+      ],
+      "lat": 34.676459,
+      "lon": -117.144156
+    },
+    {
+      "name": "Danger Small G",
+      "severity": "danger",
+      "uv": [
+        0.31226,
+        0.04247
+      ],
+      "lat": 34.675363,
+      "lon": -117.139895
+    },
+    {
+      "name": "Extreme Danger Double Roller Into Pole On Left",
+      "severity": "extreme",
+      "uv": [
+        0.42019,
+        0.33442
+      ],
+      "lat": 34.719866,
+      "lon": -117.119852
+    },
+    {
+      "name": "Danger",
+      "severity": "danger",
+      "uv": [
+        0.67976,
+        0.70949
+      ],
+      "lat": 34.777039,
+      "lon": -117.071633
+    },
+    {
+      "name": "Extreme Danger",
+      "severity": "extreme",
+      "uv": [
+        0.69012,
+        0.76019
+      ],
+      "lat": 34.784767,
+      "lon": -117.0697
+    },
+    {
+      "name": "Extreme Danger",
+      "severity": "extreme",
+      "uv": [
+        0.68571,
+        0.75347
+      ],
+      "lat": 34.783743,
+      "lon": -117.070519
+    },
+    {
+      "name": "Danger",
+      "severity": "danger",
+      "uv": [
+        0.65076,
+        0.76466
+      ],
+      "lat": 34.785448,
+      "lon": -117.077003
+    },
+    {
+      "name": "Extreme Danger",
+      "severity": "extreme",
+      "uv": [
+        0.66696,
+        0.75283
+      ],
+      "lat": 34.783646,
+      "lon": -117.073999
+    },
+    {
+      "name": "Danger Rocks",
+      "severity": "danger",
+      "uv": [
+        0.7771,
+        0.84621
+      ],
+      "lat": 34.79788,
+      "lon": -117.053535
+    },
+    {
+      "name": "Danger Rock",
+      "severity": "danger",
+      "uv": [
+        0.80075,
+        0.78958
+      ],
+      "lat": 34.789247,
+      "lon": -117.049158
+    },
+    {
+      "name": "Danger Rocks",
+      "severity": "danger",
+      "uv": [
+        0.78345,
+        0.76714
+      ],
+      "lat": 34.785827,
+      "lon": -117.052375
+    },
+    {
+      "name": "Danger Rocks",
+      "severity": "danger",
+      "uv": [
+        0.78085,
+        0.76385
+      ],
+      "lat": 34.785325,
+      "lon": -117.052859
+    },
+    {
+      "name": "Danger Rocks",
+      "severity": "danger",
+      "uv": [
+        0.77605,
+        0.7618
+      ],
+      "lat": 34.785012,
+      "lon": -117.05375
+    },
+    {
+      "name": "Danger",
+      "severity": "danger",
+      "uv": [
+        0.77438,
+        0.73967
+      ],
+      "lat": 34.78164,
+      "lon": -117.054066
+    },
+    {
+      "name": "Danger Drop Down",
+      "severity": "danger",
+      "uv": [
+        0.78729,
+        0.69722
+      ],
+      "lat": 34.775169,
+      "lon": -117.051681
+    },
+    {
+      "name": "Danger Rocks",
+      "severity": "danger",
+      "uv": [
+        0.80794,
+        0.707
+      ],
+      "lat": 34.77666,
+      "lon": -117.047845
+    },
+    {
+      "name": "Danger Double G Out",
+      "severity": "danger",
+      "uv": [
+        0.4866,
+        0.75762
+      ],
+      "lat": 34.784376,
+      "lon": -117.107473
+    },
+    {
+      "name": "Extreme Danger Through Pole Lines",
+      "severity": "extreme",
+      "uv": [
+        0.63252,
+        0.49502
+      ],
+      "lat": 34.744347,
+      "lon": -117.080443
+    },
+    {
+      "name": "Danger Pole",
+      "severity": "danger",
+      "uv": [
+        0.305,
+        0.18291
+      ],
+      "lat": 34.696771,
+      "lon": -117.141228
+    },
+    {
+      "name": "Danger G Out",
+      "severity": "danger",
+      "uv": [
+        0.11509,
+        0.10644
+      ],
+      "lat": 34.685114,
+      "lon": -117.176441
+    },
+    {
+      "name": "Danger G Out",
+      "severity": "danger",
+      "uv": [
+        0.2643,
+        0.24109
+      ],
+      "lat": 34.705639,
+      "lon": -117.14877
+    },
+    {
+      "name": "Extreme Danger G Out",
+      "severity": "extreme",
+      "uv": [
+        0.19438,
+        0.31361
+      ],
+      "lat": 34.716693,
+      "lon": -117.161732
+    },
+    {
+      "name": "Extreme Danger G Out",
+      "severity": "extreme",
+      "uv": [
+        0.18965,
+        0.31767
+      ],
+      "lat": 34.717313,
+      "lon": -117.162608
+    },
+    {
+      "name": "Danger G Out",
+      "severity": "danger",
+      "uv": [
+        0.15192,
+        0.34949
+      ],
+      "lat": 34.722162,
+      "lon": -117.169605
+    },
+    {
+      "name": "Danger G Out",
+      "severity": "danger",
+      "uv": [
+        0.42878,
+        0.08565
+      ],
+      "lat": 34.681945,
+      "lon": -117.118293
+    },
+    {
+      "name": "Dangers - Pole Lines Begin",
+      "severity": "danger",
+      "uv": [
+        0.29457,
+        0.14899
+      ],
+      "lat": 34.691599,
+      "lon": -117.143166
+    },
+    {
+      "name": "Extreme Danger Boulder",
+      "severity": "extreme",
+      "uv": [
+        0.77664,
+        0.84288
+      ],
+      "lat": 34.797372,
+      "lon": -117.053621
+    },
+    {
+      "name": "Danger Cross Grain",
+      "severity": "danger",
+      "uv": [
+        0.78722,
+        0.89415
+      ],
+      "lat": 34.805187,
+      "lon": -117.051643
+    },
+    {
+      "name": "Danger G Out",
+      "severity": "danger",
+      "uv": [
+        0.75794,
+        0.9441
+      ],
+      "lat": 34.812802,
+      "lon": -117.057067
+    },
+    {
+      "name": "Danger G Out",
+      "severity": "danger",
+      "uv": [
+        0.75338,
+        0.94428
+      ],
+      "lat": 34.812828,
+      "lon": -117.057914
+    },
+    {
+      "name": "Danger Rough G Puts",
+      "severity": "danger",
+      "uv": [
+        0.79921,
+        0.85121
+      ],
+      "lat": 34.798642,
+      "lon": -117.049428
+    },
+    {
+      "name": "Extreme Danger G Out",
+      "severity": "extreme",
+      "uv": [
+        0.66126,
+        0.63816
+      ],
+      "lat": 34.766166,
+      "lon": -117.075081
+    },
+    {
+      "name": "Danger Small G Out",
+      "severity": "danger",
+      "uv": [
+        0.35578,
+        0.39424
+      ],
+      "lat": 34.728984,
+      "lon": -117.131791
+    },
+    {
+      "name": "Danger Pole",
+      "severity": "danger",
+      "uv": [
+        0.39466,
+        0.31216
+      ],
+      "lat": 34.716472,
+      "lon": -117.12459
+    },
+    {
+      "name": "Danger Pole",
+      "severity": "danger",
+      "uv": [
+        0.40504,
+        0.32067
+      ],
+      "lat": 34.71777,
+      "lon": -117.122665
+    },
+    {
+      "name": "Danger Top Peak",
+      "severity": "danger",
+      "uv": [
+        0.53913,
+        0.39022
+      ],
+      "lat": 34.728371,
+      "lon": -117.097785
+    },
+    {
+      "name": "Danger Extreme G Out",
+      "severity": "extreme",
+      "uv": [
+        0.51064,
+        0.5752
+      ],
+      "lat": 34.756568,
+      "lon": -117.10304
+    },
+    {
+      "name": "Danger Washouts",
+      "severity": "danger",
+      "uv": [
+        0.78066,
+        0.49834
+      ],
+      "lat": 34.744852,
+      "lon": -117.052961
+    }
+  ],
+  "keyWaypoints": [
+    {
+      "name": "Start/Finish Line",
+      "uv": [
+        0.61141,
+        0.92375
+      ],
+      "lat": 34.8097,
+      "lon": -117.084277
+    },
+    {
+      "name": "RM1",
+      "uv": [
+        0.60708,
+        0.83494
+      ],
+      "lat": 34.796161,
+      "lon": -117.085098
+    },
+    {
+      "name": "RM10",
+      "uv": [
+        0.81633,
+        0.71042
+      ],
+      "lat": 34.777181,
+      "lon": -117.046288
+    },
+    {
+      "name": "RM11",
+      "uv": [
+        0.87413,
+        0.64313
+      ],
+      "lat": 34.766924,
+      "lon": -117.035581
+    },
+    {
+      "name": "RM12",
+      "uv": [
+        0.86659,
+        0.59158
+      ],
+      "lat": 34.759065,
+      "lon": -117.036993
+    },
+    {
+      "name": "RM13",
+      "uv": [
+        0.77433,
+        0.61292
+      ],
+      "lat": 34.762318,
+      "lon": -117.054106
+    },
+    {
+      "name": "RM14",
+      "uv": [
+        0.687,
+        0.64974
+      ],
+      "lat": 34.767931,
+      "lon": -117.070303
+    },
+    {
+      "name": "RM15",
+      "uv": [
+        0.6106,
+        0.70181
+      ],
+      "lat": 34.775868,
+      "lon": -117.08447
+    },
+    {
+      "name": "RM16",
+      "uv": [
+        0.54976,
+        0.76817
+      ],
+      "lat": 34.785983,
+      "lon": -117.095749
+    },
+    {
+      "name": "RM17",
+      "uv": [
+        0.50214,
+        0.78436
+      ],
+      "lat": 34.788451,
+      "lon": -117.104585
+    },
+    {
+      "name": "RM18",
+      "uv": [
+        0.45553,
+        0.70193
+      ],
+      "lat": 34.775887,
+      "lon": -117.113248
+    },
+    {
+      "name": "RM19",
+      "uv": [
+        0.43485,
+        0.61147
+      ],
+      "lat": 34.762097,
+      "lon": -117.117098
+    },
+    {
+      "name": "RM20",
+      "uv": [
+        0.40224,
+        0.523
+      ],
+      "lat": 34.748612,
+      "lon": -117.123158
+    },
+    {
+      "name": "RM30",
+      "uv": [
+        0.41251,
+        0.39553
+      ],
+      "lat": 34.729181,
+      "lon": -117.12127
+    },
+    {
+      "name": "RM40",
+      "uv": [
+        0.17903,
+        0.32738
+      ],
+      "lat": 34.718792,
+      "lon": -117.164577
+    },
+    {
+      "name": "RM50",
+      "uv": [
+        0.423,
+        0.10266
+      ],
+      "lat": 34.684538,
+      "lon": -117.119361
+    },
+    {
+      "name": "RM60",
+      "uv": [
+        0.75023,
+        0.44542
+      ],
+      "lat": 34.736785,
+      "lon": -117.058619
+    },
+    {
+      "name": "RM70",
+      "uv": [
+        0.82808,
+        0.84296
+      ],
+      "lat": 34.797384,
+      "lon": -117.044072
+    },
+    {
+      "name": "RM74",
+      "uv": [
+        0.61541,
+        0.93997
+      ],
+      "lat": 34.812171,
+      "lon": -117.083531
+    },
+    {
+      "name": "Main Pit",
+      "uv": [
+        0.65697,
+        0.95633
+      ],
+      "lat": 34.814666,
+      "lon": -117.075812
+    },
+    {
+      "name": "Hodge Pit (Optional)",
+      "uv": [
+        0.3684,
+        0.41817
+      ],
+      "lat": 34.732632,
+      "lon": -117.129449
+    },
+    {
+      "name": "STOP CHECK, 25MPH SZ BEGINS",
+      "uv": [
+        0.6836,
+        0.95828
+      ],
+      "lat": 34.814963,
+      "lon": -117.070867
+    },
+    {
+      "name": "STOP CHECK, 25MPH SZ BEGINS",
+      "uv": [
+        0.37599,
+        0.4272
+      ],
+      "lat": 34.734008,
+      "lon": -117.12804
+    }
+  ]
+}

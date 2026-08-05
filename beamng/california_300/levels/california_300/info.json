@@ -1,0 +1,73 @@
+{
+  "title": "California 300",
+  "description": "CA300-focused desert race park (16384 m). MapNG USGS 1m height + satellite ground, 2024 California 300 Race Ready GPX course (~74 mi) with DecalRoad + pit row. Terrain: squareSize=4, maxHeight=900, pos -8192,-8192.",
+  "authors": "Josh",
+  "features": "CA300 course, pit row, danger markers, open desert freeroam",
+  "suitablefor": "Ultra 4, desert racing, CA300-style prerunning",
+  "roads": "Packed desert race corridor with dirt berms; open freeroam desert around the course",
+  "biome": "Arid desert mesa / wash country (Lucerne-area inspired)",
+  "country": "United States",
+  "region": "northAmerica",
+  "size": [
+    16384,
+    16384
+  ],
+  "defaultSpawnPointName": "spawns_course",
+  "supportsTraffic": false,
+  "supportsTimeOfDay": true,
+  "localUnits": {
+    "gasoline": "gallonUS",
+    "diesel": "gallonUS"
+  },
+  "roadRules": {
+    "rightHandDrive": false,
+    "turnOnRed": true
+  },
+  "previews": [
+    "preview.png"
+  ],
+  "spawnPoints": [
+    {
+      "translationId": "Pits / Start-Finish",
+      "description": "Pit row / staging. Default CA300 start.",
+      "objectname": "spawns_pits",
+      "preview": "preview.png"
+    },
+    {
+      "translationId": "Start / Finish",
+      "description": "CA300 Start/Finish line (Google Earth 34\u00b048'34.91\"N 117\u00b005'03.39\"W).",
+      "objectname": "spawns_course",
+      "preview": "preview.png"
+    }
+  ],
+  "minimap": [
+    {
+      "file": "minimap/terrain.png",
+      "size": [
+        16384,
+        16384
+      ],
+      "offset": [
+        -8192,
+        8192
+      ]
+    }
+  ],
+  "timeOfDayPresets": [
+    {
+      "key": "sunrise",
+      "value": 0.23,
+      "label": "Desert sunrise"
+    },
+    {
+      "key": "noon",
+      "value": 0.5,
+      "label": "High sun"
+    },
+    {
+      "key": "golden",
+      "value": 0.72,
+      "label": "Golden hour"
+    }
+  ]
+}

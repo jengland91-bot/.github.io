@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:leadnav="http://www.leadnavsystems.com/GPX/Extensions/1" version="1.1" creator="LeadNav GPS http://www.leadnavsystems.com/">
+  <metadata>
+    <time>2024-10-03T21:02:57Z</time>
+  </metadata>
+  <wpt lat="34.798285" lon="-117.084199">
+    <name>Danger</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.797179" lon="-117.084630">
+    <name>Danger</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.784805" lon="-117.082254">
+    <name>Dangers Very Rough</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.776914" lon="-117.073596">
+    <name>Danger</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.802237" lon="-117.079322">
+    <name>Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.801747" lon="-117.058687">
+    <name>Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.800202" lon="-117.056187">
+    <name>Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.775355" lon="-117.049874">
+    <name>Danger Drop Down</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.785884" lon="-117.106293">
+    <name>Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.755664" lon="-117.109086">
+    <name>Danger</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.766027" lon="-117.079826">
+    <name>Danger Small Face</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.748693" lon="-117.071320">
+    <name>Danger Pole</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.742440" lon="-117.083948">
+    <name>Danger Pole Line</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.741522" lon="-117.085763">
+    <name>Danger Pole Line</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.719829" lon="-117.146007">
+    <name>Danger Ledge</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.717851" lon="-117.139509">
+    <name>Danger Tight Rocks</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.718953" lon="-117.149907">
+    <name>Danger Wash Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.730215" lon="-117.159377">
+    <name>Danger Wash Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.749611" lon="-117.165503">
+    <name>Danger Rut On Left</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.727854" lon="-117.175018">
+    <name>Danger Small G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.721715" lon="-117.171272">
+    <name>Danger Face</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.722337" lon="-117.168082">
+    <name>Danger</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.721236" lon="-117.166791">
+    <name>Danger Wash Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.718335" lon="-117.163856">
+    <name>Danger Face</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.715867" lon="-117.160554">
+    <name>Danger</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.702919" lon="-117.150268">
+    <name>Danger Off Camber, Ledge On Right</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.688556" lon="-117.159118">
+    <name>Danger Ledge On Right</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.686699" lon="-117.180543">
+    <name>Danger Rain Ruts On Right</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.679013" lon="-117.176416">
+    <name>Danger Cross Grain</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.678657" lon="-117.170696">
+    <name>Danger Small G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.676459" lon="-117.144156">
+    <name>Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.675363" lon="-117.139895">
+    <name>Danger Small G</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.719866" lon="-117.119852">
+    <name>Extreme Danger Double Roller Into Pole On Left</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.777039" lon="-117.071633">
+    <name>Danger</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.784767" lon="-117.069700">
+    <name>Extreme Danger</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.783743" lon="-117.070519">
+    <name>Extreme Danger</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.785448" lon="-117.077003">
+    <name>Danger</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.783646" lon="-117.073999">
+    <name>Extreme Danger</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.797880" lon="-117.053535">
+    <name>Danger Rocks</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.789247" lon="-117.049158">
+    <name>Danger Rock</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.785827" lon="-117.052375">
+    <name>Danger Rocks</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.785325" lon="-117.052859">
+    <name>Danger Rocks</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.785012" lon="-117.053750">
+    <name>Danger Rocks</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.781640" lon="-117.054066">
+    <name>Danger</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.775169" lon="-117.051681">
+    <name>Danger Drop Down</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.776660" lon="-117.047845">
+    <name>Danger Rocks</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.784376" lon="-117.107473">
+    <name>Danger Double G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.744347" lon="-117.080443">
+    <name>Extreme Danger Through Pole Lines</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.696771" lon="-117.141228">
+    <name>Danger Pole</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.685114" lon="-117.176441">
+    <name>Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.705639" lon="-117.148770">
+    <name>Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.716693" lon="-117.161732">
+    <name>Extreme Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.717313" lon="-117.162608">
+    <name>Extreme Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.722162" lon="-117.169605">
+    <name>Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.681945" lon="-117.118293">
+    <name>Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.691599" lon="-117.143166">
+    <name>Dangers - Pole Lines Begin</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.797372" lon="-117.053621">
+    <name>Extreme Danger Boulder</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.805187" lon="-117.051643">
+    <name>Danger Cross Grain</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.812802" lon="-117.057067">
+    <name>Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.812828" lon="-117.057914">
+    <name>Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.798642" lon="-117.049428">
+    <name>Danger Rough G Puts</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.766166" lon="-117.075081">
+    <name>Extreme Danger G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.728984" lon="-117.131791">
+    <name>Danger Small G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.716472" lon="-117.124590">
+    <name>Danger Pole</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.717770" lon="-117.122665">
+    <name>Danger Pole</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.728371" lon="-117.097785">
+    <name>Danger Top Peak</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.756568" lon="-117.103040">
+    <name>Danger Extreme G Out</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+  <wpt lat="34.744852" lon="-117.052961">
+    <name>Danger Washouts</name>
+    <extensions>
+      <leadnav:type>Marker</leadnav:type>
+    </extensions>
+  </wpt>
+</gpx>

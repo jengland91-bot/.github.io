@@ -1,0 +1,14 @@
+{
+  "worldSizeMeters": 16384.0,
+  "worldSizeMiles": 10.18,
+  "squareSize": 4.0,
+  "resolution": 4096,
+  "source": "2024 CA300 C_T_U Course - Race Ready GPX",
+  "focus": "california_300_only",
+  "courseMiles": 68.4,
+  "courseMeters": 110083.4,
+  "pitRowMiles": 0.49,
+  "ca300SourceMiles": 74.18,
+  "dangerMarkers": 68,
+  "note": "Map is focused on the CA300 race path only (short course removed)."
+}

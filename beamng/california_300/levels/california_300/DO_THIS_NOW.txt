@@ -1,0 +1,59 @@
+CALIFORNIA 300 — LOAD INTO BEAMNG
+=================================
+
+Map name: California 300
+Folder:   california_300
+(Old name "Dust Valley" is retired — ignore it.)
+
+Park size must be 16384 m x 16384 m to match the
+2024 CA300 Race Ready GPX (~74 mi) at ~0.97x scale.
+
+
+0) Run INSTALL_CALIFORNIA_300.bat first
+   That puts files here:
+   %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels\california_300\
+
+
+1) Fully quit BeamNG, then reopen it
+
+
+2) Open the map
+   Freeroam → search "cal" → California 300
+   If missing: any map → F11 → File → Open Level → california_300
+
+
+3) Import terrain the right way (critical)
+   F11 → Terrain → Import Terrain
+   Click "Load preset"
+   Open:
+     levels/california_300/import/ca300_gpx_scale.preset.json
+
+   Confirm:
+     Meters per Pixel = 4
+     Max Height       = 900
+     Position         = -8192, -8192, 0
+     Height Map       = import/heightmap_4096.png
+
+   Click Import → Ctrl+S
+
+
+4) Check it worked
+   Select theTerrain → Inspector:
+     squareSize = 4
+     maxHeight  = 900
+     size ~ 16384 x 16384  (NOT 4096)
+
+
+5) Drive
+   Hide Water if needed.
+   Pink NO MATERIAL is OK for now.
+   Race line DecalRoad: ca300_race_ready
+
+
+If Load Preset fails, set manually:
+  Height Map = heightmap_4096.png
+  Meters per Pixel = 4
+  Max Height = 900
+  then Import, then position -8192 -8192 0
+
+NEVER use Meters per Pixel = 1 (tiny wrong map).

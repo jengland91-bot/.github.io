@@ -1,0 +1,29 @@
+{
+  "ca300_course_ribbon": {
+    "name": "ca300_course_ribbon",
+    "mapTo": "ca300_course_ribbon",
+    "class": "Material",
+    "persistentId": "a1b2c3d4-ca30-4000-8000-courseribb0n01",
+    "Stages": [
+      {
+        "baseColorMap": "/levels/california_300/art/roads/ca300_course_d.png",
+        "normalMap": "/levels/california_300/art/roads/ca300_course_n.png",
+        "roughnessFactor": 0.9,
+        "metallicFactor": 0.0,
+        "colorFactor": [
+          1.1,
+          1.0,
+          0.9,
+          1
+        ]
+      },
+      {},
+      {},
+      {}
+    ],
+    "version": 1.5,
+    "dynamicCubemap": false,
+    "materialTag0": "RoadAndPath",
+    "materialTag1": "decal"
+  }
+}

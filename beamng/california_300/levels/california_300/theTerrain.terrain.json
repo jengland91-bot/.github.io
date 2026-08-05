@@ -1,0 +1,11 @@
+{
+  "datafile": "levels/california_300/theTerrain.ter",
+  "size": 4096,
+  "squareSize": 4.0,
+  "maxHeight": 900.0,
+  "materials": [
+    "desert_base",
+    "course_pack",
+    "rock_slope"
+  ]
+}

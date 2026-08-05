@@ -1,0 +1,67 @@
+{
+  "source": "2024 CA300 C_T_U Course - Race Ready",
+  "courseMiles": 74.68,
+  "courseKm": 120.19,
+  "footprintKm": [
+    15.34,
+    15.59
+  ],
+  "fitsIn16384mPark": true,
+  "recommendedScale": 0.967,
+  "trackPoints": 4279,
+  "waypoints": 172,
+  "dangers": 68,
+  "dangerTypes": {
+    "Danger": 9,
+    "Dangers Very Rough": 1,
+    "Danger G Out": 11,
+    "Danger Drop Down": 2,
+    "Danger Small Face": 1,
+    "Danger Pole": 4,
+    "Danger Pole Line": 2,
+    "Danger Ledge": 1,
+    "Danger Tight Rocks": 1,
+    "Danger Wash Out": 3,
+    "Danger Rut On Left": 1,
+    "Danger Small G Out": 3,
+    "Danger Face": 2,
+    "Danger Off Camber, Ledge On Right": 1,
+    "Danger Ledge On Right": 1,
+    "Danger Rain Ruts On Right": 1,
+    "Danger Cross Grain": 2,
+    "Danger Small G": 1,
+    "Extreme Danger Double Roller Into Pole On Left": 1,
+    "Extreme Danger": 3,
+    "Danger Rocks": 5,
+    "Danger Rock": 1,
+    "Danger Double G Out": 1,
+    "Extreme Danger Through Pole Lines": 1,
+    "Extreme Danger G Out": 3,
+    "Dangers - Pole Lines Begin": 1,
+    "Extreme Danger Boulder": 1,
+    "Danger Rough G Puts": 1,
+    "Danger Top Peak": 1,
+    "Danger Extreme G Out": 1,
+    "Danger Washouts": 1
+  },
+  "tracks": [
+    {
+      "name": "2024 CA300 C_T_U Course - Race Ready",
+      "segments": [
+        {
+          "points": 4252,
+          "miles": 74.18
+        }
+      ]
+    },
+    {
+      "name": "Hodge Pit Row",
+      "segments": [
+        {
+          "points": 27,
+          "miles": 0.51
+        }
+      ]
+    }
+  ]
+}

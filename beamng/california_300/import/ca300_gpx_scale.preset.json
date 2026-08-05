@@ -1,0 +1,16 @@
+{
+  "type": "TerrainData",
+  "name": "theTerrain",
+  "heightMapPath": "/levels/california_300/import/heightmap_4096.png",
+  "heightScale": 900.0,
+  "holeMapPath": "",
+  "opacityMaps": [],
+  "pos": {
+    "x": -8192,
+    "y": -8192,
+    "z": 0
+  },
+  "squareSize": 4.0,
+  "applyTransform": true,
+  "flipYAxis": false
+}

@@ -1,0 +1,18 @@
+Install California 300 like Parker 400
+=====================================
+
+1) Download california_300.zip
+2) Do NOT extract it
+3) Win+R → paste → Enter:
+   %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\mods
+4) Drop california_300.zip into that mods folder
+5) Open BeamNG → Freeroam → California 300
+
+If the map doesn't show:
+- Repository → Mods → make sure california_300 is enabled
+- Restart BeamNG
+
+If terrain is missing/flat the first time:
+F11 → Import Terrain → Load preset:
+  import/ca300_gpx_scale.preset.json
+Meters per pixel = 4, Max Height = 900, then Ctrl+S

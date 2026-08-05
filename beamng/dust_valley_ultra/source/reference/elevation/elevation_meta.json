@@ -1,0 +1,12 @@
+{
+  "source": "SRTM 1-arcsec N34W118 under 2024 CA300 footprint",
+  "resolution": 4096,
+  "worldSizeMeters": 16384.0,
+  "squareSize": 4.0,
+  "recommendedMaxHeight": 900.0,
+  "elevMinMeters": 693.8,
+  "elevMaxMeters": 1489.3,
+  "reliefMeters": 795.4,
+  "geographicScale": 0.9666,
+  "importNotes": "World Editor Heightmap Import: squareSize=4.0, maxHeight=900.0. Real CA300 elevation is baked in."
+}

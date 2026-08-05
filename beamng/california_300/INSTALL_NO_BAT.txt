@@ -1,0 +1,16 @@
+ONE PACKAGE INSTALL — NO .BAT (avoids Windows virus false alarm)
+==============================================================
+
+Download:
+  California_300_READY.zip
+
+Steps:
+1. Close BeamNG
+2. Win+R → paste this → Enter:
+   %LOCALAPPDATA%\BeamNG\BeamNG.drive\current\levels
+3. Put California_300_READY.zip in that levels folder
+4. Right-click zip → Extract All → Extract here
+5. You should see folder: california_300
+6. Open BeamNG → Freeroam → California 300
+
+That is the whole install. No script to run.

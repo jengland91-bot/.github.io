@@ -1,0 +1,282 @@
+{
+  "california_300TerrainMaterialTextureSet": {
+    "class": "TerrainMaterialTextureSet",
+    "name": "california_300TerrainMaterialTextureSet",
+    "baseTexSize": [
+      4096,
+      4096
+    ],
+    "macroTexSize": [
+      4096,
+      4096
+    ],
+    "detailTexSize": [
+      1024,
+      1024
+    ]
+  },
+  "desert_base": {
+    "class": "TerrainMaterial",
+    "internalName": "desert_base",
+    "annotation": "DIRT",
+    "groundmodelName": "DIRT",
+    "baseColorBaseTex": "/levels/california_300/art/terrains/mapng_satellite_b.jpg",
+    "baseColorBaseTexSize": 16384,
+    "baseColorMacroTex": "/levels/california_300/art/terrains/mapng_satellite_macro_b.jpg",
+    "baseColorMacroTexSize": 16384,
+    "baseColorMacroStrength": [
+      0.55,
+      0.85
+    ],
+    "baseColorDetailTex": "/levels/california_300/art/terrains/desert_base_detail_b.png",
+    "baseColorDetailTexSize": 4,
+    "baseColorDetailStrength": [
+      0.22,
+      0.08
+    ],
+    "normalBaseTex": "/levels/california_300/art/terrains/desert_base_base_nm.png",
+    "normalBaseTexSize": 512,
+    "normalMacroTex": "/levels/california_300/art/terrains/desert_base_macro_nm.png",
+    "normalMacroTexSize": 64,
+    "normalMacroStrength": [
+      0.15,
+      0.3
+    ],
+    "normalDetailTex": "/levels/california_300/art/terrains/desert_base_detail_nm.png",
+    "normalDetailTexSize": 4,
+    "normalDetailStrength": [
+      0.55,
+      0.18
+    ],
+    "roughnessBaseTex": "/levels/california_300/art/terrains/desert_base_base_r.png",
+    "roughnessBaseTexSize": 512,
+    "roughnessMacroTex": "/levels/california_300/art/terrains/desert_base_macro_r.png",
+    "roughnessMacroTexSize": 64,
+    "roughnessMacroStrength": [
+      0.2,
+      0.7
+    ],
+    "roughnessDetailTex": "/levels/california_300/art/terrains/desert_base_detail_r.png",
+    "roughnessDetailTexSize": 4,
+    "roughnessDetailStrength": [
+      0.3,
+      0.3
+    ],
+    "aoBaseTex": "/levels/california_300/art/terrains/desert_base_base_ao.png",
+    "aoBaseTexSize": 512,
+    "aoMacroTex": "/levels/california_300/art/terrains/desert_base_macro_ao.png",
+    "aoMacroTexSize": 64,
+    "aoDetailTex": "/levels/california_300/art/terrains/desert_base_detail_ao.png",
+    "aoDetailTexSize": 4,
+    "heightBaseTex": "/levels/california_300/art/terrains/desert_base_base_h.png",
+    "heightBaseTexSize": 512,
+    "heightMacroTex": "/levels/california_300/art/terrains/desert_base_macro_h.png",
+    "heightMacroTexSize": 64,
+    "heightDetailTex": "/levels/california_300/art/terrains/desert_base_detail_h.png",
+    "heightDetailTexSize": 4,
+    "macroDistances": [
+      0,
+      5,
+      200,
+      8000
+    ],
+    "detailDistances": [
+      0,
+      0,
+      25,
+      50
+    ],
+    "macroDistAtten": [
+      1,
+      1
+    ],
+    "detailDistAtten": [
+      1,
+      1
+    ],
+    "diffuseMap": "/levels/california_300/art/terrains/mapng_satellite_b.jpg",
+    "macroMap": "/levels/california_300/art/terrains/mapng_satellite_macro_b.jpg",
+    "detailMap": "/levels/california_300/art/terrains/desert_base_detail_b.png",
+    "normalMap": "/levels/california_300/art/terrains/desert_base_detail_nm.png",
+    "detailSize": 4,
+    "detailDistance": 50,
+    "macroSize": 16384,
+    "useSideProjection": false
+  },
+  "course_pack": {
+    "class": "TerrainMaterial",
+    "internalName": "course_pack",
+    "annotation": "DIRT",
+    "groundmodelName": "DIRT",
+    "baseColorBaseTex": "/levels/california_300/art/terrains/course_pack_base_b.png",
+    "baseColorBaseTexSize": 512,
+    "baseColorMacroTex": "/levels/california_300/art/terrains/course_pack_macro_b.png",
+    "baseColorMacroTexSize": 64,
+    "baseColorMacroStrength": [
+      0.15,
+      0.35
+    ],
+    "baseColorDetailTex": "/levels/california_300/art/terrains/course_pack_detail_b.png",
+    "baseColorDetailTexSize": 4,
+    "baseColorDetailStrength": [
+      0.35,
+      0.1
+    ],
+    "normalBaseTex": "/levels/california_300/art/terrains/course_pack_base_nm.png",
+    "normalBaseTexSize": 512,
+    "normalMacroTex": "/levels/california_300/art/terrains/course_pack_macro_nm.png",
+    "normalMacroTexSize": 64,
+    "normalMacroStrength": [
+      0.2,
+      0.4
+    ],
+    "normalDetailTex": "/levels/california_300/art/terrains/course_pack_detail_nm.png",
+    "normalDetailTexSize": 4,
+    "normalDetailStrength": [
+      0.6,
+      0.2
+    ],
+    "roughnessBaseTex": "/levels/california_300/art/terrains/course_pack_base_r.png",
+    "roughnessBaseTexSize": 512,
+    "roughnessMacroTex": "/levels/california_300/art/terrains/course_pack_macro_r.png",
+    "roughnessMacroTexSize": 64,
+    "roughnessMacroStrength": [
+      0.2,
+      0.7
+    ],
+    "roughnessDetailTex": "/levels/california_300/art/terrains/course_pack_detail_r.png",
+    "roughnessDetailTexSize": 4,
+    "roughnessDetailStrength": [
+      0.3,
+      0.3
+    ],
+    "aoBaseTex": "/levels/california_300/art/terrains/course_pack_base_ao.png",
+    "aoBaseTexSize": 512,
+    "aoMacroTex": "/levels/california_300/art/terrains/course_pack_macro_ao.png",
+    "aoMacroTexSize": 64,
+    "aoDetailTex": "/levels/california_300/art/terrains/course_pack_detail_ao.png",
+    "aoDetailTexSize": 4,
+    "heightBaseTex": "/levels/california_300/art/terrains/course_pack_base_h.png",
+    "heightBaseTexSize": 512,
+    "heightMacroTex": "/levels/california_300/art/terrains/course_pack_macro_h.png",
+    "heightMacroTexSize": 64,
+    "heightDetailTex": "/levels/california_300/art/terrains/course_pack_detail_h.png",
+    "heightDetailTexSize": 4,
+    "macroDistances": [
+      0,
+      10,
+      100,
+      3000
+    ],
+    "detailDistances": [
+      0,
+      0,
+      30,
+      60
+    ],
+    "macroDistAtten": [
+      1,
+      1
+    ],
+    "detailDistAtten": [
+      1,
+      1
+    ],
+    "diffuseMap": "/levels/california_300/art/terrains/course_pack_base_b.png",
+    "macroMap": "/levels/california_300/art/terrains/course_pack_macro_b.png",
+    "detailMap": "/levels/california_300/art/terrains/course_pack_detail_b.png",
+    "normalMap": "/levels/california_300/art/terrains/course_pack_detail_nm.png",
+    "detailSize": 4,
+    "detailDistance": 50,
+    "macroSize": 64,
+    "useSideProjection": false
+  },
+  "rock_slope": {
+    "class": "TerrainMaterial",
+    "internalName": "rock_slope",
+    "annotation": "ROCK",
+    "groundmodelName": "ROCK",
+    "baseColorBaseTex": "/levels/california_300/art/terrains/rock_slope_base_b.png",
+    "baseColorBaseTexSize": 512,
+    "baseColorMacroTex": "/levels/california_300/art/terrains/rock_slope_macro_b.png",
+    "baseColorMacroTexSize": 64,
+    "baseColorMacroStrength": [
+      0.15,
+      0.35
+    ],
+    "baseColorDetailTex": "/levels/california_300/art/terrains/rock_slope_detail_b.png",
+    "baseColorDetailTexSize": 4,
+    "baseColorDetailStrength": [
+      0.35,
+      0.1
+    ],
+    "normalBaseTex": "/levels/california_300/art/terrains/rock_slope_base_nm.png",
+    "normalBaseTexSize": 512,
+    "normalMacroTex": "/levels/california_300/art/terrains/rock_slope_macro_nm.png",
+    "normalMacroTexSize": 64,
+    "normalMacroStrength": [
+      0.2,
+      0.4
+    ],
+    "normalDetailTex": "/levels/california_300/art/terrains/rock_slope_detail_nm.png",
+    "normalDetailTexSize": 4,
+    "normalDetailStrength": [
+      0.6,
+      0.2
+    ],
+    "roughnessBaseTex": "/levels/california_300/art/terrains/rock_slope_base_r.png",
+    "roughnessBaseTexSize": 512,
+    "roughnessMacroTex": "/levels/california_300/art/terrains/rock_slope_macro_r.png",
+    "roughnessMacroTexSize": 64,
+    "roughnessMacroStrength": [
+      0.2,
+      0.7
+    ],
+    "roughnessDetailTex": "/levels/california_300/art/terrains/rock_slope_detail_r.png",
+    "roughnessDetailTexSize": 4,
+    "roughnessDetailStrength": [
+      0.3,
+      0.3
+    ],
+    "aoBaseTex": "/levels/california_300/art/terrains/rock_slope_base_ao.png",
+    "aoBaseTexSize": 512,
+    "aoMacroTex": "/levels/california_300/art/terrains/rock_slope_macro_ao.png",
+    "aoMacroTexSize": 64,
+    "aoDetailTex": "/levels/california_300/art/terrains/rock_slope_detail_ao.png",
+    "aoDetailTexSize": 4,
+    "heightBaseTex": "/levels/california_300/art/terrains/rock_slope_base_h.png",
+    "heightBaseTexSize": 512,
+    "heightMacroTex": "/levels/california_300/art/terrains/rock_slope_macro_h.png",
+    "heightMacroTexSize": 64,
+    "heightDetailTex": "/levels/california_300/art/terrains/rock_slope_detail_h.png",
+    "heightDetailTexSize": 4,
+    "macroDistances": [
+      0,
+      10,
+      100,
+      3000
+    ],
+    "detailDistances": [
+      0,
+      0,
+      30,
+      60
+    ],
+    "macroDistAtten": [
+      1,
+      1
+    ],
+    "detailDistAtten": [
+      1,
+      1
+    ],
+    "diffuseMap": "/levels/california_300/art/terrains/rock_slope_base_b.png",
+    "macroMap": "/levels/california_300/art/terrains/rock_slope_macro_b.png",
+    "detailMap": "/levels/california_300/art/terrains/rock_slope_detail_b.png",
+    "normalMap": "/levels/california_300/art/terrains/rock_slope_detail_nm.png",
+    "detailSize": 4,
+    "detailDistance": 50,
+    "macroSize": 64,
+    "useSideProjection": false
+  }
+}

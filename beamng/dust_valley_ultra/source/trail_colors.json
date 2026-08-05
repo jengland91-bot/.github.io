@@ -1,0 +1,30 @@
+{
+  "description": "Minimap color key \u2014 CA300-focused Dust Valley Ultra",
+  "worldSizeMeters": 16384.0,
+  "ca300Miles": 74.18,
+  "dangerCount": 68,
+  "trails": {
+    "course": {
+      "label": "CA300 course (~74 mi)",
+      "rgb": [
+        242,
+        199,
+        71
+      ],
+      "hex": "#F2C747",
+      "lengthMeters": 110083.4,
+      "lengthMiles": 68.4
+    },
+    "pit_row": {
+      "label": "Pit row",
+      "rgb": [
+        50,
+        200,
+        110
+      ],
+      "hex": "#32C86E",
+      "lengthMeters": 786.7,
+      "lengthMiles": 0.49
+    }
+  }
+}
