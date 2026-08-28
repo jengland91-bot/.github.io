@@ -313,19 +313,50 @@ body.setup .well-tag {
   display: block;
 }
 
-/* Live HUD wells — exact slots for Casterlabs / cam */
+.cam-name {
+  position: absolute;
+  left: -2px;
+  bottom: -2px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: 0.14em;
+  background: var(--ember);
+  color: #140800;
+  padding: 3px 10px 1px;
+  z-index: 2;
+}
+
+body.setup .cam-name {
+  display: none;
+}
+
+/* Race HUD — face + wheel along the bottom, Lumia chat on the right */
+.well-face {
+  left: 48px;
+  top: 816px;
+  width: 400px;
+  height: 225px;
+}
+
+.well-wheel {
+  left: 464px;
+  top: 816px;
+  width: 400px;
+  height: 225px;
+}
+
 .well-cam {
   left: 48px;
-  top: 762px;
-  width: 360px;
-  height: 270px;
+  top: 816px;
+  width: 400px;
+  height: 225px;
 }
 
 .well-chat {
-  left: 1472px;
-  top: 560px;
-  width: 400px;
-  height: 460px;
+  left: 1488px;
+  top: 520px;
+  width: 384px;
+  height: 500px;
 }
 
 .well-alerts {
@@ -341,11 +372,16 @@ body:not(.setup) .well-alerts {
   display: none;
 }
 
+body.scene-live:not(.setup) .well-goal,
+body.scene-dual:not(.setup) .well-goal {
+  display: none;
+}
+
 .well-goal {
-  left: 720px;
-  top: 1004px;
-  width: 480px;
-  height: 52px;
+  left: 888px;
+  top: 1008px;
+  width: 400px;
+  height: 48px;
 }
 
 .well-labels {
@@ -357,45 +393,114 @@ body:not(.setup) .well-alerts {
 
 .well-nowplaying {
   left: 48px;
-  top: 678px;
-  width: 360px;
-  height: 68px;
+  top: 736px;
+  width: 400px;
+  height: 64px;
 }
 
-/* Just Chatting — larger cam, taller chat */
-.scene-chatting .well-cam {
-  left: 56px;
+.well-angle {
+  left: 1248px;
+  top: 48px;
+  width: 640px;
+  height: 360px;
+}
+
+/* GRID — big face + wheel, Lumia chat under the wheel */
+.scene-chatting .well-face {
+  left: 48px;
   top: 168px;
-  width: 1100px;
-  height: 619px;
+  width: 960px;
+  height: 540px;
+}
+
+.scene-chatting .well-wheel {
+  left: 1032px;
+  top: 168px;
+  width: 840px;
+  height: 473px;
 }
 
 .scene-chatting .well-chat {
-  left: 1216px;
-  top: 96px;
-  width: 648px;
-  height: 860px;
+  left: 1032px;
+  top: 660px;
+  width: 840px;
+  height: 360px;
 }
 
 .scene-chatting .well-alerts {
-  left: 176px;
+  left: 200px;
   top: 24px;
 }
 
 .scene-chatting .well-goal {
-  left: 366px;
+  left: 48px;
   top: 1004px;
+  width: 480px;
+  height: 52px;
 }
 
 .scene-chatting .well-labels {
-  left: 56px;
+  left: 48px;
   top: 96px;
 }
 
 .scene-chatting .well-nowplaying {
-  left: 56px;
-  top: 804px;
+  left: 48px;
+  top: 728px;
   width: 420px;
+}
+
+/* DUAL CAM — second BeamNG angle top-right, cams low left, chat under angle */
+.scene-dual .well-angle {
+  left: 1248px;
+  top: 48px;
+  width: 640px;
+  height: 360px;
+}
+
+.scene-dual .well-face {
+  left: 48px;
+  top: 860px;
+  width: 320px;
+  height: 180px;
+}
+
+.scene-dual .well-wheel {
+  left: 384px;
+  top: 860px;
+  width: 320px;
+  height: 180px;
+}
+
+.scene-dual .well-chat {
+  left: 1248px;
+  top: 428px;
+  width: 640px;
+  height: 580px;
+}
+
+.scene-dual .well-nowplaying {
+  display: none;
+}
+
+.scene-dual .well-goal {
+  left: 720px;
+  top: 1008px;
+}
+
+.scene-dual .well-labels {
+  left: 48px;
+  top: 96px;
+}
+
+/* REPLAY — keep the game clean */
+.scene-replay .well-face,
+.scene-replay .well-wheel,
+.scene-replay .well-chat,
+.scene-replay .well-nowplaying,
+.scene-replay .well-goal,
+.scene-replay .well-labels {
+  display: none;
 }
 
 .lower-third {

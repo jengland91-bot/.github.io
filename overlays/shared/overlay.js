@@ -29,6 +29,8 @@
     fill("[data-ending]", STREAM.endingMessage);
     fill("[data-chatting-title]", STREAM.chattingTitle);
     fill("[data-live-title]", STREAM.liveTitle);
+    fill("[data-dual-title]", STREAM.dualTitle);
+    fill("[data-replay-title]", STREAM.replayTitle);
   }
 
   function socials() {

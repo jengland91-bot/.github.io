@@ -6,7 +6,7 @@
 window.STREAM = {
   name: "Josh",
   brand: "RISE ABOVE",
-  tagline: "Off-road. Photo. Live.",
+  tagline: "BeamNG. Off-road. Live.",
   handle: "@riseabovephoto",
 
   socials: {
@@ -31,6 +31,8 @@ window.STREAM = {
 
   brbMessage: "Grabbing a wrench. Back in a minute.",
   endingMessage: "Thanks for rolling with me.",
-  chattingTitle: "JUST CHATTING",
-  liveTitle: "LIVE",
+  chattingTitle: "GRID",
+  liveTitle: "RACE",
+  dualTitle: "DUAL CAM",
+  replayTitle: "REPLAY",
 };

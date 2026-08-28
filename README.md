@@ -1,47 +1,36 @@
-# Rise Above — OBS + Lumia + Casterlabs
+# Rise Above — BeamNG OBS + Lumia
 
-A race-broadcast overlay kit wired for **OBS Studio**, **Lumia Stream** (lights + scene control), and **Casterlabs Caffeinated** (chat, alerts, labels, docks).
+Race-broadcast overlay kit for **BeamNG.drive** with **multi-cam** (game + face + wheel) and **Lumia Stream** for chat, alerts, lights, and camera switching. Casterlabs is not used.
 
-Open [the preview](index.html) or jump straight to the [setup checklist](setup.html).
+Open [the preview](index.html) or the [setup checklist](setup.html).
 
-## What you get
+## Scenes
 
-| Scene | Overlay | Job |
+| OBS scene | Overlay | Job |
 | --- | --- | --- |
-| `STARTING SOON` | `overlays/starting-soon.html` | Countdown, socials, staging lights |
-| `JUST CHATTING` | `overlays/chatting.html` | Big cam, tall chat, lower third |
-| `LIVE` | `overlays/live.html` | Gameplay HUD, small cam, chat well |
-| `BRB` | `overlays/brb.html` | Pit-stop hold screen |
+| `STARTING SOON` | `overlays/starting-soon.html` | Countdown, staging lights |
+| `GRID` | `overlays/chatting.html` | Big face + wheel, talking |
+| `RACE` | `overlays/live.html` | Full BeamNG, face + wheel PiPs |
+| `RACE DUAL` | `overlays/race-dual.html` | Main view + second angle |
+| `REPLAY` | `overlays/replay.html` | Clean game, no cams |
+| `BRB` | `overlays/brb.html` | Pit stop |
 | `ENDING` | `overlays/ending.html` | Checkered / thanks |
 
-Setup mode (`?setup=1`) prints the exact wells where Casterlabs widgets and the webcam sit. Turn it off before you go live.
+In-game BeamNG cameras (C / Shift+C) stay on one source: `Game / Main`. Physical cameras are `Cam / Face` and `Cam / Wheel`. A second BeamNG view (other monitor, bumper window) is `Game / Angle 2` on `RACE DUAL` only.
 
-## Split the work so nothing double-fires
+`?setup=1` on an overlay prints wells so you can park Lumia layers. Turn it off before going live.
 
-- **OBS** captures the game, cam, and mic. It is the layout.
-- **Casterlabs** draws chat, alerts, goals, and labels on stream, plus docks only you see.
-- **Lumia** drives lights, RGB overlay, and OBS actions (scene switch, show a clip). It does **not** also play the same follow/sub alert on screen.
+## Who does what
+
+- **OBS** — BeamNG capture, face/wheel cams, layout, audio
+- **Lumia** — chatbox, alerts, goals, lights, scene/cam commands
 
 ## Customize
 
-Edit `overlays/shared/config.js`:
-
-- `name`, `brand`, `tagline`, `handle`
-- `socials` (leave a platform blank to hide it)
-- `colors.ember` for the accent
-- `startingMinutes` (or append `?m=10` on the Starting Soon URL)
-
-Then right-click the overlay Browser source in OBS → **Refresh**.
+Edit `overlays/shared/config.js`, then in OBS right-click the overlay source → **Refresh**.
 
 ## Docs
 
-- [OBS scenes, audio, encoding](docs/obs.html)
-- [Casterlabs widgets, sizes, docks](docs/casterlabs.html)
-- [Lumia connection and light recipes](docs/lumia.html)
-- [Source map (names Lumia must match)](obs/source-map.md)
-
-## Downloads
-
-- [OBS Studio](https://obsproject.com/)
-- [Casterlabs Caffeinated](https://casterlabs.co/)
-- [Lumia Stream](https://lumiastream.com/)
+- [OBS + BeamNG + multi-cam](docs/obs.html)
+- [Lumia overlay, lights, cam director](docs/lumia.html)
+- [Source map](obs/source-map.md)

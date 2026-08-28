@@ -139,12 +139,12 @@
 </head>
 <body>
   <header>
-    <div class="kicker">RISE ABOVE  ·  STREAM KIT</div>
-    <h1>OBS + LUMIA<br />+ CASTERLABS</h1>
-    <p>Race-broadcast overlays, named OBS scenes Lumia can drive, and exact Casterlabs slots so lights, alerts, and chat all hit the same look.</p>
+    <div class="kicker">RISE ABOVE  ·  BEAMNG KIT</div>
+    <h1>OBS + LUMIA<br />MULTI-CAM</h1>
+    <p>BeamNG race layouts with face + wheel cameras, a dual-angle scene, and one Lumia overlay for chat, alerts, and lights. No second alerts app.</p>
     <nav>
       <a class="btn" href="setup.html">Open setup guide</a>
-      <a class="btn ghost" href="overlays/live.html?preview=1&setup=1">Show placement slots</a>
+      <a class="btn ghost" href="overlays/live.html?preview=1&setup=1">Show race slots</a>
       <a class="btn ghost" href="https://instagram.com/riseabovephoto" target="_blank" rel="noreferrer">Instagram</a>
     </nav>
   </header>
@@ -153,11 +153,12 @@
     <div class="preview-wrap">
       <div class="preview-toolbar" id="scenes">
         <button data-src="overlays/starting-soon.html?preview=1" class="active">Starting Soon</button>
-        <button data-src="overlays/chatting.html?preview=1">Just Chatting</button>
-        <button data-src="overlays/live.html?preview=1">Live</button>
-        <button data-src="overlays/live.html?preview=1&setup=1">Live + slots</button>
+        <button data-src="overlays/chatting.html?preview=1">Grid</button>
+        <button data-src="overlays/live.html?preview=1">Race</button>
+        <button data-src="overlays/live.html?preview=1&setup=1">Race + slots</button>
+        <button data-src="overlays/race-dual.html?preview=1">Dual cam</button>
+        <button data-src="overlays/replay.html?preview=1">Replay</button>
         <button data-src="overlays/brb.html?preview=1">BRB</button>
-        <button data-src="overlays/intermission.html?preview=1">Intermission</button>
         <button data-src="overlays/ending.html?preview=1">Ending</button>
       </div>
       <div class="stage" id="stage">
@@ -167,19 +168,19 @@
 
     <div class="grid">
       <article class="card">
-        <h2>1. OBS</h2>
-        <p>Five scenes, transparent browser sources, webcam/game capture, and a clean audio chain. Scene names are locked so Lumia can switch them.</p>
-        <p style="margin-top:10px"><a href="docs/obs.html">OBS scene map →</a></p>
+        <h2>1. OBS + BeamNG</h2>
+        <p>Named scenes, Game Capture, and three cameras: game, face, wheel. Dual-cam scene for a second BeamNG angle. Lumia switches them.</p>
+        <p style="margin-top:10px"><a href="docs/obs.html">OBS + BeamNG map →</a></p>
       </article>
       <article class="card">
-        <h2>2. Casterlabs</h2>
-        <p>Chat, alerts, labels, and goals drop into the marked wells. Docks sit in OBS for you — they never go on stream.</p>
-        <p style="margin-top:10px"><a href="docs/casterlabs.html">Widget sizes &amp; colors →</a></p>
+        <h2>2. Multi-cam</h2>
+        <p><code>Cam / Face</code> and <code>Cam / Wheel</code> as Paste (Reference) on every scene. Optional <code>Game / Angle 2</code> for bumper or chase while the main view stays cockpit.</p>
+        <p style="margin-top:10px"><a href="obs/source-map.md">Exact source names →</a></p>
       </article>
       <article class="card">
         <h2>3. Lumia Stream</h2>
-        <p>Lights follow the scene. Channel points can show a clip. RGB overlay sits above the HUD. Casterlabs keeps the on-screen alerts.</p>
-        <p style="margin-top:10px"><a href="docs/lumia.html">Light recipes →</a></p>
+        <p>One overlay URL for chat, alerts, and goals. Lights follow the scene. Chat commands flip face/wheel/dual. Casterlabs is not part of this kit.</p>
+        <p style="margin-top:10px"><a href="docs/lumia.html">Overlay + light recipes →</a></p>
       </article>
       <article class="card">
         <h2>Customize</h2>

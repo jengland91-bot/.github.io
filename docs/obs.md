@@ -1,125 +1,106 @@
-# OBS Studio — scene map
+# OBS + BeamNG + multi-cam
 
-Canvas is **1920×1080**. Scene names are exact — Lumia Stream matches them as written.
+Canvas is **1920×1080**. Scene names are exact — Lumia matches them as written.
 
-## Video
+## Video / encode
 
-Settings → Video:
+Same as a normal 1080p stream: NV12, Rec. 709, Limited. Twitch CBR 6000, keyframe 2, NVENC Quality. Audio 48 kHz.
 
-| Field | Value |
+Mic filters top → bottom: RNNoise → (optional gate) → EQ → Compressor 3:1 → Limiter −1.5 dB.
+
+Keep game audio and mic on separate tracks if you record.
+
+## BeamNG capture
+
+1. BeamNG: **borderless windowed**, native 1920×1080 if the PC can hold it.
+2. Turn **Steam overlay** off for BeamNG (Steam → BeamNG → Properties → Overlay).
+3. OBS source `Game / Main`: **Game Capture** → Capture specific window → `BeamNG.drive`.
+4. Uncheck Capture Cursor.
+5. If the source is **black** (common with Vulkan): change that source to **Window Capture**, method **Windows Graphics Capture**, pick BeamNG.
+
+Do not use Display Capture unless both of those fail — it grabs your whole monitor.
+
+In-game cameras (C, Shift+C, chase / hood / cockpit / orbit) are **not** extra OBS sources. They all come through `Game / Main`. Switch those with BeamNG, not OBS.
+
+## Multi-cam (physical)
+
+Typical race rig:
+
+| Source | What it sees |
 | --- | --- |
-| Base (Canvas) | 1920 × 1080 |
-| Output (Scaled) | 1920 × 1080 |
-| FPS | 60 if the PC can hold it, else 30 |
-| Color Format | NV12 |
-| Color Space | Rec. 709 |
-| Color Range | Limited |
+| `Game / Main` | BeamNG |
+| `Cam / Face` | You |
+| `Cam / Wheel` | Hands / wheel |
+| `Game / Angle 2` | Optional second BeamNG view |
 
-Settings → Output → Output Mode: **Advanced**
+### Second BeamNG angle
 
-Twitch 1080p (typical cap):
+Only needed for `RACE DUAL`. Options:
 
-| Field | NVIDIA | AMD | Intel | CPU |
-| --- | --- | --- | --- | --- |
-| Encoder | NVENC (new) | AMF | QuickSync | x264 |
-| Rate control | CBR | CBR | CBR | CBR |
-| Bitrate | 6000 Kbps | 6000 | 6000 | 4500–6000 |
-| Keyframe | 2 | 2 | 2 | 2 |
-| Preset | Quality / P5 | Quality | Quality | veryfast |
-| Profile | High | High | High | high |
-| B-frames | 2 | 2 | 2 | 2 |
+- Second monitor with a BeamNG camera (external camera app, or a windowed second view if you use one)
+- A bumper/hood window if you run a camera UI mod
+- Skip Angle 2 and use Dual only when you actually have it — otherwise stay on `RACE` and swap in-game cameras
 
-YouTube can take more bitrate (8000–12000) if the uplink is clean.
+### USB
 
-Audio: **48 kHz**, AAC **160 Kbps** (stereo) or **160** on Track 1.
+- Two webcams on **different** USB controllers (one rear motherboard, one front/header or a different controller)
+- 720p 30fps per cam is plenty next to 1080p game
+- Leave **Deactivate when not showing** **off** so Lumia/hotkey switches do not wait on USB reconnect
 
-## Audio filters (mic)
+Create each cam once, then **Copy → Paste (Reference)** into the other scenes so OBS does not open the device twice.
 
-Add these on **Mic / Main**, top to bottom:
+Crop with **Alt + drag**. Matching Rec. 709 / Limited on the cams keeps skin from looking orange next to BeamNG.
 
-1. **Noise Suppression** — RNNoise
-2. **Noise Gate** — only if the room is noisy (open close to the noise floor)
-3. **3-Band Equalizer** or **Advanced** — small cut around 200–300 Hz if it is boxy, slight presence at 4–6 kHz
-4. **Compressor** — ratio 3:1, threshold so talking just kisses it, attack ~2 ms, release ~80 ms
-5. **Limiter** — ceiling −1.5 dB
+## Source order — RACE (bottom → top)
 
-Keep desktop audio and mic on separate tracks if you record (Track 1 = stream mix, Track 2 = mic, Track 3 = game).
+1. `Game / Main`
+2. `Cam / Face`
+3. `Cam / Wheel`
+4. `Overlay / Race HUD` (`live.html`)
+5. `Lumia / Overlay`
+6. `Media / Hype Clip` (hidden)
 
-## Browser source defaults
+## GRID
 
-Every overlay:
+1. `Cam / Face` (large)
+2. `Cam / Wheel`
+3. `Overlay / Grid HUD`
+4. `Lumia / Overlay`
 
-- Width **1920**, Height **1080**
-- FPS 30
-- Custom CSS:
+## RACE DUAL
 
-```css
-body { background-color: rgba(0, 0, 0, 0); margin: 0; overflow: hidden; }
-```
+1. `Game / Main` (full)
+2. `Game / Angle 2` (640×360 at 1248, 48)
+3. `Cam / Face` / `Cam / Wheel` (small, bottom left)
+4. `Overlay / Dual HUD`
+5. `Lumia / Overlay`
 
-- Shutdown source when not visible: **on** for STARTING SOON / BRB / ENDING / stinger
-- Refresh browser when scene becomes active: **on** for STARTING SOON (restarts the countdown)
-- Hardware acceleration: on
+## REPLAY
 
-Use a **local file** pointing at this repo, or the GitHub Pages URL once Pages is enabled.
+1. `Game / Main` only
+2. `Overlay / Replay HUD`
+3. `Lumia / Overlay` (alerts only is fine; hide the chatbox layer in Lumia for this scene if you can, or accept chat on the side)
 
-Starting Soon countdown length: `starting-soon.html?m=5` (minutes).
+## Browser sources
 
-## Source order (bottom → top)
-
-### LIVE
-
-1. `Game / Capture` — Game Capture (Vulkan/DX) or Display Capture as fallback
-2. `Cam / Main` — 360×270 at **X 48, Y 762**
-3. `Casterlabs / Chat` — 400×460 at **X 1472, Y 560**
-4. `Casterlabs / Now Playing` — 360×68 at **X 48, Y 678** (optional)
-5. `Casterlabs / Labels` — 420×70 at **X 48, Y 96**
-6. `Casterlabs / Goal` — 480×52 at **X 720, Y 1004**
-7. `Overlay / Live HUD` — 1920×1080 at **0, 0** (`live.html`)
-8. `Casterlabs / Alerts` — 860×200 at **X 530, Y 24**
-9. `Casterlabs / Emoji Rain` — 1920×1080 at **0, 0** (optional)
-10. `Lumia / Overlay` — 1920×1080 at **0, 0**
-11. `Media / Hype Clip` — hidden. Lumia sets visibility for channel-point clips. Check **Restart playback when source becomes active** and **Close file when inactive**.
-
-### JUST CHATTING
-
-1. `Cam / Main` — 1100×619 at **X 56, Y 168** (16:9)
-2. `Casterlabs / Chat` — 648×860 at **X 1216, Y 96**
-3. `Casterlabs / Now Playing` — 420×68 at **X 56, Y 804**
-4. `Casterlabs / Labels` — 420×70 at **X 56, Y 96**
-5. `Casterlabs / Goal` — 480×52 at **X 366, Y 1004**
-6. `Overlay / Chatting HUD` — `chatting.html`
-7. `Casterlabs / Alerts` — 860×200 at **X 176, Y 24**
-8. `Lumia / Overlay`
-
-Right-click `Cam / Main` → **Copy** → in the other scene **Paste (Reference)** so both scenes share one camera.
-
-Same for Casterlabs sources: **Paste (Reference)** so one widget URL is not duplicated as two independent browsers.
-
-### STARTING SOON / BRB / ENDING / INTERMISSION
-
-1. Color source `#07080C` full canvas (safety if the HTML fails)
-2. Matching overlay HTML
-3. Optional `Audio / Staging Music` (media source, loop, monitoring as needed)
+- 1920×1080, FPS 30
+- CSS: `body { background-color: rgba(0, 0, 0, 0); margin: 0; overflow: hidden; }`
+- Local file pointing at this repo
 
 ## Hotkeys
-
-Settings → Hotkeys:
 
 | Scene | Suggested |
 | --- | --- |
 | STARTING SOON | Numpad 1 |
-| JUST CHATTING | Numpad 2 |
-| LIVE | Numpad 3 |
-| BRB | Numpad 4 |
-| ENDING | Numpad 5 |
+| GRID | Numpad 2 |
+| RACE | Numpad 3 |
+| RACE DUAL | Numpad 4 |
+| REPLAY | Numpad 5 |
+| BRB | Numpad 6 |
+| ENDING | Numpad 7 |
 
-Transition: **Fade 300 ms**. Skip a stinger until the rest is stable. `overlays/stinger.html` is there if you want a 1.1s ember wipe later.
-
-## Docks (not on stream)
-
-OBS → Docks → Custom Browser Docks. Paste Casterlabs Chat, Activity Feed, and Viewer List. Park them on a second monitor.
+Fade 300 ms. Lumia can fire the same scene changes from chat.
 
 ## Placement helper
 
-Add `live.html?setup=1` (or `chatting.html?setup=1`) while lining up widgets. The wells light up with sizes. Switch the URL back to the version without `setup=1` before going live.
+`live.html?setup=1` and `race-dual.html?setup=1` while lining up Lumia layers. Remove `setup=1` before going live.

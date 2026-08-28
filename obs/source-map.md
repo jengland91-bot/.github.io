@@ -1,61 +1,66 @@
 # Source map
 
-Lumia Stream and this overlay kit depend on **exact** names. Copy-paste them.
+Names must match OBS and Lumia exactly.
 
 ## Scenes
 
 - `STARTING SOON`
-- `JUST CHATTING`
-- `LIVE`
+- `GRID`
+- `RACE`
+- `RACE DUAL`
+- `REPLAY`
 - `BRB`
 - `ENDING`
-
-Optional: `INTERMISSION`
 
 ## Sources
 
 | Name | Type | Notes |
 | --- | --- | --- |
 | `Overlay / Starting Soon` | Browser | `starting-soon.html?m=5` |
-| `Overlay / Chatting HUD` | Browser | `chatting.html` |
-| `Overlay / Live HUD` | Browser | `live.html` |
+| `Overlay / Grid HUD` | Browser | `chatting.html` |
+| `Overlay / Race HUD` | Browser | `live.html` |
+| `Overlay / Dual HUD` | Browser | `race-dual.html` |
+| `Overlay / Replay HUD` | Browser | `replay.html` |
 | `Overlay / BRB` | Browser | `brb.html` |
 | `Overlay / Ending` | Browser | `ending.html` |
-| `Overlay / Intermission` | Browser | `intermission.html` |
-| `Cam / Main` | Video Capture Device | Paste (Reference) between scenes |
-| `Game / Capture` | Game Capture | LIVE only |
-| `Mic / Main` | Audio Input | Filters documented in docs/obs.md |
-| `Casterlabs / Alerts` | Browser | Combined alerts URL |
-| `Casterlabs / Chat` | Browser | Chat widget URL |
-| `Casterlabs / Labels` | Browser | Recent follow / sub |
-| `Casterlabs / Goal` | Browser | Goal widget |
-| `Casterlabs / Now Playing` | Browser | Optional |
-| `Casterlabs / Emoji Rain` | Browser | Optional, full canvas |
-| `Lumia / Overlay` | Browser | Lumia room URL |
-| `Media / Hype Clip` | Media | Hidden; Lumia toggles visibility |
+| `Game / Main` | Game Capture | BeamNG.drive. Paste (Reference) on RACE, RACE DUAL, REPLAY |
+| `Game / Angle 2` | Game or Window Capture | Second view. RACE DUAL only |
+| `Cam / Face` | Video Capture Device | Paste (Reference) on GRID, RACE, RACE DUAL |
+| `Cam / Wheel` | Video Capture Device | Same |
+| `Cam / Wide` | Video Capture Device | Optional rig / room |
+| `Mic / Main` | Audio Input | Filters in docs/obs.md |
+| `Lumia / Overlay` | Browser | Single Lumia overlay URL, 1920×1080 |
+| `Media / Hype Clip` | Media | Hidden; Lumia toggles it |
 | `Audio / Staging Music` | Media | STARTING SOON / BRB |
 
-## LIVE transforms (pixels)
+## RACE transforms
 
 | Source | W | H | X | Y |
 | --- | --- | --- | --- | --- |
-| `Cam / Main` | 360 | 270 | 48 | 762 |
-| `Casterlabs / Chat` | 400 | 460 | 1472 | 560 |
-| `Casterlabs / Alerts` | 860 | 200 | 530 | 24 |
-| `Casterlabs / Goal` | 480 | 52 | 720 | 1004 |
-| `Casterlabs / Labels` | 420 | 70 | 48 | 96 |
-| `Casterlabs / Now Playing` | 360 | 68 | 48 | 678 |
-| HUD / Lumia / Emoji Rain | 1920 | 1080 | 0 | 0 |
+| `Game / Main` | 1920 | 1080 | 0 | 0 |
+| `Cam / Face` | 400 | 225 | 48 | 816 |
+| `Cam / Wheel` | 400 | 225 | 464 | 816 |
+| `Overlay / Race HUD` | 1920 | 1080 | 0 | 0 |
+| `Lumia / Overlay` | 1920 | 1080 | 0 | 0 |
 
-## JUST CHATTING transforms
+Lumia Chatbox layer: **384×500 at 1488, 520**. Alerts: **860×200 at 530, 24**.
+
+## GRID transforms
 
 | Source | W | H | X | Y |
 | --- | --- | --- | --- | --- |
-| `Cam / Main` | 1100 | 619 | 56 | 168 |
-| `Casterlabs / Chat` | 648 | 860 | 1216 | 96 |
-| `Casterlabs / Alerts` | 860 | 200 | 176 | 24 |
-| `Casterlabs / Goal` | 480 | 52 | 366 | 1004 |
-| `Casterlabs / Labels` | 420 | 70 | 56 | 96 |
-| `Casterlabs / Now Playing` | 420 | 68 | 56 | 804 |
+| `Cam / Face` | 960 | 540 | 48 | 168 |
+| `Cam / Wheel` | 840 | 473 | 1032 | 168 |
+| Lumia Chatbox | 840 | 360 | 1032 | 660 |
 
-Right-click a source → Transform → Edit Transform → set Position and Size (or Bounding Box).
+## RACE DUAL transforms
+
+| Source | W | H | X | Y |
+| --- | --- | --- | --- | --- |
+| `Game / Main` | 1920 | 1080 | 0 | 0 |
+| `Game / Angle 2` | 640 | 360 | 1248 | 48 |
+| `Cam / Face` | 320 | 180 | 48 | 860 |
+| `Cam / Wheel` | 320 | 180 | 384 | 860 |
+| Lumia Chatbox | 640 | 580 | 1248 | 428 |
+
+Right-click source → Transform → Edit Transform. Bounding Box type: **Scale to inner bounds**, center.

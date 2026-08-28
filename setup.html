@@ -85,7 +85,7 @@
 
     <h2>A. Identity</h2>
     <label class="step"><input type="checkbox" data-id="config" /><span>Edit <code>overlays/shared/config.js</code> — name, brand, Instagram, Twitch, YouTube, countdown minutes.</span></label>
-    <label class="step"><input type="checkbox" data-id="preview" /><span>Open <a href="index.html">the preview</a> and confirm Starting Soon / Live / BRB look right.</span></label>
+    <label class="step"><input type="checkbox" data-id="preview" /><span>Open <a href="index.html">the preview</a> and confirm Starting Soon / Race / Grid / Dual look right.</span></label>
 
     <h2>B. OBS canvas &amp; output</h2>
     <label class="step"><input type="checkbox" data-id="obs-install" /><span>Install the latest <a href="https://obsproject.com/" target="_blank" rel="noreferrer">OBS Studio</a> (28+ so WebSocket is built in).</span></label>
@@ -95,52 +95,50 @@
     <label class="step"><input type="checkbox" data-id="obs-ws" /><span>Tools → WebSocket Server Settings: Enable server, port <code>4455</code>, authentication ON. Copy the password for Lumia.</span></label>
 
     <h2>C. Scenes — use these exact names</h2>
-    <p>Lumia matches scene names character-for-character. Create these five, then add sources from the table.</p>
+    <p>Lumia matches scene names character-for-character. In-game BeamNG cameras (C / Shift+C) stay on <code>Game / Main</code>. Physical cams are separate OBS sources.</p>
     <table>
       <thead><tr><th>Scene</th><th>What lives here</th></tr></thead>
       <tbody>
-        <tr><td><code>STARTING SOON</code></td><td>Full-screen overlay. Optional music. No cam required.</td></tr>
-        <tr><td><code>JUST CHATTING</code></td><td>Big cam, chat, alerts, labels, Lumia overlay.</td></tr>
-        <tr><td><code>LIVE</code></td><td>Game/display capture, small cam, HUD, chat, alerts.</td></tr>
-        <tr><td><code>BRB</code></td><td>Full-screen overlay. Keep mic muted or down.</td></tr>
-        <tr><td><code>ENDING</code></td><td>Full-screen overlay + socials.</td></tr>
+        <tr><td><code>STARTING SOON</code></td><td>Full-screen overlay. Optional music.</td></tr>
+        <tr><td><code>GRID</code></td><td>Big face + wheel. Talking / staging.</td></tr>
+        <tr><td><code>RACE</code></td><td>BeamNG full, face + wheel PiPs, Lumia chat.</td></tr>
+        <tr><td><code>RACE DUAL</code></td><td>Main game + second angle (bumper/chase) + small cams.</td></tr>
+        <tr><td><code>REPLAY</code></td><td>Clean game, no cams. Crashes and cinematic.</td></tr>
+        <tr><td><code>BRB</code></td><td>Pit-stop overlay. Drop game audio.</td></tr>
+        <tr><td><code>ENDING</code></td><td>Thanks / checkered.</td></tr>
       </tbody>
     </table>
-    <label class="step"><input type="checkbox" data-id="scenes" /><span>Create the five scenes with those exact names.</span></label>
-    <label class="step"><input type="checkbox" data-id="browser" /><span>Add Browser sources for each overlay (1920×1080, transparent). Prefer <strong>Local file</strong> pointing at the HTML in this repo (most reliable). Custom CSS: <code>body { background-color: rgba(0,0,0,0); overflow: hidden; }</code></span></label>
-    <label class="step"><input type="checkbox" data-id="shutdown" /><span>On STARTING SOON / BRB / ENDING overlays: enable “Refresh browser when scene becomes active”. On LIVE HUD: leave it off.</span></label>
+    <label class="step"><input type="checkbox" data-id="scenes" /><span>Create those seven scenes with the exact names.</span></label>
+    <label class="step"><input type="checkbox" data-id="browser" /><span>Add Browser sources for each overlay (1920×1080, transparent). Prefer <strong>Local file</strong>. Custom CSS: <code>body { background-color: rgba(0,0,0,0); overflow: hidden; }</code></span></label>
+    <label class="step"><input type="checkbox" data-id="beamng" /><span>BeamNG in borderless windowed. OBS <code>Game / Main</code> = Game Capture → Capture specific window → BeamNG.drive. If the shot is black (Vulkan), switch that source to Window Capture (Windows Graphics Capture).</span></label>
+    <label class="step"><input type="checkbox" data-id="cams" /><span>Add <code>Cam / Face</code> and <code>Cam / Wheel</code> as Video Capture Device. Paste (Reference) onto GRID, RACE, and RACE DUAL. Optional <code>Game / Angle 2</code> for a second monitor or bumper view — only on RACE DUAL.</span></label>
+    <label class="step"><input type="checkbox" data-id="usb" /><span>Plug the two webcams into different USB controllers (front vs back). 720p 30fps each. Leave “Deactivate when not showing” <strong>off</strong> so cam switches stay instant.</span></label>
+    <label class="step"><input type="checkbox" data-id="shutdown" /><span>Refresh browser when scene becomes active: on for STARTING SOON. Off for RACE HUD.</span></label>
 
-    <h2>D. Casterlabs Caffeinated</h2>
-    <label class="step"><input type="checkbox" data-id="caff" /><span>Install <a href="https://casterlabs.co/" target="_blank" rel="noreferrer">Caffeinated</a> and link every platform you stream to (Settings → Accounts).</span></label>
-    <label class="step"><input type="checkbox" data-id="widgets" /><span>Create widgets: combined Alerts, Chat, Recent Follow, Recent Sub, Goal, optional Now Playing and Emoji Rain. Copy each URL into OBS Browser sources named exactly as in <a href="docs/casterlabs.html">the Casterlabs doc</a>.</span></label>
-    <label class="step"><input type="checkbox" data-id="docks" /><span>OBS → Docks → Custom Browser Docks: Chat, Activity Feed, Viewer List from Caffeinated’s Docks tab. These are for you, not the stream.</span></label>
-    <label class="step"><input type="checkbox" data-id="slots" /><span>Open <a href="overlays/live.html?preview=1&setup=1">Live + slots</a>, then in OBS set Transform on each Casterlabs source to the printed size and position.</span></label>
-    <label class="step"><input type="checkbox" data-id="style" /><span>Match widget colors: text <code>#F4EFE8</code>, highlight <code>#FF4D1A</code>, transparent background, Rajdhani if you install it.</span></label>
+    <h2>D. Lumia Stream (alerts + lights + cam director)</h2>
+    <label class="step"><input type="checkbox" data-id="lumia" /><span>Install <a href="https://lumiastream.com/" target="_blank" rel="noreferrer">Lumia Stream</a>. Connections → Add → your platforms, then OBS (port 4455 + password). Add lights on the same page.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-overlay" /><span>In Lumia’s overlay editor, one overlay: Chatbox, Alerts, optional Event List / Goal / Now Playing. Match colors <code>#F4EFE8</code> / <code>#FF4D1A</code>. Place layers on the wells from <a href="overlays/live.html?preview=1&setup=1">Race + slots</a>.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-url" /><span>Copy the overlay URL. OBS Browser source <code>Lumia / Overlay</code>, 1920×1080, above the HUD on GRID / RACE / RACE DUAL / REPLAY.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-scenes" /><span>Alerts → OBS scene lights: STARTING SOON amber, GRID ice, RACE ember, RACE DUAL ember+ice, REPLAY dim gold, BRB dim blue, ENDING gold pulse.</span></label>
+    <label class="step"><input type="checkbox" data-id="cam-cmds" /><span>Chat commands with OBS Set source visibility: <code>!face</code>, <code>!wheel</code>, <code>!both</code>, <code>!game</code> (hide cams). Scene commands: <code>!dual</code> → RACE DUAL, <code>!race</code> → RACE, <code>!replay</code> → REPLAY.</span></label>
 
-    <h2>E. Lumia Stream</h2>
-    <label class="step"><input type="checkbox" data-id="lumia" /><span>Install <a href="https://lumiastream.com/" target="_blank" rel="noreferrer">Lumia Stream</a>. Connections → Add → OBS. Port 4455 + the WebSocket password.</span></label>
-    <label class="step"><input type="checkbox" data-id="lights" /><span>Add your lights/plugs on the same Connections page.</span></label>
-    <label class="step"><input type="checkbox" data-id="lumia-overlay" /><span>Copy Lumia’s Overlay Room URL. OBS Browser source named <code>Lumia / Overlay</code>, 1920×1080, top of the stack on LIVE and JUST CHATTING.</span></label>
-    <label class="step"><input type="checkbox" data-id="lumia-scenes" /><span>Alerts → OBS: STARTING SOON = warm amber, LIVE = ember, JUST CHATTING = ice white, BRB = dim blue, ENDING = gold pulse.</span></label>
-    <label class="step"><input type="checkbox" data-id="split" /><span>Do not run the same follow/sub alert on both Lumia and Casterlabs. Casterlabs owns on-screen alerts. Lumia owns lights and OBS actions.</span></label>
+    <h2>E. Go live dry-run</h2>
+    <label class="step"><input type="checkbox" data-id="hotkeys" /><span>OBS hotkeys: Numpad 1 STARTING SOON, 2 GRID, 3 RACE, 4 RACE DUAL, 5 REPLAY, 6 BRB, 7 ENDING.</span></label>
+    <label class="step"><input type="checkbox" data-id="test" /><span>Record a test. Switch every scene. Toggle face/wheel. Fire a Lumia test alert. Confirm BeamNG audio vs mic.</span></label>
+    <label class="step"><input type="checkbox" data-id="mute" /><span>BRB should not leave engine audio blasting unless you want it.</span></label>
 
-    <h2>F. Go live dry-run</h2>
-    <label class="step"><input type="checkbox" data-id="hotkeys" /><span>OBS → Settings → Hotkeys: bind the five scenes (numpad 1–5 is easy).</span></label>
-    <label class="step"><input type="checkbox" data-id="test" /><span>Start a test stream or recording. Trigger a Casterlabs test alert. Trigger a Lumia light command. Switch every scene.</span></label>
-    <label class="step"><input type="checkbox" data-id="mute" /><span>Confirm desktop audio vs mic, and that BRB does not leave game audio blasting unless you want it.</span></label>
-
-    <h2>Browser source URLs</h2>
-    <p>In OBS, check <strong>Local file</strong> and browse to these (or paste a GitHub Pages URL if you enable Pages on this repo):</p>
+    <h2>Browser source files</h2>
+    <p>In OBS, check <strong>Local file</strong> and browse to:</p>
     <pre>overlays/starting-soon.html?m=5
-overlays/chatting.html
-overlays/live.html
+overlays/chatting.html          ← GRID
+overlays/live.html              ← RACE
+overlays/race-dual.html
+overlays/replay.html
 overlays/brb.html
-overlays/intermission.html
 overlays/ending.html
-overlays/stinger.html
-overlays/live.html?setup=1   ← placement helper, turn off before going live</pre>
+overlays/live.html?setup=1      ← turn off before going live</pre>
 
-    <p><a href="index.html">← Overlay preview</a> · <a href="docs/obs.html">OBS</a> · <a href="docs/casterlabs.html">Casterlabs</a> · <a href="docs/lumia.html">Lumia</a></p>
+    <p><a href="index.html">← Overlay preview</a> · <a href="docs/obs.html">OBS + BeamNG</a> · <a href="docs/lumia.html">Lumia</a></p>
   </main>
   <script>
     const KEY = "riseabove-setup";

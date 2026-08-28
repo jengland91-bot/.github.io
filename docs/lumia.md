@@ -1,99 +1,72 @@
-# Lumia Stream
+# Lumia Stream — overlay, lights, cam director
 
-Lumia owns **lights**, the **RGB overlay**, and **OBS actions** (scene changes, showing a clip). Casterlabs still owns the on-screen follow/sub/donation alert.
+Lumia is the only overlay app in this kit. It does chat, alerts, goals, lights, and OBS camera/scene switches.
 
-Guide: [Connect OBS](https://lumiastream.com/blogs/how-to-integrate-obs-streaming-software-with-lumia-stream)
+Connect guide: [Lumia + OBS](https://lumiastream.com/blogs/how-to-integrate-obs-streaming-software-with-lumia-stream)
 
 ## Connect OBS
 
-1. OBS 28+ → Tools → **WebSocket Server Settings**
-2. Enable server, port **4455**, authentication **on**
-3. Copy the password
-4. Lumia → Connections → Add → **OBS**
-5. Host `localhost` (or `127.0.0.1`), port `4455`, paste password → Connect
+1. OBS 28+ → Tools → WebSocket Server Settings
+2. Enable, port **4455**, authentication on, copy password
+3. Lumia → Connections → Add → OBS → `localhost` / 4455 / password
+4. Same page: Twitch (and any other platform) + lights
 
-OBS 27 and older need the WebSocket plugin. Update OBS instead.
+## One overlay, not five browser sources
 
-## Lights
+In Lumia’s overlay editor, build **one** overlay named something like `Rise Above Race`:
 
-Same Connections page: add Hue, Nanoleaf, Govee, WLED, Twinkly, plugs, etc.
+| Layer | Put it here (RACE) |
+| --- | --- |
+| Chatbox | 384×500 at **1488, 520** |
+| Alerts | 860×200 at **530, 24** |
+| Event list / labels | 420×70 at **48, 96** |
+| Now Playing | 400×64 at **48, 736** |
+| Goal | optional; skip on RACE if it covers the wheel |
 
-## Overlay in OBS
+Colors: text `#F4EFE8`, accent `#FF4D1A`, backgrounds transparent or a light dark glass.
 
-Lumia → overlay / room URL (looks like `https://lumiastream.com/overlay?room=…`).
+Copy the overlay URL once. OBS source `Lumia / Overlay`, 1920×1080, **above** the Rise Above HUD.
 
-OBS Browser source:
-
-- Name: `Lumia / Overlay`
-- 1920×1080
-- Transparent CSS (same as the HUD)
-- Place **above** the Rise Above HUD on LIVE and JUST CHATTING
-
-If the Lumia overlay includes its own chat/alerts, turn those layers off in Lumia and leave Casterlabs in charge. Use Lumia overlay for RGB frames, HFX, and light-reactive art.
+GRID and RACE DUAL use different wells — either duplicate the overlay in Lumia with those positions, or keep one overlay and accept that chat sits in the RACE pocket on every scene (still readable). Two Lumia overlays (Race / Grid) is cleaner if the editor allows switching with the scene.
 
 ## Scene lights (Alerts → OBS)
 
-Create an OBS-scene alert for each scene name. Scene names must match OBS exactly.
-
-| Scene | Light feel |
+| Scene | Light |
 | --- | --- |
-| `STARTING SOON` | Warm amber, slow breathe. Staging. |
-| `JUST CHATTING` | Soft ice / white, low saturation. Face-friendly. |
-| `LIVE` | Ember `#FF4D1A`, a bit more intensity. |
-| `BRB` | Dim cool blue, 30–40% brightness. |
-| `ENDING` | Gold pulse, then a slow fade you can trigger on stream stop. |
+| `STARTING SOON` | Warm amber, slow breathe |
+| `GRID` | Soft ice / white, face-friendly |
+| `RACE` | Ember `#FF4D1A` |
+| `RACE DUAL` | Ember + a bit of ice on a second zone if you have one |
+| `REPLAY` | Dim gold |
+| `BRB` | Dim cool blue, 30–40% |
+| `ENDING` | Gold pulse, then house white on stream stop |
 
-Also useful:
+Follow/sub in Lumia: **on-screen alert + a 2s light flash**. Do not add a second alerts app.
 
-- **Stream start** → LIVE colors + a short TTS “we’re live” only in your headphones if you want it
-- **Stream stop** → lights to house/white so you are not sitting in red after the raid
+## Camera director (OBS actions)
 
-## Chat / points → OBS (do not duplicate Casterlabs alerts)
-
-Under a command or Twitch points redemption, add **OBS actions**:
-
-### `!brb` / a “BRB” point redeem
-
-1. Set current scene → `BRB`
-2. Lights to BRB look
-3. End tab (or a second redeem `!live`): scene → `LIVE`
-
-### Hype clip (channel points)
-
-OBS source `Media / Hype Clip` (hidden by default), Restart when active.
-
-On the redeem:
-
-1. Start: Set source visibility **on** — scene `LIVE`, source `Media / Hype Clip`
-2. Delay = clip length
-3. End: visibility **off**
-
-Same pattern works for a PNG meme.
-
-### Chat camera zoom (optional)
-
-OBS action: Set scene item transform on `Cam / Main`, then revert after N seconds. Easy to overdo — test offline.
-
-## Commands worth adding
-
-Keep cooldowns honest so lights are not strobing.
+Use **Set source visibility** on the scene `RACE` (and copy the same rows for `GRID` / `RACE DUAL`).
 
 | Command | Action |
 | --- | --- |
-| `!lights` | Cycle a safe accent (ember / ice / sand) |
-| `!brb` | Scene `BRB` |
-| `!live` | Scene `LIVE` |
-| `!chat` | Scene `JUST CHATTING` |
+| `!face` | Face on, Wheel off |
+| `!wheel` | Wheel on, Face off |
+| `!both` | Face on, Wheel on |
+| `!game` | Face off, Wheel off (game only) |
+| `!race` | Set scene `RACE` |
+| `!dual` | Set scene `RACE DUAL` |
+| `!replay` | Set scene `REPLAY` |
+| `!grid` | Set scene `GRID` |
+| `!brb` | Set scene `BRB` |
 
-User levels: everyone for `!lights` with a 30s cooldown; mods for scene switches if you do not want random scene changes.
+Mods-only for scene switches if random viewers should not yank you into BRB. `!face` / `!wheel` / `!both` can be everyone with a 15–30s cooldown.
 
-## Follow / sub in Lumia
-
-Use those events for **lights only** (flash ember 2s, return to LIVE color). Do **not** also enable Lumia’s on-screen alert if Casterlabs is already showing it.
+Hype clip redeem: show `Media / Hype Clip`, delay = length, hide. Restart when active, close file when inactive.
 
 ## Troubleshooting
 
-- Lumia cannot see scenes: OBS is closed, WebSocket off, or wrong password/port.
-- Overlay blank in OBS: room URL stale — recopy from Lumia. Confirm Caffeinated is not required here; Lumia overlay needs the Lumia app running.
-- Double alerts: disable on-screen alerts in one of the two apps.
-- Scene switch does nothing: source/scene name mismatch (spaces, caps). Copy from [source-map.md](../obs/source-map.md).
+- Lumia cannot see scenes: WebSocket off, wrong password, OBS closed
+- Blank overlay: recopy the room URL; Lumia app must be running
+- Cam freeze: USB bandwidth — drop to 720p, different ports
+- BeamNG black: Game Capture → Window Capture (Windows Graphics Capture)
+- Scene switch does nothing: name mismatch — copy from [source-map.md](../obs/source-map.md)
