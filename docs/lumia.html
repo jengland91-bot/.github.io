@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumia Stream — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+<main>
+  <div class="kicker">LUMIA STREAM</div>
+  <h1>OVERLAY + CAMS</h1>
+  <p>Lumia is the only overlay app here: chat, alerts, lights, and OBS camera switches. Connect guide: <a href="https://lumiastream.com/blogs/how-to-integrate-obs-streaming-software-with-lumia-stream">Lumia + OBS</a>.</p>
+
+  <h2>Connect</h2>
+  <ol>
+    <li>OBS → Tools → WebSocket Server Settings → enable, port <code>4455</code>, auth on</li>
+    <li>Lumia → Connections → OBS + your platforms + lights</li>
+  </ol>
+
+  <h2>One overlay URL</h2>
+  <p>Build one overlay in Lumia. OBS source <code>Lumia / Overlay</code>, 1920×1080, above the HUD.</p>
+  <table>
+    <tr><th>Layer</th><th>RACE position</th></tr>
+    <tr><td>Chatbox</td><td>384×500 at 1488, 520</td></tr>
+    <tr><td>Alerts</td><td>860×200 at 530, 24</td></tr>
+    <tr><td>Event list</td><td>420×70 at 48, 96</td></tr>
+    <tr><td>Now Playing</td><td>400×64 at 48, 736</td></tr>
+  </table>
+  <p>Text <code>#F4EFE8</code>, accent <code>#FF4D1A</code>, transparent glass. Line up with <a href="../overlays/live.html?preview=1&setup=1">Race + slots</a>.</p>
+
+  <h2>Scene lights</h2>
+  <table>
+    <tr><th>Scene</th><th>Light</th></tr>
+    <tr><td><code>STARTING SOON</code></td><td>Warm amber</td></tr>
+    <tr><td><code>GRID</code></td><td>Ice / white</td></tr>
+    <tr><td><code>RACE</code></td><td>Ember <code>#FF4D1A</code></td></tr>
+    <tr><td><code>RACE DUAL</code></td><td>Ember + ice on a second zone</td></tr>
+    <tr><td><code>REPLAY</code></td><td>Dim gold</td></tr>
+    <tr><td><code>BRB</code></td><td>Dim blue</td></tr>
+    <tr><td><code>ENDING</code></td><td>Gold pulse</td></tr>
+  </table>
+
+  <h2>Cam director</h2>
+  <table>
+    <tr><th>Command</th><th>OBS action</th></tr>
+    <tr><td><code>!face</code></td><td>Face on, wheel off</td></tr>
+    <tr><td><code>!wheel</code></td><td>Wheel on, face off</td></tr>
+    <tr><td><code>!both</code></td><td>Both on</td></tr>
+    <tr><td><code>!game</code></td><td>Both cams off</td></tr>
+    <tr><td><code>!race</code> / <code>!dual</code> / <code>!replay</code> / <code>!grid</code> / <code>!brb</code></td><td>Set scene</td></tr>
+  </table>
+  <p>Mods-only for scene switches. Everyone can use cam toggles with a cooldown.</p>
+
+  <nav class="docs">
+    <a href="../setup.html">← Checklist</a> ·
+    <a href="obs.html">OBS + BeamNG</a>
+  </nav>
+</main>
+</body>
+</html>

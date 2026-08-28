@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setup — Rise Above Stream Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ember: #ff4d1a;
+      --ice: #5ce1e6;
+      --sand: #e8c9a0;
+      --paper: #f4efe8;
+      --void: #07080c;
+      --asphalt: #12141c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--void);
+      color: var(--paper);
+      font-family: Outfit, system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main { max-width: 820px; margin: 0 auto; padding: 48px 22px 96px; }
+    a { color: var(--ice); }
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 64px;
+      letter-spacing: 0.06em;
+      line-height: 0.9;
+      margin: 8px 0 16px;
+    }
+    h2 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.08em;
+      margin: 36px 0 10px;
+    }
+    .kicker {
+      font-family: Rajdhani, sans-serif;
+      letter-spacing: 0.4em;
+      color: var(--ice);
+      font-weight: 700;
+    }
+    p, li { color: var(--sand); }
+    ol, ul { padding-left: 20px; }
+    li { margin: 6px 0; }
+    code, pre {
+      font-family: ui-monospace, monospace;
+      background: #000;
+      color: var(--paper);
+    }
+    code { padding: 1px 6px; font-size: 0.92em; }
+    pre {
+      padding: 14px;
+      overflow: auto;
+      margin: 12px 0 18px;
+      border: 1px solid rgba(244, 239, 232, 0.12);
+      font-size: 13px;
+    }
+    label.step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: var(--asphalt);
+      border: 1px solid rgba(244, 239, 232, 0.1);
+      padding: 12px 14px;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+    label.step input { margin-top: 5px; accent-color: var(--ember); }
+    .done { opacity: 0.55; text-decoration: line-through; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+    th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid rgba(244, 239, 232, 0.1); }
+    th { color: var(--paper); font-family: Rajdhani, sans-serif; letter-spacing: 0.08em; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="kicker">CHECKLIST</div>
+    <h1>GET IT LIVE</h1>
+    <p>Work top to bottom. Check items off as you go — this page remembers them in this browser. Full detail lives in the docs linked at the bottom.</p>
+    <p><a href="tools/install.html">Use the installer</a> to create the OBS scene collection and Lumia chat commands with code. Open that page on the streaming PC (local file), not from GitHub Pages.</p>
+
+    <h2>A. Identity</h2>
+    <label class="step"><input type="checkbox" data-id="config" /><span>Edit <code>overlays/shared/config.js</code> — name, brand, Instagram, Twitch, YouTube, countdown minutes.</span></label>
+    <label class="step"><input type="checkbox" data-id="preview" /><span>Open <a href="index.html">the preview</a> and confirm Starting Soon / Race / Grid / Dual look right.</span></label>
+
+    <h2>B. OBS canvas &amp; output</h2>
+    <label class="step"><input type="checkbox" data-id="obs-install" /><span>Install the latest <a href="https://obsproject.com/" target="_blank" rel="noreferrer">OBS Studio</a> (28+ so WebSocket is built in).</span></label>
+    <label class="step"><input type="checkbox" data-id="obs-video" /><span>Settings → Video: Base and Output <code>1920×1080</code>, 30 or 60 fps. Color format NV12, Rec. 709, Limited.</span></label>
+    <label class="step"><input type="checkbox" data-id="obs-encode" /><span>Settings → Output → Advanced. NVIDIA: NVENC, CBR, 6000 Kbps for Twitch, keyframe 2, High, B-frames 2. AMD: AMF. Intel: QSV. CPU-only: x264 veryfast.</span></label>
+    <label class="step"><input type="checkbox" data-id="obs-audio" /><span>Settings → Audio: 48 kHz. Mic filters in this order: Noise Suppression (RNNoise) → EQ → Compressor → Limiter.</span></label>
+    <label class="step"><input type="checkbox" data-id="obs-ws" /><span>Tools → WebSocket Server Settings: Enable server, port <code>4455</code>, authentication ON. Copy the password for Lumia.</span></label>
+
+    <h2>C. Scenes — use these exact names</h2>
+    <p>Lumia matches scene names character-for-character. In-game BeamNG cameras (C / Shift+C) stay on <code>Game / Main</code>. Physical cams are separate OBS sources.</p>
+    <table>
+      <thead><tr><th>Scene</th><th>What lives here</th></tr></thead>
+      <tbody>
+        <tr><td><code>STARTING SOON</code></td><td>Full-screen overlay. Optional music.</td></tr>
+        <tr><td><code>GRID</code></td><td>Big face + wheel. Talking / staging.</td></tr>
+        <tr><td><code>RACE</code></td><td>BeamNG full, face + wheel PiPs, Lumia chat.</td></tr>
+        <tr><td><code>RACE DUAL</code></td><td>Main game + second angle (bumper/chase) + small cams.</td></tr>
+        <tr><td><code>REPLAY</code></td><td>Clean game, no cams. Crashes and cinematic.</td></tr>
+        <tr><td><code>BRB</code></td><td>Pit-stop overlay. Drop game audio.</td></tr>
+        <tr><td><code>ENDING</code></td><td>Thanks / checkered.</td></tr>
+      </tbody>
+    </table>
+    <label class="step"><input type="checkbox" data-id="scenes" /><span>Create those seven scenes with the exact names.</span></label>
+    <label class="step"><input type="checkbox" data-id="browser" /><span>Add Browser sources for each overlay (1920×1080, transparent). Prefer <strong>Local file</strong>. Custom CSS: <code>body { background-color: rgba(0,0,0,0); overflow: hidden; }</code></span></label>
+    <label class="step"><input type="checkbox" data-id="beamng" /><span>BeamNG in borderless windowed. OBS <code>Game / Main</code> = Game Capture → Capture specific window → BeamNG.drive. If the shot is black (Vulkan), switch that source to Window Capture (Windows Graphics Capture).</span></label>
+    <label class="step"><input type="checkbox" data-id="cams" /><span>Add <code>Cam / Face</code> and <code>Cam / Wheel</code> as Video Capture Device. Paste (Reference) onto GRID, RACE, and RACE DUAL. Optional <code>Game / Angle 2</code> for a second monitor or bumper view — only on RACE DUAL.</span></label>
+    <label class="step"><input type="checkbox" data-id="usb" /><span>Plug the two webcams into different USB controllers (front vs back). 720p 30fps each. Leave “Deactivate when not showing” <strong>off</strong> so cam switches stay instant.</span></label>
+    <label class="step"><input type="checkbox" data-id="shutdown" /><span>Refresh browser when scene becomes active: on for STARTING SOON. Off for RACE HUD.</span></label>
+
+    <h2>D. Lumia Stream (alerts + lights + cam director)</h2>
+    <label class="step"><input type="checkbox" data-id="lumia" /><span>Install <a href="https://lumiastream.com/" target="_blank" rel="noreferrer">Lumia Stream</a>. Connections → Add → your platforms, then OBS (port 4455 + password). Add lights on the same page.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-overlay" /><span>In Lumia’s overlay editor, one overlay: Chatbox, Alerts, optional Event List / Goal / Now Playing. Match colors <code>#F4EFE8</code> / <code>#FF4D1A</code>. Place layers on the wells from <a href="overlays/live.html?preview=1&setup=1">Race + slots</a>.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-url" /><span>Copy the overlay URL. OBS Browser source <code>Lumia / Overlay</code>, 1920×1080, above the HUD on GRID / RACE / RACE DUAL / REPLAY.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-scenes" /><span>Alerts → OBS scene lights: STARTING SOON amber, GRID ice, RACE ember, RACE DUAL ember+ice, REPLAY dim gold, BRB dim blue, ENDING gold pulse.</span></label>
+    <label class="step"><input type="checkbox" data-id="cam-cmds" /><span>Chat commands with OBS Set source visibility: <code>!face</code>, <code>!wheel</code>, <code>!both</code>, <code>!game</code> (hide cams). Scene commands: <code>!dual</code> → RACE DUAL, <code>!race</code> → RACE, <code>!replay</code> → REPLAY.</span></label>
+
+    <h2>E. Go live dry-run</h2>
+    <label class="step"><input type="checkbox" data-id="hotkeys" /><span>OBS hotkeys: Numpad 1 STARTING SOON, 2 GRID, 3 RACE, 4 RACE DUAL, 5 REPLAY, 6 BRB, 7 ENDING.</span></label>
+    <label class="step"><input type="checkbox" data-id="test" /><span>Record a test. Switch every scene. Toggle face/wheel. Fire a Lumia test alert. Confirm BeamNG audio vs mic.</span></label>
+    <label class="step"><input type="checkbox" data-id="mute" /><span>BRB should not leave engine audio blasting unless you want it.</span></label>
+
+    <h2>Browser source files</h2>
+    <p>In OBS, check <strong>Local file</strong> and browse to:</p>
+    <pre>overlays/starting-soon.html?m=5
+overlays/chatting.html          ← GRID
+overlays/live.html              ← RACE
+overlays/race-dual.html
+overlays/replay.html
+overlays/brb.html
+overlays/ending.html
+overlays/live.html?setup=1      ← turn off before going live</pre>
+
+    <p><a href="index.html">← Overlay preview</a> · <a href="docs/obs.html">OBS + BeamNG</a> · <a href="docs/lumia.html">Lumia</a></p>
+  </main>
+  <script>
+    const KEY = "riseabove-setup";
+    const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+    document.querySelectorAll("label.step").forEach((label) => {
+      const input = label.querySelector("input");
+      const id = input.dataset.id;
+      input.checked = Boolean(saved[id]);
+      if (input.checked) label.classList.add("done");
+      input.addEventListener("change", () => {
+        saved[id] = input.checked;
+        localStorage.setItem(KEY, JSON.stringify(saved));
+        label.classList.toggle("done", input.checked);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OBS + BeamNG — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+<main>
+  <div class="kicker">OBS + BEAMNG</div>
+  <h1>MULTI-CAM MAP</h1>
+  <p>Canvas <code>1920×1080</code>. Scene names are exact. Markdown: <a href="obs.md">obs.md</a></p>
+
+  <h2>BeamNG capture</h2>
+  <ol>
+    <li>Borderless windowed, 1920×1080 if the PC can hold it</li>
+    <li>Steam overlay off for BeamNG</li>
+    <li><code>Game / Main</code> = Game Capture → specific window → BeamNG.drive. Cursor off</li>
+    <li>Black frame (Vulkan): Window Capture, method Windows Graphics Capture</li>
+  </ol>
+  <p>In-game cameras (C / Shift+C) all flow through <code>Game / Main</code>. They are not extra OBS sources.</p>
+
+  <h2>Physical cams</h2>
+  <table>
+    <tr><th>Source</th><th>Sees</th></tr>
+    <tr><td><code>Game / Main</code></td><td>BeamNG</td></tr>
+    <tr><td><code>Cam / Face</code></td><td>You</td></tr>
+    <tr><td><code>Cam / Wheel</code></td><td>Hands / wheel</td></tr>
+    <tr><td><code>Game / Angle 2</code></td><td>Optional second BeamNG view, RACE DUAL only</td></tr>
+  </table>
+  <ul>
+    <li>Two webcams on different USB controllers</li>
+    <li>720p 30fps each</li>
+    <li>Deactivate when not showing: <strong>off</strong></li>
+    <li>Create once, Paste (Reference) into other scenes</li>
+  </ul>
+
+  <h2>RACE — bottom → top</h2>
+  <ol>
+    <li><code>Game / Main</code></li>
+    <li><code>Cam / Face</code> 400×225 at 48, 816</li>
+    <li><code>Cam / Wheel</code> 400×225 at 464, 816</li>
+    <li><code>Overlay / Race HUD</code> (<code>live.html</code>)</li>
+    <li><code>Lumia / Overlay</code></li>
+  </ol>
+
+  <h2>GRID</h2>
+  <p>Face 960×540 at 48, 168. Wheel 840×473 at 1032, 168. Lumia chat 840×360 at 1032, 660.</p>
+
+  <h2>RACE DUAL</h2>
+  <p>Full game + Angle 2 640×360 at 1248, 48. Small face/wheel bottom left. Chat under the angle.</p>
+
+  <h2>REPLAY</h2>
+  <p>Game only + Replay HUD. No cams.</p>
+
+  <h2>Hotkeys</h2>
+  <p>Numpad 1–7: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING. Fade 300 ms.</p>
+  <p>Encode: NVENC CBR 6000, keyframe 2. Mic: RNNoise → EQ → Compressor → Limiter.</p>
+
+  <nav class="docs">
+    <a href="../setup.html">← Checklist</a> ·
+    <a href="lumia.html">Lumia</a> ·
+    <a href="../obs/source-map.md">Source map</a>
+  </nav>
+</main>
+</body>
+</html>

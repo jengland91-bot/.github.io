@@ -1,0 +1,639 @@
+:root {
+  --ember: #ff4d1a;
+  --amber: #ffb020;
+  --ice: #5ce1e6;
+  --sand: #e8c9a0;
+  --paper: #f4efe8;
+  --muted: #9a938a;
+  --void: #07080c;
+  --asphalt: #12141c;
+  --panel: rgba(10, 12, 18, 0.55);
+  --line: rgba(244, 239, 232, 0.16);
+  --glow: 0 0 28px color-mix(in srgb, var(--ember) 55%, transparent);
+  --font-display: "Bebas Neue", "Arial Narrow", Impact, sans-serif;
+  --font-hud: "Rajdhani", "Segoe UI", sans-serif;
+  --font-ui: "Outfit", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: transparent;
+  color: var(--paper);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+body.scene-starting,
+body.scene-brb,
+body.scene-ending,
+body.scene-intermission,
+body.preview {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 115%, color-mix(in srgb, var(--ember) 38%, transparent), transparent 60%),
+    linear-gradient(180deg, #182038 0%, #0b0d14 48%, #1a140e 100%);
+}
+
+#dust {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hazard {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #090909 0 14px,
+    var(--ember) 14px 28px
+  );
+  z-index: 8;
+}
+
+.hazard.top {
+  top: 0;
+}
+
+.hazard.bottom {
+  bottom: 0;
+}
+
+.ticks {
+  position: absolute;
+  inset: 28px;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.ticks span {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px solid color-mix(in srgb, var(--ember) 80%, white);
+}
+
+.ticks .tl {
+  top: 0;
+  left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.ticks .tr {
+  top: 0;
+  right: 0;
+  border-left: 0;
+  border-bottom: 0;
+}
+
+.ticks .bl {
+  bottom: 0;
+  left: 0;
+  border-right: 0;
+  border-top: 0;
+}
+
+.ticks .br {
+  bottom: 0;
+  right: 0;
+  border-left: 0;
+  border-top: 0;
+}
+
+.top-bar {
+  position: absolute;
+  top: 36px;
+  left: 56px;
+  right: 56px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  z-index: 7;
+}
+
+.scene-chatting .top-bar {
+  right: 900px;
+}
+
+.scene-dual .top-bar {
+  right: 680px;
+}
+
+.live-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ember);
+  color: #140800;
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.16em;
+  padding: 8px 14px 6px;
+  box-shadow: var(--glow);
+}
+
+.live-pill i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #140800;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 42px;
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+.brand small {
+  display: block;
+  font-family: var(--font-hud);
+  font-size: 14px;
+  letter-spacing: 0.42em;
+  color: var(--sand);
+  font-weight: 600;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.clock,
+.meta {
+  font-family: var(--font-hud);
+  font-weight: 600;
+  font-size: 28px;
+  letter-spacing: 0.08em;
+  color: var(--sand);
+}
+
+.scene-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.kicker {
+  font-family: var(--font-hud);
+  font-weight: 700;
+  letter-spacing: 0.48em;
+  font-size: 18px;
+  color: var(--ice);
+  margin-bottom: 12px;
+}
+
+.scene-title h1 {
+  font-family: var(--font-display);
+  font-size: 168px;
+  line-height: 0.86;
+  letter-spacing: 0.06em;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.55), var(--glow);
+}
+
+.scene-title p {
+  margin-top: 18px;
+  font-size: 28px;
+  color: var(--sand);
+  max-width: 760px;
+}
+
+.countdown {
+  margin-top: 36px;
+  font-family: var(--font-hud);
+  font-weight: 700;
+  font-size: 112px;
+  letter-spacing: 0.08em;
+  color: var(--paper);
+  background: linear-gradient(180deg, var(--paper), var(--sand));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.45));
+}
+
+.countdown.done {
+  -webkit-text-fill-color: var(--ember);
+  color: var(--ember);
+  animation: pulse 0.8s ease-in-out infinite;
+}
+
+.social-row {
+  position: absolute;
+  bottom: 56px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  z-index: 7;
+  font-family: var(--font-hud);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  color: var(--sand);
+}
+
+.social-row span::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 10px;
+  background: var(--ember);
+  transform: translateY(-1px);
+}
+
+.well {
+  position: absolute;
+  z-index: 4;
+  border: 2px solid color-mix(in srgb, var(--ember) 70%, white 10%);
+  box-shadow:
+    var(--glow),
+    inset 0 0 40px rgba(0, 0, 0, 0.18);
+  background: transparent;
+  pointer-events: none;
+}
+
+.well::before,
+.well::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--amber);
+}
+
+.well::before {
+  top: -2px;
+  left: -2px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.well::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.well-tag {
+  position: absolute;
+  top: -26px;
+  left: -2px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  background: var(--ember);
+  color: #140800;
+  padding: 3px 10px 1px;
+}
+
+body:not(.setup) .well-tag {
+  display: none;
+}
+
+body.setup .well {
+  background: rgba(255, 77, 26, 0.12);
+}
+
+body.setup .well-tag {
+  display: block;
+}
+
+.cam-name {
+  position: absolute;
+  left: -2px;
+  bottom: -2px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: 0.14em;
+  background: var(--ember);
+  color: #140800;
+  padding: 3px 10px 1px;
+  z-index: 2;
+}
+
+body.setup .cam-name {
+  display: none;
+}
+
+/* Race HUD — face + wheel along the bottom, Lumia chat on the right */
+.well-face {
+  left: 48px;
+  top: 816px;
+  width: 400px;
+  height: 225px;
+}
+
+.well-wheel {
+  left: 464px;
+  top: 816px;
+  width: 400px;
+  height: 225px;
+}
+
+.well-cam {
+  left: 48px;
+  top: 816px;
+  width: 400px;
+  height: 225px;
+}
+
+.well-chat {
+  left: 1488px;
+  top: 520px;
+  width: 384px;
+  height: 500px;
+}
+
+.well-alerts {
+  left: 530px;
+  top: 24px;
+  width: 860px;
+  height: 200px;
+  border-style: dashed;
+  box-shadow: none;
+}
+
+body:not(.setup) .well-alerts {
+  display: none;
+}
+
+body.scene-live:not(.setup) .well-goal,
+body.scene-dual:not(.setup) .well-goal {
+  display: none;
+}
+
+.well-goal {
+  left: 888px;
+  top: 1008px;
+  width: 400px;
+  height: 48px;
+}
+
+.well-labels {
+  left: 48px;
+  top: 96px;
+  width: 420px;
+  height: 70px;
+}
+
+.well-nowplaying {
+  left: 48px;
+  top: 736px;
+  width: 400px;
+  height: 64px;
+}
+
+.well-angle {
+  left: 1248px;
+  top: 48px;
+  width: 640px;
+  height: 360px;
+}
+
+/* GRID — big face + wheel, Lumia chat under the wheel */
+.scene-chatting .well-face {
+  left: 48px;
+  top: 168px;
+  width: 960px;
+  height: 540px;
+}
+
+.scene-chatting .well-wheel {
+  left: 1032px;
+  top: 168px;
+  width: 840px;
+  height: 473px;
+}
+
+.scene-chatting .well-chat {
+  left: 1032px;
+  top: 660px;
+  width: 840px;
+  height: 360px;
+}
+
+.scene-chatting .well-alerts {
+  left: 200px;
+  top: 24px;
+}
+
+.scene-chatting .well-goal {
+  left: 48px;
+  top: 1004px;
+  width: 480px;
+  height: 52px;
+}
+
+.scene-chatting .well-labels {
+  left: 48px;
+  top: 96px;
+}
+
+.scene-chatting .well-nowplaying {
+  left: 48px;
+  top: 728px;
+  width: 420px;
+}
+
+/* DUAL CAM — second BeamNG angle top-right, cams low left, chat under angle */
+.scene-dual .well-angle {
+  left: 1248px;
+  top: 48px;
+  width: 640px;
+  height: 360px;
+}
+
+.scene-dual .well-face {
+  left: 48px;
+  top: 860px;
+  width: 320px;
+  height: 180px;
+}
+
+.scene-dual .well-wheel {
+  left: 384px;
+  top: 860px;
+  width: 320px;
+  height: 180px;
+}
+
+.scene-dual .well-chat {
+  left: 1248px;
+  top: 428px;
+  width: 640px;
+  height: 580px;
+}
+
+.scene-dual .well-nowplaying {
+  display: none;
+}
+
+.scene-dual .well-goal {
+  left: 720px;
+  top: 1008px;
+}
+
+.scene-dual .well-labels {
+  left: 48px;
+  top: 96px;
+}
+
+/* REPLAY — keep the game clean */
+.scene-replay .well-face,
+.scene-replay .well-wheel,
+.scene-replay .well-chat,
+.scene-replay .well-nowplaying,
+.scene-replay .well-goal,
+.scene-replay .well-labels {
+  display: none;
+}
+
+.lower-third {
+  position: absolute;
+  left: 56px;
+  bottom: 72px;
+  display: flex;
+  z-index: 7;
+}
+
+.lower-third .bar {
+  width: 8px;
+  background: var(--ember);
+  box-shadow: var(--glow);
+}
+
+.lower-third .copy {
+  background: color-mix(in srgb, var(--void) 82%, transparent);
+  border: 1px solid var(--line);
+  padding: 16px 28px 14px 22px;
+}
+
+.lower-third strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 42px;
+  letter-spacing: 0.08em;
+}
+
+.lower-third span {
+  font-family: var(--font-hud);
+  letter-spacing: 0.16em;
+  color: var(--sand);
+  font-size: 18px;
+}
+
+.frame-only {
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.92);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scene-title,
+.lower-third,
+.top-bar {
+  animation: rise 0.7s ease both;
+}
+
+/* Isolated webcam bezel used as its own Browser Source */
+.bezel {
+  position: absolute;
+  inset: 0;
+  border: 3px solid var(--ember);
+  box-shadow: var(--glow);
+}
+
+.bezel .caption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-family: var(--font-display);
+  letter-spacing: 0.14em;
+  font-size: 22px;
+  background: var(--ember);
+  color: #140800;
+  padding: 4px 12px 2px;
+}
+
+/* Stinger wipe */
+body.stinger {
+  background: transparent;
+}
+
+.wipe {
+  position: absolute;
+  inset: 0;
+  background: var(--void);
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  animation: wipe 1.1s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+}
+
+.wipe .mark {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 120px;
+  letter-spacing: 0.18em;
+  color: var(--ember);
+}
+
+@keyframes wipe {
+  0% {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+  35% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  65% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+  }
+}
