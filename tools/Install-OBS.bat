@@ -1,5 +1,5 @@
 @echo off
-title Rise Above — install into OBS
+title Rise Above OBS installer
 cd /d "%~dp0"
 echo.
 echo EXTRACT the zip first if you have not. OBS Studio must already be open.

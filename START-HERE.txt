@@ -3,6 +3,8 @@
 3. Open the extracted folder -> open the "tools" folder -> double-click Install-OBS.bat
 4. When it asks for a password: OBS top menu Tools -> WebSocket Server Settings -> Show Connect Info -> copy password -> paste into the black window -> Enter.
 
+If the black window immediately shows red ParserError text (Missing argument / string terminator), you have an old zip. Delete that extracted folder, download a fresh zip, extract again, then run Install-OBS.bat from the new tools folder.
+
 If Windows blocks the .bat: right-click Install-OBS.bat -> Run anyway / Properties -> Unblock.
 
 You should then see scenes named STARTING SOON, GRID, RACE in OBS.

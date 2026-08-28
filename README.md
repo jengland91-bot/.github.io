@@ -2,7 +2,7 @@
 
 Race-broadcast overlay kit for **BeamNG.drive** with **multi-cam** (game + face + wheel) and **Lumia Stream** for chat, alerts, lights, and camera switching. Casterlabs is not used.
 
-Open [the preview](index.html), the [setup checklist](setup.html), or the **[OBS + Lumia installer](tools/install.html)** (run it on the streaming PC).
+Open [START-HERE.txt](START-HERE.txt). On Windows: extract the zip, open OBS, double-click `tools/Install-OBS.bat`.
 
 ## Scenes
 
