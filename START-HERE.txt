@@ -1,0 +1,8 @@
+1. Right-click the zip -> Extract All. Do not open files from inside the zip.
+2. Open OBS Studio (the program you stream with).
+3. Open the extracted folder -> open the "tools" folder -> double-click Install-OBS.bat
+4. When it asks for a password: OBS top menu Tools -> WebSocket Server Settings -> Show Connect Info -> copy password -> paste into the black window -> Enter.
+
+If Windows blocks the .bat: right-click Install-OBS.bat -> Run anyway / Properties -> Unblock.
+
+You should then see scenes named STARTING SOON, GRID, RACE in OBS.
