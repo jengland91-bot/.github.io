@@ -1,0 +1,74 @@
+[
+  {
+    "name": "race",
+    "message": "Scene → RACE",
+    "cooldownDuration": 3000,
+    "obsScene": "RACE"
+  },
+  {
+    "name": "dual",
+    "message": "Scene → RACE DUAL",
+    "cooldownDuration": 3000,
+    "obsScene": "RACE DUAL"
+  },
+  {
+    "name": "replay",
+    "message": "Scene → REPLAY",
+    "cooldownDuration": 3000,
+    "obsScene": "REPLAY"
+  },
+  {
+    "name": "grid",
+    "message": "Scene → GRID",
+    "cooldownDuration": 3000,
+    "obsScene": "GRID"
+  },
+  {
+    "name": "brb",
+    "message": "Scene → BRB",
+    "cooldownDuration": 8000,
+    "obsScene": "BRB"
+  },
+  {
+    "name": "live",
+    "message": "Scene → RACE",
+    "cooldownDuration": 3000,
+    "obsScene": "RACE"
+  },
+  {
+    "name": "face",
+    "message": "Face cam on",
+    "cooldownDuration": 15000,
+    "obsVisibility": [
+      { "scene": "RACE", "source": "Cam / Face", "visible": true },
+      { "scene": "RACE", "source": "Cam / Wheel", "visible": false }
+    ]
+  },
+  {
+    "name": "wheel",
+    "message": "Wheel cam on",
+    "cooldownDuration": 15000,
+    "obsVisibility": [
+      { "scene": "RACE", "source": "Cam / Face", "visible": false },
+      { "scene": "RACE", "source": "Cam / Wheel", "visible": true }
+    ]
+  },
+  {
+    "name": "both",
+    "message": "Both cams on",
+    "cooldownDuration": 15000,
+    "obsVisibility": [
+      { "scene": "RACE", "source": "Cam / Face", "visible": true },
+      { "scene": "RACE", "source": "Cam / Wheel", "visible": true }
+    ]
+  },
+  {
+    "name": "game",
+    "message": "Game only",
+    "cooldownDuration": 15000,
+    "obsVisibility": [
+      { "scene": "RACE", "source": "Cam / Face", "visible": false },
+      { "scene": "RACE", "source": "Cam / Wheel", "visible": false }
+    ]
+  }
+]

@@ -1,0 +1,87 @@
+/**
+ * Rise Above BeamNG — layout used by the installer.
+ * Positions match overlays/shared/theme.css wells.
+ */
+window.RISE_LAYOUT = {
+  collectionName: "Rise Above BeamNG",
+  canvas: { width: 1920, height: 1080, fps: 60 },
+  transition: { name: "Fade", durationMs: 300 },
+  css: "body { background-color: rgba(0,0,0,0); margin: 0; overflow: hidden; }",
+
+  scenes: [
+    "STARTING SOON",
+    "GRID",
+    "RACE",
+    "RACE DUAL",
+    "REPLAY",
+    "BRB",
+    "ENDING",
+  ],
+
+  overlays: {
+    "Overlay / Starting Soon": { file: "starting-soon.html", query: "?m=5", shutdown: true, restart: true },
+    "Overlay / Grid HUD": { file: "chatting.html", shutdown: false, restart: false },
+    "Overlay / Race HUD": { file: "live.html", shutdown: false, restart: false },
+    "Overlay / Dual HUD": { file: "race-dual.html", shutdown: false, restart: false },
+    "Overlay / Replay HUD": { file: "replay.html", shutdown: false, restart: false },
+    "Overlay / BRB": { file: "brb.html", shutdown: true, restart: true },
+    "Overlay / Ending": { file: "ending.html", shutdown: true, restart: true },
+  },
+
+  /* First scene listed is where the input is created. Others get a reference. */
+  items: {
+    "STARTING SOON": [
+      { name: "Color / Backdrop", kind: "color" },
+      { name: "Overlay / Starting Soon", kind: "browser", x: 0, y: 0, w: 1920, h: 1080 },
+    ],
+    GRID: [
+      { name: "Color / Backdrop", kind: "color" },
+      { name: "Cam / Face", kind: "camera", x: 48, y: 168, w: 960, h: 540 },
+      { name: "Cam / Wheel", kind: "camera", x: 1032, y: 168, w: 840, h: 473 },
+      { name: "Overlay / Grid HUD", kind: "browser", x: 0, y: 0, w: 1920, h: 1080 },
+      { name: "Lumia / Overlay", kind: "lumia", x: 0, y: 0, w: 1920, h: 1080 },
+    ],
+    RACE: [
+      { name: "Game / Main", kind: "game", x: 0, y: 0, w: 1920, h: 1080 },
+      { name: "Cam / Face", kind: "camera", x: 48, y: 816, w: 400, h: 225 },
+      { name: "Cam / Wheel", kind: "camera", x: 464, y: 816, w: 400, h: 225 },
+      { name: "Overlay / Race HUD", kind: "browser", x: 0, y: 0, w: 1920, h: 1080 },
+      { name: "Lumia / Overlay", kind: "lumia", x: 0, y: 0, w: 1920, h: 1080 },
+      { name: "Media / Hype Clip", kind: "media", x: 0, y: 0, w: 1920, h: 1080, enabled: false },
+    ],
+    "RACE DUAL": [
+      { name: "Game / Main", kind: "game", x: 0, y: 0, w: 1920, h: 1080 },
+      { name: "Game / Angle 2", kind: "game", x: 1248, y: 48, w: 640, h: 360 },
+      { name: "Cam / Face", kind: "camera", x: 48, y: 860, w: 320, h: 180 },
+      { name: "Cam / Wheel", kind: "camera", x: 384, y: 860, w: 320, h: 180 },
+      { name: "Overlay / Dual HUD", kind: "browser", x: 0, y: 0, w: 1920, h: 1080 },
+      { name: "Lumia / Overlay", kind: "lumia", x: 0, y: 0, w: 1920, h: 1080 },
+    ],
+    REPLAY: [
+      { name: "Game / Main", kind: "game", x: 0, y: 0, w: 1920, h: 1080 },
+      { name: "Overlay / Replay HUD", kind: "browser", x: 0, y: 0, w: 1920, h: 1080 },
+      { name: "Lumia / Overlay", kind: "lumia", x: 0, y: 0, w: 1920, h: 1080 },
+    ],
+    BRB: [
+      { name: "Color / Backdrop", kind: "color" },
+      { name: "Overlay / BRB", kind: "browser", x: 0, y: 0, w: 1920, h: 1080 },
+    ],
+    ENDING: [
+      { name: "Color / Backdrop", kind: "color" },
+      { name: "Overlay / Ending", kind: "browser", x: 0, y: 0, w: 1920, h: 1080 },
+    ],
+  },
+};
+
+window.LUMIA_COMMANDS = [
+  { name: "race", message: "Scene → RACE", cooldownDuration: 3000, description: "OBS: Set current scene RACE" },
+  { name: "dual", message: "Scene → RACE DUAL", cooldownDuration: 3000, description: "OBS: Set current scene RACE DUAL" },
+  { name: "replay", message: "Scene → REPLAY", cooldownDuration: 3000, description: "OBS: Set current scene REPLAY" },
+  { name: "grid", message: "Scene → GRID", cooldownDuration: 3000, description: "OBS: Set current scene GRID" },
+  { name: "brb", message: "Scene → BRB", cooldownDuration: 8000, description: "OBS: Set current scene BRB" },
+  { name: "live", message: "Scene → RACE", cooldownDuration: 3000, description: "OBS: Set current scene RACE" },
+  { name: "face", message: "Face cam on", cooldownDuration: 15000, description: "OBS: Cam / Face on, Cam / Wheel off (scene RACE)" },
+  { name: "wheel", message: "Wheel cam on", cooldownDuration: 15000, description: "OBS: Cam / Wheel on, Cam / Face off (scene RACE)" },
+  { name: "both", message: "Both cams on", cooldownDuration: 15000, description: "OBS: Cam / Face and Cam / Wheel on" },
+  { name: "game", message: "Game only", cooldownDuration: 15000, description: "OBS: hide Cam / Face and Cam / Wheel" },
+];

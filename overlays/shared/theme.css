@@ -123,6 +123,14 @@ body.preview {
   z-index: 7;
 }
 
+.scene-chatting .top-bar {
+  right: 900px;
+}
+
+.scene-dual .top-bar {
+  right: 680px;
+}
+
 .live-pill {
   display: flex;
   align-items: center;
