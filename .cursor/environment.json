@@ -1,0 +1,17 @@
+{
+  "name": "Rise Above — OBS + Lumia overlay kit",
+  "install": "python3 --version",
+  "terminals": [
+    {
+      "name": "static-server",
+      "command": "python3 -m http.server 8000 --bind 0.0.0.0",
+      "description": "Serves the static overlay kit (index.html, setup, overlays, tools) at http://localhost:8000"
+    }
+  ],
+  "ports": [
+    {
+      "name": "Overlay kit",
+      "port": 8000
+    }
+  ]
+}
