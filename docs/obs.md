@@ -1,6 +1,11 @@
 # OBS + BeamNG + multi-cam
 
-Canvas is **1920×1080**. Scene names are exact — Lumia matches them as written.
+Two canvases. Scene names are exact — Lumia matches them as written.
+
+- Collection **Rise Above BeamNG**: **1920×1080**
+- Collection **Rise Above BeamNG Vertical**: **1080×1920**
+
+Switch collections with the dropdown at the top of OBS. Numpad 1–7 fire the same scene names on whichever collection is active. Pick BeamNG on `Game / Main` in **both**.
 
 ## Video / encode
 
@@ -81,11 +86,19 @@ Crop with **Alt + drag**. Matching Rec. 709 / Limited on the cams keeps skin fro
 2. `Overlay / Replay HUD`
 3. `Lumia / Overlay` (alerts only is fine; hide the chatbox layer in Lumia for this scene if you can, or accept chat on the side)
 
+## Vertical (1080×1920)
+
+Collection **Rise Above BeamNG Vertical**. Game sits in a 16:9 strip (1080×608) at the top of RACE. Face + wheel under that. Chat fills the phone-shaped remainder. Full numbers: [source-map.md](../obs/source-map.md).
+
+To go live on TikTok / Shorts / Reels only: switch to that collection, then Start Streaming.
+
+To run wide and vertical **at the same time**, install [Aitum Vertical](https://aitum.tv/vertical) and copy the vertical transforms into its canvas. OBS cannot hold two canvas sizes in one collection without that plugin.
+
 ## Browser sources
 
-- 1920×1080, FPS 30
+- Wide: 1920×1080, FPS 30. Vertical: 1080×1920, FPS 30
 - CSS: `body { background-color: rgba(0, 0, 0, 0); margin: 0; overflow: hidden; }`
-- Local file pointing at this repo
+- Local file pointing at this repo (`overlays/…` or `overlays/vertical/…`)
 
 ## Hotkeys
 
@@ -103,4 +116,4 @@ Fade 300 ms. Lumia can fire the same scene changes from chat.
 
 ## Placement helper
 
-`live.html?setup=1` and `race-dual.html?setup=1` while lining up Lumia layers. Remove `setup=1` before going live.
+`live.html?setup=1` and `vertical/live.html?setup=1` while lining up Lumia layers. Remove `setup=1` before going live.

@@ -62,6 +62,9 @@
   function mode() {
     if (params.has("preview")) document.body.classList.add("preview");
     if (params.has("setup")) document.body.classList.add("setup");
+    if (document.body.classList.contains("vertical")) {
+      document.documentElement.classList.add("vertical");
+    }
   }
 
   function clock() {
@@ -109,18 +112,21 @@
     const ctx = canvas.getContext("2d");
     const particles = [];
     const count = 36;
+    const vertical = document.body.classList.contains("vertical");
+    const W = vertical ? 1080 : 1920;
+    const H = vertical ? 1920 : 1080;
 
     function resize() {
-      canvas.width = 1920;
-      canvas.height = 1080;
+      canvas.width = W;
+      canvas.height = H;
     }
 
     function spawn() {
       particles.length = 0;
       for (let i = 0; i < count; i += 1) {
         particles.push({
-          x: Math.random() * 1920,
-          y: Math.random() * 1080,
+          x: Math.random() * W,
+          y: Math.random() * H,
           r: Math.random() * 1.8 + 0.4,
           s: Math.random() * 0.45 + 0.12,
           a: Math.random() * 0.35 + 0.08,
@@ -134,8 +140,8 @@
         p.y -= p.s;
         p.x += Math.sin(p.y / 40) * 0.15;
         if (p.y < -4) {
-          p.y = 1084;
-          p.x = Math.random() * 1920;
+          p.y = H + 4;
+          p.x = Math.random() * W;
         }
         ctx.beginPath();
         ctx.fillStyle = `rgba(255, 176, 80, ${p.a})`;

@@ -7,4 +7,13 @@ If the black window immediately shows red ParserError text (Missing argument / s
 
 If Windows blocks the .bat: right-click Install-OBS.bat -> Run anyway / Properties -> Unblock.
 
-You should then see scenes named STARTING SOON, GRID, RACE in OBS.
+You should then see two scene collections in OBS (dropdown at the top):
+  Rise Above BeamNG            = 1920x1080 Twitch / YouTube
+  Rise Above BeamNG Vertical   = 1080x1920 TikTok / Shorts / Reels
+
+Same scenes in both: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING.
+
+Pick BeamNG on Game / Main in BOTH collections. Cameras can wait.
+
+To stream vertical: switch that dropdown to Rise Above BeamNG Vertical, then Start Streaming.
+To stream wide and vertical at the same time, install the Aitum Vertical plugin and copy the vertical layouts into its dock.

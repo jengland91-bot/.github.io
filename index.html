@@ -101,6 +101,11 @@
       background: #000;
       overflow: hidden;
     }
+    .stage.vertical {
+      aspect-ratio: 9 / 16;
+      max-width: 380px;
+      margin: 16px auto;
+    }
     .stage iframe {
       position: absolute;
       top: 0;
@@ -141,7 +146,7 @@
   <header>
     <div class="kicker">RISE ABOVE  ·  BEAMNG KIT</div>
     <h1>OBS + LUMIA<br />MULTI-CAM</h1>
-    <p>BeamNG race layouts with face + wheel cameras, a dual-angle scene, and one Lumia overlay for chat, alerts, and lights. No second alerts app.</p>
+    <p>BeamNG race layouts with face + wheel cameras, a dual-angle scene, and one Lumia overlay for chat, alerts, and lights. Wide 16:9 and vertical 9:16 are both in the installer. No second alerts app.</p>
     <nav>
       <a class="btn" href="setup.html">Open setup guide</a>
       <a class="btn" href="tools/install.html">Install into OBS</a>
@@ -161,6 +166,14 @@
         <button data-src="overlays/replay.html?preview=1">Replay</button>
         <button data-src="overlays/brb.html?preview=1">BRB</button>
         <button data-src="overlays/ending.html?preview=1">Ending</button>
+        <button data-src="overlays/vertical/starting-soon.html?preview=1" data-vertical="1">V Starting</button>
+        <button data-src="overlays/vertical/chatting.html?preview=1" data-vertical="1">V Grid</button>
+        <button data-src="overlays/vertical/live.html?preview=1" data-vertical="1">V Race</button>
+        <button data-src="overlays/vertical/live.html?preview=1&setup=1" data-vertical="1">V Race + slots</button>
+        <button data-src="overlays/vertical/race-dual.html?preview=1" data-vertical="1">V Dual</button>
+        <button data-src="overlays/vertical/replay.html?preview=1" data-vertical="1">V Replay</button>
+        <button data-src="overlays/vertical/brb.html?preview=1" data-vertical="1">V BRB</button>
+        <button data-src="overlays/vertical/ending.html?preview=1" data-vertical="1">V Ending</button>
       </div>
       <div class="stage" id="stage">
         <iframe id="frame" src="overlays/starting-soon.html?preview=1" title="Overlay preview"></iframe>
@@ -170,7 +183,7 @@
     <div class="grid">
       <article class="card">
         <h2>1. OBS + BeamNG</h2>
-        <p>Named scenes, Game Capture, and three cameras: game, face, wheel. Dual-cam scene for a second BeamNG angle. Lumia switches them.</p>
+        <p>Named scenes, Game Capture, and three cameras: game, face, wheel. Dual-cam scene for a second BeamNG angle. A second collection at 1080×1920 for TikTok / Shorts / Reels.</p>
         <p style="margin-top:10px"><a href="docs/obs.html">OBS + BeamNG map →</a></p>
       </article>
       <article class="card">
@@ -198,8 +211,8 @@
     const stage = document.getElementById("stage");
     const frame = document.getElementById("frame");
     function fit() {
-      const scale = stage.clientWidth / 1920;
-      frame.style.transform = "scale(" + scale + ")";
+      const base = stage.classList.contains("vertical") ? 1080 : 1920;
+      frame.style.transform = "scale(" + (stage.clientWidth / base) + ")";
     }
     fit();
     window.addEventListener("resize", fit);
@@ -208,7 +221,12 @@
       if (!btn) return;
       document.querySelectorAll("#scenes button").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
+      const vertical = btn.hasAttribute("data-vertical");
+      stage.classList.toggle("vertical", vertical);
+      frame.style.width = vertical ? "1080px" : "1920px";
+      frame.style.height = vertical ? "1920px" : "1080px";
       frame.src = btn.dataset.src;
+      fit();
     });
   </script>
 </body>

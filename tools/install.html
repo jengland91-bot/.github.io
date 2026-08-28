@@ -102,8 +102,8 @@
 
   <fieldset>
     <legend>Install into OBS</legend>
-    <label><input id="newCollection" type="checkbox" checked /> Create / switch to scene collection “Rise Above BeamNG”</label>
-    <p>Then click once. After it finishes, in OBS pick devices on <code>Game / Main</code>, <code>Cam / Face</code>, and <code>Cam / Wheel</code>.</p>
+    <label><input id="newCollection" type="checkbox" checked /> Create both scene collections: 1920x1080 and 1080x1920 vertical</label>
+    <p>Then click once. After it finishes, pick BeamNG on <code>Game / Main</code> in <strong>both</strong> collections (wide and vertical). Cameras can wait.</p>
     <button type="button" id="btnInstallObs" disabled>Install scenes + sources</button>
   </fieldset>
 
@@ -244,15 +244,17 @@
     };
   }
 
-  function browserSettings(name, folder, lumiaUrl) {
-    const meta = RISE_LAYOUT.overlays[name] || {};
-    const css = RISE_LAYOUT.css;
+  function browserSettings(name, folder, lumiaUrl, layout) {
+    const meta = layout.overlays[name] || {};
+    const css = layout.css;
+    const width = layout.canvas.width;
+    const height = layout.canvas.height;
     if (name === "Lumia / Overlay") {
       return {
         is_local_file: false,
         url: lumiaUrl || "about:blank",
-        width: 1920,
-        height: 1080,
+        width,
+        height,
         fps: 30,
         fps_custom: true,
         css,
@@ -268,8 +270,8 @@
       return {
         is_local_file: false,
         url: base + "/" + file + query,
-        width: 1920,
-        height: 1080,
+        width,
+        height,
         fps: 30,
         fps_custom: true,
         css,
@@ -280,8 +282,8 @@
     return {
       is_local_file: true,
       local_file: base + "/" + file,
-      width: 1920,
-      height: 1080,
+      width,
+      height,
       fps: 30,
       fps_custom: true,
       css,
@@ -290,12 +292,12 @@
     };
   }
 
-  function settingsFor(kind, name, folder, lumiaUrl) {
-    if (kind === "browser" || kind === "lumia") return { inputKind: pickKind(["browser_source"]), settings: browserSettings(name, folder, lumiaUrl) };
+  function settingsFor(kind, name, folder, lumiaUrl, layout) {
+    if (kind === "browser" || kind === "lumia") return { inputKind: pickKind(["browser_source"]), settings: browserSettings(name, folder, lumiaUrl, layout) };
     if (kind === "color") {
       return {
         inputKind: pickKind(["color_source_v3", "color_source"]),
-        settings: { color: 4278978567, width: 1920, height: 1080 },
+        settings: { color: 4278978567, width: layout.canvas.width, height: layout.canvas.height },
       };
     }
     if (kind === "game") {
@@ -343,8 +345,8 @@
     return hit ? hit.sceneItemId : null;
   }
 
-  async function ensureItem(scene, item, folder, lumiaUrl) {
-    const spec = settingsFor(item.kind, item.name, folder, lumiaUrl);
+  async function ensureItem(scene, item, folder, lumiaUrl, layout) {
+    const spec = settingsFor(item.kind, item.name, folder, lumiaUrl, layout);
     if (!spec.inputKind) throw new Error("OBS is missing input kind for " + item.name + " (" + item.kind + ")");
     if (!(await inputExists(item.name))) {
       await obs.request("CreateInput", {
@@ -415,48 +417,56 @@
       log("Set the overlay folder first.");
       return;
     }
-    const L = RISE_LAYOUT;
+    const useCollections = document.getElementById("newCollection").checked;
+    const layouts = useCollections ? RISE_LAYOUTS : [RISE_LAYOUT];
     try {
-      if (document.getElementById("newCollection").checked) {
-        const cols = await obs.request("GetSceneCollectionList");
-        if (cols.sceneCollections.includes(L.collectionName)) {
-          await obs.request("SetCurrentSceneCollection", { sceneCollectionName: L.collectionName });
-          log("Switched to existing collection " + L.collectionName, "ok");
-        } else {
-          await obs.request("CreateSceneCollection", { sceneCollectionName: L.collectionName });
-          log("Created collection " + L.collectionName, "ok");
+      for (const L of layouts) {
+        if (useCollections) {
+          const cols = await obs.request("GetSceneCollectionList");
+          if (cols.sceneCollections.includes(L.collectionName)) {
+            await obs.request("SetCurrentSceneCollection", { sceneCollectionName: L.collectionName });
+            log("Switched to existing collection " + L.collectionName, "ok");
+          } else {
+            await obs.request("CreateSceneCollection", { sceneCollectionName: L.collectionName });
+            log("Created collection " + L.collectionName, "ok");
+          }
+          await new Promise((r) => setTimeout(r, 800));
         }
-      }
-      await obs.request("SetVideoSettings", {
-        baseWidth: L.canvas.width,
-        baseHeight: L.canvas.height,
-        outputWidth: L.canvas.width,
-        outputHeight: L.canvas.height,
-        fpsNumerator: L.canvas.fps,
-        fpsDenominator: 1,
-      });
-      const existing = await obs.request("GetSceneList");
-      const leftover = existing.scenes.find((s) => s.sceneName === "Scene");
-      if (leftover && !existing.scenes.some((s) => s.sceneName === L.scenes[0])) {
-        await obs.request("SetSceneName", { sceneName: "Scene", newSceneName: L.scenes[0] });
-        log("Renamed default Scene → " + L.scenes[0]);
-      }
-      for (const scene of L.scenes) await ensureScene(scene);
-      for (const scene of L.scenes) {
-        log(scene);
-        for (const item of L.items[scene]) {
-          await ensureItem(scene, item, folder, lumiaUrl);
+        await obs.request("SetVideoSettings", {
+          baseWidth: L.canvas.width,
+          baseHeight: L.canvas.height,
+          outputWidth: L.canvas.width,
+          outputHeight: L.canvas.height,
+          fpsNumerator: L.canvas.fps,
+          fpsDenominator: 1,
+        });
+        const existing = await obs.request("GetSceneList");
+        const leftover = existing.scenes.find((s) => s.sceneName === "Scene");
+        if (leftover && !existing.scenes.some((s) => s.sceneName === L.scenes[0])) {
+          await obs.request("SetSceneName", { sceneName: "Scene", newSceneName: L.scenes[0] });
+          log("Renamed default Scene → " + L.scenes[0]);
         }
-        await setOrder(scene, L.items[scene].map((it) => it.name));
+        for (const scene of L.scenes) await ensureScene(scene);
+        for (const scene of L.scenes) {
+          log(L.collectionName + " / " + scene);
+          for (const item of L.items[scene]) {
+            await ensureItem(scene, item, folder, lumiaUrl, L);
+          }
+          await setOrder(scene, L.items[scene].map((it) => it.name));
+        }
+        try {
+          await obs.request("SetCurrentSceneTransition", { transitionName: L.transition.name });
+          await obs.request("SetCurrentSceneTransitionDuration", { transitionDuration: L.transition.durationMs });
+        } catch (err) {
+          log("Transition skipped: " + err.message);
+        }
+        await obs.request("SetCurrentProgramScene", { sceneName: "STARTING SOON" });
       }
-      try {
-        await obs.request("SetCurrentSceneTransition", { transitionName: L.transition.name });
-        await obs.request("SetCurrentSceneTransitionDuration", { transitionDuration: L.transition.durationMs });
-      } catch (err) {
-        log("Transition skipped: " + err.message);
+      if (useCollections) {
+        await obs.request("SetCurrentSceneCollection", { sceneCollectionName: RISE_LAYOUT.collectionName });
       }
-      await obs.request("SetCurrentProgramScene", { sceneName: "STARTING SOON" });
-      log("Done. In OBS: Game / Main → BeamNG, Cam / Face, Cam / Wheel.", "ok");
+      log("Done. Wide = Rise Above BeamNG (1920x1080). Vertical = Rise Above BeamNG Vertical (1080x1920).", "ok");
+      log("Pick Game / Main → BeamNG in BOTH collections. Cameras can wait.", "ok");
     } catch (err) {
       log("Install failed: " + err.message);
     }

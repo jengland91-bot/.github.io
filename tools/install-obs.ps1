@@ -18,6 +18,11 @@ if (-not (Test-Path (Join-Path $overlayDir "live.html"))) {
     Write-Host "Looked in: $overlayDir"
     exit 1
 }
+if (-not (Test-Path (Join-Path $overlayDir "vertical\live.html"))) {
+    Write-Host 'Cannot find overlays\vertical\live.html' -ForegroundColor Red
+    Write-Host 'You need the zip that includes the vertical overlays folder.'
+    exit 1
+}
 
 Write-Host "Overlay folder: $overlayDir"
 Write-Host ""
@@ -28,7 +33,10 @@ $password = Read-Host 'Paste OBS WebSocket password'
 
 $css = "body { background-color: rgba(0,0,0,0); margin: 0; overflow: hidden; }"
 $collectionName = "Rise Above BeamNG"
+$verticalCollectionName = "Rise Above BeamNG Vertical"
 $overlaySlash = ($overlayDir -replace "\\", "/")
+$script:canvasW = 1920
+$script:canvasH = 1080
 
 $scenes = @(
     "STARTING SOON", "GRID", "RACE", "RACE DUAL", "REPLAY", "BRB", "ENDING"
@@ -43,6 +51,7 @@ $overlayFiles = @{
     "Overlay / BRB"           = @{ File = "brb.html"; Shutdown = $true; Restart = $true }
     "Overlay / Ending"        = @{ File = "ending.html"; Shutdown = $true; Restart = $true }
 }
+$script:overlayFiles = $overlayFiles
 
 $items = @{
     "STARTING SOON" = @(
@@ -84,6 +93,59 @@ $items = @{
     "ENDING" = @(
         @{ name = "Color / Backdrop"; kind = "color" }
         @{ name = "Overlay / Ending"; kind = "browser"; x = 0; y = 0; w = 1920; h = 1080 }
+    )
+}
+
+$verticalOverlayFiles = @{
+    "Overlay / Starting Soon" = @{ File = "vertical/starting-soon.html"; Shutdown = $true; Restart = $true }
+    "Overlay / Grid HUD"      = @{ File = "vertical/chatting.html"; Shutdown = $false; Restart = $false }
+    "Overlay / Race HUD"      = @{ File = "vertical/live.html"; Shutdown = $false; Restart = $false }
+    "Overlay / Dual HUD"      = @{ File = "vertical/race-dual.html"; Shutdown = $false; Restart = $false }
+    "Overlay / Replay HUD"    = @{ File = "vertical/replay.html"; Shutdown = $false; Restart = $false }
+    "Overlay / BRB"           = @{ File = "vertical/brb.html"; Shutdown = $true; Restart = $true }
+    "Overlay / Ending"        = @{ File = "vertical/ending.html"; Shutdown = $true; Restart = $true }
+}
+
+$verticalItems = @{
+    "STARTING SOON" = @(
+        @{ name = "Color / Backdrop"; kind = "color" }
+        @{ name = "Overlay / Starting Soon"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
+    )
+    "GRID" = @(
+        @{ name = "Color / Backdrop"; kind = "color" }
+        @{ name = "Cam / Face"; kind = "camera"; x = 16; y = 88; w = 1048; h = 590 }
+        @{ name = "Cam / Wheel"; kind = "camera"; x = 16; y = 696; w = 1048; h = 392 }
+        @{ name = "Overlay / Grid HUD"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
+        @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1080; h = 1920 }
+    )
+    "RACE" = @(
+        @{ name = "Game / Main"; kind = "game"; x = 0; y = 0; w = 1080; h = 608 }
+        @{ name = "Cam / Face"; kind = "camera"; x = 16; y = 624; w = 520; h = 292 }
+        @{ name = "Cam / Wheel"; kind = "camera"; x = 544; y = 624; w = 520; h = 292 }
+        @{ name = "Overlay / Race HUD"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
+        @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1080; h = 1920 }
+        @{ name = "Media / Hype Clip"; kind = "media"; x = 0; y = 0; w = 1080; h = 1920; enabled = $false }
+    )
+    "RACE DUAL" = @(
+        @{ name = "Game / Main"; kind = "game"; x = 0; y = 0; w = 1080; h = 608 }
+        @{ name = "Game / Angle 2"; kind = "game"; x = 16; y = 624; w = 1048; h = 280 }
+        @{ name = "Cam / Face"; kind = "camera"; x = 16; y = 920; w = 520; h = 292 }
+        @{ name = "Cam / Wheel"; kind = "camera"; x = 544; y = 920; w = 520; h = 292 }
+        @{ name = "Overlay / Dual HUD"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
+        @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1080; h = 1920 }
+    )
+    "REPLAY" = @(
+        @{ name = "Game / Main"; kind = "game"; x = 0; y = 360; w = 1080; h = 608 }
+        @{ name = "Overlay / Replay HUD"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
+        @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1080; h = 1920 }
+    )
+    "BRB" = @(
+        @{ name = "Color / Backdrop"; kind = "color" }
+        @{ name = "Overlay / BRB"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
+    )
+    "ENDING" = @(
+        @{ name = "Color / Backdrop"; kind = "color" }
+        @{ name = "Overlay / Ending"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
     )
 }
 
@@ -156,8 +218,8 @@ function Get-BrowserSettings($name) {
         return @{
             is_local_file        = $false
             url                  = "about:blank"
-            width                = 1920
-            height               = 1080
+            width                = $script:canvasW
+            height               = $script:canvasH
             fps                  = 30
             fps_custom           = $true
             css                  = $css
@@ -165,13 +227,13 @@ function Get-BrowserSettings($name) {
             restart_when_active  = $false
         }
     }
-    $meta = $overlayFiles[$name]
+    $meta = $script:overlayFiles[$name]
     $path = "$overlaySlash/$($meta.File)"
     return @{
         is_local_file        = $true
         local_file           = $path
-        width                = 1920
-        height               = 1080
+        width                = $script:canvasW
+        height               = $script:canvasH
         fps                  = 30
         fps_custom           = $true
         css                  = $css
@@ -187,7 +249,7 @@ function Get-InputSpec($kinds, $item) {
         "color" {
             return @{
                 inputKind = (Get-Kind $kinds @("color_source_v3", "color_source"))
-                settings  = @{ color = 4278978567; width = 1920; height = 1080 }
+                settings  = @{ color = 4278978567; width = $script:canvasW; height = $script:canvasH }
             }
         }
         "game" {
@@ -289,30 +351,31 @@ Write-Host ("OBS " + $ver.obsVersion)
 $kindList = Invoke-Obs $ws "GetInputKindList" @{ unversioned = $false }
 $kinds = @($kindList.inputKinds)
 
-$cols = Invoke-Obs $ws "GetSceneCollectionList" @{}
-$colNames = @($cols.sceneCollections)
-if ($colNames -contains $collectionName) {
-    Invoke-Obs $ws "SetCurrentSceneCollection" @{ sceneCollectionName = $collectionName } | Out-Null
-    Write-Host "Using existing collection $collectionName"
-}
-else {
-    Invoke-Obs $ws "CreateSceneCollection" @{ sceneCollectionName = $collectionName } | Out-Null
-    Write-Host "Created collection $collectionName"
+function Use-RiseCollection($ws, [string]$name) {
+    $cols = Invoke-Obs $ws "GetSceneCollectionList" @{}
+    $colNames = @($cols.sceneCollections)
+    if ($colNames -contains $name) {
+        Invoke-Obs $ws "SetCurrentSceneCollection" @{ sceneCollectionName = $name } | Out-Null
+        Write-Host "Using collection $name"
+    }
+    else {
+        Invoke-Obs $ws "CreateSceneCollection" @{ sceneCollectionName = $name } | Out-Null
+        Write-Host "Created collection $name"
+    }
+    Start-Sleep -Seconds 1
 }
 
-Invoke-Obs $ws "SetVideoSettings" @{
-    baseWidth      = 1920
-    baseHeight     = 1080
-    outputWidth    = 1920
-    outputHeight   = 1080
-    fpsNumerator   = 60
-    fpsDenominator = 1
-} | Out-Null
-
-$sceneList = Invoke-Obs $ws "GetSceneList" @{}
-$sceneNames = @($sceneList.scenes | ForEach-Object { $_.sceneName })
-if (($sceneNames -contains "Scene") -and -not ($sceneNames -contains "STARTING SOON")) {
-    Invoke-Obs $ws "SetSceneName" @{ sceneName = "Scene"; newSceneName = "STARTING SOON" } | Out-Null
+function Set-RiseCanvas($ws, [int]$width, [int]$height) {
+    $script:canvasW = $width
+    $script:canvasH = $height
+    Invoke-Obs $ws "SetVideoSettings" @{
+        baseWidth      = $width
+        baseHeight     = $height
+        outputWidth    = $width
+        outputHeight   = $height
+        fpsNumerator   = 60
+        fpsDenominator = 1
+    } | Out-Null
 }
 
 function Test-Scene($ws, $name) {
@@ -332,88 +395,115 @@ function Get-ItemId($ws, $scene, $source) {
     return $null
 }
 
-foreach ($scene in $scenes) {
-    if (-not (Test-Scene $ws $scene)) {
-        Invoke-Obs $ws "CreateScene" @{ sceneName = $scene } | Out-Null
-        Write-Host "  scene $scene"
+function Install-RiseScenes($ws, $kinds, $sceneNames, $sceneItems) {
+    $sceneList = Invoke-Obs $ws "GetSceneList" @{}
+    $existing = @($sceneList.scenes | ForEach-Object { $_.sceneName })
+    if (($existing -contains "Scene") -and -not ($existing -contains "STARTING SOON")) {
+        Invoke-Obs $ws "SetSceneName" @{ sceneName = "Scene"; newSceneName = "STARTING SOON" } | Out-Null
     }
-}
 
-foreach ($scene in $scenes) {
-    Write-Host $scene
-    foreach ($item in $items[$scene]) {
-        $spec = Get-InputSpec $kinds $item
-        if (-not $spec.inputKind) { throw "OBS missing source type for $($item.name)" }
-        $enabled = $true
-        if ($item.ContainsKey("enabled")) { $enabled = [bool]$item.enabled }
-        if (-not (Test-Input $ws $item.name)) {
-            Invoke-Obs $ws "CreateInput" @{
-                sceneName         = $scene
-                inputName         = $item.name
-                inputKind         = $spec.inputKind
-                inputSettings     = $spec.settings
-                sceneItemEnabled  = $enabled
-            } | Out-Null
-            Write-Host "  created $($item.name)"
+    foreach ($scene in $sceneNames) {
+        if (-not (Test-Scene $ws $scene)) {
+            Invoke-Obs $ws "CreateScene" @{ sceneName = $scene } | Out-Null
+            Write-Host "  scene $scene"
         }
-        else {
-            $id = Get-ItemId $ws $scene $item.name
-            if ($null -eq $id) {
-                Invoke-Obs $ws "CreateSceneItem" @{
+    }
+
+    foreach ($scene in $sceneNames) {
+        Write-Host $scene
+        foreach ($item in $sceneItems[$scene]) {
+            $spec = Get-InputSpec $kinds $item
+            if (-not $spec.inputKind) { throw "OBS missing source type for $($item.name)" }
+            $enabled = $true
+            if ($item.ContainsKey("enabled")) { $enabled = [bool]$item.enabled }
+            if (-not (Test-Input $ws $item.name)) {
+                Invoke-Obs $ws "CreateInput" @{
                     sceneName         = $scene
-                    sourceName        = $item.name
+                    inputName         = $item.name
+                    inputKind         = $spec.inputKind
+                    inputSettings     = $spec.settings
                     sceneItemEnabled  = $enabled
                 } | Out-Null
-                Write-Host "  linked $($item.name)"
+                Write-Host "  created $($item.name)"
             }
-            if ($item.kind -eq "browser" -or $item.kind -eq "lumia") {
-                Invoke-Obs $ws "SetInputSettings" @{
-                    inputName     = $item.name
-                    inputSettings = $spec.settings
-                    overlay       = $true
+            else {
+                $id = Get-ItemId $ws $scene $item.name
+                if ($null -eq $id) {
+                    Invoke-Obs $ws "CreateSceneItem" @{
+                        sceneName         = $scene
+                        sourceName        = $item.name
+                        sceneItemEnabled  = $enabled
+                    } | Out-Null
+                    Write-Host "  linked $($item.name)"
+                }
+                if ($item.kind -eq "browser" -or $item.kind -eq "lumia") {
+                    Invoke-Obs $ws "SetInputSettings" @{
+                        inputName     = $item.name
+                        inputSettings = $spec.settings
+                        overlay       = $true
+                    } | Out-Null
+                }
+            }
+            $id = Get-ItemId $ws $scene $item.name
+            $tf = Get-Transform $item
+            if ($null -ne $id -and $null -ne $tf) {
+                Invoke-Obs $ws "SetSceneItemTransform" @{
+                    sceneName           = $scene
+                    sceneItemId         = $id
+                    sceneItemTransform  = $tf
+                } | Out-Null
+            }
+            if ($null -ne $id -and -not $enabled) {
+                Invoke-Obs $ws "SetSceneItemEnabled" @{
+                    sceneName        = $scene
+                    sceneItemId      = $id
+                    sceneItemEnabled = $false
                 } | Out-Null
             }
         }
-        $id = Get-ItemId $ws $scene $item.name
-        $tf = Get-Transform $item
-        if ($null -ne $id -and $null -ne $tf) {
-            Invoke-Obs $ws "SetSceneItemTransform" @{
-                sceneName           = $scene
-                sceneItemId         = $id
-                sceneItemTransform  = $tf
-            } | Out-Null
-        }
-        if ($null -ne $id -and -not $enabled) {
-            Invoke-Obs $ws "SetSceneItemEnabled" @{
-                sceneName        = $scene
-                sceneItemId      = $id
-                sceneItemEnabled = $false
-            } | Out-Null
+        $order = @($sceneItems[$scene] | ForEach-Object { $_.name })
+        for ($i = 0; $i -lt $order.Count; $i++) {
+            $id = Get-ItemId $ws $scene $order[$i]
+            if ($null -ne $id) {
+                Invoke-Obs $ws "SetSceneItemIndex" @{
+                    sceneName      = $scene
+                    sceneItemId    = $id
+                    sceneItemIndex = $i
+                } | Out-Null
+            }
         }
     }
-    $order = @($items[$scene] | ForEach-Object { $_.name })
-    for ($i = 0; $i -lt $order.Count; $i++) {
-        $id = Get-ItemId $ws $scene $order[$i]
-        if ($null -ne $id) {
-            Invoke-Obs $ws "SetSceneItemIndex" @{
-                sceneName      = $scene
-                sceneItemId    = $id
-                sceneItemIndex = $i
-            } | Out-Null
-        }
-    }
+
+    try { Invoke-Obs $ws "SetCurrentSceneTransition" @{ transitionName = "Fade" } | Out-Null } catch {}
+    try { Invoke-Obs $ws "SetCurrentSceneTransitionDuration" @{ transitionDuration = 300 } | Out-Null } catch {}
+    Invoke-Obs $ws "SetCurrentProgramScene" @{ sceneName = "STARTING SOON" } | Out-Null
 }
 
-try { Invoke-Obs $ws "SetCurrentSceneTransition" @{ transitionName = "Fade" } | Out-Null } catch {}
-try { Invoke-Obs $ws "SetCurrentSceneTransitionDuration" @{ transitionDuration = 300 } | Out-Null } catch {}
-Invoke-Obs $ws "SetCurrentProgramScene" @{ sceneName = "STARTING SOON" } | Out-Null
+Write-Host 'Wide 1920x1080...'
+Use-RiseCollection $ws $collectionName
+Set-RiseCanvas $ws 1920 1080
+Install-RiseScenes $ws $kinds $scenes $items
+
+Write-Host 'Vertical 1080x1920...'
+$script:overlayFiles = $verticalOverlayFiles
+Use-RiseCollection $ws $verticalCollectionName
+Set-RiseCanvas $ws 1080 1920
+Install-RiseScenes $ws $kinds $scenes $verticalItems
+
+Use-RiseCollection $ws $collectionName
+Set-RiseCanvas $ws 1920 1080
 
 $ws.Dispose()
 
 Write-Host ""
 Write-Host 'Done. Look at OBS.' -ForegroundColor Green
-Write-Host 'Top of the OBS window: scene collection should say  Rise Above BeamNG'
-Write-Host 'Scenes on the left: STARTING SOON, GRID, RACE, ...'
+Write-Host 'Two scene collections (dropdown at the top of OBS):'
+Write-Host '  Rise Above BeamNG            = 1920x1080 Twitch / YouTube'
+Write-Host '  Rise Above BeamNG Vertical  = 1080x1920 TikTok / Shorts / Reels'
+Write-Host 'Same scene names in both: STARTING SOON, GRID, RACE, ...'
+Write-Host 'Numpad 1-7 still switch those scenes on whichever collection is active.'
 Write-Host ""
-Write-Host 'Next: click RACE, double-click Game / Main, pick BeamNG.'
+Write-Host 'Next: in BOTH collections, click RACE, double-click Game / Main, pick BeamNG.'
 Write-Host 'Cameras can wait.'
+Write-Host 'To go vertical: switch the scene collection dropdown, then Start Streaming.'
+Write-Host 'To do wide and vertical at the same time, install the Aitum Vertical plugin and copy these vertical layouts into its dock.'

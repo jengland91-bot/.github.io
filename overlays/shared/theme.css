@@ -32,6 +32,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+html.vertical,
+body.vertical {
+  width: 1080px;
+  height: 1920px;
+}
+
 body.scene-starting,
 body.scene-brb,
 body.scene-ending,
@@ -636,4 +642,214 @@ body.stinger {
   100% {
     clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
   }
+}
+
+/* Vertical 1080x1920 — TikTok / Shorts / Reels */
+body.vertical .top-bar {
+  left: 24px;
+  right: 24px;
+  top: 24px;
+  flex-wrap: wrap;
+}
+
+body.vertical.scene-chatting .top-bar,
+body.vertical.scene-dual .top-bar {
+  right: 24px;
+}
+
+body.vertical .brand {
+  font-size: 32px;
+}
+
+body.vertical .scene-title {
+  padding: 120px 28px 40px;
+}
+
+body.vertical .scene-title h1 {
+  font-size: 108px;
+}
+
+body.vertical .countdown {
+  font-size: 88px;
+}
+
+body.vertical .social-row {
+  bottom: 40px;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  padding: 0 20px;
+}
+
+body.vertical .lower-third {
+  left: 24px;
+  right: 24px;
+  bottom: 48px;
+}
+
+body.vertical .well-game {
+  left: 0;
+  top: 0;
+  width: 1080px;
+  height: 608px;
+}
+
+body.vertical .well-face {
+  left: 16px;
+  top: 624px;
+  width: 520px;
+  height: 292px;
+}
+
+body.vertical .well-wheel {
+  left: 544px;
+  top: 624px;
+  width: 520px;
+  height: 292px;
+}
+
+body.vertical .well-chat {
+  left: 16px;
+  top: 932px;
+  width: 1048px;
+  height: 960px;
+}
+
+body.vertical .well-alerts {
+  left: 16px;
+  top: 16px;
+  width: 1048px;
+  height: 160px;
+}
+
+body.vertical .well-labels {
+  left: 16px;
+  top: 80px;
+  width: 400px;
+  height: 64px;
+}
+
+body.vertical .well-nowplaying {
+  left: 16px;
+  top: 560px;
+  width: 400px;
+  height: 48px;
+}
+
+body.vertical .well-goal {
+  left: 16px;
+  top: 1868px;
+  width: 1048px;
+  height: 36px;
+}
+
+body.vertical.scene-chatting .well-game {
+  display: none;
+}
+
+body.vertical.scene-chatting .well-face {
+  left: 16px;
+  top: 88px;
+  width: 1048px;
+  height: 590px;
+}
+
+body.vertical.scene-chatting .well-wheel {
+  left: 16px;
+  top: 696px;
+  width: 1048px;
+  height: 392px;
+}
+
+body.vertical.scene-chatting .well-chat {
+  left: 16px;
+  top: 1104px;
+  width: 1048px;
+  height: 780px;
+}
+
+body.vertical.scene-chatting .well-alerts {
+  left: 16px;
+  top: 16px;
+  width: 1048px;
+  height: 140px;
+}
+
+body.vertical.scene-chatting .well-labels {
+  left: 16px;
+  top: 24px;
+  width: 400px;
+  height: 56px;
+}
+
+body.vertical.scene-chatting .well-nowplaying {
+  display: none;
+}
+
+body.vertical.scene-chatting .well-goal {
+  left: 16px;
+  top: 1868px;
+  width: 1048px;
+  height: 36px;
+}
+
+body.vertical.scene-dual .well-game {
+  left: 0;
+  top: 0;
+  width: 1080px;
+  height: 608px;
+}
+
+body.vertical.scene-dual .well-angle {
+  left: 16px;
+  top: 624px;
+  width: 1048px;
+  height: 280px;
+}
+
+body.vertical.scene-dual .well-face {
+  left: 16px;
+  top: 920px;
+  width: 520px;
+  height: 292px;
+}
+
+body.vertical.scene-dual .well-wheel {
+  left: 544px;
+  top: 920px;
+  width: 520px;
+  height: 292px;
+}
+
+body.vertical.scene-dual .well-chat {
+  left: 16px;
+  top: 1228px;
+  width: 1048px;
+  height: 672px;
+}
+
+body.vertical.scene-dual .well-nowplaying {
+  display: none;
+}
+
+body.vertical.scene-dual .well-goal {
+  left: 16px;
+  top: 1868px;
+  width: 1048px;
+  height: 36px;
+}
+
+body.vertical.scene-replay .well-game {
+  left: 0;
+  top: 360px;
+  width: 1080px;
+  height: 608px;
+}
+
+body.vertical.scene-replay .well-face,
+body.vertical.scene-replay .well-wheel,
+body.vertical.scene-replay .well-chat,
+body.vertical.scene-replay .well-nowplaying,
+body.vertical.scene-replay .well-goal,
+body.vertical.scene-replay .well-labels {
+  display: none;
 }

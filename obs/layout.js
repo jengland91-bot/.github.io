@@ -28,7 +28,6 @@ window.RISE_LAYOUT = {
     "Overlay / Ending": { file: "ending.html", shutdown: true, restart: true },
   },
 
-  /* First scene listed is where the input is created. Others get a reference. */
   items: {
     "STARTING SOON": [
       { name: "Color / Backdrop", kind: "color" },
@@ -72,6 +71,78 @@ window.RISE_LAYOUT = {
     ],
   },
 };
+
+window.RISE_LAYOUT_VERTICAL = {
+  collectionName: "Rise Above BeamNG Vertical",
+  canvas: { width: 1080, height: 1920, fps: 60 },
+  transition: { name: "Fade", durationMs: 300 },
+  css: "body { background-color: rgba(0,0,0,0); margin: 0; overflow: hidden; }",
+
+  scenes: [
+    "STARTING SOON",
+    "GRID",
+    "RACE",
+    "RACE DUAL",
+    "REPLAY",
+    "BRB",
+    "ENDING",
+  ],
+
+  overlays: {
+    "Overlay / Starting Soon": { file: "vertical/starting-soon.html", query: "?m=5", shutdown: true, restart: true },
+    "Overlay / Grid HUD": { file: "vertical/chatting.html", shutdown: false, restart: false },
+    "Overlay / Race HUD": { file: "vertical/live.html", shutdown: false, restart: false },
+    "Overlay / Dual HUD": { file: "vertical/race-dual.html", shutdown: false, restart: false },
+    "Overlay / Replay HUD": { file: "vertical/replay.html", shutdown: false, restart: false },
+    "Overlay / BRB": { file: "vertical/brb.html", shutdown: true, restart: true },
+    "Overlay / Ending": { file: "vertical/ending.html", shutdown: true, restart: true },
+  },
+
+  items: {
+    "STARTING SOON": [
+      { name: "Color / Backdrop", kind: "color" },
+      { name: "Overlay / Starting Soon", kind: "browser", x: 0, y: 0, w: 1080, h: 1920 },
+    ],
+    GRID: [
+      { name: "Color / Backdrop", kind: "color" },
+      { name: "Cam / Face", kind: "camera", x: 16, y: 88, w: 1048, h: 590 },
+      { name: "Cam / Wheel", kind: "camera", x: 16, y: 696, w: 1048, h: 392 },
+      { name: "Overlay / Grid HUD", kind: "browser", x: 0, y: 0, w: 1080, h: 1920 },
+      { name: "Lumia / Overlay", kind: "lumia", x: 0, y: 0, w: 1080, h: 1920 },
+    ],
+    RACE: [
+      { name: "Game / Main", kind: "game", x: 0, y: 0, w: 1080, h: 608 },
+      { name: "Cam / Face", kind: "camera", x: 16, y: 624, w: 520, h: 292 },
+      { name: "Cam / Wheel", kind: "camera", x: 544, y: 624, w: 520, h: 292 },
+      { name: "Overlay / Race HUD", kind: "browser", x: 0, y: 0, w: 1080, h: 1920 },
+      { name: "Lumia / Overlay", kind: "lumia", x: 0, y: 0, w: 1080, h: 1920 },
+      { name: "Media / Hype Clip", kind: "media", x: 0, y: 0, w: 1080, h: 1920, enabled: false },
+    ],
+    "RACE DUAL": [
+      { name: "Game / Main", kind: "game", x: 0, y: 0, w: 1080, h: 608 },
+      { name: "Game / Angle 2", kind: "game", x: 16, y: 624, w: 1048, h: 280 },
+      { name: "Cam / Face", kind: "camera", x: 16, y: 920, w: 520, h: 292 },
+      { name: "Cam / Wheel", kind: "camera", x: 544, y: 920, w: 520, h: 292 },
+      { name: "Overlay / Dual HUD", kind: "browser", x: 0, y: 0, w: 1080, h: 1920 },
+      { name: "Lumia / Overlay", kind: "lumia", x: 0, y: 0, w: 1080, h: 1920 },
+    ],
+    REPLAY: [
+      { name: "Game / Main", kind: "game", x: 0, y: 360, w: 1080, h: 608 },
+      { name: "Overlay / Replay HUD", kind: "browser", x: 0, y: 0, w: 1080, h: 1920 },
+      { name: "Lumia / Overlay", kind: "lumia", x: 0, y: 0, w: 1080, h: 1920 },
+    ],
+    BRB: [
+      { name: "Color / Backdrop", kind: "color" },
+      { name: "Overlay / BRB", kind: "browser", x: 0, y: 0, w: 1080, h: 1920 },
+    ],
+    ENDING: [
+      { name: "Color / Backdrop", kind: "color" },
+      { name: "Overlay / Ending", kind: "browser", x: 0, y: 0, w: 1080, h: 1920 },
+    ],
+  },
+};
+
+window.RISE_LAYOUTS = [window.RISE_LAYOUT, window.RISE_LAYOUT_VERTICAL];
 
 window.LUMIA_COMMANDS = [
   { name: "race", message: "Scene → RACE", cooldownDuration: 3000, description: "OBS: Set current scene RACE" },

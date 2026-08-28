@@ -25,7 +25,9 @@ In Lumia’s overlay editor, build **one** overlay named something like `Rise Ab
 
 Colors: text `#F4EFE8`, accent `#FF4D1A`, backgrounds transparent or a light dark glass.
 
-Copy the overlay URL once. OBS source `Lumia / Overlay`, 1920×1080, **above** the Rise Above HUD.
+Copy the overlay URL once. OBS source `Lumia / Overlay`, 1920×1080 on the wide collection, 1080×1920 on the vertical collection, **above** the Rise Above HUD.
+
+Vertical RACE chatbox: **1048×960 at 16, 932**. Alerts: **1048×160 at 16, 16**. Duplicate the Lumia overlay for 9:16 if chat looks stretched; or keep one URL and park layers on the vertical wells.
 
 GRID and RACE DUAL use different wells — either duplicate the overlay in Lumia with those positions, or keep one overlay and accept that chat sits in the RACE pocket on every scene (still readable). Two Lumia overlays (Race / Grid) is cleaner if the editor allows switching with the scene.
 
