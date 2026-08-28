@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumia Stream — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+<main>
+  <div class="kicker">LUMIA STREAM</div>
+  <h1>LIGHTS &amp; OBS</h1>
+  <p>Lumia owns lights, the RGB overlay, and OBS actions. Casterlabs still owns the on-screen follow/sub/donation alert. Official connect guide: <a href="https://lumiastream.com/blogs/how-to-integrate-obs-streaming-software-with-lumia-stream">Lumia + OBS</a>.</p>
+
+  <h2>Connect OBS</h2>
+  <ol>
+    <li>OBS 28+ → Tools → WebSocket Server Settings</li>
+    <li>Enable server, port <code>4455</code>, authentication on</li>
+    <li>Copy the password</li>
+    <li>Lumia → Connections → Add → OBS → <code>localhost</code>, port 4455, paste password</li>
+  </ol>
+  <p>Add lights and plugs on the same Connections page.</p>
+
+  <h2>Overlay in OBS</h2>
+  <p>Copy Lumia’s Room URL (<code>https://lumiastream.com/overlay?room=…</code>).</p>
+  <ul>
+    <li>Source name: <code>Lumia / Overlay</code></li>
+    <li>1920×1080, transparent CSS</li>
+    <li>Above the Rise Above HUD on LIVE and JUST CHATTING</li>
+  </ul>
+  <p>If Lumia’s overlay also has chat/alerts, turn those layers off. Leave Casterlabs in charge of those.</p>
+
+  <h2>Scene lights</h2>
+  <p>Alerts → OBS, one recipe per scene. Names must match OBS exactly.</p>
+  <table>
+    <tr><th>Scene</th><th>Light feel</th></tr>
+    <tr><td><code>STARTING SOON</code></td><td>Warm amber, slow breathe</td></tr>
+    <tr><td><code>JUST CHATTING</code></td><td>Soft ice / white, low sat, face-friendly</td></tr>
+    <tr><td><code>LIVE</code></td><td>Ember <code>#FF4D1A</code>, a bit more intensity</td></tr>
+    <tr><td><code>BRB</code></td><td>Dim cool blue, 30–40% brightness</td></tr>
+    <tr><td><code>ENDING</code></td><td>Gold pulse, then fade on stream stop</td></tr>
+  </table>
+
+  <h2>Commands / points</h2>
+  <table>
+    <tr><th>Trigger</th><th>OBS action</th></tr>
+    <tr><td><code>!brb</code> or a BRB redeem</td><td>Set scene <code>BRB</code> + BRB lights</td></tr>
+    <tr><td><code>!live</code></td><td>Set scene <code>LIVE</code></td></tr>
+    <tr><td><code>!chat</code></td><td>Set scene <code>JUST CHATTING</code></td></tr>
+    <tr><td>Hype clip redeem</td><td>Show <code>Media / Hype Clip</code>, delay = clip length, hide</td></tr>
+    <tr><td><code>!lights</code></td><td>Cycle ember / ice / sand, 30s cooldown</td></tr>
+  </table>
+  <p>Follow/sub events in Lumia: <strong>lights only</strong> (flash ember ~2s, return to LIVE color). Do not also enable Lumia’s on-screen alert.</p>
+  <p>Mods-only for scene-changing commands if you do not want random scene switches.</p>
+
+  <h2>If it fails</h2>
+  <ul>
+    <li>No scenes in Lumia: WebSocket off, wrong password, or OBS closed</li>
+    <li>Blank overlay: recopy the room URL; Lumia app must be running</li>
+    <li>Double alerts: disable on-screen alerts in one of the two apps</li>
+    <li>Scene switch does nothing: name mismatch — copy from <a href="../obs/source-map.md">source-map.md</a></li>
+  </ul>
+
+  <nav class="docs">
+    <a href="../setup.html">← Checklist</a> ·
+    <a href="obs.html">OBS</a> ·
+    <a href="casterlabs.html">Casterlabs</a>
+  </nav>
+</main>
+</body>
+</html>

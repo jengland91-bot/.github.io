@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live HUD — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared/theme.css" />
+</head>
+<body class="scene-live">
+  <div class="ticks"><span class="tl"></span><span class="tr"></span><span class="bl"></span><span class="br"></span></div>
+
+  <header class="top-bar">
+    <div class="live-pill"><i></i> <span data-live-title>LIVE</span></div>
+    <div class="brand"><small data-handle></small><span data-brand></span></div>
+    <div class="spacer"></div>
+    <div class="clock" data-clock></div>
+  </header>
+
+  <div class="well well-labels" data-slot="labels"><span class="well-tag">Casterlabs / Labels  420×70</span></div>
+  <div class="well well-alerts" data-slot="alerts"><span class="well-tag">Casterlabs / Alerts  860×200</span></div>
+  <div class="well well-nowplaying" data-slot="nowplaying"><span class="well-tag">Now Playing  360×68</span></div>
+  <div class="well well-cam" data-slot="cam"><span class="well-tag">Cam / Main  360×270</span></div>
+  <div class="well well-chat" data-slot="chat"><span class="well-tag">Casterlabs / Chat  400×460</span></div>
+  <div class="well well-goal" data-slot="goal"><span class="well-tag">Casterlabs / Goal  480×52</span></div>
+
+  <script src="shared/config.js"></script>
+  <script src="shared/overlay.js"></script>
+</body>
+</html>

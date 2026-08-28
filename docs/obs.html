@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OBS scene map — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+<main>
+  <div class="kicker">OBS STUDIO</div>
+  <h1>SCENE MAP</h1>
+  <p>Canvas is <code>1920×1080</code>. Scene names are exact — Lumia Stream matches them as written. Markdown copy: <a href="obs.md">obs.md</a></p>
+
+  <h2>Video</h2>
+  <table>
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td>Base (Canvas)</td><td>1920 × 1080</td></tr>
+    <tr><td>Output (Scaled)</td><td>1920 × 1080</td></tr>
+    <tr><td>FPS</td><td>60 if the PC can hold it, else 30</td></tr>
+    <tr><td>Color Format</td><td>NV12</td></tr>
+    <tr><td>Color Space</td><td>Rec. 709</td></tr>
+    <tr><td>Color Range</td><td>Limited</td></tr>
+  </table>
+  <p>Settings → Output → Output Mode: <strong>Advanced</strong>. Twitch 1080p typical cap:</p>
+  <table>
+    <tr><th>Field</th><th>NVIDIA</th><th>AMD</th><th>Intel</th><th>CPU</th></tr>
+    <tr><td>Encoder</td><td>NVENC (new)</td><td>AMF</td><td>QuickSync</td><td>x264</td></tr>
+    <tr><td>Rate control</td><td>CBR</td><td>CBR</td><td>CBR</td><td>CBR</td></tr>
+    <tr><td>Bitrate</td><td>6000 Kbps</td><td>6000</td><td>6000</td><td>4500–6000</td></tr>
+    <tr><td>Keyframe</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+    <tr><td>Preset</td><td>Quality / P5</td><td>Quality</td><td>Quality</td><td>veryfast</td></tr>
+    <tr><td>B-frames</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+  </table>
+  <p>Audio: 48 kHz, AAC 160 Kbps. YouTube can take 8000–12000 Kbps if the uplink is clean.</p>
+
+  <h2>Mic filters (top → bottom)</h2>
+  <ol>
+    <li>Noise Suppression — RNNoise</li>
+    <li>Noise Gate — only if the room is noisy</li>
+    <li>EQ — small cut 200–300 Hz if boxy, slight presence 4–6 kHz</li>
+    <li>Compressor — 3:1, attack ~2 ms, release ~80 ms</li>
+    <li>Limiter — ceiling −1.5 dB</li>
+  </ol>
+
+  <h2>Browser source defaults</h2>
+  <ul>
+    <li>Width 1920, height 1080, FPS 30</li>
+    <li>Custom CSS: <code>body { background-color: rgba(0, 0, 0, 0); margin: 0; overflow: hidden; }</code></li>
+    <li>Shutdown when not visible: on for STARTING SOON / BRB / ENDING</li>
+    <li>Refresh when scene becomes active: on for STARTING SOON (restarts countdown)</li>
+  </ul>
+  <p>Countdown length: <code>starting-soon.html?m=5</code></p>
+
+  <h2>LIVE — bottom → top</h2>
+  <ol>
+    <li><code>Game / Capture</code></li>
+    <li><code>Cam / Main</code> — 360×270 at X 48, Y 762</li>
+    <li><code>Casterlabs / Chat</code> — 400×460 at 1472, 560</li>
+    <li><code>Casterlabs / Now Playing</code> — 360×68 at 48, 678</li>
+    <li><code>Casterlabs / Labels</code> — 420×70 at 48, 96</li>
+    <li><code>Casterlabs / Goal</code> — 480×52 at 720, 1004</li>
+    <li><code>Overlay / Live HUD</code> — <code>live.html</code></li>
+    <li><code>Casterlabs / Alerts</code> — 860×200 at 530, 24</li>
+    <li><code>Casterlabs / Emoji Rain</code> — full canvas, optional</li>
+    <li><code>Lumia / Overlay</code> — full canvas</li>
+    <li><code>Media / Hype Clip</code> — hidden; Lumia toggles it</li>
+  </ol>
+
+  <h2>JUST CHATTING</h2>
+  <ol>
+    <li><code>Cam / Main</code> — 1100×619 at 56, 168 (Paste Reference from LIVE)</li>
+    <li><code>Casterlabs / Chat</code> — 648×860 at 1216, 96</li>
+    <li>Labels / Now Playing / Goal in the wells printed by <code>chatting.html?setup=1</code></li>
+    <li><code>Overlay / Chatting HUD</code></li>
+    <li>Alerts, then Lumia overlay</li>
+  </ol>
+
+  <h2>Hold screens</h2>
+  <p>STARTING SOON, BRB, ENDING, INTERMISSION: dark color source + matching overlay HTML. Optional staging music.</p>
+  <p>Hotkeys: Numpad 1–5 for the five main scenes. Fade 300 ms.</p>
+
+  <nav class="docs">
+    <a href="../setup.html">← Checklist</a> ·
+    <a href="casterlabs.html">Casterlabs</a> ·
+    <a href="lumia.html">Lumia</a>
+  </nav>
+</main>
+</body>
+</html>
