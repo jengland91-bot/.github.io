@@ -125,6 +125,6 @@ Lumia Chatbox: **1048×800 at 16, 1096**. Alerts: **1048×160 at 16, 16**.
 
 Right-click source → Transform → Edit Transform. Bounding Box type: **Scale to inner bounds**, center.
 
-To stream wide and vertical **at the same time from OBS**, install [Aitum Vertical](https://aitum.tv/products/vertical) **and** [Aitum Multistream](https://aitum.tv/products/multi). Stay on collection `Rise Above BeamNG`. Build the phone layout in the Vertical dock. Destinations: [docs/aitum.html](../docs/aitum.html).
+To stream wide and vertical **at the same time from OBS**, install [Aitum Vertical](https://aitum.tv/products/vertical) **and** [Aitum Multistream](https://aitum.tv/products/multi). Stay on collection `Rise Above BeamNG`. The **Vertical Scenes** dock starts empty — click **+** there (not in the left Scenes list). Destinations: [docs/aitum.html](../docs/aitum.html).
 
 Stay on collection `Rise Above BeamNG` while Multi + Vertical are running. The separate `Rise Above BeamNG Vertical` collection is only if you stream 9:16 by itself.

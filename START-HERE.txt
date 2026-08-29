@@ -123,11 +123,15 @@ AITUM MULTISTREAM (OBS to many sites, wide + phone):
     reopen OBS.
 
   1. Collection Rise Above BeamNG (the wide one). Do not switch away.
-  2. OBS Docks: turn on Aitum Multistream, Aitum Vertical, Vertical Scenes,
-     Vertical Sources.
-  3. Vertical canvas 1080x1920. Add scenes STARTING SOON, GRID, RACE, ...
-     On RACE, add EXISTING Game / Main and the four cams. Sizes:
-       Game 1080x608 at 0,0. Cams under it. Overlay = overlays\vertical\live.html
+  2. OBS Docks: tick Vertical Scenes, Vertical Sources, Aitum Vertical.
+     If Vertical Scenes is missing, Multistream is not enough — install
+     Aitum Vertical, then reopen OBS.
+  3. YOU WILL SEE NO VERTICAL SCENES. That is normal. The left Scenes list
+     is the wide show (already filled). Vertical Scenes is a different dock
+     and starts empty. Click IN THAT DOCK (not the left list) -> + -> RACE.
+     Vertical Sources -> + -> Add Existing Game / Main and the four cams.
+     Game 1080x608 at 0,0. Overlay = overlays\vertical\live.html
+     Right-click that RACE -> Linked Scenes -> tick wide RACE.
   4. Right-click each Vertical scene -> Linked Scenes -> matching wide scene.
   5. WHERE TO SEND IT:
      Wide (Main): OBS Settings -> Stream = Twitch. Aitum Main Outputs =

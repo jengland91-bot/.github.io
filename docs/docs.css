@@ -55,3 +55,42 @@ table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 
 th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid rgba(244, 239, 232, 0.1); vertical-align: top; }
 th { color: var(--paper); font-family: Rajdhani, sans-serif; letter-spacing: 0.08em; }
 nav.docs { margin-top: 40px; }
+.callout {
+  border: 2px solid var(--ember);
+  background: #16180c;
+  padding: 16px 18px 18px;
+  margin: 18px 0 28px;
+}
+.callout h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+.callout p:last-child { margin-bottom: 0; }
+.two-docks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 14px 0 6px;
+}
+@media (max-width: 640px) {
+  .two-docks { grid-template-columns: 1fr; }
+}
+.dock-card {
+  background: #000;
+  border: 1px solid rgba(244, 239, 232, 0.14);
+  padding: 12px 14px;
+}
+.dock-card h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-family: Rajdhani, sans-serif;
+  letter-spacing: 0.08em;
+  color: var(--paper);
+}
+.dock-card ul { margin: 0; padding-left: 18px; }
+.dock-card .empty-line {
+  color: #88785c;
+  font-style: italic;
+  margin: 8px 0;
+}
+.dock-card.accent { border-color: var(--ember); }

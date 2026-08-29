@@ -16,6 +16,29 @@
   <p>Stay in OBS. Do not add Restream. Do not run TikTok LIVE Studio at the same time as OBS going to TikTok. Chat for you is still Lumia on the gaming monitor — not a second streaming app.</p>
   <p>You downloaded <strong>Aitum Multistream</strong>. That sends the picture to extra sites. Phone-shaped video needs a second plugin: <strong>Aitum Vertical</strong>. Download Vertical from <a href="https://aitum.tv/products/vertical">aitum.tv/products/vertical</a>, or grab <a href="https://aitum.tv/products/multi">Stream Suite</a> which bundles both. Close OBS, install, reopen OBS.</p>
 
+  <div class="callout">
+    <h2>NO VERTICAL SCENES YET — THAT IS NORMAL</h2>
+    <p>The installer filled the <strong>left</strong> Scenes list (wide 1920×1080). Aitum’s phone list is a <em>different</em> dock named <strong>Vertical Scenes</strong>. It starts at <strong>zero</strong>. Nobody can push scenes into that dock from this kit.</p>
+    <div class="two-docks">
+      <div class="dock-card">
+        <h3>Scenes (left list)</h3>
+        <ul>
+          <li>STARTING SOON</li>
+          <li>GRID</li>
+          <li>RACE</li>
+          <li>REPLAY / BRB / ENDING</li>
+        </ul>
+        <p>Wide show. Already there. Leave it.</p>
+      </div>
+      <div class="dock-card accent">
+        <h3>Vertical Scenes (Aitum dock)</h3>
+        <p class="empty-line">(empty — click + in this box)</p>
+        <p>Phone 1080×1920. You add <code>RACE</code> once, by hand.</p>
+      </div>
+    </div>
+    <p><strong>Do this now:</strong> click inside <strong>Vertical Scenes</strong> (not the left list) → <strong>+</strong> → name it <code>RACE</code>. If you do not even see a panel called Vertical Scenes, Multistream is not enough — install <a href="https://aitum.tv/products/vertical">Aitum Vertical</a>, reopen OBS, then Docks → tick Vertical Scenes.</p>
+  </div>
+
   <h2>What goes where</h2>
   <table>
     <thead><tr><th>Picture</th><th>Plugin piece</th><th>Send it to</th></tr></thead>
@@ -30,21 +53,22 @@
   <p>OBS top menu → Docks (or View → Docks). Turn on:</p>
   <ul>
     <li>Aitum Multistream</li>
-    <li>Aitum Vertical (the canvas)</li>
+    <li>Aitum Vertical (the tall preview)</li>
     <li>Vertical Scenes</li>
     <li>Vertical Sources</li>
   </ul>
+  <p>Drag Vertical Scenes next to the left Scenes list so you can tell them apart. If Vertical Scenes is missing, you only have Multistream — install <a href="https://aitum.tv/products/vertical">Aitum Vertical</a>, reopen OBS, then tick those docks again.</p>
 
-  <h2>Build the phone canvas (Vertical)</h2>
+  <h2>Add the first phone scene (RACE)</h2>
   <ol>
-    <li>Vertical canvas size <strong>1080 × 1920</strong>.</li>
-    <li>In Vertical Scenes, add the same seven names: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING. Start with <strong>RACE</strong>.</li>
-    <li>In Vertical Sources, click + and pick <strong>existing</strong> sources (Game / Main, Cam / Face, Room, Wheel, Pedals). Do not create second cameras.</li>
-    <li>Park RACE like the kit: game <strong>1080×608 at 0,0</strong>. Face 520×220 at 16,624. Room 544,624. Wheel 16,860. Pedals 544,860.</li>
-    <li>Add a Browser source for the vertical overlay: local file <code>overlays\vertical\live.html</code>, 1080×1920, transparent. Then Lumia / Overlay at 1080×1920 on top if you want alerts on the phone stream.</li>
-    <li>Right-click each Vertical scene → Linked Scenes → tick the matching wide scene (RACE ↔ RACE). Then Numpad 1–7 switches both canvases.</li>
+    <li>Click inside the <strong>Vertical Scenes</strong> dock (not the main Scenes list).</li>
+    <li>Click <strong>+</strong> → name it <code>RACE</code> → OK. You should now have one vertical scene.</li>
+    <li>Click inside <strong>Vertical Sources</strong> → <strong>+</strong> → Game Capture → <strong>Add Existing</strong> → <code>Game / Main</code>. Transform: 1080×608 at 0, 0.</li>
+    <li>Same way, Add Existing: <code>Cam / Face</code> 520×220 at 16, 624. <code>Cam / Room</code> 520×220 at 544, 624. <code>Cam / Wheel</code> 520×220 at 16, 860. <code>Cam / Pedals</code> 520×220 at 544, 860.</li>
+    <li>Vertical Sources → + → Browser → <strong>Create new</strong> named <code>Overlay / Race HUD V</code>. Local file: <code>overlays\vertical\live.html</code>. Width 1080, height 1920. Transparent. Then Add Existing <code>Lumia / Overlay</code> on top, 1080×1920.</li>
+    <li>In Vertical Scenes, right-click <code>RACE</code> → <strong>Linked Scenes</strong> → tick wide <code>RACE</code>.</li>
   </ol>
-  <p>GRID has no game. STARTING SOON / BRB / ENDING use <code>overlays\vertical\starting-soon.html</code>, <code>brb.html</code>, <code>ending.html</code>.</p>
+  <p>Repeat + for GRID, STARTING SOON, BRB, ENDING, REPLAY. Skip RACE DUAL until you have a second BeamNG view. Overlay files: <code>chatting.html</code>, <code>starting-soon.html</code>, <code>brb.html</code>, <code>ending.html</code>, <code>replay.html</code> under <code>overlays\vertical\</code>.</p>
 
   <h2>Send wide streams (Main)</h2>
   <ol>
