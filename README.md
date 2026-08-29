@@ -4,7 +4,7 @@ Off-road overlay kit for **BeamNG.drive** with **four cameras** (Face, Room, Whe
 
 Open [START-HERE.txt](START-HERE.txt). Two apps:
 
-- **TikTok** — TikTok LIVE Studio only. Dual layout on. Double-click `tools/Start-OverlayServer.bat`. Do not open OBS for TikTok. Guide: [TikTok LIVE Studio](docs/tiktok.html).
+- **TikTok** — TikTok LIVE Studio only. Double-click `tools/Start-TikTokLayout.bat`. Build Dual layout from the [layout board](tiktok-studio/index.html). Do not open OBS.
 - **Twitch / YouTube / Kick** — OBS. Double-click `tools/Install-OBS.bat`.
 
 OBS creates two scene collections:
@@ -16,7 +16,7 @@ Same scene names in both. Switch them with the dropdown at the top of OBS. Pick 
 
 ## TikTok LIVE Studio
 
-TikTok is Studio only. Turn Dual layout on (phone + landscape at once). Double-click `tools/Start-OverlayServer.bat`, leave it open, and paste **vertical** Link URLs on the 1080×1920 canvas and **horizontal** Link URLs on the 1920×1080 canvas. Same seven scene names on both. Do not run `Install-OBS.bat` for TikTok. Guide: [TikTok LIVE Studio](docs/tiktok.html).
+TikTok is Studio only. Double-click `tools/Start-TikTokLayout.bat`, leave it open, and build Dual layout from the [layout board](tiktok-studio/index.html). Add sources on the phone canvas first, then resize on landscape. One overlay URL per scene. Do not run `Install-OBS.bat` for TikTok. Guide: [TikTok LIVE Studio](docs/tiktok.html).
 
 ## Audio
 
@@ -42,8 +42,9 @@ In-game BeamNG cameras (C / Shift+C) stay on one source: `Game / Main`. Physical
 
 ## Who does what
 
-- **OBS** — BeamNG capture, four cams, layout, audio
-- **Lumia** — chatbox, alerts, goals, lights, scene/cam commands
+- **OBS** — Twitch / YouTube / Kick capture, four cams, layout, audio
+- **TikTok LIVE Studio** — Dual layout (phone + landscape). Overlay server + [layout board](tiktok-studio/index.html)
+- **Lumia** — chatbox, alerts, goals, lights. Scene commands control OBS only.
 
 ## Customize
 
@@ -56,6 +57,7 @@ Drop `starting.jpg`, `brb.jpg`, and `ending.jpg` into `overlays/shared/backdrops
 ## Docs
 
 - [OBS + BeamNG + multi-cam](docs/obs.html)
+- [TikTok LIVE Studio layout](tiktok-studio/index.html)
 - [TikTok LIVE Studio](docs/tiktok.html)
 - [Lumia overlay, lights, cam director](docs/lumia.html)
 - [Source map](obs/source-map.md)

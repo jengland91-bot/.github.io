@@ -13,8 +13,9 @@
 <main>
   <div class="kicker">TIKTOK LIVE STUDIO</div>
   <h1>VERTICAL + HORIZONTAL</h1>
-  <p>Go live from TikTok LIVE Studio only. Do not open OBS for TikTok. Dual layout on: phone <strong>1080 × 1920</strong> and landscape <strong>1920 × 1080</strong> at once. Same seven scene names on both. Markdown: <a href="tiktok.md">tiktok.md</a></p>
-  <p>Studio Dual layout is <em>not</em> the scene named RACE DUAL. Dual layout = two screens (phone + landscape). RACE DUAL = a second BeamNG camera angle. You can use both.</p>
+  <p>This is the Rise Above layout for TikTok LIVE Studio only. Dual layout on. Build it on the <strong>phone</strong> canvas first — Studio copies those sources to landscape, then you only resize them. Open the live board: <a href="../tiktok-studio/">tiktok-studio/</a>. Markdown: <a href="tiktok.md">tiktok.md</a></p>
+  <p>Do not open OBS. Studio cannot import a scene file, so the board plus these sizes <em>are</em> the layout.</p>
+  <p>Studio Dual layout is <em>not</em> the scene named RACE DUAL. Dual layout = two screens (phone + landscape). RACE DUAL = a second BeamNG camera angle. Skip RACE DUAL until you have that second view.</p>
 
   <h2>Turn Dual on</h2>
   <ol>
@@ -22,20 +23,20 @@
     <li>Turn on Dual layout (portrait + landscape).</li>
     <li>You will see two canvases. Switch between them while you build sources. Both go live together.</li>
   </ol>
-  <p>Type the same scene names on each canvas: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING.</p>
+  <p>Add seven Dual scenes: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING. Each scene has a phone canvas and a landscape canvas.</p>
 
   <h2>Start the overlay server (once)</h2>
   <p>Link sources need <code>http://</code>. They will not load <code>file://</code>.</p>
   <ol>
     <li>Extract a new zip. Do not move the folder after the server starts.</li>
-    <li>Double-click <code>tools\Start-OverlayServer.bat</code>.</li>
+    <li>Double-click <code>tools\Start-TikTokLayout.bat</code> (or <code>Start-OverlayServer.bat</code>).</li>
     <li>Leave that window open the whole time you are live.</li>
-    <li>Allow the firewall prompt for private networks if Windows asks.</li>
+    <li>The layout board opens. Allow the firewall prompt for private networks if Windows asks.</li>
   </ol>
-  <p>One server feeds both canvases: <code>http://127.0.0.1:5500/</code>. Copy-paste page: <a href="../tools/tiktok.html">tools/tiktok.html</a>.</p>
+  <p>One server, one overlay URL per scene: <code>http://127.0.0.1:5500/</code>. Board: <a href="../tiktok-studio/">tiktok-studio/</a>.</p>
 
-  <h2>Vertical canvas — 1080 × 1920</h2>
-  <p>This is the phone stream. Paste these as Link sources, size 1080 × 1920, transparent if Studio offers it.</p>
+  <h2>Vertical canvas — 1080 × 1920 (add sources here)</h2>
+  <p>This is the phone stream. Dual layout copies these sources to landscape. Paste <strong>one</strong> Link per scene. Width 1080, height 1920, transparent if Studio offers it. After that, only resize on landscape — do not add a second overlay URL.</p>
   <table>
     <thead><tr><th>Scene</th><th>URL</th></tr></thead>
     <tbody>
@@ -90,20 +91,8 @@
   </table>
   <p>Vertical REPLAY: game 1080 × 608 at 0, 360. No cams. STARTING SOON / BRB / ENDING: overlay Link only.</p>
 
-  <h2>Horizontal canvas — 1920 × 1080</h2>
-  <p>This is the landscape stream. Same scenes, different overlay files (no <code>vertical/</code> in the path). Link size 1920 × 1080.</p>
-  <table>
-    <thead><tr><th>Scene</th><th>URL</th></tr></thead>
-    <tbody>
-      <tr><td>STARTING SOON</td><td><code>http://127.0.0.1:5500/overlays/starting-soon.html?m=5</code></td></tr>
-      <tr><td>GRID</td><td><code>http://127.0.0.1:5500/overlays/chatting.html</code></td></tr>
-      <tr><td>RACE</td><td><code>http://127.0.0.1:5500/overlays/live.html</code></td></tr>
-      <tr><td>RACE DUAL</td><td><code>http://127.0.0.1:5500/overlays/race-dual.html</code></td></tr>
-      <tr><td>REPLAY</td><td><code>http://127.0.0.1:5500/overlays/replay.html</code></td></tr>
-      <tr><td>BRB</td><td><code>http://127.0.0.1:5500/overlays/brb.html</code></td></tr>
-      <tr><td>ENDING</td><td><code>http://127.0.0.1:5500/overlays/ending.html</code></td></tr>
-    </tbody>
-  </table>
+  <h2>Horizontal canvas — 1920 × 1080 (resize only)</h2>
+  <p>Do not add new overlay files. Studio Dual layout keeps the same Link URL. Stretch that Overlay Link to 1920 × 1080. The HUD flips to the wide layout by itself.</p>
 
   <h3>Horizontal RACE</h3>
   <p>Game fills the canvas. Four cams along the bottom. Overlay and Lumia on top.</p>
@@ -150,11 +139,7 @@
 
   <h2>Lumia</h2>
   <p>TikTok does not need OBS. In Lumia: Connections → add TikTok. Build one overlay (Chatbox + Alerts). Copy that URL.</p>
-  <p>Add a Lumia Link on each Studio canvas, on top of the Race HUD overlay.</p>
-  <ul>
-    <li>Vertical Lumia: 1080 × 1920</li>
-    <li>Horizontal Lumia: 1920 × 1080</li>
-  </ul>
+  <p>Add a Lumia Link on the phone canvas, on top of the Race HUD overlay (1080 × 1920). On landscape, stretch that same Lumia Link to 1920 × 1080.</p>
   <p>Switch scenes in Studio yourself. Chat commands like <code>!race</code> only work if Lumia is also connected to OBS. They do not control TikTok LIVE Studio.</p>
 
   <h2>Names and photos</h2>
@@ -162,9 +147,9 @@
 
   <nav class="docs">
     <a href="../START-HERE.txt">Start here</a> ·
+    <a href="../tiktok-studio/">Layout board</a> ·
     <a href="obs.html">OBS + BeamNG</a> ·
-    <a href="lumia.html">Lumia</a> ·
-    <a href="../tools/tiktok.html">Copy URLs</a>
+    <a href="lumia.html">Lumia</a>
   </nav>
 </main>
 </body>

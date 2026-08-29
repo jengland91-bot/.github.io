@@ -16,21 +16,23 @@ if (-not (Test-Path (Join-Path $overlayDir "vertical\live.html"))) {
 }
 if (-not (Test-Path (Join-Path $overlayDir "live.html"))) {
     Write-Host "Cannot find overlays\live.html" -ForegroundColor Red
-    Write-Host "Need the wide overlays too for TikTok Dual layout (horizontal canvas)."
+    Write-Host "Need overlays\live.html in this zip too."
     Write-Host "Looked in: $overlayDir"
     exit 1
 }
 
 Write-Host ""
-Write-Host "Rise Above - overlay server for TikTok LIVE Studio" -ForegroundColor White
+Write-Host "Rise Above - TikTok LIVE Studio layout" -ForegroundColor White
 Write-Host "Serving: $repoRoot"
 Write-Host "Keep this window open while you are live on TikTok."
 Write-Host "TikTok is LIVE Studio only. Do not open OBS for TikTok."
 Write-Host ""
-Write-Host "Turn Dual layout ON in Studio (vertical + horizontal at the same time)."
-Write-Host "Same seven scene names on both canvases."
+Write-Host "Turn Dual layout ON. Add sources on the PHONE canvas first."
+Write-Host "Then switch to landscape and resize the SAME sources. One overlay URL per scene."
 Write-Host ""
-Write-Host "VERTICAL phone canvas (1080 x 1920) - Link sources:"
+Write-Host "Layout board: ${prefix}tiktok-studio/"
+Write-Host ""
+Write-Host "PHONE overlay Links (1080 x 1920), then stretch that same Link to 1920 x 1080 on landscape:"
 Write-Host "  STARTING SOON  ${prefix}overlays/vertical/starting-soon.html?m=5"
 Write-Host "  GRID           ${prefix}overlays/vertical/chatting.html"
 Write-Host "  RACE           ${prefix}overlays/vertical/live.html"
@@ -39,19 +41,8 @@ Write-Host "  REPLAY         ${prefix}overlays/vertical/replay.html"
 Write-Host "  BRB            ${prefix}overlays/vertical/brb.html"
 Write-Host "  ENDING         ${prefix}overlays/vertical/ending.html"
 Write-Host ""
-Write-Host "HORIZONTAL landscape canvas (1920 x 1080) - Link sources:"
-Write-Host "  STARTING SOON  ${prefix}overlays/starting-soon.html?m=5"
-Write-Host "  GRID           ${prefix}overlays/chatting.html"
-Write-Host "  RACE           ${prefix}overlays/live.html"
-Write-Host "  RACE DUAL      ${prefix}overlays/race-dual.html"
-Write-Host "  REPLAY         ${prefix}overlays/replay.html"
-Write-Host "  BRB            ${prefix}overlays/brb.html"
-Write-Host "  ENDING         ${prefix}overlays/ending.html"
-Write-Host ""
-Write-Host "Setup boxes V: ${prefix}overlays/vertical/live.html?setup=1"
-Write-Host "Setup boxes H: ${prefix}overlays/live.html?setup=1"
-Write-Host "Guide page:    ${prefix}docs/tiktok.html"
-Write-Host "Copy URLs:     ${prefix}tools/tiktok.html"
+Write-Host "Setup boxes:  ${prefix}overlays/vertical/live.html?setup=1"
+Write-Host "Guide:        ${prefix}docs/tiktok.html"
 Write-Host ""
 
 $listener = New-Object System.Net.HttpListener
@@ -87,7 +78,7 @@ function Get-Mime([string]$ext) {
 }
 
 Write-Host "Ready. Ctrl+C to stop." -ForegroundColor Green
-try { Start-Process "${prefix}docs/tiktok.html" } catch {}
+try { Start-Process "${prefix}tiktok-studio/" } catch {}
 
 while ($listener.IsListening) {
     $ctx = $listener.GetContext()
@@ -95,7 +86,7 @@ while ($listener.IsListening) {
     $res = $ctx.Response
     try {
         $rel = [Uri]::UnescapeDataString($req.Url.AbsolutePath.TrimStart("/"))
-        if ([string]::IsNullOrWhiteSpace($rel)) { $rel = "docs/tiktok.html" }
+        if ([string]::IsNullOrWhiteSpace($rel)) { $rel = "tiktok-studio/index.html" }
         $rel = $rel -replace "/", "\"
         if ($rel.Contains("..")) {
             $res.StatusCode = 400

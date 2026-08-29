@@ -104,12 +104,25 @@
     }
   }
 
+  function isVerticalCanvas() {
+    if (params.get("h") === "1" || params.get("wide") === "1") return false;
+    if (params.get("v") === "1" || params.get("vertical") === "1") return true;
+    if (window.innerWidth > 0 && window.innerHeight > 0) {
+      return window.innerHeight > window.innerWidth;
+    }
+    return document.body.classList.contains("vertical");
+  }
+
+  function applyCanvas() {
+    const vertical = isVerticalCanvas();
+    document.documentElement.classList.toggle("vertical", vertical);
+    document.body.classList.toggle("vertical", vertical);
+  }
+
   function mode() {
     if (params.has("preview")) document.body.classList.add("preview");
     if (params.has("setup")) document.body.classList.add("setup");
-    if (document.body.classList.contains("vertical")) {
-      document.documentElement.classList.add("vertical");
-    }
+    applyCanvas();
   }
 
   function clock() {
@@ -299,4 +312,5 @@
   countdown();
   backdrop();
   dust();
+  window.addEventListener("resize", applyCanvas);
 })();

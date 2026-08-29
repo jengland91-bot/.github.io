@@ -1,16 +1,16 @@
-# TikTok LIVE Studio — vertical + horizontal
+# TikTok LIVE Studio layout
 
-Go live from **TikTok LIVE Studio only**. Do not open OBS for TikTok.
+Go live from **TikTok LIVE Studio only**. Do not open OBS.
 
-Turn on **Dual layout**. That streams phone **1080 × 1920** and landscape **1920 × 1080** at the same time.
+Studio cannot import a scene file. Open `tiktok-studio/index.html` (via `tools/Start-TikTokLayout.bat`) and build Dual layout from that board.
+
+Turn on **Dual layout**. Add sources on the **phone** canvas first. Landscape only resizes those same sources. One overlay URL per scene — stretch it to 1920×1080 on landscape and the HUD flips.
 
 Studio Dual layout is not the scene named RACE DUAL. Dual layout = two screens. RACE DUAL = a second BeamNG camera angle.
 
-1. Double-click `tools/Start-OverlayServer.bat` and leave it open while live.
-2. Same seven scene names on both canvases: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING.
-3. Add a **Link** source per scene on each canvas.
-
-## Vertical URLs (1080 × 1920)
+1. Double-click `tools/Start-TikTokLayout.bat` and leave it open while live.
+2. Same seven scene names. Start with RACE.
+3. Phone Overlay Link URLs:
 
 - STARTING SOON: `http://127.0.0.1:5500/overlays/vertical/starting-soon.html?m=5`
 - GRID: `http://127.0.0.1:5500/overlays/vertical/chatting.html`
@@ -20,20 +20,8 @@ Studio Dual layout is not the scene named RACE DUAL. Dual layout = two screens. 
 - BRB: `http://127.0.0.1:5500/overlays/vertical/brb.html`
 - ENDING: `http://127.0.0.1:5500/overlays/vertical/ending.html`
 
-Vertical RACE: game 1080×608 at 0,0. Face 520×220 at 16,624. Room 520×220 at 544,624. Wheel 520×220 at 16,860. Pedals 520×220 at 544,860. Overlay + Lumia 1080×1920.
+Phone RACE: game 1080×608 at 0,0. Face 520×220 at 16,624. Room 520×220 at 544,624. Wheel 520×220 at 16,860. Pedals 520×220 at 544,860. Overlay + Lumia 1080×1920.
 
-## Horizontal URLs (1920 × 1080)
-
-- STARTING SOON: `http://127.0.0.1:5500/overlays/starting-soon.html?m=5`
-- GRID: `http://127.0.0.1:5500/overlays/chatting.html`
-- RACE: `http://127.0.0.1:5500/overlays/live.html`
-- RACE DUAL: `http://127.0.0.1:5500/overlays/race-dual.html`
-- REPLAY: `http://127.0.0.1:5500/overlays/replay.html`
-- BRB: `http://127.0.0.1:5500/overlays/brb.html`
-- ENDING: `http://127.0.0.1:5500/overlays/ending.html`
-
-Horizontal RACE: game 1920×1080 at 0,0. Four cams 320×180 along the bottom at y=876 (x = 48 / 384 / 720 / 1056). Overlay + Lumia 1920×1080.
+Landscape RACE (resize the same sources): game 1920×1080 at 0,0. Four cams 320×180 along the bottom at y=876 (x = 48 / 384 / 720 / 1056). Overlay + Lumia 1920×1080.
 
 Audio: BeamNG + mic only, not Discord.
-
-Edit `overlays/shared/config.js`, then refresh Link sources on both canvases.

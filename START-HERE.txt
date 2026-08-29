@@ -7,31 +7,35 @@ TWO APPS. Pick the one you are going live from:
             sections (audio, Lumia in OBS, cameras).
 
 ------------------------------------------------------------------------
-TIKTOK LIVE STUDIO (no OBS)
+TIKTOK LIVE STUDIO LAYOUT (no OBS)
 ------------------------------------------------------------------------
+Studio cannot import a scene file. This kit IS the layout. You build it
+once in Dual layout.
+
 1. Right-click the zip -> Extract All. Do not open files from inside the zip.
-2. Open TikTok LIVE Studio. Turn Dual layout ON (phone + landscape together).
-3. Open the extracted folder -> tools -> double-click Start-OverlayServer.bat
-   Leave that black window open the whole time you are live.
-4. Same seven scene names on BOTH canvases:
-   STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING
-5. Phone canvas 1080x1920: paste the VERTICAL Link URLs the window prints.
-6. Landscape canvas 1920x1080: paste the HORIZONTAL Link URLs (no "vertical"
-   in the path).
-7. Phone RACE: BeamNG 1080x608 at the top, four cams under it.
-   Landscape RACE: BeamNG full 1920x1080, four cams along the bottom.
-8. Audio in Studio: BeamNG + mic only. Do not capture desktop / Discord.
-9. Lumia: Connections -> add TikTok. Copy your Lumia overlay URL.
-   Add a Link on each canvas, paste that URL, put it on top.
-   Vertical Lumia 1080x1920. Horizontal Lumia 1920x1080.
-   Switch scenes in Studio yourself. Chat !race does not control Studio.
+2. Open the extracted folder -> tools -> double-click Start-TikTokLayout.bat
+   (Start-OverlayServer.bat is the same thing.) Leave the black window open.
+3. A layout board opens. That page is the Dual layout: phone + landscape.
+4. Open TikTok LIVE Studio. Dual layout ON. Do not open OBS.
+5. Add seven scenes: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING.
+   Start with RACE. Skip RACE DUAL until you have a second BeamNG view.
+6. On the PHONE canvas, add Game / cameras / Overlay Link / Lumia Link.
+   Copy the overlay URL from the layout board. Overlay Link size 1080x1920.
+7. Switch to the LANDSCAPE canvas. Do not paste a second overlay URL.
+   Resize the SAME sources to the landscape numbers on the board.
+   Overlay Link becomes 1920x1080 - it flips to the wide HUD by itself.
+8. Audio: BeamNG + mic only. Do not capture desktop / Discord.
 
-Names / photos: edit overlays\shared\config.js, drop jpgs in
-overlays\shared\backdrops\, then refresh the Link sources in Studio.
-Full sizes: docs\tiktok.html
-Copy-paste URLs: tools\tiktok.html
+Lumia: Connections -> TikTok. Paste overlay URL as a Link on top.
+Switch scenes in Studio. Chat !race does not control Studio.
 
-Do not run Install-OBS.bat for TikTok. OBS is a different app.
+Names / photos: overlays\shared\config.js and overlays\shared\backdrops\
+then refresh the Link in Studio.
+
+Layout board: tiktok-studio\index.html (also opens from the server)
+Full text: docs\tiktok.html
+
+Do not run Install-OBS.bat for TikTok.
 
 ------------------------------------------------------------------------
 OBS (Twitch / YouTube / Kick only)
