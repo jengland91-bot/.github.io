@@ -49,7 +49,7 @@ In-game BeamNG cameras (C / Shift+C) stay on one source: `Game / Main`. Physical
 
 ## Customize
 
-Edit `overlays/shared/config.js` in Notepad: `game` (BeamNG → SnowRunner etc.), `startingKicker` (TRAILHEAD), Monster green `colors.ember` (`#7CB701`), and `socials`. Save, then in OBS right-click the overlay → **Refresh**, or in TikTok LIVE Studio refresh the Link sources. Camera wells in OBS only move if you download a new zip and re-run `tools/Install-OBS.bat`.
+Edit `overlays/shared/config.js` in Notepad, or double-click `tools/Change-Game.bat` to swap the Starting Soon game title (`BeamNG` → `SnowRunner` etc.). Also set `startingKicker` (TRAILHEAD), Monster green `colors.ember` (`#7CB701`), and `socials`. Save, then in OBS right-click the overlay → **Refresh**, or in TikTok LIVE Studio refresh the Link sources. Camera wells in OBS only move if you download a new zip and re-run `tools/Install-OBS.bat`.
 
 ### Your photos on Starting Soon / BRB / Ending
 

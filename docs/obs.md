@@ -44,9 +44,13 @@ discord: ""                    // leave blank for now
 
 Save. In OBS: right-click the overlay source → Refresh. You do not need to re-run the installer just to change links.
 
-## Change the game name and TRAILHEAD
+## Change the game title on STARTING SOON
 
-Same file. Starting Soon prints `game` + `style` + `liveWord` as **BeamNG. Off-road. Live.** When you swap titles, change `game`. `startingKicker` is the small word above STARTING SOON (TRAILHEAD). Accent is `colors.ember` = `#7CB701`.
+Easiest: double-click `tools/Change-Game.bat`, pick or type the game, then in OBS right-click `Overlay / Starting Soon` → Refresh (or click GRID and back to STARTING SOON). No installer re-run.
+
+Same file if you prefer Notepad: `overlays/shared/config.js`. Change `game`. Starting Soon prints that as a big title, then `style` + `liveWord` as **Off-road. Live.** `startingKicker` is the small word above STARTING SOON (TRAILHEAD). Accent is `colors.ember` = `#7CB701`.
+
+Optional URL override: `starting-soon.html?m=5&game=SnowRunner`.
 
 ## BeamNG capture
 

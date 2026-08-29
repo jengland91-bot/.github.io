@@ -12,13 +12,11 @@ window.STREAM = {
   brand: "",
   handle: "@jengland91",
 
-  /* WHAT GAME ARE YOU PLAYING?
-     Starting Soon prints:  BeamNG. Off-road. Live.
-     Swap the game name when you change titles. Examples:
-       game: "BeamNG"
-       game: "SnowRunner"
-       game: "Forza"
-     Leave tagline blank unless you want to type the whole line yourself. */
+  /* TODAY'S GAME — this is the big title on STARTING SOON.
+     Easiest: double-click tools\Change-Game.bat and pick / type the name.
+     Or change the word in quotes here, Save, then in OBS right-click the overlay -> Refresh.
+     Examples: "BeamNG"  "SnowRunner"  "Forza Horizon"  "GTA V"
+     Leave tagline blank unless you want to type the whole subtitle yourself. */
   game: "BeamNG",
   style: "Off-road",
   liveWord: "Live",

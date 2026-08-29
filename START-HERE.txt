@@ -69,10 +69,16 @@ AUDIO (no Discord on stream):
   Discord can stay open. You still hear it in your headset. It will not go to the stream.
 
 NAMES, GAME, AND LINKS:
-  Open overlays\shared\config.js in Notepad.
+  EASIEST way to change the Starting Soon game title:
+    Double-click tools\Change-Game.bat
+    Pick a number or type the game (SnowRunner, Forza, GTA V, ...)
+    In OBS: STARTING SOON -> right-click Overlay / Starting Soon -> Refresh.
+    (Or click GRID, then STARTING SOON again.)
+
+  You can also open overlays\shared\config.js in Notepad:
   brand       = leave blank (no RISE ABOVE on screen). Put a word here if you want one.
-  game        = what prints in "BeamNG. Off-road. Live." (change this when you swap games)
-  style       = Off-road / Street / whatever
+  game        = the big title under STARTING SOON (BeamNG / SnowRunner / ...)
+  style       = Off-road / Street / whatever (the smaller line under the game)
   startingKicker = TRAILHEAD (the small word above STARTING SOON)
   colors.ember = #7CB701 Monster green
   socials.facebook = jengland91

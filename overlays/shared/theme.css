@@ -315,6 +315,20 @@ body.has-backdrop.scene-ending::after {
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
 }
 
+.game-now {
+  margin-top: 22px;
+  font-family: var(--font-display);
+  font-size: 72px;
+  line-height: 0.92;
+  letter-spacing: 0.08em;
+  color: var(--ember);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.75), 0 10px 32px rgba(0, 0, 0, 0.55);
+}
+
+.game-now[hidden] {
+  display: none;
+}
+
 .countdown {
   margin-top: 36px;
   font-family: var(--font-hud);
@@ -866,6 +880,11 @@ body.vertical .scene-title {
 
 body.vertical .scene-title h1 {
   font-size: 108px;
+}
+
+body.vertical .game-now {
+  font-size: 56px;
+  margin-top: 16px;
 }
 
 body.vertical .countdown {

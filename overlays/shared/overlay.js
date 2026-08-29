@@ -19,21 +19,36 @@
     });
   }
 
+  function currentGame() {
+    const fromUrl = params.get("game") || params.get("title");
+    if (fromUrl && String(fromUrl).trim()) return String(fromUrl).trim();
+    if (window.GAME_TITLE && String(window.GAME_TITLE).trim()) {
+      return String(window.GAME_TITLE).trim();
+    }
+    return String(STREAM.game || "").trim();
+  }
+
   function taglineText() {
     const custom = String(STREAM.tagline || "").trim();
     if (custom) return custom;
-    const parts = [STREAM.game, STREAM.style, STREAM.liveWord]
-      .map((p) => String(p || "").trim())
-      .filter(Boolean);
-    if (!parts.length) return "";
-    return parts.join(". ") + ".";
+    const gameOnPage = document.querySelector("[data-game]");
+    const parts = gameOnPage
+      ? [STREAM.style, STREAM.liveWord]
+      : [currentGame(), STREAM.style, STREAM.liveWord];
+    const clean = parts.map((p) => String(p || "").trim()).filter(Boolean);
+    if (!clean.length) return "";
+    return clean.join(". ") + ".";
   }
 
   function applyIdentity() {
     const name = params.get("name") || STREAM.name;
+    const game = currentGame();
     fill("[data-name]", name);
     fill("[data-brand]", STREAM.brand);
-    fill("[data-game]", STREAM.game);
+    fill("[data-game]", game);
+    document.querySelectorAll("[data-game]").forEach((el) => {
+      el.hidden = !game;
+    });
     fill("[data-tagline]", taglineText());
     fill("[data-handle]", STREAM.handle);
     fill("[data-brb]", STREAM.brbMessage);

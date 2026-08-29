@@ -38,8 +38,10 @@
 }</pre>
   <p>Blank = hidden. Save the file. In OBS, right-click the overlay source → Refresh. Those handles show on Starting Soon, BRB, and Ending (wide and vertical).</p>
 
-  <h2>Change the game name and TRAILHEAD</h2>
-  <p>Same file: <code>overlays/shared/config.js</code>. Starting Soon prints <code>game</code> + <code>style</code> + <code>liveWord</code> as <strong>BeamNG. Off-road. Live.</strong> When you swap titles, change <code>game</code> to <code>SnowRunner</code> or whatever you are playing. <code>startingKicker</code> is the small word above STARTING SOON (TRAILHEAD). Accent green is <code>colors.ember</code> = <code>#7CB701</code>.</p>
+  <h2>Change the game title on STARTING SOON</h2>
+  <p>Easiest: double-click <code>tools\Change-Game.bat</code>, pick a game or type the name, then in OBS right-click <code>Overlay / Starting Soon</code> → Refresh (or click GRID and back to STARTING SOON). You do not re-run the installer.</p>
+  <p>Same thing in <code>overlays/shared/config.js</code>: change <code>game</code> to <code>SnowRunner</code> (or whatever), Save, Refresh. Starting Soon prints the game as a big title, then <code>style</code> + <code>liveWord</code> as <strong>Off-road. Live.</strong> <code>startingKicker</code> is the small word above STARTING SOON (TRAILHEAD). Accent green is <code>colors.ember</code> = <code>#7CB701</code>.</p>
+  <p>Optional: add <code>?game=SnowRunner</code> to the Starting Soon overlay URL in OBS if you want to override the file for one stream.</p>
 
   <h2>Vertical + Aitum (Twitch wide, TikTok phone)</h2>
   <p>Aitum <strong>Multistream</strong> sends extra sites. Aitum <strong>Vertical</strong> is the 1080×1920 canvas. You need both. Stay on collection <code>Rise Above BeamNG</code>. Run <code>tools\Install-AitumVertical.bat</code> so the Vertical Scenes dock gets the phone scenes (including DESK / DESK V). Full steps: <a href="aitum.html">Aitum Multi + Vertical</a>.</p>
