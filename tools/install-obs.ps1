@@ -2,8 +2,6 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-Add-Type -AssemblyName System.Net.WebSockets.Client
-
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot = Split-Path -Parent $scriptDir
 $overlayDir = Join-Path $repoRoot "overlays"
@@ -21,6 +19,23 @@ if (-not (Test-Path (Join-Path $overlayDir "live.html"))) {
 if (-not (Test-Path (Join-Path $overlayDir "vertical\live.html"))) {
     Write-Host 'Cannot find overlays\vertical\live.html' -ForegroundColor Red
     Write-Host 'You need the zip that includes the vertical overlays folder.'
+    exit 1
+}
+
+function Open-HtmlInstaller {
+    $html = Join-Path $scriptDir "install.html"
+    Write-Host ""
+    Write-Host 'Open this page in Chrome or Edge on this PC instead:' -ForegroundColor Yellow
+    Write-Host $html
+    if (Test-Path $html) { Start-Process $html }
+}
+
+if (-not ("System.Net.WebSockets.ClientWebSocket" -as [type])) {
+    try { Add-Type -AssemblyName System } catch {}
+}
+if (-not ("System.Net.WebSockets.ClientWebSocket" -as [type])) {
+    Write-Host 'Windows PowerShell on this PC cannot open WebSockets.' -ForegroundColor Red
+    Open-HtmlInstaller
     exit 1
 }
 
@@ -301,8 +316,8 @@ function Get-Transform($item) {
 }
 
 $script:reqId = 0
-$ws = [System.Net.WebSockets.ClientWebSocket]::new()
-$ws.Options.KeepAliveInterval = [TimeSpan]::FromSeconds(20)
+$ws = New-Object System.Net.WebSockets.ClientWebSocket
+try { $ws.Options.KeepAliveInterval = [TimeSpan]::FromSeconds(20) } catch {}
 
 Write-Host 'Connecting to OBS on this PC...'
 try {
