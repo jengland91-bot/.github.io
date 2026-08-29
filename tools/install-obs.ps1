@@ -195,6 +195,13 @@ function Receive-Obs($ws) {
     return $sb.ToString() | ConvertFrom-Json
 }
 
+function Get-ObsProp($obj, [string]$name) {
+    if ($null -eq $obj) { return $null }
+    $prop = $obj.PSObject.Properties[$name]
+    if ($null -eq $prop) { return $null }
+    return $prop.Value
+}
+
 function Invoke-Obs($ws, [string]$type, $data) {
     if ($null -eq $data) { $data = @{} }
     $script:reqId++
@@ -210,12 +217,16 @@ function Invoke-Obs($ws, [string]$type, $data) {
     while ($true) {
         $msg = Receive-Obs $ws
         if ($msg.op -ne 7) { continue }
-        if ([string]$msg.d.requestId -ne $id) { continue }
-        if (-not $msg.d.requestStatus.result) {
-            $comment = $msg.d.requestStatus.comment
+        $d = Get-ObsProp $msg "d"
+        if ([string](Get-ObsProp $d "requestId") -ne $id) { continue }
+        $status = Get-ObsProp $d "requestStatus"
+        if (-not (Get-ObsProp $status "result")) {
+            $comment = Get-ObsProp $status "comment"
             throw "$type failed: $comment"
         }
-        return $msg.d.responseData
+        $out = Get-ObsProp $d "responseData"
+        if ($null -eq $out) { return @{} }
+        return $out
     }
 }
 
@@ -361,14 +372,14 @@ if ($null -eq $identified) {
 Write-Host 'Connected.' -ForegroundColor Green
 
 $ver = Invoke-Obs $ws "GetVersion" @{}
-Write-Host ("OBS " + $ver.obsVersion)
+Write-Host ("OBS " + (Get-ObsProp $ver "obsVersion"))
 
 $kindList = Invoke-Obs $ws "GetInputKindList" @{ unversioned = $false }
-$kinds = @($kindList.inputKinds)
+$kinds = @(Get-ObsProp $kindList "inputKinds")
 
 function Use-RiseCollection($ws, [string]$name) {
     $cols = Invoke-Obs $ws "GetSceneCollectionList" @{}
-    $colNames = @($cols.sceneCollections)
+    $colNames = @(Get-ObsProp $cols "sceneCollections")
     if ($colNames -contains $name) {
         Invoke-Obs $ws "SetCurrentSceneCollection" @{ sceneCollectionName = $name } | Out-Null
         Write-Host "Using collection $name"
@@ -395,24 +406,26 @@ function Set-RiseCanvas($ws, [int]$width, [int]$height) {
 
 function Test-Scene($ws, $name) {
     $list = Invoke-Obs $ws "GetSceneList" @{}
-    return (@($list.scenes | ForEach-Object { $_.sceneName }) -contains $name)
+    $names = @(Get-ObsProp $list "scenes") | ForEach-Object { Get-ObsProp $_ "sceneName" }
+    return ($names -contains $name)
 }
 
 function Test-Input($ws, $name) {
     $list = Invoke-Obs $ws "GetInputList" @{}
-    return (@($list.inputs | ForEach-Object { $_.inputName }) -contains $name)
+    $names = @(Get-ObsProp $list "inputs") | ForEach-Object { Get-ObsProp $_ "inputName" }
+    return ($names -contains $name)
 }
 
 function Get-ItemId($ws, $scene, $source) {
     $list = Invoke-Obs $ws "GetSceneItemList" @{ sceneName = $scene }
-    $hit = @($list.sceneItems | Where-Object { $_.sourceName -eq $source } | Select-Object -First 1)
-    if ($hit) { return [int]$hit.sceneItemId }
+    $hit = @(Get-ObsProp $list "sceneItems") | Where-Object { (Get-ObsProp $_ "sourceName") -eq $source } | Select-Object -First 1
+    if ($hit) { return [int](Get-ObsProp $hit "sceneItemId") }
     return $null
 }
 
 function Install-RiseScenes($ws, $kinds, $sceneNames, $sceneItems) {
     $sceneList = Invoke-Obs $ws "GetSceneList" @{}
-    $existing = @($sceneList.scenes | ForEach-Object { $_.sceneName })
+    $existing = @(Get-ObsProp $sceneList "scenes") | ForEach-Object { Get-ObsProp $_ "sceneName" }
     if (($existing -contains "Scene") -and -not ($existing -contains "STARTING SOON")) {
         Invoke-Obs $ws "SetSceneName" @{ sceneName = "Scene"; newSceneName = "STARTING SOON" } | Out-Null
     }
