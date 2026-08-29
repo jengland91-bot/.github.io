@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meld Studio — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+<main>
+  <div class="kicker">MELD STUDIO ONLY</div>
+  <h1>PLUG THE KIT INTO MELD</h1>
+  <p>You do not need OBS. The overlays are HTML files in this zip. In Meld they are <strong>Browser</strong> layers: paste the URL, or drag the file onto the canvas. Game and cameras are Meld’s own layers (Game Capture / Video Device). Markdown: <a href="meld.md">meld.md</a></p>
+  <p>Layout board (copy the URLs): <a href="../meld/">meld/</a> — double-click <code>tools\Start-MeldLayout.bat</code> and leave the black window open.</p>
+
+  <div class="callout">
+    <h2>Do this once</h2>
+    <p>Extract the zip. Open Meld. Double-click <code>tools\Start-MeldLayout.bat</code>. Keep that window open while you stream so the overlay URLs keep working.</p>
+  </div>
+
+  <ol>
+    <li>Right-click the zip → Extract All. Do not open files from inside the zip.</li>
+    <li>Install / open <a href="https://www.meldstudio.co/" target="_blank" rel="noreferrer">Meld Studio</a>. Do not open OBS.</li>
+    <li>Double-click <code>tools\Start-MeldLayout.bat</code>. A layout board opens. Leave the black window open.</li>
+    <li>In Meld, add eight scenes and name them exactly: STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING. Start with <strong>RACE</strong>.</li>
+    <li>Settings → General → <strong>Multi Canvas</strong> if you also want the phone picture. Main is 1920×1080. Portrait is 1080×1920.</li>
+    <li><strong>Plug in the overlay:</strong> on the layout board click RACE → Copy main overlay URL. In Meld, click the Main canvas, then paste (or Layers + → Browser and paste the URL). Size 1920×1080. For Portrait, copy the portrait URL and paste it on the Portrait canvas, 1080×1920.</li>
+    <li>You can also drag <code>overlays\live.html</code> (and <code>overlays\vertical\live.html</code> on Portrait) from the extracted folder onto the canvas. Same thing.</li>
+    <li>Add BeamNG: Layers + → Game Capture (or Display Capture of the BeamNG window). Name it <code>Game / Main</code>. Sit it under the overlay.</li>
+    <li>Add cameras: Layers + → Video Device. Make <code>Cam / Face</code>, <code>Cam / Room</code>, <code>Cam / Wheel</code>, <code>Cam / Pedals</code> once. Use a Duplicator (or copy) onto GRID, DESK (face + room only), and RACE DUAL. Size them to the numbers on the board.</li>
+    <li>Audio: Process Audio of BeamNG + your mic. Do not capture desktop / Discord.</li>
+  </ol>
+  <p>Repeat step 6 for the other scenes (click each scene on the board, copy that overlay URL, paste it on that Meld scene). Skip RACE DUAL until you have a second BeamNG view.</p>
+
+  <h2>What each kit name is in Meld</h2>
+  <table>
+    <tr><th>Name on the board</th><th>In Meld, add</th></tr>
+    <tr><td><code>Game / Main</code></td><td>Game Capture or Display Capture (BeamNG window)</td></tr>
+    <tr><td><code>Game / Angle 2</code></td><td>Second window / bumper view — RACE DUAL only</td></tr>
+    <tr><td><code>Cam / Face</code> (and Room / Wheel / Pedals)</td><td>Video Device</td></tr>
+    <tr><td><code>Overlay / …</code></td><td>Browser — paste the URL from the board, or drag the HTML file</td></tr>
+    <tr><td><code>Lumia / Overlay</code></td><td>Optional Browser — paste your Lumia overlay URL, on top</td></tr>
+    <tr><td><code>Audio / Game</code></td><td>Process Audio of that game. No picture.</td></tr>
+    <tr><td><code>Color / Backdrop</code></td><td>Skip. The overlay already has the dirt background.</td></tr>
+  </table>
+  <p>HUD overlay sits above the game and cameras. Lumia (if viewers should see alerts) sits above the HUD.</p>
+
+  <h2>Overlay file for each scene</h2>
+  <table>
+    <tr><th>Scene</th><th>Main (paste / drag)</th><th>Portrait</th></tr>
+    <tr><td><code>STARTING SOON</code></td><td><code>overlays/starting-soon.html</code></td><td><code>overlays/vertical/starting-soon.html</code></td></tr>
+    <tr><td><code>GRID</code></td><td><code>overlays/chatting.html</code></td><td><code>overlays/vertical/chatting.html</code></td></tr>
+    <tr><td><code>DESK</code></td><td><code>overlays/desk.html</code></td><td><code>overlays/vertical/desk.html</code></td></tr>
+    <tr><td><code>RACE</code></td><td><code>overlays/live.html</code></td><td><code>overlays/vertical/live.html</code></td></tr>
+    <tr><td><code>RACE DUAL</code></td><td><code>overlays/race-dual.html</code></td><td><code>overlays/vertical/race-dual.html</code></td></tr>
+    <tr><td><code>REPLAY</code></td><td><code>overlays/replay.html</code></td><td><code>overlays/vertical/replay.html</code></td></tr>
+    <tr><td><code>BRB</code></td><td><code>overlays/brb.html</code></td><td><code>overlays/vertical/brb.html</code></td></tr>
+    <tr><td><code>ENDING</code></td><td><code>overlays/ending.html</code></td><td><code>overlays/vertical/ending.html</code></td></tr>
+  </table>
+  <p>DESK = sit-at-desk other games (full game + face + room, no wheel). Point Game Capture and Process Audio at that game. Switch both back to BeamNG for RACE.</p>
+
+  <h2>Audio</h2>
+  <p>Stream <strong>game + mic</strong> only. Process Audio of BeamNG (or the DESK game). Do not add Display / Desktop audio. Discord can stay in your headset.</p>
+
+  <h2>Names, game title, photos</h2>
+  <p>Double-click <code>tools\Change-Game.bat</code> for the Starting Soon title, or edit <code>overlays/shared/config.js</code>. Photos: <code>overlays/shared/backdrops/</code>. Then in Meld, click the reload icon on that Browser layer.</p>
+  <p>Leave <code>tools\Start-MeldLayout.bat</code> running so those files still load.</p>
+
+  <h2>Lumia</h2>
+  <p>Chat for you is still Lumia on the gaming monitor, or <code>tools\Open-ChatForYou.bat</code>. Do not capture that window in Meld.</p>
+  <p>If viewers should see alerts: paste the Lumia overlay URL as a Browser layer on top of the HUD.</p>
+  <p>Chat <code>!race</code> / <code>!desk</code> / <code>!face</code> talk to OBS. You are not using OBS, so switch scenes in Meld yourself.</p>
+
+  <h2>Destinations</h2>
+  <p>Stream keys live in Meld (Twitch / YouTube / Kick / TikTok). Never paste them into this folder or into chat. Aitum is not used.</p>
+
+  <h2>Do not</h2>
+  <ul>
+    <li>Open OBS. Do not run <code>Install-OBS.bat</code>.</li>
+    <li>Capture desktop audio (that is Discord).</li>
+    <li>Capture the Lumia “chat for you” window.</li>
+    <li>Paste stream keys into this kit.</li>
+  </ul>
+
+  <nav class="docs">
+    <a href="../START-HERE.txt">Start here</a> ·
+    <a href="../meld/">Layout board</a> ·
+    <a href="lumia.html">Lumia</a>
+  </nav>
+</main>
+</body>
+</html>

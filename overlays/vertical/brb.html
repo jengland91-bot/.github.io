@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" class="vertical">
+<head>
+  <meta charset="UTF-8" />
+  <title>BRB Vertical - Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared/theme.css" />
+</head>
+<body class="vertical scene-brb">
+  <!-- Same brb.jpg as wide, or optional brb-vertical.jpg — see ../shared/backdrops/START-HERE.txt -->
+  <img class="backdrop-photo" data-backdrop="brb" alt="" />
+  <canvas id="dust"></canvas>
+  <div class="hazard top"></div>
+  <div class="hazard bottom"></div>
+  <div class="ticks"><span class="tl"></span><span class="tr"></span><span class="bl"></span><span class="br"></span></div>
+
+  <header class="top-bar">
+    <div class="live-pill"><i></i> <span data-hold-pill>HOLDING</span></div>
+    <div class="brand"><small data-handle></small><span data-brand></span></div>
+    <div class="spacer"></div>
+    <div class="clock" data-clock></div>
+  </header>
+
+  <section class="scene-title">
+    <div class="kicker" data-brb-kicker>TRAIL BREAK</div>
+    <h1><span data-brb-line1>BE RIGHT</span><br /><span data-brb-line2>BACK</span></h1>
+    <p data-brb></p>
+  </section>
+
+  <div class="social-row" data-socials></div>
+
+  <script src="../shared/config.js"></script>
+  <script src="../shared/overlay.js"></script>
+</body>
+</html>

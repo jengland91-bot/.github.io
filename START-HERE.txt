@@ -1,0 +1,201 @@
+THREE APPS. Pick the one you are going live from:
+
+  MELD STUDIO = Meld only. Do not open OBS. Jump to MELD STUDIO below.
+
+  TIKTOK  = TikTok LIVE Studio only. Do not open OBS or Meld for TikTok.
+            Jump to the TIKTOK LIVE STUDIO section below.
+
+  OBS     = only if you still stream from OBS (Twitch / YouTube / Kick).
+            Skip that whole section if you switched to Meld.
+
+------------------------------------------------------------------------
+MELD STUDIO (no OBS)
+------------------------------------------------------------------------
+Yes. Plug this kit straight into Meld. The overlays are HTML files.
+In Meld they are Browser layers. You do not run Install-OBS.bat.
+
+1. Right-click the zip -> Extract All. Do not open files from inside the zip.
+2. Open Meld Studio. Do not open OBS.
+3. Open the extracted folder -> tools -> double-click Start-MeldLayout.bat
+   Leave the black window open while you are live.
+4. A layout board opens. That page has the overlay URLs and the sizes.
+5. In Meld, add scenes: STARTING SOON, GRID, DESK, RACE, RACE DUAL,
+   REPLAY, BRB, ENDING. Start with RACE. DESK is sit-at-desk other games.
+   Skip RACE DUAL until you have a second BeamNG view.
+6. Settings -> General -> Multi Canvas if you also want the phone picture.
+7. PLUG IN THE OVERLAY:
+   On the layout board click RACE -> Copy main overlay URL.
+   In Meld, click the Main canvas and paste (or Layers + -> Browser, paste).
+   Size 1920x1080. For the phone canvas, copy the portrait URL and paste that.
+   Or drag overlays\live.html onto Main, overlays\vertical\live.html onto Portrait.
+8. Add BeamNG: Layers + -> Game Capture (or Display Capture of the window).
+   Add cameras: Layers + -> Video Device (Face, Room, Wheel, Pedals).
+   Size them to the numbers on the board. Overlay sits on top.
+9. Audio: Process Audio of BeamNG + your mic. Do not capture desktop / Discord.
+
+Repeat step 7 for the other scenes (each scene has its own overlay URL).
+
+Lumia chat for you: gaming monitor, or tools\Open-ChatForYou.bat.
+Do not capture that window. Chat !race does not switch Meld scenes.
+
+Names / photos: overlays\shared\config.js and overlays\shared\backdrops\
+then reload the Browser overlay in Meld.
+
+Full page: docs\meld.html
+Layout board: meld\index.html
+
+------------------------------------------------------------------------
+TIKTOK LIVE STUDIO LAYOUT (no OBS)
+------------------------------------------------------------------------
+Studio cannot import a scene file. This kit IS the layout. You build it
+once in Dual layout.
+
+1. Right-click the zip -> Extract All. Do not open files from inside the zip.
+2. Open the extracted folder -> tools -> double-click Start-TikTokLayout.bat
+   (Start-OverlayServer.bat is the same thing.) Leave the black window open.
+3. A layout board opens. That page is the Dual layout: phone + landscape.
+4. Open TikTok LIVE Studio. Dual layout ON. Do not open OBS.
+5. Add scenes: STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING.
+   Start with RACE. DESK is sit-at-desk other games (game + face + room, no wheel).
+   Skip RACE DUAL until you have a second BeamNG view.
+6. On the PHONE canvas, add Game / cameras / Overlay Link / Lumia Link.
+   Copy the overlay URL from the layout board. Overlay Link size 1080x1920.
+7. Switch to the LANDSCAPE canvas. Do not paste a second overlay URL.
+   Resize the SAME sources to the landscape numbers on the board.
+   Overlay Link becomes 1920x1080 - it flips to the wide HUD by itself.
+8. Audio: BeamNG + mic only. Do not capture desktop / Discord.
+
+Lumia: Connections -> TikTok. Paste overlay URL as a Link on top.
+Switch scenes in Studio. Chat !race does not control Studio.
+
+Names / photos: overlays\shared\config.js and overlays\shared\backdrops\
+then refresh the Link in Studio.
+
+Layout board: tiktok-studio\index.html (also opens from the server)
+Full text: docs\tiktok.html
+
+Do not run Install-OBS.bat for TikTok.
+
+------------------------------------------------------------------------
+OBS (skip this whole section if you go live from Meld)
+------------------------------------------------------------------------
+1. Right-click the zip -> Extract All. Do not open files from inside the zip.
+2. Open OBS Studio (the program you stream Twitch / YouTube / Kick with).
+3. Open the extracted folder -> open the "tools" folder -> double-click Install-OBS.bat
+4. When it asks for a password: OBS top menu Tools -> WebSocket Server Settings -> Show Connect Info -> copy password -> paste into the black window -> Enter.
+
+If the black window immediately shows red text, or you still only see Face + Wheel, you have an old zip. Delete that folder, download a fresh zip, extract again, run Install-OBS.bat from the new tools folder.
+
+You should then see two scene collections in OBS (dropdown at the top):
+  Rise Above BeamNG            = 1920x1080 Twitch / YouTube / Kick (stay here for Aitum)
+  Rise Above BeamNG Vertical   = 1080x1920 phone-only if you are not using Aitum
+
+Same scenes in both: STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING.
+
+Click DESK when you are sitting at the desk playing other games (full game + face + room, no wheel/pedals).
+Double-click Game / Main and Audio / Game and pick that game. Switch both back to BeamNG for RACE.
+
+If Aitum Vertical is already installed, Install-OBS.bat also fills the Vertical Scenes dock.
+If that dock is still empty, run tools\Install-AitumVertical.bat (OBS 32.1+).
+
+Pick BeamNG on Game / Main in BOTH collections.
+
+AUDIO (no Discord on stream):
+  Desktop Audio should be muted in the OBS mixer (speaker with an X).
+  In BOTH collections: double-click Audio / Game -> pick BeamNG.drive.
+  Mic / Main = your microphone.
+  Discord can stay open. You still hear it in your headset. It will not go to the stream.
+
+NAMES, GAME, AND LINKS:
+  EASIEST way to change the Starting Soon game title:
+    Double-click tools\Change-Game.bat
+    Pick a number or type the game (SnowRunner, Forza, GTA V, ...)
+    In OBS: STARTING SOON -> right-click Overlay / Starting Soon -> Refresh.
+    (Or click GRID, then STARTING SOON again.)
+    In Meld: refresh the Browser overlay on STARTING SOON.
+
+  You can also open overlays\shared\config.js in Notepad:
+  brand       = leave blank (no RISE ABOVE on screen). Put a word here if you want one.
+  game        = the big title under STARTING SOON (BeamNG / SnowRunner / ...)
+  style       = Off-road / Street / whatever (the smaller line under the game)
+  startingKicker = TRAILHEAD (the small word above STARTING SOON)
+  colors.ember = #7CB701 Monster green
+  socials.facebook = jengland91
+  Save. In OBS: right-click the overlay source -> Refresh.
+  In Meld: refresh the Browser overlay layer.
+  In TikTok Studio: refresh the Link sources on both canvases.
+  You do not need to run the installer again for names, colors, or links.
+
+LUMIA CHAT FOR YOU (gaming screen, not the stream):
+  You read chat. Viewers do not, unless you also paste it into OBS.
+
+  1. Lumia Stream open. Connections -> Twitch (and Kick/YouTube if you use them).
+     One Chatbox in Lumia is all those chats in one box. Leave Lumia running.
+  2. Do NOT put that Chatbox in OBS if you only want it for you.
+     Leave Lumia / Overlay blank (about:blank), or Alerts only.
+  3. Double-click tools\Open-ChatForYou.bat
+     - Fastest: drag the Lumia window onto the BeamNG monitor.
+     - Or paste the Lumia overlay URL on that page -> Open chat window,
+       then drag that window to the gaming screen.
+  4. Park it in a corner. Do not Game Capture that window in OBS.
+
+  If you already pasted chat into Lumia / Overlay, viewers can see it.
+  Hide that source (eye icon) or take the Chatbox out of the Lumia overlay.
+
+LUMIA ON OBS (only if you want viewers to see alerts/chat):
+  The installer already made an OBS source named Lumia / Overlay. It starts blank.
+  1. Lumia -> Connections -> Twitch AND OBS (port 4455, same WebSocket password).
+  2. Overlay editor: Alerts (and Chatbox only if viewers should see chat).
+  3. OBS scene RACE -> Lumia / Overlay -> uncheck Local file -> paste URL.
+     Width 1920 Height 1080. Sit ABOVE Overlay / Race HUD.
+  Optional: tools\install.html -> Lumia API token -> !race !face commands.
+
+YOUR PHOTOS on STARTING SOON, BRB, and ENDING (thank you):
+  Put pictures in overlays\shared\backdrops\
+    starting.jpg   = Starting Soon
+    brb.jpg        = Be Right Back
+    ending.jpg     = Thanks for Watching
+  Same three files work for wide AND vertical. Optional starting-vertical.jpg
+  (and brb-vertical.jpg / ending-vertical.jpg) only if you want a taller crop.
+  Then OBS: right-click the overlay -> Refresh. Studio: refresh the Link.
+  Do not re-run the installer.
+  Read overlays\shared\backdrops\START-HERE.txt if you get stuck.
+
+CAMERAS (four sources):
+  Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals.
+  After a new zip, re-run Install-OBS.bat so OBS parks them in the wells.
+
+  DESK (other games, sit at the desk):
+  Click DESK on the left list. Full game + face + room. No wheel or pedals.
+  Double-click Game / Main and Audio / Game and pick that other game.
+  When you go back to racing: pick BeamNG on both, then click RACE.
+
+AITUM MULTISTREAM (OBS to many sites, wide + phone):
+  Stay in OBS. Do not add Restream. Do not also run TikTok LIVE Studio to TikTok.
+
+  You need TWO plugins:
+    Aitum Multistream  = extra stream destinations (you already downloaded this)
+    Aitum Vertical     = phone 1080x1920 canvas
+    Close OBS, install Vertical from aitum.tv/products/vertical (or Stream Suite),
+    reopen OBS.
+
+  1. Collection Rise Above BeamNG (the wide one). Do not switch away.
+  2. OBS Docks: tick Vertical Scenes, Vertical Sources, Aitum Vertical.
+     If Vertical Scenes is missing, Multistream is not enough — install
+     Aitum Vertical, then reopen OBS.
+  3. Double-click tools\Install-AitumVertical.bat
+     (or re-run Install-OBS.bat). OBS 32.1+ and Aitum Vertical required.
+     If you only see STARTING SOON, run the bat again from a fresh zip.
+     Extra phone scenes may be named RACE V, GRID V (same show, phone copy).
+  4. Right-click each Vertical scene -> Linked Scenes -> matching wide scene.
+  5. WHERE TO SEND IT:
+     Wide (Main): OBS Settings -> Stream = Twitch. Aitum Main Outputs =
+       YouTube (YouTube Studio stream key), Kick (Kick dashboard key).
+     Phone (Vertical Outputs): TikTok LIVE Center stream key, and/or a
+       SECOND YouTube key for vertical live.
+     No TikTok stream key = skip TikTok in Aitum. Keys stay in OBS, never
+     paste them into chat.
+  6. Start Streaming in OBS. Turn on the extra outputs in the Aitum dock.
+
+  Chat for you is still Lumia on the gaming monitor, not another streaming app.
+  Full page: docs\aitum.html
