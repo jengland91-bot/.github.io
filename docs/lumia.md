@@ -1,24 +1,21 @@
-# Lumia Stream — chat on OBS
+# Lumia Stream — chat for you
 
-The Rise Above HUD does not draw chat. Chat is a **Chatbox** inside Lumia, shown by OBS source `Lumia / Overlay` (starts as `about:blank` until you paste the URL).
+You want one chat box on the **gaming monitor** so you can read it. That is not chat on the stream for viewers.
 
-## See chat on OBS
+Open [tools/chat-for-you.html](../tools/chat-for-you.html) or double-click `tools/Open-ChatForYou.bat`.
 
-1. OBS + Lumia open. Collection `Rise Above BeamNG`.
-2. OBS → Tools → WebSocket Server Settings → enable, port **4455**, auth on. Copy password.
-3. Lumia → Connections → **Twitch** (chat) and **OBS** (`localhost` / 4455 / password). Both connected. Leave Lumia running.
-4. Lumia overlay editor: one overlay, add a **Chatbox**. Park it **384×500 at 1488, 520** on RACE. Colors `#E8DCC8` / `#7CB701`. Copy the overlay URL.
-5. OBS scene **RACE** → double-click `Lumia / Overlay` → uncheck Local file → paste URL → 1920×1080. CSS: `body { background-color: rgba(0,0,0,0); margin: 0; overflow: hidden; }`
-6. Sources list: `Lumia / Overlay` **above** `Overlay / Race HUD`.
-7. Lumia test alert should hit the OBS preview. Then send a Twitch message — it should appear in that Chatbox.
+1. Lumia → Connections → Twitch (and Kick / YouTube). One Chatbox = all that chat. Leave Lumia running.
+2. Do **not** paste a Chatbox into OBS if viewers should not see it. Leave `Lumia / Overlay` blank or Alerts only.
+3. Drag the Lumia window onto the BeamNG monitor, or paste the overlay URL into Chat for you → Open chat window, then drag that window over.
+4. Do not Game Capture that window in OBS.
 
-Parking spots: [Race + slots](../overlays/live.html?preview=1&setup=1). Take `setup=1` off before going live.
+If you already put chat in `Lumia / Overlay`, hide that source or remove the Chatbox from the overlay.
 
 Connect guide: [Lumia + OBS](https://lumiastream.com/blogs/how-to-integrate-obs-streaming-software-with-lumia-stream)
 
 ## One overlay, not five browser sources
 
-In Lumia’s overlay editor, build **one** overlay named something like `Rise Above Race`:
+Only if you also want **viewers** to see chat or alerts. In Lumia’s overlay editor, build **one** overlay named something like `Rise Above Race`:
 
 | Layer | Put it here (RACE) |
 | --- | --- |

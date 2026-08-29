@@ -74,27 +74,29 @@ NAMES, GAME, AND LINKS:
   In TikTok Studio: refresh the Link sources on both canvases.
   You do not need to run the installer again for names, colors, or links.
 
-LUMIA ON OBS (chat on screen):
+LUMIA CHAT FOR YOU (gaming screen, not the stream):
+  You read chat. Viewers do not, unless you also paste it into OBS.
+
+  1. Lumia Stream open. Connections -> Twitch (and Kick/YouTube if you use them).
+     One Chatbox in Lumia is all those chats in one box. Leave Lumia running.
+  2. Do NOT put that Chatbox in OBS if you only want it for you.
+     Leave Lumia / Overlay blank (about:blank), or Alerts only.
+  3. Double-click tools\Open-ChatForYou.bat
+     - Fastest: drag the Lumia window onto the BeamNG monitor.
+     - Or paste the Lumia overlay URL on that page -> Open chat window,
+       then drag that window to the gaming screen.
+  4. Park it in a corner. Do not Game Capture that window in OBS.
+
+  If you already pasted chat into Lumia / Overlay, viewers can see it.
+  Hide that source (eye icon) or take the Chatbox out of the Lumia overlay.
+
+LUMIA ON OBS (only if you want viewers to see alerts/chat):
   The installer already made an OBS source named Lumia / Overlay. It starts blank.
-  Chat is NOT in the Rise Above HUD. Chat is a Chatbox you add inside Lumia.
-
-  1. Install Lumia Stream. Leave it running while you stream.
-  2. Lumia -> Connections -> add Twitch (chat comes from here) AND OBS
-     (port 4455, same WebSocket password as the installer). Both connected.
-  3. In Lumia, create one overlay. Add a Chatbox (and Alerts if you want follows).
-     Park Chatbox on the empty right of RACE: about 384x500 at 1488, 520.
-     Colors #E8DCC8 / #7CB701. Copy that overlay URL.
-  4. In OBS, collection Rise Above BeamNG, scene RACE.
-     Double-click Lumia / Overlay.
-     Uncheck Local file. Paste the Lumia URL. Width 1920 Height 1080.
-     Custom CSS: body { background-color: rgba(0,0,0,0); margin: 0; overflow: hidden; }
-  5. In the Sources list, Lumia / Overlay must sit ABOVE Overlay / Race HUD.
-  6. Prove it: Lumia test alert should show on the OBS preview. Then send a
-     Twitch chat message. It should land in that Chatbox on RACE.
-
-  To line the Chatbox up, open overlays\live.html?setup=1 in a browser
-  (green boxes = parking spots). Take setup=1 off before you go live.
-  Optional: tools\install.html -> Lumia API token -> Install Lumia commands for !race !face.
+  1. Lumia -> Connections -> Twitch AND OBS (port 4455, same WebSocket password).
+  2. Overlay editor: Alerts (and Chatbox only if viewers should see chat).
+  3. OBS scene RACE -> Lumia / Overlay -> uncheck Local file -> paste URL.
+     Width 1920 Height 1080. Sit ABOVE Overlay / Race HUD.
+  Optional: tools\install.html -> Lumia API token -> !race !face commands.
 
 YOUR PHOTOS on STARTING SOON, BRB, and ENDING (thank you):
   Put pictures in overlays\shared\backdrops\

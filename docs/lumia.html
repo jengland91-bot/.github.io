@@ -12,10 +12,22 @@
 <body>
 <main>
   <div class="kicker">LUMIA STREAM</div>
-  <h1>CHAT ON OBS</h1>
-  <p>The Rise Above overlay does not draw chat. Chat is a <strong>Chatbox</strong> layer inside Lumia, shown by the OBS source named <code>Lumia / Overlay</code>. That source starts blank until you paste Lumia’s overlay URL.</p>
+  <h1>CHAT FOR YOU</h1>
+  <p>You want one chat box on the <strong>gaming monitor</strong> so you can read it. That is not the same as putting chat on the stream for viewers.</p>
+  <p>Fast path: <a href="../tools/chat-for-you.html">tools/chat-for-you.html</a> (or double-click <code>tools\Open-ChatForYou.bat</code>).</p>
 
-  <h2>1. Lumia talking to OBS</h2>
+  <h2>Your eyes, not theirs</h2>
+  <ol>
+    <li>Lumia → Connections → add Twitch (and Kick / YouTube if you use them). One Chatbox shows all of that chat together. Leave Lumia running.</li>
+    <li>Do <strong>not</strong> paste a Chatbox into OBS if you do not want viewers to see it. Leave <code>Lumia / Overlay</code> blank, or only put Alerts there.</li>
+    <li>Either drag the Lumia app window onto the BeamNG monitor, or copy the Lumia overlay URL and open it with <a href="../tools/chat-for-you.html">Chat for you</a>, then drag that window over.</li>
+    <li>Sit it in a corner. If Windows hides it: PowerToys Always On Top (Win+Ctrl+T). Do not Game Capture that window in OBS.</li>
+  </ol>
+
+  <h2>If you also want viewers to see chat</h2>
+  <p>That is a different job: paste the overlay URL into OBS source <code>Lumia / Overlay</code> on RACE, above the HUD. Skip that if chat is only for you.</p>
+
+  <h2>Lumia talking to OBS (alerts / lights / !race)</h2>
   <ol>
     <li>OBS and Lumia both open. Stay on collection <code>Rise Above BeamNG</code>.</li>
     <li>OBS → Tools → WebSocket Server Settings → Enable, port <code>4455</code>, authentication on. Copy the password.</li>
@@ -23,7 +35,7 @@
     <li>Leave Lumia running the whole time you stream. If Lumia closes, the overlay in OBS goes blank.</li>
   </ol>
 
-  <h2>2. Put a Chatbox in the Lumia overlay</h2>
+  <h2>Viewer overlay (optional)</h2>
   <ol>
     <li>In Lumia, open the overlay editor (Overlays / Overlay room).</li>
     <li>Make one overlay. Add a <strong>Chatbox</strong> widget. Add Alerts too if you want follows on screen.</li>
@@ -88,7 +100,7 @@
     <tr><td><code>!game</code></td><td>All four cams off</td></tr>
     <tr><td><code>!race</code> / <code>!dual</code> / <code>!replay</code> / <code>!grid</code> / <code>!brb</code></td><td>Set scene</td></tr>
   </table>
-  <p>Mods-only for scene switches. Everyone can use cam toggles with a cooldown. Those commands control OBS only. Switch TikTok LIVE Studio scenes in Studio.</p>
+  <p>Mods-only for scene switches. Everyone can use cam toggles with a cooldown. Those commands control OBS only.</p>
 
   <nav class="docs">
     <a href="../setup.html">← Checklist</a> ·

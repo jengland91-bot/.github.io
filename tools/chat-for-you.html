@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat for you — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../docs/docs.css" />
+</head>
+<body>
+<main>
+  <div class="kicker">YOUR SCREEN ONLY</div>
+  <h1>CHAT FOR YOU</h1>
+  <p>This is a chat box <strong>you</strong> read on the gaming monitor. Viewers do not see this window. Do not paste it into OBS if you do not want it on stream.</p>
+
+  <h2>One box, all chat</h2>
+  <p>In Lumia → Connections, add every platform you care about (Twitch, Kick, YouTube, TikTok). One Chatbox in Lumia shows all of that chat together. Leave Lumia running.</p>
+
+  <h2>Fastest: drag Lumia itself</h2>
+  <ol>
+    <li>Open Lumia Stream. You should already see chat in the app.</li>
+    <li>Resize that window to a tall box.</li>
+    <li>Drag it onto your BeamNG monitor. Sit it in a corner so it does not cover the road.</li>
+  </ol>
+  <p>If Windows keeps burying it: Microsoft PowerToys → Always On Top, then Win+Ctrl+T on that window. Do not put that window in OBS Game Capture / Window Capture.</p>
+
+  <h2>Or: overlay URL as a floating window</h2>
+  <p>Same Lumia overlay URL, opened in a browser you can drag. Still not OBS.</p>
+  <ol>
+    <li>Lumia overlay editor → one overlay → add a <strong>Chatbox</strong> (big, easy to read). Copy the overlay URL.</li>
+    <li>Paste it here, then Open chat window.</li>
+    <li>Drag that new window to the gaming monitor. Crop it so you mostly see the Chatbox.</li>
+  </ol>
+  <p>
+    <label for="url">Lumia overlay URL</label><br />
+    <input id="url" type="text" style="width:100%;margin:8px 0;padding:8px;background:#000;color:#e8dcc8;border:1px solid rgba(244,239,232,0.2)" placeholder="https://lumiastream.com/overlay?room=..." />
+  </p>
+  <p>
+    <button type="button" id="open" style="font-family:Rajdhani,sans-serif;font-weight:700;letter-spacing:0.08em;background:#7cb701;color:#101408;border:0;padding:10px 16px;cursor:pointer">Open chat window</button>
+  </p>
+
+  <h2>Keep it off the stream</h2>
+  <p>OBS source <code>Lumia / Overlay</code> is what <em>viewers</em> see. For chat-for-you only:</p>
+  <ul>
+    <li>Leave <code>Lumia / Overlay</code> as <code>about:blank</code>, or hide its eye, or</li>
+    <li>Keep Alerts on that overlay for follows, but do not add a Chatbox there.</li>
+  </ul>
+  <p>If you already pasted a Chatbox into OBS, viewers see it. Pull the Chatbox out of that overlay (or hide the source) if that was not the goal.</p>
+
+  <nav class="docs">
+    <a href="../docs/lumia.html">Lumia guide</a> ·
+    <a href="../START-HERE.txt">Start here</a>
+  </nav>
+</main>
+<script>
+  const key = "riseabove-lumia-chat-url";
+  const input = document.getElementById("url");
+  try { input.value = localStorage.getItem(key) || ""; } catch (e) {}
+  document.getElementById("open").onclick = () => {
+    const u = input.value.trim();
+    if (!u) { input.focus(); return; }
+    try { localStorage.setItem(key, u); } catch (e) {}
+    window.open(u, "riseabove-chat", "width=420,height=900,menubar=no,toolbar=no,location=no,status=no");
+  };
+</script>
+</body>
+</html>
