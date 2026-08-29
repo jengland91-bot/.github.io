@@ -25,6 +25,7 @@ Write-Host ""
 Write-Host "Rise Above - overlay server for TikTok LIVE Studio" -ForegroundColor White
 Write-Host "Serving: $repoRoot"
 Write-Host "Keep this window open while you are live on TikTok."
+Write-Host "TikTok is LIVE Studio only. Do not open OBS for TikTok."
 Write-Host ""
 Write-Host "Turn Dual layout ON in Studio (vertical + horizontal at the same time)."
 Write-Host "Same seven scene names on both canvases."

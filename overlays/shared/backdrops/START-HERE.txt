@@ -11,9 +11,11 @@ Drop your own pictures here. You do NOT need to run Install-OBS.bat again.
      ending.jpg       = THANKS FOR WATCHING
 
 3. In OBS: right-click the overlay browser source → Refresh.
+   In TikTok LIVE Studio: refresh the Link sources on both canvases.
 
-Wide (Twitch / YouTube / Kick) and vertical (TikTok / Shorts / Reels) use
-the SAME three files. The overlay darkens the photo so STARTING SOON /
+Wide (Twitch / YouTube / Kick in OBS) and vertical (TikTok LIVE Studio
+phone canvas, plus OBS Shorts / Reels if you use that) use the SAME
+three files. The overlay darkens the photo so STARTING SOON /
 BE RIGHT BACK / THANKS FOR WATCHING stay readable. Dust, hazard stripes,
 and socials stay on top.
 
@@ -37,7 +39,7 @@ TIPS
   a vertical-only crop.
 - Trail, truck, pine, mud, dusk photos fit the kit. Avoid neon gaming art.
 - To use a different filename, edit overlays\shared\config.js → backdrops.
-  Save, then Refresh the overlay in OBS.
+  Save, then Refresh the overlay in OBS or the Link in TikTok LIVE Studio.
 
 Do not zip huge photos back into git unless you mean to. This folder is
 meant for pictures that live on your PC next to the overlay HTML.

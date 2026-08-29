@@ -5,7 +5,7 @@ Names must match OBS and Lumia exactly.
 The installer creates **two** scene collections. Same scene names in both. Switch them with the dropdown at the top of OBS.
 
 - `Rise Above BeamNG` — 1920×1080 Twitch / YouTube / Kick
-- `Rise Above BeamNG Vertical` — 1080×1920 TikTok / Shorts / Reels
+- `Rise Above BeamNG Vertical` — 1080×1920 YouTube Shorts / Reels if you go live from OBS (TikTok is TikTok LIVE Studio, not this collection)
 
 ## Scenes
 
@@ -125,6 +125,6 @@ Lumia Chatbox: **1048×800 at 16, 1096**. Alerts: **1048×160 at 16, 16**.
 
 Right-click source → Transform → Edit Transform. Bounding Box type: **Scale to inner bounds**, center.
 
-To stream wide and vertical **at the same time**, install [Aitum Vertical](https://aitum.tv/vertical) and copy the vertical transforms into its canvas. This kit’s second collection is for switching to 9:16 when you are only going to TikTok / Shorts / Reels.
+To stream wide and vertical **at the same time from OBS** (Twitch + Shorts), install [Aitum Vertical](https://aitum.tv/vertical) and copy the vertical transforms into its canvas.
 
-To rebuild the same look inside **TikTok LIVE Studio** Dual layout (1080×1920 + 1920×1080), start `tools/Start-OverlayServer.bat` and follow [docs/tiktok.html](../docs/tiktok.html).
+TikTok is **TikTok LIVE Studio only**. Dual layout + `tools/Start-OverlayServer.bat`. Guide: [docs/tiktok.html](../docs/tiktok.html).

@@ -13,8 +13,8 @@
 <main>
   <div class="kicker">TIKTOK LIVE STUDIO</div>
   <h1>VERTICAL + HORIZONTAL</h1>
-  <p>Turn on Dual layout in TikTok LIVE Studio. That is two canvases at once: phone <strong>1080 × 1920</strong> and landscape <strong>1920 × 1080</strong>. Same seven scene names on both. Same overlays as OBS. Markdown: <a href="tiktok.md">tiktok.md</a></p>
-  <p>Studio Dual layout is <em>not</em> the OBS scene named RACE DUAL. Dual layout = two screens (phone + landscape). RACE DUAL = a second BeamNG camera angle. You can use both.</p>
+  <p>Go live from TikTok LIVE Studio only. Do not open OBS for TikTok. Dual layout on: phone <strong>1080 × 1920</strong> and landscape <strong>1920 × 1080</strong> at once. Same seven scene names on both. Markdown: <a href="tiktok.md">tiktok.md</a></p>
+  <p>Studio Dual layout is <em>not</em> the scene named RACE DUAL. Dual layout = two screens (phone + landscape). RACE DUAL = a second BeamNG camera angle. You can use both.</p>
 
   <h2>Turn Dual on</h2>
   <ol>
@@ -149,12 +149,13 @@
   <p>Stream <strong>game + mic</strong>, not Discord. Capture BeamNG.drive and your mic. Do not capture desktop / system audio. Headset Discord stays off the stream. One mixer covers both canvases.</p>
 
   <h2>Lumia</h2>
-  <p>Add a Lumia Link on each canvas. Same Lumia overlay URL as OBS.</p>
+  <p>TikTok does not need OBS. In Lumia: Connections → add TikTok. Build one overlay (Chatbox + Alerts). Copy that URL.</p>
+  <p>Add a Lumia Link on each Studio canvas, on top of the Race HUD overlay.</p>
   <ul>
-    <li>Vertical Lumia: 1080 × 1920, on top of the phone overlay</li>
-    <li>Horizontal Lumia: 1920 × 1080, on top of the landscape overlay</li>
+    <li>Vertical Lumia: 1080 × 1920</li>
+    <li>Horizontal Lumia: 1920 × 1080</li>
   </ul>
-  <p>Chat commands like <code>!race</code> still talk to OBS if Lumia is connected there. Studio scene switches are manual (or Studio shortcuts).</p>
+  <p>Switch scenes in Studio yourself. Chat commands like <code>!race</code> only work if Lumia is also connected to OBS. They do not control TikTok LIVE Studio.</p>
 
   <h2>Names and photos</h2>
   <p>Edit <code>overlays\shared\config.js</code>, save, then refresh the Link sources on <em>both</em> canvases. Photos stay in <code>overlays\shared\backdrops\</code>.</p>

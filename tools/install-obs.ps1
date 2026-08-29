@@ -617,8 +617,8 @@ $ws.Dispose()
 Write-Host ""
 Write-Host 'Done. Look at OBS.' -ForegroundColor Green
 Write-Host 'Two scene collections (dropdown at the top of OBS):'
-Write-Host '  Rise Above BeamNG            = 1920x1080 Twitch / YouTube'
-Write-Host '  Rise Above BeamNG Vertical  = 1080x1920 TikTok / Shorts / Reels'
+Write-Host '  Rise Above BeamNG            = 1920x1080 Twitch / YouTube / Kick'
+Write-Host '  Rise Above BeamNG Vertical  = 1080x1920 Shorts / Reels if you use OBS for those'
 Write-Host 'Same scene names in both: STARTING SOON, GRID, RACE, ...'
 Write-Host 'Numpad 1-7 still switch those scenes on whichever collection is active.'
 Write-Host ""
@@ -628,5 +628,7 @@ Write-Host '  Mixer: Mic / Main = your mic. Audio / Game = double-click and pick
 Write-Host '  If Desktop Audio is unmuted, click the speaker icon to mute it again.'
 Write-Host 'Cameras can wait.'
 Write-Host 'Links (Twitch / YouTube / Kick): edit overlays\shared\config.js then Refresh the overlay in OBS.'
-Write-Host 'To go vertical: switch the scene collection dropdown, then Start Streaming.'
-Write-Host 'To do wide and vertical at the same time, install the Aitum Vertical plugin and copy these vertical layouts into its dock.'
+Write-Host 'TikTok is TikTok LIVE Studio only. Do not go live to TikTok from OBS.'
+Write-Host '  For TikTok: tools\Start-OverlayServer.bat + Dual layout. See docs\tiktok.html.'
+Write-Host 'To go Shorts from OBS: switch the scene collection dropdown, then Start Streaming.'
+Write-Host 'To do wide and vertical at the same time from OBS, install Aitum Vertical and copy these vertical layouts into its dock.'

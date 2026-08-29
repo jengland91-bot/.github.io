@@ -131,11 +131,11 @@ Crop with **Alt + drag**. Matching Rec. 709 / Limited on the cams keeps skin fro
 
 Collection **Rise Above BeamNG Vertical**. Game sits in a 16:9 strip (1080×608) at the top of RACE. Face, room, wheel, and pedals sit under that. Chat fills the phone-shaped remainder. Same **Desktop Audio muted + Audio / Game + Mic / Main** rules. Full numbers: [source-map.md](../obs/source-map.md).
 
-To go live on TikTok / Shorts / Reels only: switch to that collection, then Start Streaming.
+To go live on YouTube Shorts / Reels from OBS: switch to that collection, then Start Streaming.
 
-To rebuild the same look inside **TikTok LIVE Studio** Dual layout (phone + landscape), start `tools/Start-OverlayServer.bat` and follow [tiktok.html](tiktok.html).
+TikTok is **TikTok LIVE Studio only** (not OBS). Dual layout, `tools/Start-OverlayServer.bat`, [tiktok.html](tiktok.html).
 
-To run wide and vertical **at the same time**, install [Aitum Vertical](https://aitum.tv/vertical) and copy the vertical transforms into its canvas. OBS cannot hold two canvas sizes in one collection without that plugin.
+To run wide and vertical **at the same time from OBS** (Twitch + Shorts), install [Aitum Vertical](https://aitum.tv/vertical) and copy the vertical transforms into its canvas. OBS cannot hold two canvas sizes in one collection without that plugin.
 
 ## Browser sources
 

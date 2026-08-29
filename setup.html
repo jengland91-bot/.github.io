@@ -109,9 +109,8 @@
         <tr><td><code>ENDING</code></td><td>Thanks / checkered.</td></tr>
       </tbody>
     </table>
-    <p>The installer also creates collection <code>Rise Above BeamNG Vertical</code> at 1080×1920 with the same seven names. Switch it from the dropdown at the top of OBS for TikTok / Shorts / Reels.</p>
-    <p>Going live from TikTok LIVE Studio instead: skip the OBS installer for that app. Dual layout on (vertical + horizontal). Double-click <code>tools/Start-OverlayServer.bat</code> and follow <a href="docs/tiktok.html">the TikTok guide</a>.</p>
-    <label class="step"><input type="checkbox" data-id="vertical" /><span>Open collection <code>Rise Above BeamNG Vertical</code>. Pick BeamNG on <code>Game / Main</code> and <code>Audio / Game</code> there too. Desktop Audio stays muted. RACE is game on top, Face / Room / Wheel / Pedals under it, chat at the bottom.</span></label>
+    <p>The installer also creates collection <code>Rise Above BeamNG Vertical</code> at 1080×1920 for YouTube Shorts / Reels if you go live from OBS. TikTok is TikTok LIVE Studio only — skip the OBS installer for that app. Dual layout on. Double-click <code>tools/Start-OverlayServer.bat</code> and follow <a href="docs/tiktok.html">the TikTok guide</a>.</p>
+    <label class="step"><input type="checkbox" data-id="vertical" /><span>Optional (OBS Shorts / Reels only, not TikTok): open collection <code>Rise Above BeamNG Vertical</code>. Pick BeamNG on <code>Game / Main</code> and <code>Audio / Game</code> there too. Desktop Audio stays muted. RACE is game on top, Face / Room / Wheel / Pedals under it, chat at the bottom.</span></label>
     <label class="step"><input type="checkbox" data-id="scenes" /><span>Confirm those seven scene names exist on both collections.</span></label>
     <label class="step"><input type="checkbox" data-id="browser" /><span>Add Browser sources for each overlay (1920×1080, transparent). Prefer <strong>Local file</strong>. Custom CSS: <code>body { background-color: rgba(0,0,0,0); overflow: hidden; }</code></span></label>
     <label class="step"><input type="checkbox" data-id="beamng" /><span>BeamNG in borderless windowed. OBS <code>Game / Main</code> = Game Capture → Capture specific window → BeamNG.drive. If the shot is black (Vulkan), switch that source to Window Capture (Windows Graphics Capture).</span></label>
@@ -120,9 +119,9 @@
     <label class="step"><input type="checkbox" data-id="shutdown" /><span>Refresh browser when scene becomes active: on for STARTING SOON. Off for RACE HUD.</span></label>
 
     <h2>D. Lumia Stream (alerts + lights + cam director)</h2>
-    <label class="step"><input type="checkbox" data-id="lumia" /><span>Install <a href="https://lumiastream.com/" target="_blank" rel="noreferrer">Lumia Stream</a>. Connections → Add → your platforms, then OBS (port 4455 + password). Add lights on the same page.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia" /><span>Install <a href="https://lumiastream.com/" target="_blank" rel="noreferrer">Lumia Stream</a>. Connections → Add TikTok for LIVE Studio, and OBS (port 4455 + password) only for Twitch / YouTube / Kick. Add lights on the same page.</span></label>
     <label class="step"><input type="checkbox" data-id="lumia-overlay" /><span>In Lumia’s overlay editor, one overlay: Chatbox, Alerts, optional Event List / Goal / Now Playing. Match colors <code>#E8DCC8</code> / <code>#7CB701</code>. Place layers on the wells from <a href="overlays/live.html?preview=1&setup=1">Race + slots</a>.</span></label>
-    <label class="step"><input type="checkbox" data-id="lumia-url" /><span>Copy the overlay URL. OBS Browser source <code>Lumia / Overlay</code>, 1920×1080 on the wide collection and 1080×1920 on the vertical collection, above the HUD on GRID / RACE / RACE DUAL / REPLAY.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-url" /><span>Copy the overlay URL. OBS: Browser source <code>Lumia / Overlay</code>, 1920×1080 on the wide collection (1080×1920 if you use the vertical collection for Shorts). TikTok LIVE Studio: Link source on each Dual canvas, 1080×1920 phone and 1920×1080 landscape, above the HUD.</span></label>
     <label class="step"><input type="checkbox" data-id="lumia-scenes" /><span>Alerts → OBS scene lights: STARTING SOON moss, GRID moss/white, RACE Monster green <code>#7CB701</code>, RACE DUAL pine + moss on a second zone, REPLAY dim olive, BRB dim forest, ENDING dusk gold-olive pulse.</span></label>
     <label class="step"><input type="checkbox" data-id="cam-cmds" /><span>Chat commands with OBS Set source visibility: <code>!face</code>, <code>!room</code>, <code>!rig</code>, <code>!wheel</code>, <code>!pedals</code>, <code>!game</code> (hide cams). Scene commands: <code>!dual</code> → RACE DUAL, <code>!race</code> → RACE, <code>!replay</code> → REPLAY.</span></label>
 
@@ -142,7 +141,7 @@ overlays/brb.html
 overlays/ending.html
 overlays/vertical/live.html?setup=1   ← 9:16 race slots
 overlays/live.html?setup=1            ← turn off before going live</pre>
-    <p>Your photos: put <code>starting.jpg</code>, <code>brb.jpg</code>, and <code>ending.jpg</code> in <code>overlays/shared/backdrops/</code>, then Refresh the overlay. Same three files cover vertical. See that folder’s START-HERE. Missing files keep the dirt background.</p>
+    <p>Your photos: put <code>starting.jpg</code>, <code>brb.jpg</code>, and <code>ending.jpg</code> in <code>overlays/shared/backdrops/</code>, then Refresh the overlay in OBS (or the Link in TikTok Studio). Same three files cover vertical. See that folder’s START-HERE. Missing files keep the dirt background.</p>
 
     <p><a href="index.html">← Overlay preview</a> · <a href="docs/obs.html">OBS + BeamNG</a> · <a href="docs/tiktok.html">TikTok Studio</a> · <a href="docs/lumia.html">Lumia</a></p>
   </main>

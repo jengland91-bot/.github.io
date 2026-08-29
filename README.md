@@ -2,18 +2,21 @@
 
 Off-road overlay kit for **BeamNG.drive** with **four cameras** (Face, Room, Wheel, Pedals) plus **Lumia Stream** for chat, alerts, lights, and camera switching. Casterlabs is not used. Tag is **@jengland91**.
 
-Open [START-HERE.txt](START-HERE.txt). On Windows: extract the zip, open OBS, double-click `tools/Install-OBS.bat`.
+Open [START-HERE.txt](START-HERE.txt). Two apps:
 
-That creates two scene collections:
+- **TikTok** — TikTok LIVE Studio only. Dual layout on. Double-click `tools/Start-OverlayServer.bat`. Do not open OBS for TikTok. Guide: [TikTok LIVE Studio](docs/tiktok.html).
+- **Twitch / YouTube / Kick** — OBS. Double-click `tools/Install-OBS.bat`.
+
+OBS creates two scene collections:
 
 - **Rise Above BeamNG** — 1920×1080 for Twitch / YouTube / Kick
-- **Rise Above BeamNG Vertical** — 1080×1920 for TikTok / Shorts / Reels
+- **Rise Above BeamNG Vertical** — 1080×1920 for YouTube Shorts / Reels if you use OBS for those (TikTok is Studio)
 
 Same scene names in both. Switch them with the dropdown at the top of OBS. Pick BeamNG on `Game / Main` and `Audio / Game` in both collections. Desktop Audio stays muted so Discord is not on the stream.
 
 ## TikTok LIVE Studio
 
-Turn Dual layout on (phone + landscape at once). Double-click `tools/Start-OverlayServer.bat`, leave it open, and paste **vertical** Link URLs on the 1080×1920 canvas and **horizontal** Link URLs on the 1920×1080 canvas. Same seven scene names on both. Guide: [TikTok LIVE Studio](docs/tiktok.html).
+TikTok is Studio only. Turn Dual layout on (phone + landscape at once). Double-click `tools/Start-OverlayServer.bat`, leave it open, and paste **vertical** Link URLs on the 1080×1920 canvas and **horizontal** Link URLs on the 1920×1080 canvas. Same seven scene names on both. Do not run `Install-OBS.bat` for TikTok. Guide: [TikTok LIVE Studio](docs/tiktok.html).
 
 ## Audio
 
@@ -44,7 +47,7 @@ In-game BeamNG cameras (C / Shift+C) stay on one source: `Game / Main`. Physical
 
 ## Customize
 
-Edit `overlays/shared/config.js` in Notepad: `game` (BeamNG → SnowRunner etc.), `startingKicker` (TRAILHEAD), Monster green `colors.ember` (`#7CB701`), and `socials`. Save, then in OBS right-click the overlay → **Refresh**. Camera wells only move if you download a new zip and re-run `tools/Install-OBS.bat`.
+Edit `overlays/shared/config.js` in Notepad: `game` (BeamNG → SnowRunner etc.), `startingKicker` (TRAILHEAD), Monster green `colors.ember` (`#7CB701`), and `socials`. Save, then in OBS right-click the overlay → **Refresh**, or in TikTok LIVE Studio refresh the Link sources. Camera wells in OBS only move if you download a new zip and re-run `tools/Install-OBS.bat`.
 
 ### Your photos on Starting Soon / BRB / Ending
 

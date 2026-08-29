@@ -1,5 +1,43 @@
+TWO APPS. Pick the one you are going live from:
+
+  TIKTOK  = TikTok LIVE Studio only. Do not open OBS for TikTok.
+            Jump to the TIKTOK LIVE STUDIO section below.
+
+  TWITCH / YOUTUBE / KICK = OBS Studio. Follow steps 1-4, then the OBS
+            sections (audio, Lumia in OBS, cameras).
+
+------------------------------------------------------------------------
+TIKTOK LIVE STUDIO (no OBS)
+------------------------------------------------------------------------
 1. Right-click the zip -> Extract All. Do not open files from inside the zip.
-2. Open OBS Studio (the program you stream with).
+2. Open TikTok LIVE Studio. Turn Dual layout ON (phone + landscape together).
+3. Open the extracted folder -> tools -> double-click Start-OverlayServer.bat
+   Leave that black window open the whole time you are live.
+4. Same seven scene names on BOTH canvases:
+   STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING
+5. Phone canvas 1080x1920: paste the VERTICAL Link URLs the window prints.
+6. Landscape canvas 1920x1080: paste the HORIZONTAL Link URLs (no "vertical"
+   in the path).
+7. Phone RACE: BeamNG 1080x608 at the top, four cams under it.
+   Landscape RACE: BeamNG full 1920x1080, four cams along the bottom.
+8. Audio in Studio: BeamNG + mic only. Do not capture desktop / Discord.
+9. Lumia: Connections -> add TikTok. Copy your Lumia overlay URL.
+   Add a Link on each canvas, paste that URL, put it on top.
+   Vertical Lumia 1080x1920. Horizontal Lumia 1920x1080.
+   Switch scenes in Studio yourself. Chat !race does not control Studio.
+
+Names / photos: edit overlays\shared\config.js, drop jpgs in
+overlays\shared\backdrops\, then refresh the Link sources in Studio.
+Full sizes: docs\tiktok.html
+Copy-paste URLs: tools\tiktok.html
+
+Do not run Install-OBS.bat for TikTok. OBS is a different app.
+
+------------------------------------------------------------------------
+OBS (Twitch / YouTube / Kick only)
+------------------------------------------------------------------------
+1. Right-click the zip -> Extract All. Do not open files from inside the zip.
+2. Open OBS Studio (the program you stream Twitch / YouTube / Kick with).
 3. Open the extracted folder -> open the "tools" folder -> double-click Install-OBS.bat
 4. When it asks for a password: OBS top menu Tools -> WebSocket Server Settings -> Show Connect Info -> copy password -> paste into the black window -> Enter.
 
@@ -7,7 +45,8 @@ If the black window immediately shows red text, or you still only see Face + Whe
 
 You should then see two scene collections in OBS (dropdown at the top):
   Rise Above BeamNG            = 1920x1080 Twitch / YouTube / Kick
-  Rise Above BeamNG Vertical   = 1080x1920 TikTok / Shorts / Reels
+  Rise Above BeamNG Vertical   = 1080x1920 YouTube Shorts / Reels if you ever use OBS for those
+                                (TikTok is Studio, not this collection)
 
 Same scenes in both: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING.
 
@@ -28,9 +67,10 @@ NAMES, GAME, AND LINKS:
   colors.ember = #7CB701 Monster green
   socials.facebook = jengland91
   Save. In OBS: right-click the overlay source -> Refresh.
+  In TikTok Studio: refresh the Link sources on both canvases.
   You do not need to run the installer again for names, colors, or links.
 
-LUMIA (chat and alerts on top of this kit):
+LUMIA ON OBS (Twitch / YouTube / Kick):
   The installer already made an OBS source named Lumia / Overlay. It starts blank.
   1. Install Lumia Stream. Leave it running while you stream.
   2. Lumia -> Connections -> add Twitch (and Kick/YouTube) AND OBS
@@ -41,10 +81,11 @@ LUMIA (chat and alerts on top of this kit):
      Uncheck Local file. Paste the Lumia URL. Width 1920 Height 1080 (or 1080x1920 on vertical).
      Custom CSS: body { background-color: rgba(0,0,0,0); margin: 0; overflow: hidden; }
   6. In the Sources list, Lumia / Overlay must sit ABOVE Overlay / Race HUD.
-  7. Do the same paste on the vertical collection.
+  7. Do the same paste on the vertical collection if you use it for Shorts / Reels.
   Chat and follows then show in the empty space this kit left for them.
   To line layers up, open overlays\live.html?setup=1 in a browser (green boxes = parking spots).
   Optional: tools\install.html -> Lumia API token -> Install Lumia commands for !race !face.
+  Those chat commands control OBS only. They do not switch TikTok LIVE Studio.
 
 YOUR PHOTOS on STARTING SOON, BRB, and ENDING (thank you):
   Put pictures in overlays\shared\backdrops\
@@ -53,26 +94,11 @@ YOUR PHOTOS on STARTING SOON, BRB, and ENDING (thank you):
     ending.jpg     = Thanks for Watching
   Same three files work for wide AND vertical. Optional starting-vertical.jpg
   (and brb-vertical.jpg / ending-vertical.jpg) only if you want a taller crop.
-  Then OBS: right-click the overlay -> Refresh. Do not re-run the installer.
+  Then OBS: right-click the overlay -> Refresh. Studio: refresh the Link.
+  Do not re-run the installer.
   Read overlays\shared\backdrops\START-HERE.txt if you get stuck.
 
 CAMERAS (four sources):
   Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals.
   After a new zip, re-run Install-OBS.bat so OBS parks them in the wells.
-
-To stream vertical from OBS: switch that dropdown to Rise Above BeamNG Vertical, then Start Streaming.
-To stream wide and vertical at the same time, install the Aitum Vertical plugin and copy the vertical layouts into its dock.
-
-TIKTOK LIVE STUDIO (vertical + horizontal Dual layout):
-  Studio cannot run Install-OBS.bat. Start the overlay server instead.
-  1. Double-click tools\Start-OverlayServer.bat and leave that window open while live.
-  2. In Studio, turn Dual layout ON (phone + landscape at the same time).
-  3. Same seven scene names on BOTH canvases.
-  4. Phone canvas 1080x1920: paste the VERTICAL Link URLs the window prints.
-  5. Landscape canvas 1920x1080: paste the HORIZONTAL Link URLs (no "vertical" in the path).
-  6. Phone RACE: BeamNG 1080x608 at the top, four cams under it.
-     Landscape RACE: BeamNG full 1920x1080, four cams along the bottom.
-  7. Audio: BeamNG + mic only. Do not capture desktop / Discord.
-  Full sizes: docs\tiktok.html
-  You do not need the OBS installer just for TikTok overlays. Use a new zip
-  so Start-OverlayServer.bat is in the tools folder.
+  In TikTok Studio you place those same cameras by hand using the sizes in docs\tiktok.html.

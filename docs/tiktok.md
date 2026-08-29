@@ -1,8 +1,10 @@
 # TikTok LIVE Studio — vertical + horizontal
 
-Turn on **Dual layout** in TikTok LIVE Studio. That streams phone **1080 × 1920** and landscape **1920 × 1080** at the same time.
+Go live from **TikTok LIVE Studio only**. Do not open OBS for TikTok.
 
-Studio Dual layout is not the OBS scene named RACE DUAL. Dual layout = two screens. RACE DUAL = a second BeamNG camera angle.
+Turn on **Dual layout**. That streams phone **1080 × 1920** and landscape **1920 × 1080** at the same time.
+
+Studio Dual layout is not the scene named RACE DUAL. Dual layout = two screens. RACE DUAL = a second BeamNG camera angle.
 
 1. Double-click `tools/Start-OverlayServer.bat` and leave it open while live.
 2. Same seven scene names on both canvases: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING.

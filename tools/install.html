@@ -103,7 +103,7 @@
   <fieldset>
     <legend>Install into OBS</legend>
     <label><input id="newCollection" type="checkbox" checked /> Create both scene collections: 1920x1080 and 1080x1920 vertical</label>
-    <p>Then click once. After it finishes, pick BeamNG on <code>Game / Main</code> in <strong>both</strong> collections (wide and vertical). Cameras can wait.</p>
+    <p>Then click once. After it finishes, pick BeamNG on <code>Game / Main</code> in <strong>both</strong> collections (wide and vertical). Cameras can wait. TikTok is LIVE Studio, not this installer — use <a href="../docs/tiktok.html">the TikTok guide</a>.</p>
     <button type="button" id="btnInstallObs" disabled>Install scenes + sources</button>
   </fieldset>
 
@@ -518,7 +518,7 @@
       if (useCollections) {
         await obs.request("SetCurrentSceneCollection", { sceneCollectionName: RISE_LAYOUT.collectionName });
       }
-      log("Done. Wide = Rise Above BeamNG (1920x1080). Vertical = Rise Above BeamNG Vertical (1080x1920).", "ok");
+      log("Done. Wide = Rise Above BeamNG (1920x1080) for Twitch / YouTube / Kick. Vertical = Shorts / Reels in OBS. TikTok is LIVE Studio, not this installer.", "ok");
       log("Pick Game / Main → BeamNG in BOTH collections. Audio / Game → pick BeamNG. Desktop Audio stays muted.", "ok");
     } catch (err) {
       log("Install failed: " + err.message);

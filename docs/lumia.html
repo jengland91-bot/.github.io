@@ -13,12 +13,12 @@
 <main>
   <div class="kicker">LUMIA STREAM</div>
   <h1>OVERLAY + CAMS</h1>
-  <p>Lumia is the only overlay app here: chat, alerts, lights, and OBS camera switches. Connect guide: <a href="https://lumiastream.com/blogs/how-to-integrate-obs-streaming-software-with-lumia-stream">Lumia + OBS</a>.</p>
+  <p>Lumia is the only overlay app here: chat, alerts, lights, and (on OBS) camera switches. TikTok LIVE Studio uses the same overlay URL as a Link source — no OBS for TikTok. OBS connect guide: <a href="https://lumiastream.com/blogs/how-to-integrate-obs-streaming-software-with-lumia-stream">Lumia + OBS</a>.</p>
 
   <h2>Connect</h2>
   <ol>
-    <li>OBS → Tools → WebSocket Server Settings → enable, port <code>4455</code>, auth on</li>
-    <li>Lumia → Connections → OBS + your platforms + lights</li>
+    <li>TikTok: Lumia → Connections → add TikTok. Paste the overlay URL as a Link in LIVE Studio (1080×1920 phone, 1920×1080 landscape). See <a href="tiktok.html">TikTok LIVE Studio</a>.</li>
+    <li>Twitch / YouTube / Kick: OBS → Tools → WebSocket Server Settings → enable, port <code>4455</code>, auth on. Lumia → Connections → OBS + those platforms + lights.</li>
   </ol>
 
   <h2>One overlay URL</h2>
@@ -56,7 +56,7 @@
     <tr><td><code>!game</code></td><td>All four cams off</td></tr>
     <tr><td><code>!race</code> / <code>!dual</code> / <code>!replay</code> / <code>!grid</code> / <code>!brb</code></td><td>Set scene</td></tr>
   </table>
-  <p>Mods-only for scene switches. Everyone can use cam toggles with a cooldown.</p>
+  <p>Mods-only for scene switches. Everyone can use cam toggles with a cooldown. Those commands control OBS only. Switch TikTok LIVE Studio scenes in Studio.</p>
 
   <nav class="docs">
     <a href="../setup.html">← Checklist</a> ·
