@@ -36,7 +36,7 @@ twitch: "jengland91"            // or "https://twitch.tv/jengland91"
 youtube: "jengland91"          // or "https://youtube.com/@jengland91"
 kick: "jengland91"              // or "https://kick.com/jengland91"
 tiktok: "jengland91"
-instagram: "riseabovephoto"
+instagram: "jengland91"
 facebook: ""                   // blank = hide
 x: ""
 discord: ""                    // display-only. This is not Discord audio.

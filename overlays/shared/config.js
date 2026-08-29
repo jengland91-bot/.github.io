@@ -19,7 +19,7 @@ window.STREAM = {
        youtube: "jengland91"  or  "https://youtube.com/@jengland91"
        kick:    "jengland91"  or  "https://kick.com/jengland91"
        tiktok:  "jengland91"
-       instagram: "riseabovephoto"
+       instagram: "jengland91"
        facebook / x / discord: leave "" until you want them on screen
   */
   socials: {
@@ -27,7 +27,7 @@ window.STREAM = {
     youtube: "jengland91",
     kick: "jengland91",
     tiktok: "jengland91",
-    instagram: "riseabovephoto",
+    instagram: "jengland91",
     facebook: "",
     x: "",
     discord: "",
