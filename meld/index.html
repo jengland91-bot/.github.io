@@ -213,7 +213,7 @@
   document.getElementById("copy-phone").addEventListener("click", () => {
     navigator.clipboard.writeText(overlayMeta(V, V.items[scene]).url).then(flash);
   });
-  show("RACE");
+  show(new URLSearchParams(location.search).get("scene") || "RACE");
 </script>
 </body>
 </html>
