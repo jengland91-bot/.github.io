@@ -60,5 +60,17 @@ CAMERAS (four sources):
   Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals.
   After a new zip, re-run Install-OBS.bat so OBS parks them in the wells.
 
-To stream vertical: switch that dropdown to Rise Above BeamNG Vertical, then Start Streaming.
+To stream vertical from OBS: switch that dropdown to Rise Above BeamNG Vertical, then Start Streaming.
 To stream wide and vertical at the same time, install the Aitum Vertical plugin and copy the vertical layouts into its dock.
+
+TIKTOK LIVE STUDIO (same look, inside TikTok's app):
+  Studio cannot run Install-OBS.bat. Start the overlay server instead.
+  1. Double-click tools\Start-OverlayServer.bat and leave that window open while live.
+  2. In Studio, canvas 1080 x 1920. Same seven scene names as OBS.
+  3. Add a Link source per scene. Paste the URLs the black window prints
+     (or open docs\tiktok.html / tools\tiktok.html).
+  4. RACE: BeamNG 1080x608 at the top, four cams under it, overlay + Lumia on top.
+  5. Audio: BeamNG + mic only. Do not capture desktop / Discord.
+  Full sizes: docs\tiktok.html
+  You do not need the OBS installer just for TikTok overlays. Use a new zip
+  so Start-OverlayServer.bat is in the tools folder.

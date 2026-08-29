@@ -133,6 +133,8 @@ Collection **Rise Above BeamNG Vertical**. Game sits in a 16:9 strip (1080×608)
 
 To go live on TikTok / Shorts / Reels only: switch to that collection, then Start Streaming.
 
+To rebuild the same look inside **TikTok LIVE Studio**, start `tools/Start-OverlayServer.bat` and follow [tiktok.html](tiktok.html).
+
 To run wide and vertical **at the same time**, install [Aitum Vertical](https://aitum.tv/vertical) and copy the vertical transforms into its canvas. OBS cannot hold two canvas sizes in one collection without that plugin.
 
 ## Browser sources

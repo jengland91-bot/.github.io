@@ -11,6 +11,10 @@ That creates two scene collections:
 
 Same scene names in both. Switch them with the dropdown at the top of OBS. Pick BeamNG on `Game / Main` and `Audio / Game` in both collections. Desktop Audio stays muted so Discord is not on the stream.
 
+## TikTok LIVE Studio
+
+Studio cannot run the OBS installer. Double-click `tools/Start-OverlayServer.bat`, leave it open, and paste the printed `http://127.0.0.1:5500/overlays/vertical/...` URLs as **Link** sources on a 1080×1920 canvas. Same seven scene names, same cam sizes as OBS Vertical. Guide: [TikTok LIVE Studio](docs/tiktok.html).
+
 ## Audio
 
 - **Desktop Audio** muted
@@ -49,5 +53,6 @@ Drop `starting.jpg`, `brb.jpg`, and `ending.jpg` into `overlays/shared/backdrops
 ## Docs
 
 - [OBS + BeamNG + multi-cam](docs/obs.html)
+- [TikTok LIVE Studio](docs/tiktok.html)
 - [Lumia overlay, lights, cam director](docs/lumia.html)
 - [Source map](obs/source-map.md)
