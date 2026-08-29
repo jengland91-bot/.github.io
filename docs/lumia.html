@@ -12,14 +12,46 @@
 <body>
 <main>
   <div class="kicker">LUMIA STREAM</div>
-  <h1>OVERLAY + CAMS</h1>
-  <p>Lumia is the only overlay app here: chat, alerts, lights, and (on OBS) camera switches. TikTok LIVE Studio uses the same overlay URL as a Link source — no OBS for TikTok. OBS connect guide: <a href="https://lumiastream.com/blogs/how-to-integrate-obs-streaming-software-with-lumia-stream">Lumia + OBS</a>.</p>
+  <h1>CHAT ON OBS</h1>
+  <p>The Rise Above overlay does not draw chat. Chat is a <strong>Chatbox</strong> layer inside Lumia, shown by the OBS source named <code>Lumia / Overlay</code>. That source starts blank until you paste Lumia’s overlay URL.</p>
 
-  <h2>Connect</h2>
+  <h2>1. Lumia talking to OBS</h2>
   <ol>
-    <li>TikTok: Lumia → Connections → add TikTok. Paste the overlay URL as a Link in LIVE Studio (1080×1920 phone, 1920×1080 landscape). See <a href="tiktok.html">TikTok LIVE Studio</a>.</li>
-    <li>Twitch / YouTube / Kick: OBS → Tools → WebSocket Server Settings → enable, port <code>4455</code>, auth on. Lumia → Connections → OBS + those platforms + lights.</li>
+    <li>OBS and Lumia both open. Stay on collection <code>Rise Above BeamNG</code>.</li>
+    <li>OBS → Tools → WebSocket Server Settings → Enable, port <code>4455</code>, authentication on. Copy the password.</li>
+    <li>Lumia → Connections → add <strong>Twitch</strong> (that is where chat comes from) and <strong>OBS</strong> (<code>localhost</code>, port 4455, that password). Both should show connected.</li>
+    <li>Leave Lumia running the whole time you stream. If Lumia closes, the overlay in OBS goes blank.</li>
   </ol>
+
+  <h2>2. Put a Chatbox in the Lumia overlay</h2>
+  <ol>
+    <li>In Lumia, open the overlay editor (Overlays / Overlay room).</li>
+    <li>Make one overlay. Add a <strong>Chatbox</strong> widget. Add Alerts too if you want follows on screen.</li>
+    <li>Park the Chatbox on the empty right side of RACE: size about <strong>384 × 500</strong> at <strong>X 1488, Y 520</strong>. Text <code>#E8DCC8</code>, accent <code>#7CB701</code>, background transparent.</li>
+    <li>Copy the overlay URL (the browser-source / overlay link Lumia gives you).</li>
+  </ol>
+  <p>Green boxes on our HUD are only parking spots. They hide when you go live. They are not the chat. Chat is the Lumia widget.</p>
+  <p>To see the parking spots while you drag the Chatbox: open <a href="../overlays/live.html?preview=1&setup=1">Race + slots</a> in a browser, or in OBS add <code>?setup=1</code> to Overlay / Race HUD, then take it off before you go live.</p>
+
+  <h2>3. Paste that URL into OBS</h2>
+  <ol>
+    <li>OBS scene <strong>RACE</strong>. In Sources, double-click <code>Lumia / Overlay</code>.</li>
+    <li>Uncheck <strong>Local file</strong>. Paste the Lumia URL. Width 1920, height 1080.</li>
+    <li>Custom CSS: <code>body { background-color: rgba(0,0,0,0); margin: 0; overflow: hidden; }</code></li>
+    <li>OK. In the Sources list, drag <code>Lumia / Overlay</code> so it sits <strong>above</strong> <code>Overlay / Race HUD</code>. If it is under the HUD, chat is hidden.</li>
+    <li>Eye icon on. The source must not be <code>about:blank</code>.</li>
+  </ol>
+
+  <h2>4. Prove it works</h2>
+  <ol>
+    <li>Stay on RACE. Lumia still open.</li>
+    <li>In Lumia, fire a <strong>test alert</strong>. You should see it on the OBS preview.</li>
+    <li>Send a Twitch chat message (another account, or your phone). It should appear in the Chatbox on the right of RACE.</li>
+  </ol>
+  <p>If the test alert works but chat does not: the overlay has Alerts but no Chatbox, or Twitch is not connected in Lumia. If nothing shows: the OBS URL is still blank, Local file is still checked, Lumia is closed, or <code>Lumia / Overlay</code> is under the HUD.</p>
+
+  <h2>Connect extras</h2>
+  <p>Lights and chat commands are optional. Overlay URL connect guide: <a href="https://lumiastream.com/blogs/how-to-integrate-obs-streaming-software-with-lumia-stream">Lumia + OBS</a>.</p>
 
   <h2>One overlay URL</h2>
   <p>Build one overlay in Lumia. OBS source <code>Lumia / Overlay</code>, 1920×1080 on the wide collection and 1080×1920 on the vertical collection, above the HUD.</p>

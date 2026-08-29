@@ -1,15 +1,20 @@
-# Lumia Stream — overlay, lights, cam director
+# Lumia Stream — chat on OBS
 
-Lumia is the only overlay app in this kit. It does chat, alerts, goals, lights, and OBS camera/scene switches.
+The Rise Above HUD does not draw chat. Chat is a **Chatbox** inside Lumia, shown by OBS source `Lumia / Overlay` (starts as `about:blank` until you paste the URL).
+
+## See chat on OBS
+
+1. OBS + Lumia open. Collection `Rise Above BeamNG`.
+2. OBS → Tools → WebSocket Server Settings → enable, port **4455**, auth on. Copy password.
+3. Lumia → Connections → **Twitch** (chat) and **OBS** (`localhost` / 4455 / password). Both connected. Leave Lumia running.
+4. Lumia overlay editor: one overlay, add a **Chatbox**. Park it **384×500 at 1488, 520** on RACE. Colors `#E8DCC8` / `#7CB701`. Copy the overlay URL.
+5. OBS scene **RACE** → double-click `Lumia / Overlay` → uncheck Local file → paste URL → 1920×1080. CSS: `body { background-color: rgba(0,0,0,0); margin: 0; overflow: hidden; }`
+6. Sources list: `Lumia / Overlay` **above** `Overlay / Race HUD`.
+7. Lumia test alert should hit the OBS preview. Then send a Twitch message — it should appear in that Chatbox.
+
+Parking spots: [Race + slots](../overlays/live.html?preview=1&setup=1). Take `setup=1` off before going live.
 
 Connect guide: [Lumia + OBS](https://lumiastream.com/blogs/how-to-integrate-obs-streaming-software-with-lumia-stream)
-
-## Connect OBS
-
-1. OBS 28+ → Tools → WebSocket Server Settings
-2. Enable, port **4455**, authentication on, copy password
-3. Lumia → Connections → Add → OBS → `localhost` / 4455 / password
-4. Same page: Twitch (and any other platform) + lights
 
 ## One overlay, not five browser sources
 

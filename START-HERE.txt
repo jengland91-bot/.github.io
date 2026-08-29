@@ -74,22 +74,27 @@ NAMES, GAME, AND LINKS:
   In TikTok Studio: refresh the Link sources on both canvases.
   You do not need to run the installer again for names, colors, or links.
 
-LUMIA ON OBS (Twitch / YouTube / Kick):
+LUMIA ON OBS (chat on screen):
   The installer already made an OBS source named Lumia / Overlay. It starts blank.
+  Chat is NOT in the Rise Above HUD. Chat is a Chatbox you add inside Lumia.
+
   1. Install Lumia Stream. Leave it running while you stream.
-  2. Lumia -> Connections -> add Twitch (and Kick/YouTube) AND OBS
-     (port 4455, same WebSocket password as the installer).
-  3. In Lumia, create one overlay: Chatbox + Alerts. Colors #E8DCC8 / #7CB701.
-  4. Copy that overlay URL.
-  5. In OBS, click scene RACE. Double-click Lumia / Overlay.
-     Uncheck Local file. Paste the Lumia URL. Width 1920 Height 1080 (or 1080x1920 on vertical).
+  2. Lumia -> Connections -> add Twitch (chat comes from here) AND OBS
+     (port 4455, same WebSocket password as the installer). Both connected.
+  3. In Lumia, create one overlay. Add a Chatbox (and Alerts if you want follows).
+     Park Chatbox on the empty right of RACE: about 384x500 at 1488, 520.
+     Colors #E8DCC8 / #7CB701. Copy that overlay URL.
+  4. In OBS, collection Rise Above BeamNG, scene RACE.
+     Double-click Lumia / Overlay.
+     Uncheck Local file. Paste the Lumia URL. Width 1920 Height 1080.
      Custom CSS: body { background-color: rgba(0,0,0,0); margin: 0; overflow: hidden; }
-  6. In the Sources list, Lumia / Overlay must sit ABOVE Overlay / Race HUD.
-  7. Do the same paste on the vertical collection if you use it for Shorts / Reels.
-  Chat and follows then show in the empty space this kit left for them.
-  To line layers up, open overlays\live.html?setup=1 in a browser (green boxes = parking spots).
+  5. In the Sources list, Lumia / Overlay must sit ABOVE Overlay / Race HUD.
+  6. Prove it: Lumia test alert should show on the OBS preview. Then send a
+     Twitch chat message. It should land in that Chatbox on RACE.
+
+  To line the Chatbox up, open overlays\live.html?setup=1 in a browser
+  (green boxes = parking spots). Take setup=1 off before you go live.
   Optional: tools\install.html -> Lumia API token -> Install Lumia commands for !race !face.
-  Those chat commands control OBS only. They do not switch TikTok LIVE Studio.
 
 YOUR PHOTOS on STARTING SOON, BRB, and ENDING (thank you):
   Put pictures in overlays\shared\backdrops\
