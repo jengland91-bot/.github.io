@@ -33,7 +33,7 @@ Edit `overlays/shared/config.js`. The `socials` object is the list that prints o
 
 ```
 twitch: "jengland91"            // or "https://twitch.tv/jengland91"
-youtube: "jengland91"          // or "https://youtube.com/@jengland91"
+youtube: "joshengland91"          // or "https://youtube.com/@joshengland91"
 kick: "jengland91"              // or "https://kick.com/jengland91"
 tiktok: "jengland91"
 instagram: "jengland91"

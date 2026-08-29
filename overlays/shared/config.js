@@ -60,7 +60,7 @@ window.STREAM = {
   /* Links. Username OR a full https:// URL. Blank = hide that one. */
   socials: {
     twitch: "jengland91",
-    youtube: "jengland91",
+    youtube: "joshengland91",
     kick: "jengland91",
     tiktok: "jengland91",
     instagram: "jengland91",
