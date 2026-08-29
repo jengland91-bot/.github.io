@@ -121,10 +121,11 @@ Crop with **Alt + drag**. Matching Rec. 709 / Limited on the cams keeps skin fro
 1. `Game / Main` (full)
 2. `Audio / Game` (pick that game, not BeamNG)
 3. `Cam / Face` (640×360 at 1256, 696)
-4. `Overlay / Desk HUD` (`desk.html`)
-5. `Lumia / Overlay`
+4. `Cam / Room` (480×270 at 760, 786)
+5. `Overlay / Desk HUD` (`desk.html`)
+6. `Lumia / Overlay`
 
-No room / wheel / pedals. When you go back to racing, pick BeamNG on `Game / Main` and `Audio / Game` again, then click `RACE`.
+No wheel / pedals. When you go back to racing, pick BeamNG on `Game / Main` and `Audio / Game` again, then click `RACE`.
 
 ## RACE DUAL
 

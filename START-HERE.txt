@@ -18,7 +18,7 @@ once in Dual layout.
 3. A layout board opens. That page is the Dual layout: phone + landscape.
 4. Open TikTok LIVE Studio. Dual layout ON. Do not open OBS.
 5. Add scenes: STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING.
-   Start with RACE. DESK is sit-at-desk other games (game + face, no wheel).
+   Start with RACE. DESK is sit-at-desk other games (game + face + room, no wheel).
    Skip RACE DUAL until you have a second BeamNG view.
 6. On the PHONE canvas, add Game / cameras / Overlay Link / Lumia Link.
    Copy the overlay URL from the layout board. Overlay Link size 1080x1920.
@@ -54,7 +54,7 @@ You should then see two scene collections in OBS (dropdown at the top):
 
 Same scenes in both: STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING.
 
-Click DESK when you are sitting at the desk playing other games (full game + face cam, no wheel/pedals).
+Click DESK when you are sitting at the desk playing other games (full game + face + room, no wheel/pedals).
 Double-click Game / Main and Audio / Game and pick that game. Switch both back to BeamNG for RACE.
 
 If Aitum Vertical is already installed, Install-OBS.bat also fills the Vertical Scenes dock.
@@ -126,7 +126,7 @@ CAMERAS (four sources):
   After a new zip, re-run Install-OBS.bat so OBS parks them in the wells.
 
   DESK (other games, sit at the desk):
-  Click DESK on the left list. Full game + big face cam. No wheel or pedals.
+  Click DESK on the left list. Full game + face + room. No wheel or pedals.
   Double-click Game / Main and Audio / Game and pick that other game.
   When you go back to racing: pick BeamNG on both, then click RACE.
 

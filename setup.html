@@ -102,7 +102,7 @@
       <tbody>
         <tr><td><code>STARTING SOON</code></td><td>Full-screen overlay. Optional music.</td></tr>
         <tr><td><code>GRID</code></td><td>Big face + room + wheel + pedals. Talking / staging. No game.</td></tr>
-        <tr><td><code>DESK</code></td><td>Other games. Full game + big face. No wheel / pedals. Pick that game on Game / Main and Audio / Game.</td></tr>
+        <tr><td><code>DESK</code></td><td>Other games. Full game + face + room. No wheel / pedals. Pick that game on Game / Main and Audio / Game.</td></tr>
         <tr><td><code>RACE</code></td><td>BeamNG full, four cam PiPs, Lumia chat.</td></tr>
         <tr><td><code>RACE DUAL</code></td><td>Main game + second angle (bumper/chase) + small cams.</td></tr>
         <tr><td><code>REPLAY</code></td><td>Clean game, no cams. Crashes and cinematic.</td></tr>
@@ -115,7 +115,7 @@
     <label class="step"><input type="checkbox" data-id="scenes" /><span>Confirm those scene names exist on both collections, including <code>DESK</code>.</span></label>
     <label class="step"><input type="checkbox" data-id="browser" /><span>Add Browser sources for each overlay (1920×1080, transparent). Prefer <strong>Local file</strong>. Custom CSS: <code>body { background-color: rgba(0,0,0,0); overflow: hidden; }</code></span></label>
     <label class="step"><input type="checkbox" data-id="beamng" /><span>BeamNG in borderless windowed. OBS <code>Game / Main</code> = Game Capture → Capture specific window → BeamNG.drive. If the shot is black (Vulkan), switch that source to Window Capture (Windows Graphics Capture).</span></label>
-    <label class="step"><input type="checkbox" data-id="cams" /><span>Add <code>Cam / Face</code>, <code>Cam / Room</code>, <code>Cam / Wheel</code>, and <code>Cam / Pedals</code> as Video Capture Device. Paste (Reference) onto GRID, DESK (face only), RACE, and RACE DUAL. Optional <code>Game / Angle 2</code> for a second monitor or bumper view — only on RACE DUAL. Re-run <code>Install-OBS.bat</code> from a new zip so wells match.</span></label>
+    <label class="step"><input type="checkbox" data-id="cams" /><span>Add <code>Cam / Face</code>, <code>Cam / Room</code>, <code>Cam / Wheel</code>, and <code>Cam / Pedals</code> as Video Capture Device. Paste (Reference) onto GRID, DESK (face + room), RACE, and RACE DUAL. Optional <code>Game / Angle 2</code> for a second monitor or bumper view — only on RACE DUAL. Re-run <code>Install-OBS.bat</code> from a new zip so wells match.</span></label>
     <label class="step"><input type="checkbox" data-id="usb" /><span>Spread the four cameras across USB controllers (front vs back). 720p 30fps each. Leave “Deactivate when not showing” <strong>off</strong> so cam switches stay instant.</span></label>
     <label class="step"><input type="checkbox" data-id="shutdown" /><span>Refresh browser when scene becomes active: on for STARTING SOON. Off for RACE HUD.</span></label>
 

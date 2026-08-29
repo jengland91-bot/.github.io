@@ -100,6 +100,7 @@ $items = @{
     "DESK" = @(
         @{ name = "Game / Main"; kind = "game"; x = 0; y = 0; w = 1920; h = 1080 }
         @{ name = "Cam / Face"; kind = "camera"; x = 1256; y = 696; w = 640; h = 360 }
+        @{ name = "Cam / Room"; kind = "camera"; x = 760; y = 786; w = 480; h = 270 }
         @{ name = "Overlay / Desk HUD"; kind = "browser"; x = 0; y = 0; w = 1920; h = 1080 }
         @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1920; h = 1080 }
         @{ name = "Audio / Game"; kind = "gameaudio" }
@@ -169,7 +170,8 @@ $verticalItems = @{
     )
     "DESK" = @(
         @{ name = "Game / Main"; kind = "game"; x = 0; y = 0; w = 1080; h = 608 }
-        @{ name = "Cam / Face"; kind = "camera"; x = 16; y = 624; w = 1048; h = 400 }
+        @{ name = "Cam / Face"; kind = "camera"; x = 16; y = 624; w = 520; h = 300 }
+        @{ name = "Cam / Room"; kind = "camera"; x = 544; y = 624; w = 520; h = 300 }
         @{ name = "Overlay / Desk HUD"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
         @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1080; h = 1920 }
         @{ name = "Audio / Game"; kind = "gameaudio" }

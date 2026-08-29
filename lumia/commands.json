@@ -58,7 +58,8 @@
       { "scene": "RACE DUAL", "source": "Cam / Room", "visible": false },
       { "scene": "RACE DUAL", "source": "Cam / Wheel", "visible": false },
       { "scene": "RACE DUAL", "source": "Cam / Pedals", "visible": false },
-      { "scene": "DESK", "source": "Cam / Face", "visible": true }
+      { "scene": "DESK", "source": "Cam / Face", "visible": true },
+      { "scene": "DESK", "source": "Cam / Room", "visible": false }
     ]
   },
   {
@@ -77,7 +78,9 @@
       { "scene": "RACE DUAL", "source": "Cam / Face", "visible": false },
       { "scene": "RACE DUAL", "source": "Cam / Room", "visible": true },
       { "scene": "RACE DUAL", "source": "Cam / Wheel", "visible": false },
-      { "scene": "RACE DUAL", "source": "Cam / Pedals", "visible": false }
+      { "scene": "RACE DUAL", "source": "Cam / Pedals", "visible": false },
+      { "scene": "DESK", "source": "Cam / Face", "visible": false },
+      { "scene": "DESK", "source": "Cam / Room", "visible": true }
     ]
   },
   {
@@ -97,7 +100,8 @@
       { "scene": "RACE DUAL", "source": "Cam / Room", "visible": true },
       { "scene": "RACE DUAL", "source": "Cam / Wheel", "visible": true },
       { "scene": "RACE DUAL", "source": "Cam / Pedals", "visible": true },
-      { "scene": "DESK", "source": "Cam / Face", "visible": true }
+      { "scene": "DESK", "source": "Cam / Face", "visible": true },
+      { "scene": "DESK", "source": "Cam / Room", "visible": true }
     ]
   },
   {
@@ -155,7 +159,8 @@
       { "scene": "RACE DUAL", "source": "Cam / Room", "visible": false },
       { "scene": "RACE DUAL", "source": "Cam / Wheel", "visible": false },
       { "scene": "RACE DUAL", "source": "Cam / Pedals", "visible": false },
-      { "scene": "DESK", "source": "Cam / Face", "visible": false }
+      { "scene": "DESK", "source": "Cam / Face", "visible": false },
+      { "scene": "DESK", "source": "Cam / Room", "visible": false }
     ]
   }
 ]

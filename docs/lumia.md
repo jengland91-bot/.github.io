@@ -50,7 +50,7 @@ Follow/sub in Lumia: **on-screen alert + a 2s light flash**. Do not add a second
 
 ## Camera director (OBS actions)
 
-Use **Set source visibility** on the scene `RACE` (and copy the same rows for `GRID` / `RACE DUAL`). On `DESK`, only `Cam / Face` exists — `!face` / `!rig` show it, `!game` hides it.
+Use **Set source visibility** on the scene `RACE` (and copy the same rows for `GRID` / `RACE DUAL` / `DESK`). On `DESK`, Face and Room exist — `!face` shows face, `!room` shows room, `!rig` shows both, `!game` hides both.
 
 | Command | Action |
 | --- | --- |

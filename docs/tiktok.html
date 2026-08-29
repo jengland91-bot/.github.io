@@ -23,7 +23,7 @@
     <li>Turn on Dual layout (portrait + landscape).</li>
     <li>You will see two canvases. Switch between them while you build sources. Both go live together.</li>
   </ol>
-  <p>Add Dual scenes: STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING. Each scene has a phone canvas and a landscape canvas. DESK is sit-at-desk other games (game + face only).</p>
+  <p>Add Dual scenes: STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING. Each scene has a phone canvas and a landscape canvas. DESK is sit-at-desk other games (game + face + room).</p>
 
   <h2>Start the overlay server (once)</h2>
   <p>Link sources need <code>http://</code>. They will not load <code>file://</code>.</p>
@@ -78,12 +78,13 @@
   </table>
 
   <h3>Vertical DESK (other games, sit at desk)</h3>
-  <p>Game on top. One big face cam. No wheel / pedals.</p>
+  <p>Game on top. Face and room side by side. No wheel / pedals.</p>
   <table>
     <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
     <tbody>
       <tr><td>Game / Main</td><td>0</td><td>0</td><td>1080</td><td>608</td></tr>
-      <tr><td>Cam / Face</td><td>16</td><td>624</td><td>1048</td><td>400</td></tr>
+      <tr><td>Cam / Face</td><td>16</td><td>624</td><td>520</td><td>300</td></tr>
+      <tr><td>Cam / Room</td><td>544</td><td>624</td><td>520</td><td>300</td></tr>
     </tbody>
   </table>
 
@@ -132,12 +133,13 @@
   </table>
 
   <h3>Horizontal DESK (other games)</h3>
-  <p>Full game + one big face cam. No wheel / pedals.</p>
+  <p>Full game + face + room. No wheel / pedals.</p>
   <table>
     <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
     <tbody>
       <tr><td>Game / Main</td><td>0</td><td>0</td><td>1920</td><td>1080</td></tr>
       <tr><td>Cam / Face</td><td>1256</td><td>696</td><td>640</td><td>360</td></tr>
+      <tr><td>Cam / Room</td><td>760</td><td>786</td><td>480</td><td>270</td></tr>
     </tbody>
   </table>
 

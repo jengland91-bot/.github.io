@@ -613,7 +613,7 @@ body.scene-dual:not(.setup) .well-goal {
   width: 420px;
 }
 
-/* DESK — sit at the desk, other games. Full game + big face, no wheel/pedals. */
+/* DESK — sit at the desk, other games. Full game + face + room. No wheel/pedals. */
 .scene-desk .well-face {
   left: 1256px;
   top: 696px;
@@ -621,7 +621,13 @@ body.scene-dual:not(.setup) .well-goal {
   height: 360px;
 }
 
-.scene-desk .well-room,
+.scene-desk .well-room {
+  left: 760px;
+  top: 786px;
+  width: 480px;
+  height: 270px;
+}
+
 .scene-desk .well-wheel,
 .scene-desk .well-pedals,
 .scene-desk .well-angle {
@@ -629,10 +635,10 @@ body.scene-dual:not(.setup) .well-goal {
 }
 
 .scene-desk .well-chat {
-  left: 840px;
-  top: 696px;
+  left: 344px;
+  top: 786px;
   width: 400px;
-  height: 360px;
+  height: 270px;
 }
 
 .scene-desk .well-alerts {
@@ -647,8 +653,8 @@ body.scene-dual:not(.setup) .well-goal {
 
 .scene-desk .well-nowplaying {
   left: 48px;
-  top: 800px;
-  width: 400px;
+  top: 696px;
+  width: 280px;
 }
 
 .scene-desk .well-goal {
@@ -1053,11 +1059,17 @@ body.vertical.scene-desk .well-game {
 body.vertical.scene-desk .well-face {
   left: 16px;
   top: 624px;
-  width: 1048px;
-  height: 400px;
+  width: 520px;
+  height: 300px;
 }
 
-body.vertical.scene-desk .well-room,
+body.vertical.scene-desk .well-room {
+  left: 544px;
+  top: 624px;
+  width: 520px;
+  height: 300px;
+}
+
 body.vertical.scene-desk .well-wheel,
 body.vertical.scene-desk .well-pedals,
 body.vertical.scene-desk .well-angle {
@@ -1066,9 +1078,9 @@ body.vertical.scene-desk .well-angle {
 
 body.vertical.scene-desk .well-chat {
   left: 16px;
-  top: 1040px;
+  top: 940px;
   width: 1048px;
-  height: 812px;
+  height: 912px;
 }
 
 body.vertical.scene-desk .well-alerts {

@@ -30,7 +30,8 @@ window.RISE_TIKTOK_LAYOUT = {
     ],
     DESK: [
       { name: "Game / Main", x: 0, y: 0, w: 1080, h: 608, kind: "game" },
-      { name: "Cam / Face", x: 16, y: 624, w: 1048, h: 400, kind: "cam" },
+      { name: "Cam / Face", x: 16, y: 624, w: 520, h: 300, kind: "cam" },
+      { name: "Cam / Room", x: 544, y: 624, w: 520, h: 300, kind: "cam" },
       { name: "Overlay Link", x: 0, y: 0, w: 1080, h: 1920, kind: "overlay" },
       { name: "Lumia Link", x: 0, y: 0, w: 1080, h: 1920, kind: "lumia" },
     ],
@@ -81,6 +82,7 @@ window.RISE_TIKTOK_LAYOUT = {
     DESK: [
       { name: "Game / Main", x: 0, y: 0, w: 1920, h: 1080, kind: "game" },
       { name: "Cam / Face", x: 1256, y: 696, w: 640, h: 360, kind: "cam" },
+      { name: "Cam / Room", x: 760, y: 786, w: 480, h: 270, kind: "cam" },
       { name: "Overlay Link", x: 0, y: 0, w: 1920, h: 1080, kind: "overlay" },
       { name: "Lumia Link", x: 0, y: 0, w: 1920, h: 1080, kind: "lumia" },
     ],

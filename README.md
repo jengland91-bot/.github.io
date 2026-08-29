@@ -30,7 +30,7 @@ Same scene names in both. Switch them with the dropdown at the top of OBS. Pick 
 | --- | --- | --- | --- |
 | `STARTING SOON` | `overlays/starting-soon.html` | `overlays/vertical/starting-soon.html` | Countdown, staging lights |
 | `GRID` | `overlays/chatting.html` | `overlays/vertical/chatting.html` | Big face + room + wheel + pedals |
-| `DESK` | `overlays/desk.html` | `overlays/vertical/desk.html` | Other games: full game + big face, no wheel/pedals |
+| `DESK` | `overlays/desk.html` | `overlays/vertical/desk.html` | Other games: full game + face + room, no wheel/pedals |
 | `RACE` | `overlays/live.html` | `overlays/vertical/live.html` | BeamNG + four cams + chat |
 | `RACE DUAL` | `overlays/race-dual.html` | `overlays/vertical/race-dual.html` | Main view + second angle |
 | `REPLAY` | `overlays/replay.html` | `overlays/vertical/replay.html` | Clean game, no cams |
