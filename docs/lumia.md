@@ -20,14 +20,14 @@ In Lumia’s overlay editor, build **one** overlay named something like `Rise Ab
 | Chatbox | 384×500 at **1488, 520** |
 | Alerts | 860×200 at **530, 24** |
 | Event list / labels | 420×70 at **48, 96** |
-| Now Playing | 400×64 at **48, 736** |
-| Goal | optional; skip on RACE if it covers the wheel |
+| Now Playing | 400×64 at **48, 800** |
+| Goal | optional; skip on RACE if it covers the cams |
 
-Colors: text `#F4EFE8`, accent `#FF4D1A`, backgrounds transparent or a light dark glass.
+Colors: text `#EDE4D4`, accent `#C65A12`, backgrounds transparent or a light dark glass.
 
 Copy the overlay URL once. OBS source `Lumia / Overlay`, 1920×1080 on the wide collection, 1080×1920 on the vertical collection, **above** the Rise Above HUD.
 
-Vertical RACE chatbox: **1048×960 at 16, 932**. Alerts: **1048×160 at 16, 16**. Duplicate the Lumia overlay for 9:16 if chat looks stretched; or keep one URL and park layers on the vertical wells.
+Vertical RACE chatbox: **1048×800 at 16, 1096**. Alerts: **1048×160 at 16, 16**. Duplicate the Lumia overlay for 9:16 if chat looks stretched; or keep one URL and park layers on the vertical wells.
 
 GRID and RACE DUAL use different wells — either duplicate the overlay in Lumia with those positions, or keep one overlay and accept that chat sits in the RACE pocket on every scene (still readable). Two Lumia overlays (Race / Grid) is cleaner if the editor allows switching with the scene.
 
@@ -37,7 +37,7 @@ GRID and RACE DUAL use different wells — either duplicate the overlay in Lumia
 | --- | --- |
 | `STARTING SOON` | Warm amber, slow breathe |
 | `GRID` | Soft ice / white, face-friendly |
-| `RACE` | Ember `#FF4D1A` |
+| `RACE` | Ember `#C65A12` |
 | `RACE DUAL` | Ember + a bit of ice on a second zone if you have one |
 | `REPLAY` | Dim gold |
 | `BRB` | Dim cool blue, 30–40% |
@@ -51,17 +51,19 @@ Use **Set source visibility** on the scene `RACE` (and copy the same rows for `G
 
 | Command | Action |
 | --- | --- |
-| `!face` | Face on, Wheel off |
-| `!wheel` | Wheel on, Face off |
-| `!both` | Face on, Wheel on |
-| `!game` | Face off, Wheel off (game only) |
+| `!face` | Face on; Room, Wheel, Pedals off |
+| `!room` | Room on; Face, Wheel, Pedals off |
+| `!rig` | Face, Room, Wheel, Pedals all on |
+| `!wheel` | Wheel on; Face, Room, Pedals off |
+| `!pedals` | Pedals on; Face, Room, Wheel off |
+| `!game` | All four cams off (game only) |
 | `!race` | Set scene `RACE` |
 | `!dual` | Set scene `RACE DUAL` |
 | `!replay` | Set scene `REPLAY` |
 | `!grid` | Set scene `GRID` |
 | `!brb` | Set scene `BRB` |
 
-Mods-only for scene switches if random viewers should not yank you into BRB. `!face` / `!wheel` / `!both` can be everyone with a 15–30s cooldown.
+Mods-only for scene switches if random viewers should not yank you into BRB. `!face` / `!room` / `!rig` / `!wheel` / `!pedals` can be everyone with a 15–30s cooldown.
 
 Hype clip redeem: show `Media / Hype Clip`, delay = length, hide. Restart when active, close file when inactive.
 

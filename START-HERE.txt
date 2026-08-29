@@ -3,19 +3,31 @@
 3. Open the extracted folder -> open the "tools" folder -> double-click Install-OBS.bat
 4. When it asks for a password: OBS top menu Tools -> WebSocket Server Settings -> Show Connect Info -> copy password -> paste into the black window -> Enter.
 
-If the black window immediately shows red text (ParserError, or assembly System.Net.WebSockets.Client could not be found), you have an old zip. Delete that extracted folder, download a fresh zip, extract again, then run Install-OBS.bat from the new tools folder.
-
-Backup: double-click tools\install.html in Chrome or Edge (OBS still has to be open).
-
-If Windows blocks the .bat: right-click Install-OBS.bat -> Run anyway / Properties -> Unblock.
+If the black window immediately shows red text, or you still only see Face + Wheel, you have an old zip. Delete that folder, download a fresh zip, extract again, run Install-OBS.bat from the new tools folder.
 
 You should then see two scene collections in OBS (dropdown at the top):
-  Rise Above BeamNG            = 1920x1080 Twitch / YouTube
+  Rise Above BeamNG            = 1920x1080 Twitch / YouTube / Kick
   Rise Above BeamNG Vertical   = 1080x1920 TikTok / Shorts / Reels
 
 Same scenes in both: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING.
 
-Pick BeamNG on Game / Main in BOTH collections. Cameras can wait.
+Pick BeamNG on Game / Main in BOTH collections.
+
+AUDIO (no Discord on stream):
+  Desktop Audio should be muted in the OBS mixer (speaker with an X).
+  In BOTH collections: double-click Audio / Game -> pick BeamNG.drive.
+  Mic / Main = your microphone.
+  Discord can stay open. You still hear it in your headset. It will not go to the stream.
+
+NAMES AND LINKS (LIVE, GRID, handle, Twitch, YouTube, Kick, TikTok, Instagram):
+  Open overlays\shared\config.js in Notepad.
+  Change chattingTitle / liveTitle / dualTitle and the social usernames.
+  Save. In OBS: right-click the overlay source -> Refresh.
+  You do not need to run the installer again just to rename LIVE / GRID.
+
+CAMERAS (four sources):
+  Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals.
+  After a new zip, re-run Install-OBS.bat so OBS parks them in the wells.
 
 To stream vertical: switch that dropdown to Rise Above BeamNG Vertical, then Start Streaming.
 To stream wide and vertical at the same time, install the Aitum Vertical plugin and copy the vertical layouts into its dock.

@@ -9,12 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ember: #ff4d1a;
-      --ice: #5ce1e6;
-      --sand: #e8c9a0;
-      --paper: #f4efe8;
-      --void: #07080c;
-      --asphalt: #12141c;
+      --ember: #c65a12;
+      --ice: #9aab70;
+      --sand: #d4c4a0;
+      --paper: #ede4d4;
+      --void: #120e0a;
+      --asphalt: #1c1610;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -85,14 +85,14 @@
     <p><a href="tools/install.html">Use the installer</a> to create the OBS scene collection and Lumia chat commands with code. Open that page on the streaming PC (local file), not from GitHub Pages.</p>
 
     <h2>A. Identity</h2>
-    <label class="step"><input type="checkbox" data-id="config" /><span>Edit <code>overlays/shared/config.js</code> — name, brand, Instagram, Twitch, YouTube, countdown minutes.</span></label>
+    <label class="step"><input type="checkbox" data-id="config" /><span>Edit <code>overlays/shared/config.js</code> — name, brand, LIVE / GRID words, and the <code>socials</code> block (Twitch, YouTube, Kick, TikTok, Instagram). Username or a full https link. Blank hides that platform. Then in OBS right-click the overlay → Refresh.</span></label>
     <label class="step"><input type="checkbox" data-id="preview" /><span>Open <a href="index.html">the preview</a> and confirm Starting Soon / Race / Grid / Dual look right.</span></label>
 
     <h2>B. OBS canvas &amp; output</h2>
     <label class="step"><input type="checkbox" data-id="obs-install" /><span>Install the latest <a href="https://obsproject.com/" target="_blank" rel="noreferrer">OBS Studio</a> (28+ so WebSocket is built in).</span></label>
     <label class="step"><input type="checkbox" data-id="obs-video" /><span>Settings → Video: Base and Output <code>1920×1080</code> for the wide collection. The vertical collection is <code>1080×1920</code> (the installer sets both). Color format NV12, Rec. 709, Limited.</span></label>
     <label class="step"><input type="checkbox" data-id="obs-encode" /><span>Settings → Output → Advanced. NVIDIA: NVENC, CBR, 6000 Kbps for Twitch, keyframe 2, High, B-frames 2. AMD: AMF. Intel: QSV. CPU-only: x264 veryfast.</span></label>
-    <label class="step"><input type="checkbox" data-id="obs-audio" /><span>Settings → Audio: 48 kHz. Mic filters in this order: Noise Suppression (RNNoise) → EQ → Compressor → Limiter.</span></label>
+    <label class="step"><input type="checkbox" data-id="obs-audio" /><span>Settings → Audio: 48 kHz. Mixer: Desktop Audio muted (no Discord). Mic / Main = your mic. Audio / Game = Application Audio Capture of BeamNG. Filters on the mic: Noise Suppression (RNNoise) → EQ → Compressor → Limiter.</span></label>
     <label class="step"><input type="checkbox" data-id="obs-ws" /><span>Tools → WebSocket Server Settings: Enable server, port <code>4455</code>, authentication ON. Copy the password for Lumia.</span></label>
 
     <h2>C. Scenes — use these exact names</h2>
@@ -101,8 +101,8 @@
       <thead><tr><th>Scene</th><th>What lives here</th></tr></thead>
       <tbody>
         <tr><td><code>STARTING SOON</code></td><td>Full-screen overlay. Optional music.</td></tr>
-        <tr><td><code>GRID</code></td><td>Big face + wheel. Talking / staging.</td></tr>
-        <tr><td><code>RACE</code></td><td>BeamNG full, face + wheel PiPs, Lumia chat.</td></tr>
+        <tr><td><code>GRID</code></td><td>Big face + room + wheel + pedals. Talking / staging.</td></tr>
+        <tr><td><code>RACE</code></td><td>BeamNG full, four cam PiPs, Lumia chat.</td></tr>
         <tr><td><code>RACE DUAL</code></td><td>Main game + second angle (bumper/chase) + small cams.</td></tr>
         <tr><td><code>REPLAY</code></td><td>Clean game, no cams. Crashes and cinematic.</td></tr>
         <tr><td><code>BRB</code></td><td>Pit-stop overlay. Drop game audio.</td></tr>
@@ -110,24 +110,24 @@
       </tbody>
     </table>
     <p>The installer also creates collection <code>Rise Above BeamNG Vertical</code> at 1080×1920 with the same seven names. Switch it from the dropdown at the top of OBS for TikTok / Shorts / Reels.</p>
-    <label class="step"><input type="checkbox" data-id="vertical" /><span>Open collection <code>Rise Above BeamNG Vertical</code>. Pick BeamNG on <code>Game / Main</code> there too. RACE is game on top, face + wheel under it, chat at the bottom.</span></label>
+    <label class="step"><input type="checkbox" data-id="vertical" /><span>Open collection <code>Rise Above BeamNG Vertical</code>. Pick BeamNG on <code>Game / Main</code> and <code>Audio / Game</code> there too. Desktop Audio stays muted. RACE is game on top, Face / Room / Wheel / Pedals under it, chat at the bottom.</span></label>
     <label class="step"><input type="checkbox" data-id="scenes" /><span>Confirm those seven scene names exist on both collections.</span></label>
     <label class="step"><input type="checkbox" data-id="browser" /><span>Add Browser sources for each overlay (1920×1080, transparent). Prefer <strong>Local file</strong>. Custom CSS: <code>body { background-color: rgba(0,0,0,0); overflow: hidden; }</code></span></label>
     <label class="step"><input type="checkbox" data-id="beamng" /><span>BeamNG in borderless windowed. OBS <code>Game / Main</code> = Game Capture → Capture specific window → BeamNG.drive. If the shot is black (Vulkan), switch that source to Window Capture (Windows Graphics Capture).</span></label>
-    <label class="step"><input type="checkbox" data-id="cams" /><span>Add <code>Cam / Face</code> and <code>Cam / Wheel</code> as Video Capture Device. Paste (Reference) onto GRID, RACE, and RACE DUAL. Optional <code>Game / Angle 2</code> for a second monitor or bumper view — only on RACE DUAL.</span></label>
-    <label class="step"><input type="checkbox" data-id="usb" /><span>Plug the two webcams into different USB controllers (front vs back). 720p 30fps each. Leave “Deactivate when not showing” <strong>off</strong> so cam switches stay instant.</span></label>
+    <label class="step"><input type="checkbox" data-id="cams" /><span>Add <code>Cam / Face</code>, <code>Cam / Room</code>, <code>Cam / Wheel</code>, and <code>Cam / Pedals</code> as Video Capture Device. Paste (Reference) onto GRID, RACE, and RACE DUAL. Optional <code>Game / Angle 2</code> for a second monitor or bumper view — only on RACE DUAL. Re-run <code>Install-OBS.bat</code> from a new zip so wells match.</span></label>
+    <label class="step"><input type="checkbox" data-id="usb" /><span>Spread the four cameras across USB controllers (front vs back). 720p 30fps each. Leave “Deactivate when not showing” <strong>off</strong> so cam switches stay instant.</span></label>
     <label class="step"><input type="checkbox" data-id="shutdown" /><span>Refresh browser when scene becomes active: on for STARTING SOON. Off for RACE HUD.</span></label>
 
     <h2>D. Lumia Stream (alerts + lights + cam director)</h2>
     <label class="step"><input type="checkbox" data-id="lumia" /><span>Install <a href="https://lumiastream.com/" target="_blank" rel="noreferrer">Lumia Stream</a>. Connections → Add → your platforms, then OBS (port 4455 + password). Add lights on the same page.</span></label>
-    <label class="step"><input type="checkbox" data-id="lumia-overlay" /><span>In Lumia’s overlay editor, one overlay: Chatbox, Alerts, optional Event List / Goal / Now Playing. Match colors <code>#F4EFE8</code> / <code>#FF4D1A</code>. Place layers on the wells from <a href="overlays/live.html?preview=1&setup=1">Race + slots</a>.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-overlay" /><span>In Lumia’s overlay editor, one overlay: Chatbox, Alerts, optional Event List / Goal / Now Playing. Match colors <code>#EDE4D4</code> / <code>#C65A12</code>. Place layers on the wells from <a href="overlays/live.html?preview=1&setup=1">Race + slots</a>.</span></label>
     <label class="step"><input type="checkbox" data-id="lumia-url" /><span>Copy the overlay URL. OBS Browser source <code>Lumia / Overlay</code>, 1920×1080 on the wide collection and 1080×1920 on the vertical collection, above the HUD on GRID / RACE / RACE DUAL / REPLAY.</span></label>
     <label class="step"><input type="checkbox" data-id="lumia-scenes" /><span>Alerts → OBS scene lights: STARTING SOON amber, GRID ice, RACE ember, RACE DUAL ember+ice, REPLAY dim gold, BRB dim blue, ENDING gold pulse.</span></label>
-    <label class="step"><input type="checkbox" data-id="cam-cmds" /><span>Chat commands with OBS Set source visibility: <code>!face</code>, <code>!wheel</code>, <code>!both</code>, <code>!game</code> (hide cams). Scene commands: <code>!dual</code> → RACE DUAL, <code>!race</code> → RACE, <code>!replay</code> → REPLAY.</span></label>
+    <label class="step"><input type="checkbox" data-id="cam-cmds" /><span>Chat commands with OBS Set source visibility: <code>!face</code>, <code>!room</code>, <code>!rig</code>, <code>!wheel</code>, <code>!pedals</code>, <code>!game</code> (hide cams). Scene commands: <code>!dual</code> → RACE DUAL, <code>!race</code> → RACE, <code>!replay</code> → REPLAY.</span></label>
 
     <h2>E. Go live dry-run</h2>
     <label class="step"><input type="checkbox" data-id="hotkeys" /><span>OBS hotkeys: Numpad 1 STARTING SOON, 2 GRID, 3 RACE, 4 RACE DUAL, 5 REPLAY, 6 BRB, 7 ENDING. Same keys work on the vertical collection.</span></label>
-    <label class="step"><input type="checkbox" data-id="test" /><span>Record a test. Switch every scene. Toggle face/wheel. Fire a Lumia test alert. Confirm BeamNG audio vs mic.</span></label>
+    <label class="step"><input type="checkbox" data-id="test" /><span>Record a test. Switch every scene. Toggle face / room / wheel / pedals. Fire a Lumia test alert. Confirm BeamNG audio vs mic.</span></label>
     <label class="step"><input type="checkbox" data-id="mute" /><span>BRB should not leave engine audio blasting unless you want it.</span></label>
 
     <h2>Browser source files</h2>

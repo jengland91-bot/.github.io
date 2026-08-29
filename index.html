@@ -9,18 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ember: #ff4d1a;
-      --amber: #ffb020;
-      --ice: #5ce1e6;
-      --sand: #e8c9a0;
-      --paper: #f4efe8;
-      --void: #07080c;
-      --asphalt: #12141c;
+      --ember: #c65a12;
+      --amber: #e0a04a;
+      --ice: #9aab70;
+      --sand: #d4c4a0;
+      --paper: #ede4d4;
+      --void: #120e0a;
+      --asphalt: #1c1610;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background:
-        radial-gradient(ellipse 70% 40% at 50% -10%, rgba(255, 77, 26, 0.18), transparent 55%),
+        radial-gradient(ellipse 70% 40% at 50% -10%, rgba(198, 90, 18, 0.22), transparent 55%),
         var(--void);
       color: var(--paper);
       font-family: Outfit, system-ui, sans-serif;
@@ -146,7 +146,7 @@
   <header>
     <div class="kicker">RISE ABOVE  ·  BEAMNG KIT</div>
     <h1>OBS + LUMIA<br />MULTI-CAM</h1>
-    <p>BeamNG race layouts with face + wheel cameras, a dual-angle scene, and one Lumia overlay for chat, alerts, and lights. Wide 16:9 and vertical 9:16 are both in the installer. No second alerts app.</p>
+    <p>BeamNG off-road layouts with Face, Room, Wheel, and Pedals cameras, a dual-angle scene, and one Lumia overlay for chat, alerts, and lights. Wide 16:9 and vertical 9:16 are both in the installer. Tagged @jengland91. Stream audio is game + mic only — Discord stays off.</p>
     <nav>
       <a class="btn" href="setup.html">Open setup guide</a>
       <a class="btn" href="tools/install.html">Install into OBS</a>
@@ -183,24 +183,24 @@
     <div class="grid">
       <article class="card">
         <h2>1. OBS + BeamNG</h2>
-        <p>Named scenes, Game Capture, and three cameras: game, face, wheel. Dual-cam scene for a second BeamNG angle. A second collection at 1080×1920 for TikTok / Shorts / Reels.</p>
+        <p>Named scenes, Game Capture, and four cameras: face, room, wheel, pedals. Dual-cam scene for a second BeamNG angle. A second collection at 1080×1920 for TikTok / Shorts / Reels. Mixer: Desktop Audio muted, <code>Audio / Game</code> = BeamNG, <code>Mic / Main</code> = you.</p>
         <p style="margin-top:10px"><a href="docs/obs.html">OBS + BeamNG map →</a></p>
       </article>
       <article class="card">
         <h2>2. Multi-cam</h2>
-        <p><code>Cam / Face</code> and <code>Cam / Wheel</code> as Paste (Reference) on every scene. Optional <code>Game / Angle 2</code> for bumper or chase while the main view stays cockpit.</p>
+        <p><code>Cam / Face</code>, <code>Cam / Room</code>, <code>Cam / Wheel</code>, and <code>Cam / Pedals</code> as Paste (Reference) on every live scene. Optional <code>Game / Angle 2</code> for bumper or chase while the main view stays cockpit. After this layout change, download a new zip and re-run Install-OBS.bat.</p>
         <p style="margin-top:10px"><a href="obs/source-map.md">Exact source names →</a></p>
       </article>
       <article class="card">
         <h2>3. Lumia Stream</h2>
-        <p>One overlay URL for chat, alerts, and goals. Lights follow the scene. Chat commands flip face/wheel/dual. Casterlabs is not part of this kit.</p>
+        <p>One overlay URL for chat, alerts, and goals. Lights follow the scene. Chat commands: <code>!face</code> <code>!room</code> <code>!rig</code> <code>!wheel</code> <code>!pedals</code> <code>!game</code>. Casterlabs is not part of this kit.</p>
         <p style="margin-top:10px"><a href="docs/lumia.html">Overlay + light recipes →</a></p>
       </article>
       <article class="card">
         <h2>Customize</h2>
         <ol>
           <li>Edit <code>overlays/shared/config.js</code></li>
-          <li>Set your name, socials, and colors</li>
+          <li>Set your name, LIVE / GRID words, socials (Twitch / YouTube / Kick / TikTok / Instagram), and colors</li>
           <li>In OBS, right-click the overlay source → Refresh</li>
         </ol>
       </article>

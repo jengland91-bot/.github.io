@@ -1,15 +1,15 @@
 :root {
-  --ember: #ff4d1a;
-  --amber: #ffb020;
-  --ice: #5ce1e6;
-  --sand: #e8c9a0;
-  --paper: #f4efe8;
-  --muted: #9a938a;
-  --void: #07080c;
-  --asphalt: #12141c;
-  --panel: rgba(10, 12, 18, 0.55);
-  --line: rgba(244, 239, 232, 0.16);
-  --glow: 0 0 28px color-mix(in srgb, var(--ember) 55%, transparent);
+  --ember: #c65a12;
+  --amber: #e0a04a;
+  --ice: #9aab70;
+  --sand: #d4c4a0;
+  --paper: #ede4d4;
+  --muted: #9a8c78;
+  --void: #120e0a;
+  --asphalt: #1c1610;
+  --panel: rgba(18, 12, 8, 0.62);
+  --line: rgba(237, 228, 212, 0.16);
+  --glow: 0 0 22px color-mix(in srgb, var(--ember) 40%, transparent);
   --font-display: "Bebas Neue", "Arial Narrow", Impact, sans-serif;
   --font-hud: "Rajdhani", "Segoe UI", sans-serif;
   --font-ui: "Outfit", "Segoe UI", sans-serif;
@@ -44,8 +44,31 @@ body.scene-ending,
 body.scene-intermission,
 body.preview {
   background:
-    radial-gradient(ellipse 80% 50% at 50% 115%, color-mix(in srgb, var(--ember) 38%, transparent), transparent 60%),
-    linear-gradient(180deg, #182038 0%, #0b0d14 48%, #1a140e 100%);
+    radial-gradient(ellipse 90% 46% at 50% 118%, color-mix(in srgb, var(--ember) 42%, transparent), transparent 62%),
+    radial-gradient(ellipse 50% 30% at 80% 0%, rgba(154, 171, 112, 0.12), transparent 55%),
+    linear-gradient(180deg, #2a2216 0%, #120e0a 48%, #2a160c 100%);
+}
+
+body.scene-starting::before,
+body.scene-brb::before,
+body.scene-ending::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.22;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 11px,
+      rgba(80, 50, 20, 0.18) 11px 12px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 13px,
+      rgba(40, 28, 12, 0.12) 13px 14px
+    );
 }
 
 #dust {
@@ -59,11 +82,11 @@ body.preview {
   position: absolute;
   left: 0;
   right: 0;
-  height: 10px;
+  height: 12px;
   background: repeating-linear-gradient(
     -45deg,
-    #090909 0 14px,
-    var(--ember) 14px 28px
+    #1a1008 0 16px,
+    #8a3e10 14px 28px
   );
   z-index: 8;
 }
@@ -272,12 +295,13 @@ body.preview {
 .well {
   position: absolute;
   z-index: 4;
-  border: 2px solid color-mix(in srgb, var(--ember) 70%, white 10%);
+  border: 3px solid color-mix(in srgb, var(--ember) 78%, #3a220c);
   box-shadow:
     var(--glow),
-    inset 0 0 40px rgba(0, 0, 0, 0.18);
+    inset 0 0 36px rgba(20, 10, 4, 0.28);
   background: transparent;
   pointer-events: none;
+  border-radius: 2px;
 }
 
 .well::before,
@@ -344,26 +368,40 @@ body.setup .cam-name {
   display: none;
 }
 
-/* Race HUD — face + wheel along the bottom, Lumia chat on the right */
+/* Race HUD — face, room, wheel, pedals along the bottom */
 .well-face {
   left: 48px;
-  top: 816px;
-  width: 400px;
-  height: 225px;
+  top: 876px;
+  width: 320px;
+  height: 180px;
+}
+
+.well-room {
+  left: 384px;
+  top: 876px;
+  width: 320px;
+  height: 180px;
 }
 
 .well-wheel {
-  left: 464px;
-  top: 816px;
-  width: 400px;
-  height: 225px;
+  left: 720px;
+  top: 876px;
+  width: 320px;
+  height: 180px;
+}
+
+.well-pedals {
+  left: 1056px;
+  top: 876px;
+  width: 320px;
+  height: 180px;
 }
 
 .well-cam {
   left: 48px;
-  top: 816px;
-  width: 400px;
-  height: 225px;
+  top: 876px;
+  width: 320px;
+  height: 180px;
 }
 
 .well-chat {
@@ -407,8 +445,8 @@ body.scene-dual:not(.setup) .well-goal {
 
 .well-nowplaying {
   left: 48px;
-  top: 736px;
-  width: 400px;
+  top: 800px;
+  width: 320px;
   height: 64px;
 }
 
@@ -419,7 +457,7 @@ body.scene-dual:not(.setup) .well-goal {
   height: 360px;
 }
 
-/* GRID — big face + wheel, Lumia chat under the wheel */
+/* GRID — big face, room, wheel + pedals, chat under the rig */
 .scene-chatting .well-face {
   left: 48px;
   top: 168px;
@@ -427,18 +465,32 @@ body.scene-dual:not(.setup) .well-goal {
   height: 540px;
 }
 
-.scene-chatting .well-wheel {
+.scene-chatting .well-room {
   left: 1032px;
   top: 168px;
   width: 840px;
-  height: 473px;
+  height: 360px;
+}
+
+.scene-chatting .well-wheel {
+  left: 1032px;
+  top: 544px;
+  width: 408px;
+  height: 200px;
+}
+
+.scene-chatting .well-pedals {
+  left: 1464px;
+  top: 544px;
+  width: 408px;
+  height: 200px;
 }
 
 .scene-chatting .well-chat {
   left: 1032px;
-  top: 660px;
+  top: 760px;
   width: 840px;
-  height: 360px;
+  height: 268px;
 }
 
 .scene-chatting .well-alerts {
@@ -474,16 +526,30 @@ body.scene-dual:not(.setup) .well-goal {
 
 .scene-dual .well-face {
   left: 48px;
-  top: 860px;
-  width: 320px;
-  height: 180px;
+  top: 900px;
+  width: 240px;
+  height: 135px;
+}
+
+.scene-dual .well-room {
+  left: 304px;
+  top: 900px;
+  width: 240px;
+  height: 135px;
 }
 
 .scene-dual .well-wheel {
-  left: 384px;
-  top: 860px;
-  width: 320px;
-  height: 180px;
+  left: 560px;
+  top: 900px;
+  width: 240px;
+  height: 135px;
+}
+
+.scene-dual .well-pedals {
+  left: 816px;
+  top: 900px;
+  width: 240px;
+  height: 135px;
 }
 
 .scene-dual .well-chat {
@@ -509,7 +575,9 @@ body.scene-dual:not(.setup) .well-goal {
 
 /* REPLAY — keep the game clean */
 .scene-replay .well-face,
+.scene-replay .well-room,
 .scene-replay .well-wheel,
+.scene-replay .well-pedals,
 .scene-replay .well-chat,
 .scene-replay .well-nowplaying,
 .scene-replay .well-goal,
@@ -702,21 +770,35 @@ body.vertical .well-face {
   left: 16px;
   top: 624px;
   width: 520px;
-  height: 292px;
+  height: 220px;
 }
 
-body.vertical .well-wheel {
+body.vertical .well-room {
   left: 544px;
   top: 624px;
   width: 520px;
-  height: 292px;
+  height: 220px;
+}
+
+body.vertical .well-wheel {
+  left: 16px;
+  top: 860px;
+  width: 520px;
+  height: 220px;
+}
+
+body.vertical .well-pedals {
+  left: 544px;
+  top: 860px;
+  width: 520px;
+  height: 220px;
 }
 
 body.vertical .well-chat {
   left: 16px;
-  top: 932px;
+  top: 1096px;
   width: 1048px;
-  height: 960px;
+  height: 800px;
 }
 
 body.vertical .well-alerts {
@@ -755,21 +837,35 @@ body.vertical.scene-chatting .well-face {
   left: 16px;
   top: 88px;
   width: 1048px;
-  height: 590px;
+  height: 420px;
+}
+
+body.vertical.scene-chatting .well-room {
+  left: 16px;
+  top: 524px;
+  width: 1048px;
+  height: 280px;
 }
 
 body.vertical.scene-chatting .well-wheel {
   left: 16px;
-  top: 696px;
-  width: 1048px;
-  height: 392px;
+  top: 820px;
+  width: 516px;
+  height: 200px;
+}
+
+body.vertical.scene-chatting .well-pedals {
+  left: 548px;
+  top: 820px;
+  width: 516px;
+  height: 200px;
 }
 
 body.vertical.scene-chatting .well-chat {
   left: 16px;
-  top: 1104px;
+  top: 1036px;
   width: 1048px;
-  height: 780px;
+  height: 816px;
 }
 
 body.vertical.scene-chatting .well-alerts {
@@ -808,28 +904,42 @@ body.vertical.scene-dual .well-angle {
   left: 16px;
   top: 624px;
   width: 1048px;
-  height: 280px;
+  height: 200px;
 }
 
 body.vertical.scene-dual .well-face {
   left: 16px;
-  top: 920px;
+  top: 840px;
   width: 520px;
-  height: 292px;
+  height: 180px;
+}
+
+body.vertical.scene-dual .well-room {
+  left: 544px;
+  top: 840px;
+  width: 520px;
+  height: 180px;
 }
 
 body.vertical.scene-dual .well-wheel {
-  left: 544px;
-  top: 920px;
+  left: 16px;
+  top: 1036px;
   width: 520px;
-  height: 292px;
+  height: 180px;
+}
+
+body.vertical.scene-dual .well-pedals {
+  left: 544px;
+  top: 1036px;
+  width: 520px;
+  height: 180px;
 }
 
 body.vertical.scene-dual .well-chat {
   left: 16px;
-  top: 1228px;
+  top: 1232px;
   width: 1048px;
-  height: 672px;
+  height: 660px;
 }
 
 body.vertical.scene-dual .well-nowplaying {
@@ -851,7 +961,9 @@ body.vertical.scene-replay .well-game {
 }
 
 body.vertical.scene-replay .well-face,
+body.vertical.scene-replay .well-room,
 body.vertical.scene-replay .well-wheel,
+body.vertical.scene-replay .well-pedals,
 body.vertical.scene-replay .well-chat,
 body.vertical.scene-replay .well-nowplaying,
 body.vertical.scene-replay .well-goal,

@@ -76,30 +76,39 @@ $items = @{
     "GRID" = @(
         @{ name = "Color / Backdrop"; kind = "color" }
         @{ name = "Cam / Face"; kind = "camera"; x = 48; y = 168; w = 960; h = 540 }
-        @{ name = "Cam / Wheel"; kind = "camera"; x = 1032; y = 168; w = 840; h = 473 }
+        @{ name = "Cam / Room"; kind = "camera"; x = 1032; y = 168; w = 840; h = 360 }
+        @{ name = "Cam / Wheel"; kind = "camera"; x = 1032; y = 544; w = 408; h = 200 }
+        @{ name = "Cam / Pedals"; kind = "camera"; x = 1464; y = 544; w = 408; h = 200 }
         @{ name = "Overlay / Grid HUD"; kind = "browser"; x = 0; y = 0; w = 1920; h = 1080 }
         @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1920; h = 1080 }
     )
     "RACE" = @(
         @{ name = "Game / Main"; kind = "game"; x = 0; y = 0; w = 1920; h = 1080 }
-        @{ name = "Cam / Face"; kind = "camera"; x = 48; y = 816; w = 400; h = 225 }
-        @{ name = "Cam / Wheel"; kind = "camera"; x = 464; y = 816; w = 400; h = 225 }
+        @{ name = "Cam / Face"; kind = "camera"; x = 48; y = 876; w = 320; h = 180 }
+        @{ name = "Cam / Room"; kind = "camera"; x = 384; y = 876; w = 320; h = 180 }
+        @{ name = "Cam / Wheel"; kind = "camera"; x = 720; y = 876; w = 320; h = 180 }
+        @{ name = "Cam / Pedals"; kind = "camera"; x = 1056; y = 876; w = 320; h = 180 }
         @{ name = "Overlay / Race HUD"; kind = "browser"; x = 0; y = 0; w = 1920; h = 1080 }
         @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1920; h = 1080 }
         @{ name = "Media / Hype Clip"; kind = "media"; x = 0; y = 0; w = 1920; h = 1080; enabled = $false }
+        @{ name = "Audio / Game"; kind = "gameaudio" }
     )
     "RACE DUAL" = @(
         @{ name = "Game / Main"; kind = "game"; x = 0; y = 0; w = 1920; h = 1080 }
         @{ name = "Game / Angle 2"; kind = "game"; x = 1248; y = 48; w = 640; h = 360 }
-        @{ name = "Cam / Face"; kind = "camera"; x = 48; y = 860; w = 320; h = 180 }
-        @{ name = "Cam / Wheel"; kind = "camera"; x = 384; y = 860; w = 320; h = 180 }
+        @{ name = "Cam / Face"; kind = "camera"; x = 48; y = 900; w = 240; h = 135 }
+        @{ name = "Cam / Room"; kind = "camera"; x = 304; y = 900; w = 240; h = 135 }
+        @{ name = "Cam / Wheel"; kind = "camera"; x = 560; y = 900; w = 240; h = 135 }
+        @{ name = "Cam / Pedals"; kind = "camera"; x = 816; y = 900; w = 240; h = 135 }
         @{ name = "Overlay / Dual HUD"; kind = "browser"; x = 0; y = 0; w = 1920; h = 1080 }
         @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1920; h = 1080 }
+        @{ name = "Audio / Game"; kind = "gameaudio" }
     )
     "REPLAY" = @(
         @{ name = "Game / Main"; kind = "game"; x = 0; y = 0; w = 1920; h = 1080 }
         @{ name = "Overlay / Replay HUD"; kind = "browser"; x = 0; y = 0; w = 1920; h = 1080 }
         @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1920; h = 1080 }
+        @{ name = "Audio / Game"; kind = "gameaudio" }
     )
     "BRB" = @(
         @{ name = "Color / Backdrop"; kind = "color" }
@@ -128,31 +137,40 @@ $verticalItems = @{
     )
     "GRID" = @(
         @{ name = "Color / Backdrop"; kind = "color" }
-        @{ name = "Cam / Face"; kind = "camera"; x = 16; y = 88; w = 1048; h = 590 }
-        @{ name = "Cam / Wheel"; kind = "camera"; x = 16; y = 696; w = 1048; h = 392 }
+        @{ name = "Cam / Face"; kind = "camera"; x = 16; y = 88; w = 1048; h = 420 }
+        @{ name = "Cam / Room"; kind = "camera"; x = 16; y = 524; w = 1048; h = 280 }
+        @{ name = "Cam / Wheel"; kind = "camera"; x = 16; y = 820; w = 516; h = 200 }
+        @{ name = "Cam / Pedals"; kind = "camera"; x = 548; y = 820; w = 516; h = 200 }
         @{ name = "Overlay / Grid HUD"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
         @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1080; h = 1920 }
     )
     "RACE" = @(
         @{ name = "Game / Main"; kind = "game"; x = 0; y = 0; w = 1080; h = 608 }
-        @{ name = "Cam / Face"; kind = "camera"; x = 16; y = 624; w = 520; h = 292 }
-        @{ name = "Cam / Wheel"; kind = "camera"; x = 544; y = 624; w = 520; h = 292 }
+        @{ name = "Cam / Face"; kind = "camera"; x = 16; y = 624; w = 520; h = 220 }
+        @{ name = "Cam / Room"; kind = "camera"; x = 544; y = 624; w = 520; h = 220 }
+        @{ name = "Cam / Wheel"; kind = "camera"; x = 16; y = 860; w = 520; h = 220 }
+        @{ name = "Cam / Pedals"; kind = "camera"; x = 544; y = 860; w = 520; h = 220 }
         @{ name = "Overlay / Race HUD"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
         @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1080; h = 1920 }
         @{ name = "Media / Hype Clip"; kind = "media"; x = 0; y = 0; w = 1080; h = 1920; enabled = $false }
+        @{ name = "Audio / Game"; kind = "gameaudio" }
     )
     "RACE DUAL" = @(
         @{ name = "Game / Main"; kind = "game"; x = 0; y = 0; w = 1080; h = 608 }
-        @{ name = "Game / Angle 2"; kind = "game"; x = 16; y = 624; w = 1048; h = 280 }
-        @{ name = "Cam / Face"; kind = "camera"; x = 16; y = 920; w = 520; h = 292 }
-        @{ name = "Cam / Wheel"; kind = "camera"; x = 544; y = 920; w = 520; h = 292 }
+        @{ name = "Game / Angle 2"; kind = "game"; x = 16; y = 624; w = 1048; h = 200 }
+        @{ name = "Cam / Face"; kind = "camera"; x = 16; y = 840; w = 520; h = 180 }
+        @{ name = "Cam / Room"; kind = "camera"; x = 544; y = 840; w = 520; h = 180 }
+        @{ name = "Cam / Wheel"; kind = "camera"; x = 16; y = 1036; w = 520; h = 180 }
+        @{ name = "Cam / Pedals"; kind = "camera"; x = 544; y = 1036; w = 520; h = 180 }
         @{ name = "Overlay / Dual HUD"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
         @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1080; h = 1920 }
+        @{ name = "Audio / Game"; kind = "gameaudio" }
     )
     "REPLAY" = @(
         @{ name = "Game / Main"; kind = "game"; x = 0; y = 360; w = 1080; h = 608 }
         @{ name = "Overlay / Replay HUD"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
         @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1080; h = 1920 }
+        @{ name = "Audio / Game"; kind = "gameaudio" }
     )
     "BRB" = @(
         @{ name = "Color / Backdrop"; kind = "color" }
@@ -282,12 +300,12 @@ function Get-InputSpec($kinds, $item) {
             if ($item.name -eq "Game / Angle 2") {
                 return @{
                     inputKind = (Get-Kind $kinds @("window_capture", "game_capture"))
-                    settings  = @{ cursor = $false; capture_cursor = $false }
+                    settings  = @{ cursor = $false; capture_cursor = $false; capture_audio = $false }
                 }
             }
             return @{
                 inputKind = (Get-Kind $kinds @("game_capture", "window_capture"))
-                settings  = @{ capture_mode = "any"; capture_cursor = $false }
+                settings  = @{ capture_mode = "any"; capture_cursor = $false; capture_audio = $false }
             }
         }
         "camera" {
@@ -300,6 +318,18 @@ function Get-InputSpec($kinds, $item) {
             return @{
                 inputKind = (Get-Kind $kinds @("ffmpeg_source"))
                 settings  = @{ looping = $false; restart_on_activate = $true; close_when_inactive = $true }
+            }
+        }
+        "gameaudio" {
+            return @{
+                inputKind = (Get-Kind $kinds @("wasapi_process_output_capture"))
+                settings  = @{}
+            }
+        }
+        "mic" {
+            return @{
+                inputKind = (Get-Kind $kinds @("wasapi_input_capture", "coreaudio_input_capture"))
+                settings  = @{}
             }
         }
         default { throw "Unknown kind $($item.kind)" }
@@ -441,7 +471,13 @@ function Install-RiseScenes($ws, $kinds, $sceneNames, $sceneItems) {
         Write-Host $scene
         foreach ($item in $sceneItems[$scene]) {
             $spec = Get-InputSpec $kinds $item
-            if (-not $spec.inputKind) { throw "OBS missing source type for $($item.name)" }
+            if (-not $spec.inputKind) {
+                if ($item.kind -eq "gameaudio") {
+                    Write-Host "  skip Audio / Game (this OBS has no Application Audio Capture)"
+                    continue
+                }
+                throw "OBS missing source type for $($item.name)"
+            }
             $enabled = $true
             if ($item.ContainsKey("enabled")) { $enabled = [bool]$item.enabled }
             if (-not (Test-Input $ws $item.name)) {
@@ -507,16 +543,71 @@ function Install-RiseScenes($ws, $kinds, $sceneNames, $sceneItems) {
     Invoke-Obs $ws "SetCurrentProgramScene" @{ sceneName = "STARTING SOON" } | Out-Null
 }
 
+function Install-RiseAudio($ws) {
+    Write-Host "Audio: mute Desktop so Discord is not on the stream"
+    $special = Invoke-Obs $ws "GetSpecialInputs" @{}
+    foreach ($key in @("desktop1", "desktop2")) {
+        $name = Get-ObsProp $special $key
+        if ($name) {
+            try {
+                Invoke-Obs $ws "SetInputMute" @{ inputName = $name; inputMuted = $true } | Out-Null
+                Write-Host "  muted $name"
+            }
+            catch {}
+        }
+    }
+    $mic1 = Get-ObsProp $special "mic1"
+    if ($mic1 -and $mic1 -ne "Mic / Main") {
+        try {
+            Invoke-Obs $ws "SetInputName" @{ inputName = $mic1; newInputName = "Mic / Main" } | Out-Null
+            Write-Host "  mic is Mic / Main"
+        }
+        catch {}
+    }
+    $hasGameAudio = Test-Input $ws "Audio / Game"
+    foreach ($gameName in @("Game / Main", "Game / Angle 2")) {
+        if (-not (Test-Input $ws $gameName)) { continue }
+        try {
+            Invoke-Obs $ws "SetInputSettings" @{
+                inputName     = $gameName
+                inputSettings = @{ capture_audio = (-not $hasGameAudio) }
+                overlay       = $true
+            } | Out-Null
+        }
+        catch {}
+    }
+    if ($hasGameAudio) {
+        try {
+            Invoke-Obs $ws "SetInputAudioMonitorType" @{ inputName = "Audio / Game"; monitorType = "OBS_MONITORING_TYPE_NONE" } | Out-Null
+        }
+        catch {}
+        try {
+            Invoke-Obs $ws "SetInputMute" @{ inputName = "Audio / Game"; inputMuted = $false } | Out-Null
+        }
+        catch {}
+    }
+    if ($mic1) {
+        $micName = "Mic / Main"
+        if (-not (Test-Input $ws $micName)) { $micName = $mic1 }
+        try {
+            Invoke-Obs $ws "SetInputMute" @{ inputName = $micName; inputMuted = $false } | Out-Null
+        }
+        catch {}
+    }
+}
+
 Write-Host 'Wide 1920x1080...'
 Use-RiseCollection $ws $collectionName
 Set-RiseCanvas $ws 1920 1080
 Install-RiseScenes $ws $kinds $scenes $items
+Install-RiseAudio $ws
 
 Write-Host 'Vertical 1080x1920...'
 $script:overlayFiles = $verticalOverlayFiles
 Use-RiseCollection $ws $verticalCollectionName
 Set-RiseCanvas $ws 1080 1920
 Install-RiseScenes $ws $kinds $scenes $verticalItems
+Install-RiseAudio $ws
 
 Use-RiseCollection $ws $collectionName
 Set-RiseCanvas $ws 1920 1080
@@ -532,6 +623,10 @@ Write-Host 'Same scene names in both: STARTING SOON, GRID, RACE, ...'
 Write-Host 'Numpad 1-7 still switch those scenes on whichever collection is active.'
 Write-Host ""
 Write-Host 'Next: in BOTH collections, click RACE, double-click Game / Main, pick BeamNG.'
+Write-Host 'Audio: Desktop Audio is muted so Discord is not on stream.'
+Write-Host '  Mixer: Mic / Main = your mic. Audio / Game = double-click and pick BeamNG.drive.'
+Write-Host '  If Desktop Audio is unmuted, click the speaker icon to mute it again.'
 Write-Host 'Cameras can wait.'
+Write-Host 'Links (Twitch / YouTube / Kick): edit overlays\shared\config.js then Refresh the overlay in OBS.'
 Write-Host 'To go vertical: switch the scene collection dropdown, then Start Streaming.'
 Write-Host 'To do wide and vertical at the same time, install the Aitum Vertical plugin and copy these vertical layouts into its dock.'

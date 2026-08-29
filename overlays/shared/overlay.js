@@ -31,22 +31,49 @@
     fill("[data-live-title]", STREAM.liveTitle);
     fill("[data-dual-title]", STREAM.dualTitle);
     fill("[data-replay-title]", STREAM.replayTitle);
+    fill("[data-staging-pill]", STREAM.stagingPill);
+    fill("[data-hold-pill]", STREAM.holdPill);
+    fill("[data-checkered-pill]", STREAM.checkeredPill);
+    fill("[data-starting-kicker]", STREAM.startingKicker);
+    fill("[data-starting-line1]", STREAM.startingLine1);
+    fill("[data-starting-line2]", STREAM.startingLine2);
+    fill("[data-brb-kicker]", STREAM.brbKicker);
+    fill("[data-brb-line1]", STREAM.brbLine1);
+    fill("[data-brb-line2]", STREAM.brbLine2);
+    fill("[data-ending-kicker]", STREAM.endingKicker);
+    fill("[data-ending-line1]", STREAM.endingLine1);
+    fill("[data-ending-line2]", STREAM.endingLine2);
+  }
+
+  function socialHandle(value) {
+    if (!value) return "";
+    let s = String(value).trim();
+    s = s.replace(/^https?:\/\//i, "");
+    s = s.replace(/^www\./i, "");
+    s = s.replace(/^(youtube\.com\/@|youtube\.com\/c\/|youtube\.com\/channel\/|youtube\.com\/|twitch\.tv\/|tiktok\.com\/@|tiktok\.com\/|kick\.com\/|instagram\.com\/|facebook\.com\/|x\.com\/|twitter\.com\/|discord\.gg\/|discord\.com\/invite\/)/i, "");
+    s = s.replace(/\/.*$/, "");
+    s = s.replace(/^@/, "");
+    return s;
   }
 
   function socials() {
     const row = document.querySelector("[data-socials]");
     if (!row) return;
     const map = {
-      instagram: "IG",
-      youtube: "YT",
       twitch: "TWITCH",
-      tiktok: "TIKTOK",
+      youtube: "YT",
       kick: "KICK",
+      tiktok: "TIKTOK",
+      instagram: "IG",
+      facebook: "FB",
+      x: "X",
+      twitter: "X",
+      discord: "DISCORD",
     };
     const items = STREAM.socials || {};
     row.innerHTML = "";
     Object.entries(map).forEach(([key, label]) => {
-      const handle = items[key];
+      const handle = socialHandle(items[key]);
       if (!handle) return;
       const span = document.createElement("span");
       span.textContent = `${label}  ${handle}`;
@@ -144,7 +171,7 @@
           p.x = Math.random() * W;
         }
         ctx.beginPath();
-        ctx.fillStyle = `rgba(255, 176, 80, ${p.a})`;
+        ctx.fillStyle = `rgba(210, 150, 70, ${p.a})`;
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       });

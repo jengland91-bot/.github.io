@@ -9,12 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ember: #ff4d1a;
-      --ice: #5ce1e6;
-      --sand: #e8c9a0;
-      --paper: #f4efe8;
-      --void: #07080c;
-      --asphalt: #12141c;
+      --ember: #c65a12;
+      --ice: #9aab70;
+      --sand: #d4c4a0;
+      --paper: #ede4d4;
+      --void: #120e0a;
+      --asphalt: #1c1610;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -111,7 +111,7 @@
     <legend>Lumia commands</legend>
     <label>API token (Lumia → Settings → API)</label>
     <input id="lumiaToken" type="password" autocomplete="off" />
-    <p>Creates <code>!race</code> <code>!dual</code> <code>!replay</code> <code>!grid</code> <code>!brb</code> <code>!face</code> <code>!wheel</code> <code>!both</code> <code>!game</code>. Then add the OBS action on each command in Lumia (Set current scene / Set source visibility) — the log lists the exact names.</p>
+    <p>Creates <code>!race</code> <code>!dual</code> <code>!replay</code> <code>!grid</code> <code>!brb</code> <code>!face</code> <code>!room</code> <code>!rig</code> <code>!wheel</code> <code>!pedals</code> <code>!game</code>. Then add the OBS action on each command in Lumia (Set current scene / Set source visibility) — the log lists the exact names.</p>
     <button type="button" id="btnLumia">Install Lumia commands</button>
   </fieldset>
 
@@ -304,12 +304,12 @@
       if (name === "Game / Angle 2") {
         return {
           inputKind: pickKind(["window_capture", "game_capture"]),
-          settings: { cursor: false, capture_cursor: false },
+          settings: { cursor: false, capture_cursor: false, capture_audio: false },
         };
       }
       return {
         inputKind: pickKind(["game_capture", "xcomposite_input", "window_capture"]),
-        settings: { capture_mode: "any", capture_cursor: false },
+        settings: { capture_mode: "any", capture_cursor: false, capture_audio: false },
       };
     }
     if (kind === "camera") {
@@ -322,6 +322,18 @@
       return {
         inputKind: pickKind(["ffmpeg_source"]),
         settings: { looping: false, restart_on_activate: true, close_when_inactive: true },
+      };
+    }
+    if (kind === "gameaudio") {
+      return {
+        inputKind: pickKind(["wasapi_process_output_capture"]),
+        settings: {},
+      };
+    }
+    if (kind === "mic") {
+      return {
+        inputKind: pickKind(["wasapi_input_capture", "coreaudio_input_capture"]),
+        settings: {},
       };
     }
     throw new Error("Unknown kind " + kind);
@@ -347,7 +359,13 @@
 
   async function ensureItem(scene, item, folder, lumiaUrl, layout) {
     const spec = settingsFor(item.kind, item.name, folder, lumiaUrl, layout);
-    if (!spec.inputKind) throw new Error("OBS is missing input kind for " + item.name + " (" + item.kind + ")");
+    if (!spec.inputKind) {
+      if (item.kind === "gameaudio") {
+        log("  skip Audio / Game (no Application Audio Capture on this OBS)");
+        return;
+      }
+      throw new Error("OBS is missing input kind for " + item.name + " (" + item.kind + ")");
+    }
     if (!(await inputExists(item.name))) {
       await obs.request("CreateInput", {
         sceneName: scene,
@@ -461,12 +479,47 @@
           log("Transition skipped: " + err.message);
         }
         await obs.request("SetCurrentProgramScene", { sceneName: "STARTING SOON" });
+        try {
+          const special = await obs.request("GetSpecialInputs");
+          for (const key of ["desktop1", "desktop2"]) {
+            const name = special[key];
+            if (!name) continue;
+            await obs.request("SetInputMute", { inputName: name, inputMuted: true });
+            log("  muted " + name + " (Discord stays off the stream)", "ok");
+          }
+          if (special.mic1 && special.mic1 !== "Mic / Main") {
+            await obs.request("SetInputName", { inputName: special.mic1, newInputName: "Mic / Main" });
+            log("  mic is Mic / Main", "ok");
+          }
+          const hasGameAudio = await inputExists("Audio / Game");
+          for (const gameName of ["Game / Main", "Game / Angle 2"]) {
+            if (!(await inputExists(gameName))) continue;
+            await obs.request("SetInputSettings", {
+              inputName: gameName,
+              inputSettings: { capture_audio: !hasGameAudio },
+              overlay: true,
+            });
+          }
+          if (hasGameAudio) {
+            await obs.request("SetInputAudioMonitorType", {
+              inputName: "Audio / Game",
+              monitorType: "OBS_MONITORING_TYPE_NONE",
+            });
+            await obs.request("SetInputMute", { inputName: "Audio / Game", inputMuted: false });
+          }
+          const micName = (await inputExists("Mic / Main")) ? "Mic / Main" : special.mic1;
+          if (micName && (await inputExists(micName))) {
+            await obs.request("SetInputMute", { inputName: micName, inputMuted: false });
+          }
+        } catch (err) {
+          log("Audio mute skipped: " + err.message);
+        }
       }
       if (useCollections) {
         await obs.request("SetCurrentSceneCollection", { sceneCollectionName: RISE_LAYOUT.collectionName });
       }
       log("Done. Wide = Rise Above BeamNG (1920x1080). Vertical = Rise Above BeamNG Vertical (1080x1920).", "ok");
-      log("Pick Game / Main → BeamNG in BOTH collections. Cameras can wait.", "ok");
+      log("Pick Game / Main → BeamNG in BOTH collections. Audio / Game → pick BeamNG. Desktop Audio stays muted.", "ok");
     } catch (err) {
       log("Install failed: " + err.message);
     }

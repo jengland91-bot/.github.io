@@ -15,11 +15,38 @@
   <h1>MULTI-CAM MAP</h1>
   <p>Two collections: <code>Rise Above BeamNG</code> at <code>1920×1080</code>, and <code>Rise Above BeamNG Vertical</code> at <code>1080×1920</code>. Same scene names in both. Markdown: <a href="obs.md">obs.md</a></p>
 
+  <h2>Audio — game + mic only</h2>
+  <p>Discord, Chrome, and Windows sounds stay in your headset. They do not go to Twitch, YouTube, or Kick.</p>
+  <ol>
+    <li><strong>Desktop Audio</strong> — muted in the mixer (speaker with an X). That is the Discord trap. Do not unmute it.</li>
+    <li><code>Audio / Game</code> — Application Audio Capture. Double-click it in <strong>both</strong> collections and pick <strong>BeamNG.drive</strong>.</li>
+    <li><code>Mic / Main</code> — your microphone, unmuted.</li>
+  </ol>
+  <p>If Discord still hits a VOD, Desktop Audio got unmuted. Mute it again. You can keep Discord open.</p>
+
+  <h2>Kick, Twitch, YouTube, and the rest</h2>
+  <p>Open <code>overlays/shared/config.js</code>. In the <code>socials</code> block, put a username or a full <code>https://</code> URL:</p>
+  <pre>socials: {
+  twitch: "jengland91",
+  youtube: "jengland91",
+  kick: "jengland91",
+  tiktok: "jengland91",
+  instagram: "riseabovephoto",
+  facebook: "",
+  x: "",
+  discord: "",
+}</pre>
+  <p>Blank = hidden. Save the file. In OBS, right-click the overlay source → Refresh. Those handles show on Starting Soon, BRB, and Ending (wide and vertical).</p>
+
+  <h2>Vertical</h2>
+  <p>Collection <code>Rise Above BeamNG Vertical</code> is already in the installer. Same seven scenes, 1080×1920, same audio rules. Switch the dropdown at the top of OBS, pick BeamNG on <code>Game / Main</code> and <code>Audio / Game</code> in that collection too, then Start Streaming.</p>
+  <p>OBS cannot run 16:9 and 9:16 at the same time in one collection. For Twitch + TikTok together, install <a href="https://aitum.tv/vertical">Aitum Vertical</a> and copy the vertical layouts into its dock.</p>
+
   <h2>BeamNG capture</h2>
   <ol>
     <li>Borderless windowed, 1920×1080 if the PC can hold it</li>
     <li>Steam overlay off for BeamNG</li>
-    <li><code>Game / Main</code> = Game Capture → specific window → BeamNG.drive. Cursor off</li>
+    <li><code>Game / Main</code> = Game Capture → specific window → BeamNG.drive. Cursor off. Game-capture audio is off so Discord cannot sneak in that way either.</li>
     <li>Black frame (Vulkan): Window Capture, method Windows Graphics Capture</li>
   </ol>
   <p>In-game cameras (C / Shift+C) all flow through <code>Game / Main</code>. They are not extra OBS sources.</p>
@@ -28,12 +55,14 @@
   <table>
     <tr><th>Source</th><th>Sees</th></tr>
     <tr><td><code>Game / Main</code></td><td>BeamNG</td></tr>
-    <tr><td><code>Cam / Face</code></td><td>You</td></tr>
+    <tr><td><code>Cam / Face</code></td><td>Close-up of you</td></tr>
+    <tr><td><code>Cam / Room</code></td><td>Face + room</td></tr>
     <tr><td><code>Cam / Wheel</code></td><td>Hands / wheel</td></tr>
+    <tr><td><code>Cam / Pedals</code></td><td>Pedals</td></tr>
     <tr><td><code>Game / Angle 2</code></td><td>Optional second BeamNG view, RACE DUAL only</td></tr>
   </table>
   <ul>
-    <li>Two webcams on different USB controllers</li>
+    <li>Four capture devices on different USB controllers when you can</li>
     <li>720p 30fps each</li>
     <li>Deactivate when not showing: <strong>off</strong></li>
     <li>Create once, Paste (Reference) into other scenes</li>
@@ -42,24 +71,23 @@
   <h2>RACE — bottom → top</h2>
   <ol>
     <li><code>Game / Main</code></li>
-    <li><code>Cam / Face</code> 400×225 at 48, 816</li>
-    <li><code>Cam / Wheel</code> 400×225 at 464, 816</li>
+    <li><code>Audio / Game</code> (no picture, BeamNG sound only)</li>
+    <li><code>Cam / Face</code> 320×180 at 48, 876</li>
+    <li><code>Cam / Room</code> 320×180 at 384, 876</li>
+    <li><code>Cam / Wheel</code> 320×180 at 720, 876</li>
+    <li><code>Cam / Pedals</code> 320×180 at 1056, 876</li>
     <li><code>Overlay / Race HUD</code> (<code>live.html</code>)</li>
     <li><code>Lumia / Overlay</code></li>
   </ol>
 
   <h2>GRID</h2>
-  <p>Face 960×540 at 48, 168. Wheel 840×473 at 1032, 168. Lumia chat 840×360 at 1032, 660.</p>
+  <p>Face 960×540 at 48, 168. Room 840×360 at 1032, 168. Wheel 408×200 at 1032, 544. Pedals 408×200 at 1464, 544. Lumia chat 840×268 at 1032, 760.</p>
 
   <h2>RACE DUAL</h2>
-  <p>Full game + Angle 2 640×360 at 1248, 48. Small face/wheel bottom left. Chat under the angle.</p>
+  <p>Full game + Angle 2 640×360 at 1248, 48. Small Face / Room / Wheel / Pedals along the bottom. Chat under the angle.</p>
 
   <h2>REPLAY</h2>
-  <p>Game only + Replay HUD. No cams.</p>
-
-  <h2>Vertical 1080×1920</h2>
-  <p>Collection <code>Rise Above BeamNG Vertical</code>. On RACE, game is 1080×608 at the top, face + wheel under it, chat below. Pick BeamNG on <code>Game / Main</code> in this collection too. Numbers: <a href="../obs/source-map.md">source map</a>.</p>
-  <p>Switch the collection dropdown to go vertical-only. For Twitch + TikTok at once, install Aitum Vertical and copy those layouts into its dock.</p>
+  <p>Game only + Replay HUD. No cams. Game audio still comes from <code>Audio / Game</code>.</p>
 
   <h2>Hotkeys</h2>
   <p>Numpad 1–7: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING. Fade 300 ms. Same keys work on the vertical collection.</p>

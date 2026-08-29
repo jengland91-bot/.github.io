@@ -1,10 +1,10 @@
 :root {
-  --ember: #ff4d1a;
-  --ice: #5ce1e6;
-  --sand: #e8c9a0;
-  --paper: #f4efe8;
-  --void: #07080c;
-  --asphalt: #12141c;
+  --ember: #c65a12;
+  --ice: #9aab70;
+  --sand: #d4c4a0;
+  --paper: #ede4d4;
+  --void: #120e0a;
+  --asphalt: #1c1610;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
