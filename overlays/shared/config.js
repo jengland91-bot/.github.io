@@ -41,6 +41,8 @@ window.STREAM = {
   endingMessage: "Thanks for riding along.",
 
   chattingTitle: "GRID",
+  /* Small word on the DESK scene pill. Sit-at-desk other games. */
+  deskTitle: "DESK",
   liveTitle: "LIVE",
   dualTitle: "DUAL",
   replayTitle: "REPLAY",

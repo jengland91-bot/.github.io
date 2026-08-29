@@ -9,11 +9,12 @@ Turn on **Dual layout**. Add sources on the **phone** canvas first. Landscape on
 Studio Dual layout is not the scene named RACE DUAL. Dual layout = two screens. RACE DUAL = a second BeamNG camera angle.
 
 1. Double-click `tools/Start-TikTokLayout.bat` and leave it open while live.
-2. Same seven scene names. Start with RACE.
+2. Same scene names, including DESK for sit-at-desk other games. Start with RACE.
 3. Phone Overlay Link URLs:
 
 - STARTING SOON: `http://127.0.0.1:5500/overlays/vertical/starting-soon.html?m=5`
 - GRID: `http://127.0.0.1:5500/overlays/vertical/chatting.html`
+- DESK: `http://127.0.0.1:5500/overlays/vertical/desk.html`
 - RACE: `http://127.0.0.1:5500/overlays/vertical/live.html`
 - RACE DUAL: `http://127.0.0.1:5500/overlays/vertical/race-dual.html`
 - REPLAY: `http://127.0.0.1:5500/overlays/vertical/replay.html`

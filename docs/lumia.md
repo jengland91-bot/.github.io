@@ -39,6 +39,7 @@ GRID and RACE DUAL use different wells — either duplicate the overlay in Lumia
 | --- | --- |
 | `STARTING SOON` | Moss / trail green, slow breathe |
 | `GRID` | Soft moss / white, face-friendly |
+| `DESK` | Moss (sit at desk, other games) |
 | `RACE` | Monster green `#7CB701` |
 | `RACE DUAL` | Pine + a bit of moss on a second zone if you have one |
 | `REPLAY` | Dim olive |
@@ -49,7 +50,7 @@ Follow/sub in Lumia: **on-screen alert + a 2s light flash**. Do not add a second
 
 ## Camera director (OBS actions)
 
-Use **Set source visibility** on the scene `RACE` (and copy the same rows for `GRID` / `RACE DUAL`).
+Use **Set source visibility** on the scene `RACE` (and copy the same rows for `GRID` / `RACE DUAL`). On `DESK`, only `Cam / Face` exists — `!face` / `!rig` show it, `!game` hides it.
 
 | Command | Action |
 | --- | --- |
@@ -63,6 +64,7 @@ Use **Set source visibility** on the scene `RACE` (and copy the same rows for `G
 | `!dual` | Set scene `RACE DUAL` |
 | `!replay` | Set scene `REPLAY` |
 | `!grid` | Set scene `GRID` |
+| `!desk` | Set scene `DESK` (other games, sit at desk) |
 | `!brb` | Set scene `BRB` |
 
 Mods-only for scene switches if random viewers should not yank you into BRB. `!face` / `!room` / `!rig` / `!wheel` / `!pedals` can be everyone with a 15–30s cooldown.

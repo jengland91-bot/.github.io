@@ -576,7 +576,7 @@
     const have = await vendorAitumScenes();
     log("Vertical Scenes dock: " + (have.length ? have.join(", ") : "(none reported)"));
     if (have.length < 2) {
-      log("If you still only see STARTING SOON, click + in that dock and name them GRID V, RACE V, REPLAY V, BRB V, ENDING V.");
+      log("If you still only see STARTING SOON, click + in that dock and name them GRID V, DESK V, RACE V, REPLAY V, BRB V, ENDING V.");
     }
     log("Right-click each -> Linked Scenes -> matching wide scene (RACE V -> RACE).", "ok");
     return true;
@@ -687,7 +687,7 @@
         log("Aitum Vertical install skipped: " + err.message);
       }
       log("Done. Stay on Rise Above BeamNG. If Vertical Scenes filled, right-click each -> Linked Scenes. See docs/aitum.html.", "ok");
-      log("Pick Game / Main -> BeamNG. Audio / Game -> pick BeamNG. Desktop Audio stays muted.", "ok");
+      log("Pick Game / Main -> BeamNG (or the other game on DESK). Audio / Game -> pick that same game. Desktop Audio stays muted.", "ok");
     } catch (err) {
       log("Install failed: " + err.message);
     }

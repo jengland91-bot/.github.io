@@ -11,6 +11,7 @@ The installer creates **two** scene collections. Same scene names in both. Switc
 
 - `STARTING SOON`
 - `GRID`
+- `DESK`
 - `RACE`
 - `RACE DUAL`
 - `REPLAY`
@@ -23,19 +24,20 @@ The installer creates **two** scene collections. Same scene names in both. Switc
 | --- | --- | --- |
 | `Overlay / Starting Soon` | Browser | Wide: `starting-soon.html?m=5`. Vertical: `vertical/starting-soon.html?m=5` |
 | `Overlay / Grid HUD` | Browser | Wide: `chatting.html`. Vertical: `vertical/chatting.html` |
+| `Overlay / Desk HUD` | Browser | Wide: `desk.html`. Vertical: `vertical/desk.html` |
 | `Overlay / Race HUD` | Browser | Wide: `live.html`. Vertical: `vertical/live.html` |
 | `Overlay / Dual HUD` | Browser | Wide: `race-dual.html`. Vertical: `vertical/race-dual.html` |
 | `Overlay / Replay HUD` | Browser | Wide: `replay.html`. Vertical: `vertical/replay.html` |
 | `Overlay / BRB` | Browser | Wide: `brb.html`. Vertical: `vertical/brb.html` |
 | `Overlay / Ending` | Browser | Wide: `ending.html`. Vertical: `vertical/ending.html` |
-| `Game / Main` | Game Capture | BeamNG.drive. Pick the window in **both** collections |
+| `Game / Main` | Game Capture | BeamNG on RACE. Other games on DESK. Pick the window in **both** collections |
 | `Game / Angle 2` | Game or Window Capture | Second view. RACE DUAL only |
-| `Cam / Face` | Video Capture Device | Close-up. Paste (Reference) onto GRID, RACE, and RACE DUAL |
-| `Cam / Room` | Video Capture Device | Face + room. Same scenes |
-| `Cam / Wheel` | Video Capture Device | Hands / wheel. Same scenes |
-| `Cam / Pedals` | Video Capture Device | Pedals. Same scenes |
+| `Cam / Face` | Video Capture Device | Close-up. Paste (Reference) onto GRID, DESK, RACE, and RACE DUAL |
+| `Cam / Room` | Video Capture Device | Face + room. GRID / RACE / RACE DUAL |
+| `Cam / Wheel` | Video Capture Device | Hands / wheel. Same racing scenes |
+| `Cam / Pedals` | Video Capture Device | Pedals. Same racing scenes |
 | `Mic / Main` | Audio Input | Your mic. Desktop Audio stays muted |
-| `Audio / Game` | Application Audio Capture | BeamNG only. Discord stays off |
+| `Audio / Game` | Application Audio Capture | BeamNG on RACE. The other game on DESK. Discord stays off |
 | `Lumia / Overlay` | Browser | Lumia overlay URL. 1920×1080 wide, 1080×1920 vertical |
 | `Media / Hype Clip` | Media | Hidden; Lumia toggles it |
 | `Audio / Staging Music` | Media | STARTING SOON / BRB |
@@ -56,6 +58,20 @@ LIVE / GRID / DUAL words on the HUD come from `overlays/shared/config.js`. Chang
 | `Lumia / Overlay` | 1920 | 1080 | 0 | 0 |
 
 Lumia Chatbox layer: **384×500 at 1488, 520**. Alerts: **860×200 at 530, 24**.
+
+## DESK transforms (wide 1920×1080)
+
+Sit at the desk playing other games. Full game, one big face cam, no wheel / pedals / room.
+
+| Source | W | H | X | Y |
+| --- | --- | --- | --- | --- |
+| `Game / Main` | 1920 | 1080 | 0 | 0 |
+| `Audio / Game` | — | — | — | — |
+| `Cam / Face` | 640 | 360 | 1256 | 696 |
+| `Overlay / Desk HUD` | 1920 | 1080 | 0 | 0 |
+| `Lumia / Overlay` | 1920 | 1080 | 0 | 0 |
+
+Lumia Chatbox: **400×360 at 840, 696**. Alerts: **860×200 at 200, 24**.
 
 ## GRID transforms (wide)
 
@@ -94,6 +110,19 @@ Game is a 16:9 strip at the top. Four cams sit under it. Chat fills the rest.
 | `Lumia / Overlay` | 1080 | 1920 | 0 | 0 |
 
 Lumia Chatbox: **1048×800 at 16, 1096**. Alerts: **1048×160 at 16, 16**.
+
+## DESK transforms (vertical)
+
+Game on top. One wide face cam under it. No wheel / pedals.
+
+| Source | W | H | X | Y |
+| --- | --- | --- | --- | --- |
+| `Game / Main` | 1080 | 608 | 0 | 0 |
+| `Cam / Face` | 1048 | 400 | 16 | 624 |
+| `Overlay / Desk HUD` | 1080 | 1920 | 0 | 0 |
+| `Lumia / Overlay` | 1080 | 1920 | 0 | 0 |
+
+Lumia Chatbox: **1048×812 at 16, 1040**.
 
 ## GRID transforms (vertical)
 

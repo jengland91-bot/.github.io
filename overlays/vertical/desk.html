@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" class="vertical">
+<head>
+  <meta charset="UTF-8" />
+  <title>Desk HUD Vertical - Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared/theme.css" />
+</head>
+<body class="vertical scene-desk">
+  <div class="ticks"><span class="tl"></span><span class="tr"></span><span class="bl"></span><span class="br"></span></div>
+
+  <header class="top-bar">
+    <div class="live-pill"><i></i> <span data-desk-title>DESK</span></div>
+    <div class="brand"><small data-handle></small><span data-brand></span></div>
+    <div class="spacer"></div>
+    <div class="clock" data-clock></div>
+  </header>
+
+  <div class="well well-game" data-slot="game"><span class="well-tag">Game / Main  1080x608</span></div>
+  <div class="well well-labels" data-slot="labels"><span class="well-tag">Lumia event list  400x64</span></div>
+  <div class="well well-alerts" data-slot="alerts"><span class="well-tag">Lumia alerts  1048x160</span></div>
+  <div class="well well-nowplaying" data-slot="nowplaying"><span class="well-tag">Lumia now playing  400x48</span></div>
+  <div class="well well-face" data-slot="face">
+    <span class="well-tag">Cam / Face  1048x400</span>
+    <span class="cam-name">FACE</span>
+  </div>
+  <div class="well well-chat" data-slot="chat"><span class="well-tag">Lumia chatbox  1048x812</span></div>
+  <div class="well well-goal" data-slot="goal"><span class="well-tag">Lumia goal  1048x36</span></div>
+
+  <script src="../shared/config.js"></script>
+  <script src="../shared/overlay.js"></script>
+</body>
+</html>

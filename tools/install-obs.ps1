@@ -19,9 +19,20 @@ if (-not (Test-Path (Join-Path $overlayDir "live.html"))) {
     Write-Host "Looked in: $overlayDir"
     exit 1
 }
+if (-not (Test-Path (Join-Path $overlayDir "desk.html"))) {
+    Write-Host 'Cannot find overlays\desk.html' -ForegroundColor Red
+    Write-Host 'You have an old zip. Download a fresh one so DESK is in it.'
+    Write-Host "Looked in: $overlayDir"
+    exit 1
+}
 if (-not (Test-Path (Join-Path $overlayDir "vertical\live.html"))) {
     Write-Host 'Cannot find overlays\vertical\live.html' -ForegroundColor Red
     Write-Host 'You need the zip that includes the vertical overlays folder.'
+    exit 1
+}
+if (-not (Test-Path (Join-Path $overlayDir "vertical\desk.html"))) {
+    Write-Host 'Cannot find overlays\vertical\desk.html' -ForegroundColor Red
+    Write-Host 'You have an old zip. Download a fresh one so DESK is in it.'
     exit 1
 }
 
@@ -57,12 +68,13 @@ $script:canvasW = 1920
 $script:canvasH = 1080
 
 $scenes = @(
-    "STARTING SOON", "GRID", "RACE", "RACE DUAL", "REPLAY", "BRB", "ENDING"
+    "STARTING SOON", "GRID", "DESK", "RACE", "RACE DUAL", "REPLAY", "BRB", "ENDING"
 )
 
 $overlayFiles = @{
     "Overlay / Starting Soon" = @{ File = "starting-soon.html"; Shutdown = $true; Restart = $true }
     "Overlay / Grid HUD"      = @{ File = "chatting.html"; Shutdown = $false; Restart = $false }
+    "Overlay / Desk HUD"      = @{ File = "desk.html"; Shutdown = $false; Restart = $false }
     "Overlay / Race HUD"      = @{ File = "live.html"; Shutdown = $false; Restart = $false }
     "Overlay / Dual HUD"      = @{ File = "race-dual.html"; Shutdown = $false; Restart = $false }
     "Overlay / Replay HUD"    = @{ File = "replay.html"; Shutdown = $false; Restart = $false }
@@ -84,6 +96,13 @@ $items = @{
         @{ name = "Cam / Pedals"; kind = "camera"; x = 1464; y = 544; w = 408; h = 200 }
         @{ name = "Overlay / Grid HUD"; kind = "browser"; x = 0; y = 0; w = 1920; h = 1080 }
         @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1920; h = 1080 }
+    )
+    "DESK" = @(
+        @{ name = "Game / Main"; kind = "game"; x = 0; y = 0; w = 1920; h = 1080 }
+        @{ name = "Cam / Face"; kind = "camera"; x = 1256; y = 696; w = 640; h = 360 }
+        @{ name = "Overlay / Desk HUD"; kind = "browser"; x = 0; y = 0; w = 1920; h = 1080 }
+        @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1920; h = 1080 }
+        @{ name = "Audio / Game"; kind = "gameaudio" }
     )
     "RACE" = @(
         @{ name = "Game / Main"; kind = "game"; x = 0; y = 0; w = 1920; h = 1080 }
@@ -126,6 +145,7 @@ $items = @{
 $verticalOverlayFiles = @{
     "Overlay / Starting Soon" = @{ File = "vertical/starting-soon.html"; Shutdown = $true; Restart = $true }
     "Overlay / Grid HUD"      = @{ File = "vertical/chatting.html"; Shutdown = $false; Restart = $false }
+    "Overlay / Desk HUD"      = @{ File = "vertical/desk.html"; Shutdown = $false; Restart = $false }
     "Overlay / Race HUD"      = @{ File = "vertical/live.html"; Shutdown = $false; Restart = $false }
     "Overlay / Dual HUD"      = @{ File = "vertical/race-dual.html"; Shutdown = $false; Restart = $false }
     "Overlay / Replay HUD"    = @{ File = "vertical/replay.html"; Shutdown = $false; Restart = $false }
@@ -146,6 +166,13 @@ $verticalItems = @{
         @{ name = "Cam / Pedals"; kind = "camera"; x = 548; y = 820; w = 516; h = 200 }
         @{ name = "Overlay / Grid HUD"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
         @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1080; h = 1920 }
+    )
+    "DESK" = @(
+        @{ name = "Game / Main"; kind = "game"; x = 0; y = 0; w = 1080; h = 608 }
+        @{ name = "Cam / Face"; kind = "camera"; x = 16; y = 624; w = 1048; h = 400 }
+        @{ name = "Overlay / Desk HUD"; kind = "browser"; x = 0; y = 0; w = 1080; h = 1920 }
+        @{ name = "Lumia / Overlay"; kind = "lumia"; x = 0; y = 0; w = 1080; h = 1920 }
+        @{ name = "Audio / Game"; kind = "gameaudio" }
     )
     "RACE" = @(
         @{ name = "Game / Main"; kind = "game"; x = 0; y = 0; w = 1080; h = 608 }
@@ -544,7 +571,6 @@ function Install-RiseScenes($ws, $kinds, $sceneNames, $sceneItems, $canvasUuid, 
         $vendor = @(Get-VendorAitumSceneNames $ws)
         foreach ($defaultName in @("Vertical Scene", "Scene")) {
             if ($vendor -contains $defaultName) {
-                $renamed = $false
                 foreach ($newName in @("STARTING SOON", "STARTING SOON V")) {
                     try {
                         Invoke-Obs $ws "SetSceneName" @{
@@ -553,7 +579,6 @@ function Install-RiseScenes($ws, $kinds, $sceneNames, $sceneItems, $canvasUuid, 
                             canvasUuid   = $canvasUuid
                         } | Out-Null
                         Write-Host "  renamed $defaultName -> $newName"
-                        $renamed = $true
                         break
                     }
                     catch {
@@ -698,6 +723,7 @@ function Install-RiseScenes($ws, $kinds, $sceneNames, $sceneItems, $canvasUuid, 
 $aitumSourceMap = @{
     "Overlay / Starting Soon" = "Overlay / Starting Soon V"
     "Overlay / Grid HUD"      = "Overlay / Grid HUD V"
+    "Overlay / Desk HUD"      = "Overlay / Desk HUD V"
     "Overlay / Race HUD"      = "Overlay / Race HUD V"
     "Overlay / Dual HUD"      = "Overlay / Dual HUD V"
     "Overlay / Replay HUD"    = "Overlay / Replay HUD V"
@@ -774,8 +800,8 @@ function Install-AitumVertical($ws, $kinds) {
         }
         foreach ($n in $have) { Write-Host "  - $n" }
         if ($have.Count -lt 2) {
-            Write-Host "If you still only see STARTING SOON: in Vertical Scenes click + and add GRID, RACE, REPLAY, BRB, ENDING."
-            Write-Host "OBS will not allow those names if they already exist on the left list, so name them GRID V, RACE V, ..."
+            Write-Host "If you still only see STARTING SOON: in Vertical Scenes click + and add GRID V, DESK V, RACE V, REPLAY V, BRB V, ENDING V."
+            Write-Host "OBS will not allow those names if they already exist on the left list, so name them GRID V, DESK V, RACE V, ..."
         }
     }
     finally {
@@ -783,8 +809,8 @@ function Install-AitumVertical($ws, $kinds) {
         $script:canvasH = $savedH
         $script:overlayFiles = $savedOverlays
     }
-    Write-Host "Vertical Scenes should now list STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING."
-    Write-Host "In Vertical Scenes, right-click each name -> Linked Scenes -> tick the matching wide scene (RACE V -> RACE)."
+    Write-Host "Vertical Scenes should now list STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING (or ... V names)."
+    Write-Host "In Vertical Scenes, right-click each name -> Linked Scenes -> tick the matching wide scene (DESK V -> DESK, RACE V -> RACE)."
     return $true
 }
 
@@ -874,12 +900,12 @@ if (-not $AitumOnly) {
     Write-Host 'Two scene collections (dropdown at the top of OBS):'
     Write-Host '  Rise Above BeamNG            = 1920x1080 Twitch / YouTube / Kick'
     Write-Host '  Rise Above BeamNG Vertical  = 1080x1920 phone-only if you are not using Aitum'
-    Write-Host 'Same scene names in both: STARTING SOON, GRID, RACE, ...'
+    Write-Host 'Same scene names in both: STARTING SOON, GRID, DESK, RACE, ...'
 }
 Write-Host ""
 Write-Host 'Stay on collection Rise Above BeamNG for Aitum Multi + Vertical.'
 if ($aitumOk) {
-    Write-Host 'Vertical Scenes dock should now have the seven phone scenes.'
+    Write-Host 'Vertical Scenes dock should now have the eight phone scenes.'
     Write-Host 'Right-click each one -> Linked Scenes -> tick the matching wide scene.'
 }
 else {
@@ -888,8 +914,9 @@ else {
 }
 Write-Host ""
 Write-Host 'Next: click RACE, double-click Game / Main, pick BeamNG.'
+Write-Host 'Other games (no wheel cams): click DESK, then pick that game on Game / Main and Audio / Game.'
 Write-Host 'Audio: Desktop Audio is muted so Discord is not on stream.'
-Write-Host '  Mixer: Mic / Main = your mic. Audio / Game = double-click and pick BeamNG.drive.'
+Write-Host '  Mixer: Mic / Main = your mic. Audio / Game = double-click and pick BeamNG.drive (or the other game on DESK).'
 Write-Host 'Cameras can wait.'
 Write-Host 'Chat for you: tools\Open-ChatForYou.bat  (not on the stream).'
 Write-Host 'See docs\aitum.html'

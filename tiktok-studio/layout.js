@@ -4,10 +4,11 @@
  */
 window.RISE_TIKTOK_LAYOUT = {
   name: "Rise Above BeamNG",
-  scenes: ["STARTING SOON", "GRID", "RACE", "RACE DUAL", "REPLAY", "BRB", "ENDING"],
+  scenes: ["STARTING SOON", "GRID", "DESK", "RACE", "RACE DUAL", "REPLAY", "BRB", "ENDING"],
   overlays: {
     "STARTING SOON": "overlays/vertical/starting-soon.html?m=5",
     GRID: "overlays/vertical/chatting.html",
+    DESK: "overlays/vertical/desk.html",
     RACE: "overlays/vertical/live.html",
     "RACE DUAL": "overlays/vertical/race-dual.html",
     REPLAY: "overlays/vertical/replay.html",
@@ -24,6 +25,12 @@ window.RISE_TIKTOK_LAYOUT = {
       { name: "Cam / Room", x: 16, y: 524, w: 1048, h: 280, kind: "cam" },
       { name: "Cam / Wheel", x: 16, y: 820, w: 516, h: 200, kind: "cam" },
       { name: "Cam / Pedals", x: 548, y: 820, w: 516, h: 200, kind: "cam" },
+      { name: "Overlay Link", x: 0, y: 0, w: 1080, h: 1920, kind: "overlay" },
+      { name: "Lumia Link", x: 0, y: 0, w: 1080, h: 1920, kind: "lumia" },
+    ],
+    DESK: [
+      { name: "Game / Main", x: 0, y: 0, w: 1080, h: 608, kind: "game" },
+      { name: "Cam / Face", x: 16, y: 624, w: 1048, h: 400, kind: "cam" },
       { name: "Overlay Link", x: 0, y: 0, w: 1080, h: 1920, kind: "overlay" },
       { name: "Lumia Link", x: 0, y: 0, w: 1080, h: 1920, kind: "lumia" },
     ],
@@ -68,6 +75,12 @@ window.RISE_TIKTOK_LAYOUT = {
       { name: "Cam / Room", x: 1032, y: 168, w: 840, h: 360, kind: "cam" },
       { name: "Cam / Wheel", x: 1032, y: 544, w: 408, h: 200, kind: "cam" },
       { name: "Cam / Pedals", x: 1464, y: 544, w: 408, h: 200, kind: "cam" },
+      { name: "Overlay Link", x: 0, y: 0, w: 1920, h: 1080, kind: "overlay" },
+      { name: "Lumia Link", x: 0, y: 0, w: 1920, h: 1080, kind: "lumia" },
+    ],
+    DESK: [
+      { name: "Game / Main", x: 0, y: 0, w: 1920, h: 1080, kind: "game" },
+      { name: "Cam / Face", x: 1256, y: 696, w: 640, h: 360, kind: "cam" },
       { name: "Overlay Link", x: 0, y: 0, w: 1920, h: 1080, kind: "overlay" },
       { name: "Lumia Link", x: 0, y: 0, w: 1920, h: 1080, kind: "lumia" },
     ],

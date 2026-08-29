@@ -17,8 +17,9 @@ once in Dual layout.
    (Start-OverlayServer.bat is the same thing.) Leave the black window open.
 3. A layout board opens. That page is the Dual layout: phone + landscape.
 4. Open TikTok LIVE Studio. Dual layout ON. Do not open OBS.
-5. Add seven scenes: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING.
-   Start with RACE. Skip RACE DUAL until you have a second BeamNG view.
+5. Add scenes: STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING.
+   Start with RACE. DESK is sit-at-desk other games (game + face, no wheel).
+   Skip RACE DUAL until you have a second BeamNG view.
 6. On the PHONE canvas, add Game / cameras / Overlay Link / Lumia Link.
    Copy the overlay URL from the layout board. Overlay Link size 1080x1920.
 7. Switch to the LANDSCAPE canvas. Do not paste a second overlay URL.
@@ -51,7 +52,10 @@ You should then see two scene collections in OBS (dropdown at the top):
   Rise Above BeamNG            = 1920x1080 Twitch / YouTube / Kick (stay here for Aitum)
   Rise Above BeamNG Vertical   = 1080x1920 phone-only if you are not using Aitum
 
-Same scenes in both: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING.
+Same scenes in both: STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING.
+
+Click DESK when you are sitting at the desk playing other games (full game + face cam, no wheel/pedals).
+Double-click Game / Main and Audio / Game and pick that game. Switch both back to BeamNG for RACE.
 
 If Aitum Vertical is already installed, Install-OBS.bat also fills the Vertical Scenes dock.
 If that dock is still empty, run tools\Install-AitumVertical.bat (OBS 32.1+).
@@ -114,6 +118,11 @@ YOUR PHOTOS on STARTING SOON, BRB, and ENDING (thank you):
 CAMERAS (four sources):
   Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals.
   After a new zip, re-run Install-OBS.bat so OBS parks them in the wells.
+
+  DESK (other games, sit at the desk):
+  Click DESK on the left list. Full game + big face cam. No wheel or pedals.
+  Double-click Game / Main and Audio / Game and pick that other game.
+  When you go back to racing: pick BeamNG on both, then click RACE.
 
 AITUM MULTISTREAM (OBS to many sites, wide + phone):
   Stay in OBS. Do not add Restream. Do not also run TikTok LIVE Studio to TikTok.

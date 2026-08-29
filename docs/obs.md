@@ -5,7 +5,7 @@ Two canvases. Scene names are exact — Lumia matches them as written.
 - Collection **Rise Above BeamNG**: **1920×1080**
 - Collection **Rise Above BeamNG Vertical**: **1080×1920**
 
-Switch collections with the dropdown at the top of OBS. Numpad 1–7 fire the same scene names on whichever collection is active. Pick BeamNG on `Game / Main` in **both**.
+Switch collections with the dropdown at the top of OBS. Numpad 1–7 fire the same scene names on whichever collection is active. Numpad 8 is `DESK`. Pick BeamNG on `Game / Main` in **both** for racing. For other games, click `DESK` and pick that game on `Game / Main` and `Audio / Game`.
 
 ## Video / encode
 
@@ -112,6 +112,16 @@ Crop with **Alt + drag**. Matching Rec. 709 / Limited on the cams keeps skin fro
 5. `Overlay / Grid HUD`
 6. `Lumia / Overlay`
 
+## DESK (other games)
+
+1. `Game / Main` (full)
+2. `Audio / Game` (pick that game, not BeamNG)
+3. `Cam / Face` (640×360 at 1256, 696)
+4. `Overlay / Desk HUD` (`desk.html`)
+5. `Lumia / Overlay`
+
+No room / wheel / pedals. When you go back to racing, pick BeamNG on `Game / Main` and `Audio / Game` again, then click `RACE`.
+
 ## RACE DUAL
 
 1. `Game / Main` (full)
@@ -150,6 +160,7 @@ To run wide and vertical **at the same time from OBS**, install [Aitum Vertical]
 | REPLAY | Numpad 5 |
 | BRB | Numpad 6 |
 | ENDING | Numpad 7 |
+| DESK | Numpad 8 |
 
 Fade 300 ms. Lumia can fire the same scene changes from chat.
 

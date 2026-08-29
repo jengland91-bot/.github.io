@@ -23,7 +23,7 @@
     <li>Turn on Dual layout (portrait + landscape).</li>
     <li>You will see two canvases. Switch between them while you build sources. Both go live together.</li>
   </ol>
-  <p>Add seven Dual scenes: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING. Each scene has a phone canvas and a landscape canvas.</p>
+  <p>Add Dual scenes: STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING. Each scene has a phone canvas and a landscape canvas. DESK is sit-at-desk other games (game + face only).</p>
 
   <h2>Start the overlay server (once)</h2>
   <p>Link sources need <code>http://</code>. They will not load <code>file://</code>.</p>
@@ -42,6 +42,7 @@
     <tbody>
       <tr><td>STARTING SOON</td><td><code>http://127.0.0.1:5500/overlays/vertical/starting-soon.html?m=5</code></td></tr>
       <tr><td>GRID</td><td><code>http://127.0.0.1:5500/overlays/vertical/chatting.html</code></td></tr>
+      <tr><td>DESK</td><td><code>http://127.0.0.1:5500/overlays/vertical/desk.html</code></td></tr>
       <tr><td>RACE</td><td><code>http://127.0.0.1:5500/overlays/vertical/live.html</code></td></tr>
       <tr><td>RACE DUAL</td><td><code>http://127.0.0.1:5500/overlays/vertical/race-dual.html</code></td></tr>
       <tr><td>REPLAY</td><td><code>http://127.0.0.1:5500/overlays/vertical/replay.html</code></td></tr>
@@ -73,6 +74,16 @@
       <tr><td>Cam / Room</td><td>16</td><td>524</td><td>1048</td><td>280</td></tr>
       <tr><td>Cam / Wheel</td><td>16</td><td>820</td><td>516</td><td>200</td></tr>
       <tr><td>Cam / Pedals</td><td>548</td><td>820</td><td>516</td><td>200</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Vertical DESK (other games, sit at desk)</h3>
+  <p>Game on top. One big face cam. No wheel / pedals.</p>
+  <table>
+    <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
+    <tbody>
+      <tr><td>Game / Main</td><td>0</td><td>0</td><td>1080</td><td>608</td></tr>
+      <tr><td>Cam / Face</td><td>16</td><td>624</td><td>1048</td><td>400</td></tr>
     </tbody>
   </table>
 
@@ -117,6 +128,16 @@
       <tr><td>Cam / Room</td><td>1032</td><td>168</td><td>840</td><td>360</td></tr>
       <tr><td>Cam / Wheel</td><td>1032</td><td>544</td><td>408</td><td>200</td></tr>
       <tr><td>Cam / Pedals</td><td>1464</td><td>544</td><td>408</td><td>200</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Horizontal DESK (other games)</h3>
+  <p>Full game + one big face cam. No wheel / pedals.</p>
+  <table>
+    <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
+    <tbody>
+      <tr><td>Game / Main</td><td>0</td><td>0</td><td>1920</td><td>1080</td></tr>
+      <tr><td>Cam / Face</td><td>1256</td><td>696</td><td>640</td><td>360</td></tr>
     </tbody>
   </table>
 

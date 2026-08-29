@@ -30,13 +30,14 @@ Same scene names in both. Switch them with the dropdown at the top of OBS. Pick 
 | --- | --- | --- | --- |
 | `STARTING SOON` | `overlays/starting-soon.html` | `overlays/vertical/starting-soon.html` | Countdown, staging lights |
 | `GRID` | `overlays/chatting.html` | `overlays/vertical/chatting.html` | Big face + room + wheel + pedals |
+| `DESK` | `overlays/desk.html` | `overlays/vertical/desk.html` | Other games: full game + big face, no wheel/pedals |
 | `RACE` | `overlays/live.html` | `overlays/vertical/live.html` | BeamNG + four cams + chat |
 | `RACE DUAL` | `overlays/race-dual.html` | `overlays/vertical/race-dual.html` | Main view + second angle |
 | `REPLAY` | `overlays/replay.html` | `overlays/vertical/replay.html` | Clean game, no cams |
 | `BRB` | `overlays/brb.html` | `overlays/vertical/brb.html` | Pit stop |
 | `ENDING` | `overlays/ending.html` | `overlays/vertical/ending.html` | Checkered / thanks |
 
-In-game BeamNG cameras (C / Shift+C) stay on one source: `Game / Main`. Physical cameras are `Cam / Face`, `Cam / Room`, `Cam / Wheel`, and `Cam / Pedals`. A second BeamNG view (other monitor, bumper window) is `Game / Angle 2` on `RACE DUAL` only.
+In-game BeamNG cameras (C / Shift+C) stay on one source: `Game / Main`. Physical cameras are `Cam / Face`, `Cam / Room`, `Cam / Wheel`, and `Cam / Pedals`. A second BeamNG view (other monitor, bumper window) is `Game / Angle 2` on `RACE DUAL` only. For other games, click `DESK`, then pick that game on `Game / Main` and `Audio / Game`. Switch both back to BeamNG when you go to `RACE`.
 
 `?setup=1` on an overlay prints wells so you can park Lumia layers. Turn it off before going live.
 

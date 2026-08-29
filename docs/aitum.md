@@ -7,7 +7,7 @@ You need **two** plugins:
 - [Aitum Multistream](https://aitum.tv/products/multi) — extra destinations
 - [Aitum Vertical](https://aitum.tv/products/vertical) — 1080×1920 canvas (or Stream Suite, which includes both)
 
-Run `tools/Install-AitumVertical.bat` (OBS 32.1+). That fills **Vertical Scenes**. If you only see STARTING SOON, re-run it — extra scenes are named `RACE V`, `GRID V`, etc. because the left list already used those names. Right-click each → Linked Scenes → matching wide scene (`RACE V` → `RACE`).
+Run `tools/Install-AitumVertical.bat` (OBS 32.1+). That fills **Vertical Scenes**. If you only see STARTING SOON, re-run it — extra scenes are named `RACE V`, `GRID V`, `DESK V`, etc. because the left list already used those names. Right-click each → Linked Scenes → matching wide scene (`RACE V` → `RACE`, `DESK V` → `DESK`).
 
 If Vertical Scenes is missing: Multistream is not enough — install Vertical, then OBS → Docks → Vertical Scenes / Vertical Sources / Aitum Vertical.
 
