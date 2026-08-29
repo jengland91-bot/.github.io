@@ -19,11 +19,22 @@
     });
   }
 
+  function taglineText() {
+    const custom = String(STREAM.tagline || "").trim();
+    if (custom) return custom;
+    const parts = [STREAM.game, STREAM.style, STREAM.liveWord]
+      .map((p) => String(p || "").trim())
+      .filter(Boolean);
+    if (!parts.length) return "";
+    return parts.join(". ") + ".";
+  }
+
   function applyIdentity() {
     const name = params.get("name") || STREAM.name;
     fill("[data-name]", name);
     fill("[data-brand]", STREAM.brand);
-    fill("[data-tagline]", STREAM.tagline);
+    fill("[data-game]", STREAM.game);
+    fill("[data-tagline]", taglineText());
     fill("[data-handle]", STREAM.handle);
     fill("[data-brb]", STREAM.brbMessage);
     fill("[data-ending]", STREAM.endingMessage);

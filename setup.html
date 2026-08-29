@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ember: #4a6b32;
+      --ember: #7cb701;
       --ice: #7a9a5c;
       --sand: #c4b490;
       --paper: #e8dcc8;
@@ -85,7 +85,7 @@
     <p><a href="tools/install.html">Use the installer</a> to create the OBS scene collection and Lumia chat commands with code. Open that page on the streaming PC (local file), not from GitHub Pages.</p>
 
     <h2>A. Identity</h2>
-    <label class="step"><input type="checkbox" data-id="config" /><span>Edit <code>overlays/shared/config.js</code> — name, brand, LIVE / GRID words, and the <code>socials</code> block (Twitch, YouTube, Kick, TikTok, Instagram, Facebook, Discord). Username or a full https link. Blank hides that platform. Then in OBS right-click the overlay → Refresh.</span></label>
+    <label class="step"><input type="checkbox" data-id="config" /><span>Edit <code>overlays/shared/config.js</code> — <code>game</code> (BeamNG / SnowRunner / …), <code>startingKicker</code> (TRAILHEAD), Monster green <code>#7CB701</code>, and the <code>socials</code> block. Save, then in OBS right-click the overlay → Refresh.</span></label>
     <label class="step"><input type="checkbox" data-id="preview" /><span>Open <a href="index.html">the preview</a> and confirm Starting Soon / Race / Grid / Dual look right.</span></label>
 
     <h2>B. OBS canvas &amp; output</h2>
@@ -120,9 +120,9 @@
 
     <h2>D. Lumia Stream (alerts + lights + cam director)</h2>
     <label class="step"><input type="checkbox" data-id="lumia" /><span>Install <a href="https://lumiastream.com/" target="_blank" rel="noreferrer">Lumia Stream</a>. Connections → Add → your platforms, then OBS (port 4455 + password). Add lights on the same page.</span></label>
-    <label class="step"><input type="checkbox" data-id="lumia-overlay" /><span>In Lumia’s overlay editor, one overlay: Chatbox, Alerts, optional Event List / Goal / Now Playing. Match colors <code>#E8DCC8</code> / <code>#4A6B32</code>. Place layers on the wells from <a href="overlays/live.html?preview=1&setup=1">Race + slots</a>.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-overlay" /><span>In Lumia’s overlay editor, one overlay: Chatbox, Alerts, optional Event List / Goal / Now Playing. Match colors <code>#E8DCC8</code> / <code>#7CB701</code>. Place layers on the wells from <a href="overlays/live.html?preview=1&setup=1">Race + slots</a>.</span></label>
     <label class="step"><input type="checkbox" data-id="lumia-url" /><span>Copy the overlay URL. OBS Browser source <code>Lumia / Overlay</code>, 1920×1080 on the wide collection and 1080×1920 on the vertical collection, above the HUD on GRID / RACE / RACE DUAL / REPLAY.</span></label>
-    <label class="step"><input type="checkbox" data-id="lumia-scenes" /><span>Alerts → OBS scene lights: STARTING SOON moss, GRID moss/white, RACE pine <code>#4A6B32</code>, RACE DUAL pine + moss on a second zone, REPLAY dim olive, BRB dim forest, ENDING dusk gold-olive pulse.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-scenes" /><span>Alerts → OBS scene lights: STARTING SOON moss, GRID moss/white, RACE Monster green <code>#7CB701</code>, RACE DUAL pine + moss on a second zone, REPLAY dim olive, BRB dim forest, ENDING dusk gold-olive pulse.</span></label>
     <label class="step"><input type="checkbox" data-id="cam-cmds" /><span>Chat commands with OBS Set source visibility: <code>!face</code>, <code>!room</code>, <code>!rig</code>, <code>!wheel</code>, <code>!pedals</code>, <code>!game</code> (hide cams). Scene commands: <code>!dual</code> → RACE DUAL, <code>!race</code> → RACE, <code>!replay</code> → REPLAY.</span></label>
 
     <h2>E. Go live dry-run</h2>

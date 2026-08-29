@@ -40,7 +40,7 @@ In-game BeamNG cameras (C / Shift+C) stay on one source: `Game / Main`. Physical
 
 ## Customize
 
-Edit `overlays/shared/config.js` (handle, LIVE / GRID / DUAL words, colors, and the `socials` block for Twitch / YouTube / Kick / TikTok / Instagram / Facebook / Discord). Put a username or a full `https://` URL. Blank hides that platform. Then in OBS right-click the overlay source → **Refresh**. Camera wells only move if you download a new zip and re-run `tools/Install-OBS.bat`.
+Edit `overlays/shared/config.js` in Notepad: `game` (BeamNG → SnowRunner etc.), `startingKicker` (TRAILHEAD), Monster green `colors.ember` (`#7CB701`), and `socials`. Save, then in OBS right-click the overlay → **Refresh**. Camera wells only move if you download a new zip and re-run `tools/Install-OBS.bat`.
 
 ### Your photos on Starting Soon / BRB / Ending
 

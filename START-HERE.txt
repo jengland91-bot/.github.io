@@ -19,11 +19,15 @@ AUDIO (no Discord on stream):
   Mic / Main = your microphone.
   Discord can stay open. You still hear it in your headset. It will not go to the stream.
 
-NAMES AND LINKS (LIVE, GRID, handle, Twitch, YouTube, Kick, TikTok, Instagram, Facebook, Discord):
+NAMES, GAME, AND LINKS:
   Open overlays\shared\config.js in Notepad.
-  Change chattingTitle / liveTitle / dualTitle and the social usernames.
+  game        = what prints in "BeamNG. Off-road. Live." (change this when you swap games)
+  style       = Off-road / Street / whatever
+  startingKicker = TRAILHEAD (the small word above STARTING SOON)
+  colors.ember = #7CB701 Monster green
+  socials.facebook = jengland91
   Save. In OBS: right-click the overlay source -> Refresh.
-  You do not need to run the installer again just to rename LIVE / GRID.
+  You do not need to run the installer again for names, colors, or links.
 
 YOUR PHOTOS on STARTING SOON, BRB, and ENDING (thank you):
   Put pictures in overlays\shared\backdrops\

@@ -37,12 +37,16 @@ youtube: "jengland91"          // or "https://youtube.com/@jengland91"
 kick: "jengland91"              // or "https://kick.com/jengland91"
 tiktok: "jengland91"
 instagram: "jengland91"
-facebook: "joshengland91"
+facebook: "jengland91"
 x: ""
 discord: "1483831196570878084" // or "https://discord.com/users/1483831196570878084". Display-only — not Discord audio.
 ```
 
 Save. In OBS: right-click the overlay source → Refresh. You do not need to re-run the installer just to change links.
+
+## Change the game name and TRAILHEAD
+
+Same file. Starting Soon prints `game` + `style` + `liveWord` as **BeamNG. Off-road. Live.** When you swap titles, change `game`. `startingKicker` is the small word above STARTING SOON (TRAILHEAD). Accent is `colors.ember` = `#7CB701`.
 
 ## BeamNG capture
 
