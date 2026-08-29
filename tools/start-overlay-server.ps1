@@ -1,4 +1,8 @@
 ﻿#Requires -Version 5.1
+param(
+    [ValidateSet("tiktok", "meld")]
+    [string]$Mode = "tiktok"
+)
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
@@ -22,29 +26,63 @@ if (-not (Test-Path (Join-Path $overlayDir "live.html"))) {
 }
 
 Write-Host ""
-Write-Host "Rise Above - TikTok LIVE Studio layout" -ForegroundColor White
-Write-Host "Serving: $repoRoot"
-Write-Host "Keep this window open while you are live on TikTok."
-Write-Host "TikTok is LIVE Studio only. Do not open OBS for TikTok."
-Write-Host ""
-Write-Host "Turn Dual layout ON. Add sources on the PHONE canvas first."
-Write-Host "Then switch to landscape and resize the SAME sources. One overlay URL per scene."
-Write-Host ""
-Write-Host "Layout board: ${prefix}tiktok-studio/"
-Write-Host ""
-Write-Host "PHONE overlay Links (1080 x 1920), then stretch that same Link to 1920 x 1080 on landscape:"
-Write-Host "  STARTING SOON  ${prefix}overlays/vertical/starting-soon.html?m=5"
-Write-Host "  GRID           ${prefix}overlays/vertical/chatting.html"
-Write-Host "  DESK           ${prefix}overlays/vertical/desk.html"
-Write-Host "  RACE           ${prefix}overlays/vertical/live.html"
-Write-Host "  RACE DUAL      ${prefix}overlays/vertical/race-dual.html"
-Write-Host "  REPLAY         ${prefix}overlays/vertical/replay.html"
-Write-Host "  BRB            ${prefix}overlays/vertical/brb.html"
-Write-Host "  ENDING         ${prefix}overlays/vertical/ending.html"
-Write-Host ""
-Write-Host "Setup boxes:  ${prefix}overlays/vertical/live.html?setup=1"
-Write-Host "Guide:        ${prefix}docs/tiktok.html"
-Write-Host ""
+if ($Mode -eq "meld") {
+    Write-Host "Rise Above - Meld Studio layout" -ForegroundColor White
+    Write-Host "Serving: $repoRoot"
+    Write-Host "Keep this window open if Meld Browser layers use these URLs."
+    Write-Host "Fastest path is still Meld File -> Import OBS Session."
+    Write-Host "Do not stream OBS and Meld to the same site at the same time."
+    Write-Host ""
+    Write-Host "Layout board: ${prefix}meld/"
+    Write-Host "Guide:        ${prefix}docs/meld.html"
+    Write-Host ""
+    Write-Host "Main canvas overlays (1920 x 1080):"
+    Write-Host "  STARTING SOON  ${prefix}overlays/starting-soon.html?m=5"
+    Write-Host "  GRID           ${prefix}overlays/chatting.html"
+    Write-Host "  DESK           ${prefix}overlays/desk.html"
+    Write-Host "  RACE           ${prefix}overlays/live.html"
+    Write-Host "  RACE DUAL      ${prefix}overlays/race-dual.html"
+    Write-Host "  REPLAY         ${prefix}overlays/replay.html"
+    Write-Host "  BRB            ${prefix}overlays/brb.html"
+    Write-Host "  ENDING         ${prefix}overlays/ending.html"
+    Write-Host ""
+    Write-Host "Portrait canvas overlays (1080 x 1920):"
+    Write-Host "  STARTING SOON  ${prefix}overlays/vertical/starting-soon.html?m=5"
+    Write-Host "  GRID           ${prefix}overlays/vertical/chatting.html"
+    Write-Host "  DESK           ${prefix}overlays/vertical/desk.html"
+    Write-Host "  RACE           ${prefix}overlays/vertical/live.html"
+    Write-Host "  RACE DUAL      ${prefix}overlays/vertical/race-dual.html"
+    Write-Host "  REPLAY         ${prefix}overlays/vertical/replay.html"
+    Write-Host "  BRB            ${prefix}overlays/vertical/brb.html"
+    Write-Host "  ENDING         ${prefix}overlays/vertical/ending.html"
+    Write-Host ""
+    Write-Host "Setup boxes:  ${prefix}overlays/live.html?setup=1"
+    Write-Host ""
+} else {
+    Write-Host "Rise Above - TikTok LIVE Studio layout" -ForegroundColor White
+    Write-Host "Serving: $repoRoot"
+    Write-Host "Keep this window open while you are live on TikTok."
+    Write-Host "TikTok is LIVE Studio only. Do not open OBS for TikTok."
+    Write-Host ""
+    Write-Host "Turn Dual layout ON. Add sources on the PHONE canvas first."
+    Write-Host "Then switch to landscape and resize the SAME sources. One overlay URL per scene."
+    Write-Host ""
+    Write-Host "Layout board: ${prefix}tiktok-studio/"
+    Write-Host ""
+    Write-Host "PHONE overlay Links (1080 x 1920), then stretch that same Link to 1920 x 1080 on landscape:"
+    Write-Host "  STARTING SOON  ${prefix}overlays/vertical/starting-soon.html?m=5"
+    Write-Host "  GRID           ${prefix}overlays/vertical/chatting.html"
+    Write-Host "  DESK           ${prefix}overlays/vertical/desk.html"
+    Write-Host "  RACE           ${prefix}overlays/vertical/live.html"
+    Write-Host "  RACE DUAL      ${prefix}overlays/vertical/race-dual.html"
+    Write-Host "  REPLAY         ${prefix}overlays/vertical/replay.html"
+    Write-Host "  BRB            ${prefix}overlays/vertical/brb.html"
+    Write-Host "  ENDING         ${prefix}overlays/vertical/ending.html"
+    Write-Host ""
+    Write-Host "Setup boxes:  ${prefix}overlays/vertical/live.html?setup=1"
+    Write-Host "Guide:        ${prefix}docs/tiktok.html"
+    Write-Host ""
+}
 
 $listener = New-Object System.Net.HttpListener
 $listener.Prefixes.Add($prefix)
@@ -79,7 +117,8 @@ function Get-Mime([string]$ext) {
 }
 
 Write-Host "Ready. Ctrl+C to stop." -ForegroundColor Green
-try { Start-Process "${prefix}tiktok-studio/" } catch {}
+$openPath = if ($Mode -eq "meld") { "${prefix}meld/" } else { "${prefix}tiktok-studio/" }
+try { Start-Process $openPath } catch {}
 
 while ($listener.IsListening) {
     $ctx = $listener.GetContext()

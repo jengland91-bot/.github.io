@@ -1,10 +1,50 @@
-TWO APPS. Pick the one you are going live from:
+THREE APPS. Pick the one you are going live from:
+
+  MELD STUDIO = Meld. Fastest: import the OBS scenes, then go live from
+            Meld. Jump to the MELD STUDIO section below.
 
   TIKTOK  = TikTok LIVE Studio only. Do not open OBS for TikTok.
             Jump to the TIKTOK LIVE STUDIO section below.
 
-  TWITCH / YOUTUBE / KICK = OBS Studio. Follow steps 1-4, then the OBS
-            sections (audio, Lumia in OBS, cameras).
+  TWITCH / YOUTUBE / KICK from OBS = OBS Studio. Follow the OBS
+            sections (audio, Lumia in OBS, cameras). Skip if you
+            switched to Meld.
+
+------------------------------------------------------------------------
+MELD STUDIO (all eight scenes)
+------------------------------------------------------------------------
+Yes. You can put STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY,
+BRB, and ENDING into Meld. Overlay HTML stays the same files.
+
+FAST PATH (already have OBS kit on this PC):
+1. Right-click the zip -> Extract All. Do not open files from inside the zip.
+2. Open OBS. Top dropdown = Rise Above BeamNG (the 1920x1080 one).
+   If those scenes are missing, run tools\Install-OBS.bat first.
+3. OBS -> File -> Save. Close OBS. Do not stream OBS and Meld to the
+   same Twitch / YouTube / Kick / TikTok at the same time.
+4. Open Meld Studio -> File -> Import OBS Session.
+   Meld pulls the last saved OBS session. Your eight scenes should appear.
+5. Bottom-left warning icon = Missing Source Assistant. Pick BeamNG
+   on Game / Main, your four cameras, and your mic.
+6. Audio: game process + mic only. Do not capture desktop / Discord.
+7. Phone picture: Meld Settings -> General -> Multi Canvas.
+   Aitum is not used in Meld. Portrait sizes: double-click
+   tools\Open-MeldLayout.bat and use the Portrait column.
+8. If an overlay is blank, drag the HTML from overlays\ (Main) or
+   overlays\vertical\ (Portrait) onto that canvas.
+
+NO OBS PATH:
+  Double-click tools\Open-MeldLayout.bat and build the eight scenes
+  from the numbers on that page. Drag the overlay HTML onto the canvas.
+
+Lumia chat for you still works (gaming monitor, or Open-ChatForYou.bat).
+Chat !race does NOT switch Meld scenes — click the scene in Meld.
+
+Names / photos: overlays\shared\config.js and overlays\shared\backdrops\
+then refresh the Browser overlay in Meld.
+
+Full page: docs\meld.html
+Layout board: meld\index.html
 
 ------------------------------------------------------------------------
 TIKTOK LIVE STUDIO LAYOUT (no OBS)
@@ -74,6 +114,7 @@ NAMES, GAME, AND LINKS:
     Pick a number or type the game (SnowRunner, Forza, GTA V, ...)
     In OBS: STARTING SOON -> right-click Overlay / Starting Soon -> Refresh.
     (Or click GRID, then STARTING SOON again.)
+    In Meld: refresh the Browser overlay on STARTING SOON.
 
   You can also open overlays\shared\config.js in Notepad:
   brand       = leave blank (no RISE ABOVE on screen). Put a word here if you want one.
@@ -83,6 +124,7 @@ NAMES, GAME, AND LINKS:
   colors.ember = #7CB701 Monster green
   socials.facebook = jengland91
   Save. In OBS: right-click the overlay source -> Refresh.
+  In Meld: refresh the Browser overlay layer.
   In TikTok Studio: refresh the Link sources on both canvases.
   You do not need to run the installer again for names, colors, or links.
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rise Above — OBS Overlay Kit</title>
+      <title>Rise Above — Overlay Kit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
@@ -145,12 +145,14 @@
 <body>
   <header>
     <div class="kicker">RISE ABOVE  ·  BEAMNG KIT</div>
-    <h1>OBS + LUMIA<br />MULTI-CAM</h1>
-    <p>BeamNG off-road layouts with Face, Room, Wheel, and Pedals cameras, a dual-angle scene, and one Lumia overlay for alerts. OBS + Aitum Multi sends wide and phone streams. Chat for you stays on the gaming monitor. Tagged @jengland91. Stream audio is game + mic only — Discord stays off.</p>
+    <h1>MELD OR OBS<br />MULTI-CAM</h1>
+    <p>BeamNG off-road layouts with Face, Room, Wheel, and Pedals cameras, a dual-angle scene, and one Lumia overlay for alerts. Put the scenes in Meld with File → Import OBS Session, or stay in OBS + Aitum. Chat for you stays on the gaming monitor. Tagged @jengland91. Stream audio is game + mic only — Discord stays off.</p>
     <nav>
+      <a class="btn" href="docs/meld.html">Meld Studio</a>
+      <a class="btn" href="meld/index.html">Meld layout</a>
       <a class="btn" href="setup.html">Open setup guide</a>
       <a class="btn" href="tools/install.html">Install into OBS</a>
-      <a class="btn" href="docs/aitum.html">Aitum Multi</a>
+      <a class="btn ghost" href="docs/aitum.html">Aitum Multi</a>
       <a class="btn ghost" href="overlays/live.html?preview=1&setup=1">Show race slots</a>
       <a class="btn ghost" href="https://instagram.com/riseabovephoto" target="_blank" rel="noreferrer">Instagram</a>
     </nav>
@@ -187,9 +189,9 @@
 
     <div class="grid">
       <article class="card">
-        <h2>1. OBS + BeamNG</h2>
-        <p>Named scenes, Game Capture, and four cameras: face, room, wheel, pedals. Dual-cam scene for a second BeamNG angle. Mixer: Desktop Audio muted, <code>Audio / Game</code> = BeamNG, <code>Mic / Main</code> = you. Wide + phone from OBS uses Aitum Multi + Vertical.</p>
-        <p style="margin-top:10px"><a href="docs/obs.html">OBS + BeamNG map →</a> · <a href="docs/aitum.html">Aitum Multi →</a></p>
+        <h2>1. Meld or OBS</h2>
+        <p>Same eight scenes. Meld: File → Import OBS Session from collection <code>Rise Above BeamNG</code>, then Settings → General → Multi Canvas for phone. OBS path still uses Aitum Multi + Vertical. Stream audio is game + mic, not Discord.</p>
+        <p style="margin-top:10px"><a href="docs/meld.html">Meld import →</a> · <a href="meld/index.html">Meld layout →</a> · <a href="docs/obs.html">OBS map →</a></p>
       </article>
       <article class="card">
         <h2>2. Multi-cam</h2>
@@ -198,7 +200,7 @@
       </article>
       <article class="card">
         <h2>3. Lumia Stream</h2>
-        <p>One overlay URL for chat, alerts, and goals. Lights follow the scene. Chat commands: <code>!face</code> <code>!room</code> <code>!rig</code> <code>!wheel</code> <code>!pedals</code> <code>!game</code>. Casterlabs is not part of this kit.</p>
+        <p>One overlay URL for chat, alerts, and goals. Lights follow the scene when Lumia is connected to OBS. Chat commands: <code>!face</code> <code>!room</code> <code>!rig</code> <code>!wheel</code> <code>!pedals</code> <code>!game</code>. Scene commands like <code>!race</code> control OBS only — they do not switch Meld. Casterlabs is not part of this kit.</p>
         <p style="margin-top:10px"><a href="docs/lumia.html">Overlay + light recipes →</a></p>
       </article>
       <article class="card">
@@ -207,7 +209,7 @@
           <li>Today’s game on Starting Soon: double-click <code>tools/Change-Game.bat</code> (or edit <code>game</code> in <code>overlays/shared/config.js</code>)</li>
           <li>Set TRAILHEAD, socials, and Monster green <code>#7CB701</code> in that same config file</li>
           <li>Drop <code>starting.jpg</code> / <code>brb.jpg</code> / <code>ending.jpg</code> in <code>overlays/shared/backdrops/</code> for your own photo backgrounds</li>
-          <li>In OBS, right-click the overlay source → Refresh. In TikTok Studio, refresh the Link sources (no installer re-run)</li>
+          <li>In OBS, right-click the overlay source → Refresh. In Meld, refresh the Browser overlay. In TikTok Studio, refresh the Link sources (no installer re-run)</li>
         </ol>
       </article>
     </div>

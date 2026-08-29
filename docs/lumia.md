@@ -7,7 +7,7 @@ Open [tools/chat-for-you.html](../tools/chat-for-you.html) or double-click `tool
 1. Lumia → Connections → Twitch (and Kick / YouTube). One Chatbox = all that chat. Leave Lumia running.
 2. Do **not** paste a Chatbox into OBS if viewers should not see it. Leave `Lumia / Overlay` blank or Alerts only.
 3. Drag the Lumia window onto the BeamNG monitor, or paste the overlay URL into Chat for you → Open chat window, then drag that window over.
-4. Do not Game Capture that window in OBS.
+4. Do not Game Capture that window in OBS, and do not capture it in Meld.
 
 If you already put chat in `Lumia / Overlay`, hide that source or remove the Chatbox from the overlay.
 
@@ -27,7 +27,9 @@ Only if you also want **viewers** to see chat or alerts. In Lumia’s overlay ed
 
 Colors: text `#E8DCC8`, accent Monster green `#7CB701`, backgrounds transparent or a light dark glass.
 
-Copy the overlay URL once. OBS source `Lumia / Overlay`, 1920×1080 on the wide collection, 1080×1920 on the vertical collection, **above** the Rise Above HUD.
+Copy the overlay URL once. OBS source `Lumia / Overlay`, 1920×1080 on the wide collection, 1080×1920 on the vertical collection, **above** the Rise Above HUD. In Meld, same URL as a Browser layer on Main and Portrait.
+
+Scene commands (`!race`, `!desk`, …) control OBS only. They do not switch Meld.
 
 Vertical RACE chatbox: **1048×800 at 16, 1096**. Alerts: **1048×160 at 16, 16**. Duplicate the Lumia overlay for 9:16 if chat looks stretched; or keep one URL and park layers on the vertical wells.
 
