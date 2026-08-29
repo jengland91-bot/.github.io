@@ -693,6 +693,11 @@ body.vertical .well-game {
   height: 608px;
 }
 
+body.vertical .well-game .well-tag {
+  top: 8px;
+  left: 8px;
+}
+
 body.vertical .well-face {
   left: 16px;
   top: 624px;
