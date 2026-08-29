@@ -27,7 +27,7 @@ The installer mutes **Desktop Audio** on **both** the wide and vertical collecti
 
 If you still hear Discord on VODs: Desktop Audio got unmuted. Mute it again. In Discord, you can keep output on your headset.
 
-## Kick, Twitch, YouTube, TikTok, Instagram, Facebook
+## Kick, Twitch, YouTube, TikTok, Instagram, Facebook, Discord
 
 Edit `overlays/shared/config.js`. The `socials` object is the list that prints on Starting Soon, BRB, and Ending:
 
@@ -39,7 +39,7 @@ tiktok: "jengland91"
 instagram: "jengland91"
 facebook: "joshengland91"
 x: ""
-discord: ""                    // display-only. This is not Discord audio.
+discord: "1483831196570878084" // or "https://discord.com/users/1483831196570878084". Display-only — not Discord audio.
 ```
 
 Save. In OBS: right-click the overlay source → Refresh. You do not need to re-run the installer just to change links.

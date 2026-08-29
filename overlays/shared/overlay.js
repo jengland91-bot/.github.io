@@ -50,7 +50,7 @@
     let s = String(value).trim();
     s = s.replace(/^https?:\/\//i, "");
     s = s.replace(/^www\./i, "");
-    s = s.replace(/^(youtube\.com\/@|youtube\.com\/c\/|youtube\.com\/channel\/|youtube\.com\/|twitch\.tv\/|tiktok\.com\/@|tiktok\.com\/|kick\.com\/|instagram\.com\/|facebook\.com\/|x\.com\/|twitter\.com\/|discord\.gg\/|discord\.com\/invite\/)/i, "");
+    s = s.replace(/^(youtube\.com\/@|youtube\.com\/c\/|youtube\.com\/channel\/|youtube\.com\/|twitch\.tv\/|tiktok\.com\/@|tiktok\.com\/|kick\.com\/|instagram\.com\/|facebook\.com\/|x\.com\/|twitter\.com\/|discord\.gg\/|discord\.com\/invite\/|discord\.com\/users\/)/i, "");
     s = s.replace(/\/.*$/, "");
     s = s.replace(/^@/, "");
     return s;

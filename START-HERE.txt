@@ -19,7 +19,7 @@ AUDIO (no Discord on stream):
   Mic / Main = your microphone.
   Discord can stay open. You still hear it in your headset. It will not go to the stream.
 
-NAMES AND LINKS (LIVE, GRID, handle, Twitch, YouTube, Kick, TikTok, Instagram):
+NAMES AND LINKS (LIVE, GRID, handle, Twitch, YouTube, Kick, TikTok, Instagram, Facebook, Discord):
   Open overlays\shared\config.js in Notepad.
   Change chattingTitle / liveTitle / dualTitle and the social usernames.
   Save. In OBS: right-click the overlay source -> Refresh.

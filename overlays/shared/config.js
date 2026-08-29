@@ -21,7 +21,9 @@ window.STREAM = {
        tiktok:  "jengland91"
        instagram: "jengland91"
        facebook: "joshengland91"
-       x / discord: leave "" until you want them on screen
+       discord: "1483831196570878084"  or  "https://discord.com/users/1483831196570878084"
+                (a discord.gg invite URL also works)
+       x: leave "" until you want it on screen
   */
   socials: {
     twitch: "jengland91",
@@ -31,7 +33,7 @@ window.STREAM = {
     instagram: "jengland91",
     facebook: "joshengland91",
     x: "",
-    discord: "",
+    discord: "1483831196570878084",
   },
 
   /* Off-road dirt / dusk palette */
