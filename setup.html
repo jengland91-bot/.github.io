@@ -82,19 +82,20 @@
     <div class="kicker">CHECKLIST</div>
     <h1>GET IT LIVE</h1>
     <p>Work top to bottom. Check items off as you go — this page remembers them in this browser. Full detail lives in the docs linked at the bottom.</p>
-    <p>Going live from <strong>Meld</strong>: <a href="docs/meld.html">import the OBS scenes</a> (or build from the <a href="meld/index.html">layout board</a>). The OBS installer is only needed once so Meld has something to import.</p>
-    <p><a href="tools/install.html">Use the installer</a> to create the OBS scene collection and Lumia chat commands with code. Open that page on the streaming PC (local file), not from GitHub Pages.</p>
+    <p>Going live from <strong>Meld</strong> (no OBS): extract the zip, double-click <code>tools/Start-MeldLayout.bat</code>, paste overlay URLs into Meld. Guide: <a href="docs/meld.html">docs/meld.html</a>. Skip the OBS installer.</p>
+    <p>Only if you still use OBS: <a href="tools/install.html">use the installer</a> on the streaming PC (local file), not from GitHub Pages.</p>
 
     <h2>A. Identity</h2>
     <label class="step"><input type="checkbox" data-id="config" /><span>Today’s game on STARTING SOON: double-click <code>tools/Change-Game.bat</code> (or edit <code>game</code> in <code>overlays/shared/config.js</code>). Also set TRAILHEAD, Monster green <code>#7CB701</code>, and the <code>socials</code> block. Save, then refresh the overlay in OBS, Meld, or TikTok Studio.</span></label>
     <label class="step"><input type="checkbox" data-id="preview" /><span>Open <a href="index.html">the preview</a> and confirm Starting Soon / Desk / Race / Grid / Dual look right.</span></label>
 
-    <h2>B. Meld Studio (if you go live from Meld)</h2>
-    <label class="step"><input type="checkbox" data-id="meld-install" /><span>Install <a href="https://www.meldstudio.co/" target="_blank" rel="noreferrer">Meld Studio</a>. Extract this zip. If OBS does not already have collection <code>Rise Above BeamNG</code>, run <code>tools/Install-OBS.bat</code> once.</span></label>
-    <label class="step"><input type="checkbox" data-id="meld-import" /><span>OBS dropdown = <code>Rise Above BeamNG</code> (not the Vertical collection). File → Save. Close OBS. Meld → File → Import OBS Session. Confirm STARTING SOON through ENDING.</span></label>
-    <label class="step"><input type="checkbox" data-id="meld-sources" /><span>Missing Source Assistant: BeamNG on Game / Main, four cameras, mic. Process Audio of the game. Do not capture desktop / Discord.</span></label>
-    <label class="step"><input type="checkbox" data-id="meld-multi" /><span>Settings → General → Multi Canvas for phone. Portrait sizes: <a href="meld/index.html">meld layout board</a>. Drag <code>overlays/vertical/*.html</code> onto Portrait. Aitum is not used in Meld.</span></label>
-    <p>Skip section C if you are not going live from OBS.</p>
+    <h2>B. Meld Studio (no OBS)</h2>
+    <label class="step"><input type="checkbox" data-id="meld-install" /><span>Install <a href="https://www.meldstudio.co/" target="_blank" rel="noreferrer">Meld Studio</a>. Extract this zip. Do not open OBS. Do not run <code>Install-OBS.bat</code>.</span></label>
+    <label class="step"><input type="checkbox" data-id="meld-server" /><span>Double-click <code>tools/Start-MeldLayout.bat</code> and leave the black window open. Layout board: <a href="meld/index.html">meld/</a></span></label>
+    <label class="step"><input type="checkbox" data-id="meld-scenes" /><span>In Meld, add STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING. Start with RACE. Settings → General → Multi Canvas for phone.</span></label>
+    <label class="step"><input type="checkbox" data-id="meld-overlay" /><span>Each scene: copy that overlay URL from the board and paste it onto the Meld canvas (Browser layer), or drag the HTML from <code>overlays\</code> / <code>overlays\vertical\</code>.</span></label>
+    <label class="step"><input type="checkbox" data-id="meld-sources" /><span>Game Capture (or Display Capture) for BeamNG. Video Device for Face / Room / Wheel / Pedals. Process Audio of the game + mic. Do not capture desktop / Discord.</span></label>
+    <p>Skip section C if you are going live from Meld, not OBS.</p>
 
     <h2>C. OBS canvas &amp; output</h2>
     <label class="step"><input type="checkbox" data-id="obs-install" /><span>Install the latest <a href="https://obsproject.com/" target="_blank" rel="noreferrer">OBS Studio</a> (28+ so WebSocket is built in).</span></label>

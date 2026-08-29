@@ -4,14 +4,16 @@ Off-road overlay kit for **BeamNG.drive** with **four cameras** (Face, Room, Whe
 
 Open [START-HERE.txt](START-HERE.txt).
 
-- **Meld Studio** — [Import the OBS scenes](docs/meld.html) with File → Import OBS Session, then go live from Meld. Multi Canvas is the phone picture (no Aitum). Layout board: [meld/index.html](meld/index.html).
+- **Meld Studio (no OBS)** — double-click `tools/Start-MeldLayout.bat`, paste overlay URLs into Meld as Browser layers. [Guide](docs/meld.html). Layout board: [meld/index.html](meld/index.html).
 - **Twitch / YouTube / Kick + TikTok/Shorts from OBS** — OBS + [Aitum Multi + Vertical](docs/aitum.html). Stay on collection `Rise Above BeamNG`. Do not add Restream.
 - **Chat for you** — Lumia on the gaming monitor, or `tools/Open-ChatForYou.bat`. Not a streaming app.
 
-OBS (if you still use it, or as the import source for Meld) creates two scene collections:
+OBS (only if you still stream from OBS) creates two scene collections:
 
-- **Rise Above BeamNG** — 1920×1080. This is the collection Meld should import.
-- **Rise Above BeamNG Vertical** — 1080×1920 if you stream phone-only from OBS with no wide canvas. With Aitum Vertical, stay on the wide collection. In Meld, use Multi Canvas instead of this collection.
+- **Rise Above BeamNG** — 1920×1080
+- **Rise Above BeamNG Vertical** — 1080×1920 if you stream phone-only from OBS with no wide canvas. With Aitum Vertical, stay on the wide collection.
+
+Meld does not use these collections. In Meld, Multi Canvas is the phone picture.
 
 Same scene names in both. Switch them with the dropdown at the top of OBS. Pick BeamNG on `Game / Main` and `Audio / Game` in both collections. Desktop Audio stays muted so Discord is not on the stream.
 
@@ -44,14 +46,14 @@ In-game BeamNG cameras (C / Shift+C) stay on one source: `Game / Main`. Physical
 
 ## Who does what
 
-- **Meld Studio** — go-live app if you switched off OBS. Import OBS scenes, then Multi Canvas for phone. [Meld guide](docs/meld.html)
-- **OBS** — capture + layout if you stay in OBS, or the one-time source Meld imports
+- **Meld Studio** — go-live app. Plug overlay HTML in as Browser layers. No OBS. [Meld guide](docs/meld.html)
+- **OBS** — only if you still stream from OBS (not needed for Meld)
 - **TikTok LIVE Studio** — Dual layout (phone + landscape). Overlay server + [layout board](tiktok-studio/index.html)
 - **Lumia** — chatbox, alerts, goals, lights. Scene commands control OBS only, not Meld.
 
 ## Customize
 
-Edit `overlays/shared/config.js` in Notepad, or double-click `tools/Change-Game.bat` to swap the Starting Soon game title (`BeamNG` → `SnowRunner` etc.). Also set `startingKicker` (TRAILHEAD), Monster green `colors.ember` (`#7CB701`), and `socials`. Save, then in OBS right-click the overlay → **Refresh**, in Meld refresh the Browser overlay, or in TikTok LIVE Studio refresh the Link sources. Camera wells in OBS only move if you download a new zip and re-run `tools/Install-OBS.bat`. Then in Meld: File → Import OBS Session again if you want those new positions.
+Edit `overlays/shared/config.js` in Notepad, or double-click `tools/Change-Game.bat` to swap the Starting Soon game title (`BeamNG` → `SnowRunner` etc.). Also set `startingKicker` (TRAILHEAD), Monster green `colors.ember` (`#7CB701`), and `socials`. Save, then in Meld reload the Browser overlay, or in OBS right-click the overlay → **Refresh**, or in TikTok LIVE Studio refresh the Link sources. Camera wells only apply if you still use OBS.
 
 ### Your photos on Starting Soon / BRB / Ending
 
@@ -59,7 +61,7 @@ Drop `starting.jpg`, `brb.jpg`, and `ending.jpg` into `overlays/shared/backdrops
 
 ## Docs
 
-- [Meld Studio — import scenes](docs/meld.html)
+- [Meld Studio — plug in overlays](docs/meld.html)
 - [OBS + BeamNG + multi-cam](docs/obs.html)
 - [Aitum Multi + Vertical](docs/aitum.html)
 - [Lumia / chat for you](docs/lumia.html)

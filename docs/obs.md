@@ -5,7 +5,7 @@ Two canvases. Scene names are exact — Lumia matches them as written.
 - Collection **Rise Above BeamNG**: **1920×1080** (this is the one Meld should import)
 - Collection **Rise Above BeamNG Vertical**: **1080×1920**
 
-To move this show into Meld: stay on **Rise Above BeamNG**, File → Save, close OBS, then Meld **File → Import OBS Session**. Portrait in Meld is Multi Canvas, not this second OBS collection. Guide: [meld.html](meld.html).
+To go live from Meld instead of OBS: skip this collection. Plug the overlay HTML into Meld as Browser layers. Guide: [meld.html](meld.html).
 
 Switch collections with the dropdown at the top of OBS. Numpad 1–7 fire the same scene names on whichever collection is active. Numpad 8 is `DESK`. Pick BeamNG on `Game / Main` in **both** for racing. For other games, click `DESK` and pick that game on `Game / Main` and `Audio / Game`.
 

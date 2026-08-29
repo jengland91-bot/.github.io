@@ -11,82 +11,83 @@
 </head>
 <body>
 <main>
-  <div class="kicker">MELD STUDIO</div>
-  <h1>PUT THE SCENES IN MELD</h1>
-  <p>Yes. Meld can take the Rise Above scenes. Fastest way: build them in OBS once, then <strong>File → Import OBS Session</strong>. Overlay HTML stays the same files. Aitum is not needed — Meld’s Multi Canvas is the phone picture. Markdown: <a href="meld.md">meld.md</a></p>
-  <p>Layout board with every X / Y / W / H: <a href="../meld/">meld/</a> (or double-click <code>tools\Open-MeldLayout.bat</code>).</p>
+  <div class="kicker">MELD STUDIO ONLY</div>
+  <h1>PLUG THE KIT INTO MELD</h1>
+  <p>You do not need OBS. The overlays are HTML files in this zip. In Meld they are <strong>Browser</strong> layers: paste the URL, or drag the file onto the canvas. Game and cameras are Meld’s own layers (Game Capture / Video Device). Markdown: <a href="meld.md">meld.md</a></p>
+  <p>Layout board (copy the URLs): <a href="../meld/">meld/</a> — double-click <code>tools\Start-MeldLayout.bat</code> and leave the black window open.</p>
 
   <div class="callout">
-    <h2>Path A — import OBS (fastest)</h2>
-    <p>If the OBS kit is already on this PC, you do not rebuild eight scenes by hand. Meld reads the last saved OBS session.</p>
+    <h2>Do this once</h2>
+    <p>Extract the zip. Open Meld. Double-click <code>tools\Start-MeldLayout.bat</code>. Keep that window open while you stream so the overlay URLs keep working.</p>
   </div>
 
   <ol>
     <li>Right-click the zip → Extract All. Do not open files from inside the zip.</li>
-    <li>If you have not run the installer yet: open OBS, stay on a throwaway collection, double-click <code>tools\Install-OBS.bat</code>, pick collection <code>Rise Above BeamNG</code>.</li>
-    <li>OBS top dropdown = <code>Rise Above BeamNG</code> (1920×1080). Do not switch to the Vertical collection.</li>
-    <li>OBS → File → Save. Then close OBS. Do not stream from OBS and Meld to the same site at the same time.</li>
-    <li>Open <a href="https://www.meldstudio.co/" target="_blank" rel="noreferrer">Meld Studio</a>.</li>
-    <li>File → <strong>Import OBS Session</strong>. Meld grabs the most recently saved OBS session. It backs up whatever you had in Meld first.</li>
-    <li>You should see STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING.</li>
-    <li>Bottom-left warning icon = Missing Source Assistant. Click it. Point Game / Main at BeamNG, cameras at Face / Room / Wheel / Pedals, mic at your mic. One fix updates every scene that uses that layer.</li>
-    <li>Audio: capture the game process and your mic. Do not capture desktop / system audio (that is Discord). Same rule as OBS.</li>
-    <li>If a Browser overlay is blank, re-point it at the HTML in this extracted folder (list below).</li>
+    <li>Install / open <a href="https://www.meldstudio.co/" target="_blank" rel="noreferrer">Meld Studio</a>. Do not open OBS.</li>
+    <li>Double-click <code>tools\Start-MeldLayout.bat</code>. A layout board opens. Leave the black window open.</li>
+    <li>In Meld, add eight scenes and name them exactly: STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING. Start with <strong>RACE</strong>.</li>
+    <li>Settings → General → <strong>Multi Canvas</strong> if you also want the phone picture. Main is 1920×1080. Portrait is 1080×1920.</li>
+    <li><strong>Plug in the overlay:</strong> on the layout board click RACE → Copy main overlay URL. In Meld, click the Main canvas, then paste (or Layers + → Browser and paste the URL). Size 1920×1080. For Portrait, copy the portrait URL and paste it on the Portrait canvas, 1080×1920.</li>
+    <li>You can also drag <code>overlays\live.html</code> (and <code>overlays\vertical\live.html</code> on Portrait) from the extracted folder onto the canvas. Same thing.</li>
+    <li>Add BeamNG: Layers + → Game Capture (or Display Capture of the BeamNG window). Name it <code>Game / Main</code>. Sit it under the overlay.</li>
+    <li>Add cameras: Layers + → Video Device. Make <code>Cam / Face</code>, <code>Cam / Room</code>, <code>Cam / Wheel</code>, <code>Cam / Pedals</code> once. Use a Duplicator (or copy) onto GRID, DESK (face + room only), and RACE DUAL. Size them to the numbers on the board.</li>
+    <li>Audio: Process Audio of BeamNG + your mic. Do not capture desktop / Discord.</li>
   </ol>
-  <p>Official import notes: <a href="https://meldstudio.co/docs/sessions/" target="_blank" rel="noreferrer">Meld sessions</a>.</p>
+  <p>Repeat step 6 for the other scenes (click each scene on the board, copy that overlay URL, paste it on that Meld scene). Skip RACE DUAL until you have a second BeamNG view.</p>
 
-  <h2>Phone canvas (instead of Aitum)</h2>
-  <p>Import only brings the <strong>wide</strong> collection. The OBS vertical collection is a second OBS show — Meld will not turn it into the Portrait canvas for you. In Meld:</p>
-  <ol>
-    <li>Settings → General → <strong>Multi Canvas</strong>.</li>
-    <li>Each scene now has Main (1920×1080) and Portrait (1080×1920). Switching scenes switches both.</li>
-    <li>Click the Portrait canvas. Add the same cameras / game, then drag the matching file from <code>overlays\vertical\</code>. Sizes are on the <a href="../meld/">layout board</a>.</li>
-    <li>You can copy a camera from Main to Portrait, then only resize it.</li>
-  </ol>
-  <p>Aitum Multistream and Aitum Vertical do not come over. Stream keys live in Meld Destinations, never in this folder.</p>
-
-  <h2>Path B — no OBS</h2>
-  <p>Skip the installer. Double-click <code>tools\Open-MeldLayout.bat</code>. In Meld, add the eight scene names, then for each scene add layers from the board and drag the overlay HTML onto the canvas.</p>
-  <p>Layers + → Browser also works. Local file is fine. You can also run <code>tools\Start-MeldLayout.bat</code> and paste <code>http://127.0.0.1:5500/overlays/...</code> if you prefer a URL.</p>
-
-  <h2>Scenes (same names as OBS)</h2>
+  <h2>What each kit name is in Meld</h2>
   <table>
-    <tr><th>Scene</th><th>Main overlay (drag this)</th><th>Portrait overlay</th><th>Job</th></tr>
-    <tr><td><code>STARTING SOON</code></td><td><code>overlays/starting-soon.html</code></td><td><code>overlays/vertical/starting-soon.html</code></td><td>Countdown</td></tr>
-    <tr><td><code>GRID</code></td><td><code>overlays/chatting.html</code></td><td><code>overlays/vertical/chatting.html</code></td><td>Talking, no game</td></tr>
-    <tr><td><code>DESK</code></td><td><code>overlays/desk.html</code></td><td><code>overlays/vertical/desk.html</code></td><td>Other games: full game + face + room</td></tr>
-    <tr><td><code>RACE</code></td><td><code>overlays/live.html</code></td><td><code>overlays/vertical/live.html</code></td><td>BeamNG + four cams</td></tr>
-    <tr><td><code>RACE DUAL</code></td><td><code>overlays/race-dual.html</code></td><td><code>overlays/vertical/race-dual.html</code></td><td>Main + second angle</td></tr>
-    <tr><td><code>REPLAY</code></td><td><code>overlays/replay.html</code></td><td><code>overlays/vertical/replay.html</code></td><td>Clean game</td></tr>
-    <tr><td><code>BRB</code></td><td><code>overlays/brb.html</code></td><td><code>overlays/vertical/brb.html</code></td><td>Pit stop</td></tr>
-    <tr><td><code>ENDING</code></td><td><code>overlays/ending.html</code></td><td><code>overlays/vertical/ending.html</code></td><td>Thanks</td></tr>
+    <tr><th>Name on the board</th><th>In Meld, add</th></tr>
+    <tr><td><code>Game / Main</code></td><td>Game Capture or Display Capture (BeamNG window)</td></tr>
+    <tr><td><code>Game / Angle 2</code></td><td>Second window / bumper view — RACE DUAL only</td></tr>
+    <tr><td><code>Cam / Face</code> (and Room / Wheel / Pedals)</td><td>Video Device</td></tr>
+    <tr><td><code>Overlay / …</code></td><td>Browser — paste the URL from the board, or drag the HTML file</td></tr>
+    <tr><td><code>Lumia / Overlay</code></td><td>Optional Browser — paste your Lumia overlay URL, on top</td></tr>
+    <tr><td><code>Audio / Game</code></td><td>Process Audio of that game. No picture.</td></tr>
+    <tr><td><code>Color / Backdrop</code></td><td>Skip. The overlay already has the dirt background.</td></tr>
   </table>
-  <p>HUD overlays sit above the game and cameras. Lumia (if viewers should see alerts) sits above the HUD.</p>
+  <p>HUD overlay sits above the game and cameras. Lumia (if viewers should see alerts) sits above the HUD.</p>
+
+  <h2>Overlay file for each scene</h2>
+  <table>
+    <tr><th>Scene</th><th>Main (paste / drag)</th><th>Portrait</th></tr>
+    <tr><td><code>STARTING SOON</code></td><td><code>overlays/starting-soon.html</code></td><td><code>overlays/vertical/starting-soon.html</code></td></tr>
+    <tr><td><code>GRID</code></td><td><code>overlays/chatting.html</code></td><td><code>overlays/vertical/chatting.html</code></td></tr>
+    <tr><td><code>DESK</code></td><td><code>overlays/desk.html</code></td><td><code>overlays/vertical/desk.html</code></td></tr>
+    <tr><td><code>RACE</code></td><td><code>overlays/live.html</code></td><td><code>overlays/vertical/live.html</code></td></tr>
+    <tr><td><code>RACE DUAL</code></td><td><code>overlays/race-dual.html</code></td><td><code>overlays/vertical/race-dual.html</code></td></tr>
+    <tr><td><code>REPLAY</code></td><td><code>overlays/replay.html</code></td><td><code>overlays/vertical/replay.html</code></td></tr>
+    <tr><td><code>BRB</code></td><td><code>overlays/brb.html</code></td><td><code>overlays/vertical/brb.html</code></td></tr>
+    <tr><td><code>ENDING</code></td><td><code>overlays/ending.html</code></td><td><code>overlays/vertical/ending.html</code></td></tr>
+  </table>
+  <p>DESK = sit-at-desk other games (full game + face + room, no wheel). Point Game Capture and Process Audio at that game. Switch both back to BeamNG for RACE.</p>
 
   <h2>Audio</h2>
-  <p>Stream <strong>game + mic</strong> only. In Meld use Process Audio for BeamNG (or the DESK game). Do not add Display / Desktop audio. Discord can stay in your headset.</p>
-  <p>On DESK, switch Process Audio to that other game. Switch it back to BeamNG for RACE.</p>
+  <p>Stream <strong>game + mic</strong> only. Process Audio of BeamNG (or the DESK game). Do not add Display / Desktop audio. Discord can stay in your headset.</p>
 
   <h2>Names, game title, photos</h2>
-  <p>Same as OBS. Double-click <code>tools\Change-Game.bat</code> for the Starting Soon title, or edit <code>overlays/shared/config.js</code>. Photos: <code>overlays/shared/backdrops/</code>. Then in Meld, refresh the Browser overlay layer (or hide and show it).</p>
+  <p>Double-click <code>tools\Change-Game.bat</code> for the Starting Soon title, or edit <code>overlays/shared/config.js</code>. Photos: <code>overlays/shared/backdrops/</code>. Then in Meld, click the reload icon on that Browser layer.</p>
+  <p>Leave <code>tools\Start-MeldLayout.bat</code> running so those files still load.</p>
 
   <h2>Lumia</h2>
-  <p>Chat for you is still Lumia on the gaming monitor, or <code>tools\Open-ChatForYou.bat</code>. Do not capture that window.</p>
-  <p>If viewers should see alerts: paste the Lumia overlay URL as a Browser layer named <code>Lumia / Overlay</code>, 1920×1080 on Main, 1080×1920 on Portrait, above the HUD.</p>
-  <p>Chat <code>!race</code> / <code>!desk</code> / <code>!face</code> talk to <strong>OBS</strong>, not Meld. Switch scenes in Meld (or a Stream Deck Meld plugin). Lights that follow OBS scenes will not fire unless OBS is also open and connected — skip that if you live in Meld only.</p>
+  <p>Chat for you is still Lumia on the gaming monitor, or <code>tools\Open-ChatForYou.bat</code>. Do not capture that window in Meld.</p>
+  <p>If viewers should see alerts: paste the Lumia overlay URL as a Browser layer on top of the HUD.</p>
+  <p>Chat <code>!race</code> / <code>!desk</code> / <code>!face</code> talk to OBS. You are not using OBS, so switch scenes in Meld yourself.</p>
+
+  <h2>Destinations</h2>
+  <p>Stream keys live in Meld (Twitch / YouTube / Kick / TikTok). Never paste them into this folder or into chat. Aitum is not used.</p>
 
   <h2>Do not</h2>
   <ul>
-    <li>Run OBS and Meld live to the same Twitch / YouTube / Kick / TikTok at once.</li>
-    <li>Import the OBS <em>Vertical</em> collection as your Main canvas (that makes the whole show 9:16).</li>
-    <li>Expect Aitum docks or Linked Scenes to appear in Meld.</li>
-    <li>Paste stream keys into this kit or into chat.</li>
+    <li>Open OBS. Do not run <code>Install-OBS.bat</code>.</li>
+    <li>Capture desktop audio (that is Discord).</li>
+    <li>Capture the Lumia “chat for you” window.</li>
+    <li>Paste stream keys into this kit.</li>
   </ul>
 
   <nav class="docs">
     <a href="../START-HERE.txt">Start here</a> ·
     <a href="../meld/">Layout board</a> ·
-    <a href="obs.html">OBS + BeamNG</a> ·
     <a href="lumia.html">Lumia</a>
   </nav>
 </main>

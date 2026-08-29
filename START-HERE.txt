@@ -1,47 +1,45 @@
 THREE APPS. Pick the one you are going live from:
 
-  MELD STUDIO = Meld. Fastest: import the OBS scenes, then go live from
-            Meld. Jump to the MELD STUDIO section below.
+  MELD STUDIO = Meld only. Do not open OBS. Jump to MELD STUDIO below.
 
-  TIKTOK  = TikTok LIVE Studio only. Do not open OBS for TikTok.
+  TIKTOK  = TikTok LIVE Studio only. Do not open OBS or Meld for TikTok.
             Jump to the TIKTOK LIVE STUDIO section below.
 
-  TWITCH / YOUTUBE / KICK from OBS = OBS Studio. Follow the OBS
-            sections (audio, Lumia in OBS, cameras). Skip if you
-            switched to Meld.
+  OBS     = only if you still stream from OBS (Twitch / YouTube / Kick).
+            Skip that whole section if you switched to Meld.
 
 ------------------------------------------------------------------------
-MELD STUDIO (all eight scenes)
+MELD STUDIO (no OBS)
 ------------------------------------------------------------------------
-Yes. You can put STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY,
-BRB, and ENDING into Meld. Overlay HTML stays the same files.
+Yes. Plug this kit straight into Meld. The overlays are HTML files.
+In Meld they are Browser layers. You do not run Install-OBS.bat.
 
-FAST PATH (already have OBS kit on this PC):
 1. Right-click the zip -> Extract All. Do not open files from inside the zip.
-2. Open OBS. Top dropdown = Rise Above BeamNG (the 1920x1080 one).
-   If those scenes are missing, run tools\Install-OBS.bat first.
-3. OBS -> File -> Save. Close OBS. Do not stream OBS and Meld to the
-   same Twitch / YouTube / Kick / TikTok at the same time.
-4. Open Meld Studio -> File -> Import OBS Session.
-   Meld pulls the last saved OBS session. Your eight scenes should appear.
-5. Bottom-left warning icon = Missing Source Assistant. Pick BeamNG
-   on Game / Main, your four cameras, and your mic.
-6. Audio: game process + mic only. Do not capture desktop / Discord.
-7. Phone picture: Meld Settings -> General -> Multi Canvas.
-   Aitum is not used in Meld. Portrait sizes: double-click
-   tools\Open-MeldLayout.bat and use the Portrait column.
-8. If an overlay is blank, drag the HTML from overlays\ (Main) or
-   overlays\vertical\ (Portrait) onto that canvas.
+2. Open Meld Studio. Do not open OBS.
+3. Open the extracted folder -> tools -> double-click Start-MeldLayout.bat
+   Leave the black window open while you are live.
+4. A layout board opens. That page has the overlay URLs and the sizes.
+5. In Meld, add scenes: STARTING SOON, GRID, DESK, RACE, RACE DUAL,
+   REPLAY, BRB, ENDING. Start with RACE. DESK is sit-at-desk other games.
+   Skip RACE DUAL until you have a second BeamNG view.
+6. Settings -> General -> Multi Canvas if you also want the phone picture.
+7. PLUG IN THE OVERLAY:
+   On the layout board click RACE -> Copy main overlay URL.
+   In Meld, click the Main canvas and paste (or Layers + -> Browser, paste).
+   Size 1920x1080. For the phone canvas, copy the portrait URL and paste that.
+   Or drag overlays\live.html onto Main, overlays\vertical\live.html onto Portrait.
+8. Add BeamNG: Layers + -> Game Capture (or Display Capture of the window).
+   Add cameras: Layers + -> Video Device (Face, Room, Wheel, Pedals).
+   Size them to the numbers on the board. Overlay sits on top.
+9. Audio: Process Audio of BeamNG + your mic. Do not capture desktop / Discord.
 
-NO OBS PATH:
-  Double-click tools\Open-MeldLayout.bat and build the eight scenes
-  from the numbers on that page. Drag the overlay HTML onto the canvas.
+Repeat step 7 for the other scenes (each scene has its own overlay URL).
 
-Lumia chat for you still works (gaming monitor, or Open-ChatForYou.bat).
-Chat !race does NOT switch Meld scenes — click the scene in Meld.
+Lumia chat for you: gaming monitor, or tools\Open-ChatForYou.bat.
+Do not capture that window. Chat !race does not switch Meld scenes.
 
 Names / photos: overlays\shared\config.js and overlays\shared\backdrops\
-then refresh the Browser overlay in Meld.
+then reload the Browser overlay in Meld.
 
 Full page: docs\meld.html
 Layout board: meld\index.html
@@ -79,7 +77,7 @@ Full text: docs\tiktok.html
 Do not run Install-OBS.bat for TikTok.
 
 ------------------------------------------------------------------------
-OBS (Twitch / YouTube / Kick only)
+OBS (skip this whole section if you go live from Meld)
 ------------------------------------------------------------------------
 1. Right-click the zip -> Extract All. Do not open files from inside the zip.
 2. Open OBS Studio (the program you stream Twitch / YouTube / Kick with).

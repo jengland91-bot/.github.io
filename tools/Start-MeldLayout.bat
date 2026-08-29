@@ -2,8 +2,8 @@
 title Rise Above Meld Studio layout
 cd /d "%~dp0"
 echo.
-echo Meld Studio layout server. Keep this window open if Browser layers use http://127.0.0.1:5500
-echo Fastest path is still File - Import OBS Session. This server is optional.
+echo Meld only. Do not open OBS.
+echo Keep this window open so overlay URLs keep working in Meld.
 echo.
 where pwsh >nul 2>&1
 if %errorlevel%==0 (

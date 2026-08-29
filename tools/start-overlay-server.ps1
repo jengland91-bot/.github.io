@@ -27,11 +27,10 @@ if (-not (Test-Path (Join-Path $overlayDir "live.html"))) {
 
 Write-Host ""
 if ($Mode -eq "meld") {
-    Write-Host "Rise Above - Meld Studio layout" -ForegroundColor White
+    Write-Host "Rise Above - Meld Studio (no OBS)" -ForegroundColor White
     Write-Host "Serving: $repoRoot"
-    Write-Host "Keep this window open if Meld Browser layers use these URLs."
-    Write-Host "Fastest path is still Meld File -> Import OBS Session."
-    Write-Host "Do not stream OBS and Meld to the same site at the same time."
+    Write-Host "Keep this window open while Meld Browser layers use these URLs."
+    Write-Host "Do not open OBS. Paste a URL onto the Meld canvas, or drag the HTML file."
     Write-Host ""
     Write-Host "Layout board: ${prefix}meld/"
     Write-Host "Guide:        ${prefix}docs/meld.html"
