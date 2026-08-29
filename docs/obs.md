@@ -39,7 +39,7 @@ tiktok: "jengland91"
 instagram: "jengland91"
 facebook: "jengland91"
 x: ""
-discord: "1483831196570878084" // or "https://discord.com/users/1483831196570878084". Display-only — not Discord audio.
+discord: ""                    // leave blank for now
 ```
 
 Save. In OBS: right-click the overlay source → Refresh. You do not need to re-run the installer just to change links.

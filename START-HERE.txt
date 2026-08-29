@@ -29,6 +29,18 @@ NAMES, GAME, AND LINKS:
   Save. In OBS: right-click the overlay source -> Refresh.
   You do not need to run the installer again for names, colors, or links.
 
+LUMIA (chat, alerts, lights):
+  The green boxes on RACE (chat, alerts) are parking spots. Lumia is a separate app.
+  1. Install Lumia Stream and leave it running while you stream.
+  2. In Lumia: Connections -> add Twitch (and Kick/YouTube if you use them) AND OBS.
+     OBS is the same WebSocket as the installer (port 4455 + that password).
+  3. In Lumia, make one overlay with Chatbox + Alerts (Monster green #7CB701).
+  4. Copy the Lumia overlay URL. In OBS, double-click the source named Lumia / Overlay
+     and paste that URL (wide collection AND vertical collection).
+  5. Optional: open tools\install.html, paste your Lumia API token, click Install Lumia
+     commands. That makes !race !face etc. Then in each command, add the OBS action.
+  You can go live with just step 1-4. Lights and chat commands can wait.
+
 YOUR PHOTOS on STARTING SOON, BRB, and ENDING (thank you):
   Put pictures in overlays\shared\backdrops\
     starting.jpg   = Starting Soon

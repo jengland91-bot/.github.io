@@ -65,7 +65,7 @@ window.STREAM = {
     instagram: "jengland91",
     facebook: "jengland91",
     x: "",
-    discord: "1483831196570878084",
+    discord: "",
   },
 
   /* Photos on Starting Soon / BRB / Ending. Paths from the overlays/ folder. */
