@@ -13,9 +13,9 @@
   }
 
   function fill(selector, value) {
-    if (!value) return;
+    const text = value == null ? "" : String(value);
     document.querySelectorAll(selector).forEach((el) => {
-      el.textContent = value;
+      el.textContent = text;
     });
   }
 
@@ -54,6 +54,13 @@
     fill("[data-ending-kicker]", STREAM.endingKicker);
     fill("[data-ending-line1]", STREAM.endingLine1);
     fill("[data-ending-line2]", STREAM.endingLine2);
+    document.querySelectorAll(".brand").forEach((el) => {
+      const brand = String(STREAM.brand || "").trim();
+      const handle = String(STREAM.handle || "").trim();
+      el.classList.toggle("is-empty", !brand && !handle);
+      const mark = el.querySelector("[data-brand]");
+      if (mark) mark.hidden = !brand;
+    });
   }
 
   function socialHandle(value) {

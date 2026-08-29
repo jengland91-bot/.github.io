@@ -243,6 +243,14 @@ body.has-backdrop.scene-ending::after {
   font-weight: 600;
 }
 
+.brand.is-empty {
+  display: none;
+}
+
+.brand [data-brand][hidden] {
+  display: none !important;
+}
+
 .spacer {
   flex: 1;
 }
@@ -490,7 +498,12 @@ body.setup .cam-name {
   box-shadow: none;
 }
 
-body:not(.setup) .well-alerts {
+body:not(.setup) .well-alerts,
+body:not(.setup) .well-chat,
+body:not(.setup) .well-labels,
+body:not(.setup) .well-nowplaying,
+body:not(.setup) .well-goal,
+body:not(.setup) .well-game {
   display: none;
 }
 

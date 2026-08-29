@@ -8,7 +8,8 @@
  */
 window.STREAM = {
   name: "Josh",
-  brand: "RISE ABOVE",
+  /* Big word next to LIVE. Leave blank to hide it. Put something here if you want it back. */
+  brand: "",
   handle: "@jengland91",
 
   /* WHAT GAME ARE YOU PLAYING?

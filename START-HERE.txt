@@ -21,6 +21,7 @@ AUDIO (no Discord on stream):
 
 NAMES, GAME, AND LINKS:
   Open overlays\shared\config.js in Notepad.
+  brand       = leave blank (no RISE ABOVE on screen). Put a word here if you want one.
   game        = what prints in "BeamNG. Off-road. Live." (change this when you swap games)
   style       = Off-road / Street / whatever
   startingKicker = TRAILHEAD (the small word above STARTING SOON)
@@ -29,17 +30,21 @@ NAMES, GAME, AND LINKS:
   Save. In OBS: right-click the overlay source -> Refresh.
   You do not need to run the installer again for names, colors, or links.
 
-LUMIA (chat, alerts, lights):
-  The green boxes on RACE (chat, alerts) are parking spots. Lumia is a separate app.
-  1. Install Lumia Stream and leave it running while you stream.
-  2. In Lumia: Connections -> add Twitch (and Kick/YouTube if you use them) AND OBS.
-     OBS is the same WebSocket as the installer (port 4455 + that password).
-  3. In Lumia, make one overlay with Chatbox + Alerts (Monster green #7CB701).
-  4. Copy the Lumia overlay URL. In OBS, double-click the source named Lumia / Overlay
-     and paste that URL (wide collection AND vertical collection).
-  5. Optional: open tools\install.html, paste your Lumia API token, click Install Lumia
-     commands. That makes !race !face etc. Then in each command, add the OBS action.
-  You can go live with just step 1-4. Lights and chat commands can wait.
+LUMIA (chat and alerts on top of this kit):
+  The installer already made an OBS source named Lumia / Overlay. It starts blank.
+  1. Install Lumia Stream. Leave it running while you stream.
+  2. Lumia -> Connections -> add Twitch (and Kick/YouTube) AND OBS
+     (port 4455, same WebSocket password as the installer).
+  3. In Lumia, create one overlay: Chatbox + Alerts. Colors #E8DCC8 / #7CB701.
+  4. Copy that overlay URL.
+  5. In OBS, click scene RACE. Double-click Lumia / Overlay.
+     Uncheck Local file. Paste the Lumia URL. Width 1920 Height 1080 (or 1080x1920 on vertical).
+     Custom CSS: body { background-color: rgba(0,0,0,0); margin: 0; overflow: hidden; }
+  6. In the Sources list, Lumia / Overlay must sit ABOVE Overlay / Race HUD.
+  7. Do the same paste on the vertical collection.
+  Chat and follows then show in the empty space this kit left for them.
+  To line layers up, open overlays\live.html?setup=1 in a browser (green boxes = parking spots).
+  Optional: tools\install.html -> Lumia API token -> Install Lumia commands for !race !face.
 
 YOUR PHOTOS on STARTING SOON, BRB, and ENDING (thank you):
   Put pictures in overlays\shared\backdrops\
