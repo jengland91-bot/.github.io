@@ -16,7 +16,7 @@ Same scene names in both. Switch them with the dropdown at the top of OBS. Pick 
 
 ## Aitum (wide + phone from OBS)
 
-[Aitum Multistream](https://aitum.tv/products/multi) sends extra sites. [Aitum Vertical](https://aitum.tv/products/vertical) is the 1080×1920 canvas. You need both. Guide: [Aitum Multi + Vertical](docs/aitum.html).
+[Aitum Multistream](https://aitum.tv/products/multi) sends extra sites. [Aitum Vertical](https://aitum.tv/products/vertical) is the 1080×1920 canvas. You need both. After Vertical is installed, run `tools/Install-AitumVertical.bat` (OBS 32.1+) to fill the Vertical Scenes dock. Guide: [Aitum Multi + Vertical](docs/aitum.html).
 
 ## Audio
 

@@ -1,4 +1,7 @@
 ﻿#Requires -Version 5.1
+param(
+    [switch]$AitumOnly
+)
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
@@ -248,6 +251,15 @@ function Invoke-Obs($ws, [string]$type, $data) {
     }
 }
 
+function Try-Obs($ws, [string]$type, $data) {
+    try {
+        return Invoke-Obs $ws $type $data
+    }
+    catch {
+        return $null
+    }
+}
+
 function Get-Kind($kinds, [string[]]$names) {
     foreach ($n in $names) {
         if ($kinds -contains $n) { return $n }
@@ -258,7 +270,7 @@ function Get-Kind($kinds, [string[]]$names) {
 }
 
 function Get-BrowserSettings($name) {
-    if ($name -eq "Lumia / Overlay") {
+    if ($name -eq "Lumia / Overlay" -or $name -eq "Lumia / Overlay V") {
         return @{
             is_local_file        = $false
             url                  = "about:blank"
@@ -434,8 +446,10 @@ function Set-RiseCanvas($ws, [int]$width, [int]$height) {
     } | Out-Null
 }
 
-function Test-Scene($ws, $name) {
-    $list = Invoke-Obs $ws "GetSceneList" @{}
+function Test-Scene($ws, $name, $canvasUuid) {
+    $data = @{}
+    if ($canvasUuid) { $data["canvasUuid"] = $canvasUuid }
+    $list = Invoke-Obs $ws "GetSceneList" $data
     $names = @(Get-ObsProp $list "scenes") | ForEach-Object { Get-ObsProp $_ "sceneName" }
     return ($names -contains $name)
 }
@@ -446,23 +460,40 @@ function Test-Input($ws, $name) {
     return ($names -contains $name)
 }
 
-function Get-ItemId($ws, $scene, $source) {
-    $list = Invoke-Obs $ws "GetSceneItemList" @{ sceneName = $scene }
+function Get-ItemId($ws, $scene, $source, $canvasUuid) {
+    $data = @{ sceneName = $scene }
+    if ($canvasUuid) { $data["canvasUuid"] = $canvasUuid }
+    $list = Invoke-Obs $ws "GetSceneItemList" $data
     $hit = @(Get-ObsProp $list "sceneItems") | Where-Object { (Get-ObsProp $_ "sourceName") -eq $source } | Select-Object -First 1
     if ($hit) { return [int](Get-ObsProp $hit "sceneItemId") }
     return $null
 }
 
-function Install-RiseScenes($ws, $kinds, $sceneNames, $sceneItems) {
-    $sceneList = Invoke-Obs $ws "GetSceneList" @{}
+function Get-SourceName($item, $sourceNameMap) {
+    if ($sourceNameMap -and $sourceNameMap.ContainsKey($item.name)) {
+        return [string]$sourceNameMap[$item.name]
+    }
+    return [string]$item.name
+}
+
+function Install-RiseScenes($ws, $kinds, $sceneNames, $sceneItems, $canvasUuid, $sourceNameMap) {
+    $listData = @{}
+    if ($canvasUuid) { $listData["canvasUuid"] = $canvasUuid }
+    $sceneList = Invoke-Obs $ws "GetSceneList" $listData
     $existing = @(Get-ObsProp $sceneList "scenes") | ForEach-Object { Get-ObsProp $_ "sceneName" }
-    if (($existing -contains "Scene") -and -not ($existing -contains "STARTING SOON")) {
-        Invoke-Obs $ws "SetSceneName" @{ sceneName = "Scene"; newSceneName = "STARTING SOON" } | Out-Null
+    foreach ($defaultName in @("Vertical Scene", "Scene")) {
+        if (($existing -contains $defaultName) -and -not ($existing -contains "STARTING SOON")) {
+            $rename = @{ sceneName = $defaultName; newSceneName = "STARTING SOON" }
+            if ($canvasUuid) { $rename["canvasUuid"] = $canvasUuid }
+            Invoke-Obs $ws "SetSceneName" $rename | Out-Null
+        }
     }
 
     foreach ($scene in $sceneNames) {
-        if (-not (Test-Scene $ws $scene)) {
-            Invoke-Obs $ws "CreateScene" @{ sceneName = $scene } | Out-Null
+        if (-not (Test-Scene $ws $scene $canvasUuid)) {
+            $create = @{ sceneName = $scene }
+            if ($canvasUuid) { $create["canvasUuid"] = $canvasUuid }
+            Invoke-Obs $ws "CreateScene" $create | Out-Null
             Write-Host "  scene $scene"
         }
     }
@@ -471,76 +502,184 @@ function Install-RiseScenes($ws, $kinds, $sceneNames, $sceneItems) {
         Write-Host $scene
         foreach ($item in $sceneItems[$scene]) {
             $spec = Get-InputSpec $kinds $item
+            $sourceName = Get-SourceName $item $sourceNameMap
             if (-not $spec.inputKind) {
                 if ($item.kind -eq "gameaudio") {
                     Write-Host "  skip Audio / Game (this OBS has no Application Audio Capture)"
                     continue
                 }
-                throw "OBS missing source type for $($item.name)"
+                throw "OBS missing source type for $sourceName"
             }
             $enabled = $true
             if ($item.ContainsKey("enabled")) { $enabled = [bool]$item.enabled }
-            if (-not (Test-Input $ws $item.name)) {
-                Invoke-Obs $ws "CreateInput" @{
-                    sceneName         = $scene
-                    inputName         = $item.name
-                    inputKind         = $spec.inputKind
-                    inputSettings     = $spec.settings
-                    sceneItemEnabled  = $enabled
-                } | Out-Null
-                Write-Host "  created $($item.name)"
+            if (-not (Test-Input $ws $sourceName)) {
+                $createIn = @{
+                    sceneName        = $scene
+                    inputName        = $sourceName
+                    inputKind        = $spec.inputKind
+                    inputSettings    = $spec.settings
+                    sceneItemEnabled = $enabled
+                }
+                if ($canvasUuid) { $createIn["canvasUuid"] = $canvasUuid }
+                Invoke-Obs $ws "CreateInput" $createIn | Out-Null
+                Write-Host "  created $sourceName"
             }
             else {
-                $id = Get-ItemId $ws $scene $item.name
+                $id = Get-ItemId $ws $scene $sourceName $canvasUuid
                 if ($null -eq $id) {
-                    Invoke-Obs $ws "CreateSceneItem" @{
-                        sceneName         = $scene
-                        sourceName        = $item.name
-                        sceneItemEnabled  = $enabled
-                    } | Out-Null
-                    Write-Host "  linked $($item.name)"
+                    $link = @{
+                        sceneName        = $scene
+                        sourceName       = $sourceName
+                        sceneItemEnabled = $enabled
+                    }
+                    if ($canvasUuid) { $link["canvasUuid"] = $canvasUuid }
+                    Invoke-Obs $ws "CreateSceneItem" $link | Out-Null
+                    Write-Host "  linked $sourceName"
                 }
-                if ($item.kind -eq "browser" -or $item.kind -eq "lumia") {
+                $updateSettings = $false
+                if ($canvasUuid) {
+                    if ($item.kind -eq "browser" -or $item.kind -eq "lumia") {
+                        if ($sourceNameMap -and $sourceNameMap.ContainsKey($item.name)) {
+                            $updateSettings = $true
+                        }
+                    }
+                }
+                elseif ($item.kind -eq "browser" -or $item.kind -eq "lumia") {
+                    $updateSettings = $true
+                }
+                if ($updateSettings) {
                     Invoke-Obs $ws "SetInputSettings" @{
-                        inputName     = $item.name
+                        inputName     = $sourceName
                         inputSettings = $spec.settings
                         overlay       = $true
                     } | Out-Null
                 }
             }
-            $id = Get-ItemId $ws $scene $item.name
+            $id = Get-ItemId $ws $scene $sourceName $canvasUuid
             $tf = Get-Transform $item
             if ($null -ne $id -and $null -ne $tf) {
-                Invoke-Obs $ws "SetSceneItemTransform" @{
-                    sceneName           = $scene
-                    sceneItemId         = $id
-                    sceneItemTransform  = $tf
-                } | Out-Null
+                $tfReq = @{
+                    sceneName          = $scene
+                    sceneItemId        = $id
+                    sceneItemTransform = $tf
+                }
+                if ($canvasUuid) { $tfReq["canvasUuid"] = $canvasUuid }
+                Invoke-Obs $ws "SetSceneItemTransform" $tfReq | Out-Null
             }
             if ($null -ne $id -and -not $enabled) {
-                Invoke-Obs $ws "SetSceneItemEnabled" @{
+                $enReq = @{
                     sceneName        = $scene
                     sceneItemId      = $id
                     sceneItemEnabled = $false
-                } | Out-Null
+                }
+                if ($canvasUuid) { $enReq["canvasUuid"] = $canvasUuid }
+                Invoke-Obs $ws "SetSceneItemEnabled" $enReq | Out-Null
             }
         }
-        $order = @($sceneItems[$scene] | ForEach-Object { $_.name })
+        $order = @($sceneItems[$scene] | ForEach-Object { Get-SourceName $_ $sourceNameMap })
         for ($i = 0; $i -lt $order.Count; $i++) {
-            $id = Get-ItemId $ws $scene $order[$i]
+            $id = Get-ItemId $ws $scene $order[$i] $canvasUuid
             if ($null -ne $id) {
-                Invoke-Obs $ws "SetSceneItemIndex" @{
+                $idxReq = @{
                     sceneName      = $scene
                     sceneItemId    = $id
                     sceneItemIndex = $i
-                } | Out-Null
+                }
+                if ($canvasUuid) { $idxReq["canvasUuid"] = $canvasUuid }
+                Invoke-Obs $ws "SetSceneItemIndex" $idxReq | Out-Null
             }
         }
     }
 
-    try { Invoke-Obs $ws "SetCurrentSceneTransition" @{ transitionName = "Fade" } | Out-Null } catch {}
-    try { Invoke-Obs $ws "SetCurrentSceneTransitionDuration" @{ transitionDuration = 300 } | Out-Null } catch {}
-    Invoke-Obs $ws "SetCurrentProgramScene" @{ sceneName = "STARTING SOON" } | Out-Null
+    if (-not $canvasUuid) {
+        try { Invoke-Obs $ws "SetCurrentSceneTransition" @{ transitionName = "Fade" } | Out-Null } catch {}
+        try { Invoke-Obs $ws "SetCurrentSceneTransitionDuration" @{ transitionDuration = 300 } | Out-Null } catch {}
+    }
+    $prog = @{ sceneName = "STARTING SOON" }
+    if ($canvasUuid) { $prog["canvasUuid"] = $canvasUuid }
+    try { Invoke-Obs $ws "SetCurrentProgramScene" $prog | Out-Null } catch {}
+}
+
+$aitumSourceMap = @{
+    "Overlay / Starting Soon" = "Overlay / Starting Soon V"
+    "Overlay / Grid HUD"      = "Overlay / Grid HUD V"
+    "Overlay / Race HUD"      = "Overlay / Race HUD V"
+    "Overlay / Dual HUD"      = "Overlay / Dual HUD V"
+    "Overlay / Replay HUD"    = "Overlay / Replay HUD V"
+    "Overlay / BRB"           = "Overlay / BRB V"
+    "Overlay / Ending"        = "Overlay / Ending V"
+    "Lumia / Overlay"         = "Lumia / Overlay V"
+    "Color / Backdrop"        = "Color / Backdrop V"
+}
+
+function Get-AitumCanvasUuid($ws) {
+    $list = Try-Obs $ws "GetCanvasList" @{}
+    if ($null -eq $list) { return $null }
+    $canvases = @(Get-ObsProp $list "canvases")
+    $fallback = $null
+    foreach ($c in $canvases) {
+        $flags = Get-ObsProp $c "canvasFlags"
+        $isMain = $false
+        if ($null -ne $flags) {
+            $isMain = [bool](Get-ObsProp $flags "main")
+        }
+        $name = [string](Get-ObsProp $c "canvasName")
+        $uuid = [string](Get-ObsProp $c "canvasUuid")
+        $vs = Get-ObsProp $c "canvasVideoSettings"
+        $w = 0
+        $h = 0
+        if ($null -ne $vs) {
+            $w = [int](Get-ObsProp $vs "baseWidth")
+            $h = [int](Get-ObsProp $vs "baseHeight")
+        }
+        if (-not $uuid) { continue }
+        if ($isMain) { continue }
+        Write-Host ("  canvas " + $name + " " + $w + "x" + $h)
+        if (($w -eq 1080 -and $h -eq 1920) -or ($name -match "Vertical|Aitum|vertical")) {
+            return $uuid
+        }
+        if (-not $fallback) { $fallback = $uuid }
+    }
+    return $fallback
+}
+
+function Install-AitumVertical($ws, $kinds) {
+    Write-Host ""
+    Write-Host "Aitum Vertical Scenes (phone dock)..."
+    $vendor = Try-Obs $ws "CallVendorRequest" @{
+        vendorName  = "aitum-vertical-canvas"
+        requestType = "version"
+        requestData = @{}
+    }
+    $uuid = Get-AitumCanvasUuid $ws
+    if (-not $uuid) {
+        if ($vendor) {
+            Write-Host "Aitum Vertical is installed, but this OBS cannot create scenes on that canvas from here."
+            Write-Host "Update OBS Studio to 32.1 or newer, keep Aitum Vertical, then run tools\Install-AitumVertical.bat"
+        }
+        else {
+            Write-Host "No Aitum Vertical canvas found. Install Aitum Vertical, reopen OBS,"
+            Write-Host "Docks -> tick Vertical Scenes, then run tools\Install-AitumVertical.bat"
+        }
+        return $false
+    }
+    $savedW = $script:canvasW
+    $savedH = $script:canvasH
+    $savedOverlays = $script:overlayFiles
+    $script:canvasW = 1080
+    $script:canvasH = 1920
+    $script:overlayFiles = $verticalOverlayFiles
+    try {
+        Install-RiseScenes $ws $kinds $scenes $verticalItems $uuid $aitumSourceMap
+    }
+    finally {
+        $script:canvasW = $savedW
+        $script:canvasH = $savedH
+        $script:overlayFiles = $savedOverlays
+    }
+    Write-Host "Vertical Scenes should now list STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING."
+    Write-Host "In Vertical Scenes, right-click each name -> Linked Scenes -> tick the matching wide scene."
+    return $true
 }
 
 function Install-RiseAudio($ws) {
@@ -596,39 +735,55 @@ function Install-RiseAudio($ws) {
     }
 }
 
-Write-Host 'Wide 1920x1080...'
+if (-not $AitumOnly) {
+    Write-Host 'Wide 1920x1080...'
+    Use-RiseCollection $ws $collectionName
+    Set-RiseCanvas $ws 1920 1080
+    Install-RiseScenes $ws $kinds $scenes $items
+    Install-RiseAudio $ws
+
+    Write-Host 'Vertical 1080x1920...'
+    $script:overlayFiles = $verticalOverlayFiles
+    Use-RiseCollection $ws $verticalCollectionName
+    Set-RiseCanvas $ws 1080 1920
+    Install-RiseScenes $ws $kinds $scenes $verticalItems
+    Install-RiseAudio $ws
+}
+
 Use-RiseCollection $ws $collectionName
 Set-RiseCanvas $ws 1920 1080
-Install-RiseScenes $ws $kinds $scenes $items
-Install-RiseAudio $ws
-
-Write-Host 'Vertical 1080x1920...'
-$script:overlayFiles = $verticalOverlayFiles
-Use-RiseCollection $ws $verticalCollectionName
-Set-RiseCanvas $ws 1080 1920
-Install-RiseScenes $ws $kinds $scenes $verticalItems
-Install-RiseAudio $ws
-
-Use-RiseCollection $ws $collectionName
-Set-RiseCanvas $ws 1920 1080
+$aitumOk = $false
+try {
+    $aitumOk = [bool](Install-AitumVertical $ws $kinds)
+}
+catch {
+    Write-Host ("Aitum Vertical install skipped: " + $_.Exception.Message)
+}
 
 $ws.Dispose()
 
 Write-Host ""
 Write-Host 'Done. Look at OBS.' -ForegroundColor Green
-Write-Host 'Two scene collections (dropdown at the top of OBS):'
-Write-Host '  Rise Above BeamNG            = 1920x1080 Twitch / YouTube / Kick'
-Write-Host '  Rise Above BeamNG Vertical  = 1080x1920 Shorts / Reels if you use OBS for those'
-Write-Host 'Same scene names in both: STARTING SOON, GRID, RACE, ...'
-Write-Host 'Numpad 1-7 still switch those scenes on whichever collection is active.'
+if (-not $AitumOnly) {
+    Write-Host 'Two scene collections (dropdown at the top of OBS):'
+    Write-Host '  Rise Above BeamNG            = 1920x1080 Twitch / YouTube / Kick'
+    Write-Host '  Rise Above BeamNG Vertical  = 1080x1920 phone-only if you are not using Aitum'
+    Write-Host 'Same scene names in both: STARTING SOON, GRID, RACE, ...'
+}
 Write-Host ""
-Write-Host 'Next: in BOTH collections, click RACE, double-click Game / Main, pick BeamNG.'
+Write-Host 'Stay on collection Rise Above BeamNG for Aitum Multi + Vertical.'
+if ($aitumOk) {
+    Write-Host 'Vertical Scenes dock should now have the seven phone scenes.'
+    Write-Host 'Right-click each one -> Linked Scenes -> tick the matching wide scene.'
+}
+else {
+    Write-Host 'If Vertical Scenes is still empty: install Aitum Vertical, reopen OBS,'
+    Write-Host 'then double-click tools\Install-AitumVertical.bat'
+}
+Write-Host ""
+Write-Host 'Next: click RACE, double-click Game / Main, pick BeamNG.'
 Write-Host 'Audio: Desktop Audio is muted so Discord is not on stream.'
 Write-Host '  Mixer: Mic / Main = your mic. Audio / Game = double-click and pick BeamNG.drive.'
-Write-Host '  If Desktop Audio is unmuted, click the speaker icon to mute it again.'
 Write-Host 'Cameras can wait.'
-Write-Host 'Links (Twitch / YouTube / Kick): edit overlays\shared\config.js then Refresh the overlay in OBS.'
-Write-Host 'To stream wide AND phone at the same time: install Aitum Vertical (not just Multistream).'
-Write-Host '  Stay on Rise Above BeamNG. Vertical Scenes starts EMPTY — that is normal.'
-Write-Host '  Click + in the Vertical Scenes dock (not the left Scenes list) and name it RACE.'
-Write-Host '  See docs\aitum.html.'
+Write-Host 'Chat for you: tools\Open-ChatForYou.bat  (not on the stream).'
+Write-Host 'See docs\aitum.html'

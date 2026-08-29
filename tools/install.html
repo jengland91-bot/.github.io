@@ -103,7 +103,7 @@
   <fieldset>
     <legend>Install into OBS</legend>
     <label><input id="newCollection" type="checkbox" checked /> Create both scene collections: 1920x1080 and 1080x1920 vertical</label>
-    <p>Then click once. After it finishes, pick BeamNG on <code>Game / Main</code> in <strong>both</strong> collections. Cameras can wait. Wide + phone at the same time needs <a href="../docs/aitum.html">Aitum Vertical</a> — its Vertical Scenes dock starts empty; click + there.</p>
+    <p>Then click once. After it finishes, pick BeamNG on <code>Game / Main</code>. If Aitum Vertical is installed, this also fills the <strong>Vertical Scenes</strong> dock. Or run <code>tools\Install-AitumVertical.bat</code> after you install that plugin.</p>
     <button type="button" id="btnInstallObs" disabled>Install scenes + sources</button>
   </fieldset>
 
@@ -249,7 +249,7 @@
     const css = layout.css;
     const width = layout.canvas.width;
     const height = layout.canvas.height;
-    if (name === "Lumia / Overlay") {
+    if (name === "Lumia / Overlay" || name === "Lumia / Overlay V") {
       return {
         is_local_file: false,
         url: lumiaUrl || "about:blank",
@@ -339,10 +339,10 @@
     throw new Error("Unknown kind " + kind);
   }
 
-  async function ensureScene(name) {
-    const list = await obs.request("GetSceneList");
+  async function ensureScene(name, canvasUuid) {
+    const list = await obs.request("GetSceneList", canvasUuid ? { canvasUuid } : {});
     if (list.scenes.some((s) => s.sceneName === name)) return;
-    await obs.request("CreateScene", { sceneName: name });
+    await obs.request("CreateScene", canvasUuid ? { sceneName: name, canvasUuid } : { sceneName: name });
     log("  scene " + name);
   }
 
@@ -351,60 +351,146 @@
     return list.inputs.some((i) => i.inputName === name);
   }
 
-  async function sceneItemId(scene, source) {
-    const list = await obs.request("GetSceneItemList", { sceneName: scene });
+  function sourceName(item, nameMap) {
+    if (nameMap && nameMap[item.name]) return nameMap[item.name];
+    return item.name;
+  }
+
+  async function sceneItemId(scene, source, canvasUuid) {
+    const payload = { sceneName: scene };
+    if (canvasUuid) payload.canvasUuid = canvasUuid;
+    const list = await obs.request("GetSceneItemList", payload);
     const hit = list.sceneItems.find((it) => it.sourceName === source);
     return hit ? hit.sceneItemId : null;
   }
 
-  async function ensureItem(scene, item, folder, lumiaUrl, layout) {
+  async function ensureItem(scene, item, folder, lumiaUrl, layout, canvasUuid, nameMap) {
     const spec = settingsFor(item.kind, item.name, folder, lumiaUrl, layout);
+    const name = sourceName(item, nameMap);
     if (!spec.inputKind) {
       if (item.kind === "gameaudio") {
         log("  skip Audio / Game (no Application Audio Capture on this OBS)");
         return;
       }
-      throw new Error("OBS is missing input kind for " + item.name + " (" + item.kind + ")");
+      throw new Error("OBS is missing input kind for " + name + " (" + item.kind + ")");
     }
-    if (!(await inputExists(item.name))) {
-      await obs.request("CreateInput", {
-        sceneName: scene,
-        inputName: item.name,
+    const itemPayload = (extra) => {
+      const o = Object.assign({ sceneName: scene }, extra);
+      if (canvasUuid) o.canvasUuid = canvasUuid;
+      return o;
+    };
+    if (!(await inputExists(name))) {
+      await obs.request("CreateInput", itemPayload({
+        inputName: name,
         inputKind: spec.inputKind,
         inputSettings: spec.settings,
         sceneItemEnabled: item.enabled !== false,
-      });
-      log("  created source " + item.name);
+      }));
+      log("  created source " + name);
     } else {
-      const id = await sceneItemId(scene, item.name);
+      const id = await sceneItemId(scene, name, canvasUuid);
       if (id == null) {
-        await obs.request("CreateSceneItem", {
-          sceneName: scene,
-          sourceName: item.name,
+        await obs.request("CreateSceneItem", itemPayload({
+          sourceName: name,
           sceneItemEnabled: item.enabled !== false,
-        });
-        log("  referenced " + item.name + " on " + scene);
+        }));
+        log("  referenced " + name + " on " + scene);
       }
-      if (item.kind === "browser" || item.kind === "lumia") {
-        await obs.request("SetInputSettings", { inputName: item.name, inputSettings: spec.settings, overlay: true });
+      const mapped = nameMap && nameMap[item.name];
+      const updateSettings = canvasUuid
+        ? (mapped && (item.kind === "browser" || item.kind === "lumia"))
+        : (item.kind === "browser" || item.kind === "lumia");
+      if (updateSettings) {
+        await obs.request("SetInputSettings", { inputName: name, inputSettings: spec.settings, overlay: true });
       }
     }
-    const id = await sceneItemId(scene, item.name);
+    const id = await sceneItemId(scene, name, canvasUuid);
     const tf = transform(item);
     if (id != null && tf) {
-      await obs.request("SetSceneItemTransform", { sceneName: scene, sceneItemId: id, sceneItemTransform: tf });
+      await obs.request("SetSceneItemTransform", itemPayload({ sceneItemId: id, sceneItemTransform: tf }));
     }
     if (id != null && item.enabled === false) {
-      await obs.request("SetSceneItemEnabled", { sceneName: scene, sceneItemId: id, sceneItemEnabled: false });
+      await obs.request("SetSceneItemEnabled", itemPayload({ sceneItemId: id, sceneItemEnabled: false }));
     }
   }
 
-  async function setOrder(scene, names) {
+  async function setOrder(scene, names, canvasUuid) {
     for (let i = 0; i < names.length; i += 1) {
-      const id = await sceneItemId(scene, names[i]);
+      const id = await sceneItemId(scene, names[i], canvasUuid);
       if (id == null) continue;
-      await obs.request("SetSceneItemIndex", { sceneName: scene, sceneItemId: id, sceneItemIndex: i });
+      const payload = { sceneName: scene, sceneItemId: id, sceneItemIndex: i };
+      if (canvasUuid) payload.canvasUuid = canvasUuid;
+      await obs.request("SetSceneItemIndex", payload);
     }
+  }
+
+  async function installLayoutScenes(L, folder, lumiaUrl, canvasUuid, nameMap) {
+    const listPayload = canvasUuid ? { canvasUuid } : {};
+    const existing = await obs.request("GetSceneList", listPayload);
+    for (const leftoverName of ["Vertical Scene", "Scene"]) {
+      const leftover = existing.scenes.find((s) => s.sceneName === leftoverName);
+      if (leftover && !existing.scenes.some((s) => s.sceneName === L.scenes[0])) {
+        const rename = { sceneName: leftoverName, newSceneName: L.scenes[0] };
+        if (canvasUuid) rename.canvasUuid = canvasUuid;
+        await obs.request("SetSceneName", rename);
+        log("Renamed " + leftoverName + " -> " + L.scenes[0]);
+      }
+    }
+    for (const scene of L.scenes) await ensureScene(scene, canvasUuid);
+    for (const scene of L.scenes) {
+      log((canvasUuid ? "Aitum / " : L.collectionName + " / ") + scene);
+      for (const item of L.items[scene]) {
+        await ensureItem(scene, item, folder, lumiaUrl, L, canvasUuid, nameMap);
+      }
+      await setOrder(scene, L.items[scene].map((it) => sourceName(it, nameMap)), canvasUuid);
+    }
+    if (!canvasUuid) {
+      try {
+        await obs.request("SetCurrentSceneTransition", { transitionName: L.transition.name });
+        await obs.request("SetCurrentSceneTransitionDuration", { transitionDuration: L.transition.durationMs });
+      } catch (err) {
+        log("Transition skipped: " + err.message);
+      }
+    }
+    try {
+      const prog = { sceneName: "STARTING SOON" };
+      if (canvasUuid) prog.canvasUuid = canvasUuid;
+      await obs.request("SetCurrentProgramScene", prog);
+    } catch (err) {
+      log("Set scene skipped: " + err.message);
+    }
+  }
+
+  function pickAitumCanvas(canvases) {
+    const extra = (canvases || []).filter((c) => !(c.canvasFlags && c.canvasFlags.main));
+    const phone = extra.find((c) => {
+      const vs = c.canvasVideoSettings || {};
+      const name = c.canvasName || "";
+      return (vs.baseWidth === 1080 && vs.baseHeight === 1920) || /vertical|aitum/i.test(name);
+    });
+    return phone || extra[0] || null;
+  }
+
+  async function installAitumVertical(folder, lumiaUrl) {
+    log("Aitum Vertical Scenes (phone dock)...");
+    let canvases = [];
+    try {
+      canvases = (await obs.request("GetCanvasList")).canvases || [];
+    } catch (err) {
+      log("This OBS cannot fill Aitum Vertical from here (" + err.message + ").");
+      log("Update OBS to 32.1+, install Aitum Vertical, then run tools\\Install-AitumVertical.bat");
+      return false;
+    }
+    const canvas = pickAitumCanvas(canvases);
+    if (!canvas) {
+      log("No Aitum Vertical canvas. Install Aitum Vertical, reopen OBS, Docks -> Vertical Scenes, then run tools\\Install-AitumVertical.bat");
+      return false;
+    }
+    log("  canvas " + canvas.canvasName, "ok");
+    const L = Object.assign({}, RISE_LAYOUT_VERTICAL, { collectionName: "Aitum Vertical" });
+    await installLayoutScenes(L, folder, lumiaUrl, canvas.canvasUuid, RISE_AITUM_SOURCE_MAP);
+    log("Vertical Scenes should list the seven phone scenes. Right-click each -> Linked Scenes -> matching wide scene.", "ok");
+    return true;
   }
 
   document.getElementById("btnObsConnect").onclick = async () => {
@@ -458,27 +544,7 @@
           fpsNumerator: L.canvas.fps,
           fpsDenominator: 1,
         });
-        const existing = await obs.request("GetSceneList");
-        const leftover = existing.scenes.find((s) => s.sceneName === "Scene");
-        if (leftover && !existing.scenes.some((s) => s.sceneName === L.scenes[0])) {
-          await obs.request("SetSceneName", { sceneName: "Scene", newSceneName: L.scenes[0] });
-          log("Renamed default Scene → " + L.scenes[0]);
-        }
-        for (const scene of L.scenes) await ensureScene(scene);
-        for (const scene of L.scenes) {
-          log(L.collectionName + " / " + scene);
-          for (const item of L.items[scene]) {
-            await ensureItem(scene, item, folder, lumiaUrl, L);
-          }
-          await setOrder(scene, L.items[scene].map((it) => it.name));
-        }
-        try {
-          await obs.request("SetCurrentSceneTransition", { transitionName: L.transition.name });
-          await obs.request("SetCurrentSceneTransitionDuration", { transitionDuration: L.transition.durationMs });
-        } catch (err) {
-          log("Transition skipped: " + err.message);
-        }
-        await obs.request("SetCurrentProgramScene", { sceneName: "STARTING SOON" });
+        await installLayoutScenes(L, folder, lumiaUrl);
         try {
           const special = await obs.request("GetSpecialInputs");
           for (const key of ["desktop1", "desktop2"]) {
@@ -517,9 +583,22 @@
       }
       if (useCollections) {
         await obs.request("SetCurrentSceneCollection", { sceneCollectionName: RISE_LAYOUT.collectionName });
+        await obs.request("SetVideoSettings", {
+          baseWidth: 1920,
+          baseHeight: 1080,
+          outputWidth: 1920,
+          outputHeight: 1080,
+          fpsNumerator: 60,
+          fpsDenominator: 1,
+        });
       }
-      log("Done. Wide = Rise Above BeamNG (1920x1080). Aitum Vertical Scenes starts empty — click + in that dock for phone. See docs/aitum.html.", "ok");
-      log("Pick Game / Main → BeamNG in BOTH collections. Audio / Game → pick BeamNG. Desktop Audio stays muted.", "ok");
+      try {
+        await installAitumVertical(folder, lumiaUrl);
+      } catch (err) {
+        log("Aitum Vertical install skipped: " + err.message);
+      }
+      log("Done. Stay on Rise Above BeamNG. If Vertical Scenes filled, right-click each -> Linked Scenes. See docs/aitum.html.", "ok");
+      log("Pick Game / Main -> BeamNG. Audio / Game -> pick BeamNG. Desktop Audio stays muted.", "ok");
     } catch (err) {
       log("Install failed: " + err.message);
     }

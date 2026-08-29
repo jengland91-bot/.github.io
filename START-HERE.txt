@@ -48,11 +48,13 @@ OBS (Twitch / YouTube / Kick only)
 If the black window immediately shows red text, or you still only see Face + Wheel, you have an old zip. Delete that folder, download a fresh zip, extract again, run Install-OBS.bat from the new tools folder.
 
 You should then see two scene collections in OBS (dropdown at the top):
-  Rise Above BeamNG            = 1920x1080 Twitch / YouTube / Kick
-  Rise Above BeamNG Vertical   = 1080x1920 YouTube Shorts / Reels if you ever use OBS for those
-                                (TikTok is Studio, not this collection)
+  Rise Above BeamNG            = 1920x1080 Twitch / YouTube / Kick (stay here for Aitum)
+  Rise Above BeamNG Vertical   = 1080x1920 phone-only if you are not using Aitum
 
 Same scenes in both: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING.
+
+If Aitum Vertical is already installed, Install-OBS.bat also fills the Vertical Scenes dock.
+If that dock is still empty, run tools\Install-AitumVertical.bat (OBS 32.1+).
 
 Pick BeamNG on Game / Main in BOTH collections.
 
@@ -126,12 +128,9 @@ AITUM MULTISTREAM (OBS to many sites, wide + phone):
   2. OBS Docks: tick Vertical Scenes, Vertical Sources, Aitum Vertical.
      If Vertical Scenes is missing, Multistream is not enough — install
      Aitum Vertical, then reopen OBS.
-  3. YOU WILL SEE NO VERTICAL SCENES. That is normal. The left Scenes list
-     is the wide show (already filled). Vertical Scenes is a different dock
-     and starts empty. Click IN THAT DOCK (not the left list) -> + -> RACE.
-     Vertical Sources -> + -> Add Existing Game / Main and the four cams.
-     Game 1080x608 at 0,0. Overlay = overlays\vertical\live.html
-     Right-click that RACE -> Linked Scenes -> tick wide RACE.
+  3. Double-click tools\Install-AitumVertical.bat
+     (or re-run Install-OBS.bat). OBS 32.1+ and Aitum Vertical required.
+     Vertical Scenes should fill with STARTING SOON, GRID, RACE, ...
   4. Right-click each Vertical scene -> Linked Scenes -> matching wide scene.
   5. WHERE TO SEND IT:
      Wide (Main): OBS Settings -> Stream = Twitch. Aitum Main Outputs =

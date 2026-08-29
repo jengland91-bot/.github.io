@@ -7,11 +7,9 @@ You need **two** plugins:
 - [Aitum Multistream](https://aitum.tv/products/multi) — extra destinations
 - [Aitum Vertical](https://aitum.tv/products/vertical) — 1080×1920 canvas (or Stream Suite, which includes both)
 
-You will see **no vertical scenes**. That is normal. The left Scenes list is the wide show (already filled). **Vertical Scenes** is a different dock and starts at zero. The installer cannot fill it.
+Stay on **Rise Above BeamNG**. Install [Aitum Vertical](https://aitum.tv/products/vertical), reopen OBS, then run `tools/Install-AitumVertical.bat` (OBS 32.1+). That fills the **Vertical Scenes** dock with the seven phone scenes. Right-click each → Linked Scenes → matching wide scene.
 
-If there is no Vertical Scenes dock: install [Aitum Vertical](https://aitum.tv/products/vertical), then OBS → Docks → Vertical Scenes / Vertical Sources / Aitum Vertical.
-
-Stay on **Rise Above BeamNG**. Click **in Vertical Scenes** (not the left list) → **+** → `RACE`. Vertical Sources → **Add Existing** Game / Main and the four cams. Overlay: `overlays/vertical/live.html`. Right-click → Linked Scenes → wide `RACE`.
+If Vertical Scenes is missing: Multistream is not enough — install Vertical, then OBS → Docks → Vertical Scenes / Vertical Sources / Aitum Vertical.
 
 ## Where each picture goes
 

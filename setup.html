@@ -109,8 +109,8 @@
         <tr><td><code>ENDING</code></td><td>Thanks / checkered.</td></tr>
       </tbody>
     </table>
-    <p>Going live wide + phone from OBS: install <a href="https://aitum.tv/products/vertical">Aitum Vertical</a> as well as Multistream, then follow <a href="docs/aitum.html">Aitum Multi + Vertical</a>. Stay on collection <code>Rise Above BeamNG</code>. Vertical Scenes starts empty — that is the Aitum dock, not the left Scenes list.</p>
-    <label class="step"><input type="checkbox" data-id="vertical" /><span>Aitum Vertical: Docks → tick Vertical Scenes. It is empty on purpose. Click + in that dock, name it RACE, Add Existing Game / Main + four cams. Do not switch to collection Rise Above BeamNG Vertical while Multi is running.</span></label>
+    <p>Going live wide + phone from OBS: install <a href="https://aitum.tv/products/vertical">Aitum Vertical</a> as well as Multistream, then run <code>tools\Install-AitumVertical.bat</code> (OBS 32.1+). Stay on collection <code>Rise Above BeamNG</code>. Full steps: <a href="docs/aitum.html">Aitum Multi + Vertical</a>.</p>
+    <label class="step"><input type="checkbox" data-id="vertical" /><span>Aitum Vertical: Docks → tick Vertical Scenes. Run tools\Install-AitumVertical.bat (OBS 32.1+). Then right-click each vertical scene → Linked Scenes → matching wide name. Stay on collection Rise Above BeamNG.</span></label>
     <label class="step"><input type="checkbox" data-id="scenes" /><span>Confirm those seven scene names exist on both collections.</span></label>
     <label class="step"><input type="checkbox" data-id="browser" /><span>Add Browser sources for each overlay (1920×1080, transparent). Prefer <strong>Local file</strong>. Custom CSS: <code>body { background-color: rgba(0,0,0,0); overflow: hidden; }</code></span></label>
     <label class="step"><input type="checkbox" data-id="beamng" /><span>BeamNG in borderless windowed. OBS <code>Game / Main</code> = Game Capture → Capture specific window → BeamNG.drive. If the shot is black (Vulkan), switch that source to Window Capture (Windows Graphics Capture).</span></label>

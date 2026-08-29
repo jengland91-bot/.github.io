@@ -162,6 +162,18 @@ window.RISE_LAYOUT_VERTICAL = {
 
 window.RISE_LAYOUTS = [window.RISE_LAYOUT, window.RISE_LAYOUT_VERTICAL];
 
+window.RISE_AITUM_SOURCE_MAP = {
+  "Overlay / Starting Soon": "Overlay / Starting Soon V",
+  "Overlay / Grid HUD": "Overlay / Grid HUD V",
+  "Overlay / Race HUD": "Overlay / Race HUD V",
+  "Overlay / Dual HUD": "Overlay / Dual HUD V",
+  "Overlay / Replay HUD": "Overlay / Replay HUD V",
+  "Overlay / BRB": "Overlay / BRB V",
+  "Overlay / Ending": "Overlay / Ending V",
+  "Lumia / Overlay": "Lumia / Overlay V",
+  "Color / Backdrop": "Color / Backdrop V",
+};
+
 window.LUMIA_COMMANDS = [
   { name: "race", message: "Scene \u2192 RACE", cooldownDuration: 3000, description: "OBS: Set current scene RACE" },
   { name: "dual", message: "Scene \u2192 RACE DUAL", cooldownDuration: 3000, description: "OBS: Set current scene RACE DUAL" },

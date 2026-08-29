@@ -131,7 +131,7 @@ Crop with **Alt + drag**. Matching Rec. 709 / Limited on the cams keeps skin fro
 
 Collection **Rise Above BeamNG Vertical**. Game sits in a 16:9 strip (1080×608) at the top of RACE. Face, room, wheel, and pedals sit under that. Chat fills the phone-shaped remainder. Same **Desktop Audio muted + Audio / Game + Mic / Main** rules. Full numbers: [source-map.md](../obs/source-map.md).
 
-To run wide and vertical **at the same time from OBS**, install [Aitum Vertical](https://aitum.tv/products/vertical) and [Aitum Multistream](https://aitum.tv/products/multi). Stay on collection **Rise Above BeamNG**. Phone layout lives in the **Vertical Scenes** dock, which starts empty — click **+** there. Destinations: [aitum.html](aitum.html).
+To run wide and vertical **at the same time from OBS**, install [Aitum Vertical](https://aitum.tv/products/vertical) and [Aitum Multistream](https://aitum.tv/products/multi). Stay on collection **Rise Above BeamNG**. Run `tools/Install-AitumVertical.bat` (OBS 32.1+) to fill the Vertical Scenes dock. Destinations: [aitum.html](aitum.html).
 
 ## Browser sources
 
