@@ -12,37 +12,30 @@
 <body>
 <main>
   <div class="kicker">TIKTOK LIVE STUDIO</div>
-  <h1>MATCH THE OBS LOOK</h1>
-  <p>Same overlays, same cam names, same RACE layout — portrait. TikTok LIVE Studio cannot run the OBS installer, so this is the matching kit: a local overlay server plus the exact sizes to click in Studio. Markdown: <a href="tiktok.md">tiktok.md</a></p>
+  <h1>VERTICAL + HORIZONTAL</h1>
+  <p>Turn on Dual layout in TikTok LIVE Studio. That is two canvases at once: phone <strong>1080 × 1920</strong> and landscape <strong>1920 × 1080</strong>. Same seven scene names on both. Same overlays as OBS. Markdown: <a href="tiktok.md">tiktok.md</a></p>
+  <p>Studio Dual layout is <em>not</em> the OBS scene named RACE DUAL. Dual layout = two screens (phone + landscape). RACE DUAL = a second BeamNG camera angle. You can use both.</p>
 
-  <h2>What you get</h2>
-  <p>OBS collection <code>Rise Above BeamNG Vertical</code> is already 1080×1920. Studio is a different app, so scenes are not pushed automatically. Rebuild the same seven names with <strong>Link</strong> sources pointed at the same overlay files.</p>
-  <p>Canvas: <strong>1080 × 1920</strong> (portrait). Type these scene names in Studio:</p>
+  <h2>Turn Dual on</h2>
   <ol>
-    <li>STARTING SOON</li>
-    <li>GRID</li>
-    <li>RACE</li>
-    <li>RACE DUAL</li>
-    <li>REPLAY</li>
-    <li>BRB</li>
-    <li>ENDING</li>
+    <li>Open TikTok LIVE Studio.</li>
+    <li>Turn on Dual layout (portrait + landscape).</li>
+    <li>You will see two canvases. Switch between them while you build sources. Both go live together.</li>
   </ol>
-  <p>If you already go live from OBS Vertical into TikTok, you can skip Studio and keep using OBS. Use this page when you want the matching look <em>inside</em> TikTok LIVE Studio.</p>
+  <p>Type the same scene names on each canvas: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING.</p>
 
-  <h2>Step 1 — start the overlay server</h2>
-  <p>TikTok Link sources need <code>http://</code>. They will not load <code>file://</code> from your disk.</p>
+  <h2>Start the overlay server (once)</h2>
+  <p>Link sources need <code>http://</code>. They will not load <code>file://</code>.</p>
   <ol>
-    <li>Keep this zip extracted. Do not move the folder after you start the server.</li>
+    <li>Extract a new zip. Do not move the folder after the server starts.</li>
     <li>Double-click <code>tools\Start-OverlayServer.bat</code>.</li>
-    <li>Leave that window open the whole time you are live. Closing it kills the overlays.</li>
-    <li>Windows may ask about a firewall. Allow it for private networks.</li>
+    <li>Leave that window open the whole time you are live.</li>
+    <li>Allow the firewall prompt for private networks if Windows asks.</li>
   </ol>
-  <p>The server is only on your PC: <code>http://127.0.0.1:5500/</code>. Nobody else can see it.</p>
-  <p>If 5500 is already in use, the window will say so. Close whatever is on that port, or edit the port near the top of <code>tools\start-overlay-server.ps1</code> and restart.</p>
-  <p>Copy-paste list: <a href="../tools/tiktok.html">tools/tiktok.html</a> (opens from the server too).</p>
+  <p>One server feeds both canvases: <code>http://127.0.0.1:5500/</code>. Copy-paste page: <a href="../tools/tiktok.html">tools/tiktok.html</a>.</p>
 
-  <h2>Step 2 — add Link overlays</h2>
-  <p>In TikTok LIVE Studio, add a <strong>Link</strong> (browser / webpage) source. Paste one of these. Width 1080, height 1920, transparent background if Studio offers it.</p>
+  <h2>Vertical canvas — 1080 × 1920</h2>
+  <p>This is the phone stream. Paste these as Link sources, size 1080 × 1920, transparent if Studio offers it.</p>
   <table>
     <thead><tr><th>Scene</th><th>URL</th></tr></thead>
     <tbody>
@@ -55,26 +48,23 @@
       <tr><td>ENDING</td><td><code>http://127.0.0.1:5500/overlays/vertical/ending.html</code></td></tr>
     </tbody>
   </table>
-  <p>Names, Monster green, photos, and socials still come from <code>overlays\shared\config.js</code>. Save that file, then refresh the Link source in Studio. You do not re-run anything.</p>
 
-  <h2>Step 3 — RACE layout (same as OBS Vertical)</h2>
-  <p>Put sources in this order, bottom to top: game, then four cams, then overlay Link, then Lumia Link.</p>
+  <h3>Vertical RACE</h3>
+  <p>Bottom to top: game, four cams, overlay Link, Lumia Link. Do not stretch BeamNG to fill the phone.</p>
   <table>
     <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
     <tbody>
-      <tr><td>Game / Main (BeamNG window or game capture)</td><td>0</td><td>0</td><td>1080</td><td>608</td></tr>
+      <tr><td>Game / Main</td><td>0</td><td>0</td><td>1080</td><td>608</td></tr>
       <tr><td>Cam / Face</td><td>16</td><td>624</td><td>520</td><td>220</td></tr>
       <tr><td>Cam / Room</td><td>544</td><td>624</td><td>520</td><td>220</td></tr>
       <tr><td>Cam / Wheel</td><td>16</td><td>860</td><td>520</td><td>220</td></tr>
       <tr><td>Cam / Pedals</td><td>544</td><td>860</td><td>520</td><td>220</td></tr>
-      <tr><td>Overlay / Race HUD (Link: live.html)</td><td>0</td><td>0</td><td>1080</td><td>1920</td></tr>
-      <tr><td>Lumia / Overlay (Link: your Lumia URL)</td><td>0</td><td>0</td><td>1080</td><td>1920</td></tr>
+      <tr><td>Overlay Link</td><td>0</td><td>0</td><td>1080</td><td>1920</td></tr>
+      <tr><td>Lumia Link</td><td>0</td><td>0</td><td>1080</td><td>1920</td></tr>
     </tbody>
   </table>
-  <p>Game stays a landscape strip at the top. Chat in the overlay fills the rest of the phone. Do not stretch BeamNG to 1080×1920.</p>
 
-  <h2>GRID</h2>
-  <p>No game capture. Talking / lobby only. Same four cams, then the grid overlay Link, then Lumia.</p>
+  <h3>Vertical GRID (no game)</h3>
   <table>
     <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
     <tbody>
@@ -82,13 +72,11 @@
       <tr><td>Cam / Room</td><td>16</td><td>524</td><td>1048</td><td>280</td></tr>
       <tr><td>Cam / Wheel</td><td>16</td><td>820</td><td>516</td><td>200</td></tr>
       <tr><td>Cam / Pedals</td><td>548</td><td>820</td><td>516</td><td>200</td></tr>
-      <tr><td>Overlay / Grid HUD (Link: chatting.html)</td><td>0</td><td>0</td><td>1080</td><td>1920</td></tr>
-      <tr><td>Lumia / Overlay</td><td>0</td><td>0</td><td>1080</td><td>1920</td></tr>
     </tbody>
   </table>
 
-  <h2>RACE DUAL</h2>
-  <p>Game / Main still 1080×608 at 0,0. Add Game / Angle 2. Overlay is <code>race-dual.html</code>. Skip Dual until you have a second BeamNG view.</p>
+  <h3>Vertical RACE DUAL (second BeamNG angle)</h3>
+  <p>Skip this scene until you have a second BeamNG view. Game / Main stays the top strip.</p>
   <table>
     <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
     <tbody>
@@ -100,33 +88,76 @@
       <tr><td>Cam / Pedals</td><td>544</td><td>1036</td><td>520</td><td>180</td></tr>
     </tbody>
   </table>
+  <p>Vertical REPLAY: game 1080 × 608 at 0, 360. No cams. STARTING SOON / BRB / ENDING: overlay Link only.</p>
 
-  <h2>REPLAY / STARTING SOON / BRB / ENDING</h2>
-  <p><strong>REPLAY</strong> — game only + replay overlay. No cams. Park Game / Main at <strong>0, 360, 1080 × 608</strong> so it sits in the well.</p>
-  <p><strong>STARTING SOON / BRB / ENDING</strong> — overlay Link only (photos from <code>overlays\shared\backdrops\</code>).</p>
+  <h2>Horizontal canvas — 1920 × 1080</h2>
+  <p>This is the landscape stream. Same scenes, different overlay files (no <code>vertical/</code> in the path). Link size 1920 × 1080.</p>
+  <table>
+    <thead><tr><th>Scene</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr><td>STARTING SOON</td><td><code>http://127.0.0.1:5500/overlays/starting-soon.html?m=5</code></td></tr>
+      <tr><td>GRID</td><td><code>http://127.0.0.1:5500/overlays/chatting.html</code></td></tr>
+      <tr><td>RACE</td><td><code>http://127.0.0.1:5500/overlays/live.html</code></td></tr>
+      <tr><td>RACE DUAL</td><td><code>http://127.0.0.1:5500/overlays/race-dual.html</code></td></tr>
+      <tr><td>REPLAY</td><td><code>http://127.0.0.1:5500/overlays/replay.html</code></td></tr>
+      <tr><td>BRB</td><td><code>http://127.0.0.1:5500/overlays/brb.html</code></td></tr>
+      <tr><td>ENDING</td><td><code>http://127.0.0.1:5500/overlays/ending.html</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Horizontal RACE</h3>
+  <p>Game fills the canvas. Four cams along the bottom. Overlay and Lumia on top.</p>
+  <table>
+    <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
+    <tbody>
+      <tr><td>Game / Main</td><td>0</td><td>0</td><td>1920</td><td>1080</td></tr>
+      <tr><td>Cam / Face</td><td>48</td><td>876</td><td>320</td><td>180</td></tr>
+      <tr><td>Cam / Room</td><td>384</td><td>876</td><td>320</td><td>180</td></tr>
+      <tr><td>Cam / Wheel</td><td>720</td><td>876</td><td>320</td><td>180</td></tr>
+      <tr><td>Cam / Pedals</td><td>1056</td><td>876</td><td>320</td><td>180</td></tr>
+      <tr><td>Overlay Link</td><td>0</td><td>0</td><td>1920</td><td>1080</td></tr>
+      <tr><td>Lumia Link</td><td>0</td><td>0</td><td>1920</td><td>1080</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Horizontal GRID (no game)</h3>
+  <table>
+    <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
+    <tbody>
+      <tr><td>Cam / Face</td><td>48</td><td>168</td><td>960</td><td>540</td></tr>
+      <tr><td>Cam / Room</td><td>1032</td><td>168</td><td>840</td><td>360</td></tr>
+      <tr><td>Cam / Wheel</td><td>1032</td><td>544</td><td>408</td><td>200</td></tr>
+      <tr><td>Cam / Pedals</td><td>1464</td><td>544</td><td>408</td><td>200</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Horizontal RACE DUAL (second BeamNG angle)</h3>
+  <table>
+    <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
+    <tbody>
+      <tr><td>Game / Main</td><td>0</td><td>0</td><td>1920</td><td>1080</td></tr>
+      <tr><td>Game / Angle 2</td><td>1248</td><td>48</td><td>640</td><td>360</td></tr>
+      <tr><td>Cam / Face</td><td>48</td><td>900</td><td>240</td><td>135</td></tr>
+      <tr><td>Cam / Room</td><td>304</td><td>900</td><td>240</td><td>135</td></tr>
+      <tr><td>Cam / Wheel</td><td>560</td><td>900</td><td>240</td><td>135</td></tr>
+      <tr><td>Cam / Pedals</td><td>816</td><td>900</td><td>240</td><td>135</td></tr>
+    </tbody>
+  </table>
+  <p>Horizontal REPLAY: game full 1920 × 1080. No cams. STARTING SOON / BRB / ENDING: overlay Link only.</p>
 
   <h2>Audio</h2>
-  <p>Same rule as OBS: stream <strong>game + mic</strong>, not Discord. In Studio, capture BeamNG.drive (app / game audio) and your mic. Do not capture desktop / system audio. You can still hear Discord in your headset.</p>
+  <p>Stream <strong>game + mic</strong>, not Discord. Capture BeamNG.drive and your mic. Do not capture desktop / system audio. Headset Discord stays off the stream. One mixer covers both canvases.</p>
 
-  <h2>Lumia on TikTok</h2>
-  <p>Add a second Link source on every live scene. Paste the same Lumia overlay URL you used in OBS. Size 1080 × 1920. Put it on top of the Race HUD overlay so alerts sit over the phones.</p>
-  <p>Chat commands like <code>!race</code> still talk to OBS if that is where Lumia is connected. Studio scene switches are manual (or Studio’s own shortcuts). That is a TikTok limit, not a bug in this kit.</p>
-
-  <h2>Portrait + landscape Dual layout</h2>
-  <p>TikTok Studio can stream portrait and landscape at once. Portrait should use this page. Landscape is a second 16:9 canvas — it is not auto-copied from your wide OBS collection. If you turn Dual on, rebuild landscape with the wide overlay URLs:</p>
+  <h2>Lumia</h2>
+  <p>Add a Lumia Link on each canvas. Same Lumia overlay URL as OBS.</p>
   <ul>
-    <li>STARTING SOON: <code>http://127.0.0.1:5500/overlays/starting-soon.html?m=5</code></li>
-    <li>GRID: <code>http://127.0.0.1:5500/overlays/chatting.html</code></li>
-    <li>RACE: <code>http://127.0.0.1:5500/overlays/live.html</code></li>
-    <li>RACE DUAL: <code>http://127.0.0.1:5500/overlays/race-dual.html</code></li>
-    <li>REPLAY: <code>http://127.0.0.1:5500/overlays/replay.html</code></li>
-    <li>BRB: <code>http://127.0.0.1:5500/overlays/brb.html</code></li>
-    <li>ENDING: <code>http://127.0.0.1:5500/overlays/ending.html</code></li>
+    <li>Vertical Lumia: 1080 × 1920, on top of the phone overlay</li>
+    <li>Horizontal Lumia: 1920 × 1080, on top of the landscape overlay</li>
   </ul>
-  <p>Wide RACE sizes stay the OBS ones: game 1920×1080 full, cams 320×180 along the bottom at y=876. Skip Dual until portrait looks right.</p>
+  <p>Chat commands like <code>!race</code> still talk to OBS if Lumia is connected there. Studio scene switches are manual (or Studio shortcuts).</p>
 
-  <h2>If you already use OBS for TikTok</h2>
-  <p>Collection <code>Rise Above BeamNG Vertical</code> already matches this. You can keep streaming TikTok from OBS and ignore Studio. Use Studio only if that is where you actually go live.</p>
+  <h2>Names and photos</h2>
+  <p>Edit <code>overlays\shared\config.js</code>, save, then refresh the Link sources on <em>both</em> canvases. Photos stay in <code>overlays\shared\backdrops\</code>.</p>
 
   <nav class="docs">
     <a href="../START-HERE.txt">Start here</a> ·

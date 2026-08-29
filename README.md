@@ -13,7 +13,7 @@ Same scene names in both. Switch them with the dropdown at the top of OBS. Pick 
 
 ## TikTok LIVE Studio
 
-Studio cannot run the OBS installer. Double-click `tools/Start-OverlayServer.bat`, leave it open, and paste the printed `http://127.0.0.1:5500/overlays/vertical/...` URLs as **Link** sources on a 1080×1920 canvas. Same seven scene names, same cam sizes as OBS Vertical. Guide: [TikTok LIVE Studio](docs/tiktok.html).
+Turn Dual layout on (phone + landscape at once). Double-click `tools/Start-OverlayServer.bat`, leave it open, and paste **vertical** Link URLs on the 1080×1920 canvas and **horizontal** Link URLs on the 1920×1080 canvas. Same seven scene names on both. Guide: [TikTok LIVE Studio](docs/tiktok.html).
 
 ## Audio
 

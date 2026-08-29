@@ -1,10 +1,14 @@
-# TikTok LIVE Studio — Rise Above
+# TikTok LIVE Studio — vertical + horizontal
 
-TikTok LIVE Studio cannot run the OBS WebSocket installer. Use the same vertical overlays over a local HTTP server.
+Turn on **Dual layout** in TikTok LIVE Studio. That streams phone **1080 × 1920** and landscape **1920 × 1080** at the same time.
+
+Studio Dual layout is not the OBS scene named RACE DUAL. Dual layout = two screens. RACE DUAL = a second BeamNG camera angle.
 
 1. Double-click `tools/Start-OverlayServer.bat` and leave it open while live.
-2. Canvas **1080 × 1920**. Scenes: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING.
-3. Add a **Link** source per scene. URLs:
+2. Same seven scene names on both canvases: STARTING SOON, GRID, RACE, RACE DUAL, REPLAY, BRB, ENDING.
+3. Add a **Link** source per scene on each canvas.
+
+## Vertical URLs (1080 × 1920)
 
 - STARTING SOON: `http://127.0.0.1:5500/overlays/vertical/starting-soon.html?m=5`
 - GRID: `http://127.0.0.1:5500/overlays/vertical/chatting.html`
@@ -14,28 +18,20 @@ TikTok LIVE Studio cannot run the OBS WebSocket installer. Use the same vertical
 - BRB: `http://127.0.0.1:5500/overlays/vertical/brb.html`
 - ENDING: `http://127.0.0.1:5500/overlays/vertical/ending.html`
 
-RACE sizes (same as OBS Vertical):
+Vertical RACE: game 1080×608 at 0,0. Face 520×220 at 16,624. Room 520×220 at 544,624. Wheel 520×220 at 16,860. Pedals 520×220 at 544,860. Overlay + Lumia 1080×1920.
 
-| Source | X | Y | W | H |
-| --- | --- | --- | --- | --- |
-| Game / Main | 0 | 0 | 1080 | 608 |
-| Cam / Face | 16 | 624 | 520 | 220 |
-| Cam / Room | 544 | 624 | 520 | 220 |
-| Cam / Wheel | 16 | 860 | 520 | 220 |
-| Cam / Pedals | 544 | 860 | 520 | 220 |
-| Overlay Link | 0 | 0 | 1080 | 1920 |
-| Lumia Link | 0 | 0 | 1080 | 1920 |
+## Horizontal URLs (1920 × 1080)
 
-GRID has no game. Face 1048×420 at 16,88; Room 1048×280 at 16,524; Wheel 516×200 at 16,820; Pedals 516×200 at 548,820.
+- STARTING SOON: `http://127.0.0.1:5500/overlays/starting-soon.html?m=5`
+- GRID: `http://127.0.0.1:5500/overlays/chatting.html`
+- RACE: `http://127.0.0.1:5500/overlays/live.html`
+- RACE DUAL: `http://127.0.0.1:5500/overlays/race-dual.html`
+- REPLAY: `http://127.0.0.1:5500/overlays/replay.html`
+- BRB: `http://127.0.0.1:5500/overlays/brb.html`
+- ENDING: `http://127.0.0.1:5500/overlays/ending.html`
 
-RACE DUAL: Game / Main still top strip. Angle 2 is 1048×200 at 16,624. Skip Dual until you have a second BeamNG view.
+Horizontal RACE: game 1920×1080 at 0,0. Four cams 320×180 along the bottom at y=876 (x = 48 / 384 / 720 / 1056). Overlay + Lumia 1920×1080.
 
-REPLAY: game 1080×608 at 0,360. No cams.
+Audio: BeamNG + mic only, not Discord.
 
-Audio is BeamNG + mic only, not Discord.
-
-Edit names in `overlays/shared/config.js`, then refresh the Link source.
-
-Portrait + landscape Dual in Studio: portrait uses the vertical URLs above. Landscape uses the wide files (`overlays/live.html`, no `vertical/`).
-
-If you already go live from OBS collection **Rise Above BeamNG Vertical**, you can skip Studio.
+Edit `overlays/shared/config.js`, then refresh Link sources on both canvases.

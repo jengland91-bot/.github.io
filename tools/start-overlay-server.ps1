@@ -14,14 +14,22 @@ if (-not (Test-Path (Join-Path $overlayDir "vertical\live.html"))) {
     Write-Host "Looked in: $overlayDir"
     exit 1
 }
+if (-not (Test-Path (Join-Path $overlayDir "live.html"))) {
+    Write-Host "Cannot find overlays\live.html" -ForegroundColor Red
+    Write-Host "Need the wide overlays too for TikTok Dual layout (horizontal canvas)."
+    Write-Host "Looked in: $overlayDir"
+    exit 1
+}
 
 Write-Host ""
 Write-Host "Rise Above - overlay server for TikTok LIVE Studio" -ForegroundColor White
 Write-Host "Serving: $repoRoot"
 Write-Host "Keep this window open while you are live on TikTok."
 Write-Host ""
-Write-Host "In TikTok LIVE Studio: Add source -> Link (or Browser / Webpage)"
-Write-Host "Paste one of these (1080 x 1920):"
+Write-Host "Turn Dual layout ON in Studio (vertical + horizontal at the same time)."
+Write-Host "Same seven scene names on both canvases."
+Write-Host ""
+Write-Host "VERTICAL phone canvas (1080 x 1920) - Link sources:"
 Write-Host "  STARTING SOON  ${prefix}overlays/vertical/starting-soon.html?m=5"
 Write-Host "  GRID           ${prefix}overlays/vertical/chatting.html"
 Write-Host "  RACE           ${prefix}overlays/vertical/live.html"
@@ -30,9 +38,19 @@ Write-Host "  REPLAY         ${prefix}overlays/vertical/replay.html"
 Write-Host "  BRB            ${prefix}overlays/vertical/brb.html"
 Write-Host "  ENDING         ${prefix}overlays/vertical/ending.html"
 Write-Host ""
-Write-Host "Setup boxes:  ${prefix}overlays/vertical/live.html?setup=1"
-Write-Host "Guide page:   ${prefix}docs/tiktok.html"
-Write-Host "Copy URLs:    ${prefix}tools/tiktok.html"
+Write-Host "HORIZONTAL landscape canvas (1920 x 1080) - Link sources:"
+Write-Host "  STARTING SOON  ${prefix}overlays/starting-soon.html?m=5"
+Write-Host "  GRID           ${prefix}overlays/chatting.html"
+Write-Host "  RACE           ${prefix}overlays/live.html"
+Write-Host "  RACE DUAL      ${prefix}overlays/race-dual.html"
+Write-Host "  REPLAY         ${prefix}overlays/replay.html"
+Write-Host "  BRB            ${prefix}overlays/brb.html"
+Write-Host "  ENDING         ${prefix}overlays/ending.html"
+Write-Host ""
+Write-Host "Setup boxes V: ${prefix}overlays/vertical/live.html?setup=1"
+Write-Host "Setup boxes H: ${prefix}overlays/live.html?setup=1"
+Write-Host "Guide page:    ${prefix}docs/tiktok.html"
+Write-Host "Copy URLs:     ${prefix}tools/tiktok.html"
 Write-Host ""
 
 $listener = New-Object System.Net.HttpListener

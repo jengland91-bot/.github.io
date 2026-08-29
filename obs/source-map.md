@@ -127,4 +127,4 @@ Right-click source → Transform → Edit Transform. Bounding Box type: **Scale 
 
 To stream wide and vertical **at the same time**, install [Aitum Vertical](https://aitum.tv/vertical) and copy the vertical transforms into its canvas. This kit’s second collection is for switching to 9:16 when you are only going to TikTok / Shorts / Reels.
 
-To rebuild the same 9:16 look inside **TikTok LIVE Studio** (not OBS), start `tools/Start-OverlayServer.bat` and follow [docs/tiktok.html](../docs/tiktok.html). Sizes above are the ones to type in Studio.
+To rebuild the same look inside **TikTok LIVE Studio** Dual layout (1080×1920 + 1920×1080), start `tools/Start-OverlayServer.bat` and follow [docs/tiktok.html](../docs/tiktok.html).
