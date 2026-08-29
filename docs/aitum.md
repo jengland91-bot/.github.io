@@ -7,7 +7,7 @@ You need **two** plugins:
 - [Aitum Multistream](https://aitum.tv/products/multi) — extra destinations
 - [Aitum Vertical](https://aitum.tv/products/vertical) — 1080×1920 canvas (or Stream Suite, which includes both)
 
-Stay on **Rise Above BeamNG**. Install [Aitum Vertical](https://aitum.tv/products/vertical), reopen OBS, then run `tools/Install-AitumVertical.bat` (OBS 32.1+). That fills the **Vertical Scenes** dock with the seven phone scenes. Right-click each → Linked Scenes → matching wide scene.
+Run `tools/Install-AitumVertical.bat` (OBS 32.1+). That fills **Vertical Scenes**. If you only see STARTING SOON, re-run it — extra scenes are named `RACE V`, `GRID V`, etc. because the left list already used those names. Right-click each → Linked Scenes → matching wide scene (`RACE V` → `RACE`).
 
 If Vertical Scenes is missing: Multistream is not enough — install Vertical, then OBS → Docks → Vertical Scenes / Vertical Sources / Aitum Vertical.
 

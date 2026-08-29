@@ -339,6 +339,55 @@
     throw new Error("Unknown kind " + kind);
   }
 
+  async function vendorAitumScenes() {
+    try {
+      const vr = await obs.request("CallVendorRequest", {
+        vendorName: "aitum-vertical-canvas",
+        requestType: "get_scenes",
+        requestData: { width: 1080, height: 1920 },
+      });
+      const inner = (vr && vr.responseData) || vr || {};
+      const arr = inner.scenes || [];
+      return arr.map((s) => (typeof s === "string" ? s : s.name || s.sceneName)).filter(Boolean);
+    } catch (err) {
+      return [];
+    }
+  }
+
+  async function ensureAitumScene(desired, canvasUuid) {
+    const vendor = await vendorAitumScenes();
+    for (const tryName of [desired, desired + " V"]) {
+      if (vendor.includes(tryName)) {
+        log("  have " + tryName);
+        return tryName;
+      }
+      try {
+        await obs.request("CreateScene", { sceneName: tryName, canvasUuid });
+        log("  scene " + tryName);
+        return tryName;
+      } catch (err) {
+        log("  skip " + tryName + " (" + err.message + ")");
+      }
+    }
+    return null;
+  }
+
+  async function pingSceneCollection() {
+    try {
+      const cols = await obs.request("GetSceneCollectionList");
+      const current = cols.currentSceneCollectionName;
+      const other = (cols.sceneCollections || []).find((n) => n && n !== current);
+      if (!other) return;
+      log("Refreshing Aitum dock (switch collection and back)...");
+      await obs.request("SetCurrentSceneCollection", { sceneCollectionName: other });
+      await new Promise((r) => setTimeout(r, 2000));
+      await obs.request("SetCurrentSceneCollection", { sceneCollectionName: current });
+      await new Promise((r) => setTimeout(r, 800));
+    } catch (err) {
+      log("  refresh skipped: " + err.message);
+    }
+  }
+
   async function ensureScene(name, canvasUuid) {
     const list = await obs.request("GetSceneList", canvasUuid ? { canvasUuid } : {});
     if (list.scenes.some((s) => s.sceneName === name)) return;
@@ -425,24 +474,55 @@
   }
 
   async function installLayoutScenes(L, folder, lumiaUrl, canvasUuid, nameMap) {
-    const listPayload = canvasUuid ? { canvasUuid } : {};
-    const existing = await obs.request("GetSceneList", listPayload);
-    for (const leftoverName of ["Vertical Scene", "Scene"]) {
-      const leftover = existing.scenes.find((s) => s.sceneName === leftoverName);
+    const kitToObs = {};
+    if (canvasUuid) {
+      const vendor = await vendorAitumScenes();
+      for (const leftoverName of ["Vertical Scene", "Scene"]) {
+        if (vendor.includes(leftoverName)) {
+          for (const newName of ["STARTING SOON", "STARTING SOON V"]) {
+            try {
+              await obs.request("SetSceneName", {
+                sceneName: leftoverName,
+                newSceneName: newName,
+                canvasUuid,
+              });
+              log("Renamed " + leftoverName + " -> " + newName);
+              break;
+            } catch (err) {
+              log("  rename " + leftoverName + " -> " + newName + " failed");
+            }
+          }
+        }
+      }
+      for (const scene of L.scenes) {
+        const actual = await ensureAitumScene(scene, canvasUuid);
+        if (actual) kitToObs[scene] = actual;
+        else log("  could not add " + scene + " to Vertical Scenes");
+      }
+    } else {
+      const existing = await obs.request("GetSceneList");
+      const leftover = existing.scenes.find((s) => s.sceneName === "Scene");
       if (leftover && !existing.scenes.some((s) => s.sceneName === L.scenes[0])) {
-        const rename = { sceneName: leftoverName, newSceneName: L.scenes[0] };
-        if (canvasUuid) rename.canvasUuid = canvasUuid;
-        await obs.request("SetSceneName", rename);
-        log("Renamed " + leftoverName + " -> " + L.scenes[0]);
+        await obs.request("SetSceneName", { sceneName: "Scene", newSceneName: L.scenes[0] });
+        log("Renamed default Scene -> " + L.scenes[0]);
+      }
+      for (const scene of L.scenes) {
+        kitToObs[scene] = scene;
+        await ensureScene(scene);
       }
     }
-    for (const scene of L.scenes) await ensureScene(scene, canvasUuid);
     for (const scene of L.scenes) {
-      log((canvasUuid ? "Aitum / " : L.collectionName + " / ") + scene);
+      const obsScene = kitToObs[scene];
+      if (!obsScene) continue;
+      log((canvasUuid ? "Aitum / " : L.collectionName + " / ") + obsScene);
       for (const item of L.items[scene]) {
-        await ensureItem(scene, item, folder, lumiaUrl, L, canvasUuid, nameMap);
+        try {
+          await ensureItem(obsScene, item, folder, lumiaUrl, L, canvasUuid, nameMap);
+        } catch (err) {
+          log("  " + item.name + " failed: " + err.message);
+        }
       }
-      await setOrder(scene, L.items[scene].map((it) => sourceName(it, nameMap)), canvasUuid);
+      await setOrder(obsScene, L.items[scene].map((it) => sourceName(it, nameMap)), canvasUuid);
     }
     if (!canvasUuid) {
       try {
@@ -453,9 +533,12 @@
       }
     }
     try {
-      const prog = { sceneName: "STARTING SOON" };
-      if (canvasUuid) prog.canvasUuid = canvasUuid;
-      await obs.request("SetCurrentProgramScene", prog);
+      const first = kitToObs[L.scenes[0]];
+      if (first) {
+        const prog = { sceneName: first };
+        if (canvasUuid) prog.canvasUuid = canvasUuid;
+        await obs.request("SetCurrentProgramScene", prog);
+      }
     } catch (err) {
       log("Set scene skipped: " + err.message);
     }
@@ -489,7 +572,13 @@
     log("  canvas " + canvas.canvasName, "ok");
     const L = Object.assign({}, RISE_LAYOUT_VERTICAL, { collectionName: "Aitum Vertical" });
     await installLayoutScenes(L, folder, lumiaUrl, canvas.canvasUuid, RISE_AITUM_SOURCE_MAP);
-    log("Vertical Scenes should list the seven phone scenes. Right-click each -> Linked Scenes -> matching wide scene.", "ok");
+    await pingSceneCollection();
+    const have = await vendorAitumScenes();
+    log("Vertical Scenes dock: " + (have.length ? have.join(", ") : "(none reported)"));
+    if (have.length < 2) {
+      log("If you still only see STARTING SOON, click + in that dock and name them GRID V, RACE V, REPLAY V, BRB V, ENDING V.");
+    }
+    log("Right-click each -> Linked Scenes -> matching wide scene (RACE V -> RACE).", "ok");
     return true;
   }
 

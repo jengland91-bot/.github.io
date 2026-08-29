@@ -130,7 +130,8 @@ AITUM MULTISTREAM (OBS to many sites, wide + phone):
      Aitum Vertical, then reopen OBS.
   3. Double-click tools\Install-AitumVertical.bat
      (or re-run Install-OBS.bat). OBS 32.1+ and Aitum Vertical required.
-     Vertical Scenes should fill with STARTING SOON, GRID, RACE, ...
+     If you only see STARTING SOON, run the bat again from a fresh zip.
+     Extra phone scenes may be named RACE V, GRID V (same show, phone copy).
   4. Right-click each Vertical scene -> Linked Scenes -> matching wide scene.
   5. WHERE TO SEND IT:
      Wide (Main): OBS Settings -> Stream = Twitch. Aitum Main Outputs =
