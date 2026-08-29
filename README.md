@@ -2,21 +2,21 @@
 
 Off-road overlay kit for **BeamNG.drive** with **four cameras** (Face, Room, Wheel, Pedals) plus **Lumia Stream** for chat, alerts, lights, and camera switching. Casterlabs is not used. Tag is **@jengland91**.
 
-Open [START-HERE.txt](START-HERE.txt). Two apps:
+Open [START-HERE.txt](START-HERE.txt).
 
-- **TikTok** — TikTok LIVE Studio only. Double-click `tools/Start-TikTokLayout.bat`. Build Dual layout from the [layout board](tiktok-studio/index.html). Do not open OBS.
-- **Twitch / YouTube / Kick** — OBS. Double-click `tools/Install-OBS.bat`.
+- **Twitch / YouTube / Kick + TikTok/Shorts from OBS** — OBS + [Aitum Multi + Vertical](docs/aitum.html). Stay on collection `Rise Above BeamNG`. Do not add Restream.
+- **Chat for you** — Lumia on the gaming monitor, or `tools/Open-ChatForYou.bat`. Not a streaming app.
 
 OBS creates two scene collections:
 
 - **Rise Above BeamNG** — 1920×1080 for Twitch / YouTube / Kick
-- **Rise Above BeamNG Vertical** — 1080×1920 for YouTube Shorts / Reels if you use OBS for those (TikTok is Studio)
+- **Rise Above BeamNG Vertical** — 1080×1920 if you stream phone-only from OBS with no wide canvas. With Aitum Vertical, stay on the wide collection instead.
 
 Same scene names in both. Switch them with the dropdown at the top of OBS. Pick BeamNG on `Game / Main` and `Audio / Game` in both collections. Desktop Audio stays muted so Discord is not on the stream.
 
-## TikTok LIVE Studio
+## Aitum (wide + phone from OBS)
 
-TikTok is Studio only. Double-click `tools/Start-TikTokLayout.bat`, leave it open, and build Dual layout from the [layout board](tiktok-studio/index.html). Add sources on the phone canvas first, then resize on landscape. One overlay URL per scene. Do not run `Install-OBS.bat` for TikTok. Guide: [TikTok LIVE Studio](docs/tiktok.html).
+[Aitum Multistream](https://aitum.tv/products/multi) sends extra sites. [Aitum Vertical](https://aitum.tv/products/vertical) is the 1080×1920 canvas. You need both. Guide: [Aitum Multi + Vertical](docs/aitum.html).
 
 ## Audio
 
@@ -57,7 +57,6 @@ Drop `starting.jpg`, `brb.jpg`, and `ending.jpg` into `overlays/shared/backdrops
 ## Docs
 
 - [OBS + BeamNG + multi-cam](docs/obs.html)
-- [TikTok LIVE Studio layout](tiktok-studio/index.html)
-- [TikTok LIVE Studio](docs/tiktok.html)
-- [Lumia overlay, lights, cam director](docs/lumia.html)
+- [Aitum Multi + Vertical](docs/aitum.html)
+- [Lumia / chat for you](docs/lumia.html)
 - [Source map](obs/source-map.md)

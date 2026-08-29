@@ -112,4 +112,31 @@ YOUR PHOTOS on STARTING SOON, BRB, and ENDING (thank you):
 CAMERAS (four sources):
   Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals.
   After a new zip, re-run Install-OBS.bat so OBS parks them in the wells.
-  In TikTok Studio you place those same cameras by hand using the sizes in docs\tiktok.html.
+
+AITUM MULTISTREAM (OBS to many sites, wide + phone):
+  Stay in OBS. Do not add Restream. Do not also run TikTok LIVE Studio to TikTok.
+
+  You need TWO plugins:
+    Aitum Multistream  = extra stream destinations (you already downloaded this)
+    Aitum Vertical     = phone 1080x1920 canvas
+    Close OBS, install Vertical from aitum.tv/products/vertical (or Stream Suite),
+    reopen OBS.
+
+  1. Collection Rise Above BeamNG (the wide one). Do not switch away.
+  2. OBS Docks: turn on Aitum Multistream, Aitum Vertical, Vertical Scenes,
+     Vertical Sources.
+  3. Vertical canvas 1080x1920. Add scenes STARTING SOON, GRID, RACE, ...
+     On RACE, add EXISTING Game / Main and the four cams. Sizes:
+       Game 1080x608 at 0,0. Cams under it. Overlay = overlays\vertical\live.html
+  4. Right-click each Vertical scene -> Linked Scenes -> matching wide scene.
+  5. WHERE TO SEND IT:
+     Wide (Main): OBS Settings -> Stream = Twitch. Aitum Main Outputs =
+       YouTube (YouTube Studio stream key), Kick (Kick dashboard key).
+     Phone (Vertical Outputs): TikTok LIVE Center stream key, and/or a
+       SECOND YouTube key for vertical live.
+     No TikTok stream key = skip TikTok in Aitum. Keys stay in OBS, never
+     paste them into chat.
+  6. Start Streaming in OBS. Turn on the extra outputs in the Aitum dock.
+
+  Chat for you is still Lumia on the gaming monitor, not another streaming app.
+  Full page: docs\aitum.html

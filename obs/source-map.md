@@ -125,6 +125,6 @@ Lumia Chatbox: **1048×800 at 16, 1096**. Alerts: **1048×160 at 16, 16**.
 
 Right-click source → Transform → Edit Transform. Bounding Box type: **Scale to inner bounds**, center.
 
-To stream wide and vertical **at the same time from OBS** (Twitch + Shorts), install [Aitum Vertical](https://aitum.tv/vertical) and copy the vertical transforms into its canvas.
+To stream wide and vertical **at the same time from OBS**, install [Aitum Vertical](https://aitum.tv/products/vertical) **and** [Aitum Multistream](https://aitum.tv/products/multi). Stay on collection `Rise Above BeamNG`. Build the phone layout in the Vertical dock. Destinations: [docs/aitum.html](../docs/aitum.html).
 
-TikTok is **TikTok LIVE Studio only**. Dual layout + `tools/Start-OverlayServer.bat`. Guide: [docs/tiktok.html](../docs/tiktok.html).
+Stay on collection `Rise Above BeamNG` while Multi + Vertical are running. The separate `Rise Above BeamNG Vertical` collection is only if you stream 9:16 by itself.
