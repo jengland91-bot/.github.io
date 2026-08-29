@@ -1,8 +1,11 @@
 /**
  * Rise Above — stream identity
  *
- * CHANGE NAMES HERE. Then in OBS: right-click the overlay source → Refresh.
- * You do not need to run the installer again just to rename LIVE / GRID / etc.
+ * CHANGE NAMES / COLORS / PHOTO PATHS HERE. Then in OBS: right-click the
+ * overlay source → Refresh. You do not need to run the installer again.
+ *
+ * Photos: drop starting.jpg, brb.jpg, ending.jpg in shared/backdrops/
+ * (see that folder's START-HERE). Same files work for wide and vertical.
  */
 window.STREAM = {
   name: "Josh",
@@ -36,13 +39,26 @@ window.STREAM = {
     discord: "1483831196570878084",
   },
 
-  /* Off-road dirt / dusk palette */
+  /* Off-road dirt / dusk / pine palette (not neon gaming green) */
   colors: {
-    ember: "#C65A12",
-    amber: "#E0A04A",
-    ice: "#9AAB70",
-    sand: "#D4C4A0",
-    paper: "#EDE4D4",
+    ember: "#4A6B32",
+    amber: "#8A7A38",
+    ice: "#7A9A5C",
+    sand: "#C4B490",
+    paper: "#E8DCC8",
+  },
+
+  /* Photos on Starting Soon / BRB / Ending. Paths are from the overlays/ folder.
+     Drop files in overlays/shared/backdrops/ then OBS → right-click overlay → Refresh.
+     Vertical scenes use the same three files unless a *-vertical.jpg is present.
+     Change a path here if you want a different filename. */
+  backdrops: {
+    starting: "shared/backdrops/starting.jpg",
+    brb: "shared/backdrops/brb.jpg",
+    ending: "shared/backdrops/ending.jpg",
+    startingVertical: "shared/backdrops/starting-vertical.jpg",
+    brbVertical: "shared/backdrops/brb-vertical.jpg",
+    endingVertical: "shared/backdrops/ending-vertical.jpg",
   },
 
   startingMinutes: 5,

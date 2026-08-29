@@ -9,18 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ember: #c65a12;
-      --amber: #e0a04a;
-      --ice: #9aab70;
-      --sand: #d4c4a0;
-      --paper: #ede4d4;
-      --void: #120e0a;
-      --asphalt: #1c1610;
+      --ember: #4a6b32;
+      --amber: #8a7a38;
+      --ice: #7a9a5c;
+      --sand: #c4b490;
+      --paper: #e8dcc8;
+      --void: #100e0a;
+      --asphalt: #1a1610;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background:
-        radial-gradient(ellipse 70% 40% at 50% -10%, rgba(198, 90, 18, 0.22), transparent 55%),
+        radial-gradient(ellipse 70% 40% at 50% -10%, rgba(74, 107, 50, 0.22), transparent 55%),
         var(--void);
       color: var(--paper);
       font-family: Outfit, system-ui, sans-serif;
@@ -54,7 +54,7 @@
     }
     a.btn {
       text-decoration: none;
-      color: #140800;
+      color: #101408;
       background: var(--ember);
       font-family: "Bebas Neue", sans-serif;
       letter-spacing: 0.12em;
@@ -91,7 +91,7 @@
     }
     .preview-toolbar button.active {
       background: var(--ember);
-      color: #140800;
+      color: #101408;
       border-color: var(--ember);
     }
     .stage {
@@ -201,7 +201,8 @@
         <ol>
           <li>Edit <code>overlays/shared/config.js</code></li>
           <li>Set your name, LIVE / GRID words, socials (Twitch / YouTube / Kick / TikTok / Instagram / Facebook / Discord), and colors</li>
-          <li>In OBS, right-click the overlay source → Refresh</li>
+          <li>Drop <code>starting.jpg</code> / <code>brb.jpg</code> / <code>ending.jpg</code> in <code>overlays/shared/backdrops/</code> for your own photo backgrounds</li>
+          <li>In OBS, right-click the overlay source → Refresh (no installer re-run)</li>
         </ol>
       </article>
     </div>

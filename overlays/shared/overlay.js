@@ -133,12 +133,97 @@
     setInterval(render, 1000);
   }
 
+  function overlayPrefix() {
+    const script = document.querySelector('script[src*="overlay.js"]');
+    const src = (script && script.getAttribute("src")) || "";
+    if (src.indexOf("../") !== -1 || document.body.classList.contains("vertical")) {
+      return "../";
+    }
+    return "";
+  }
+
+  function resolveOverlayPath(path) {
+    if (!path) return "";
+    const p = String(path).trim();
+    if (!p) return "";
+    if (/^https?:\/\//i.test(p) || p.startsWith("/") || p.startsWith("../") || p.startsWith("./")) {
+      return p;
+    }
+    return overlayPrefix() + p;
+  }
+
+  function backdrop() {
+    const body = document.body;
+    const scene = body.classList.contains("scene-starting")
+      ? "starting"
+      : body.classList.contains("scene-brb")
+        ? "brb"
+        : body.classList.contains("scene-ending")
+          ? "ending"
+          : null;
+    if (!scene) return;
+
+    const vertical = body.classList.contains("vertical");
+    const cfg = STREAM.backdrops || {};
+    const wide = resolveOverlayPath(cfg[scene] || `shared/backdrops/${scene}.jpg`);
+    const vert = resolveOverlayPath(
+      cfg[`${scene}Vertical`] || `shared/backdrops/${scene}-vertical.jpg`
+    );
+
+    let img = document.querySelector(".backdrop-photo");
+    if (!img) {
+      img = document.createElement("img");
+      img.className = "backdrop-photo";
+      img.setAttribute("data-backdrop", scene);
+      body.insertBefore(img, body.firstChild);
+    }
+    img.alt = "";
+    img.setAttribute("aria-hidden", "true");
+
+    const seen = new Set();
+    const list = [];
+    [vertical ? vert : "", wide].forEach((src) => {
+      if (src && !seen.has(src)) {
+        seen.add(src);
+        list.push(src);
+      }
+    });
+
+    let i = 0;
+    let settled = false;
+    const fail = () => {
+      if (settled) return;
+      settled = true;
+      body.classList.remove("has-backdrop");
+    };
+    const tryNext = () => {
+      if (settled) return;
+      if (i >= list.length) {
+        fail();
+        return;
+      }
+      img.src = list[i];
+      i += 1;
+    };
+    img.addEventListener("load", () => {
+      if (settled) return;
+      if (!img.naturalWidth) {
+        tryNext();
+        return;
+      }
+      settled = true;
+      body.classList.add("has-backdrop");
+    });
+    img.addEventListener("error", tryNext);
+    tryNext();
+  }
+
   function dust() {
     const canvas = document.getElementById("dust");
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     const particles = [];
-    const count = 36;
+    const count = 58;
     const vertical = document.body.classList.contains("vertical");
     const W = vertical ? 1080 : 1920;
     const H = vertical ? 1920 : 1080;
@@ -151,12 +236,15 @@
     function spawn() {
       particles.length = 0;
       for (let i = 0; i < count; i += 1) {
+        const grit = Math.random();
         particles.push({
           x: Math.random() * W,
           y: Math.random() * H,
-          r: Math.random() * 1.8 + 0.4,
-          s: Math.random() * 0.45 + 0.12,
-          a: Math.random() * 0.35 + 0.08,
+          r: grit > 0.82 ? Math.random() * 4.5 + 1.4 : Math.random() * 2.1 + 0.35,
+          s: Math.random() * 0.55 + 0.08,
+          a: Math.random() * 0.4 + 0.06,
+          drift: Math.random() * 0.42 + 0.04,
+          moss: grit > 0.7,
         });
       }
     }
@@ -165,13 +253,15 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((p) => {
         p.y -= p.s;
-        p.x += Math.sin(p.y / 40) * 0.15;
-        if (p.y < -4) {
-          p.y = H + 4;
+        p.x += Math.sin(p.y / 38) * p.drift;
+        if (p.y < -6) {
+          p.y = H + 6;
           p.x = Math.random() * W;
         }
         ctx.beginPath();
-        ctx.fillStyle = `rgba(210, 150, 70, ${p.a})`;
+        ctx.fillStyle = p.moss
+          ? `rgba(122, 154, 92, ${p.a * 0.75})`
+          : `rgba(196, 168, 118, ${p.a})`;
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       });
@@ -189,5 +279,6 @@
   mode();
   clock();
   countdown();
+  backdrop();
   dust();
 })();

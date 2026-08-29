@@ -42,6 +42,10 @@ In-game BeamNG cameras (C / Shift+C) stay on one source: `Game / Main`. Physical
 
 Edit `overlays/shared/config.js` (handle, LIVE / GRID / DUAL words, colors, and the `socials` block for Twitch / YouTube / Kick / TikTok / Instagram / Facebook / Discord). Put a username or a full `https://` URL. Blank hides that platform. Then in OBS right-click the overlay source → **Refresh**. Camera wells only move if you download a new zip and re-run `tools/Install-OBS.bat`.
 
+### Your photos on Starting Soon / BRB / Ending
+
+Drop `starting.jpg`, `brb.jpg`, and `ending.jpg` into `overlays/shared/backdrops/` (see that folder’s START-HERE). Same three files cover wide and vertical. Optional `starting-vertical.jpg` / `brb-vertical.jpg` / `ending-vertical.jpg` if you want a separate 9:16 crop. Then OBS → right-click overlay → **Refresh**. No installer re-run. Missing files keep the dark dirt background.
+
 ## Docs
 
 - [OBS + BeamNG + multi-cam](docs/obs.html)

@@ -9,12 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ember: #c65a12;
-      --ice: #9aab70;
-      --sand: #d4c4a0;
-      --paper: #ede4d4;
-      --void: #120e0a;
-      --asphalt: #1c1610;
+      --ember: #4a6b32;
+      --ice: #7a9a5c;
+      --sand: #c4b490;
+      --paper: #e8dcc8;
+      --void: #100e0a;
+      --asphalt: #1a1610;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -120,9 +120,9 @@
 
     <h2>D. Lumia Stream (alerts + lights + cam director)</h2>
     <label class="step"><input type="checkbox" data-id="lumia" /><span>Install <a href="https://lumiastream.com/" target="_blank" rel="noreferrer">Lumia Stream</a>. Connections → Add → your platforms, then OBS (port 4455 + password). Add lights on the same page.</span></label>
-    <label class="step"><input type="checkbox" data-id="lumia-overlay" /><span>In Lumia’s overlay editor, one overlay: Chatbox, Alerts, optional Event List / Goal / Now Playing. Match colors <code>#EDE4D4</code> / <code>#C65A12</code>. Place layers on the wells from <a href="overlays/live.html?preview=1&setup=1">Race + slots</a>.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-overlay" /><span>In Lumia’s overlay editor, one overlay: Chatbox, Alerts, optional Event List / Goal / Now Playing. Match colors <code>#E8DCC8</code> / <code>#4A6B32</code>. Place layers on the wells from <a href="overlays/live.html?preview=1&setup=1">Race + slots</a>.</span></label>
     <label class="step"><input type="checkbox" data-id="lumia-url" /><span>Copy the overlay URL. OBS Browser source <code>Lumia / Overlay</code>, 1920×1080 on the wide collection and 1080×1920 on the vertical collection, above the HUD on GRID / RACE / RACE DUAL / REPLAY.</span></label>
-    <label class="step"><input type="checkbox" data-id="lumia-scenes" /><span>Alerts → OBS scene lights: STARTING SOON amber, GRID ice, RACE ember, RACE DUAL ember+ice, REPLAY dim gold, BRB dim blue, ENDING gold pulse.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-scenes" /><span>Alerts → OBS scene lights: STARTING SOON moss, GRID moss/white, RACE pine <code>#4A6B32</code>, RACE DUAL pine + moss on a second zone, REPLAY dim olive, BRB dim forest, ENDING dusk gold-olive pulse.</span></label>
     <label class="step"><input type="checkbox" data-id="cam-cmds" /><span>Chat commands with OBS Set source visibility: <code>!face</code>, <code>!room</code>, <code>!rig</code>, <code>!wheel</code>, <code>!pedals</code>, <code>!game</code> (hide cams). Scene commands: <code>!dual</code> → RACE DUAL, <code>!race</code> → RACE, <code>!replay</code> → REPLAY.</span></label>
 
     <h2>E. Go live dry-run</h2>
@@ -141,6 +141,7 @@ overlays/brb.html
 overlays/ending.html
 overlays/vertical/live.html?setup=1   ← 9:16 race slots
 overlays/live.html?setup=1            ← turn off before going live</pre>
+    <p>Your photos: put <code>starting.jpg</code>, <code>brb.jpg</code>, and <code>ending.jpg</code> in <code>overlays/shared/backdrops/</code>, then Refresh the overlay. Same three files cover vertical. See that folder’s START-HERE. Missing files keep the dirt background.</p>
 
     <p><a href="index.html">← Overlay preview</a> · <a href="docs/obs.html">OBS + BeamNG</a> · <a href="docs/lumia.html">Lumia</a></p>
   </main>

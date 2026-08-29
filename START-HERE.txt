@@ -25,6 +25,16 @@ NAMES AND LINKS (LIVE, GRID, handle, Twitch, YouTube, Kick, TikTok, Instagram, F
   Save. In OBS: right-click the overlay source -> Refresh.
   You do not need to run the installer again just to rename LIVE / GRID.
 
+YOUR PHOTOS on STARTING SOON, BRB, and ENDING (thank you):
+  Put pictures in overlays\shared\backdrops\
+    starting.jpg   = Starting Soon
+    brb.jpg        = Be Right Back
+    ending.jpg     = Thanks for Watching
+  Same three files work for wide AND vertical. Optional starting-vertical.jpg
+  (and brb-vertical.jpg / ending-vertical.jpg) only if you want a taller crop.
+  Then OBS: right-click the overlay -> Refresh. Do not re-run the installer.
+  Read overlays\shared\backdrops\START-HERE.txt if you get stuck.
+
 CAMERAS (four sources):
   Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals.
   After a new zip, re-run Install-OBS.bat so OBS parks them in the wells.

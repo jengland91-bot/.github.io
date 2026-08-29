@@ -23,7 +23,7 @@ In Lumia’s overlay editor, build **one** overlay named something like `Rise Ab
 | Now Playing | 400×64 at **48, 800** |
 | Goal | optional; skip on RACE if it covers the cams |
 
-Colors: text `#EDE4D4`, accent `#C65A12`, backgrounds transparent or a light dark glass.
+Colors: text `#E8DCC8`, accent pine `#4A6B32`, backgrounds transparent or a light dark glass.
 
 Copy the overlay URL once. OBS source `Lumia / Overlay`, 1920×1080 on the wide collection, 1080×1920 on the vertical collection, **above** the Rise Above HUD.
 
@@ -35,13 +35,13 @@ GRID and RACE DUAL use different wells — either duplicate the overlay in Lumia
 
 | Scene | Light |
 | --- | --- |
-| `STARTING SOON` | Warm amber, slow breathe |
-| `GRID` | Soft ice / white, face-friendly |
-| `RACE` | Ember `#C65A12` |
-| `RACE DUAL` | Ember + a bit of ice on a second zone if you have one |
-| `REPLAY` | Dim gold |
-| `BRB` | Dim cool blue, 30–40% |
-| `ENDING` | Gold pulse, then house white on stream stop |
+| `STARTING SOON` | Moss / trail green, slow breathe |
+| `GRID` | Soft moss / white, face-friendly |
+| `RACE` | Pine `#4A6B32` |
+| `RACE DUAL` | Pine + a bit of moss on a second zone if you have one |
+| `REPLAY` | Dim olive |
+| `BRB` | Dim forest, 30–40% |
+| `ENDING` | Dusk gold-olive pulse, then house white on stream stop |
 
 Follow/sub in Lumia: **on-screen alert + a 2s light flash**. Do not add a second alerts app.
 
