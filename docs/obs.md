@@ -27,7 +27,7 @@ The installer mutes **Desktop Audio** on **both** the wide and vertical collecti
 
 If you still hear Discord on VODs: Desktop Audio got unmuted. Mute it again. In Discord, you can keep output on your headset.
 
-## Kick, Twitch, YouTube, TikTok, Instagram
+## Kick, Twitch, YouTube, TikTok, Instagram, Facebook
 
 Edit `overlays/shared/config.js`. The `socials` object is the list that prints on Starting Soon, BRB, and Ending:
 
@@ -37,7 +37,7 @@ youtube: "jengland91"          // or "https://youtube.com/@jengland91"
 kick: "jengland91"              // or "https://kick.com/jengland91"
 tiktok: "jengland91"
 instagram: "jengland91"
-facebook: ""                   // blank = hide
+facebook: "joshengland91"
 x: ""
 discord: ""                    // display-only. This is not Discord audio.
 ```

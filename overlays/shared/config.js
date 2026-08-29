@@ -20,7 +20,8 @@ window.STREAM = {
        kick:    "jengland91"  or  "https://kick.com/jengland91"
        tiktok:  "jengland91"
        instagram: "jengland91"
-       facebook / x / discord: leave "" until you want them on screen
+       facebook: "joshengland91"
+       x / discord: leave "" until you want them on screen
   */
   socials: {
     twitch: "jengland91",
@@ -28,7 +29,7 @@ window.STREAM = {
     kick: "jengland91",
     tiktok: "jengland91",
     instagram: "jengland91",
-    facebook: "",
+    facebook: "joshengland91",
     x: "",
     discord: "",
   },
