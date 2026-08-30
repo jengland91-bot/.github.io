@@ -8,26 +8,28 @@ You probably opened files from INSIDE the zip, or Windows blocked the .bat.
 4. Double-click  00-DOUBLE-CLICK-ME.html
    That always opens this page in your browser.
 
-Then in Meld Studio, if scenes did not appear:
-   File  ->  Import Session  ->  Ctrl+V  (or folder LOAD-THESE-SCENES)
+Then double-click 1-OPEN-IN-MELD.bat. It CLOSES Meld, writes the 8 scenes
+into Meld, and opens Meld again with STARTING SOON already there.
+You do not paste code. You do not click Import Session unless it failed.
 
-If you want the bat to work: right-click 1-OPEN-IN-MELD.bat
+If Windows blocked the bat: right-click 1-OPEN-IN-MELD.bat
 -> Properties -> check Unblock -> OK -> double-click it.
-A BLACK WINDOW must stay open. If it flashes and vanishes, use the HTML instead.
+A BLACK WINDOW must stay open. If it flashes and vanishes, use 00-CLICK-ME.vbs.
 
 ------------------------------------------------------------------------
 NORMAL PATH (after extract)
 ===========================
 Double-click  1-OPEN-IN-MELD.bat
 
-Wait. It starts the overlays, opens Meld, and tries to load all 8 scenes
-into Meld for you. Leave the overlay window open.
+Wait. Meld may close and reopen. That is the installer writing the scenes.
+Leave the overlay window open.
 
 If Meld shows STARTING SOON / GRID / RACE / BRB, you are done.
 Then add Game Capture + cameras.
 
-If Meld is still empty: File -> Import Session -> Ctrl+V -> Open
-(or pick Desktop\Rise Above scenes\0 ALL SCENES.json).
+If Meld is still empty, use the Desktop shortcut  Rise Above Meld
+(or File -> Import Session -> Ctrl+V -> Open).
+A log is on your Desktop: Rise-Above-Meld-load-log.txt
 
 You do not look inside a meld\ folder. You do not paste code.
 
@@ -46,18 +48,17 @@ APPS
 DRAG AND DROP — MELD STUDIO
 ------------------------------------------------------------------------
 1. Right-click the zip -> Extract All. Do not open files from inside the zip.
-2. Open Meld Studio.
-3. Double-click 1-OPEN-IN-MELD.bat (or File -> Import Session on LOAD-THESE-SCENES\0 ALL SCENES.json).
+2. Double-click 1-OPEN-IN-MELD.bat. Wait — it installs the scenes into Meld.
    Leave the overlay window open while you are live.
-4. That creates STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING
+3. That creates STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING
    plus the HUD, Social Stream chat, and Lumia browser layers.
 
-5. Add game + cameras (once). Size them to the layout board that opened:
+4. Add game + cameras (once). Size them to the layout board that opened:
    Layers + -> Game Capture     name: Game / Main
    Layers + -> Video Device     Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals
    Overlay stays on top. Process Audio of BeamNG + your mic. No desktop / Discord.
 
-6. If you skipped Import Session, open DROP-INTO-MELD\ and drag
+5. If a scene is missing its HUD, open DROP-INTO-MELD\ and drag
    "RACE - Main.html" onto the Main canvas. Same for the other scene names.
    Portrait files go on the Portrait canvas (Settings -> General -> Multi Canvas).
 
@@ -96,6 +97,6 @@ CAMERAS: Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals.
 DESK = other games, sit at the desk (face + room, no wheel).
 Skip RACE DUAL until you have a second BeamNG view.
 
-STREAMER.BOT COMMANDS (after you paste the C#):
+STREAMER.BOT COMMANDS (after Streamer.bot is connected to Meld):
   !race !dual !replay !grid !desk !brb !ending !starting
   !face !room !wheel !pedals !rig !game

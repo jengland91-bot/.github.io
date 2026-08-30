@@ -10,14 +10,14 @@ echo   RISE ABOVE  -  LOAD INTO MELD
 echo ========================================
 echo.
 echo This window MUST stay open.
-echo It copies the scenes, starts overlays, opens Meld,
-echo and tries to Import Session for you.
+echo It writes the 8 scenes into Meld, starts overlays,
+echo and opens Meld with STARTING SOON already loaded.
 echo.
 
 if not exist "%~dp0meld\Rise-Above-Meld.json" goto :wrongfolder
 if not exist "%~dp0LOAD-THESE-SCENES\0 ALL SCENES.json" goto :wrongfolder
 
-echo Loading into Meld Studio...
+echo Closing Meld if it is open, then installing scenes...
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\load-into-meld.ps1"
 if errorlevel 1 (
   echo PowerShell could not finish. Opening the scenes folder instead.
@@ -26,12 +26,13 @@ if errorlevel 1 (
 )
 
 echo.
-echo If Meld shows STARTING SOON / GRID / RACE / BRB, it worked.
+echo You should see STARTING SOON / GRID / RACE / BRB in Meld.
 echo Leave the overlay window open. Then add Game Capture + cameras.
 echo.
-echo If Meld is empty: File - Import Session - Ctrl+V - Open.
-echo The path is on your clipboard, and also:
-echo   Desktop\Rise Above scenes\0 ALL SCENES.json
+echo If Meld is still empty, use the Desktop shortcut
+echo   Rise Above Meld
+echo or File - Import Session - Ctrl+V - Open.
+echo A log is on your Desktop: Rise-Above-Meld-load-log.txt
 echo.
 pause
 goto :eof

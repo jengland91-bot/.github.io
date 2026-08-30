@@ -90,9 +90,9 @@
   <h1>DOUBLE-CLICK THE BAT. MELD LOADS THE SCENES.</h1>
 
   <div class="box">
-    <p>Go back to this folder in File Explorer. Double-click <code>1-OPEN-IN-MELD.bat</code>. Wait — Meld should open with STARTING SOON, GRID, RACE, BRB.</p>
-    <p style="margin-top:10px">If Windows blocks the bat: right-click it → Properties → Unblock → OK.</p>
-    <p style="margin-top:10px">If Meld is still empty: File → Import Session → Ctrl+V (the path is copied) or pick a file in <code>LOAD-THESE-SCENES</code>.</p>
+    <p>Go back to this folder in File Explorer. Double-click <code>1-OPEN-IN-MELD.bat</code>. It closes Meld, writes the 8 scenes into Meld’s files, then opens Meld with STARTING SOON already loaded. You do not paste code.</p>
+    <p style="margin-top:10px">If Windows blocks the bat: right-click it → Properties → Unblock → OK. Or use <code>00-CLICK-ME.vbs</code>.</p>
+    <p style="margin-top:10px">If Meld is still empty: use the Desktop shortcut <code>Rise Above Meld</code>, or File → Import Session → Ctrl+V, or pick a file in <code>LOAD-THESE-SCENES</code>. A log is on your Desktop: <code>Rise-Above-Meld-load-log.txt</code>.</p>
     <p style="margin-top:10px"><strong>This folder:</strong></p>
     <span class="path" id="here">…</span>
   </div>
@@ -152,10 +152,9 @@
 
   <h2>Clicks in Meld</h2>
   <ol>
-    <li>Open <strong>Meld Studio</strong>.</li>
-    <li><strong>File → Import Session</strong> — not Import OBS Session (that is a different menu item).</li>
-    <li>Go to <code>LOAD-THESE-SCENES</code> (or <code>Rise Above scenes</code> on your Desktop).</li>
-    <li>Pick <code>0 ALL SCENES.json</code> to get every scene, or a numbered file to try just one look.</li>
+    <li>Double-click <strong>1-OPEN-IN-MELD.bat</strong>. Meld may close and reopen — that is the scenes being written in.</li>
+    <li>You should see <strong>STARTING SOON</strong> (then GRID / RACE / BRB in the scene list).</li>
+    <li>Only if that failed: <strong>File → Import Session</strong> (not Import OBS Session) → <code>0 ALL SCENES.json</code>.</li>
     <li>Leave <code>tools\Start-MeldLayout.bat</code> open or the overlays stay black.</li>
     <li>Add Game Capture + your four cameras.</li>
   </ol>

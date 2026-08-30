@@ -30,6 +30,9 @@ def main() -> None:
     items = session["items"]
     OUT.mkdir(exist_ok=True)
 
+    for obj in items.values():
+        if obj.get("type") == "scene":
+            obj["current"] = obj.get("name") == "STARTING SOON"
     dump(OUT / "0 ALL SCENES.json", session)
     (ROOT / "IMPORT-THIS-IN-MELD.json").write_text(SRC.read_text(encoding="utf-8"), encoding="utf-8")
 

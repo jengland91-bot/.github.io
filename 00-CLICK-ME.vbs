@@ -13,10 +13,11 @@ If Not fso.FileExists(fso.BuildPath(here, "meld\Rise-Above-Meld.json")) Then
   WScript.Quit 1
 End If
 
-MsgBox "Rise Above will open Meld and load the scenes." & vbCrLf & vbCrLf & _
-  "Wait about 10 seconds. Leave the black overlay window open.", 64, "Rise Above"
+MsgBox "Rise Above will CLOSE Meld, write the 8 scenes in, then open Meld again." & vbCrLf & vbCrLf & _
+  "Wait about 15 seconds. Leave the black overlay window open.", 64, "Rise Above"
 
 shell.Run "powershell.exe -NoProfile -ExecutionPolicy Bypass -File """ & ps1 & """", 1, True
 
 MsgBox "If Meld shows STARTING SOON / GRID / RACE / BRB, you are done." & vbCrLf & vbCrLf & _
-  "If it is empty: File -> Import Session -> Ctrl+V -> Open.", 64, "Rise Above"
+  "If it is empty, use the Desktop shortcut Rise Above Meld" & vbCrLf & _
+  "or File -> Import Session -> Ctrl+V -> Open.", 64, "Rise Above"

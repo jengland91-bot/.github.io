@@ -10,7 +10,7 @@
       "type": "scene",
       "name": "STARTING SOON",
       "index": 0,
-      "current": false,
+      "current": true,
       "staged": false
     },
     "362E3A3879D6E0EB16F60E47D473B611": {
@@ -148,7 +148,7 @@
       "type": "scene",
       "name": "RACE",
       "index": 3,
-      "current": true,
+      "current": false,
       "staged": false
     },
     "97D201FA1126508BDBD191C81A866FEB": {

@@ -11,7 +11,7 @@ OUT = ROOT / "Rise-Above-Meld.zip"
 PREFIX = "Rise-Above-Meld"
 
 SKIP_DIRS = {".git", "__pycache__", ".cursor"}
-SKIP_FILES = {"Rise-Above-Meld.zip"}
+SKIP_FILES = {"Rise-Above-Meld.zip", "last-load-log.txt"}
 SKIP_SUFFIXES = {".pyc"}
 
 
