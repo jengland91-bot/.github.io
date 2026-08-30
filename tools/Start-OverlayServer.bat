@@ -1,14 +1,7 @@
 @echo off
-title Rise Above overlay server (TikTok LIVE Studio)
+title Rise Above overlays - KEEP THIS WINDOW OPEN
 cd /d "%~dp0"
 echo.
-echo Keep this window open while TikTok LIVE Studio is using the overlays.
+echo Keep this window open while Meld is using the overlays.
 echo.
-where pwsh >nul 2>&1
-if %errorlevel%==0 (
-  pwsh -NoProfile -ExecutionPolicy Bypass -File "%~dp0start-overlay-server.ps1"
-) else (
-  powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0start-overlay-server.ps1"
-)
-echo.
-pause
+call "%~dp0Start-MeldLayout.bat"

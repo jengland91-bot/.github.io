@@ -13,7 +13,7 @@
 <main>
   <div class="kicker">YOUR SCREEN ONLY</div>
   <h1>CHAT FOR YOU</h1>
-  <p>This is a chat box <strong>you</strong> read on the gaming monitor. Viewers do not see this window. Do not paste it into OBS if you do not want it on stream.</p>
+  <p>This is a chat box <strong>you</strong> read on the gaming monitor. Viewers do not see this window. Do not capture it in Meld.</p>
 
   <h2>One box, all chat</h2>
   <p>In Lumia → Connections, add every platform you care about (Twitch, Kick, YouTube, TikTok). One Chatbox in Lumia shows all of that chat together. Leave Lumia running.</p>
@@ -24,10 +24,10 @@
     <li>Resize that window to a tall box.</li>
     <li>Drag it onto your BeamNG monitor. Sit it in a corner so it does not cover the road.</li>
   </ol>
-  <p>If Windows keeps burying it: Microsoft PowerToys → Always On Top, then Win+Ctrl+T on that window. Do not put that window in OBS Game Capture / Window Capture.</p>
+  <p>If Windows keeps burying it: Microsoft PowerToys → Always On Top, then Win+Ctrl+T on that window. Do not capture that window in Meld.</p>
 
   <h2>Or: overlay URL as a floating window</h2>
-  <p>Same Lumia overlay URL, opened in a browser you can drag. Still not OBS.</p>
+  <p>Same Lumia overlay URL, opened in a browser you can drag.</p>
   <ol>
     <li>Lumia overlay editor → one overlay → add a <strong>Chatbox</strong> (big, easy to read). Copy the overlay URL.</li>
     <li>Paste it here, then Open chat window.</li>
@@ -42,12 +42,12 @@
   </p>
 
   <h2>Keep it off the stream</h2>
-  <p>OBS source <code>Lumia / Overlay</code> is what <em>viewers</em> see. For chat-for-you only:</p>
+  <p>The Meld layer <code>Lumia / Overlay</code> is what <em>viewers</em> see. For chat-for-you only:</p>
   <ul>
-    <li>Leave <code>Lumia / Overlay</code> as <code>about:blank</code>, or hide its eye, or</li>
+    <li>Leave <code>lumia.overlayUrl</code> blank in config.js, or</li>
     <li>Keep Alerts on that overlay for follows, but do not add a Chatbox there.</li>
   </ul>
-  <p>If you already pasted a Chatbox into OBS, viewers see it. Pull the Chatbox out of that overlay (or hide the source) if that was not the goal.</p>
+  <p>If you already put a Chatbox on the Lumia overlay that Meld loads, viewers see it. Pull the Chatbox out of that overlay if that was not the goal.</p>
 
   <nav class="docs">
     <a href="../docs/lumia.html">Lumia guide</a> ·

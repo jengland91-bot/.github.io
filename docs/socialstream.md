@@ -30,4 +30,4 @@ Keep this on a side monitor. Click a message to send it to Featured. Do not Game
 - Reload the Browser layer after saving config.js.
 - Leave `Start-MeldLayout.bat` running.
 
-Official: [OBS quick start](https://socialstream.ninja/docs/obs-quick-start.html) (same Browser URL idea as Meld).
+Official: [Social Stream Ninja docs](https://socialstream.ninja/docs/).

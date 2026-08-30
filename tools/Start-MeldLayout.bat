@@ -14,7 +14,7 @@ echo If this window closes, Browser layers in Meld go black.
 echo.
 
 echo Starting PowerShell overlay server...
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0start-overlay-server.ps1" -Mode meld
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0start-overlay-server.ps1"
 if errorlevel 1 (
   echo.
   echo PowerShell server failed. Trying Python...

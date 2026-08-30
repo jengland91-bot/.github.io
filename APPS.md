@@ -1,6 +1,6 @@
 # Apps you need — Rise Above Meld kit
 
-You go live from **Meld Studio**. Do not install OBS for this kit.
+You go live from **Meld Studio**.
 
 ## You already have / are getting
 
@@ -27,13 +27,6 @@ You go live from **Meld Studio**. Do not install OBS for this kit.
 | **Elgato Stream Deck** | optional hardware | Buttons that fire Streamer.bot / Meld scenes. Not required. |
 | **NVIDIA Broadcast** | NVIDIA app, RTX GPU | Mic noise removal. Meld can also do basic filters. |
 | **Meld Stream Deck plugin** | Meld docs → Stream Deck | Scene keys without Streamer.bot. Skip if Streamer.bot already does it. |
-
-## Do not install for this Meld setup
-
-- **OBS Studio** — Meld is the go-live app.
-- **Aitum Vertical / Multistream** — OBS plugins.
-- **Casterlabs / Caffeinated** — doubles Lumia alerts.
-- **Restream** — put destinations in Meld instead.
 
 ## Who puts what on the picture
 

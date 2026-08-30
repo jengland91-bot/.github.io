@@ -32,7 +32,7 @@ if not exist "%USERPROFILE%\Desktop\." set "NOTE=%~dp0READ-THIS-THEN-OPEN-MELD.t
 echo RISE ABOVE - next 3 clicks in Meld Studio
 echo ========================================
 echo.
-echo 1. Open Meld Studio  ^(not OBS^)
+echo 1. Open Meld Studio
 echo 2. File - Import Session
 echo 3. Open the Desktop folder  Rise Above scenes
 echo 4. Pick  0 ALL SCENES.json  for every scene

@@ -1,6 +1,6 @@
-# Meld Studio — import the session (no OBS)
+# Meld Studio — import the session
 
-You do not need OBS. Overlays are HTML. In Meld they are **Browser** layers.
+Overlays are HTML. In Meld they are **Browser** layers.
 
 ## Fast path (import)
 
@@ -42,6 +42,5 @@ You do not put code into Meld. Click the scene in Meld, or later add Streamer.bo
 
 ## Do not
 
-- Open OBS or run `Install-OBS.bat`
 - Capture desktop / Discord
 - Put stream keys in this repo

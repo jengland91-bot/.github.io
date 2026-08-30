@@ -1,6 +1,6 @@
-# Rise Above — BeamNG kit (Meld first)
+# Rise Above — BeamNG kit (Meld Studio)
 
-Off-road overlay kit for **BeamNG.drive** with **four cameras** (Face, Room, Wheel, Pedals). Go live from **Meld Studio**. **Lumia Stream** for alerts and lights. **Streamer.bot** for `!race` / `!face`. **Social Stream Ninja** for chat on stream. Casterlabs is not used. Tag is **@jengland91**.
+Off-road overlay kit for **BeamNG.drive** with **four cameras** (Face, Room, Wheel, Pedals). Go live from **Meld Studio**. **Lumia Stream** for alerts and lights. **Streamer.bot** for `!race` / `!face`. **Social Stream Ninja** for chat on stream. Tag is **@jengland91**.
 
 Open [START-HERE.txt](START-HERE.txt). Apps you need: [apps.html](apps.html) / [APPS.md](APPS.md).
 
@@ -24,8 +24,6 @@ Guides: [Meld](docs/meld.html) · [Social Stream Ninja](docs/socialstream.html) 
 | Lumia Stream | Alerts + lights | Chat-for-you on the gaming monitor |
 | Streamer.bot | Nothing visual | Optional `!race` `!brb` `!face` → Meld (clicks, not code) |
 
-Do not open OBS. Do not install Aitum or Casterlabs for this Meld setup.
-
 ## Scenes
 
 | Scene | Wide overlay | Vertical overlay | Job |
@@ -46,5 +44,3 @@ Edit `overlays/shared/config.js` in Notepad, or double-click `tools/Change-Game.
 ## Audio
 
 Process Audio of BeamNG + your mic. Do not capture desktop / Discord.
-
-OBS / TikTok LIVE Studio / Aitum paths are still in this repo if you need them later. They are not part of the Meld drag-and-drop setup.

@@ -33,24 +33,21 @@ In Meld: File -> Import Session -> Rise Above scenes -> 0 ALL SCENES.json
 You do not look inside a meld\ folder. You do not paste code.
 
 ------------------------------------------------------------------------
-APPS (Meld only — do not open OBS)
-==================================
+APPS
+====
   Meld Studio          https://www.meldstudio.co/          go live
   Lumia Stream         https://lumiastream.com/            YOU HAVE THIS — alerts + lights
   Streamer.bot         https://streamer.bot/               YOU ARE GETTING THIS — !race !brb !face
   Social Stream Ninja  https://socialstream.ninja/         YOU ARE GETTING THIS — chat on stream
 
   Also: Chrome or Edge (SSN extension), BeamNG.drive, this extracted zip.
-
-  Skip: OBS, Aitum, Casterlabs, Restream.
-
   Visual list: open apps.html  (or tools\Start-MeldLayout.bat then click Apps)
 
 ------------------------------------------------------------------------
 DRAG AND DROP — MELD STUDIO
 ------------------------------------------------------------------------
 1. Right-click the zip -> Extract All. Do not open files from inside the zip.
-2. Open Meld Studio. Do not open OBS.
+2. Open Meld Studio.
 3. Double-click 1-OPEN-IN-MELD.bat (or File -> Import Session on LOAD-THESE-SCENES\0 ALL SCENES.json).
    Leave the overlay window open while you are live.
 4. That creates STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING
@@ -82,18 +79,6 @@ Social Stream Ninja: socialstream\index.html
 Full Meld page: docs\meld.html
 Layout board:   meld\index.html
 Apps list:      apps.html
-
-------------------------------------------------------------------------
-TIKTOK LIVE STUDIO (only if you go live from TikTok Studio, not Meld)
-------------------------------------------------------------------------
-Studio cannot import a session file. Dual layout. tools\Start-TikTokLayout.bat
-Full text: docs\tiktok.html   Skip this if Meld is going to TikTok.
-
-------------------------------------------------------------------------
-OBS (skip this whole section — you are on Meld)
-------------------------------------------------------------------------
-Only if you still stream from OBS: tools\Install-OBS.bat
-See the old START-HERE in git history, or docs\obs.html.
 
 LUMIA CHAT FOR YOU (gaming screen, not the stream):
   1. Lumia Stream open. Connections -> Twitch (and Kick/YouTube if you use them).

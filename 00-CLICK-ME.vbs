@@ -38,7 +38,7 @@ note = fso.BuildPath(desktop, "READ-THIS-THEN-OPEN-MELD.txt")
 Dim ts
 Set ts = fso.CreateTextFile(note, True)
 ts.WriteLine "RISE ABOVE - load a scene in Meld Studio"
-ts.WriteLine "1. Open Meld Studio (not OBS)"
+ts.WriteLine "1. Open Meld Studio"
 ts.WriteLine "2. File -> Import Session"
 ts.WriteLine "3. Open Desktop folder: Rise Above scenes"
 ts.WriteLine "4. Pick 0 ALL SCENES.json for every scene"

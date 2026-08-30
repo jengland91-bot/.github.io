@@ -79,18 +79,17 @@
 </head>
 <body>
   <main>
-    <div class="kicker">CHECKLIST</div>
+    <div class="kicker">MELD STUDIO ONLY</div>
     <h1>GET IT LIVE</h1>
-    <p>Work top to bottom. Check items off as you go — this page remembers them in this browser. Full detail lives in the docs linked at the bottom.</p>
-    <p>Going live from <strong>Meld</strong> (no OBS): extract the zip. If <code>1-OPEN-IN-MELD.bat</code> did nothing, double-click <code>00-DOUBLE-CLICK-ME.html</code>. Then <strong>File → Import Session → LOAD-THESE-SCENES → 0 ALL SCENES.json</strong> (or a numbered scene file). Or drag files from <code>DROP-INTO-MELD\</code>. Guide: <a href="docs/meld.html">docs/meld.html</a>. Apps: <a href="apps.html">apps.html</a>. Skip the OBS installer.</p>
-    <p>Only if you still use OBS: <a href="tools/install.html">use the installer</a> on the streaming PC (local file), not from GitHub Pages.</p>
+    <p>Work top to bottom. This kit is Meld only. Check items off as you go — this page remembers them in this browser.</p>
+    <p>Extract the zip. If <code>1-OPEN-IN-MELD.bat</code> did nothing, double-click <code>00-DOUBLE-CLICK-ME.html</code>. Then <strong>File → Import Session → LOAD-THESE-SCENES → 0 ALL SCENES.json</strong> (or a numbered scene file). Guide: <a href="docs/meld.html">docs/meld.html</a>. Apps: <a href="apps.html">apps.html</a>.</p>
 
     <h2>A. Identity</h2>
-    <label class="step"><input type="checkbox" data-id="config" /><span>Today’s game on STARTING SOON: double-click <code>tools/Change-Game.bat</code> (or edit <code>game</code> in <code>overlays/shared/config.js</code>). Also set TRAILHEAD, Monster green <code>#7CB701</code>, and the <code>socials</code> block. Save, then refresh the overlay in OBS, Meld, or TikTok Studio.</span></label>
+    <label class="step"><input type="checkbox" data-id="config" /><span>Today’s game on STARTING SOON: double-click <code>tools/Change-Game.bat</code> (or edit <code>game</code> in <code>overlays/shared/config.js</code>). Save, then reload the Browser layer in Meld.</span></label>
     <label class="step"><input type="checkbox" data-id="preview" /><span>Open <a href="index.html">the preview</a> and confirm Starting Soon / Desk / Race / Grid / Dual look right.</span></label>
 
-    <h2>B. Meld Studio (no OBS)</h2>
-    <label class="step"><input type="checkbox" data-id="meld-install" /><span>Install <a href="https://www.meldstudio.co/" target="_blank" rel="noreferrer">Meld Studio</a>. Extract this zip. Do not open OBS. Do not run <code>Install-OBS.bat</code>.</span></label>
+    <h2>B. Meld Studio</h2>
+    <label class="step"><input type="checkbox" data-id="meld-install" /><span>Install <a href="https://www.meldstudio.co/" target="_blank" rel="noreferrer">Meld Studio</a>. Extract this zip. Go live from Meld.</span></label>
     <label class="step"><input type="checkbox" data-id="apps" /><span>Install the four apps: Meld, Lumia (you have it), <a href="https://streamer.bot/" target="_blank" rel="noreferrer">Streamer.bot</a>, <a href="https://socialstream.ninja/" target="_blank" rel="noreferrer">Social Stream Ninja</a>. List: <a href="apps.html">apps.html</a></span></label>
     <label class="step"><input type="checkbox" data-id="meld-server" /><span>Double-click <code>tools/Start-MeldLayout.bat</code> and leave the black window open. Layout board: <a href="meld/index.html">meld/</a></span></label>
     <label class="step"><input type="checkbox" data-id="meld-import" /><span>Meld → File → Import Session → folder <code>LOAD-THESE-SCENES</code> → <code>0 ALL SCENES.json</code> (or a numbered scene file). The bat also copies that folder to the Desktop as <code>Rise Above scenes</code>.</span></label>
@@ -99,64 +98,27 @@
     <label class="step"><input type="checkbox" data-id="meld-sources" /><span>Game Capture (or Display Capture) for BeamNG. Video Device for Face / Room / Wheel / Pedals. Process Audio of the game + mic. Do not capture desktop / Discord.</span></label>
     <label class="step"><input type="checkbox" data-id="ssn" /><span>Social Stream Ninja: paste the session ID into <code>overlays/shared/config.js</code> → <code>ssn.session</code>. Reload Social Stream layers. Guide: <a href="socialstream/">socialstream/</a></span></label>
     <label class="step"><input type="checkbox" data-id="sbot" /><span>Streamer.bot (optional): Stream Apps → Meld Studio → 127.0.0.1. Actions → Meld Studio → Show Scene (clicks, no code in Meld). Guide: <a href="docs/streamerbot.html">docs/streamerbot.html</a></span></label>
-    <p>Skip section C if you are going live from Meld, not OBS.</p>
-
-    <h2>C. OBS canvas &amp; output</h2>
-    <label class="step"><input type="checkbox" data-id="obs-install" /><span>Install the latest <a href="https://obsproject.com/" target="_blank" rel="noreferrer">OBS Studio</a> (28+ so WebSocket is built in).</span></label>
-    <label class="step"><input type="checkbox" data-id="obs-video" /><span>Settings → Video: Base and Output <code>1920×1080</code> for the wide collection. The vertical collection is <code>1080×1920</code> (the installer sets both). Color format NV12, Rec. 709, Limited.</span></label>
-    <label class="step"><input type="checkbox" data-id="obs-encode" /><span>Settings → Output → Advanced. NVIDIA: NVENC, CBR, 6000 Kbps for Twitch, keyframe 2, High, B-frames 2. AMD: AMF. Intel: QSV. CPU-only: x264 veryfast.</span></label>
-    <label class="step"><input type="checkbox" data-id="obs-audio" /><span>Settings → Audio: 48 kHz. Mixer: Desktop Audio muted (no Discord). Mic / Main = your mic. Audio / Game = Application Audio Capture of BeamNG. Filters on the mic: Noise Suppression (RNNoise) → EQ → Compressor → Limiter.</span></label>
-    <label class="step"><input type="checkbox" data-id="obs-ws" /><span>Tools → WebSocket Server Settings: Enable server, port <code>4455</code>, authentication ON. Copy the password for Lumia.</span></label>
-
-    <h2>D. Scenes — use these exact names</h2>
-    <p>Lumia matches scene names character-for-character. In-game BeamNG cameras (C / Shift+C) stay on <code>Game / Main</code>. Physical cams are separate OBS sources.</p>
+    <h2>C. Scenes</h2>
+    <p>These names match the import files. In-game BeamNG cameras (C / Shift+C) stay on <code>Game / Main</code>. Physical cams are Meld Video Device layers.</p>
     <table>
       <thead><tr><th>Scene</th><th>What lives here</th></tr></thead>
       <tbody>
         <tr><td><code>STARTING SOON</code></td><td>Full-screen overlay. Optional music.</td></tr>
         <tr><td><code>GRID</code></td><td>Big face + room + wheel + pedals. Talking / staging. No game.</td></tr>
         <tr><td><code>DESK</code></td><td>Other games. Full game + face + room. No wheel / pedals. Pick that game on Game / Main and Audio / Game.</td></tr>
-        <tr><td><code>RACE</code></td><td>BeamNG full, four cam PiPs, Lumia chat.</td></tr>
+        <tr><td><code>RACE</code></td><td>BeamNG full, four cam PiPs, Social Stream chat.</td></tr>
         <tr><td><code>RACE DUAL</code></td><td>Main game + second angle (bumper/chase) + small cams.</td></tr>
         <tr><td><code>REPLAY</code></td><td>Clean game, no cams. Crashes and cinematic.</td></tr>
         <tr><td><code>BRB</code></td><td>Pit-stop overlay. Drop game audio.</td></tr>
         <tr><td><code>ENDING</code></td><td>Thanks / checkered.</td></tr>
       </tbody>
     </table>
-    <p>Going live wide + phone from OBS: install <a href="https://aitum.tv/products/vertical">Aitum Vertical</a> as well as Multistream, then run <code>tools\Install-AitumVertical.bat</code> (OBS 32.1+). Stay on collection <code>Rise Above BeamNG</code>. Full steps: <a href="docs/aitum.html">Aitum Multi + Vertical</a>.</p>
-    <label class="step"><input type="checkbox" data-id="vertical" /><span>Aitum Vertical: Docks → tick Vertical Scenes. Run tools\Install-AitumVertical.bat (OBS 32.1+). Then right-click each vertical scene → Linked Scenes → matching wide name. Stay on collection Rise Above BeamNG.</span></label>
-    <label class="step"><input type="checkbox" data-id="scenes" /><span>Confirm those scene names exist on both collections, including <code>DESK</code>.</span></label>
-    <label class="step"><input type="checkbox" data-id="browser" /><span>Add Browser sources for each overlay (1920×1080, transparent). Prefer <strong>Local file</strong>. Custom CSS: <code>body { background-color: rgba(0,0,0,0); overflow: hidden; }</code></span></label>
-    <label class="step"><input type="checkbox" data-id="beamng" /><span>BeamNG in borderless windowed. OBS <code>Game / Main</code> = Game Capture → Capture specific window → BeamNG.drive. If the shot is black (Vulkan), switch that source to Window Capture (Windows Graphics Capture).</span></label>
-    <label class="step"><input type="checkbox" data-id="cams" /><span>Add <code>Cam / Face</code>, <code>Cam / Room</code>, <code>Cam / Wheel</code>, and <code>Cam / Pedals</code> as Video Capture Device. Paste (Reference) onto GRID, DESK (face + room), RACE, and RACE DUAL. Optional <code>Game / Angle 2</code> for a second monitor or bumper view — only on RACE DUAL. Re-run <code>Install-OBS.bat</code> from a new zip so wells match.</span></label>
-    <label class="step"><input type="checkbox" data-id="usb" /><span>Spread the four cameras across USB controllers (front vs back). 720p 30fps each. Leave “Deactivate when not showing” <strong>off</strong> so cam switches stay instant.</span></label>
-    <label class="step"><input type="checkbox" data-id="shutdown" /><span>Refresh browser when scene becomes active: on for STARTING SOON. Off for RACE HUD.</span></label>
-
-    <h2>E. Lumia Stream (alerts + lights + cam director)</h2>
-    <label class="step"><input type="checkbox" data-id="lumia" /><span>Install <a href="https://lumiastream.com/" target="_blank" rel="noreferrer">Lumia Stream</a>. Connections → Add TikTok for LIVE Studio, and OBS (port 4455 + password) only for Twitch / YouTube / Kick. Add lights on the same page.</span></label>
-    <label class="step"><input type="checkbox" data-id="lumia-overlay" /><span>In Lumia’s overlay editor, one overlay: Chatbox, Alerts, optional Event List / Goal / Now Playing. Match colors <code>#E8DCC8</code> / <code>#7CB701</code>. Place layers on the wells from <a href="overlays/live.html?preview=1&setup=1">Race + slots</a>.</span></label>
-    <label class="step"><input type="checkbox" data-id="lumia-url" /><span>Copy the overlay URL. OBS: Browser source <code>Lumia / Overlay</code>, 1920×1080. Meld: Browser layer on Main 1920×1080 and Portrait 1080×1920, above the HUD. TikTok LIVE Studio: Link source on each Dual canvas. Chat <code>!race</code> controls OBS only, not Meld.</span></label>
-    <label class="step"><input type="checkbox" data-id="lumia-scenes" /><span>Alerts → OBS scene lights: STARTING SOON moss, GRID moss/white, DESK moss, RACE Monster green <code>#7CB701</code>, RACE DUAL pine + moss on a second zone, REPLAY dim olive, BRB dim forest, ENDING dusk gold-olive pulse.</span></label>
-    <label class="step"><input type="checkbox" data-id="cam-cmds" /><span>Chat commands with OBS Set source visibility: <code>!face</code>, <code>!room</code>, <code>!rig</code>, <code>!wheel</code>, <code>!pedals</code>, <code>!game</code> (hide cams). Scene commands: <code>!desk</code> → DESK, <code>!dual</code> → RACE DUAL, <code>!race</code> → RACE, <code>!replay</code> → REPLAY.</span></label>
-
-    <h2>F. Go live dry-run</h2>
-    <label class="step"><input type="checkbox" data-id="hotkeys" /><span>OBS hotkeys: Numpad 1 STARTING SOON, 2 GRID, 3 RACE, 4 RACE DUAL, 5 REPLAY, 6 BRB, 7 ENDING, 8 DESK. Same keys work on the vertical collection.</span></label>
-    <label class="step"><input type="checkbox" data-id="test" /><span>Record a test. Switch every scene. Toggle face / room / wheel / pedals. Fire a Lumia test alert. Confirm BeamNG audio vs mic.</span></label>
+    <h2>D. Lumia + go live</h2>
+    <label class="step"><input type="checkbox" data-id="lumia" /><span>Lumia Stream open. Connections → Twitch (and Kick / YouTube if you use them). Chat-for-you stays on the gaming monitor — do not capture that window in Meld.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-url" /><span>If viewers should see alerts: copy the Lumia overlay URL into <code>overlays/shared/config.js</code> → <code>lumia.overlayUrl</code>. Reload the Lumia / Overlay Browser layer in Meld.</span></label>
+    <label class="step"><input type="checkbox" data-id="photos" /><span>Your photos: put <code>starting.jpg</code>, <code>brb.jpg</code>, and <code>ending.jpg</code> in <code>overlays/shared/backdrops/</code>, then reload the Browser overlay in Meld.</span></label>
+    <label class="step"><input type="checkbox" data-id="test" /><span>Record a test. Click every scene. Fire a Lumia test alert. Confirm BeamNG audio vs mic. No Discord on the stream.</span></label>
     <label class="step"><input type="checkbox" data-id="mute" /><span>BRB should not leave engine audio blasting unless you want it.</span></label>
-
-    <h2>Browser source files</h2>
-    <p>In OBS, check <strong>Local file</strong> and browse to:</p>
-    <pre>overlays/starting-soon.html?m=5
-overlays/chatting.html          ← GRID
-overlays/desk.html              ← DESK (other games)
-overlays/live.html              ← RACE
-overlays/race-dual.html
-overlays/replay.html
-overlays/brb.html
-overlays/ending.html
-overlays/vertical/live.html?setup=1   ← 9:16 race slots
-overlays/live.html?setup=1            ← turn off before going live</pre>
-    <p>Your photos: put <code>starting.jpg</code>, <code>brb.jpg</code>, and <code>ending.jpg</code> in <code>overlays/shared/backdrops/</code>, then Refresh the overlay in OBS, Meld, or TikTok Studio. Same three files cover vertical. See that folder’s START-HERE. Missing files keep the dirt background.</p>
 
     <p><a href="index.html">← Overlay preview</a> · <a href="apps.html">Apps</a> · <a href="docs/meld.html">Meld</a> · <a href="docs/socialstream.html">Social Stream Ninja</a> · <a href="docs/streamerbot.html">Streamer.bot</a> · <a href="docs/lumia.html">Lumia</a></p>
   </main>

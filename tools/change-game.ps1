@@ -83,8 +83,7 @@ else {
 Write-Host ""
 Write-Host ("Starting Soon will say: " + $game) -ForegroundColor Green
 Write-Host ""
-Write-Host "In OBS: click STARTING SOON, right-click Overlay / Starting Soon -> Refresh."
+Write-Host "In Meld: reload the Starting Soon Browser overlay."
 Write-Host "Or click GRID, then STARTING SOON again (that overlay reloads itself)."
-Write-Host "You do not run Install-OBS.bat for this."
 Write-Host ""
-Write-Host "Optional: in OBS you can also add ?game=SnowRunner to the overlay URL."
+Write-Host "Optional: you can also add ?game=SnowRunner to the overlay URL."

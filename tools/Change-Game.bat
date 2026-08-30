@@ -2,7 +2,7 @@
 title Change the game on Starting Soon
 cd /d "%~dp0"
 echo.
-echo This updates STARTING SOON. You do not re-run Install-OBS.bat.
+echo This updates STARTING SOON. Then reload the Browser overlay in Meld.
 echo.
 where pwsh >nul 2>&1
 if %errorlevel%==0 (

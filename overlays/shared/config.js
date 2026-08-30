@@ -2,7 +2,7 @@
  * Rise Above — CHANGE THIS FILE
  *
  * Open in Notepad. Save. Then in Meld: reload the Browser overlay.
- * (OBS: right-click the overlay → Refresh.) Names, colors, SSN session, Lumia URL, photos.
+ * Names, colors, SSN session, Lumia URL, photos.
  *
  * Photos: drop starting.jpg, brb.jpg, ending.jpg in shared/backdrops/
  */
@@ -14,7 +14,7 @@ window.STREAM = {
 
   /* TODAY'S GAME — this is the big title on STARTING SOON.
      Easiest: double-click tools\Change-Game.bat and pick / type the name.
-     Or change the word in quotes here, Save, then in OBS right-click the overlay -> Refresh.
+     Or change the word in quotes here, Save, then in Meld reload the Browser overlay.
      Examples: "BeamNG"  "SnowRunner"  "Forza Horizon"  "GTA V"
      Leave tagline blank unless you want to type the whole subtitle yourself. */
   game: "BeamNG",

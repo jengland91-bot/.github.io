@@ -1,8 +1,4 @@
 ﻿#Requires -Version 5.1
-param(
-    [ValidateSet("tiktok", "meld")]
-    [string]$Mode = "tiktok"
-)
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Continue"
 Write-Host ""
@@ -28,68 +24,41 @@ if (-not (Test-Path (Join-Path $overlayDir "live.html"))) {
 }
 
 Write-Host ""
-if ($Mode -eq "meld") {
-    Write-Host "Rise Above - Meld Studio (no OBS)" -ForegroundColor White
-    Write-Host "Serving: $repoRoot"
-    Write-Host "Keep this window open while Meld Browser layers use these URLs."
-    Write-Host "Do not open OBS. Paste a URL onto the Meld canvas, or drag the HTML file."
-    Write-Host ""
-    Write-Host "Layout board: ${prefix}meld/"
-    Write-Host "Apps list:    ${prefix}apps.html"
-    Write-Host "Guide:        ${prefix}docs/meld.html"
-    Write-Host "Import JSON:  $repoRoot\meld\Rise-Above-Meld.json"
-    Write-Host "Drag folder:  $repoRoot\DROP-INTO-MELD"
-    Write-Host ""
-    Write-Host "In Meld: File -> Import Session -> Rise-Above-Meld.json"
-    Write-Host "Or drag the HTML files from DROP-INTO-MELD onto each canvas."
-    Write-Host ""
-    Write-Host "Main canvas overlays (1920 x 1080):"
-    Write-Host "  STARTING SOON  ${prefix}overlays/starting-soon.html?m=5"
-    Write-Host "  GRID           ${prefix}overlays/chatting.html"
-    Write-Host "  DESK           ${prefix}overlays/desk.html"
-    Write-Host "  RACE           ${prefix}overlays/live.html"
-    Write-Host "  RACE DUAL      ${prefix}overlays/race-dual.html"
-    Write-Host "  REPLAY         ${prefix}overlays/replay.html"
-    Write-Host "  BRB            ${prefix}overlays/brb.html"
-    Write-Host "  ENDING         ${prefix}overlays/ending.html"
-    Write-Host ""
-    Write-Host "Portrait canvas overlays (1080 x 1920):"
-    Write-Host "  STARTING SOON  ${prefix}overlays/vertical/starting-soon.html?m=5"
-    Write-Host "  GRID           ${prefix}overlays/vertical/chatting.html"
-    Write-Host "  DESK           ${prefix}overlays/vertical/desk.html"
-    Write-Host "  RACE           ${prefix}overlays/vertical/live.html"
-    Write-Host "  RACE DUAL      ${prefix}overlays/vertical/race-dual.html"
-    Write-Host "  REPLAY         ${prefix}overlays/vertical/replay.html"
-    Write-Host "  BRB            ${prefix}overlays/vertical/brb.html"
-    Write-Host "  ENDING         ${prefix}overlays/vertical/ending.html"
-    Write-Host ""
-    Write-Host "Setup boxes:  ${prefix}overlays/live.html?setup=1"
-    Write-Host ""
-} else {
-    Write-Host "Rise Above - TikTok LIVE Studio layout" -ForegroundColor White
-    Write-Host "Serving: $repoRoot"
-    Write-Host "Keep this window open while you are live on TikTok."
-    Write-Host "TikTok is LIVE Studio only. Do not open OBS for TikTok."
-    Write-Host ""
-    Write-Host "Turn Dual layout ON. Add sources on the PHONE canvas first."
-    Write-Host "Then switch to landscape and resize the SAME sources. One overlay URL per scene."
-    Write-Host ""
-    Write-Host "Layout board: ${prefix}tiktok-studio/"
-    Write-Host ""
-    Write-Host "PHONE overlay Links (1080 x 1920), then stretch that same Link to 1920 x 1080 on landscape:"
-    Write-Host "  STARTING SOON  ${prefix}overlays/vertical/starting-soon.html?m=5"
-    Write-Host "  GRID           ${prefix}overlays/vertical/chatting.html"
-    Write-Host "  DESK           ${prefix}overlays/vertical/desk.html"
-    Write-Host "  RACE           ${prefix}overlays/vertical/live.html"
-    Write-Host "  RACE DUAL      ${prefix}overlays/vertical/race-dual.html"
-    Write-Host "  REPLAY         ${prefix}overlays/vertical/replay.html"
-    Write-Host "  BRB            ${prefix}overlays/vertical/brb.html"
-    Write-Host "  ENDING         ${prefix}overlays/vertical/ending.html"
-    Write-Host ""
-    Write-Host "Setup boxes:  ${prefix}overlays/vertical/live.html?setup=1"
-    Write-Host "Guide:        ${prefix}docs/tiktok.html"
-    Write-Host ""
-}
+Write-Host "Rise Above - Meld Studio" -ForegroundColor White
+Write-Host "Serving: $repoRoot"
+Write-Host "Keep this window open while Meld Browser layers use these URLs."
+Write-Host ""
+Write-Host "Layout board: ${prefix}meld/"
+Write-Host "Apps list:    ${prefix}apps.html"
+Write-Host "Guide:        ${prefix}docs/meld.html"
+Write-Host "Scenes:       $repoRoot\LOAD-THESE-SCENES"
+Write-Host "Drag folder:  $repoRoot\DROP-INTO-MELD"
+Write-Host ""
+Write-Host "In Meld: File -> Import Session -> LOAD-THESE-SCENES\0 ALL SCENES.json"
+Write-Host "Or pick a numbered file such as 4 RACE.json"
+Write-Host ""
+Write-Host "Main canvas overlays (1920 x 1080):"
+Write-Host "  STARTING SOON  ${prefix}overlays/starting-soon.html?m=5"
+Write-Host "  GRID           ${prefix}overlays/chatting.html"
+Write-Host "  DESK           ${prefix}overlays/desk.html"
+Write-Host "  RACE           ${prefix}overlays/live.html"
+Write-Host "  RACE DUAL      ${prefix}overlays/race-dual.html"
+Write-Host "  REPLAY         ${prefix}overlays/replay.html"
+Write-Host "  BRB            ${prefix}overlays/brb.html"
+Write-Host "  ENDING         ${prefix}overlays/ending.html"
+Write-Host ""
+Write-Host "Portrait canvas overlays (1080 x 1920):"
+Write-Host "  STARTING SOON  ${prefix}overlays/vertical/starting-soon.html?m=5"
+Write-Host "  GRID           ${prefix}overlays/vertical/chatting.html"
+Write-Host "  DESK           ${prefix}overlays/vertical/desk.html"
+Write-Host "  RACE           ${prefix}overlays/vertical/live.html"
+Write-Host "  RACE DUAL      ${prefix}overlays/vertical/race-dual.html"
+Write-Host "  REPLAY         ${prefix}overlays/vertical/replay.html"
+Write-Host "  BRB            ${prefix}overlays/vertical/brb.html"
+Write-Host "  ENDING         ${prefix}overlays/vertical/ending.html"
+Write-Host ""
+Write-Host "Setup boxes:  ${prefix}overlays/live.html?setup=1"
+Write-Host ""
 
 $listener = New-Object System.Net.HttpListener
 $listener.Prefixes.Add($prefix)
@@ -124,12 +93,9 @@ function Get-Mime([string]$ext) {
 }
 
 Write-Host "Ready. Ctrl+C to stop." -ForegroundColor Green
-$openPath = if ($Mode -eq "meld") { "${prefix}meld/" } else { "${prefix}tiktok-studio/" }
-try { Start-Process $openPath } catch {}
-if ($Mode -eq "meld") {
-    try { Start-Process (Join-Path $repoRoot "DROP-INTO-MELD") } catch {}
-    try { Start-Process "${prefix}apps.html" } catch {}
-}
+try { Start-Process "${prefix}meld/" } catch {}
+try { Start-Process (Join-Path $repoRoot "LOAD-THESE-SCENES") } catch {}
+try { Start-Process "${prefix}apps.html" } catch {}
 
 while ($listener.IsListening) {
     $ctx = $listener.GetContext()
@@ -137,7 +103,7 @@ while ($listener.IsListening) {
     $res = $ctx.Response
     try {
         $rel = [Uri]::UnescapeDataString($req.Url.AbsolutePath.TrimStart("/"))
-        if ([string]::IsNullOrWhiteSpace($rel)) { $rel = "tiktok-studio/index.html" }
+        if ([string]::IsNullOrWhiteSpace($rel)) { $rel = "meld/index.html" }
         $rel = $rel -replace "/", "\"
         if ($rel.Contains("..")) {
             $res.StatusCode = 400

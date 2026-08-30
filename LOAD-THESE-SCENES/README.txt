@@ -1,7 +1,7 @@
 LOAD THESE IN MELD (one file = one look)
 ========================================
 
-1. Open Meld Studio. Do not open OBS.
+1. Open Meld Studio.
 2. File -> Import Session
 3. Open this folder and pick a file:
 
