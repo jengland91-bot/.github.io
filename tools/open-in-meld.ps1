@@ -1,6 +1,8 @@
 #Requires -Version 5.1
 Set-StrictMode -Version Latest
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Continue"
+Write-Host ""
+Write-Host "Rise Above - copying the Meld file to your Desktop..."
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot = Split-Path -Parent $scriptDir
@@ -59,3 +61,4 @@ Write-Host ""
 Write-Host "Leave the black overlay-server window open."
 Write-Host "Then in Meld add Game Capture + your cameras."
 Write-Host ""
+Read-Host "Press Enter to close this window"

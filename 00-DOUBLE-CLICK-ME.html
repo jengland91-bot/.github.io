@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>If nothing happened — Rise Above</title>
+  <style>
+    :root { --g: #7CB701; --paper: #e8dcc8; --void: #100e0a; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--void);
+      color: var(--paper);
+      font-family: Segoe UI, system-ui, sans-serif;
+      line-height: 1.45;
+      padding: 28px 18px 80px;
+    }
+    main { max-width: 720px; margin: 0 auto; }
+    .kicker {
+      color: var(--g);
+      letter-spacing: 0.28em;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    h1 { font-size: 42px; line-height: 0.95; margin: 8px 0 18px; letter-spacing: 0.02em; }
+    h2 { font-size: 22px; margin: 28px 0 10px; color: var(--g); }
+    p, li { color: #c4b490; }
+    ol { padding-left: 22px; }
+    li { margin: 8px 0; }
+    .box {
+      background: #1a1610;
+      border: 2px solid var(--g);
+      padding: 16px 18px;
+      margin: 16px 0 22px;
+    }
+    .box strong { color: #fff; }
+    code, .path {
+      font-family: Consolas, ui-monospace, monospace;
+      background: #000;
+      color: var(--paper);
+      padding: 2px 6px;
+    }
+    .path { display: block; margin-top: 8px; word-break: break-all; padding: 10px; }
+    a.btn {
+      display: inline-block;
+      background: var(--g);
+      color: #101408;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 14px 18px;
+      margin: 6px 8px 6px 0;
+    }
+    a.ghost {
+      display: inline-block;
+      border: 1px solid var(--g);
+      color: var(--g);
+      text-decoration: none;
+      padding: 12px 16px;
+      margin: 6px 8px 6px 0;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <div class="kicker">THE BAT DID NOTHING — USE THIS</div>
+  <h1>SKIP THE BAT. IMPORT THIS FILE IN MELD.</h1>
+
+  <div class="box">
+    <p>If this page opened, you are in the extracted folder. The bat is not required.</p>
+    <p style="margin-top:10px"><strong>You are here:</strong></p>
+    <span class="path" id="here">…</span>
+  </div>
+
+  <p>
+    <a class="btn" href="IMPORT-THIS-IN-MELD.json">Open the Meld file (then save it if the browser asks)</a>
+    <a class="ghost" href="START-HERE.txt">START-HERE.txt</a>
+  </p>
+
+  <h2>Do these 4 clicks in Meld</h2>
+  <ol>
+    <li>Open <strong>Meld Studio</strong> (the app, not OBS).</li>
+    <li>Click <strong>File</strong>.</li>
+    <li>Click <strong>Import Session</strong> — not Import OBS Session, not Tools.</li>
+    <li>Browse to the folder shown above and pick <code>IMPORT-THIS-IN-MELD.json</code>
+      (or <code>Rise-Above-Meld.json</code> on your Desktop if the bat did copy it).</li>
+  </ol>
+
+  <h2>If Windows blocked the bat</h2>
+  <ol>
+    <li>Go back to this folder in File Explorer (not inside the zip).</li>
+    <li>Right-click <code>1-OPEN-IN-MELD.bat</code> → <strong>Properties</strong>.</li>
+    <li>If you see <strong>Unblock</strong> at the bottom, check it → OK.</li>
+    <li>Double-click the bat again. A black window must stay open. Press a key when it says to.</li>
+  </ol>
+
+  <h2>Still nothing?</h2>
+  <ol>
+    <li>You must <strong>Extract All</strong> first. Opening the zip and double-clicking files inside it does nothing useful.</li>
+    <li>Leave a second window open: double-click <code>tools\Start-MeldLayout.bat</code>. Overlays stay black without that.</li>
+    <li>Then in Meld add Game Capture + your four cameras.</li>
+  </ol>
+</main>
+<script>
+  (function () {
+    var p = location.pathname || "";
+    try { p = decodeURIComponent(p); } catch (e) {}
+    p = p.replace(/\\/g, "/");
+    if (p.charAt(0) === "/") p = p.slice(1);
+    if (/^[A-Za-z]:/.test(p) === false && p.indexOf(":") === 1) { /* keep */ }
+    var folder = p.replace(/\/[^/]*$/, "").replace(/\//g, "\\");
+    document.getElementById("here").textContent = folder || "(this folder)";
+  })();
+</script>
+</body>
+</html>

@@ -5,9 +5,15 @@ YOU ARE IN THE RIGHT FOLDER
 2. In Downloads, RIGHT-CLICK the zip -> Extract All -> Extract.
 3. Open the new FOLDER (not the zip). It is named Rise-Above-Meld
    (or .github.io-cursor-meld-drag-drop-addons-ea5b if you used the GitHub zip).
-4. Double-click  1-OPEN-IN-MELD.bat
-5. In Meld: File -> Import Session -> Rise-Above-Meld.json on your DESKTOP.
+4. Double-click  00-DOUBLE-CLICK-ME.html   (always opens a page)
+   or  00-CLICK-ME.vbs                     (always pops a box)
+   or  1-OPEN-IN-MELD.bat                  (black window must stay open)
+5. In Meld: File -> Import Session -> IMPORT-THIS-IN-MELD.json
+   in THIS folder, or Rise-Above-Meld.json on your DESKTOP.
+
+If the bat flashes and vanishes: Windows blocked it.
+Right-click the .bat -> Properties -> Unblock -> OK.
 
 Windows search: click the taskbar search box, type
-  1-OPEN-IN-MELD
-and open it from there after you extract.
+  00-DOUBLE-CLICK-ME
+after you extract.

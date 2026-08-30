@@ -6,10 +6,11 @@ Open [START-HERE.txt](START-HERE.txt). Apps you need: [apps.html](apps.html) / [
 
 ## Drag and drop (Meld)
 
-1. Double-click `1-OPEN-IN-MELD.bat`. That copies the session file to your Desktop and opens Meld.
-2. Meld → **File → Import Session** → `Rise-Above-Meld.json` on the Desktop.
-3. Or drag files from [`DROP-INTO-MELD/`](DROP-INTO-MELD/README.txt) onto each canvas.
-4. Add Game Capture + four Video Device cameras. Size them on the [layout board](meld/index.html).
+1. Extract `Rise-Above-Meld.zip` (do not open files from inside the zip).
+2. Double-click `00-DOUBLE-CLICK-ME.html` if the bat did nothing. Or `1-OPEN-IN-MELD.bat` (a black window must stay open).
+3. Meld → **File → Import Session** → `IMPORT-THIS-IN-MELD.json` in that folder, or `Rise-Above-Meld.json` on the Desktop.
+4. Or drag files from [`DROP-INTO-MELD/`](DROP-INTO-MELD/README.txt) onto each canvas.
+5. Add Game Capture + four Video Device cameras. Size them on the [layout board](meld/index.html).
 
 Guides: [Meld](docs/meld.html) · [Social Stream Ninja](docs/socialstream.html) · [Streamer.bot](docs/streamerbot.html) · [Lumia](docs/lumia.html)
 

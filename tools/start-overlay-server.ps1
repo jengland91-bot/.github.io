@@ -4,7 +4,9 @@ param(
     [string]$Mode = "tiktok"
 )
 Set-StrictMode -Version Latest
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Continue"
+Write-Host ""
+Write-Host "Rise Above overlay server starting..."
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot = Split-Path -Parent $scriptDir

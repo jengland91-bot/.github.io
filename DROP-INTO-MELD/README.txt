@@ -1,7 +1,11 @@
 DRAG THESE ONTO MELD STUDIO
 ============================
 
-Easier: go up one folder and double-click 1-OPEN-IN-MELD.bat
+If 1-OPEN-IN-MELD.bat did nothing:
+  Go up one folder and double-click 00-DOUBLE-CLICK-ME.html
+  Then in Meld: File -> Import Session -> IMPORT-THIS-IN-MELD.json
+
+Easier path: go up one folder and double-click 1-OPEN-IN-MELD.bat
 That copies Rise-Above-Meld.json to your Desktop. In Meld:
 File -> Import Session -> Rise-Above-Meld.json on the DESKTOP.
 

@@ -1,21 +1,32 @@
-DO THIS (nothing else)
-=======================
-Download Rise-Above-Meld.zip (not the GitHub source zip).
-Right-click it -> Extract All.
+IF THE BAT DID NOTHING
+======================
+You probably opened files from INSIDE the zip, or Windows blocked the .bat.
 
-Open the folder named  Rise-Above-Meld
-(File Explorer -> Downloads -> Rise-Above-Meld)
+1. Close the zip window.
+2. In Downloads, RIGHT-CLICK Rise-Above-Meld.zip -> Extract All -> Extract.
+3. Open the new FOLDER named Rise-Above-Meld (not the zip).
+4. Double-click  00-DOUBLE-CLICK-ME.html
+   That always opens this page in your browser.
 
+Then in Meld Studio:
+   File  ->  Import Session  ->  IMPORT-THIS-IN-MELD.json
+   (that file is in this same folder)
+
+If you want the bat to work: right-click 1-OPEN-IN-MELD.bat
+-> Properties -> check Unblock -> OK -> double-click it.
+A BLACK WINDOW must stay open. If it flashes and vanishes, use the HTML instead.
+
+------------------------------------------------------------------------
+NORMAL PATH (after extract)
+===========================
 Double-click  1-OPEN-IN-MELD.bat
 
-That copies the Meld file to your DESKTOP and opens Meld.
+That copies Rise-Above-Meld.json to your DESKTOP, opens Notepad with the next
+clicks, tries to open Meld, and starts the overlay window (leave it open).
+
 In Meld: File -> Import Session -> Rise-Above-Meld.json on the DESKTOP.
 
 You do not look inside a meld\ folder. You do not paste code.
-Leave the black window open. Then add Game Capture + cameras in Meld.
-
-If you cannot see the folder: click the Windows search box, type
-1-OPEN-IN-MELD  after you extract.
 
 ------------------------------------------------------------------------
 APPS (Meld only — do not open OBS)
@@ -36,10 +47,9 @@ DRAG AND DROP — MELD STUDIO
 ------------------------------------------------------------------------
 1. Right-click the zip -> Extract All. Do not open files from inside the zip.
 2. Open Meld Studio. Do not open OBS.
-3. Open the extracted folder -> tools -> double-click Start-MeldLayout.bat
-   Leave the black window open while you are live.
-4. In Meld: File -> Import Session -> meld\Rise-Above-Meld.json
-   That creates STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING
+3. Double-click 1-OPEN-IN-MELD.bat (or File -> Import Session on IMPORT-THIS-IN-MELD.json).
+   Leave the overlay window open while you are live.
+4. That creates STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING
    plus the HUD, Social Stream chat, and Lumia browser layers.
 
 5. Add game + cameras (once). Size them to the layout board that opened:
