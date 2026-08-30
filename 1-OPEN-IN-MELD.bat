@@ -48,10 +48,12 @@ echo You double-clicked the bat from INSIDE the zip,
 echo or from a temp folder. That never works.
 echo.
 echo Close this. In Downloads:
-echo   right-click Rise-Above-Meld.zip
+echo   right-click the zip GitHub gave you
 echo   Extract All
-echo Then open the FOLDER named Rise-Above-Meld
+echo Then open that FOLDER (look for FIND-ME.txt)
 echo and double-click 1-OPEN-IN-MELD.bat
+echo.
+echo If Windows would not download the zip, open GET-THE-KIT.txt
 echo.
 echo This copy is running from:
 echo   %~dp0

@@ -1,0 +1,26 @@
+WINDOWS BLOCKED THE OLD DOWNLOAD
+================================
+That is SmartScreen being scared of a .bat file. It is not a virus.
+Do not use the old "raw" Rise-Above-Meld.zip link.
+
+GET THE KIT FROM GITHUB (this one Windows allows)
+=================================================
+Open this page:
+  https://github.com/jengland91-bot/.github.io/tree/cursor/meld-drag-drop-addons-ea5b
+
+1. Click the green  Code  button.
+2. Click  Download ZIP.
+3. If Chrome/Edge/Windows says "not commonly downloaded":
+     click the arrow or "..." on the download  ->  Keep  ->  Keep anyway.
+   If a blue Windows box says "Windows protected your PC":
+     More info  ->  Run anyway.
+4. In Downloads, RIGHT-CLICK the zip -> Extract All -> Extract.
+5. Open the new FOLDER (the name looks weird — that is normal).
+   You are in the right place if you see FIND-ME.txt and 1-OPEN-IN-MELD.bat.
+6. Double-click  1-OPEN-IN-MELD.bat
+   If Windows blocked the bat: right-click it -> Properties -> Unblock -> OK.
+
+Direct download (same GitHub zip, not the blocked raw file):
+  https://github.com/jengland91-bot/.github.io/archive/refs/heads/cursor/meld-drag-drop-addons-ea5b.zip
+
+Then leave the overlay window open. Meld should show STARTING SOON.

@@ -6,8 +6,8 @@ Open [START-HERE.txt](START-HERE.txt). Apps you need: [apps.html](apps.html) / [
 
 ## Drag and drop (Meld)
 
-1. Extract `Rise-Above-Meld.zip` (do not open files from inside the zip).
-2. Double-click `1-OPEN-IN-MELD.bat`. It closes Meld, writes all 8 scenes into Meld, then opens Meld with STARTING SOON loaded. You do not paste code.
+1. Get the kit with GitHub **Code → Download ZIP** (see [GET-THE-KIT.txt](GET-THE-KIT.txt)). Do not use the old raw `Rise-Above-Meld.zip` link — Windows SmartScreen blocks it.
+2. Extract All. Open the folder (look for `FIND-ME.txt`). Double-click `1-OPEN-IN-MELD.bat`. It closes Meld, writes all 8 scenes into Meld, then opens Meld with STARTING SOON loaded. You do not paste code.
 3. If Meld is still empty: use the Desktop shortcut **Rise Above Meld**, or **File → Import Session** → Ctrl+V, or pick `LOAD-THESE-SCENES/0 ALL SCENES.json`.
 4. Add Game Capture + four Video Device cameras. Size them on the [layout board](meld/index.html).
 

@@ -4,7 +4,7 @@ Overlays are HTML. In Meld they are **Browser** layers.
 
 ## Fast path (the bat writes the scenes in)
 
-1. Extract the zip. Do not double-click files from inside the zip window.
+1. Get the kit with GitHub **Code → Download ZIP** ([GET-THE-KIT.txt](../GET-THE-KIT.txt)). Extract All. Do not open files from inside the zip window.
 2. Double-click `1-OPEN-IN-MELD.bat`. It closes Meld, writes `session.json` into Meld’s data folder, then opens Meld with STARTING SOON / GRID / RACE / BRB already there. You do not paste code into Meld.
 3. If the bat flashed and vanished, double-click `00-DOUBLE-CLICK-ME.html` or `00-CLICK-ME.vbs`. Unblock the bat if Windows blocked it.
 4. If Meld is still empty, use the Desktop shortcut **Rise Above Meld**, or **File → Import Session** → `LOAD-THESE-SCENES/0 ALL SCENES.json`.

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get the kit — Rise Above</title>
+  <style>
+    :root { --g: #7CB701; --paper: #e8dcc8; --void: #100e0a; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--void);
+      color: var(--paper);
+      font-family: Segoe UI, system-ui, sans-serif;
+      line-height: 1.45;
+      padding: 28px 18px 80px;
+    }
+    main { max-width: 820px; margin: 0 auto; }
+    .kicker {
+      color: var(--g);
+      letter-spacing: 0.28em;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    h1 { font-size: 40px; line-height: 0.95; margin: 8px 0 18px; }
+    h2 { font-size: 22px; margin: 28px 0 10px; color: var(--g); }
+    p, li { color: #c4b490; }
+    ol { padding-left: 22px; }
+    li { margin: 8px 0; }
+    .box {
+      background: #1a1610;
+      border: 2px solid var(--g);
+      padding: 16px 18px;
+      margin: 16px 0 22px;
+    }
+    .box strong { color: #fff; }
+    a.btn {
+      display: inline-block;
+      background: var(--g);
+      color: #101408;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 14px 18px;
+      margin: 6px 8px 6px 0;
+    }
+    a.ghost {
+      display: inline-block;
+      border: 1px solid var(--g);
+      color: var(--g);
+      text-decoration: none;
+      padding: 12px 16px;
+      margin: 6px 8px 6px 0;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <div class="kicker">WINDOWS SECURITY</div>
+  <h1>THE OLD ZIP LINK IS BLOCKED. USE GITHUB’S DOWNLOAD ZIP.</h1>
+
+  <div class="box">
+    <p>Windows SmartScreen blocks a zip that is only a <code>.bat</code> sitting on a “raw file” URL. That is caution, not a virus.</p>
+    <p style="margin-top:10px"><strong>Use GitHub’s normal source download instead.</strong></p>
+  </div>
+
+  <p>
+    <a class="btn" href="https://github.com/jengland91-bot/.github.io/archive/refs/heads/cursor/meld-drag-drop-addons-ea5b.zip">Download ZIP from GitHub</a>
+    <a class="ghost" href="https://github.com/jengland91-bot/.github.io/tree/cursor/meld-drag-drop-addons-ea5b">Open the GitHub folder</a>
+  </p>
+
+  <h2>If a popup still appears</h2>
+  <ol>
+    <li>Chrome / Edge download bar: click the arrow or <strong>…</strong> → <strong>Keep</strong> → <strong>Keep anyway</strong>.</li>
+    <li>Blue “Windows protected your PC”: <strong>More info</strong> → <strong>Run anyway</strong>.</li>
+    <li>Right-click the zip → Extract All. Open the new folder (the name looks weird — that is normal).</li>
+    <li>You are in the right place if you see <code>FIND-ME.txt</code> and <code>1-OPEN-IN-MELD.bat</code>.</li>
+    <li>Double-click <code>1-OPEN-IN-MELD.bat</code>. If Windows blocked the bat: right-click → Properties → Unblock → OK.</li>
+  </ol>
+
+  <p>Meld may close and reopen. You should see STARTING SOON. Leave the overlay window open.</p>
+</main>
+</body>
+</html>

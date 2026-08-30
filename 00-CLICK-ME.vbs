@@ -8,7 +8,7 @@ ps1 = fso.BuildPath(here, "tools\load-into-meld.ps1")
 If Not fso.FileExists(fso.BuildPath(here, "meld\Rise-Above-Meld.json")) Then
   MsgBox "WRONG FOLDER" & vbCrLf & vbCrLf & _
     "Extract the zip first (right-click -> Extract All)." & vbCrLf & _
-    "Then open the Rise-Above-Meld FOLDER and double-click 1-OPEN-IN-MELD.bat" & vbCrLf & vbCrLf & _
+    "Then open the extracted FOLDER (look for FIND-ME.txt) and double-click 1-OPEN-IN-MELD.bat" & vbCrLf & vbCrLf & _
     "Running from:" & vbCrLf & here, 16, "Rise Above"
   WScript.Quit 1
 End If

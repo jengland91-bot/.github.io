@@ -1,10 +1,17 @@
+IF WINDOWS WOULD NOT DOWNLOAD THE ZIP
+=====================================
+Use GitHub, not the old raw zip link. Open GET-THE-KIT.txt
+or: https://github.com/jengland91-bot/.github.io/tree/cursor/meld-drag-drop-addons-ea5b
+Green Code button -> Download ZIP.
+If a popup says it is uncommon: Keep -> Keep anyway.
+
 IF THE BAT DID NOTHING
 ======================
 You probably opened files from INSIDE the zip, or Windows blocked the .bat.
 
 1. Close the zip window.
-2. In Downloads, RIGHT-CLICK Rise-Above-Meld.zip -> Extract All -> Extract.
-3. Open the new FOLDER named Rise-Above-Meld (not the zip).
+2. In Downloads, RIGHT-CLICK the zip -> Extract All -> Extract.
+3. Open the new FOLDER (not the zip). Look for FIND-ME.txt.
 4. Double-click  00-DOUBLE-CLICK-ME.html
    That always opens this page in your browser.
 
