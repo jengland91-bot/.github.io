@@ -1,0 +1,13 @@
+YOU ARE IN THE RIGHT FOLDER
+===========================
+
+1. If you are looking INSIDE a .zip, stop. Close it.
+2. In Downloads, RIGHT-CLICK the zip -> Extract All -> Extract.
+3. Open the new FOLDER (not the zip). It is named Rise-Above-Meld
+   (or .github.io-cursor-meld-drag-drop-addons-ea5b if you used the GitHub zip).
+4. Double-click  1-OPEN-IN-MELD.bat
+5. In Meld: File -> Import Session -> Rise-Above-Meld.json on your DESKTOP.
+
+Windows search: click the taskbar search box, type
+  1-OPEN-IN-MELD
+and open it from there after you extract.
