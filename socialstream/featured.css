@@ -1,0 +1,29 @@
+/* Rise Above — Social Stream Ninja featured / highlight message */
+:root {
+  --font-family: "Bebas Neue", "Rajdhani", "Segoe UI", sans-serif;
+  --comment-font-size: 36px;
+  --author-font-size: 28px;
+  --comment-font-weight: 600;
+  --author-font-weight: 700;
+  --comment-color: #e8dcc8;
+  --author-color: #101408;
+  --comment-bg-color: rgba(16, 14, 10, 0.82);
+  --author-bg-color: #7cb701;
+  --comment-width: 920px;
+  --comment-padding: 18px;
+  --comment-area-bottom: 220px;
+}
+
+html,
+body {
+  background: transparent !important;
+  overflow: hidden;
+}
+
+.hl-name,
+.chatname,
+.name {
+  background: #7cb701 !important;
+  color: #101408 !important;
+  letter-spacing: 0.12em;
+}

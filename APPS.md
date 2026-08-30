@@ -1,0 +1,39 @@
+# Apps you need — Rise Above Meld kit
+
+You go live from **Meld Studio**.
+
+## You already have / are getting
+
+| App | Get it | Job |
+| --- | --- | --- |
+| **Meld Studio** | https://www.meldstudio.co/ | Go live. Scenes, game, cameras, Browser overlays. |
+| **Lumia Stream** | https://lumiastream.com/ *(you have this)* | Alerts, lights, goals. Chat-for-you on the **gaming monitor**. |
+| **Streamer.bot** | https://streamer.bot/ *(you are getting this)* | Optional. Clicks: Show Scene. No code in Meld. `!race` `!brb` `!face` |
+| **Social Stream Ninja** | https://socialstream.ninja/ *(you are getting this)* | One chat overlay from Twitch + YouTube + Kick + TikTok. |
+
+## Also needed (you probably already have these)
+
+| App | Get it | Job |
+| --- | --- | --- |
+| **Chrome or Edge** | any current browser | Social Stream Ninja **extension** lives here. Leave the chat tab open. |
+| **BeamNG.drive** | Steam | The race game. Borderless / fullscreen. |
+| **This overlay kit** | extract the zip | HUD, Starting Soon, BRB, Ending. Import `LOAD-THESE-SCENES` or drag onto Meld. |
+
+## Optional — makes it look more “pro”
+
+| App | Get it | Job |
+| --- | --- | --- |
+| **Social Stream Ninja desktop app** | https://socialstream.ninja/ | Same as the extension, nicer if you do not want extra Chrome tabs. |
+| **Elgato Stream Deck** | optional hardware | Buttons that fire Streamer.bot / Meld scenes. Not required. |
+| **NVIDIA Broadcast** | NVIDIA app, RTX GPU | Mic noise removal. Meld can also do basic filters. |
+| **Meld Stream Deck plugin** | Meld docs → Stream Deck | Scene keys without Streamer.bot. Skip if Streamer.bot already does it. |
+
+## Who puts what on the picture
+
+1. **Game + cameras** — Meld layers (Game Capture, Video Device).
+2. **HUD frames, LIVE pill, Starting Soon** — this kit (Browser layers).
+3. **Chat on stream** — Social Stream Ninja.
+4. **Follow / sub / raid popups + lights** — Lumia.
+5. **Chat commands** — Streamer.bot talking to Meld.
+
+Full click-path: [START-HERE.txt](START-HERE.txt) · visual list: [apps.html](apps.html)

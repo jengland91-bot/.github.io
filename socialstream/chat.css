@@ -1,0 +1,58 @@
+/* Rise Above — Social Stream Ninja chat (Monster green, dirt HUD) */
+:root {
+  --font-family: "Rajdhani", "Segoe UI", sans-serif;
+  --comment-font-size: 22px;
+  --author-font-size: 20px;
+  --comment-font-weight: 600;
+  --author-font-weight: 700;
+  --message-font-weight: 600;
+  --name-font-weight: 700;
+  --comment-color: #e8dcc8;
+  --author-color: #101408;
+  --comment-bg-color: rgba(16, 14, 10, 0.72);
+  --author-bg-color: #7cb701;
+  --highlight-base: #7cb701;
+  --highlight-base2: #5a6b32;
+}
+
+html,
+body {
+  background: transparent !important;
+  color: #e8dcc8;
+  font-family: "Rajdhani", "Segoe UI", sans-serif;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.hl-name,
+.chat-entry .name,
+.chatname,
+.name {
+  background: #7cb701 !important;
+  color: #101408 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em;
+  padding: 2px 8px !important;
+  border-radius: 0 !important;
+}
+
+.hl-message,
+.chat-entry .message,
+.chatmessage,
+.message {
+  color: #e8dcc8 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+.chat-entry,
+.highlight-chat,
+.chatline {
+  background: rgba(16, 14, 10, 0.62) !important;
+  border-left: 3px solid #7cb701 !important;
+  margin: 6px 0 !important;
+  padding: 6px 10px !important;
+}

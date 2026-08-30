@@ -1,0 +1,24 @@
+MELD CRASHED — FIX IT THIS WAY
+==============================
+Do not run 1-OPEN-IN-MELD.bat from the old zip. That closed Meld
+and rewrote its files. That is what crashed it.
+
+1. Delete the Desktop shortcut named  Rise Above Meld
+   (that one launched a broken copy of Meld).
+
+2. Open Meld from the Start menu (the normal Meld Studio icon).
+
+3. If Meld opens: File -> Restore from Backup -> pick the newest backup.
+
+4. If Meld will not open at all:
+   Press Win+R, paste this, Enter:
+     %LOCALAPPDATA%\Packages
+   Open the folder with Meld in the name.
+   Search that folder for session.json
+   Rename it to session-broken.json
+   Then open Meld again (it should start empty).
+
+5. Then import the kit the safe way (one JSON file, will not crash Meld):
+   https://raw.githubusercontent.com/jengland91-bot/.github.io/refs/heads/cursor/meld-drag-drop-addons-ea5b/IMPORT-THIS-IN-MELD.json
+   Save it to your Desktop as Rise-Above.json
+   In Meld: File -> Import Session -> that file.

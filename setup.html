@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setup — Rise Above Stream Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ember: #7cb701;
+      --ice: #7a9a5c;
+      --sand: #c4b490;
+      --paper: #e8dcc8;
+      --void: #100e0a;
+      --asphalt: #1a1610;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--void);
+      color: var(--paper);
+      font-family: Outfit, system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main { max-width: 820px; margin: 0 auto; padding: 48px 22px 96px; }
+    a { color: var(--ice); }
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 64px;
+      letter-spacing: 0.06em;
+      line-height: 0.9;
+      margin: 8px 0 16px;
+    }
+    h2 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.08em;
+      margin: 36px 0 10px;
+    }
+    .kicker {
+      font-family: Rajdhani, sans-serif;
+      letter-spacing: 0.4em;
+      color: var(--ice);
+      font-weight: 700;
+    }
+    p, li { color: var(--sand); }
+    ol, ul { padding-left: 20px; }
+    li { margin: 6px 0; }
+    code, pre {
+      font-family: ui-monospace, monospace;
+      background: #000;
+      color: var(--paper);
+    }
+    code { padding: 1px 6px; font-size: 0.92em; }
+    pre {
+      padding: 14px;
+      overflow: auto;
+      margin: 12px 0 18px;
+      border: 1px solid rgba(244, 239, 232, 0.12);
+      font-size: 13px;
+    }
+    label.step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: var(--asphalt);
+      border: 1px solid rgba(244, 239, 232, 0.1);
+      padding: 12px 14px;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+    label.step input { margin-top: 5px; accent-color: var(--ember); }
+    .done { opacity: 0.55; text-decoration: line-through; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+    th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid rgba(244, 239, 232, 0.1); }
+    th { color: var(--paper); font-family: Rajdhani, sans-serif; letter-spacing: 0.08em; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="kicker">MELD STUDIO ONLY</div>
+    <h1>GET IT LIVE</h1>
+    <p>Work top to bottom. This kit is Meld only. Check items off as you go — this page remembers them in this browser.</p>
+    <p>Extract the zip. Double-click <code>1-OPEN-IN-MELD.bat</code> — it writes the 8 scenes into Meld. If Windows blocks it, Unblock it or use <code>00-CLICK-ME.vbs</code>. Guide: <a href="docs/meld.html">docs/meld.html</a>. Apps: <a href="apps.html">apps.html</a>.</p>
+
+    <h2>A. Identity</h2>
+    <label class="step"><input type="checkbox" data-id="config" /><span>Today’s game on STARTING SOON: double-click <code>tools/Change-Game.bat</code> (or edit <code>game</code> in <code>overlays/shared/config.js</code>). Save, then reload the Browser layer in Meld.</span></label>
+    <label class="step"><input type="checkbox" data-id="preview" /><span>Open <a href="index.html">the preview</a> and confirm Starting Soon / Desk / Race / Grid / Dual look right.</span></label>
+
+    <h2>B. Meld Studio</h2>
+    <label class="step"><input type="checkbox" data-id="meld-install" /><span>Install <a href="https://www.meldstudio.co/" target="_blank" rel="noreferrer">Meld Studio</a>. Extract this zip. Go live from Meld.</span></label>
+    <label class="step"><input type="checkbox" data-id="apps" /><span>Install the four apps: Meld, Lumia (you have it), <a href="https://streamer.bot/" target="_blank" rel="noreferrer">Streamer.bot</a>, <a href="https://socialstream.ninja/" target="_blank" rel="noreferrer">Social Stream Ninja</a>. List: <a href="apps.html">apps.html</a></span></label>
+    <label class="step"><input type="checkbox" data-id="meld-server" /><span>Double-click <code>tools/Start-MeldLayout.bat</code> and leave the black window open. Layout board: <a href="meld/index.html">meld/</a></span></label>
+    <label class="step"><input type="checkbox" data-id="meld-import" /><span>Download <code>IMPORT-THIS-IN-MELD.json</code> (see <a href="GET-THE-KIT.txt">GET-THE-KIT.txt</a>). In Meld: File → Import Session → that file. If Meld crashed: File → Restore from Backup first.</span></label>
+    <label class="step"><input type="checkbox" data-id="meld-scenes" /><span>Confirm scenes STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING. Settings → General → Multi Canvas for phone.</span></label>
+    <label class="step"><input type="checkbox" data-id="meld-overlay" /><span>If a scene is missing its HUD: copy that overlay URL from the board, or drag the HTML from <code>DROP-INTO-MELD\</code>.</span></label>
+    <label class="step"><input type="checkbox" data-id="meld-sources" /><span>Game Capture (or Display Capture) for BeamNG. Video Device for Face / Room / Wheel / Pedals. Process Audio of the game + mic. Do not capture desktop / Discord.</span></label>
+    <label class="step"><input type="checkbox" data-id="ssn" /><span>Social Stream Ninja: paste the session ID into <code>overlays/shared/config.js</code> → <code>ssn.session</code>. Reload Social Stream layers. Guide: <a href="socialstream/">socialstream/</a></span></label>
+    <label class="step"><input type="checkbox" data-id="sbot" /><span>Streamer.bot (optional): Stream Apps → Meld Studio → 127.0.0.1. Actions → Meld Studio → Show Scene (clicks, no code in Meld). Guide: <a href="docs/streamerbot.html">docs/streamerbot.html</a></span></label>
+    <h2>C. Scenes</h2>
+    <p>These names match the import files. In-game BeamNG cameras (C / Shift+C) stay on <code>Game / Main</code>. Physical cams are Meld Video Device layers.</p>
+    <table>
+      <thead><tr><th>Scene</th><th>What lives here</th></tr></thead>
+      <tbody>
+        <tr><td><code>STARTING SOON</code></td><td>Full-screen overlay. Optional music.</td></tr>
+        <tr><td><code>GRID</code></td><td>Big face + room + wheel + pedals. Talking / staging. No game.</td></tr>
+        <tr><td><code>DESK</code></td><td>Other games. Full game + face + room. No wheel / pedals. Pick that game on Game / Main and Audio / Game.</td></tr>
+        <tr><td><code>RACE</code></td><td>BeamNG full, four cam PiPs, Social Stream chat.</td></tr>
+        <tr><td><code>RACE DUAL</code></td><td>Main game + second angle (bumper/chase) + small cams.</td></tr>
+        <tr><td><code>REPLAY</code></td><td>Clean game, no cams. Crashes and cinematic.</td></tr>
+        <tr><td><code>BRB</code></td><td>Pit-stop overlay. Drop game audio.</td></tr>
+        <tr><td><code>ENDING</code></td><td>Thanks / checkered.</td></tr>
+      </tbody>
+    </table>
+    <h2>D. Lumia + go live</h2>
+    <label class="step"><input type="checkbox" data-id="lumia" /><span>Lumia Stream open. Connections → Twitch (and Kick / YouTube if you use them). Chat-for-you stays on the gaming monitor — do not capture that window in Meld.</span></label>
+    <label class="step"><input type="checkbox" data-id="lumia-url" /><span>If viewers should see alerts: copy the Lumia overlay URL into <code>overlays/shared/config.js</code> → <code>lumia.overlayUrl</code>. Reload the Lumia / Overlay Browser layer in Meld.</span></label>
+    <label class="step"><input type="checkbox" data-id="photos" /><span>Your photos: put <code>starting.jpg</code>, <code>brb.jpg</code>, and <code>ending.jpg</code> in <code>overlays/shared/backdrops/</code>, then reload the Browser overlay in Meld.</span></label>
+    <label class="step"><input type="checkbox" data-id="test" /><span>Record a test. Click every scene. Fire a Lumia test alert. Confirm BeamNG audio vs mic. No Discord on the stream.</span></label>
+    <label class="step"><input type="checkbox" data-id="mute" /><span>BRB should not leave engine audio blasting unless you want it.</span></label>
+
+    <p><a href="index.html">← Overlay preview</a> · <a href="apps.html">Apps</a> · <a href="docs/meld.html">Meld</a> · <a href="docs/socialstream.html">Social Stream Ninja</a> · <a href="docs/streamerbot.html">Streamer.bot</a> · <a href="docs/lumia.html">Lumia</a></p>
+  </main>
+  <script>
+    const KEY = "riseabove-setup";
+    const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+    document.querySelectorAll("label.step").forEach((label) => {
+      const input = label.querySelector("input");
+      const id = input.dataset.id;
+      input.checked = Boolean(saved[id]);
+      if (input.checked) label.classList.add("done");
+      input.addEventListener("change", () => {
+        saved[id] = input.checked;
+        localStorage.setItem(KEY, JSON.stringify(saved));
+        label.classList.toggle("done", input.checked);
+      });
+    });
+  </script>
+</body>
+</html>

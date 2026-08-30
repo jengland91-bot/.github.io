@@ -1,0 +1,31 @@
+{
+  "items": {
+    "394A627BB2674487DB30E4C7EAF6420B": {
+      "type": "track",
+      "name": "Microphone",
+      "parent": "41200B4B85DF2B6A7B653C6D1C9E1F34",
+      "monitoring": false,
+      "muted": false
+    },
+    "58B1941E114D5B85CEC84603A3DC9771": {
+      "type": "scene",
+      "name": "ENDING",
+      "index": 0,
+      "current": true,
+      "staged": false
+    },
+    "56EE3DFC071D666A6270F068F56423AA": {
+      "type": "layer",
+      "parent": "58B1941E114D5B85CEC84603A3DC9771",
+      "name": "Overlay / Ending",
+      "index": 0,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "rotation": 0,
+      "url": "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/ending.html"
+    }
+  }
+}

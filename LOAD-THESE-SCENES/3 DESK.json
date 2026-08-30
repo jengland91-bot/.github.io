@@ -1,0 +1,70 @@
+{
+  "items": {
+    "394A627BB2674487DB30E4C7EAF6420B": {
+      "type": "track",
+      "name": "Microphone",
+      "parent": "41200B4B85DF2B6A7B653C6D1C9E1F34",
+      "monitoring": false,
+      "muted": false
+    },
+    "97646A3134A691D06257385EB5E60BF8": {
+      "type": "scene",
+      "name": "DESK",
+      "index": 0,
+      "current": true,
+      "staged": false
+    },
+    "3751033E0AF80EF6F427E6E34329254D": {
+      "type": "layer",
+      "parent": "97646A3134A691D06257385EB5E60BF8",
+      "name": "Overlay / Desk HUD",
+      "index": 0,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "rotation": 0,
+      "url": "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/desk.html"
+    },
+    "8891B8B7BF07EE825777DE8650B58287": {
+      "type": "layer",
+      "parent": "97646A3134A691D06257385EB5E60BF8",
+      "name": "Social Stream / Chat",
+      "index": 1,
+      "visible": true,
+      "x": 344,
+      "y": 786,
+      "width": 400,
+      "height": 270,
+      "rotation": 0,
+      "url": "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/socialstream/chat.html"
+    },
+    "6A91E6CE1F14D00654B15B3DCB65AC9C": {
+      "type": "layer",
+      "parent": "97646A3134A691D06257385EB5E60BF8",
+      "name": "Social Stream / Featured",
+      "index": 2,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "rotation": 0,
+      "url": "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/socialstream/featured.html"
+    },
+    "0B5D7E564FE9C507ECE5098336E1CC60": {
+      "type": "layer",
+      "parent": "97646A3134A691D06257385EB5E60BF8",
+      "name": "Lumia / Overlay",
+      "index": 3,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "rotation": 0,
+      "url": "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/socialstream/lumia.html"
+    }
+  }
+}

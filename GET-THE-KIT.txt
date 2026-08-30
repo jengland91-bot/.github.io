@@ -1,0 +1,29 @@
+OPENING THE LINK IN CHROME DOES NOT LOAD MELD
+=============================================
+You have to click inside Meld itself.
+
+DO THIS IN MELD (this one will show the overlay)
+================================================
+1. Open Meld Studio from the Start menu.
+2. On the left, click the +  (add layer).
+3. Click  Browser.
+4. In the URL box, paste this website (not code):
+
+https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/starting-soon.html
+
+5. You should see STARTING SOON on the canvas (green / dirt look).
+
+Other scenes — same steps, paste one of these:
+  GRID     https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/chatting.html
+  RACE     https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/live.html
+  BRB      https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/brb.html
+  ENDING   https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/ending.html
+
+IF YOU WANT ALL 8 SCENES AT ONCE
+================================
+In Meld: File -> Import Session (not Import OBS Session).
+Pick a file that ends in .json  (not a Chrome page, not a .txt).
+If Chrome opened a page of text, press Ctrl+S, save as Rise-Above.json
+on the Desktop, THEN Import Session that file.
+
+  https://raw.githubusercontent.com/jengland91-bot/.github.io/refs/heads/cursor/meld-drag-drop-addons-ea5b/Rise-Above.json

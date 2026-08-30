@@ -1,0 +1,42 @@
+PHOTOS FOR STARTING SOON / BRB / ENDING
+=======================================
+
+Drop your own pictures here.
+
+1. Copy your photos into this folder (overlays\shared\backdrops\).
+2. Name them exactly:
+
+     starting.jpg     = STARTING SOON  (wide + portrait)
+     brb.jpg          = BE RIGHT BACK
+     ending.jpg       = THANKS FOR WATCHING
+
+3. In Meld: reload the Browser overlay layer.
+
+Wide (Meld Main canvas) and portrait (Meld Multi Canvas) use the SAME
+three files. The overlay darkens the photo so STARTING SOON / BE RIGHT
+BACK / THANKS FOR WATCHING stay readable.
+
+If a file is missing, that scene keeps the dark dirt / dusk background.
+Nothing breaks.
+
+OPTIONAL (only if a photo looks wrong on 9:16)
+-----------------------------------------------
+Add a taller crop next to the main files:
+
+     starting-vertical.jpg
+     brb-vertical.jpg
+     ending-vertical.jpg
+
+If those exist, portrait scenes use them. If they do not, portrait uses
+starting.jpg / brb.jpg / ending.jpg.
+
+TIPS
+----
+- JPG is easiest. 1920x1080 (or larger) for wide. 1080x1920 if you make
+  a portrait-only crop.
+- Trail, truck, pine, mud, dusk photos fit the kit. Avoid neon gaming art.
+- To use a different filename, edit overlays\shared\config.js → backdrops.
+  Save, then reload the Browser overlay in Meld.
+
+Do not zip huge photos back into git unless you mean to. This folder is
+meant for pictures that live on your PC next to the overlay HTML.

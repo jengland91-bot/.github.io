@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Stream Ninja — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+<main>
+  <div class="kicker">ON-SCREEN CHAT</div>
+  <h1>SOCIAL STREAM NINJA</h1>
+  <p>Viewers see this chat. You still read chat on the gaming monitor with Lumia. Markdown: <a href="socialstream.md">socialstream.md</a>. URL builder: <a href="../socialstream/">socialstream/</a></p>
+
+  <div class="callout">
+    <h2>One session ID</h2>
+    <p>Copy it from the extension or app. Paste into <code>overlays/shared/config.js</code> → <code>ssn.session</code>. The imported Meld session already has Chat + Featured browser layers pointing at <code>socialstream/chat.html</code> and <code>socialstream/featured.html</code>.</p>
+  </div>
+
+  <ol>
+    <li>Install <a href="https://socialstream.ninja/" target="_blank" rel="noreferrer">Social Stream Ninja</a> (Chrome/Edge extension or desktop app).</li>
+    <li>Open Twitch / YouTube / Kick / TikTok chat. Enable the extension. Leave that tab (or the app) open while live.</li>
+    <li>Paste the session ID into config.js. Save. Reload the Social Stream layers in Meld.</li>
+    <li>Open the dock on a side monitor: <code>https://socialstream.ninja/dock.html?session=YOUR_ID</code>. Click a message to send it to Featured. Do not capture the dock.</li>
+  </ol>
+
+  <h2>If chat is blank</h2>
+  <ul>
+    <li>Dock empty → source chat is not connected yet.</li>
+    <li>Dock works, Meld empty → session ID mismatch, or the overlay server is not running.</li>
+    <li>Reload the Browser layer after saving config.js.</li>
+  </ul>
+  <p>Do not stack Lumia Chatbox on top of SSN chat. Lumia on stream = alerts only.</p>
+
+  <nav class="docs">
+    <a href="../apps.html">Apps list</a> ·
+    <a href="../socialstream/">URL builder</a> ·
+    <a href="meld.html">Meld</a> ·
+    <a href="lumia.html">Lumia</a>
+  </nav>
+</main>
+</body>
+</html>

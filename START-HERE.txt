@@ -1,0 +1,70 @@
+IF MELD CRASHED
+===============
+Open Meld normally. File -> Restore from Backup.
+Do NOT run the old bat that closes Meld.
+
+GET THE SCENES (Windows will not block this)
+===========================================
+Download this JSON (right-click -> Save as -> Desktop\Rise-Above.json):
+
+  https://raw.githubusercontent.com/jengland91-bot/.github.io/refs/heads/cursor/meld-drag-drop-addons-ea5b/IMPORT-THIS-IN-MELD.json
+
+Then in Meld: File -> Import Session -> pick that file.
+You should see STARTING SOON / GRID / RACE / BRB.
+Overlays load from the internet. No zip. No bat.
+
+More detail: GET-THE-KIT.txt
+
+------------------------------------------------------------------------
+IF YOU ALREADY HAVE THE FOLDER
+==============================
+Do not run a bat that says it will CLOSE Meld.
+In Meld: File -> Import Session -> LOAD-THESE-SCENES\0 ALL SCENES.json
+or Desktop\Rise-Above.json after you run the NEW 1-OPEN-IN-MELD.bat
+(it only copies the JSON, it does not close Meld).
+
+------------------------------------------------------------------------
+APPS
+====
+  Meld Studio          https://www.meldstudio.co/          go live
+  Lumia Stream         https://lumiastream.com/            YOU HAVE THIS — alerts + lights
+  Streamer.bot         https://streamer.bot/               YOU ARE GETTING THIS — !race !brb !face
+  Social Stream Ninja  https://socialstream.ninja/         YOU ARE GETTING THIS — chat on stream
+
+  Also: Chrome or Edge (SSN extension), BeamNG.drive.
+  Visual list: open apps.html
+
+------------------------------------------------------------------------
+AFTER IMPORT
+------------
+Add game + cameras (once). Size them to the layout board:
+   Layers + -> Game Capture     name: Game / Main
+   Layers + -> Video Device     Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals
+   Overlay stays on top. Process Audio of BeamNG + your mic. No desktop / Discord.
+
+Portrait files go on the Portrait canvas (Settings -> General -> Multi Canvas).
+
+Lumia chat for YOU: gaming monitor, or tools\Open-ChatForYou.bat.
+Do not capture that window.
+
+Names / photos / SSN session / Lumia overlay URL:
+  overlays\shared\config.js
+  then reload the Browser layers in Meld.
+
+Streamer.bot (optional, clicks — no code in Meld):
+  Connect Streamer.bot to Meld, then Actions → Meld Studio → Show Scene.
+  Guide: streamerbot\README.md
+
+Social Stream Ninja: socialstream\index.html
+Full Meld page: docs\meld.html
+Layout board:   meld\index.html
+Apps list:      apps.html
+
+YOUR PHOTOS on STARTING SOON, BRB, ENDING:
+  Put starting.jpg, brb.jpg, ending.jpg in overlays\shared\backdrops\
+  Then reload the Browser overlay in Meld. (Photos only apply if you
+  use the local overlay files. The imported session uses online overlays.)
+
+CAMERAS: Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals.
+DESK = other games, sit at the desk (face + room, no wheel).
+Skip RACE DUAL until you have a second BeamNG view.

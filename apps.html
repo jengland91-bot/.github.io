@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apps you need — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs/docs.css" />
+  <style>
+    main { max-width: 980px; }
+    .apps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 22px 0 32px; }
+    .app {
+      background: var(--asphalt);
+      border: 1px solid rgba(244, 239, 232, 0.12);
+      padding: 18px 16px 16px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .app.have { border-color: var(--ember); }
+    .app.get { border-color: rgba(124, 183, 1, 0.45); }
+    .app h2 { margin: 0 0 8px; font-size: 28px; }
+    .app p { margin: 0; font-size: 14px; }
+    .tag {
+      font-family: Rajdhani, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      font-size: 12px;
+      color: var(--ember);
+      margin-bottom: 8px;
+    }
+    .skip { opacity: 0.55; }
+  </style>
+</head>
+<body>
+<main>
+  <div class="kicker">MELD STUDIO STACK</div>
+  <h1>APPS YOU NEED</h1>
+  <p>Four apps make the stream look like a real production. You already have Lumia. Streamer.bot and Social Stream Ninja are the two you said you are getting. Meld is where you go live.</p>
+
+  <div class="callout">
+    <h2>Drag and drop</h2>
+    <p>Extract the zip. Double-click <code>1-OPEN-IN-MELD.bat</code> — it writes the 8 scenes into Meld. You do not paste code. No hunting in a meld folder.</p>
+  </div>
+
+  <h2>The four apps</h2>
+  <div class="apps">
+    <a class="app have" href="https://www.meldstudio.co/" target="_blank" rel="noreferrer">
+      <div class="tag">GO LIVE</div>
+      <h2>Meld Studio</h2>
+      <p>Scenes, BeamNG capture, four cameras, Browser overlays. Import the session JSON.</p>
+    </a>
+    <a class="app have" href="https://lumiastream.com/" target="_blank" rel="noreferrer">
+      <div class="tag">YOU HAVE THIS</div>
+      <h2>Lumia Stream</h2>
+      <p>Follow / sub / raid alerts and lights. Chat-for-you stays on the gaming monitor. Paste the overlay URL into config.js if viewers should see alerts.</p>
+    </a>
+    <a class="app get" href="https://streamer.bot/" target="_blank" rel="noreferrer">
+      <div class="tag">YOU ARE GETTING THIS</div>
+      <h2>Streamer.bot</h2>
+      <p>Chat commands switch Meld: !race !desk !brb !face. Connect Stream Apps → Meld Studio. Clicks only — Show Scene. No code in Meld.</p>
+    </a>
+    <a class="app get" href="https://socialstream.ninja/" target="_blank" rel="noreferrer">
+      <div class="tag">YOU ARE GETTING THIS</div>
+      <h2>Social Stream Ninja</h2>
+      <p>One chat overlay from Twitch, YouTube, Kick, TikTok. Paste the session ID into config.js. Chrome/Edge extension or the desktop app.</p>
+    </a>
+  </div>
+
+  <h2>Also running on the PC</h2>
+  <table>
+    <tr><th>Thing</th><th>Why</th></tr>
+    <tr><td>Chrome or Edge</td><td>Social Stream Ninja extension. Leave the platform chat tab open.</td></tr>
+    <tr><td>BeamNG.drive</td><td>The race. Fullscreen or borderless.</td></tr>
+    <tr><td>This overlay zip (extracted)</td><td>HUD, Starting Soon, BRB, Ending. Keep <code>Start-MeldLayout.bat</code> open.</td></tr>
+  </table>
+
+  <h2>Optional</h2>
+  <table>
+    <tr><th>Thing</th><th>Why</th></tr>
+    <tr><td>Social Stream Ninja desktop app</td><td>Instead of extra Chrome tabs.</td></tr>
+    <tr><td>Stream Deck</td><td>Physical buttons. Streamer.bot can fire the same scenes without one.</td></tr>
+    <tr><td>NVIDIA Broadcast</td><td>Mic noise removal if you have an RTX card.</td></tr>
+  </table>
+
+  <h2>On-screen stack (bottom → top)</h2>
+  <ol>
+    <li>Game / Main (Meld Game Capture)</li>
+    <li>Cam / Face, Room, Wheel, Pedals (Meld Video Device)</li>
+    <li>Rise Above HUD (this kit)</li>
+    <li>Social Stream / Chat + Featured</li>
+    <li>Lumia / Overlay (alerts only)</li>
+  </ol>
+
+  <nav class="docs">
+    <a href="START-HERE.txt">Start here</a> ·
+    <a href="meld/">Meld layout</a> ·
+    <a href="DROP-INTO-MELD/README.txt">Drag folder</a> ·
+    <a href="streamerbot/README.md">Streamer.bot</a> ·
+    <a href="socialstream/">Social Stream Ninja</a> ·
+    <a href="docs/meld.html">Meld guide</a>
+  </nav>
+</main>
+</body>
+</html>

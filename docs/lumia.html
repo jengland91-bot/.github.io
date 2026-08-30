@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumia Stream — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+<main>
+  <div class="kicker">LUMIA STREAM</div>
+  <h1>CHAT FOR YOU</h1>
+  <p>You want one chat box on the <strong>gaming monitor</strong> so you can read it. That is not the same as putting chat on the stream for viewers.</p>
+  <p>On the stream, viewers see <strong>Social Stream Ninja</strong>. Lumia on the stream is alerts and lights. Scene switches on Meld are <strong>Streamer.bot</strong>. Apps: <a href="../apps.html">apps.html</a>.</p>
+  <p>Fast path: <a href="../tools/chat-for-you.html">tools/chat-for-you.html</a> (or double-click <code>tools\Open-ChatForYou.bat</code>). Markdown: <a href="lumia.md">lumia.md</a></p>
+
+  <h2>Your eyes, not theirs</h2>
+  <ol>
+    <li>Lumia → Connections → add Twitch (and Kick / YouTube if you use them). One Chatbox shows all of that chat together. Leave Lumia running.</li>
+    <li>Do <strong>not</strong> put a Chatbox on the Meld Lumia overlay if you do not want viewers to see it. Alerts only on stream.</li>
+    <li>Either drag the Lumia app window onto the BeamNG monitor, or copy the Lumia overlay URL and open it with <a href="../tools/chat-for-you.html">Chat for you</a>, then drag that window over.</li>
+    <li>Sit it in a corner. Do not capture that window in Meld.</li>
+  </ol>
+
+  <h2>If you also want viewers to see chat</h2>
+  <p>Use <a href="socialstream.html">Social Stream Ninja</a> for on-stream chat. Keep Lumia Chatbox off the stream so it does not double. Lumia on stream = alerts.</p>
+
+  <h2>Viewer alerts (optional)</h2>
+  <ol>
+    <li>In Lumia, open the overlay editor and make one overlay. Add Alerts. Skip Chatbox if Social Stream Ninja is the chat.</li>
+    <li>Copy the overlay URL Lumia gives you.</li>
+    <li>Paste it into <code>overlays/shared/config.js</code> → <code>lumia.overlayUrl</code>. Save.</li>
+    <li>In Meld, reload the <code>Lumia / Overlay</code> Browser layer. Keep it above the HUD.</li>
+    <li>Fire a test alert in Lumia. You should see it on the Meld preview.</li>
+  </ol>
+  <p>Green boxes on our HUD are only parking spots. They hide when you go live.</p>
+  <p>To see the parking spots: open <a href="../overlays/live.html?preview=1&setup=1">Race + slots</a>.</p>
+
+  <h2>One overlay URL</h2>
+  <table>
+    <tr><th>Layer</th><th>RACE position</th></tr>
+    <tr><td>Alerts</td><td>860×200 at 530, 24</td></tr>
+    <tr><td>Event list</td><td>420×70 at 48, 96</td></tr>
+    <tr><td>Now Playing</td><td>400×64 at 48, 800</td></tr>
+  </table>
+  <p>Text <code>#E8DCC8</code>, accent Monster green <code>#7CB701</code>. Line up with <a href="../overlays/live.html?preview=1&setup=1">Race + slots</a>.</p>
+
+  <h2>Scene lights</h2>
+  <table>
+    <tr><th>Scene</th><th>Light</th></tr>
+    <tr><td><code>STARTING SOON</code></td><td>Moss / trail green</td></tr>
+    <tr><td><code>GRID</code></td><td>Moss / white</td></tr>
+    <tr><td><code>DESK</code></td><td>Moss (sit at desk, other games)</td></tr>
+    <tr><td><code>RACE</code></td><td>Monster green <code>#7CB701</code></td></tr>
+    <tr><td><code>RACE DUAL</code></td><td>Pine + moss on a second zone</td></tr>
+    <tr><td><code>REPLAY</code></td><td>Dim olive</td></tr>
+    <tr><td><code>BRB</code></td><td>Dim forest</td></tr>
+    <tr><td><code>ENDING</code></td><td>Dusk gold-olive pulse</td></tr>
+  </table>
+
+  <h2>Cam + scene commands</h2>
+  <p>Those live in Streamer.bot talking to Meld (Show Scene / layer visibility). Clicks, no code in Meld. Guide: <a href="streamerbot.html">streamerbot.html</a></p>
+
+  <nav class="docs">
+    <a href="../setup.html">← Checklist</a> ·
+    <a href="meld.html">Meld</a> ·
+    <a href="socialstream.html">Social Stream Ninja</a> ·
+    <a href="streamerbot.html">Streamer.bot</a>
+  </nav>
+</main>
+</body>
+</html>

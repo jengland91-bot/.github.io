@@ -1,0 +1,8 @@
+YOU ARE IN THE RIGHT FOLDER
+===========================
+
+Do NOT run an old bat that closes Meld (that crashed it).
+
+In Meld: File -> Import Session -> LOAD-THESE-SCENES\0 ALL SCENES.json
+
+Or download only the JSON (Windows will not block it). See GET-THE-KIT.txt

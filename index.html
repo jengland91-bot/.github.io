@@ -1,93 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Links</title>
-    <style>
-        :root {
-            --bg-color: #0d0d0d;
-            --text-color: #ffffff;
-            --accent-color: #ff4500; /* Change to your brand color */
-            --button-bg: #1a1a1a;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-            margin: 0;
-        }
-
-        .profile {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .profile img {
-            width: 96px;
-            height: 96px;
-            border-radius: 50%;
-            border: 2px solid var(--accent-color);
-            object-fit: cover;
-        }
-
-        .profile h1 {
-            font-size: 1.5rem;
-            margin: 10px 0 5px 0;
-        }
-
-        .profile p {
-            color: #888;
-            margin: 0;
-            font-size: 0.9rem;
-        }
-
-        .links-container {
-            width: 100%;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .link-card {
-            background-color: var(--button-bg);
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 16px;
-            text-align: center;
-            border-radius: 12px;
-            border: 1px solid #2a2a2a;
-            font-weight: 600;
-            transition: all 0.2s ease-in-out;
-        }
-
-        /* Hover animation effect */
-        .link-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-color);
-            background-color: #222;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Rise Above — Overlay Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ember: #7cb701;
+      --amber: #8a7a38;
+      --ice: #7a9a5c;
+      --sand: #c4b490;
+      --paper: #e8dcc8;
+      --void: #100e0a;
+      --asphalt: #1a1610;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background:
+        radial-gradient(ellipse 70% 40% at 50% -10%, rgba(74, 107, 50, 0.22), transparent 55%),
+        var(--void);
+      color: var(--paper);
+      font-family: Outfit, system-ui, sans-serif;
+      min-height: 100vh;
+    }
+    header {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 48px 24px 24px;
+    }
+    .kicker {
+      font-family: Rajdhani, sans-serif;
+      letter-spacing: 0.42em;
+      color: var(--ice);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(56px, 10vw, 96px);
+      letter-spacing: 0.06em;
+      line-height: 0.9;
+      margin: 8px 0 12px;
+    }
+    header p { color: var(--sand); max-width: 560px; font-size: 18px; }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    a.btn {
+      text-decoration: none;
+      color: #101408;
+      background: var(--ember);
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 0.12em;
+      font-size: 20px;
+      padding: 10px 18px 8px;
+    }
+    a.btn.ghost {
+      background: transparent;
+      color: var(--paper);
+      border: 1px solid rgba(244, 239, 232, 0.2);
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 12px 24px 80px; }
+    .preview-wrap {
+      background: var(--asphalt);
+      border: 1px solid rgba(244, 239, 232, 0.12);
+      overflow: hidden;
+    }
+    .preview-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px;
+      border-bottom: 1px solid rgba(244, 239, 232, 0.1);
+    }
+    .preview-toolbar button {
+      font-family: Rajdhani, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      background: transparent;
+      color: var(--sand);
+      border: 1px solid rgba(244, 239, 232, 0.14);
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+    .preview-toolbar button.active {
+      background: var(--ember);
+      color: #101408;
+      border-color: var(--ember);
+    }
+    .stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      overflow: hidden;
+    }
+    .stage.vertical {
+      aspect-ratio: 9 / 16;
+      max-width: 380px;
+      margin: 16px auto;
+    }
+    .stage iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      border: 0;
+      transform-origin: 0 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .card {
+      background: var(--asphalt);
+      border: 1px solid rgba(244, 239, 232, 0.1);
+      padding: 20px;
+    }
+    .card h2 {
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 0.08em;
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .card p, .card li { color: var(--sand); font-size: 15px; line-height: 1.55; }
+    .card ol { padding-left: 18px; }
+    .card a { color: var(--ice); }
+    code {
+      font-size: 13px;
+      background: #000;
+      padding: 1px 6px;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <div class="kicker">RISE ABOVE  ·  MELD STUDIO</div>
+    <h1>DRAG AND DROP<br />PRO STREAM</h1>
+    <p>BeamNG off-road layouts with Face, Room, Wheel, and Pedals cameras. Import the Meld session or drag HTML onto the canvas. Lumia for alerts. Streamer.bot for commands. Social Stream Ninja for chat. Tagged @jengland91. Stream audio is game + mic only — Discord stays off.</p>
+    <nav>
+      <a class="btn" href="apps.html">Apps you need</a>
+      <a class="btn" href="docs/meld.html">Meld Studio</a>
+      <a class="btn" href="meld/index.html">Meld layout</a>
+      <a class="btn" href="setup.html">Open setup guide</a>
+      <a class="btn ghost" href="socialstream/">Social Stream Ninja</a>
+      <a class="btn ghost" href="docs/streamerbot.html">Streamer.bot</a>
+      <a class="btn ghost" href="overlays/live.html?preview=1&setup=1">Show race slots</a>
+    </nav>
+  </header>
 
-    <div class="profile">
-        <img src="your-avatar.jpg" alt="Profile Picture">
-        <h1>Your Name</h1>
-        <p>Photographer & Creator</p>
+  <main>
+    <div class="preview-wrap">
+      <div class="preview-toolbar" id="scenes">
+        <button data-src="overlays/starting-soon.html?preview=1" class="active">Starting Soon</button>
+        <button data-src="overlays/chatting.html?preview=1">Grid</button>
+        <button data-src="overlays/desk.html?preview=1">Desk</button>
+        <button data-src="overlays/desk.html?preview=1&setup=1">Desk + slots</button>
+        <button data-src="overlays/live.html?preview=1">Race</button>
+        <button data-src="overlays/live.html?preview=1&setup=1">Race + slots</button>
+        <button data-src="overlays/race-dual.html?preview=1">Dual cam</button>
+        <button data-src="overlays/replay.html?preview=1">Replay</button>
+        <button data-src="overlays/brb.html?preview=1">BRB</button>
+        <button data-src="overlays/ending.html?preview=1">Ending</button>
+        <button data-src="overlays/vertical/starting-soon.html?preview=1" data-vertical="1">V Starting</button>
+        <button data-src="overlays/vertical/chatting.html?preview=1" data-vertical="1">V Grid</button>
+        <button data-src="overlays/vertical/desk.html?preview=1" data-vertical="1">V Desk</button>
+        <button data-src="overlays/vertical/desk.html?preview=1&setup=1" data-vertical="1">V Desk + slots</button>
+        <button data-src="overlays/vertical/live.html?preview=1" data-vertical="1">V Race</button>
+        <button data-src="overlays/vertical/live.html?preview=1&setup=1" data-vertical="1">V Race + slots</button>
+        <button data-src="overlays/vertical/race-dual.html?preview=1" data-vertical="1">V Dual</button>
+        <button data-src="overlays/vertical/replay.html?preview=1" data-vertical="1">V Replay</button>
+        <button data-src="overlays/vertical/brb.html?preview=1" data-vertical="1">V BRB</button>
+        <button data-src="overlays/vertical/ending.html?preview=1" data-vertical="1">V Ending</button>
+      </div>
+      <div class="stage" id="stage">
+        <iframe id="frame" src="overlays/starting-soon.html?preview=1" title="Overlay preview"></iframe>
+      </div>
     </div>
 
-    <div class="links-container">
-        <a href="https://yourwebsite.com" class="link-card" target="_blank">Main Website</a>
-        <a href="https://youtube.com" class="link-card" target="_blank">Latest Video</a>
-        <a href="https://instagram.com" class="link-card" target="_blank">Instagram Portfolio</a>
+    <div class="grid">
+      <article class="card">
+        <h2>1. Meld — import or drag</h2>
+        <p>Double-click <code>1-OPEN-IN-MELD.bat</code> — it writes the 8 scenes into Meld. Leave the overlay window open. Add Game Capture + four cameras. Stream audio is game + mic, not Discord.</p>
+        <p style="margin-top:10px"><a href="apps.html">Apps list →</a> · <a href="docs/meld.html">Meld import →</a> · <a href="meld/index.html">Layout →</a></p>
+      </article>
+      <article class="card">
+        <h2>2. Multi-cam</h2>
+        <p><code>Cam / Face</code>, <code>Cam / Room</code>, <code>Cam / Wheel</code>, and <code>Cam / Pedals</code>. Optional <code>Game / Angle 2</code> for bumper or chase. Size them to the wells on the layout board.</p>
+        <p style="margin-top:10px"><a href="meld/index.html">Layout sizes →</a></p>
+      </article>
+      <article class="card">
+        <h2>3. Add-ons</h2>
+        <p><strong>Social Stream Ninja</strong> = chat on stream. <strong>Lumia</strong> = alerts + lights (chat-for-you on the gaming monitor). <strong>Streamer.bot</strong> = <code>!race</code> <code>!face</code> switches Meld.</p>
+        <p style="margin-top:10px"><a href="docs/socialstream.html">SSN →</a> · <a href="docs/lumia.html">Lumia →</a> · <a href="docs/streamerbot.html">Streamer.bot →</a></p>
+      </article>
+      <article class="card">
+        <h2>Customize</h2>
+        <ol>
+          <li>Today’s game on Starting Soon: double-click <code>tools/Change-Game.bat</code> (or edit <code>game</code> in <code>overlays/shared/config.js</code>)</li>
+          <li>Paste Social Stream Ninja <code>ssn.session</code> and optional Lumia <code>overlayUrl</code> in that same file</li>
+          <li>Drop <code>starting.jpg</code> / <code>brb.jpg</code> / <code>ending.jpg</code> in <code>overlays/shared/backdrops/</code></li>
+          <li>In Meld, reload the Browser layers. No installer re-run</li>
+        </ol>
+      </article>
     </div>
+  </main>
 
+  <script>
+    const stage = document.getElementById("stage");
+    const frame = document.getElementById("frame");
+    function fit() {
+      const base = stage.classList.contains("vertical") ? 1080 : 1920;
+      frame.style.transform = "scale(" + (stage.clientWidth / base) + ")";
+    }
+    fit();
+    window.addEventListener("resize", fit);
+    document.getElementById("scenes").addEventListener("click", (event) => {
+      const btn = event.target.closest("button");
+      if (!btn) return;
+      document.querySelectorAll("#scenes button").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const vertical = btn.hasAttribute("data-vertical");
+      stage.classList.toggle("vertical", vertical);
+      frame.style.width = vertical ? "1080px" : "1920px";
+      frame.style.height = vertical ? "1920px" : "1080px";
+      frame.src = btn.dataset.src;
+      fit();
+    });
+  </script>
 </body>
 </html>
