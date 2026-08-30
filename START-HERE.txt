@@ -1,3 +1,14 @@
+DO THIS (nothing else)
+=======================
+1. Extract this zip (right-click -> Extract All).
+2. Open the extracted folder. Double-click  1-OPEN-IN-MELD.bat
+3. That copies Rise-Above-Meld.json to your DESKTOP and opens Meld.
+4. In Meld: File -> Import Session -> pick Rise-Above-Meld.json on the DESKTOP.
+
+You do not look inside a meld\ folder. You do not paste code.
+Leave the black window open. Then add Game Capture + cameras in Meld.
+
+------------------------------------------------------------------------
 APPS (Meld only — do not open OBS)
 ==================================
   Meld Studio          https://www.meldstudio.co/          go live

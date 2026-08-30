@@ -4,9 +4,9 @@ You do not need OBS. Overlays are HTML. In Meld they are **Browser** layers.
 
 ## Fast path (import)
 
-1. Extract the zip. Open Meld. Do not open OBS.
-2. Double-click `tools/Start-MeldLayout.bat` and leave it open.
-3. Meld → **File → Import Session** → `meld/Rise-Above-Meld.json`
+1. Extract the zip. Double-click `1-OPEN-IN-MELD.bat`.
+2. That copies `Rise-Above-Meld.json` to your Desktop and opens Meld.
+3. Meld → **File → Import Session** → `Rise-Above-Meld.json` on the Desktop.
 4. You get eight scenes plus HUD / Social Stream / Lumia browser layers.
 5. Add **Game Capture** (`Game / Main`) and **Video Device** cameras. Size them to the [layout board](../meld/index.html). Overlay stays on top.
 6. Process Audio of the game + mic. No desktop / Discord.

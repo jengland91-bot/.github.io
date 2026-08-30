@@ -6,8 +6,8 @@ Open [START-HERE.txt](START-HERE.txt). Apps you need: [apps.html](apps.html) / [
 
 ## Drag and drop (Meld)
 
-1. Double-click `tools/Start-MeldLayout.bat` and leave it open.
-2. Meld → **File → Import Session** → [`meld/Rise-Above-Meld.json`](meld/Rise-Above-Meld.json)
+1. Double-click `1-OPEN-IN-MELD.bat`. That copies the session file to your Desktop and opens Meld.
+2. Meld → **File → Import Session** → `Rise-Above-Meld.json` on the Desktop.
 3. Or drag files from [`DROP-INTO-MELD/`](DROP-INTO-MELD/README.txt) onto each canvas.
 4. Add Game Capture + four Video Device cameras. Size them on the [layout board](meld/index.html).
 
