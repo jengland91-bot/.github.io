@@ -1,6 +1,11 @@
-DO NOT RUN THE OLD BAT THAT CLOSES MELD
-=========================================
-That crashed Meld. Use this instead.
+MELD CRASHED
+============
+1. Delete the Desktop shortcut named  Rise Above Meld
+2. Open Meld from the Start menu (normal icon).
+3. File -> Restore from Backup
+   If Meld will not open, see RECOVERY.txt (rename session.json).
+
+Then import the JSON below. Do not run the old bat.
 
 WINDOWS BLOCKS THE ZIP. DOWNLOAD ONLY THIS JSON
 ================================================
