@@ -28,49 +28,37 @@
       margin: 16px 0 22px;
     }
     .box strong { color: #fff; }
-    a.btn {
-      display: inline-block;
-      background: var(--g);
-      color: #101408;
-      font-weight: 800;
-      text-decoration: none;
-      padding: 14px 18px;
-      margin: 6px 8px 6px 0;
-    }
-    a.ghost {
-      display: inline-block;
-      border: 1px solid var(--g);
-      color: var(--g);
-      text-decoration: none;
-      padding: 12px 16px;
-      margin: 6px 8px 6px 0;
+    code, .url {
+      font-family: Consolas, ui-monospace, monospace;
+      background: #000;
+      color: var(--paper);
+      padding: 8px 10px;
+      display: block;
+      margin-top: 10px;
+      word-break: break-all;
     }
   </style>
 </head>
 <body>
 <main>
   <div class="kicker">MELD STUDIO</div>
-  <h1>DOWNLOAD THE JSON. IMPORT SESSION. DO NOT RUN THE OLD BAT.</h1>
+  <h1>CLICK PLUS IN MELD. PASTE THE WEBSITE.</h1>
 
   <div class="box">
-    <p>Windows blocked the zip. The old bat closed Meld and crashed it. <strong>Do not use those.</strong></p>
-    <p style="margin-top:10px">This is one JSON file. Windows allows it. Overlays load from the internet.</p>
+    <p>Opening a JSON link in Chrome does <strong>not</strong> change Meld. Do these clicks inside Meld.</p>
   </div>
 
-  <p>
-    <a class="btn" href="https://raw.githubusercontent.com/jengland91-bot/.github.io/refs/heads/cursor/meld-drag-drop-addons-ea5b/IMPORT-THIS-IN-MELD.json" download="Rise-Above.json">Download Rise-Above.json</a>
-    <a class="ghost" href="https://github.com/jengland91-bot/.github.io/blob/cursor/meld-drag-drop-addons-ea5b/IMPORT-THIS-IN-MELD.json">If that fails, open on GitHub → Raw → Save</a>
-  </p>
-
-  <h2>In Meld</h2>
+  <h2>Starting Soon on the canvas</h2>
   <ol>
-    <li>Open Meld Studio from the Start menu (normal icon).</li>
-    <li>If it crashed last time: <strong>File → Restore from Backup</strong>.</li>
-    <li><strong>File → Import Session</strong> — not Import OBS Session.</li>
-    <li>Pick <code>Rise-Above.json</code> (Downloads or Desktop).</li>
-    <li>You should see STARTING SOON, GRID, RACE, BRB.</li>
-    <li>Add Game Capture + cameras.</li>
+    <li>Open Meld Studio from the Start menu.</li>
+    <li>On the left, click <strong>+</strong> (add layer).</li>
+    <li>Click <strong>Browser</strong>.</li>
+    <li>Paste this into the URL box:</li>
   </ol>
+  <p class="url">https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/starting-soon.html</p>
+  <p style="margin-top:14px">You should see STARTING SOON (green / dirt). That is the overlay.</p>
+
+  <h2>Then add Game Capture + cameras under it</h2>
 </main>
 </body>
 </html>

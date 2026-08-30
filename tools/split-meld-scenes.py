@@ -34,7 +34,9 @@ def main() -> None:
         if obj.get("type") == "scene":
             obj["current"] = obj.get("name") == "STARTING SOON"
     dump(OUT / "0 ALL SCENES.json", session)
-    (ROOT / "IMPORT-THIS-IN-MELD.json").write_text(SRC.read_text(encoding="utf-8"), encoding="utf-8")
+    text = json.dumps(session, indent=2) + "\n"
+    (ROOT / "IMPORT-THIS-IN-MELD.json").write_text(text, encoding="utf-8")
+    (ROOT / "Rise-Above.json").write_text(text, encoding="utf-8")
 
     tracks = {iid: obj for iid, obj in items.items() if obj.get("type") == "track"}
     scenes = {iid: obj for iid, obj in items.items() if obj.get("type") == "scene"}

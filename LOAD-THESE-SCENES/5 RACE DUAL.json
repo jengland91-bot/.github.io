@@ -3,6 +3,7 @@
     "394A627BB2674487DB30E4C7EAF6420B": {
       "type": "track",
       "name": "Microphone",
+      "parent": "41200B4B85DF2B6A7B653C6D1C9E1F34",
       "monitoring": false,
       "muted": false
     },

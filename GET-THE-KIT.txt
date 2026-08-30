@@ -1,32 +1,29 @@
-MELD CRASHED
-============
-1. Delete the Desktop shortcut named  Rise Above Meld
-2. Open Meld from the Start menu (normal icon).
-3. File -> Restore from Backup
-   If Meld will not open, see RECOVERY.txt (rename session.json).
+OPENING THE LINK IN CHROME DOES NOT LOAD MELD
+=============================================
+You have to click inside Meld itself.
 
-Then import the JSON below. Do not run the old bat.
-
-WINDOWS BLOCKS THE ZIP. DOWNLOAD ONLY THIS JSON
+DO THIS IN MELD (this one will show the overlay)
 ================================================
-Right-click this link -> Save link as -> Desktop\Rise-Above.json
+1. Open Meld Studio from the Start menu.
+2. On the left, click the +  (add layer).
+3. Click  Browser.
+4. In the URL box, paste this website (not code):
 
-  https://raw.githubusercontent.com/jengland91-bot/.github.io/refs/heads/cursor/meld-drag-drop-addons-ea5b/IMPORT-THIS-IN-MELD.json
+https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/starting-soon.html
 
-Same file, easier name:
+5. You should see STARTING SOON on the canvas (green / dirt look).
 
-  https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/IMPORT-THIS-IN-MELD.json
+Other scenes — same steps, paste one of these:
+  GRID     https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/chatting.html
+  RACE     https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/live.html
+  BRB      https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/brb.html
+  ENDING   https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/ending.html
 
-THEN IN MELD STUDIO
-===================
-1. Open Meld Studio (normal icon, not a special shortcut).
-2. If Meld crashed last time: File -> Restore from Backup.
-3. File -> Import Session   (NOT Import OBS Session)
-4. Pick Desktop\Rise-Above.json  (or the file you just saved)
-5. You should see STARTING SOON / GRID / RACE / BRB.
+IF YOU WANT ALL 8 SCENES AT ONCE
+================================
+In Meld: File -> Import Session (not Import OBS Session).
+Pick a file that ends in .json  (not a Chrome page, not a .txt).
+If Chrome opened a page of text, press Ctrl+S, save as Rise-Above.json
+on the Desktop, THEN Import Session that file.
 
-Overlays load from the internet. You do not need a black server window.
-Then add Game Capture + your cameras.
-
-If the JSON download is blocked too, open this page and click Raw -> Save:
-  https://github.com/jengland91-bot/.github.io/blob/cursor/meld-drag-drop-addons-ea5b/IMPORT-THIS-IN-MELD.json
+  https://raw.githubusercontent.com/jengland91-bot/.github.io/refs/heads/cursor/meld-drag-drop-addons-ea5b/Rise-Above.json
