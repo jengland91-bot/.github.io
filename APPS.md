@@ -17,7 +17,7 @@ You go live from **Meld Studio**. Do not install OBS for this kit.
 | --- | --- | --- |
 | **Chrome or Edge** | any current browser | Social Stream Ninja **extension** lives here. Leave the chat tab open. |
 | **BeamNG.drive** | Steam | The race game. Borderless / fullscreen. |
-| **This overlay kit** | extract the zip | HUD, Starting Soon, BRB, Ending. Drag onto Meld or File → Import Session. |
+| **This overlay kit** | extract the zip | HUD, Starting Soon, BRB, Ending. Import `LOAD-THESE-SCENES` or drag onto Meld. |
 
 ## Optional — makes it look more “pro”
 

@@ -3,11 +3,12 @@ DRAG THESE ONTO MELD STUDIO
 
 If 1-OPEN-IN-MELD.bat did nothing:
   Go up one folder and double-click 00-DOUBLE-CLICK-ME.html
-  Then in Meld: File -> Import Session -> IMPORT-THIS-IN-MELD.json
+  Then in Meld: File -> Import Session -> LOAD-THESE-SCENES
+  Pick 0 ALL SCENES.json or a numbered file (4 RACE.json, 7 BRB.json, ...).
 
 Easier path: go up one folder and double-click 1-OPEN-IN-MELD.bat
-That copies Rise-Above-Meld.json to your Desktop. In Meld:
-File -> Import Session -> Rise-Above-Meld.json on the DESKTOP.
+That copies a "Rise Above scenes" folder to your Desktop. In Meld:
+File -> Import Session -> 0 ALL SCENES.json (or a numbered file).
 
 Then add your game and cameras in Meld (once):
    Layers + -> Game Capture     name it  Game / Main

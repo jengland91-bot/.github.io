@@ -1,0 +1,30 @@
+{
+  "items": {
+    "394A627BB2674487DB30E4C7EAF6420B": {
+      "type": "track",
+      "name": "Microphone",
+      "monitoring": false,
+      "muted": false
+    },
+    "41200B4B85DF2B6A7B653C6D1C9E1F34": {
+      "type": "scene",
+      "name": "STARTING SOON",
+      "index": 0,
+      "current": true,
+      "staged": false
+    },
+    "362E3A3879D6E0EB16F60E47D473B611": {
+      "type": "layer",
+      "parent": "41200B4B85DF2B6A7B653C6D1C9E1F34",
+      "name": "Overlay / Starting Soon",
+      "index": 0,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "rotation": 0,
+      "url": "http://127.0.0.1:5500/overlays/starting-soon.html?m=5"
+    }
+  }
+}

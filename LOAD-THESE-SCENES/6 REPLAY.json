@@ -1,0 +1,30 @@
+{
+  "items": {
+    "394A627BB2674487DB30E4C7EAF6420B": {
+      "type": "track",
+      "name": "Microphone",
+      "monitoring": false,
+      "muted": false
+    },
+    "2E301ED51FE5DE655639C72FE73BA6AF": {
+      "type": "scene",
+      "name": "REPLAY",
+      "index": 0,
+      "current": true,
+      "staged": false
+    },
+    "06482D01BFB2F262F1C573EBE7322B68": {
+      "type": "layer",
+      "parent": "2E301ED51FE5DE655639C72FE73BA6AF",
+      "name": "Overlay / Replay HUD",
+      "index": 0,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "rotation": 0,
+      "url": "http://127.0.0.1:5500/overlays/replay.html"
+    }
+  }
+}

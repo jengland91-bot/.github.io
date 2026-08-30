@@ -17,9 +17,13 @@ echo.
 if not exist "%~dp0meld\Rise-Above-Meld.json" goto :wrongfolder
 if not exist "%~dp0IMPORT-THIS-IN-MELD.json" copy /Y "%~dp0meld\Rise-Above-Meld.json" "%~dp0IMPORT-THIS-IN-MELD.json" >nul
 
-echo Copying the Meld file to your Desktop...
+echo Copying the Meld file and scene folder to your Desktop...
 copy /Y "%~dp0meld\Rise-Above-Meld.json" "%USERPROFILE%\Desktop\Rise-Above-Meld.json" >nul 2>&1
 copy /Y "%~dp0meld\Rise-Above-Meld.json" "%USERPROFILE%\OneDrive\Desktop\Rise-Above-Meld.json" >nul 2>&1
+if exist "%~dp0LOAD-THESE-SCENES\0 ALL SCENES.json" (
+  xcopy /E /I /Y "%~dp0LOAD-THESE-SCENES" "%USERPROFILE%\Desktop\Rise Above scenes\" >nul
+  xcopy /E /I /Y "%~dp0LOAD-THESE-SCENES" "%USERPROFILE%\OneDrive\Desktop\Rise Above scenes\" >nul
+)
 
 set "NOTE=%USERPROFILE%\Desktop\READ-THIS-THEN-OPEN-MELD.txt"
 if not exist "%USERPROFILE%\Desktop\." set "NOTE=%~dp0READ-THIS-THEN-OPEN-MELD.txt"
@@ -29,11 +33,13 @@ echo RISE ABOVE - next 3 clicks in Meld Studio
 echo ========================================
 echo.
 echo 1. Open Meld Studio  ^(not OBS^)
-echo 2. File
-echo 3. Import Session
-echo 4. Pick Rise-Above-Meld.json on your DESKTOP
-echo    or IMPORT-THIS-IN-MELD.json in the extracted folder:
-echo    %~dp0
+echo 2. File - Import Session
+echo 3. Open the Desktop folder  Rise Above scenes
+echo 4. Pick  0 ALL SCENES.json  for every scene
+echo    or  4 RACE.json  to try just the race look
+echo.
+echo    Those files are also in:
+echo    %~dp0LOAD-THESE-SCENES
 echo.
 echo Leave the black KEEP THIS WINDOW OPEN overlay window running.
 echo Then in Meld add Game Capture + your cameras.
@@ -44,11 +50,12 @@ echo You do not paste any code into Meld.
 echo Opening Notepad with the next clicks...
 start "" notepad.exe "%NOTE%"
 
-echo Opening this folder in File Explorer...
-start "" explorer.exe /select,"%~dp0IMPORT-THIS-IN-MELD.json"
-
-if exist "%USERPROFILE%\Desktop\Rise-Above-Meld.json" start "" explorer.exe /select,"%USERPROFILE%\Desktop\Rise-Above-Meld.json"
-if exist "%USERPROFILE%\OneDrive\Desktop\Rise-Above-Meld.json" start "" explorer.exe /select,"%USERPROFILE%\OneDrive\Desktop\Rise-Above-Meld.json"
+echo Opening the scenes folder...
+if exist "%USERPROFILE%\Desktop\Rise Above scenes\0 ALL SCENES.json" (
+  start "" explorer.exe "%USERPROFILE%\Desktop\Rise Above scenes"
+) else (
+  start "" explorer.exe "%~dp0LOAD-THESE-SCENES"
+)
 
 echo Starting overlay server - leave that window open...
 start "Rise Above overlays - KEEP OPEN" cmd /k "%~dp0tools\Start-MeldLayout.bat"
@@ -83,7 +90,7 @@ echo    - a second black window titled KEEP OPEN
 echo    - Meld Studio
 echo ========================================
 echo.
-echo In Meld: File - Import Session - Rise-Above-Meld.json
+echo In Meld: File - Import Session - Rise Above scenes\0 ALL SCENES.json
 echo.
 pause
 goto :eof

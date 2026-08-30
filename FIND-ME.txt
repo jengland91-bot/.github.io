@@ -8,8 +8,8 @@ YOU ARE IN THE RIGHT FOLDER
 4. Double-click  00-DOUBLE-CLICK-ME.html   (always opens a page)
    or  00-CLICK-ME.vbs                     (always pops a box)
    or  1-OPEN-IN-MELD.bat                  (black window must stay open)
-5. In Meld: File -> Import Session -> IMPORT-THIS-IN-MELD.json
-   in THIS folder, or Rise-Above-Meld.json on your DESKTOP.
+5. In Meld: File -> Import Session -> folder LOAD-THESE-SCENES
+   Pick 0 ALL SCENES.json (every scene) or a numbered file (one look).
 
 If the bat flashes and vanishes: Windows blocked it.
 Right-click the .bat -> Properties -> Unblock -> OK.

@@ -1,0 +1,30 @@
+{
+  "items": {
+    "394A627BB2674487DB30E4C7EAF6420B": {
+      "type": "track",
+      "name": "Microphone",
+      "monitoring": false,
+      "muted": false
+    },
+    "E9E3398CD0CDD2822F63B92B0C6A8A34": {
+      "type": "scene",
+      "name": "BRB",
+      "index": 0,
+      "current": true,
+      "staged": false
+    },
+    "FFB98FAAB7353A6D41537208A206702D": {
+      "type": "layer",
+      "parent": "E9E3398CD0CDD2822F63B92B0C6A8A34",
+      "name": "Overlay / BRB",
+      "index": 0,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "rotation": 0,
+      "url": "http://127.0.0.1:5500/overlays/brb.html"
+    }
+  }
+}

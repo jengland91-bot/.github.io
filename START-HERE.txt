@@ -9,8 +9,11 @@ You probably opened files from INSIDE the zip, or Windows blocked the .bat.
    That always opens this page in your browser.
 
 Then in Meld Studio:
-   File  ->  Import Session  ->  IMPORT-THIS-IN-MELD.json
-   (that file is in this same folder)
+   File  ->  Import Session  ->  folder LOAD-THESE-SCENES
+   Pick  0 ALL SCENES.json     (all 8 scenes)
+   or    4 RACE.json           (just the race look)
+
+Each numbered file is one scene you can load by itself.
 
 If you want the bat to work: right-click 1-OPEN-IN-MELD.bat
 -> Properties -> check Unblock -> OK -> double-click it.
@@ -21,10 +24,11 @@ NORMAL PATH (after extract)
 ===========================
 Double-click  1-OPEN-IN-MELD.bat
 
-That copies Rise-Above-Meld.json to your DESKTOP, opens Notepad with the next
-clicks, tries to open Meld, and starts the overlay window (leave it open).
+That copies a folder named Rise Above scenes to your DESKTOP, opens Notepad,
+tries to open Meld, and starts the overlay window (leave it open).
 
-In Meld: File -> Import Session -> Rise-Above-Meld.json on the DESKTOP.
+In Meld: File -> Import Session -> Rise Above scenes -> 0 ALL SCENES.json
+(or a numbered file such as 4 RACE.json).
 
 You do not look inside a meld\ folder. You do not paste code.
 
@@ -47,7 +51,7 @@ DRAG AND DROP — MELD STUDIO
 ------------------------------------------------------------------------
 1. Right-click the zip -> Extract All. Do not open files from inside the zip.
 2. Open Meld Studio. Do not open OBS.
-3. Double-click 1-OPEN-IN-MELD.bat (or File -> Import Session on IMPORT-THIS-IN-MELD.json).
+3. Double-click 1-OPEN-IN-MELD.bat (or File -> Import Session on LOAD-THESE-SCENES\0 ALL SCENES.json).
    Leave the overlay window open while you are live.
 4. That creates STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING
    plus the HUD, Social Stream chat, and Lumia browser layers.

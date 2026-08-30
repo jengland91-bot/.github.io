@@ -2,6 +2,7 @@
 """Build Rise-Above-Meld.zip with a visible top-level folder name."""
 from __future__ import annotations
 
+import runpy
 import zipfile
 from pathlib import Path
 
@@ -26,6 +27,7 @@ def keep(path: Path) -> bool:
 
 
 def main() -> None:
+    runpy.run_path(str(ROOT / "tools" / "split-meld-scenes.py"), run_name="__main__")
     files = sorted(p for p in ROOT.rglob("*") if p.is_file() and keep(p))
     with zipfile.ZipFile(OUT, "w", compression=zipfile.ZIP_DEFLATED) as zf:
         for p in files:

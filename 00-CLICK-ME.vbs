@@ -1,13 +1,14 @@
 Option Explicit
-Dim fso, shell, here, src, dest, note, desktop, i, candidates
+Dim fso, shell, here, src, dest, note, desktop, scenesSrc, scenesDest, i, candidates
 Set fso = CreateObject("Scripting.FileSystemObject")
 Set shell = CreateObject("WScript.Shell")
 here = fso.GetParentFolderName(WScript.ScriptFullName)
 src = fso.BuildPath(here, "meld\Rise-Above-Meld.json")
 
 MsgBox "Rise Above" & vbCrLf & vbCrLf & _
-  "This copies the Meld file to your Desktop, opens Notepad, and opens Explorer." & vbCrLf & vbCrLf & _
-  "Then in Meld Studio: File -> Import Session -> Rise-Above-Meld.json", _
+  "This copies the SCENES folder to your Desktop." & vbCrLf & vbCrLf & _
+  "Then in Meld: File -> Import Session -> Rise Above scenes -> 0 ALL SCENES.json" & vbCrLf & _
+  "(or 4 RACE.json to try just one look)", _
   64, "Rise Above"
 
 If Not fso.FileExists(src) Then
@@ -26,20 +27,32 @@ dest = fso.BuildPath(desktop, "Rise-Above-Meld.json")
 fso.CopyFile src, dest, True
 fso.CopyFile src, shell.ExpandEnvironmentStrings("%USERPROFILE%\OneDrive\Desktop\Rise-Above-Meld.json"), True
 
+scenesSrc = fso.BuildPath(here, "LOAD-THESE-SCENES")
+scenesDest = fso.BuildPath(desktop, "Rise Above scenes")
+If fso.FolderExists(scenesSrc) Then
+  If fso.FolderExists(scenesDest) Then fso.DeleteFolder scenesDest, True
+  fso.CopyFolder scenesSrc, scenesDest, True
+End If
+
 note = fso.BuildPath(desktop, "READ-THIS-THEN-OPEN-MELD.txt")
 Dim ts
 Set ts = fso.CreateTextFile(note, True)
-ts.WriteLine "RISE ABOVE - next clicks in Meld Studio"
+ts.WriteLine "RISE ABOVE - load a scene in Meld Studio"
 ts.WriteLine "1. Open Meld Studio (not OBS)"
-ts.WriteLine "2. File"
-ts.WriteLine "3. Import Session"
-ts.WriteLine "4. Pick Rise-Above-Meld.json on your DESKTOP"
-ts.WriteLine "   or IMPORT-THIS-IN-MELD.json in:"
-ts.WriteLine here
+ts.WriteLine "2. File -> Import Session"
+ts.WriteLine "3. Open Desktop folder: Rise Above scenes"
+ts.WriteLine "4. Pick 0 ALL SCENES.json for every scene"
+ts.WriteLine "   or 4 RACE.json to try just the race look"
+ts.WriteLine "Those files are also in:"
+ts.WriteLine fso.BuildPath(here, "LOAD-THESE-SCENES")
 ts.Close
 
 shell.Run "notepad.exe """ & note & """", 1, False
-shell.Run "explorer.exe /select,""" & dest & """", 1, False
+If fso.FolderExists(scenesDest) Then
+  shell.Run "explorer.exe """ & scenesDest & """", 1, False
+Else
+  shell.Run "explorer.exe """ & scenesSrc & """", 1, False
+End If
 shell.Run "cmd.exe /k """ & fso.BuildPath(here, "tools\Start-MeldLayout.bat") & """", 1, False
 
 candidates = Array( _
@@ -55,6 +68,6 @@ For i = 0 To UBound(candidates)
   End If
 Next
 
-MsgBox "Copied to Desktop:" & vbCrLf & dest & vbCrLf & vbCrLf & _
-  "Now in Meld: File -> Import Session -> that file." & vbCrLf & _
+MsgBox "Scenes folder on Desktop: Rise Above scenes" & vbCrLf & vbCrLf & _
+  "Meld -> File -> Import Session -> 0 ALL SCENES.json" & vbCrLf & _
   "Leave the black overlay window open.", 64, "Rise Above"

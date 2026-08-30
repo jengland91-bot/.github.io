@@ -1,0 +1,69 @@
+{
+  "items": {
+    "394A627BB2674487DB30E4C7EAF6420B": {
+      "type": "track",
+      "name": "Microphone",
+      "monitoring": false,
+      "muted": false
+    },
+    "32C10673C8150857BC72CB0D71C3E105": {
+      "type": "scene",
+      "name": "GRID",
+      "index": 0,
+      "current": true,
+      "staged": false
+    },
+    "E03FF76A925E36C217CCE027F709F27B": {
+      "type": "layer",
+      "parent": "32C10673C8150857BC72CB0D71C3E105",
+      "name": "Overlay / Grid HUD",
+      "index": 0,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "rotation": 0,
+      "url": "http://127.0.0.1:5500/overlays/chatting.html"
+    },
+    "551562F36E5405E5AEEDE674AB5110A7": {
+      "type": "layer",
+      "parent": "32C10673C8150857BC72CB0D71C3E105",
+      "name": "Social Stream / Chat",
+      "index": 1,
+      "visible": true,
+      "x": 1032,
+      "y": 760,
+      "width": 840,
+      "height": 268,
+      "rotation": 0,
+      "url": "http://127.0.0.1:5500/socialstream/chat.html"
+    },
+    "C989D6B2D2289BDA0F8B21F1CFFC39A6": {
+      "type": "layer",
+      "parent": "32C10673C8150857BC72CB0D71C3E105",
+      "name": "Social Stream / Featured",
+      "index": 2,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "rotation": 0,
+      "url": "http://127.0.0.1:5500/socialstream/featured.html"
+    },
+    "ED2FABB9915A055B1FE9658AA07CBEE0": {
+      "type": "layer",
+      "parent": "32C10673C8150857BC72CB0D71C3E105",
+      "name": "Lumia / Overlay",
+      "index": 3,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "rotation": 0,
+      "url": "http://127.0.0.1:5500/socialstream/lumia.html"
+    }
+  }
+}

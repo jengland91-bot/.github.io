@@ -1,0 +1,69 @@
+{
+  "items": {
+    "394A627BB2674487DB30E4C7EAF6420B": {
+      "type": "track",
+      "name": "Microphone",
+      "monitoring": false,
+      "muted": false
+    },
+    "B575820E19A315414B84D25EC752E6F3": {
+      "type": "scene",
+      "name": "RACE DUAL",
+      "index": 0,
+      "current": true,
+      "staged": false
+    },
+    "88AD3EFA1D6F93D8FEC042485ED9C9E0": {
+      "type": "layer",
+      "parent": "B575820E19A315414B84D25EC752E6F3",
+      "name": "Overlay / Dual HUD",
+      "index": 0,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "rotation": 0,
+      "url": "http://127.0.0.1:5500/overlays/race-dual.html"
+    },
+    "6A20014B321C8E899EAF9D72660D04A0": {
+      "type": "layer",
+      "parent": "B575820E19A315414B84D25EC752E6F3",
+      "name": "Social Stream / Chat",
+      "index": 1,
+      "visible": true,
+      "x": 1248,
+      "y": 428,
+      "width": 640,
+      "height": 580,
+      "rotation": 0,
+      "url": "http://127.0.0.1:5500/socialstream/chat.html"
+    },
+    "4D8D1FFA0F90D3BC778D2357144039B6": {
+      "type": "layer",
+      "parent": "B575820E19A315414B84D25EC752E6F3",
+      "name": "Social Stream / Featured",
+      "index": 2,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "rotation": 0,
+      "url": "http://127.0.0.1:5500/socialstream/featured.html"
+    },
+    "1CB4C6B6A52909A72A7883E5C396FFC4": {
+      "type": "layer",
+      "parent": "B575820E19A315414B84D25EC752E6F3",
+      "name": "Lumia / Overlay",
+      "index": 3,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "rotation": 0,
+      "url": "http://127.0.0.1:5500/socialstream/lumia.html"
+    }
+  }
+}

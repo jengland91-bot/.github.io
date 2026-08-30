@@ -8,7 +8,7 @@ Open [START-HERE.txt](START-HERE.txt). Apps you need: [apps.html](apps.html) / [
 
 1. Extract `Rise-Above-Meld.zip` (do not open files from inside the zip).
 2. Double-click `00-DOUBLE-CLICK-ME.html` if the bat did nothing. Or `1-OPEN-IN-MELD.bat` (a black window must stay open).
-3. Meld → **File → Import Session** → `IMPORT-THIS-IN-MELD.json` in that folder, or `Rise-Above-Meld.json` on the Desktop.
+3. Meld → **File → Import Session** → folder `LOAD-THESE-SCENES` → `0 ALL SCENES.json` (all 8 scenes) or a numbered file such as `4 RACE.json`.
 4. Or drag files from [`DROP-INTO-MELD/`](DROP-INTO-MELD/README.txt) onto each canvas.
 5. Add Game Capture + four Video Device cameras. Size them on the [layout board](meld/index.html).
 
