@@ -6,33 +6,29 @@ cd /d "%~dp0"
 
 echo.
 echo ========================================
-echo   RISE ABOVE  -  LOAD INTO MELD
+echo   RISE ABOVE  -  MELD SESSION FILE
 echo ========================================
 echo.
-echo This window MUST stay open.
-echo It writes the 8 scenes into Meld, starts overlays,
-echo and opens Meld with STARTING SOON already loaded.
+echo This copies Rise-Above.json to your Desktop
+echo and opens Meld. It does NOT close Meld or
+echo rewrite Meld's files (that crashed Meld).
 echo.
 
 if not exist "%~dp0meld\Rise-Above-Meld.json" goto :wrongfolder
 if not exist "%~dp0LOAD-THESE-SCENES\0 ALL SCENES.json" goto :wrongfolder
 
-echo Closing Meld if it is open, then installing scenes...
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\load-into-meld.ps1"
 if errorlevel 1 (
   echo PowerShell could not finish. Opening the scenes folder instead.
   start "" explorer.exe "%~dp0LOAD-THESE-SCENES"
-  start "Rise Above overlays - KEEP OPEN" cmd /k "%~dp0tools\Start-MeldLayout.bat"
 )
 
 echo.
-echo You should see STARTING SOON / GRID / RACE / BRB in Meld.
-echo Leave the overlay window open. Then add Game Capture + cameras.
+echo IN MELD:  File  -  Import Session  -  Desktop\Rise-Above.json
+echo (Ctrl+V pastes the path.)
+echo Then you should see STARTING SOON / GRID / RACE / BRB.
 echo.
-echo If Meld is still empty, use the Desktop shortcut
-echo   Rise Above Meld
-echo or File - Import Session - Ctrl+V - Open.
-echo A log is on your Desktop: Rise-Above-Meld-load-log.txt
+echo If Meld crashed before: File - Restore from Backup, then Import Session.
 echo.
 pause
 goto :eof
@@ -41,19 +37,11 @@ goto :eof
 color 0C
 echo.
 echo ========================================
-echo  WRONG FOLDER - NOTHING TO IMPORT
+echo  WRONG FOLDER
 echo ========================================
 echo.
-echo You double-clicked the bat from INSIDE the zip,
-echo or from a temp folder. That never works.
-echo.
-echo Close this. In Downloads:
-echo   right-click the zip GitHub gave you
-echo   Extract All
-echo Then open that FOLDER (look for FIND-ME.txt)
-echo and double-click 1-OPEN-IN-MELD.bat
-echo.
-echo If Windows would not download the zip, open GET-THE-KIT.txt
+echo Extract the GitHub zip first. Look for FIND-ME.txt.
+echo Or skip the zip: download only the JSON. See GET-THE-KIT.txt
 echo.
 echo This copy is running from:
 echo   %~dp0

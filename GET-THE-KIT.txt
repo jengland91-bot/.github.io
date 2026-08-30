@@ -1,26 +1,27 @@
-WINDOWS BLOCKED THE OLD DOWNLOAD
-================================
-That is SmartScreen being scared of a .bat file. It is not a virus.
-Do not use the old "raw" Rise-Above-Meld.zip link.
+DO NOT RUN THE OLD BAT THAT CLOSES MELD
+=========================================
+That crashed Meld. Use this instead.
 
-GET THE KIT FROM GITHUB (this one Windows allows)
-=================================================
-Open this page:
-  https://github.com/jengland91-bot/.github.io/tree/cursor/meld-drag-drop-addons-ea5b
+WINDOWS BLOCKS THE ZIP. DOWNLOAD ONLY THIS JSON
+================================================
+Right-click this link -> Save link as -> Desktop\Rise-Above.json
 
-1. Click the green  Code  button.
-2. Click  Download ZIP.
-3. If Chrome/Edge/Windows says "not commonly downloaded":
-     click the arrow or "..." on the download  ->  Keep  ->  Keep anyway.
-   If a blue Windows box says "Windows protected your PC":
-     More info  ->  Run anyway.
-4. In Downloads, RIGHT-CLICK the zip -> Extract All -> Extract.
-5. Open the new FOLDER (the name looks weird — that is normal).
-   You are in the right place if you see FIND-ME.txt and 1-OPEN-IN-MELD.bat.
-6. Double-click  1-OPEN-IN-MELD.bat
-   If Windows blocked the bat: right-click it -> Properties -> Unblock -> OK.
+  https://raw.githubusercontent.com/jengland91-bot/.github.io/refs/heads/cursor/meld-drag-drop-addons-ea5b/IMPORT-THIS-IN-MELD.json
 
-Direct download (same GitHub zip, not the blocked raw file):
-  https://github.com/jengland91-bot/.github.io/archive/refs/heads/cursor/meld-drag-drop-addons-ea5b.zip
+Same file, easier name:
 
-Then leave the overlay window open. Meld should show STARTING SOON.
+  https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/IMPORT-THIS-IN-MELD.json
+
+THEN IN MELD STUDIO
+===================
+1. Open Meld Studio (normal icon, not a special shortcut).
+2. If Meld crashed last time: File -> Restore from Backup.
+3. File -> Import Session   (NOT Import OBS Session)
+4. Pick Desktop\Rise-Above.json  (or the file you just saved)
+5. You should see STARTING SOON / GRID / RACE / BRB.
+
+Overlays load from the internet. You do not need a black server window.
+Then add Game Capture + your cameras.
+
+If the JSON download is blocked too, open this page and click Raw -> Save:
+  https://github.com/jengland91-bot/.github.io/blob/cursor/meld-drag-drop-addons-ea5b/IMPORT-THIS-IN-MELD.json

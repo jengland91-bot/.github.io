@@ -2,14 +2,13 @@
 
 Overlays are HTML. In Meld they are **Browser** layers.
 
-## Fast path (the bat writes the scenes in)
+## Fast path (one JSON file)
 
-1. Get the kit with GitHub **Code → Download ZIP** ([GET-THE-KIT.txt](../GET-THE-KIT.txt)). Extract All. Do not open files from inside the zip window.
-2. Double-click `1-OPEN-IN-MELD.bat`. It closes Meld, writes `session.json` into Meld’s data folder, then opens Meld with STARTING SOON / GRID / RACE / BRB already there. You do not paste code into Meld.
-3. If the bat flashed and vanished, double-click `00-DOUBLE-CLICK-ME.html` or `00-CLICK-ME.vbs`. Unblock the bat if Windows blocked it.
-4. If Meld is still empty, use the Desktop shortcut **Rise Above Meld**, or **File → Import Session** → `LOAD-THESE-SCENES/0 ALL SCENES.json`.
-5. Add **Game Capture** (`Game / Main`) and **Video Device** cameras. Size them to the [layout board](../meld/index.html). Overlay stays on top.
-6. Process Audio of the game + mic. No desktop / Discord.
+1. Download `IMPORT-THIS-IN-MELD.json` ([GET-THE-KIT.txt](../GET-THE-KIT.txt)). Windows will not block a JSON file. Do not run the old bat that closed Meld — that crashed it.
+2. In Meld: **File → Import Session** → that file. If Meld crashed: **File → Restore from Backup** first.
+3. You should see STARTING SOON / GRID / RACE / BRB. Overlays load from the internet.
+4. Add **Game Capture** (`Game / Main`) and **Video Device** cameras. Size them to the [layout board](../meld/index.html). Overlay stays on top.
+5. Process Audio of the game + mic. No desktop / Discord.
 
 ## Drag and drop (if you skip import)
 

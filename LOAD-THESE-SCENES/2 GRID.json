@@ -24,7 +24,7 @@
       "width": 1920,
       "height": 1080,
       "rotation": 0,
-      "url": "http://127.0.0.1:5500/overlays/chatting.html"
+      "url": "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/chatting.html"
     },
     "551562F36E5405E5AEEDE674AB5110A7": {
       "type": "layer",
@@ -37,7 +37,7 @@
       "width": 840,
       "height": 268,
       "rotation": 0,
-      "url": "http://127.0.0.1:5500/socialstream/chat.html"
+      "url": "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/socialstream/chat.html"
     },
     "C989D6B2D2289BDA0F8B21F1CFFC39A6": {
       "type": "layer",
@@ -50,7 +50,7 @@
       "width": 1920,
       "height": 1080,
       "rotation": 0,
-      "url": "http://127.0.0.1:5500/socialstream/featured.html"
+      "url": "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/socialstream/featured.html"
     },
     "ED2FABB9915A055B1FE9658AA07CBEE0": {
       "type": "layer",
@@ -63,7 +63,7 @@
       "width": 1920,
       "height": 1080,
       "rotation": 0,
-      "url": "http://127.0.0.1:5500/socialstream/lumia.html"
+      "url": "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/socialstream/lumia.html"
     }
   }
 }

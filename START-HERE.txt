@@ -1,44 +1,27 @@
-IF WINDOWS WOULD NOT DOWNLOAD THE ZIP
-=====================================
-Use GitHub, not the old raw zip link. Open GET-THE-KIT.txt
-or: https://github.com/jengland91-bot/.github.io/tree/cursor/meld-drag-drop-addons-ea5b
-Green Code button -> Download ZIP.
-If a popup says it is uncommon: Keep -> Keep anyway.
+IF MELD CRASHED
+===============
+Open Meld normally. File -> Restore from Backup.
+Do NOT run the old bat that closes Meld.
 
-IF THE BAT DID NOTHING
-======================
-You probably opened files from INSIDE the zip, or Windows blocked the .bat.
+GET THE SCENES (Windows will not block this)
+===========================================
+Download this JSON (right-click -> Save as -> Desktop\Rise-Above.json):
 
-1. Close the zip window.
-2. In Downloads, RIGHT-CLICK the zip -> Extract All -> Extract.
-3. Open the new FOLDER (not the zip). Look for FIND-ME.txt.
-4. Double-click  00-DOUBLE-CLICK-ME.html
-   That always opens this page in your browser.
+  https://raw.githubusercontent.com/jengland91-bot/.github.io/refs/heads/cursor/meld-drag-drop-addons-ea5b/IMPORT-THIS-IN-MELD.json
 
-Then double-click 1-OPEN-IN-MELD.bat. It CLOSES Meld, writes the 8 scenes
-into Meld, and opens Meld again with STARTING SOON already there.
-You do not paste code. You do not click Import Session unless it failed.
+Then in Meld: File -> Import Session -> pick that file.
+You should see STARTING SOON / GRID / RACE / BRB.
+Overlays load from the internet. No zip. No bat.
 
-If Windows blocked the bat: right-click 1-OPEN-IN-MELD.bat
--> Properties -> check Unblock -> OK -> double-click it.
-A BLACK WINDOW must stay open. If it flashes and vanishes, use 00-CLICK-ME.vbs.
+More detail: GET-THE-KIT.txt
 
 ------------------------------------------------------------------------
-NORMAL PATH (after extract)
-===========================
-Double-click  1-OPEN-IN-MELD.bat
-
-Wait. Meld may close and reopen. That is the installer writing the scenes.
-Leave the overlay window open.
-
-If Meld shows STARTING SOON / GRID / RACE / BRB, you are done.
-Then add Game Capture + cameras.
-
-If Meld is still empty, use the Desktop shortcut  Rise Above Meld
-(or File -> Import Session -> Ctrl+V -> Open).
-A log is on your Desktop: Rise-Above-Meld-load-log.txt
-
-You do not look inside a meld\ folder. You do not paste code.
+IF YOU ALREADY HAVE THE FOLDER
+==============================
+Do not run a bat that says it will CLOSE Meld.
+In Meld: File -> Import Session -> LOAD-THESE-SCENES\0 ALL SCENES.json
+or Desktop\Rise-Above.json after you run the NEW 1-OPEN-IN-MELD.bat
+(it only copies the JSON, it does not close Meld).
 
 ------------------------------------------------------------------------
 APPS
@@ -48,26 +31,18 @@ APPS
   Streamer.bot         https://streamer.bot/               YOU ARE GETTING THIS — !race !brb !face
   Social Stream Ninja  https://socialstream.ninja/         YOU ARE GETTING THIS — chat on stream
 
-  Also: Chrome or Edge (SSN extension), BeamNG.drive, this extracted zip.
-  Visual list: open apps.html  (or tools\Start-MeldLayout.bat then click Apps)
+  Also: Chrome or Edge (SSN extension), BeamNG.drive.
+  Visual list: open apps.html
 
 ------------------------------------------------------------------------
-DRAG AND DROP — MELD STUDIO
-------------------------------------------------------------------------
-1. Right-click the zip -> Extract All. Do not open files from inside the zip.
-2. Double-click 1-OPEN-IN-MELD.bat. Wait — it installs the scenes into Meld.
-   Leave the overlay window open while you are live.
-3. That creates STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING
-   plus the HUD, Social Stream chat, and Lumia browser layers.
-
-4. Add game + cameras (once). Size them to the layout board that opened:
+AFTER IMPORT
+------------
+Add game + cameras (once). Size them to the layout board:
    Layers + -> Game Capture     name: Game / Main
    Layers + -> Video Device     Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals
    Overlay stays on top. Process Audio of BeamNG + your mic. No desktop / Discord.
 
-5. If a scene is missing its HUD, open DROP-INTO-MELD\ and drag
-   "RACE - Main.html" onto the Main canvas. Same for the other scene names.
-   Portrait files go on the Portrait canvas (Settings -> General -> Multi Canvas).
+Portrait files go on the Portrait canvas (Settings -> General -> Multi Canvas).
 
 Lumia chat for YOU: gaming monitor, or tools\Open-ChatForYou.bat.
 Do not capture that window.
@@ -78,32 +53,18 @@ Names / photos / SSN session / Lumia overlay URL:
 
 Streamer.bot (optional, clicks — no code in Meld):
   Connect Streamer.bot to Meld, then Actions → Meld Studio → Show Scene.
-  Skip it until you want !race. Click the scene in Meld until then.
   Guide: streamerbot\README.md
 
 Social Stream Ninja: socialstream\index.html
-
 Full Meld page: docs\meld.html
 Layout board:   meld\index.html
 Apps list:      apps.html
 
-LUMIA CHAT FOR YOU (gaming screen, not the stream):
-  1. Lumia Stream open. Connections -> Twitch (and Kick/YouTube if you use them).
-  2. Do NOT put that Chatbox on the stream if you only want it for you.
-  3. Double-click tools\Open-ChatForYou.bat and park it on the BeamNG monitor.
-
-LUMIA ON MELD (only if viewers should see alerts):
-  Paste the Lumia overlay URL into overlays\shared\config.js -> lumia.overlayUrl
-  Reload Lumia / Overlay in Meld. Alerts only — Social Stream Ninja is the chat.
-
 YOUR PHOTOS on STARTING SOON, BRB, ENDING:
   Put starting.jpg, brb.jpg, ending.jpg in overlays\shared\backdrops\
-  Then reload the Browser overlay in Meld.
+  Then reload the Browser overlay in Meld. (Photos only apply if you
+  use the local overlay files. The imported session uses online overlays.)
 
 CAMERAS: Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals.
 DESK = other games, sit at the desk (face + room, no wheel).
 Skip RACE DUAL until you have a second BeamNG view.
-
-STREAMER.BOT COMMANDS (after Streamer.bot is connected to Meld):
-  !race !dual !replay !grid !desk !brb !ending !starting
-  !face !room !wheel !pedals !rig !game

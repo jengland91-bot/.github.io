@@ -24,7 +24,7 @@
       "width": 1920,
       "height": 1080,
       "rotation": 0,
-      "url": "http://127.0.0.1:5500/overlays/race-dual.html"
+      "url": "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/overlays/race-dual.html"
     },
     "6A20014B321C8E899EAF9D72660D04A0": {
       "type": "layer",
@@ -37,7 +37,7 @@
       "width": 640,
       "height": 580,
       "rotation": 0,
-      "url": "http://127.0.0.1:5500/socialstream/chat.html"
+      "url": "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/socialstream/chat.html"
     },
     "4D8D1FFA0F90D3BC778D2357144039B6": {
       "type": "layer",
@@ -50,7 +50,7 @@
       "width": 1920,
       "height": 1080,
       "rotation": 0,
-      "url": "http://127.0.0.1:5500/socialstream/featured.html"
+      "url": "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/socialstream/featured.html"
     },
     "1CB4C6B6A52909A72A7883E5C396FFC4": {
       "type": "layer",
@@ -63,7 +63,7 @@
       "width": 1920,
       "height": 1080,
       "rotation": 0,
-      "url": "http://127.0.0.1:5500/socialstream/lumia.html"
+      "url": "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@rise-above/socialstream/lumia.html"
     }
   }
 }

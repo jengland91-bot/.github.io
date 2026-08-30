@@ -15,12 +15,7 @@
       padding: 28px 18px 80px;
     }
     main { max-width: 820px; margin: 0 auto; }
-    .kicker {
-      color: var(--g);
-      letter-spacing: 0.28em;
-      font-weight: 700;
-      font-size: 13px;
-    }
+    .kicker { color: var(--g); letter-spacing: 0.28em; font-weight: 700; font-size: 13px; }
     h1 { font-size: 40px; line-height: 0.95; margin: 8px 0 18px; }
     h2 { font-size: 22px; margin: 28px 0 10px; color: var(--g); }
     p, li { color: #c4b490; }
@@ -54,29 +49,28 @@
 </head>
 <body>
 <main>
-  <div class="kicker">WINDOWS SECURITY</div>
-  <h1>THE OLD ZIP LINK IS BLOCKED. USE GITHUB’S DOWNLOAD ZIP.</h1>
+  <div class="kicker">MELD STUDIO</div>
+  <h1>DOWNLOAD THE JSON. IMPORT SESSION. DO NOT RUN THE OLD BAT.</h1>
 
   <div class="box">
-    <p>Windows SmartScreen blocks a zip that is only a <code>.bat</code> sitting on a “raw file” URL. That is caution, not a virus.</p>
-    <p style="margin-top:10px"><strong>Use GitHub’s normal source download instead.</strong></p>
+    <p>Windows blocked the zip. The old bat closed Meld and crashed it. <strong>Do not use those.</strong></p>
+    <p style="margin-top:10px">This is one JSON file. Windows allows it. Overlays load from the internet.</p>
   </div>
 
   <p>
-    <a class="btn" href="https://github.com/jengland91-bot/.github.io/archive/refs/heads/cursor/meld-drag-drop-addons-ea5b.zip">Download ZIP from GitHub</a>
-    <a class="ghost" href="https://github.com/jengland91-bot/.github.io/tree/cursor/meld-drag-drop-addons-ea5b">Open the GitHub folder</a>
+    <a class="btn" href="https://raw.githubusercontent.com/jengland91-bot/.github.io/refs/heads/cursor/meld-drag-drop-addons-ea5b/IMPORT-THIS-IN-MELD.json" download="Rise-Above.json">Download Rise-Above.json</a>
+    <a class="ghost" href="https://github.com/jengland91-bot/.github.io/blob/cursor/meld-drag-drop-addons-ea5b/IMPORT-THIS-IN-MELD.json">If that fails, open on GitHub → Raw → Save</a>
   </p>
 
-  <h2>If a popup still appears</h2>
+  <h2>In Meld</h2>
   <ol>
-    <li>Chrome / Edge download bar: click the arrow or <strong>…</strong> → <strong>Keep</strong> → <strong>Keep anyway</strong>.</li>
-    <li>Blue “Windows protected your PC”: <strong>More info</strong> → <strong>Run anyway</strong>.</li>
-    <li>Right-click the zip → Extract All. Open the new folder (the name looks weird — that is normal).</li>
-    <li>You are in the right place if you see <code>FIND-ME.txt</code> and <code>1-OPEN-IN-MELD.bat</code>.</li>
-    <li>Double-click <code>1-OPEN-IN-MELD.bat</code>. If Windows blocked the bat: right-click → Properties → Unblock → OK.</li>
+    <li>Open Meld Studio from the Start menu (normal icon).</li>
+    <li>If it crashed last time: <strong>File → Restore from Backup</strong>.</li>
+    <li><strong>File → Import Session</strong> — not Import OBS Session.</li>
+    <li>Pick <code>Rise-Above.json</code> (Downloads or Desktop).</li>
+    <li>You should see STARTING SOON, GRID, RACE, BRB.</li>
+    <li>Add Game Capture + cameras.</li>
   </ol>
-
-  <p>Meld may close and reopen. You should see STARTING SOON. Leave the overlay window open.</p>
 </main>
 </body>
 </html>

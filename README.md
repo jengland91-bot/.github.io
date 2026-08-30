@@ -6,9 +6,9 @@ Open [START-HERE.txt](START-HERE.txt). Apps you need: [apps.html](apps.html) / [
 
 ## Drag and drop (Meld)
 
-1. Get the kit with GitHub **Code → Download ZIP** (see [GET-THE-KIT.txt](GET-THE-KIT.txt)). Do not use the old raw `Rise-Above-Meld.zip` link — Windows SmartScreen blocks it.
-2. Extract All. Open the folder (look for `FIND-ME.txt`). Double-click `1-OPEN-IN-MELD.bat`. It closes Meld, writes all 8 scenes into Meld, then opens Meld with STARTING SOON loaded. You do not paste code.
-3. If Meld is still empty: use the Desktop shortcut **Rise Above Meld**, or **File → Import Session** → Ctrl+V, or pick `LOAD-THESE-SCENES/0 ALL SCENES.json`.
+1. Download **only** `IMPORT-THIS-IN-MELD.json` (see [GET-THE-KIT.txt](GET-THE-KIT.txt)). Windows will not block a JSON file.
+2. In Meld: **File → Import Session** → that file. You should see STARTING SOON. Overlays load from the internet.
+3. If Meld crashed from the old bat: **File → Restore from Backup**, then Import Session.
 4. Add Game Capture + four Video Device cameras. Size them on the [layout board](meld/index.html).
 
 Guides: [Meld](docs/meld.html) · [Social Stream Ninja](docs/socialstream.html) · [Streamer.bot](docs/streamerbot.html) · [Lumia](docs/lumia.html)

@@ -13,11 +13,11 @@ If Not fso.FileExists(fso.BuildPath(here, "meld\Rise-Above-Meld.json")) Then
   WScript.Quit 1
 End If
 
-MsgBox "Rise Above will CLOSE Meld, write the 8 scenes in, then open Meld again." & vbCrLf & vbCrLf & _
-  "Wait about 15 seconds. Leave the black overlay window open.", 64, "Rise Above"
+MsgBox "This copies Rise-Above.json to your Desktop and opens Meld." & vbCrLf & vbCrLf & _
+  "It does NOT close Meld." & vbCrLf & vbCrLf & _
+  "Then in Meld: File -> Import Session -> Desktop\Rise-Above.json", 64, "Rise Above"
 
 shell.Run "powershell.exe -NoProfile -ExecutionPolicy Bypass -File """ & ps1 & """", 1, True
 
-MsgBox "If Meld shows STARTING SOON / GRID / RACE / BRB, you are done." & vbCrLf & vbCrLf & _
-  "If it is empty, use the Desktop shortcut Rise Above Meld" & vbCrLf & _
-  "or File -> Import Session -> Ctrl+V -> Open.", 64, "Rise Above"
+MsgBox "In Meld: File -> Import Session -> Desktop\Rise-Above.json" & vbCrLf & vbCrLf & _
+  "If Meld crashed before: File -> Restore from Backup first.", 64, "Rise Above"

@@ -1,19 +1,8 @@
 YOU ARE IN THE RIGHT FOLDER
 ===========================
 
-1. If you are looking INSIDE a .zip, stop. Close it.
-2. In Downloads, RIGHT-CLICK the zip -> Extract All -> Extract.
-3. Open the new FOLDER (not the zip). The name may look weird.
-   You are in the right place if you see this file and 1-OPEN-IN-MELD.bat.
-4. Double-click  1-OPEN-IN-MELD.bat
-   Wait. Meld may close and reopen. That writes the 8 scenes in.
-5. If Windows blocked the bat: right-click it -> Properties -> Unblock.
-   Or double-click 00-DOUBLE-CLICK-ME.html
+Do NOT run an old bat that closes Meld (that crashed it).
 
-If Meld is empty: use the Desktop shortcut  Rise Above Meld
-or File -> Import Session -> Ctrl+V -> Open
-(or pick LOAD-THESE-SCENES\0 ALL SCENES.json).
-Log: Desktop\Rise-Above-Meld-load-log.txt
+In Meld: File -> Import Session -> LOAD-THESE-SCENES\0 ALL SCENES.json
 
-Could not even download the zip? Open GET-THE-KIT.txt
-(use GitHub Code -> Download ZIP, then Keep anyway if Windows asks).
+Or download only the JSON (Windows will not block it). See GET-THE-KIT.txt
