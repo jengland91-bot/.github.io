@@ -8,12 +8,8 @@ You probably opened files from INSIDE the zip, or Windows blocked the .bat.
 4. Double-click  00-DOUBLE-CLICK-ME.html
    That always opens this page in your browser.
 
-Then in Meld Studio:
-   File  ->  Import Session  ->  folder LOAD-THESE-SCENES
-   Pick  0 ALL SCENES.json     (all 8 scenes)
-   or    4 RACE.json           (just the race look)
-
-Each numbered file is one scene you can load by itself.
+Then in Meld Studio, if scenes did not appear:
+   File  ->  Import Session  ->  Ctrl+V  (or folder LOAD-THESE-SCENES)
 
 If you want the bat to work: right-click 1-OPEN-IN-MELD.bat
 -> Properties -> check Unblock -> OK -> double-click it.
@@ -24,11 +20,14 @@ NORMAL PATH (after extract)
 ===========================
 Double-click  1-OPEN-IN-MELD.bat
 
-That copies a folder named Rise Above scenes to your DESKTOP, opens Notepad,
-tries to open Meld, and starts the overlay window (leave it open).
+Wait. It starts the overlays, opens Meld, and tries to load all 8 scenes
+into Meld for you. Leave the overlay window open.
 
-In Meld: File -> Import Session -> Rise Above scenes -> 0 ALL SCENES.json
-(or a numbered file such as 4 RACE.json).
+If Meld shows STARTING SOON / GRID / RACE / BRB, you are done.
+Then add Game Capture + cameras.
+
+If Meld is still empty: File -> Import Session -> Ctrl+V -> Open
+(or pick Desktop\Rise Above scenes\0 ALL SCENES.json).
 
 You do not look inside a meld\ folder. You do not paste code.
 

@@ -3,17 +3,11 @@ YOU ARE IN THE RIGHT FOLDER
 
 1. If you are looking INSIDE a .zip, stop. Close it.
 2. In Downloads, RIGHT-CLICK the zip -> Extract All -> Extract.
-3. Open the new FOLDER (not the zip). It is named Rise-Above-Meld
-   (or .github.io-cursor-meld-drag-drop-addons-ea5b if you used the GitHub zip).
-4. Double-click  00-DOUBLE-CLICK-ME.html   (always opens a page)
-   or  00-CLICK-ME.vbs                     (always pops a box)
-   or  1-OPEN-IN-MELD.bat                  (black window must stay open)
-5. In Meld: File -> Import Session -> folder LOAD-THESE-SCENES
-   Pick 0 ALL SCENES.json (every scene) or a numbered file (one look).
+3. Open the new FOLDER (not the zip). It is named Rise-Above-Meld.
+4. Double-click  1-OPEN-IN-MELD.bat
+   Wait. Meld should open with the scenes loaded.
+5. If Windows blocked the bat: right-click it -> Properties -> Unblock.
+   Or double-click 00-CLICK-ME.vbs / 00-DOUBLE-CLICK-ME.html
 
-If the bat flashes and vanishes: Windows blocked it.
-Right-click the .bat -> Properties -> Unblock -> OK.
-
-Windows search: click the taskbar search box, type
-  00-DOUBLE-CLICK-ME
-after you extract.
+If Meld is empty: File -> Import Session -> Ctrl+V -> Open
+(or pick LOAD-THESE-SCENES\0 ALL SCENES.json).

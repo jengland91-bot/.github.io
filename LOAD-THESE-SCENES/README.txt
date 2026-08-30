@@ -1,9 +1,14 @@
-LOAD THESE IN MELD (one file = one look)
-========================================
+LOAD THESE IN MELD
+==================
 
+Easiest: go up one folder and double-click 1-OPEN-IN-MELD.bat
+That opens Meld and tries to load all 8 scenes for you.
+
+If Meld is still empty:
 1. Open Meld Studio.
 2. File -> Import Session
-3. Open this folder and pick a file:
+3. Pick 0 ALL SCENES.json in this folder
+   (or a numbered file for one look).
 
    0 ALL SCENES.json     all 8 scenes (click them in Meld after import)
    1 STARTING SOON.json  countdown
