@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Stream Ninja — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../docs/docs.css" />
+  <style>
+    label { display: block; margin: 14px 0 6px; color: var(--paper); font-family: Rajdhani, sans-serif; letter-spacing: 0.08em; }
+    input {
+      width: 100%;
+      max-width: 520px;
+      padding: 10px 12px;
+      background: #000;
+      color: var(--paper);
+      border: 1px solid rgba(244, 239, 232, 0.2);
+      font-size: 16px;
+    }
+    .copy-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 18px; }
+    .copy-row button {
+      font-family: Rajdhani, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      background: var(--ember);
+      color: #101408;
+      border: 0;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+    .ok { color: var(--ice); }
+    code.url { display: block; word-break: break-all; margin-top: 6px; }
+  </style>
+</head>
+<body>
+<main>
+  <div class="kicker">SOCIAL STREAM NINJA</div>
+  <h1>CHAT ON STREAM</h1>
+  <p>Viewers see this chat. You still read chat on the gaming monitor with Lumia (or the dock below). One session ID ties the dock, the chat overlay, and the featured highlight together.</p>
+
+  <div class="callout">
+    <h2>Do this once</h2>
+    <ol>
+      <li>Install <a href="https://socialstream.ninja/" target="_blank" rel="noreferrer">Social Stream Ninja</a> (Chrome/Edge extension, or the desktop app).</li>
+      <li>Open Twitch / YouTube / Kick / TikTok chat. Click the extension → Enable.</li>
+      <li>Copy the <strong>session ID</strong> from the popup. Paste it below, and into <code>overlays/shared/config.js</code> → <code>ssn.session</code>.</li>
+      <li>Leave the source chat tab (or the SSN app) open while you are live.</li>
+    </ol>
+  </div>
+
+  <label for="session">Session ID</label>
+  <input id="session" placeholder="paste session id" autocomplete="off" />
+
+  <h2>Copy these into Meld (or they are already in the imported session)</h2>
+  <p>Imported session uses <code>socialstream/chat.html</code> and <code>socialstream/featured.html</code>, which read the ID from config.js. These buttons are if you paste URLs yourself.</p>
+
+  <p><strong>Dock</strong> (your screen, not the stream) <code class="url" id="dock"></code></p>
+  <div class="copy-row"><button type="button" data-copy="dock">Copy dock URL</button></div>
+
+  <p><strong>Chat overlay</strong> (Meld Browser, sized to the chat well) <code class="url" id="chat"></code></p>
+  <div class="copy-row"><button type="button" data-copy="chat">Copy chat overlay URL</button></div>
+
+  <p><strong>Featured overlay</strong> (full 1920×1080, highlights you click in the dock) <code class="url" id="featured"></code></p>
+  <div class="copy-row"><button type="button" data-copy="featured">Copy featured URL</button> <span class="ok" id="copied" hidden>Copied</span></div>
+
+  <h2>Who does what</h2>
+  <table>
+    <tr><th>App</th><th>On stream</th><th>For you</th></tr>
+    <tr><td>Social Stream Ninja</td><td>Chat list + featured shoutouts</td><td>Dock (pick messages)</td></tr>
+    <tr><td>Lumia Stream</td><td>Follow/sub/raid alerts + lights</td><td>Chat-for-you on the gaming monitor</td></tr>
+    <tr><td>Streamer.bot</td><td>Nothing visual</td><td>!race !brb !face — switches Meld</td></tr>
+  </table>
+  <p>Do not put Lumia Chatbox and SSN chat in the same pocket. One chat on screen.</p>
+
+  <nav class="docs">
+    <a href="../START-HERE.txt">Start here</a> ·
+    <a href="../apps.html">Apps list</a> ·
+    <a href="../docs/socialstream.html">Full guide</a> ·
+    <a href="https://socialstream.ninja/docs/obs-quick-start.html" target="_blank" rel="noreferrer">SSN docs</a>
+  </nav>
+</main>
+<script src="../overlays/shared/config.js"></script>
+<script>
+  const input = document.getElementById("session");
+  const copied = document.getElementById("copied");
+  const host = location.origin && location.origin !== "file://" ? location.origin : "http://127.0.0.1:5500";
+  input.value = (window.STREAM && STREAM.ssn && STREAM.ssn.session) || "";
+
+  function urls() {
+    const id = input.value.trim() || "YOUR_SESSION_ID";
+    document.getElementById("dock").textContent = "https://socialstream.ninja/dock.html?session=" + id;
+    document.getElementById("chat").textContent = host + "/socialstream/chat.html";
+    document.getElementById("featured").textContent = host + "/socialstream/featured.html";
+  }
+  input.addEventListener("input", urls);
+  urls();
+
+  document.querySelectorAll("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-copy");
+      navigator.clipboard.writeText(document.getElementById(id).textContent).then(() => {
+        copied.hidden = false;
+        setTimeout(() => { copied.hidden = true; }, 1200);
+      });
+    });
+  });
+</script>
+</body>
+</html>

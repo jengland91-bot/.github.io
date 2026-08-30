@@ -1,1 +1,49 @@
-# .github.io
+# Rise Above — BeamNG kit (Meld first)
+
+Off-road overlay kit for **BeamNG.drive** with **four cameras** (Face, Room, Wheel, Pedals). Go live from **Meld Studio**. **Lumia Stream** for alerts and lights. **Streamer.bot** for `!race` / `!face`. **Social Stream Ninja** for chat on stream. Casterlabs is not used. Tag is **@jengland91**.
+
+Open [START-HERE.txt](START-HERE.txt). Apps you need: [apps.html](apps.html) / [APPS.md](APPS.md).
+
+## Drag and drop (Meld)
+
+1. Double-click `tools/Start-MeldLayout.bat` and leave it open.
+2. Meld → **File → Import Session** → [`meld/Rise-Above-Meld.json`](meld/Rise-Above-Meld.json)
+3. Or drag files from [`DROP-INTO-MELD/`](DROP-INTO-MELD/README.txt) onto each canvas.
+4. Add Game Capture + four Video Device cameras. Size them on the [layout board](meld/index.html).
+
+Guides: [Meld](docs/meld.html) · [Social Stream Ninja](docs/socialstream.html) · [Streamer.bot](docs/streamerbot.html) · [Lumia](docs/lumia.html)
+
+## Who does what
+
+| App | On the picture | For you |
+| --- | --- | --- |
+| Meld Studio | Game, cameras, go-live | Scenes |
+| This kit | HUD, Starting Soon, BRB, Ending | Layout board |
+| Social Stream Ninja | Chat + featured shoutouts | Dock |
+| Lumia Stream | Alerts + lights | Chat-for-you on the gaming monitor |
+| Streamer.bot | Nothing visual | `!race` `!brb` `!face` → Meld |
+
+Do not open OBS. Do not install Aitum or Casterlabs for this Meld setup.
+
+## Scenes
+
+| Scene | Wide overlay | Vertical overlay | Job |
+| --- | --- | --- | --- |
+| `STARTING SOON` | `overlays/starting-soon.html` | `overlays/vertical/starting-soon.html` | Countdown, staging lights |
+| `GRID` | `overlays/chatting.html` | `overlays/vertical/chatting.html` | Big face + room + wheel + pedals |
+| `DESK` | `overlays/desk.html` | `overlays/vertical/desk.html` | Other games: full game + face + room, no wheel/pedals |
+| `RACE` | `overlays/live.html` | `overlays/vertical/live.html` | BeamNG + four cams + chat |
+| `RACE DUAL` | `overlays/race-dual.html` | `overlays/vertical/race-dual.html` | Main view + second angle |
+| `REPLAY` | `overlays/replay.html` | `overlays/vertical/replay.html` | Clean game, no cams |
+| `BRB` | `overlays/brb.html` | `overlays/vertical/brb.html` | Pit stop |
+| `ENDING` | `overlays/ending.html` | `overlays/vertical/ending.html` | Checkered / thanks |
+
+## Customize
+
+Edit `overlays/shared/config.js` in Notepad, or double-click `tools/Change-Game.bat` for the Starting Soon title. Paste Social Stream Ninja `ssn.session` and optional `lumia.overlayUrl` in that same file. Drop `starting.jpg` / `brb.jpg` / `ending.jpg` in `overlays/shared/backdrops/`. Then reload the Browser layers in Meld.
+
+## Audio
+
+Process Audio of BeamNG + your mic. Do not capture desktop / Discord.
+
+OBS / TikTok LIVE Studio / Aitum paths are still in this repo if you need them later. They are not part of the Meld drag-and-drop setup.

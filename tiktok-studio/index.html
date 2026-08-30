@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TikTok LIVE Studio layout — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../docs/docs.css" />
+  <style>
+    main { max-width: 1080px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 20px; }
+    .toolbar button {
+      font-family: Rajdhani, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      background: transparent;
+      color: var(--sand);
+      border: 1px solid rgba(244, 239, 232, 0.14);
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+    .toolbar button.on { background: var(--ember); color: #101408; border-color: var(--ember); }
+    .pair { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; margin: 12px 0 24px; }
+    .stage-wrap h3 { margin-top: 0; }
+    .phone, .land {
+      position: relative;
+      background: #000;
+      border: 1px solid rgba(244, 239, 232, 0.16);
+      overflow: hidden;
+    }
+    .phone { width: 243px; height: 432px; }
+    .land { width: 422px; height: 238px; }
+    .box {
+      position: absolute;
+      box-sizing: border-box;
+      border: 1px solid rgba(124, 183, 1, 0.85);
+      background: rgba(124, 183, 1, 0.12);
+      color: #e8dcc8;
+      font-family: Rajdhani, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      padding: 2px 4px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .box.overlay, .box.lumia {
+      background: transparent;
+      border-style: dashed;
+      pointer-events: none;
+    }
+    .box.lumia { border-color: rgba(232, 220, 200, 0.35); }
+    .copy-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0 16px; }
+    .copy-row code { word-break: break-all; }
+    .copy-row button {
+      font-family: Rajdhani, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      background: var(--ember);
+      color: #101408;
+      border: 0;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    .ok { color: var(--ice); font-size: 14px; }
+  </style>
+</head>
+<body>
+<main>
+  <div class="kicker">TIKTOK LIVE STUDIO ONLY</div>
+  <h1>THE LAYOUT</h1>
+  <p>This is the Rise Above Dual layout for TikTok LIVE Studio. Studio cannot import a file, so you build it once in Dual layout using these sizes. Do not open OBS.</p>
+  <p>Dual layout rule: add everything on the <strong>phone</strong> canvas first. Those sources appear on landscape automatically. Then only resize / move them. One overlay Link per scene — the overlay flips itself when you stretch it to 1920×1080.</p>
+
+  <h2>Build it</h2>
+  <ol>
+    <li>Leave this window’s overlay server running.</li>
+    <li>TikTok LIVE Studio → Dual layout on.</li>
+    <li>Add scenes: STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING. DESK is sit-at-desk other games.</li>
+    <li>Stay on the <strong>phone</strong> canvas. Add Game, cameras, then Overlay Link, then Lumia Link. Copy the URL below. Size the Overlay Link 1080×1920.</li>
+    <li>Switch to the <strong>landscape</strong> canvas. Do not add a second overlay URL. Resize the same sources to the landscape numbers.</li>
+    <li>Audio: BeamNG + mic only. No desktop / Discord.</li>
+  </ol>
+  <p>Skip RACE DUAL until you have a second BeamNG view. Start with RACE.</p>
+
+  <div class="toolbar" id="scenes"></div>
+  <p id="url-line"></p>
+  <div class="copy-row">
+    <button type="button" id="copy">Copy overlay URL</button>
+    <button type="button" id="copy-setup">Copy setup boxes URL</button>
+    <span class="ok" id="copied" hidden>Copied</span>
+  </div>
+
+  <div class="pair">
+    <div class="stage-wrap">
+      <h3>Phone — add here first · 1080×1920</h3>
+      <div class="phone" id="phone"></div>
+    </div>
+    <div class="stage-wrap">
+      <h3>Landscape — resize only · 1920×1080</h3>
+      <div class="land" id="land"></div>
+    </div>
+  </div>
+
+  <h2 id="sizes-title">RACE sizes</h2>
+  <div id="tables"></div>
+
+  <p>Lumia: Connections → TikTok. Same overlay URL as a second Link, on top. Phone 1080×1920, then on landscape stretch it to 1920×1080. Switch scenes in Studio; chat <code>!race</code> does not control Studio.</p>
+  <p>Names and photos: edit <code>overlays/shared/config.js</code>, then refresh the Link in Studio.</p>
+
+  <nav class="docs">
+    <a href="../START-HERE.txt">Start here</a> ·
+    <a href="../docs/tiktok.html">Full guide</a> ·
+    <a href="../overlays/vertical/live.html?setup=1">RACE setup boxes</a>
+  </nav>
+</main>
+<script src="layout.js"></script>
+<script>
+  const L = window.RISE_TIKTOK_LAYOUT;
+  const host = location.origin && location.origin !== "file://" ? location.origin : "http://127.0.0.1:5500";
+  const bar = document.getElementById("scenes");
+  const phoneEl = document.getElementById("phone");
+  const landEl = document.getElementById("land");
+  const tables = document.getElementById("tables");
+  const urlLine = document.getElementById("url-line");
+  const copied = document.getElementById("copied");
+  let scene = "RACE";
+
+  function url(sceneName, setup) {
+    const path = L.overlays[sceneName];
+    return host + "/" + path + (setup ? (path.indexOf("?") >= 0 ? "&setup=1" : "?setup=1") : "");
+  }
+
+  function draw(el, items, canvas, cssW, cssH) {
+    el.innerHTML = "";
+    const sx = cssW / canvas.w;
+    const sy = cssH / canvas.h;
+    items.forEach((item) => {
+      const box = document.createElement("div");
+      box.className = "box " + item.kind;
+      box.style.left = item.x * sx + "px";
+      box.style.top = item.y * sy + "px";
+      box.style.width = item.w * sx + "px";
+      box.style.height = item.h * sy + "px";
+      box.textContent = item.name;
+      el.appendChild(box);
+    });
+  }
+
+  function table(title, items) {
+    const rows = items
+      .map((i) => "<tr><td>" + i.name + "</td><td>" + i.x + "</td><td>" + i.y + "</td><td>" + i.w + "</td><td>" + i.h + "</td></tr>")
+      .join("");
+    return "<h3>" + title + "</h3><table><thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead><tbody>" + rows + "</tbody></table>";
+  }
+
+  function show(name) {
+    scene = name;
+    bar.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.scene === name));
+    document.getElementById("sizes-title").textContent = name + " sizes";
+    urlLine.innerHTML = "Overlay Link (one URL for both canvases): <code>" + url(name) + "</code>";
+    draw(phoneEl, L.phone[name], L.phone.canvas, 243, 432);
+    draw(landEl, L.land[name], L.land.canvas, 422, 238);
+    tables.innerHTML = table("Phone — add these", L.phone[name]) + table("Landscape — resize the same sources", L.land[name]);
+  }
+
+  function flash() {
+    copied.hidden = false;
+    setTimeout(() => { copied.hidden = true; }, 1200);
+  }
+
+  L.scenes.forEach((name) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = name;
+    btn.dataset.scene = name;
+    btn.addEventListener("click", () => show(name));
+    bar.appendChild(btn);
+  });
+  document.getElementById("copy").addEventListener("click", () => {
+    navigator.clipboard.writeText(url(scene)).then(flash);
+  });
+  document.getElementById("copy-setup").addEventListener("click", () => {
+    navigator.clipboard.writeText(url(scene, true)).then(flash);
+  });
+  show("RACE");
+</script>
+</body>
+</html>

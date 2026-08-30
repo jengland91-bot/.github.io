@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meld Studio layout — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../docs/docs.css" />
+  <style>
+    main { max-width: 1080px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 20px; }
+    .toolbar button {
+      font-family: Rajdhani, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      background: transparent;
+      color: var(--sand);
+      border: 1px solid rgba(244, 239, 232, 0.14);
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+    .toolbar button.on { background: var(--ember); color: #101408; border-color: var(--ember); }
+    .pair { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; margin: 12px 0 24px; }
+    .stage-wrap h3 { margin-top: 0; }
+    .phone, .land {
+      position: relative;
+      background: #000;
+      border: 1px solid rgba(244, 239, 232, 0.16);
+      overflow: hidden;
+    }
+    .phone { width: 243px; height: 432px; }
+    .land { width: 422px; height: 238px; }
+    .box {
+      position: absolute;
+      box-sizing: border-box;
+      border: 1px solid rgba(124, 183, 1, 0.85);
+      background: rgba(124, 183, 1, 0.12);
+      color: #e8dcc8;
+      font-family: Rajdhani, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      padding: 2px 4px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .box.overlay, .box.lumia, .box.browser {
+      background: transparent;
+      border-style: dashed;
+      pointer-events: none;
+    }
+    .box.lumia { border-color: rgba(232, 220, 200, 0.35); }
+    .box.ssn { border-color: rgba(124, 183, 1, 0.55); border-style: dashed; background: rgba(124, 183, 1, 0.08); }
+    .box.camera { border-color: rgba(122, 154, 92, 0.9); }
+    .box.game { border-color: rgba(124, 183, 1, 0.85); }
+    .box.color { background: rgba(26, 22, 16, 0.9); border-color: rgba(244, 239, 232, 0.2); }
+    .box.media { border-style: dotted; opacity: 0.55; }
+    .copy-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0 16px; }
+    .copy-row code { word-break: break-all; }
+    .copy-row button {
+      font-family: Rajdhani, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      background: var(--ember);
+      color: #101408;
+      border: 0;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    .ok { color: var(--ice); font-size: 14px; }
+    .note { font-size: 14px; }
+  </style>
+</head>
+<body>
+<main>
+  <div class="kicker">MELD STUDIO — NO OBS</div>
+  <h1>THE LAYOUT</h1>
+  <p>You are not using OBS. Fastest: <strong>File → Import Session → <code>meld/Rise-Above-Meld.json</code></strong> while this page is being served. Or drag files from <code>DROP-INTO-MELD\</code>. Double-click <code>tools\Start-MeldLayout.bat</code> and leave that window open.</p>
+
+  <h2>Plug it in</h2>
+  <ol>
+    <li>Keep this board open. In Meld: File → Import Session → download below (or <code>meld\Rise-Above-Meld.json</code> in the zip).</li>
+    <li>Main canvas 1920×1080. Settings → General → Multi Canvas for Portrait 1080×1920. Drag the Portrait HTML from <code>DROP-INTO-MELD\</code> onto that canvas.</li>
+    <li>Add Game Capture / Video Device cameras. Size them to the numbers. Overlay on top.</li>
+    <li>Audio: Process Audio of the game + mic. No desktop / Discord.</li>
+    <li>Apps: <a href="../apps.html">list</a> · <a href="../socialstream/">Social Stream Ninja</a> · <a href="../streamerbot/README.md">Streamer.bot</a></li>
+  </ol>
+  <div class="copy-row">
+    <button type="button" id="dl-session">Download Meld session JSON</button>
+  </div>
+  <p>Skip RACE DUAL until you have a second BeamNG view. DESK is sit-at-desk other games (face + room, no wheel).</p>
+
+  <div class="toolbar" id="scenes"></div>
+  <p id="url-line"></p>
+  <div class="copy-row">
+    <button type="button" id="copy-wide">Copy main overlay URL</button>
+    <button type="button" id="copy-phone">Copy portrait overlay URL</button>
+    <span class="ok" id="copied" hidden>Copied</span>
+  </div>
+  <p class="note" id="file-line"></p>
+
+  <div class="pair">
+    <div class="stage-wrap">
+      <h3>Main canvas · 1920×1080</h3>
+      <div class="land" id="land"></div>
+    </div>
+    <div class="stage-wrap">
+      <h3>Portrait canvas · 1080×1920</h3>
+      <div class="phone" id="phone"></div>
+    </div>
+  </div>
+
+  <h2 id="sizes-title">RACE sizes</h2>
+  <div id="tables"></div>
+
+  <p>Social Stream Ninja chat sits in the dashed green well. Lumia (optional, for viewers) is alerts on top. Chat <code>!race</code> switches Meld only after you paste Streamer.bot — otherwise click the scene in Meld.</p>
+  <p>Names, photos, SSN session ID, Lumia overlay URL: edit <code>overlays/shared/config.js</code>, then reload the Browser layers in Meld.</p>
+
+  <nav class="docs">
+    <a href="../START-HERE.txt">Start here</a> ·
+    <a href="../apps.html">Apps</a> ·
+    <a href="../docs/meld.html">Full guide</a> ·
+    <a href="../DROP-INTO-MELD/README.txt">Drag folder</a> ·
+    <a href="../overlays/live.html?setup=1">RACE setup boxes</a>
+  </nav>
+</main>
+<script src="../tools/layout.js"></script>
+<script>
+  const W = window.RISE_LAYOUT;
+  const V = window.RISE_LAYOUT_VERTICAL;
+  const host = location.origin && location.origin !== "file://" ? location.origin : "http://127.0.0.1:5500";
+  const bar = document.getElementById("scenes");
+  const phoneEl = document.getElementById("phone");
+  const landEl = document.getElementById("land");
+  const tables = document.getElementById("tables");
+  const urlLine = document.getElementById("url-line");
+  const fileLine = document.getElementById("file-line");
+  const copied = document.getElementById("copied");
+  let scene = "RACE";
+
+  function overlayMeta(layout, items) {
+    const item = items.find((i) => i.kind === "browser");
+    if (!item) return { file: "", url: "" };
+    const meta = layout.overlays[item.name] || {};
+    const file = "overlays/" + (meta.file || "") + (meta.query || "");
+    return { file: file, url: host + "/" + file };
+  }
+
+  function visible(items) {
+    return items.filter((i) => typeof i.x === "number" && typeof i.w === "number");
+  }
+
+  function draw(el, items, canvas, cssW, cssH) {
+    el.innerHTML = "";
+    const sx = cssW / canvas.width;
+    const sy = cssH / canvas.height;
+    visible(items).forEach((item) => {
+      const box = document.createElement("div");
+      const kind = item.kind === "browser" ? "browser overlay" : item.kind;
+      box.className = "box " + kind;
+      box.style.left = item.x * sx + "px";
+      box.style.top = item.y * sy + "px";
+      box.style.width = item.w * sx + "px";
+      box.style.height = item.h * sy + "px";
+      box.textContent = item.name;
+      el.appendChild(box);
+    });
+  }
+
+  function cell(item, layout) {
+    if (item.kind === "gameaudio") {
+      return "<tr><td>" + item.name + "</td><td colspan=\"4\">Process Audio of that game — no picture</td></tr>";
+    }
+    if (item.kind === "ssn") {
+      const file = item.name.indexOf("Featured") >= 0 ? "socialstream/featured.html" : "socialstream/chat.html";
+      return "<tr><td>" + item.name + "<br><code>" + file + "</code></td><td>" + item.x + "</td><td>" + item.y + "</td><td>" + item.w + "</td><td>" + item.h + "</td></tr>";
+    }
+    if (typeof item.x !== "number") {
+      return "<tr><td>" + item.name + "</td><td colspan=\"4\">Full canvas / no position</td></tr>";
+    }
+    const meta = layout.overlays[item.name];
+    const file = meta ? "overlays/" + meta.file + (meta.query || "") : "";
+    const extra = file ? "<br><code>" + file + "</code>" : "";
+    const off = item.enabled === false ? " (off)" : "";
+    return "<tr><td>" + item.name + off + extra + "</td><td>" + item.x + "</td><td>" + item.y + "</td><td>" + item.w + "</td><td>" + item.h + "</td></tr>";
+  }
+
+  function table(title, items, layout) {
+    const rows = items.map((i) => cell(i, layout)).join("");
+    return "<h3>" + title + "</h3><table><thead><tr><th>Layer</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead><tbody>" + rows + "</tbody></table>";
+  }
+
+  function show(name) {
+    scene = name;
+    bar.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.scene === name));
+    document.getElementById("sizes-title").textContent = name + " sizes";
+    const wideMeta = overlayMeta(W, W.items[name]);
+    const phoneMeta = overlayMeta(V, V.items[name]);
+    urlLine.innerHTML = "Main overlay URL: <code>" + wideMeta.url + "</code><br>Portrait overlay URL: <code>" + phoneMeta.url + "</code>";
+    fileLine.innerHTML = "Or drag the files: <code>" + wideMeta.file + "</code> on Main, <code>" + phoneMeta.file + "</code> on Portrait.";
+    draw(landEl, W.items[name], W.canvas, 422, 238);
+    draw(phoneEl, V.items[name], V.canvas, 243, 432);
+    tables.innerHTML = table("Main canvas — 1920×1080", W.items[name], W) + table("Portrait canvas — 1080×1920", V.items[name], V);
+  }
+
+  function flash() {
+    copied.hidden = false;
+    setTimeout(() => { copied.hidden = true; }, 1200);
+  }
+
+  W.scenes.forEach((name) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = name;
+    btn.dataset.scene = name;
+    btn.addEventListener("click", () => show(name));
+    bar.appendChild(btn);
+  });
+  document.getElementById("copy-wide").addEventListener("click", () => {
+    navigator.clipboard.writeText(overlayMeta(W, W.items[scene]).url).then(flash);
+  });
+  document.getElementById("copy-phone").addEventListener("click", () => {
+    navigator.clipboard.writeText(overlayMeta(V, V.items[scene]).url).then(flash);
+  });
+  document.getElementById("dl-session").addEventListener("click", () => {
+    fetch("Rise-Above-Meld.json")
+      .then((r) => r.text())
+      .then((text) => {
+        const rewritten = text.split("http://127.0.0.1:5500").join(host);
+        const blob = new Blob([rewritten], { type: "application/json" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "Rise-Above-Meld.json";
+        a.click();
+        URL.revokeObjectURL(a.href);
+        flash();
+      });
+  });
+  show(new URLSearchParams(location.search).get("scene") || "RACE");
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+APPS (Meld only — do not open OBS)
+==================================
+  Meld Studio          https://www.meldstudio.co/          go live
+  Lumia Stream         https://lumiastream.com/            YOU HAVE THIS — alerts + lights
+  Streamer.bot         https://streamer.bot/               YOU ARE GETTING THIS — !race !brb !face
+  Social Stream Ninja  https://socialstream.ninja/         YOU ARE GETTING THIS — chat on stream
+
+  Also: Chrome or Edge (SSN extension), BeamNG.drive, this extracted zip.
+
+  Skip: OBS, Aitum, Casterlabs, Restream.
+
+  Visual list: open apps.html  (or tools\Start-MeldLayout.bat then click Apps)
+
+------------------------------------------------------------------------
+DRAG AND DROP — MELD STUDIO
+------------------------------------------------------------------------
+1. Right-click the zip -> Extract All. Do not open files from inside the zip.
+2. Open Meld Studio. Do not open OBS.
+3. Open the extracted folder -> tools -> double-click Start-MeldLayout.bat
+   Leave the black window open while you are live.
+4. In Meld: File -> Import Session -> meld\Rise-Above-Meld.json
+   That creates STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING
+   plus the HUD, Social Stream chat, and Lumia browser layers.
+
+5. Add game + cameras (once). Size them to the layout board that opened:
+   Layers + -> Game Capture     name: Game / Main
+   Layers + -> Video Device     Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals
+   Overlay stays on top. Process Audio of BeamNG + your mic. No desktop / Discord.
+
+6. If you skipped Import Session, open DROP-INTO-MELD\ and drag
+   "RACE - Main.html" onto the Main canvas. Same for the other scene names.
+   Portrait files go on the Portrait canvas (Settings -> General -> Multi Canvas).
+
+Lumia chat for YOU: gaming monitor, or tools\Open-ChatForYou.bat.
+Do not capture that window.
+
+Names / photos / SSN session / Lumia overlay URL:
+  overlays\shared\config.js
+  then reload the Browser layers in Meld.
+
+Streamer.bot paste: streamerbot\README.md
+Social Stream Ninja: socialstream\index.html
+
+Full Meld page: docs\meld.html
+Layout board:   meld\index.html
+Apps list:      apps.html
+
+------------------------------------------------------------------------
+TIKTOK LIVE STUDIO (only if you go live from TikTok Studio, not Meld)
+------------------------------------------------------------------------
+Studio cannot import a session file. Dual layout. tools\Start-TikTokLayout.bat
+Full text: docs\tiktok.html   Skip this if Meld is going to TikTok.
+
+------------------------------------------------------------------------
+OBS (skip this whole section — you are on Meld)
+------------------------------------------------------------------------
+Only if you still stream from OBS: tools\Install-OBS.bat
+See the old START-HERE in git history, or docs\obs.html.
+
+LUMIA CHAT FOR YOU (gaming screen, not the stream):
+  1. Lumia Stream open. Connections -> Twitch (and Kick/YouTube if you use them).
+  2. Do NOT put that Chatbox on the stream if you only want it for you.
+  3. Double-click tools\Open-ChatForYou.bat and park it on the BeamNG monitor.
+
+LUMIA ON MELD (only if viewers should see alerts):
+  Paste the Lumia overlay URL into overlays\shared\config.js -> lumia.overlayUrl
+  Reload Lumia / Overlay in Meld. Alerts only — Social Stream Ninja is the chat.
+
+YOUR PHOTOS on STARTING SOON, BRB, ENDING:
+  Put starting.jpg, brb.jpg, ending.jpg in overlays\shared\backdrops\
+  Then reload the Browser overlay in Meld.
+
+CAMERAS: Cam / Face, Cam / Room, Cam / Wheel, Cam / Pedals.
+DESK = other games, sit at the desk (face + room, no wheel).
+Skip RACE DUAL until you have a second BeamNG view.
+
+STREAMER.BOT COMMANDS (after you paste the C#):
+  !race !dual !replay !grid !desk !brb !ending !starting
+  !face !room !wheel !pedals !rig !game

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumia Stream — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+<main>
+  <div class="kicker">LUMIA STREAM</div>
+  <h1>CHAT FOR YOU</h1>
+  <p>You want one chat box on the <strong>gaming monitor</strong> so you can read it. That is not the same as putting chat on the stream for viewers.</p>
+  <p>On the stream, viewers see <strong>Social Stream Ninja</strong>. Lumia on the stream is alerts and lights. Scene switches on Meld are <strong>Streamer.bot</strong>. Apps: <a href="../apps.html">apps.html</a>.</p>
+  <p>Fast path: <a href="../tools/chat-for-you.html">tools/chat-for-you.html</a> (or double-click <code>tools\Open-ChatForYou.bat</code>).</p>
+
+  <h2>Your eyes, not theirs</h2>
+  <ol>
+    <li>Lumia → Connections → add Twitch (and Kick / YouTube if you use them). One Chatbox shows all of that chat together. Leave Lumia running.</li>
+    <li>Do <strong>not</strong> paste a Chatbox into OBS if you do not want viewers to see it. Leave <code>Lumia / Overlay</code> blank, or only put Alerts there.</li>
+    <li>Either drag the Lumia app window onto the BeamNG monitor, or copy the Lumia overlay URL and open it with <a href="../tools/chat-for-you.html">Chat for you</a>, then drag that window over.</li>
+    <li>Sit it in a corner. If Windows hides it: PowerToys Always On Top (Win+Ctrl+T). Do not Game Capture that window in OBS, and do not capture it in Meld.</li>
+  </ol>
+
+  <h2>If you also want viewers to see chat</h2>
+  <p>Use <a href="socialstream.html">Social Stream Ninja</a> for on-stream chat. Keep Lumia Chatbox off the stream so it does not double. Lumia on stream = alerts.</p>
+
+  <h2>Lumia talking to OBS (alerts / lights / !race)</h2>
+  <ol>
+    <li>OBS and Lumia both open. Stay on collection <code>Rise Above BeamNG</code>.</li>
+    <li>OBS → Tools → WebSocket Server Settings → Enable, port <code>4455</code>, authentication on. Copy the password.</li>
+    <li>Lumia → Connections → add <strong>Twitch</strong> (that is where chat comes from) and <strong>OBS</strong> (<code>localhost</code>, port 4455, that password). Both should show connected.</li>
+    <li>Leave Lumia running the whole time you stream. If Lumia closes, the overlay in OBS goes blank.</li>
+  </ol>
+
+  <h2>Viewer overlay (optional)</h2>
+  <ol>
+    <li>In Lumia, open the overlay editor (Overlays / Overlay room).</li>
+    <li>Make one overlay. Add a <strong>Chatbox</strong> widget. Add Alerts too if you want follows on screen.</li>
+    <li>Park the Chatbox on the empty right side of RACE: size about <strong>384 × 500</strong> at <strong>X 1488, Y 520</strong>. Text <code>#E8DCC8</code>, accent <code>#7CB701</code>, background transparent.</li>
+    <li>Copy the overlay URL (the browser-source / overlay link Lumia gives you).</li>
+  </ol>
+  <p>Green boxes on our HUD are only parking spots. They hide when you go live. They are not the chat. Chat is the Lumia widget.</p>
+  <p>To see the parking spots while you drag the Chatbox: open <a href="../overlays/live.html?preview=1&setup=1">Race + slots</a> in a browser, or in OBS add <code>?setup=1</code> to Overlay / Race HUD, then take it off before you go live.</p>
+
+  <h2>Paste that URL into OBS (viewers only)</h2>
+  <ol>
+    <li>OBS scene <strong>RACE</strong>. In Sources, double-click <code>Lumia / Overlay</code>.</li>
+    <li>Uncheck <strong>Local file</strong>. Paste the Lumia URL. Width 1920, height 1080.</li>
+    <li>Custom CSS: <code>body { background-color: rgba(0,0,0,0); margin: 0; overflow: hidden; }</code></li>
+    <li>OK. In the Sources list, drag <code>Lumia / Overlay</code> so it sits <strong>above</strong> <code>Overlay / Race HUD</code>. If it is under the HUD, chat is hidden.</li>
+    <li>Eye icon on. The source must not be <code>about:blank</code>.</li>
+  </ol>
+
+  <h2>Prove the viewer overlay</h2>
+  <ol>
+    <li>Stay on RACE. Lumia still open.</li>
+    <li>In Lumia, fire a <strong>test alert</strong>. You should see it on the OBS preview.</li>
+    <li>Send a Twitch chat message (another account, or your phone). It should appear in the Chatbox on the right of RACE.</li>
+  </ol>
+  <p>If the test alert works but chat does not: the overlay has Alerts but no Chatbox, or Twitch is not connected in Lumia. If nothing shows: the OBS URL is still blank, Local file is still checked, Lumia is closed, or <code>Lumia / Overlay</code> is under the HUD.</p>
+
+  <h2>Connect extras</h2>
+  <p>Lights and chat commands are optional. Overlay URL connect guide: <a href="https://lumiastream.com/blogs/how-to-integrate-obs-streaming-software-with-lumia-stream">Lumia + OBS</a>.</p>
+
+  <h2>One overlay URL</h2>
+  <p>Build one overlay in Lumia. OBS source <code>Lumia / Overlay</code>, 1920×1080 on the wide collection and 1080×1920 on the vertical collection, above the HUD.</p>
+  <table>
+    <tr><th>Layer</th><th>RACE position</th></tr>
+    <tr><td>Chatbox</td><td>384×500 at 1488, 520</td></tr>
+    <tr><td>Alerts</td><td>860×200 at 530, 24</td></tr>
+    <tr><td>Event list</td><td>420×70 at 48, 96</td></tr>
+    <tr><td>Now Playing</td><td>400×64 at 48, 800</td></tr>
+  </table>
+  <p>Text <code>#E8DCC8</code>, accent Monster green <code>#7CB701</code>, transparent glass. Line up with <a href="../overlays/live.html?preview=1&setup=1">Race + slots</a> or <a href="../overlays/vertical/live.html?preview=1&setup=1">vertical race slots</a>.</p>
+  <p>Vertical RACE chatbox: 1048×800 at 16, 1096. Alerts: 1048×160 at 16, 16.</p>
+
+  <h2>Scene lights</h2>
+  <table>
+    <tr><th>Scene</th><th>Light</th></tr>
+    <tr><td><code>STARTING SOON</code></td><td>Moss / trail green</td></tr>
+    <tr><td><code>GRID</code></td><td>Moss / white</td></tr>
+    <tr><td><code>DESK</code></td><td>Moss (sit at desk, other games)</td></tr>
+    <tr><td><code>RACE</code></td><td>Monster green <code>#7CB701</code></td></tr>
+    <tr><td><code>RACE DUAL</code></td><td>Pine + moss on a second zone</td></tr>
+    <tr><td><code>REPLAY</code></td><td>Dim olive</td></tr>
+    <tr><td><code>BRB</code></td><td>Dim forest</td></tr>
+    <tr><td><code>ENDING</code></td><td>Dusk gold-olive pulse</td></tr>
+  </table>
+
+  <h2>Cam director</h2>
+  <table>
+    <tr><th>Command</th><th>OBS action</th></tr>
+    <tr><td><code>!face</code></td><td>Face on; Room, Wheel, Pedals off</td></tr>
+    <tr><td><code>!room</code></td><td>Room on; Face, Wheel, Pedals off</td></tr>
+    <tr><td><code>!rig</code></td><td>All four cams on</td></tr>
+    <tr><td><code>!wheel</code></td><td>Wheel on; Face, Room, Pedals off</td></tr>
+    <tr><td><code>!pedals</code></td><td>Pedals on; Face, Room, Wheel off</td></tr>
+    <tr><td><code>!game</code></td><td>All four cams off</td></tr>
+    <tr><td><code>!race</code> / <code>!desk</code> / <code>!dual</code> / <code>!replay</code> / <code>!grid</code> / <code>!brb</code></td><td>Set scene</td></tr>
+  </table>
+  <p>Mods-only for scene switches. Everyone can use cam toggles with a cooldown. Those commands control OBS only. They do not switch Meld scenes — click the scene in Meld.</p>
+
+  <nav class="docs">
+    <a href="../setup.html">← Checklist</a> ·
+    <a href="meld.html">Meld</a> ·
+    <a href="obs.html">OBS + BeamNG</a> ·
+    <a href="aitum.html">Aitum Multi</a>
+  </nav>
+</main>
+</body>
+</html>

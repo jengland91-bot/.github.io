@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TikTok LIVE Studio — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+<main>
+  <div class="kicker">TIKTOK LIVE STUDIO</div>
+  <h1>VERTICAL + HORIZONTAL</h1>
+  <p>This is the Rise Above layout for TikTok LIVE Studio only. Dual layout on. Build it on the <strong>phone</strong> canvas first — Studio copies those sources to landscape, then you only resize them. Open the live board: <a href="../tiktok-studio/">tiktok-studio/</a>. Markdown: <a href="tiktok.md">tiktok.md</a></p>
+  <p>Do not open OBS. Studio cannot import a scene file, so the board plus these sizes <em>are</em> the layout.</p>
+  <p>Studio Dual layout is <em>not</em> the scene named RACE DUAL. Dual layout = two screens (phone + landscape). RACE DUAL = a second BeamNG camera angle. Skip RACE DUAL until you have that second view.</p>
+
+  <h2>Turn Dual on</h2>
+  <ol>
+    <li>Open TikTok LIVE Studio.</li>
+    <li>Turn on Dual layout (portrait + landscape).</li>
+    <li>You will see two canvases. Switch between them while you build sources. Both go live together.</li>
+  </ol>
+  <p>Add Dual scenes: STARTING SOON, GRID, DESK, RACE, RACE DUAL, REPLAY, BRB, ENDING. Each scene has a phone canvas and a landscape canvas. DESK is sit-at-desk other games (game + face + room).</p>
+
+  <h2>Start the overlay server (once)</h2>
+  <p>Link sources need <code>http://</code>. They will not load <code>file://</code>.</p>
+  <ol>
+    <li>Extract a new zip. Do not move the folder after the server starts.</li>
+    <li>Double-click <code>tools\Start-TikTokLayout.bat</code> (or <code>Start-OverlayServer.bat</code>).</li>
+    <li>Leave that window open the whole time you are live.</li>
+    <li>The layout board opens. Allow the firewall prompt for private networks if Windows asks.</li>
+  </ol>
+  <p>One server, one overlay URL per scene: <code>http://127.0.0.1:5500/</code>. Board: <a href="../tiktok-studio/">tiktok-studio/</a>.</p>
+
+  <h2>Vertical canvas — 1080 × 1920 (add sources here)</h2>
+  <p>This is the phone stream. Dual layout copies these sources to landscape. Paste <strong>one</strong> Link per scene. Width 1080, height 1920, transparent if Studio offers it. After that, only resize on landscape — do not add a second overlay URL.</p>
+  <table>
+    <thead><tr><th>Scene</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr><td>STARTING SOON</td><td><code>http://127.0.0.1:5500/overlays/vertical/starting-soon.html?m=5</code></td></tr>
+      <tr><td>GRID</td><td><code>http://127.0.0.1:5500/overlays/vertical/chatting.html</code></td></tr>
+      <tr><td>DESK</td><td><code>http://127.0.0.1:5500/overlays/vertical/desk.html</code></td></tr>
+      <tr><td>RACE</td><td><code>http://127.0.0.1:5500/overlays/vertical/live.html</code></td></tr>
+      <tr><td>RACE DUAL</td><td><code>http://127.0.0.1:5500/overlays/vertical/race-dual.html</code></td></tr>
+      <tr><td>REPLAY</td><td><code>http://127.0.0.1:5500/overlays/vertical/replay.html</code></td></tr>
+      <tr><td>BRB</td><td><code>http://127.0.0.1:5500/overlays/vertical/brb.html</code></td></tr>
+      <tr><td>ENDING</td><td><code>http://127.0.0.1:5500/overlays/vertical/ending.html</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Vertical RACE</h3>
+  <p>Bottom to top: game, four cams, overlay Link, Lumia Link. Do not stretch BeamNG to fill the phone.</p>
+  <table>
+    <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
+    <tbody>
+      <tr><td>Game / Main</td><td>0</td><td>0</td><td>1080</td><td>608</td></tr>
+      <tr><td>Cam / Face</td><td>16</td><td>624</td><td>520</td><td>220</td></tr>
+      <tr><td>Cam / Room</td><td>544</td><td>624</td><td>520</td><td>220</td></tr>
+      <tr><td>Cam / Wheel</td><td>16</td><td>860</td><td>520</td><td>220</td></tr>
+      <tr><td>Cam / Pedals</td><td>544</td><td>860</td><td>520</td><td>220</td></tr>
+      <tr><td>Overlay Link</td><td>0</td><td>0</td><td>1080</td><td>1920</td></tr>
+      <tr><td>Lumia Link</td><td>0</td><td>0</td><td>1080</td><td>1920</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Vertical GRID (no game)</h3>
+  <table>
+    <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
+    <tbody>
+      <tr><td>Cam / Face</td><td>16</td><td>88</td><td>1048</td><td>420</td></tr>
+      <tr><td>Cam / Room</td><td>16</td><td>524</td><td>1048</td><td>280</td></tr>
+      <tr><td>Cam / Wheel</td><td>16</td><td>820</td><td>516</td><td>200</td></tr>
+      <tr><td>Cam / Pedals</td><td>548</td><td>820</td><td>516</td><td>200</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Vertical DESK (other games, sit at desk)</h3>
+  <p>Game on top. Face and room side by side. No wheel / pedals.</p>
+  <table>
+    <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
+    <tbody>
+      <tr><td>Game / Main</td><td>0</td><td>0</td><td>1080</td><td>608</td></tr>
+      <tr><td>Cam / Face</td><td>16</td><td>624</td><td>520</td><td>300</td></tr>
+      <tr><td>Cam / Room</td><td>544</td><td>624</td><td>520</td><td>300</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Vertical RACE DUAL (second BeamNG angle)</h3>
+  <p>Skip this scene until you have a second BeamNG view. Game / Main stays the top strip.</p>
+  <table>
+    <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
+    <tbody>
+      <tr><td>Game / Main</td><td>0</td><td>0</td><td>1080</td><td>608</td></tr>
+      <tr><td>Game / Angle 2</td><td>16</td><td>624</td><td>1048</td><td>200</td></tr>
+      <tr><td>Cam / Face</td><td>16</td><td>840</td><td>520</td><td>180</td></tr>
+      <tr><td>Cam / Room</td><td>544</td><td>840</td><td>520</td><td>180</td></tr>
+      <tr><td>Cam / Wheel</td><td>16</td><td>1036</td><td>520</td><td>180</td></tr>
+      <tr><td>Cam / Pedals</td><td>544</td><td>1036</td><td>520</td><td>180</td></tr>
+    </tbody>
+  </table>
+  <p>Vertical REPLAY: game 1080 × 608 at 0, 360. No cams. STARTING SOON / BRB / ENDING: overlay Link only.</p>
+
+  <h2>Horizontal canvas — 1920 × 1080 (resize only)</h2>
+  <p>Do not add new overlay files. Studio Dual layout keeps the same Link URL. Stretch that Overlay Link to 1920 × 1080. The HUD flips to the wide layout by itself.</p>
+
+  <h3>Horizontal RACE</h3>
+  <p>Game fills the canvas. Four cams along the bottom. Overlay and Lumia on top.</p>
+  <table>
+    <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
+    <tbody>
+      <tr><td>Game / Main</td><td>0</td><td>0</td><td>1920</td><td>1080</td></tr>
+      <tr><td>Cam / Face</td><td>48</td><td>876</td><td>320</td><td>180</td></tr>
+      <tr><td>Cam / Room</td><td>384</td><td>876</td><td>320</td><td>180</td></tr>
+      <tr><td>Cam / Wheel</td><td>720</td><td>876</td><td>320</td><td>180</td></tr>
+      <tr><td>Cam / Pedals</td><td>1056</td><td>876</td><td>320</td><td>180</td></tr>
+      <tr><td>Overlay Link</td><td>0</td><td>0</td><td>1920</td><td>1080</td></tr>
+      <tr><td>Lumia Link</td><td>0</td><td>0</td><td>1920</td><td>1080</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Horizontal GRID (no game)</h3>
+  <table>
+    <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
+    <tbody>
+      <tr><td>Cam / Face</td><td>48</td><td>168</td><td>960</td><td>540</td></tr>
+      <tr><td>Cam / Room</td><td>1032</td><td>168</td><td>840</td><td>360</td></tr>
+      <tr><td>Cam / Wheel</td><td>1032</td><td>544</td><td>408</td><td>200</td></tr>
+      <tr><td>Cam / Pedals</td><td>1464</td><td>544</td><td>408</td><td>200</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Horizontal DESK (other games)</h3>
+  <p>Full game + face + room. No wheel / pedals.</p>
+  <table>
+    <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
+    <tbody>
+      <tr><td>Game / Main</td><td>0</td><td>0</td><td>1920</td><td>1080</td></tr>
+      <tr><td>Cam / Face</td><td>1256</td><td>696</td><td>640</td><td>360</td></tr>
+      <tr><td>Cam / Room</td><td>760</td><td>786</td><td>480</td><td>270</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Horizontal RACE DUAL (second BeamNG angle)</h3>
+  <table>
+    <thead><tr><th>Source</th><th>X</th><th>Y</th><th>W</th><th>H</th></tr></thead>
+    <tbody>
+      <tr><td>Game / Main</td><td>0</td><td>0</td><td>1920</td><td>1080</td></tr>
+      <tr><td>Game / Angle 2</td><td>1248</td><td>48</td><td>640</td><td>360</td></tr>
+      <tr><td>Cam / Face</td><td>48</td><td>900</td><td>240</td><td>135</td></tr>
+      <tr><td>Cam / Room</td><td>304</td><td>900</td><td>240</td><td>135</td></tr>
+      <tr><td>Cam / Wheel</td><td>560</td><td>900</td><td>240</td><td>135</td></tr>
+      <tr><td>Cam / Pedals</td><td>816</td><td>900</td><td>240</td><td>135</td></tr>
+    </tbody>
+  </table>
+  <p>Horizontal REPLAY: game full 1920 × 1080. No cams. STARTING SOON / BRB / ENDING: overlay Link only.</p>
+
+  <h2>Audio</h2>
+  <p>Stream <strong>game + mic</strong>, not Discord. Capture BeamNG.drive and your mic. Do not capture desktop / system audio. Headset Discord stays off the stream. One mixer covers both canvases.</p>
+
+  <h2>Lumia</h2>
+  <p>TikTok does not need OBS. In Lumia: Connections → add TikTok. Build one overlay (Chatbox + Alerts). Copy that URL.</p>
+  <p>Add a Lumia Link on the phone canvas, on top of the Race HUD overlay (1080 × 1920). On landscape, stretch that same Lumia Link to 1920 × 1080.</p>
+  <p>Switch scenes in Studio yourself. Chat commands like <code>!race</code> only work if Lumia is also connected to OBS. They do not control TikTok LIVE Studio.</p>
+
+  <h2>Names and photos</h2>
+  <p>Edit <code>overlays\shared\config.js</code>, save, then refresh the Link sources on <em>both</em> canvases. Photos stay in <code>overlays\shared\backdrops\</code>.</p>
+
+  <nav class="docs">
+    <a href="../START-HERE.txt">Start here</a> ·
+    <a href="../tiktok-studio/">Layout board</a> ·
+    <a href="meld.html">Meld</a> ·
+    <a href="obs.html">OBS + BeamNG</a> ·
+    <a href="lumia.html">Lumia</a>
+  </nav>
+</main>
+</body>
+</html>

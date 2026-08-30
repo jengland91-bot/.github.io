@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Streamer.bot — Rise Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="docs.css" />
+</head>
+<body>
+<main>
+  <div class="kicker">CHAT COMMANDS</div>
+  <h1>STREAMER.BOT + MELD</h1>
+  <p>Streamer.bot switches Meld scenes. Lumia cannot do that. Full paste steps: <a href="../streamerbot/README.md">streamerbot/README.md</a>. C#: <a href="../streamerbot/Rise-Above-Meld.cs">Rise-Above-Meld.cs</a></p>
+
+  <div class="callout">
+    <h2>Connect</h2>
+    <p>Meld → Settings → Advanced → Allow remote connections. Streamer.bot → Stream Apps → Meld Studio → Add <code>127.0.0.1</code>. Auto Connect on.</p>
+  </div>
+
+  <ol>
+    <li>Install <a href="https://streamer.bot/" target="_blank" rel="noreferrer">Streamer.bot</a>. Connect Twitch (and YouTube / Kick if you use them).</li>
+    <li>Create one action named <code>Rise Above · Meld Router</code>. Sub-action: Execute C# Code. Paste <code>streamerbot/Rise-Above-Meld.cs</code>.</li>
+    <li>Add Command triggers for every line in <code>streamerbot/commands.txt</code>. Point them all at that action.</li>
+    <li>Mods + you for scene switches. Everyone (15s cooldown) for <code>!face</code> / <code>!room</code> / <code>!rig</code>.</li>
+  </ol>
+
+  <table>
+    <tr><th>Command</th><th>Meld</th></tr>
+    <tr><td><code>!race</code> <code>!live</code></td><td>RACE</td></tr>
+    <tr><td><code>!dual</code></td><td>RACE DUAL</td></tr>
+    <tr><td><code>!replay</code></td><td>REPLAY</td></tr>
+    <tr><td><code>!grid</code></td><td>GRID</td></tr>
+    <tr><td><code>!desk</code></td><td>DESK</td></tr>
+    <tr><td><code>!brb</code></td><td>BRB</td></tr>
+    <tr><td><code>!ending</code></td><td>ENDING</td></tr>
+    <tr><td><code>!starting</code></td><td>STARTING SOON</td></tr>
+    <tr><td><code>!face</code> <code>!room</code> <code>!wheel</code> <code>!pedals</code> <code>!rig</code> <code>!game</code></td><td>Show / hide cams</td></tr>
+  </table>
+  <p>Cam layers must be named exactly <code>Cam / Face</code>, <code>Cam / Room</code>, <code>Cam / Wheel</code>, <code>Cam / Pedals</code>.</p>
+
+  <nav class="docs">
+    <a href="../apps.html">Apps list</a> ·
+    <a href="../streamerbot/README.md">Paste guide</a> ·
+    <a href="meld.html">Meld</a> ·
+    <a href="https://docs.streamer.bot/guide/stream-apps/meld-studio" target="_blank" rel="noreferrer">Official Meld docs</a>
+  </nav>
+</main>
+</body>
+</html>

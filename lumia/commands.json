@@ -1,0 +1,166 @@
+[
+  {
+    "name": "race",
+    "message": "Scene → RACE",
+    "cooldownDuration": 3000,
+    "obsScene": "RACE"
+  },
+  {
+    "name": "dual",
+    "message": "Scene → RACE DUAL",
+    "cooldownDuration": 3000,
+    "obsScene": "RACE DUAL"
+  },
+  {
+    "name": "replay",
+    "message": "Scene → REPLAY",
+    "cooldownDuration": 3000,
+    "obsScene": "REPLAY"
+  },
+  {
+    "name": "grid",
+    "message": "Scene → GRID",
+    "cooldownDuration": 3000,
+    "obsScene": "GRID"
+  },
+  {
+    "name": "desk",
+    "message": "Scene → DESK",
+    "cooldownDuration": 3000,
+    "obsScene": "DESK"
+  },
+  {
+    "name": "brb",
+    "message": "Scene → BRB",
+    "cooldownDuration": 8000,
+    "obsScene": "BRB"
+  },
+  {
+    "name": "live",
+    "message": "Scene → RACE",
+    "cooldownDuration": 3000,
+    "obsScene": "RACE"
+  },
+  {
+    "name": "face",
+    "message": "Face cam on",
+    "cooldownDuration": 15000,
+    "obsVisibility": [
+      { "scene": "RACE", "source": "Cam / Face", "visible": true },
+      { "scene": "RACE", "source": "Cam / Room", "visible": false },
+      { "scene": "RACE", "source": "Cam / Wheel", "visible": false },
+      { "scene": "RACE", "source": "Cam / Pedals", "visible": false },
+      { "scene": "GRID", "source": "Cam / Face", "visible": true },
+      { "scene": "GRID", "source": "Cam / Room", "visible": false },
+      { "scene": "GRID", "source": "Cam / Wheel", "visible": false },
+      { "scene": "GRID", "source": "Cam / Pedals", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Face", "visible": true },
+      { "scene": "RACE DUAL", "source": "Cam / Room", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Wheel", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Pedals", "visible": false },
+      { "scene": "DESK", "source": "Cam / Face", "visible": true },
+      { "scene": "DESK", "source": "Cam / Room", "visible": false }
+    ]
+  },
+  {
+    "name": "room",
+    "message": "Room cam on",
+    "cooldownDuration": 15000,
+    "obsVisibility": [
+      { "scene": "RACE", "source": "Cam / Face", "visible": false },
+      { "scene": "RACE", "source": "Cam / Room", "visible": true },
+      { "scene": "RACE", "source": "Cam / Wheel", "visible": false },
+      { "scene": "RACE", "source": "Cam / Pedals", "visible": false },
+      { "scene": "GRID", "source": "Cam / Face", "visible": false },
+      { "scene": "GRID", "source": "Cam / Room", "visible": true },
+      { "scene": "GRID", "source": "Cam / Wheel", "visible": false },
+      { "scene": "GRID", "source": "Cam / Pedals", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Face", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Room", "visible": true },
+      { "scene": "RACE DUAL", "source": "Cam / Wheel", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Pedals", "visible": false },
+      { "scene": "DESK", "source": "Cam / Face", "visible": false },
+      { "scene": "DESK", "source": "Cam / Room", "visible": true }
+    ]
+  },
+  {
+    "name": "rig",
+    "message": "All cams on",
+    "cooldownDuration": 15000,
+    "obsVisibility": [
+      { "scene": "RACE", "source": "Cam / Face", "visible": true },
+      { "scene": "RACE", "source": "Cam / Room", "visible": true },
+      { "scene": "RACE", "source": "Cam / Wheel", "visible": true },
+      { "scene": "RACE", "source": "Cam / Pedals", "visible": true },
+      { "scene": "GRID", "source": "Cam / Face", "visible": true },
+      { "scene": "GRID", "source": "Cam / Room", "visible": true },
+      { "scene": "GRID", "source": "Cam / Wheel", "visible": true },
+      { "scene": "GRID", "source": "Cam / Pedals", "visible": true },
+      { "scene": "RACE DUAL", "source": "Cam / Face", "visible": true },
+      { "scene": "RACE DUAL", "source": "Cam / Room", "visible": true },
+      { "scene": "RACE DUAL", "source": "Cam / Wheel", "visible": true },
+      { "scene": "RACE DUAL", "source": "Cam / Pedals", "visible": true },
+      { "scene": "DESK", "source": "Cam / Face", "visible": true },
+      { "scene": "DESK", "source": "Cam / Room", "visible": true }
+    ]
+  },
+  {
+    "name": "wheel",
+    "message": "Wheel cam on",
+    "cooldownDuration": 15000,
+    "obsVisibility": [
+      { "scene": "RACE", "source": "Cam / Face", "visible": false },
+      { "scene": "RACE", "source": "Cam / Room", "visible": false },
+      { "scene": "RACE", "source": "Cam / Wheel", "visible": true },
+      { "scene": "RACE", "source": "Cam / Pedals", "visible": false },
+      { "scene": "GRID", "source": "Cam / Face", "visible": false },
+      { "scene": "GRID", "source": "Cam / Room", "visible": false },
+      { "scene": "GRID", "source": "Cam / Wheel", "visible": true },
+      { "scene": "GRID", "source": "Cam / Pedals", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Face", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Room", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Wheel", "visible": true },
+      { "scene": "RACE DUAL", "source": "Cam / Pedals", "visible": false }
+    ]
+  },
+  {
+    "name": "pedals",
+    "message": "Pedals cam on",
+    "cooldownDuration": 15000,
+    "obsVisibility": [
+      { "scene": "RACE", "source": "Cam / Face", "visible": false },
+      { "scene": "RACE", "source": "Cam / Room", "visible": false },
+      { "scene": "RACE", "source": "Cam / Wheel", "visible": false },
+      { "scene": "RACE", "source": "Cam / Pedals", "visible": true },
+      { "scene": "GRID", "source": "Cam / Face", "visible": false },
+      { "scene": "GRID", "source": "Cam / Room", "visible": false },
+      { "scene": "GRID", "source": "Cam / Wheel", "visible": false },
+      { "scene": "GRID", "source": "Cam / Pedals", "visible": true },
+      { "scene": "RACE DUAL", "source": "Cam / Face", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Room", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Wheel", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Pedals", "visible": true }
+    ]
+  },
+  {
+    "name": "game",
+    "message": "Game only",
+    "cooldownDuration": 15000,
+    "obsVisibility": [
+      { "scene": "RACE", "source": "Cam / Face", "visible": false },
+      { "scene": "RACE", "source": "Cam / Room", "visible": false },
+      { "scene": "RACE", "source": "Cam / Wheel", "visible": false },
+      { "scene": "RACE", "source": "Cam / Pedals", "visible": false },
+      { "scene": "GRID", "source": "Cam / Face", "visible": false },
+      { "scene": "GRID", "source": "Cam / Room", "visible": false },
+      { "scene": "GRID", "source": "Cam / Wheel", "visible": false },
+      { "scene": "GRID", "source": "Cam / Pedals", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Face", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Room", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Wheel", "visible": false },
+      { "scene": "RACE DUAL", "source": "Cam / Pedals", "visible": false },
+      { "scene": "DESK", "source": "Cam / Face", "visible": false },
+      { "scene": "DESK", "source": "Cam / Room", "visible": false }
+    ]
+  }
+]

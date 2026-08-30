@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Install — Rise Above BeamNG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ember: #7cb701;
+      --ice: #7a9a5c;
+      --sand: #c4b490;
+      --paper: #e8dcc8;
+      --void: #100e0a;
+      --asphalt: #1a1610;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--void);
+      color: var(--paper);
+      font-family: Outfit, system-ui, sans-serif;
+      line-height: 1.5;
+    }
+    main { max-width: 880px; margin: 0 auto; padding: 40px 20px 80px; }
+    h1 { font-family: "Bebas Neue", sans-serif; font-size: 56px; letter-spacing: 0.06em; line-height: 0.9; margin: 8px 0 12px; }
+    .kicker { font-family: Rajdhani, sans-serif; letter-spacing: 0.4em; color: var(--ice); font-weight: 700; }
+    p, label { color: var(--sand); }
+    a { color: var(--ice); }
+    fieldset {
+      border: 1px solid rgba(244, 239, 232, 0.12);
+      background: var(--asphalt);
+      padding: 16px;
+      margin: 16px 0;
+    }
+    legend { font-family: "Bebas Neue", sans-serif; letter-spacing: 0.1em; font-size: 22px; padding: 0 8px; }
+    label { display: block; margin: 10px 0 4px; font-size: 14px; }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      background: #000;
+      border: 1px solid rgba(244, 239, 232, 0.18);
+      color: var(--paper);
+      padding: 8px 10px;
+      font: 14px ui-monospace, monospace;
+    }
+    .row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    @media (max-width: 700px) { .row { grid-template-columns: 1fr; } }
+    button {
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 0.1em;
+      font-size: 20px;
+      background: var(--ember);
+      color: #101408;
+      border: 0;
+      padding: 10px 18px 8px;
+      cursor: pointer;
+      margin: 8px 8px 0 0;
+    }
+    button.ghost { background: transparent; color: var(--paper); border: 1px solid rgba(244, 239, 232, 0.2); }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+    #log {
+      background: #000;
+      color: #c8ffb0;
+      font: 12px/1.45 ui-monospace, monospace;
+      padding: 14px;
+      height: 280px;
+      overflow: auto;
+      white-space: pre-wrap;
+      border: 1px solid rgba(244, 239, 232, 0.12);
+      margin-top: 16px;
+    }
+    .warn { color: #ffb020; margin: 12px 0; }
+    .ok { color: #7dffb3; }
+  </style>
+</head>
+<body>
+<main>
+  <div class="kicker">INSTALLER</div>
+  <h1>PUSH IT INTO OBS</h1>
+  <p>This page talks to OBS and Lumia on <strong>this computer</strong>. Open it as a local file (double-click) or from <code>http://127.0.0.1</code> — not from GitHub Pages. OBS and Lumia must be running.</p>
+  <p>Going live from <strong>Meld</strong> (no OBS): skip this page. Double-click <code>tools\Start-MeldLayout.bat</code> and paste overlay URLs into Meld. Guide: <a href="../docs/meld.html">docs/meld.html</a>.</p>
+  <p class="warn">Enable OBS → Tools → WebSocket Server Settings (port 4455, auth on). Create a new scene collection so this does not overwrite your current show.</p>
+
+  <fieldset>
+    <legend>OBS WebSocket</legend>
+    <div class="row">
+      <div><label>Host</label><input id="obsHost" type="text" value="127.0.0.1" /></div>
+      <div><label>Port</label><input id="obsPort" type="text" value="4455" /></div>
+      <div><label>Password</label><input id="obsPass" type="password" autocomplete="off" /></div>
+    </div>
+    <button type="button" id="btnObsConnect">Connect OBS</button>
+    <span id="obsStatus"></span>
+  </fieldset>
+
+  <fieldset>
+    <legend>Overlay files</legend>
+    <label>Folder that contains starting-soon.html (or a hosted overlays URL)</label>
+    <input id="overlayPath" type="text" placeholder="C:\Users\Josh\stream\overlays   or  http://127.0.0.1:8765/overlays" />
+    <label>Lumia overlay URL (copy from Lumia → overlay room). Leave blank to skip that source.</label>
+    <input id="lumiaUrl" type="text" placeholder="https://lumiastream.com/overlay?room=..." />
+  </fieldset>
+
+  <fieldset>
+    <legend>Install into OBS</legend>
+    <label><input id="newCollection" type="checkbox" checked /> Create both scene collections: 1920x1080 and 1080x1920 vertical</label>
+    <p>Then click once. After it finishes, pick BeamNG on <code>Game / Main</code>. If Aitum Vertical is installed, this also fills the <strong>Vertical Scenes</strong> dock. Or run <code>tools\Install-AitumVertical.bat</code> after you install that plugin.</p>
+    <button type="button" id="btnInstallObs" disabled>Install scenes + sources</button>
+  </fieldset>
+
+  <fieldset>
+    <legend>Lumia commands</legend>
+    <label>API token (Lumia → Settings → API)</label>
+    <input id="lumiaToken" type="password" autocomplete="off" />
+    <p>Creates <code>!race</code> <code>!dual</code> <code>!replay</code> <code>!grid</code> <code>!brb</code> <code>!face</code> <code>!room</code> <code>!rig</code> <code>!wheel</code> <code>!pedals</code> <code>!game</code>. Then add the OBS action on each command in Lumia (Set current scene / Set source visibility) — the log lists the exact names.</p>
+    <button type="button" id="btnLumia">Install Lumia commands</button>
+  </fieldset>
+
+  <div id="log"></div>
+  <p style="margin-top:16px"><a href="../setup.html">Checklist</a> · <a href="../index.html">Preview</a> · <a href="../docs/meld.html">Meld Studio</a> · <a href="../docs/tiktok.html">TikTok LIVE Studio</a></p>
+</main>
+
+<script src="./layout.js"></script>
+<script>
+(function () {
+  const logEl = document.getElementById("log");
+  function log(line, cls) {
+    const span = document.createElement("span");
+    if (cls) span.className = cls;
+    span.textContent = line + "\n";
+    logEl.appendChild(span);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  async function sha256Base64(str) {
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+    return btoa(String.fromCharCode(...new Uint8Array(buf)));
+  }
+  async function obsAuth(password, salt, challenge) {
+    const secret = await sha256Base64(password + salt);
+    return sha256Base64(secret + challenge);
+  }
+
+  class Obs {
+    constructor() {
+      this.ws = null;
+      this.pending = new Map();
+      this.i = 0;
+    }
+    connect(host, port, password) {
+      return new Promise((resolve, reject) => {
+        const ws = new WebSocket("ws://" + host + ":" + port);
+        this.ws = ws;
+        let identified = false;
+        const timer = setTimeout(() => reject(new Error("OBS connection timed out")), 8000);
+        ws.onerror = () => {
+          clearTimeout(timer);
+          if (!identified) reject(new Error("WebSocket error — is OBS open with WebSocket enabled?"));
+        };
+        ws.onclose = (e) => {
+          if (!identified && e.code === 4009) reject(new Error("OBS auth failed — check the WebSocket password"));
+        };
+        ws.onmessage = async (ev) => {
+          const msg = JSON.parse(ev.data);
+          if (msg.op === 0) {
+            try {
+              const identify = { rpcVersion: 1 };
+              if (msg.d.authentication) {
+                identify.authentication = await obsAuth(
+                  password,
+                  msg.d.authentication.salt,
+                  msg.d.authentication.challenge
+                );
+              }
+              ws.send(JSON.stringify({ op: 1, d: identify }));
+            } catch (err) {
+              clearTimeout(timer);
+              reject(err);
+            }
+          } else if (msg.op === 2) {
+            identified = true;
+            clearTimeout(timer);
+            ws.onmessage = (e) => this._onMsg(JSON.parse(e.data));
+            resolve(msg.d);
+          }
+        };
+      });
+    }
+    _onMsg(msg) {
+      if (msg.op !== 7) return;
+      const id = msg.d.requestId;
+      const p = this.pending.get(id);
+      if (!p) return;
+      this.pending.delete(id);
+      if (msg.d.requestStatus && !msg.d.requestStatus.result) {
+        p.reject(new Error((msg.d.requestType || "") + ": " + (msg.d.requestStatus.comment || msg.d.requestStatus.code)));
+      } else {
+        p.resolve(msg.d.responseData || {});
+      }
+    }
+    request(requestType, requestData) {
+      const requestId = String(++this.i);
+      return new Promise((resolve, reject) => {
+        this.pending.set(requestId, { resolve, reject });
+        this.ws.send(JSON.stringify({ op: 6, d: { requestType, requestId, requestData: requestData || {} } }));
+        setTimeout(() => {
+          if (this.pending.has(requestId)) {
+            this.pending.delete(requestId);
+            reject(new Error("Timeout: " + requestType));
+          }
+        }, 15000);
+      });
+    }
+  }
+
+  const obs = new Obs();
+  let kinds = [];
+
+  function pickKind(candidates) {
+    for (const name of candidates) {
+      if (kinds.includes(name)) return name;
+      const versioned = kinds.find((k) => k === name || k.startsWith(name + "_v"));
+      if (versioned) return versioned;
+    }
+    return null;
+  }
+
+  function transform(item) {
+    if (item.w == null) return null;
+    return {
+      positionX: item.x,
+      positionY: item.y,
+      rotation: 0,
+      scaleX: 1,
+      scaleY: 1,
+      alignment: 5,
+      boundsType: "OBS_BOUNDS_SCALE_INNER",
+      boundsAlignment: 0,
+      boundsWidth: Math.max(1, item.w),
+      boundsHeight: Math.max(1, item.h),
+      cropLeft: 0,
+      cropRight: 0,
+      cropTop: 0,
+      cropBottom: 0,
+    };
+  }
+
+  function browserSettings(name, folder, lumiaUrl, layout) {
+    const meta = layout.overlays[name] || {};
+    const css = layout.css;
+    const width = layout.canvas.width;
+    const height = layout.canvas.height;
+    if (name === "Lumia / Overlay" || name === "Lumia / Overlay V") {
+      return {
+        is_local_file: false,
+        url: lumiaUrl || "about:blank",
+        width,
+        height,
+        fps: 30,
+        fps_custom: true,
+        css,
+        shutdown: false,
+        restart_when_active: false,
+      };
+    }
+    const file = meta.file;
+    const query = meta.query || "";
+    const base = folder.replace(/\\/g, "/").replace(/\/$/, "");
+    const isHttp = /^https?:/i.test(base);
+    if (isHttp) {
+      return {
+        is_local_file: false,
+        url: base + "/" + file + query,
+        width,
+        height,
+        fps: 30,
+        fps_custom: true,
+        css,
+        shutdown: Boolean(meta.shutdown),
+        restart_when_active: Boolean(meta.restart),
+      };
+    }
+    return {
+      is_local_file: true,
+      local_file: base + "/" + file,
+      width,
+      height,
+      fps: 30,
+      fps_custom: true,
+      css,
+      shutdown: Boolean(meta.shutdown),
+      restart_when_active: Boolean(meta.restart),
+    };
+  }
+
+  function settingsFor(kind, name, folder, lumiaUrl, layout) {
+    if (kind === "browser" || kind === "lumia") return { inputKind: pickKind(["browser_source"]), settings: browserSettings(name, folder, lumiaUrl, layout) };
+    if (kind === "color") {
+      return {
+        inputKind: pickKind(["color_source_v3", "color_source"]),
+        settings: { color: 4278978567, width: layout.canvas.width, height: layout.canvas.height },
+      };
+    }
+    if (kind === "game") {
+      if (name === "Game / Angle 2") {
+        return {
+          inputKind: pickKind(["window_capture", "game_capture"]),
+          settings: { cursor: false, capture_cursor: false, capture_audio: false },
+        };
+      }
+      return {
+        inputKind: pickKind(["game_capture", "xcomposite_input", "window_capture"]),
+        settings: { capture_mode: "any", capture_cursor: false, capture_audio: false },
+      };
+    }
+    if (kind === "camera") {
+      return {
+        inputKind: pickKind(["dshow_input", "av_capture_input", "macos-avcapture", "v4l2_input"]),
+        settings: {},
+      };
+    }
+    if (kind === "media") {
+      return {
+        inputKind: pickKind(["ffmpeg_source"]),
+        settings: { looping: false, restart_on_activate: true, close_when_inactive: true },
+      };
+    }
+    if (kind === "gameaudio") {
+      return {
+        inputKind: pickKind(["wasapi_process_output_capture"]),
+        settings: {},
+      };
+    }
+    if (kind === "mic") {
+      return {
+        inputKind: pickKind(["wasapi_input_capture", "coreaudio_input_capture"]),
+        settings: {},
+      };
+    }
+    throw new Error("Unknown kind " + kind);
+  }
+
+  async function vendorAitumScenes() {
+    try {
+      const vr = await obs.request("CallVendorRequest", {
+        vendorName: "aitum-vertical-canvas",
+        requestType: "get_scenes",
+        requestData: { width: 1080, height: 1920 },
+      });
+      const inner = (vr && vr.responseData) || vr || {};
+      const arr = inner.scenes || [];
+      return arr.map((s) => (typeof s === "string" ? s : s.name || s.sceneName)).filter(Boolean);
+    } catch (err) {
+      return [];
+    }
+  }
+
+  async function ensureAitumScene(desired, canvasUuid) {
+    const vendor = await vendorAitumScenes();
+    for (const tryName of [desired, desired + " V"]) {
+      if (vendor.includes(tryName)) {
+        log("  have " + tryName);
+        return tryName;
+      }
+      try {
+        await obs.request("CreateScene", { sceneName: tryName, canvasUuid });
+        log("  scene " + tryName);
+        return tryName;
+      } catch (err) {
+        log("  skip " + tryName + " (" + err.message + ")");
+      }
+    }
+    return null;
+  }
+
+  async function pingSceneCollection() {
+    try {
+      const cols = await obs.request("GetSceneCollectionList");
+      const current = cols.currentSceneCollectionName;
+      const other = (cols.sceneCollections || []).find((n) => n && n !== current);
+      if (!other) return;
+      log("Refreshing Aitum dock (switch collection and back)...");
+      await obs.request("SetCurrentSceneCollection", { sceneCollectionName: other });
+      await new Promise((r) => setTimeout(r, 2000));
+      await obs.request("SetCurrentSceneCollection", { sceneCollectionName: current });
+      await new Promise((r) => setTimeout(r, 800));
+    } catch (err) {
+      log("  refresh skipped: " + err.message);
+    }
+  }
+
+  async function ensureScene(name, canvasUuid) {
+    const list = await obs.request("GetSceneList", canvasUuid ? { canvasUuid } : {});
+    if (list.scenes.some((s) => s.sceneName === name)) return;
+    await obs.request("CreateScene", canvasUuid ? { sceneName: name, canvasUuid } : { sceneName: name });
+    log("  scene " + name);
+  }
+
+  async function inputExists(name) {
+    const list = await obs.request("GetInputList");
+    return list.inputs.some((i) => i.inputName === name);
+  }
+
+  function sourceName(item, nameMap) {
+    if (nameMap && nameMap[item.name]) return nameMap[item.name];
+    return item.name;
+  }
+
+  async function sceneItemId(scene, source, canvasUuid) {
+    const payload = { sceneName: scene };
+    if (canvasUuid) payload.canvasUuid = canvasUuid;
+    const list = await obs.request("GetSceneItemList", payload);
+    const hit = list.sceneItems.find((it) => it.sourceName === source);
+    return hit ? hit.sceneItemId : null;
+  }
+
+  async function ensureItem(scene, item, folder, lumiaUrl, layout, canvasUuid, nameMap) {
+    const spec = settingsFor(item.kind, item.name, folder, lumiaUrl, layout);
+    const name = sourceName(item, nameMap);
+    if (!spec.inputKind) {
+      if (item.kind === "gameaudio") {
+        log("  skip Audio / Game (no Application Audio Capture on this OBS)");
+        return;
+      }
+      throw new Error("OBS is missing input kind for " + name + " (" + item.kind + ")");
+    }
+    const itemPayload = (extra) => {
+      const o = Object.assign({ sceneName: scene }, extra);
+      if (canvasUuid) o.canvasUuid = canvasUuid;
+      return o;
+    };
+    if (!(await inputExists(name))) {
+      await obs.request("CreateInput", itemPayload({
+        inputName: name,
+        inputKind: spec.inputKind,
+        inputSettings: spec.settings,
+        sceneItemEnabled: item.enabled !== false,
+      }));
+      log("  created source " + name);
+    } else {
+      const id = await sceneItemId(scene, name, canvasUuid);
+      if (id == null) {
+        await obs.request("CreateSceneItem", itemPayload({
+          sourceName: name,
+          sceneItemEnabled: item.enabled !== false,
+        }));
+        log("  referenced " + name + " on " + scene);
+      }
+      const mapped = nameMap && nameMap[item.name];
+      const updateSettings = canvasUuid
+        ? (mapped && (item.kind === "browser" || item.kind === "lumia"))
+        : (item.kind === "browser" || item.kind === "lumia");
+      if (updateSettings) {
+        await obs.request("SetInputSettings", { inputName: name, inputSettings: spec.settings, overlay: true });
+      }
+    }
+    const id = await sceneItemId(scene, name, canvasUuid);
+    const tf = transform(item);
+    if (id != null && tf) {
+      await obs.request("SetSceneItemTransform", itemPayload({ sceneItemId: id, sceneItemTransform: tf }));
+    }
+    if (id != null && item.enabled === false) {
+      await obs.request("SetSceneItemEnabled", itemPayload({ sceneItemId: id, sceneItemEnabled: false }));
+    }
+  }
+
+  async function setOrder(scene, names, canvasUuid) {
+    for (let i = 0; i < names.length; i += 1) {
+      const id = await sceneItemId(scene, names[i], canvasUuid);
+      if (id == null) continue;
+      const payload = { sceneName: scene, sceneItemId: id, sceneItemIndex: i };
+      if (canvasUuid) payload.canvasUuid = canvasUuid;
+      await obs.request("SetSceneItemIndex", payload);
+    }
+  }
+
+  async function installLayoutScenes(L, folder, lumiaUrl, canvasUuid, nameMap) {
+    const kitToObs = {};
+    if (canvasUuid) {
+      const vendor = await vendorAitumScenes();
+      for (const leftoverName of ["Vertical Scene", "Scene"]) {
+        if (vendor.includes(leftoverName)) {
+          for (const newName of ["STARTING SOON", "STARTING SOON V"]) {
+            try {
+              await obs.request("SetSceneName", {
+                sceneName: leftoverName,
+                newSceneName: newName,
+                canvasUuid,
+              });
+              log("Renamed " + leftoverName + " -> " + newName);
+              break;
+            } catch (err) {
+              log("  rename " + leftoverName + " -> " + newName + " failed");
+            }
+          }
+        }
+      }
+      for (const scene of L.scenes) {
+        const actual = await ensureAitumScene(scene, canvasUuid);
+        if (actual) kitToObs[scene] = actual;
+        else log("  could not add " + scene + " to Vertical Scenes");
+      }
+    } else {
+      const existing = await obs.request("GetSceneList");
+      const leftover = existing.scenes.find((s) => s.sceneName === "Scene");
+      if (leftover && !existing.scenes.some((s) => s.sceneName === L.scenes[0])) {
+        await obs.request("SetSceneName", { sceneName: "Scene", newSceneName: L.scenes[0] });
+        log("Renamed default Scene -> " + L.scenes[0]);
+      }
+      for (const scene of L.scenes) {
+        kitToObs[scene] = scene;
+        await ensureScene(scene);
+      }
+    }
+    for (const scene of L.scenes) {
+      const obsScene = kitToObs[scene];
+      if (!obsScene) continue;
+      log((canvasUuid ? "Aitum / " : L.collectionName + " / ") + obsScene);
+      for (const item of L.items[scene]) {
+        try {
+          await ensureItem(obsScene, item, folder, lumiaUrl, L, canvasUuid, nameMap);
+        } catch (err) {
+          log("  " + item.name + " failed: " + err.message);
+        }
+      }
+      await setOrder(obsScene, L.items[scene].map((it) => sourceName(it, nameMap)), canvasUuid);
+    }
+    if (!canvasUuid) {
+      try {
+        await obs.request("SetCurrentSceneTransition", { transitionName: L.transition.name });
+        await obs.request("SetCurrentSceneTransitionDuration", { transitionDuration: L.transition.durationMs });
+      } catch (err) {
+        log("Transition skipped: " + err.message);
+      }
+    }
+    try {
+      const first = kitToObs[L.scenes[0]];
+      if (first) {
+        const prog = { sceneName: first };
+        if (canvasUuid) prog.canvasUuid = canvasUuid;
+        await obs.request("SetCurrentProgramScene", prog);
+      }
+    } catch (err) {
+      log("Set scene skipped: " + err.message);
+    }
+  }
+
+  function pickAitumCanvas(canvases) {
+    const extra = (canvases || []).filter((c) => !(c.canvasFlags && c.canvasFlags.main));
+    const phone = extra.find((c) => {
+      const vs = c.canvasVideoSettings || {};
+      const name = c.canvasName || "";
+      return (vs.baseWidth === 1080 && vs.baseHeight === 1920) || /vertical|aitum/i.test(name);
+    });
+    return phone || extra[0] || null;
+  }
+
+  async function installAitumVertical(folder, lumiaUrl) {
+    log("Aitum Vertical Scenes (phone dock)...");
+    let canvases = [];
+    try {
+      canvases = (await obs.request("GetCanvasList")).canvases || [];
+    } catch (err) {
+      log("This OBS cannot fill Aitum Vertical from here (" + err.message + ").");
+      log("Update OBS to 32.1+, install Aitum Vertical, then run tools\\Install-AitumVertical.bat");
+      return false;
+    }
+    const canvas = pickAitumCanvas(canvases);
+    if (!canvas) {
+      log("No Aitum Vertical canvas. Install Aitum Vertical, reopen OBS, Docks -> Vertical Scenes, then run tools\\Install-AitumVertical.bat");
+      return false;
+    }
+    log("  canvas " + canvas.canvasName, "ok");
+    const L = Object.assign({}, RISE_LAYOUT_VERTICAL, { collectionName: "Aitum Vertical" });
+    await installLayoutScenes(L, folder, lumiaUrl, canvas.canvasUuid, RISE_AITUM_SOURCE_MAP);
+    await pingSceneCollection();
+    const have = await vendorAitumScenes();
+    log("Vertical Scenes dock: " + (have.length ? have.join(", ") : "(none reported)"));
+    if (have.length < 2) {
+      log("If you still only see STARTING SOON, click + in that dock and name them GRID V, DESK V, RACE V, REPLAY V, BRB V, ENDING V.");
+    }
+    log("Right-click each -> Linked Scenes -> matching wide scene (RACE V -> RACE).", "ok");
+    return true;
+  }
+
+  document.getElementById("btnObsConnect").onclick = async () => {
+    const status = document.getElementById("obsStatus");
+    status.textContent = "";
+    try {
+      const hello = await obs.connect(
+        document.getElementById("obsHost").value.trim(),
+        document.getElementById("obsPort").value.trim(),
+        document.getElementById("obsPass").value
+      );
+      const ver = await obs.request("GetVersion");
+      kinds = (await obs.request("GetInputKindList", { unversioned: false })).inputKinds || [];
+      log("OBS " + ver.obsVersion + "  websocket " + (hello.obsWebSocketVersion || ver.obsWebSocketVersion), "ok");
+      status.textContent = " connected";
+      status.className = "ok";
+      document.getElementById("btnInstallObs").disabled = false;
+    } catch (err) {
+      log("OBS connect failed: " + err.message);
+      status.textContent = " failed";
+    }
+  };
+
+  document.getElementById("btnInstallObs").onclick = async () => {
+    const folder = document.getElementById("overlayPath").value.trim();
+    const lumiaUrl = document.getElementById("lumiaUrl").value.trim();
+    if (!folder) {
+      log("Set the overlay folder first.");
+      return;
+    }
+    const useCollections = document.getElementById("newCollection").checked;
+    const layouts = useCollections ? RISE_LAYOUTS : [RISE_LAYOUT];
+    try {
+      for (const L of layouts) {
+        if (useCollections) {
+          const cols = await obs.request("GetSceneCollectionList");
+          if (cols.sceneCollections.includes(L.collectionName)) {
+            await obs.request("SetCurrentSceneCollection", { sceneCollectionName: L.collectionName });
+            log("Switched to existing collection " + L.collectionName, "ok");
+          } else {
+            await obs.request("CreateSceneCollection", { sceneCollectionName: L.collectionName });
+            log("Created collection " + L.collectionName, "ok");
+          }
+          await new Promise((r) => setTimeout(r, 800));
+        }
+        await obs.request("SetVideoSettings", {
+          baseWidth: L.canvas.width,
+          baseHeight: L.canvas.height,
+          outputWidth: L.canvas.width,
+          outputHeight: L.canvas.height,
+          fpsNumerator: L.canvas.fps,
+          fpsDenominator: 1,
+        });
+        await installLayoutScenes(L, folder, lumiaUrl);
+        try {
+          const special = await obs.request("GetSpecialInputs");
+          for (const key of ["desktop1", "desktop2"]) {
+            const name = special[key];
+            if (!name) continue;
+            await obs.request("SetInputMute", { inputName: name, inputMuted: true });
+            log("  muted " + name + " (Discord stays off the stream)", "ok");
+          }
+          if (special.mic1 && special.mic1 !== "Mic / Main") {
+            await obs.request("SetInputName", { inputName: special.mic1, newInputName: "Mic / Main" });
+            log("  mic is Mic / Main", "ok");
+          }
+          const hasGameAudio = await inputExists("Audio / Game");
+          for (const gameName of ["Game / Main", "Game / Angle 2"]) {
+            if (!(await inputExists(gameName))) continue;
+            await obs.request("SetInputSettings", {
+              inputName: gameName,
+              inputSettings: { capture_audio: !hasGameAudio },
+              overlay: true,
+            });
+          }
+          if (hasGameAudio) {
+            await obs.request("SetInputAudioMonitorType", {
+              inputName: "Audio / Game",
+              monitorType: "OBS_MONITORING_TYPE_NONE",
+            });
+            await obs.request("SetInputMute", { inputName: "Audio / Game", inputMuted: false });
+          }
+          const micName = (await inputExists("Mic / Main")) ? "Mic / Main" : special.mic1;
+          if (micName && (await inputExists(micName))) {
+            await obs.request("SetInputMute", { inputName: micName, inputMuted: false });
+          }
+        } catch (err) {
+          log("Audio mute skipped: " + err.message);
+        }
+      }
+      if (useCollections) {
+        await obs.request("SetCurrentSceneCollection", { sceneCollectionName: RISE_LAYOUT.collectionName });
+        await obs.request("SetVideoSettings", {
+          baseWidth: 1920,
+          baseHeight: 1080,
+          outputWidth: 1920,
+          outputHeight: 1080,
+          fpsNumerator: 60,
+          fpsDenominator: 1,
+        });
+      }
+      try {
+        await installAitumVertical(folder, lumiaUrl);
+      } catch (err) {
+        log("Aitum Vertical install skipped: " + err.message);
+      }
+      log("Done. Stay on Rise Above BeamNG. If Vertical Scenes filled, right-click each -> Linked Scenes. See docs/aitum.html.", "ok");
+      log("Pick Game / Main -> BeamNG (or the other game on DESK). Audio / Game -> pick that same game. Desktop Audio stays muted.", "ok");
+    } catch (err) {
+      log("Install failed: " + err.message);
+    }
+  };
+
+  document.getElementById("btnLumia").onclick = async () => {
+    const token = document.getElementById("lumiaToken").value.trim();
+    if (!token) {
+      log("Paste the Lumia API token.");
+      return;
+    }
+    const url = "ws://127.0.0.1:39231/api?token=" + encodeURIComponent(token) + "&name=RiseAboveInstaller";
+    log("Connecting Lumia…");
+    const ws = new WebSocket(url);
+    ws.onerror = () => log("Lumia socket error — is Lumia running? Token from Settings → API.");
+    ws.onopen = async () => {
+      for (const cmd of LUMIA_COMMANDS) {
+        ws.send(
+          JSON.stringify({
+            type: "create-chatbot-command",
+            params: {
+              name: cmd.name,
+              message: cmd.message,
+              description: cmd.description,
+              cooldownDuration: cmd.cooldownDuration,
+              on: true,
+            },
+            context: cmd.name,
+          })
+        );
+        log("  sent !" + cmd.name + " — " + cmd.description);
+        await new Promise((r) => setTimeout(r, 450));
+      }
+      log("Lumia commands sent. In Lumia, open each command → add OBS action (scene / source names above).", "ok");
+      setTimeout(() => ws.close(), 800);
+    };
+  };
+})();
+</script>
+</body>
+</html>
