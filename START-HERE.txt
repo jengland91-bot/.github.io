@@ -38,7 +38,11 @@ Names / photos / SSN session / Lumia overlay URL:
   overlays\shared\config.js
   then reload the Browser layers in Meld.
 
-Streamer.bot paste: streamerbot\README.md
+Streamer.bot (optional, clicks — no code in Meld):
+  Connect Streamer.bot to Meld, then Actions → Meld Studio → Show Scene.
+  Skip it until you want !race. Click the scene in Meld until then.
+  Guide: streamerbot\README.md
+
 Social Stream Ninja: socialstream\index.html
 
 Full Meld page: docs\meld.html

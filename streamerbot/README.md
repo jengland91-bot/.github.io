@@ -1,52 +1,49 @@
-# Streamer.bot — Meld scene + cam commands
+# Streamer.bot — clicks only (no code in Meld)
 
-Chat commands switch **Meld Studio** (not OBS). Import is copy-paste: Streamer.bot cannot load a raw `.cs` file, so you paste this into one action.
+**You do not put code into Meld Studio.** Meld is import / drag-and-drop. Streamer.bot is also clicks: pick **Show Scene**, pick **RACE**.
 
-## Connect Meld
+The `.cs` file in this folder is optional. Skip it.
 
-1. Open Meld Studio → Settings → Advanced → **Allow remote connections**.
-2. Open Streamer.bot → **Stream Apps** → **Meld Studio**.
-3. Right-click → **Add**. Host `127.0.0.1`. Name it `Local Meld`. Auto Connect on. Connect.
+## Connect Meld (once)
 
-The status panel should show the current scene once Meld is open with the Rise Above session imported.
+1. Meld Studio → Settings → Advanced → **Allow remote connections**.
+2. Streamer.bot → **Stream Apps** → **Meld Studio** → right-click → **Add**.
+3. Host `127.0.0.1`. Auto Connect on. Connect.
 
-## One action
+## Make `!race` (repeat this pattern)
 
-1. Streamer.bot → **Actions** → right-click → **Add**. Name: `Rise Above · Meld Router`.
-2. Add sub-action **Core** → **C#** → **Execute C# Code**.
-3. Paste everything in `Rise-Above-Meld.cs`. Compile. Save.
+1. Streamer.bot → **Actions** → right-click → **Add**. Name it `Scene RACE`.
+2. Add sub-action **Meld Studio** → **Show Scene**. Scene: `RACE`.
+3. Add a **Command** trigger: `!race`. Enable it. Cooldown 3 seconds. Mods + you.
 
-## Commands (triggers)
+Do the same for the other scenes:
 
-In **Commands** (or on the action, add **Command** triggers). Enable each one. Cooldown as listed. Suggested: **Mods + Broadcaster** for scene switches, **Everyone** for cam shots.
+| Command | Show Scene |
+| --- | --- |
+| `!race` / `!live` | RACE |
+| `!dual` | RACE DUAL |
+| `!replay` | REPLAY |
+| `!grid` | GRID |
+| `!desk` | DESK |
+| `!brb` | BRB |
+| `!ending` | ENDING |
+| `!starting` | STARTING SOON |
 
-| Command | Cooldown | What it does |
-| --- | --- | --- |
-| `!race` / `!live` | 3s | Scene → RACE |
-| `!dual` | 3s | Scene → RACE DUAL |
-| `!replay` | 3s | Scene → REPLAY |
-| `!grid` | 3s | Scene → GRID |
-| `!desk` | 3s | Scene → DESK |
-| `!brb` | 8s | Scene → BRB |
-| `!ending` | 8s | Scene → ENDING |
-| `!starting` | 8s | Scene → STARTING SOON |
-| `!face` | 15s | Face cam only |
-| `!room` | 15s | Room cam only |
-| `!wheel` | 15s | Wheel cam only |
-| `!pedals` | 15s | Pedals cam only |
-| `!rig` | 15s | All cams on |
-| `!game` | 15s | Hide cams (game only) |
+## Cam shots (also clicks)
 
-Each command runs the **same** `Rise Above · Meld Router` action.
+New action `Cam Face`. Sub-actions **Meld Studio** → **Set Layer Visibility State**:
 
-Cam commands need the layers named exactly `Cam / Face`, `Cam / Room`, `Cam / Wheel`, `Cam / Pedals` in Meld.
+- `Cam / Face` = show
+- `Cam / Room` = hide
+- `Cam / Wheel` = hide
+- `Cam / Pedals` = hide
 
-## Platforms
+Do that on scenes RACE, GRID, RACE DUAL, DESK (DESK only has Face + Room). Command: `!face`. Same idea for `!room` `!wheel` `!pedals` `!rig` (all show) `!game` (all hide).
 
-Add Twitch (and YouTube / Kick if you use them) under **Platforms** in Streamer.bot so commands arrive from chat. Social Stream Ninja does **not** replace this — SSN is the on-screen chat look. Streamer.bot is the brain.
+Layer names in Meld must match exactly: `Cam / Face`, `Cam / Room`, `Cam / Wheel`, `Cam / Pedals`.
 
-## Lumia lights
+## You can skip Streamer.bot at first
 
-Lumia does not talk to Meld the way it talks to OBS. Lights that follow the scene: in Streamer.bot, add a **Meld Studio → Scene Changed** trigger that calls a Lumia HTTP command, **or** keep lights on a default Monster green and fire alert flashes from Lumia only. Alerts still come from Lumia’s overlay URL.
+Click the scene in Meld yourself. Add commands later when you want chat to switch scenes.
 
-Official: [Meld + Streamer.bot](https://docs.streamer.bot/guide/stream-apps/meld-studio) · [Import](https://docs.streamer.bot/guide/core/import-export)
+Official: [Meld + Streamer.bot](https://docs.streamer.bot/guide/stream-apps/meld-studio)

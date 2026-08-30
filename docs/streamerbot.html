@@ -11,24 +11,26 @@
 </head>
 <body>
 <main>
-  <div class="kicker">CHAT COMMANDS</div>
-  <h1>STREAMER.BOT + MELD</h1>
-  <p>Streamer.bot switches Meld scenes. Lumia cannot do that. Full paste steps: <a href="../streamerbot/README.md">streamerbot/README.md</a>. C#: <a href="../streamerbot/Rise-Above-Meld.cs">Rise-Above-Meld.cs</a></p>
+  <div class="kicker">CLICKS ONLY</div>
+  <h1>NO CODE IN MELD</h1>
+  <p>Meld Studio does not take code. You import a session or drag HTML. Streamer.bot is also clicks: Show Scene → RACE. Full list: <a href="../streamerbot/README.md">streamerbot/README.md</a></p>
 
   <div class="callout">
-    <h2>Connect</h2>
+    <h2>Connect once</h2>
     <p>Meld → Settings → Advanced → Allow remote connections. Streamer.bot → Stream Apps → Meld Studio → Add <code>127.0.0.1</code>. Auto Connect on.</p>
   </div>
 
+  <h2>Make !race</h2>
   <ol>
     <li>Install <a href="https://streamer.bot/" target="_blank" rel="noreferrer">Streamer.bot</a>. Connect Twitch (and YouTube / Kick if you use them).</li>
-    <li>Create one action named <code>Rise Above · Meld Router</code>. Sub-action: Execute C# Code. Paste <code>streamerbot/Rise-Above-Meld.cs</code>.</li>
-    <li>Add Command triggers for every line in <code>streamerbot/commands.txt</code>. Point them all at that action.</li>
-    <li>Mods + you for scene switches. Everyone (15s cooldown) for <code>!face</code> / <code>!room</code> / <code>!rig</code>.</li>
+    <li>Actions → Add. Name <code>Scene RACE</code>.</li>
+    <li>Sub-action: <strong>Meld Studio → Show Scene → RACE</strong>. No C#.</li>
+    <li>Command trigger: <code>!race</code>. Mods + you. Cooldown 3s.</li>
   </ol>
+  <p>Copy that pattern for the other scenes. Skip Streamer.bot entirely until you want chat to change scenes — click the scene in Meld until then.</p>
 
   <table>
-    <tr><th>Command</th><th>Meld</th></tr>
+    <tr><th>Command</th><th>Meld Show Scene</th></tr>
     <tr><td><code>!race</code> <code>!live</code></td><td>RACE</td></tr>
     <tr><td><code>!dual</code></td><td>RACE DUAL</td></tr>
     <tr><td><code>!replay</code></td><td>REPLAY</td></tr>
@@ -37,13 +39,12 @@
     <tr><td><code>!brb</code></td><td>BRB</td></tr>
     <tr><td><code>!ending</code></td><td>ENDING</td></tr>
     <tr><td><code>!starting</code></td><td>STARTING SOON</td></tr>
-    <tr><td><code>!face</code> <code>!room</code> <code>!wheel</code> <code>!pedals</code> <code>!rig</code> <code>!game</code></td><td>Show / hide cams</td></tr>
   </table>
-  <p>Cam layers must be named exactly <code>Cam / Face</code>, <code>Cam / Room</code>, <code>Cam / Wheel</code>, <code>Cam / Pedals</code>.</p>
+  <p>Cam shots: <strong>Set Layer Visibility State</strong> on <code>Cam / Face</code> (and Room / Wheel / Pedals). Still clicks, still not code in Meld.</p>
 
   <nav class="docs">
     <a href="../apps.html">Apps list</a> ·
-    <a href="../streamerbot/README.md">Paste guide</a> ·
+    <a href="../streamerbot/README.md">Click guide</a> ·
     <a href="meld.html">Meld</a> ·
     <a href="https://docs.streamer.bot/guide/stream-apps/meld-studio" target="_blank" rel="noreferrer">Official Meld docs</a>
   </nav>

@@ -21,7 +21,7 @@ Guides: [Meld](docs/meld.html) · [Social Stream Ninja](docs/socialstream.html) 
 | This kit | HUD, Starting Soon, BRB, Ending | Layout board |
 | Social Stream Ninja | Chat + featured shoutouts | Dock |
 | Lumia Stream | Alerts + lights | Chat-for-you on the gaming monitor |
-| Streamer.bot | Nothing visual | `!race` `!brb` `!face` → Meld |
+| Streamer.bot | Nothing visual | Optional `!race` `!brb` `!face` → Meld (clicks, not code) |
 
 Do not open OBS. Do not install Aitum or Casterlabs for this Meld setup.
 

@@ -8,7 +8,7 @@ You go live from **Meld Studio**. Do not install OBS for this kit.
 | --- | --- | --- |
 | **Meld Studio** | https://www.meldstudio.co/ | Go live. Scenes, game, cameras, Browser overlays. |
 | **Lumia Stream** | https://lumiastream.com/ *(you have this)* | Alerts, lights, goals. Chat-for-you on the **gaming monitor**. |
-| **Streamer.bot** | https://streamer.bot/ *(you are getting this)* | `!race` `!brb` `!face` — switches Meld scenes and cams. |
+| **Streamer.bot** | https://streamer.bot/ *(you are getting this)* | Optional. Clicks: Show Scene. No code in Meld. `!race` `!brb` `!face` |
 | **Social Stream Ninja** | https://socialstream.ninja/ *(you are getting this)* | One chat overlay from Twitch + YouTube + Kick + TikTok. |
 
 ## Also needed (you probably already have these)

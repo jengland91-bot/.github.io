@@ -1,7 +1,9 @@
-# Streamer.bot — Meld commands
+# Streamer.bot — clicks, no code in Meld
 
-See the paste-in C# and command table: [streamerbot/README.md](../streamerbot/README.md)
+Meld Studio does not take code. Streamer.bot is **Show Scene** clicks. Full steps: [streamerbot/README.md](../streamerbot/README.md)
 
-Meld must have **Allow remote connections**. Streamer.bot → Stream Apps → Meld Studio → `127.0.0.1`.
+Meld → Settings → Advanced → Allow remote connections. Streamer.bot → Stream Apps → Meld Studio → `127.0.0.1`.
 
 Scene names must match exactly: `STARTING SOON`, `GRID`, `DESK`, `RACE`, `RACE DUAL`, `REPLAY`, `BRB`, `ENDING`.
+
+Skip Streamer.bot until you want `!race`. Click the scene in Meld until then.

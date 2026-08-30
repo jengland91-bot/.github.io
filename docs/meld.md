@@ -36,9 +36,9 @@ Official: [Browser layers](https://meldstudio.co/docs/layers/) · [Import Sessio
 
 - **Social Stream Ninja** — chat on stream. Session ID in `overlays/shared/config.js`. [Guide](socialstream.md)
 - **Lumia** — alerts + lights. Chat-for-you on the gaming monitor. [Guide](lumia.md)
-- **Streamer.bot** — `!race` switches Meld. [Guide](streamerbot.md)
+- **Streamer.bot** — optional. Clicks: Show Scene. No code in Meld. [Guide](streamerbot.md)
 
-`!race` in Lumia does not switch Meld. Streamer.bot does.
+You do not put code into Meld. Click the scene in Meld, or later add Streamer.bot Show Scene commands.
 
 ## Do not
 
