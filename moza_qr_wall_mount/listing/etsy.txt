@@ -16,8 +16,8 @@ Fits:
 
 You get:
 • 1× round mount, printed in PETG
-• 2× M8 holes at 12 and 6 o’clock for 4040 / 2020 T-nuts (or a wall stud)
-• 2× countersunk #8 holes left/right for extra wall screws
+• 1× M8 through the middle of the stub (drop the bolt in from the front; hidden by the wheel)
+• 4× countersunk #8 holes around the rim for a wall
 • Screws / T-nuts not included unless you add the hardware option
 
 Use it on a wall or on your rig — same part. Install into a wall stud or use rated anchors. Do not hang a wheel on a single drywall screw.

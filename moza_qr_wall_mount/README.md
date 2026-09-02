@@ -17,7 +17,7 @@ This is an original product design, not a MOZA part and not a copy of a commerci
 | File | What it is |
 | --- | --- |
 | [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Tiny coupon, ~15 minutes. |
-| [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate, no tab. 2× M8 at 12 and 6 o'clock (rig) + 2× #8 left/right (wall). 6 anti-spin pockets. |
+| [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. **M8 through the middle of the stub** (one T-nut or a stud) + 4× #8 around the rim. 6 anti-spin pockets. |
 | [`stl/fit_test_tight.stl`](stl/fit_test_tight.stl) / [`stl/fit_test_loose.stl`](stl/fit_test_loose.stl) | Same coupon, ±0.4 mm on the shaft if nominal is off. |
 | [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same universal plate, ring groove, wheel can rotate. |
 
@@ -27,7 +27,7 @@ This is an original product design, not a MOZA part and not a copy of a commerci
 
 ![Kit outlines](accessories.svg)
 
-All four use **M8 × 16–20 mm** bolts and T-nuts. The wheel mount’s M8 holes are at 12 and 6 o’clock on the round plate (~78 mm apart on one 8020 slot). The phone / hook accessories still use a 40 mm pair. Print in PETG, no supports.
+All four use **M8 × 16–20 mm** bolts and T-nuts. The wheel mount uses **one M8 through the centre of the stub** (a longer bolt — see Hardware). Print in PETG, no supports.
 
 | File | What it is | On the bed |
 | --- | --- | --- |
@@ -87,22 +87,21 @@ One print. Pick how you hang it:
 
 **On a wall**
 
-- 2× **M8** (or 5/16″) into a **stud** through the top and bottom holes.
-- 2× **#8 × 1¼″** wood screws through the left/right holes (anchors if they miss a stud).
+- 1× **M8 × 45–50 mm** socket-cap through the hole in the **middle of the stub**, into a **stud**.
+- 4× **#8 × 1¼″** wood screws around the rim (anchors if they miss a stud).
 
 **On a sim rig (4040 / 2020)**
 
-- 2× **M8 × 16–20 mm** socket-cap bolts + T-nuts through the top and bottom holes.
-- Leave the two small #8 holes empty.
-- Rotate the whole plate 90° if you are bolting to a horizontal beam.
+- 1× **M8 × 45–50 mm** socket-cap + T-nut, dropped in from the stub opening (the head sits in a counterbore at the tip). Hidden once the wheel is on.
+- Leave the four #8 holes empty, or snug the M8 so the plate cannot rotate on the bolt.
 
-The phone / cup / hook / clip take the same M8 T-nuts. Phone holder: two of the four plus-pattern holes, matching whether the extrusion is vertical or horizontal. Cup holder: two holes through the tab, into the **top** slot of a beam.
+The phone / cup / hook / clip take shorter **M8 × 16–20 mm** T-nut bolts. Phone holder: two of the four plus-pattern holes. Cup holder: two holes through the tab, into the **top** slot of a beam.
 
 Do not hang this on a single drywall anchor.
 
 ## Use
 
-1. Wall: two M8 into a stud (top and bottom) plus #8 left/right. Rig: two M8 T-nuts through the top and bottom holes. Stub points into the room.
+1. Wall: one M8 through the stub into a stud, plus four #8 around the rim. Rig: one M8 × 45–50 mm through the stub into a T-nut. Stub points into the room.
 2. Line up the six balls on the wheel with the six seats on the stub (same idea as the base). Press on until it clicks.
 3. To remove: pull the QR collar with both hands and take the wheel off, same as on the base.
 
@@ -118,7 +117,7 @@ Paddle clearance: the plate is 98 mm across. If paddles kiss the plate, increase
 | `FITS["nominal"].groove_d` | 45.4 | Groove floor Ø (balls lock here) |
 | `SHAFT_LEN` | 26 | How far the stub sticks out |
 | `PLATE_D` / `PLATE_T` | 98 / 8 | Wall plate size |
-| `PROFILE_HOLE_R` | 39 | M8 at 12 and 6 o'clock |
+| `CENTER_HOLE_D` | 8.4 | M8 through the middle of the stub |
 | `POCKET_OFFSET_DEG` | 90 | Rotate the six seats (90 = one at 12 o'clock) |
 
 Accessories (`accessories.py`): `PHONE_INNER_W` / `PHONE_INNER_H` / `PHONE_DEPTH`, `CUP_ID`, `HOOK_INNER`.

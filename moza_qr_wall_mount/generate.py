@@ -68,9 +68,9 @@ SCREW_R = 36.0  # plus-pattern: N/E/S/W, so two screws can hit a stud
 SCREW_D = 4.8  # clearance for #8 wood screw / 4.5 mm / M4
 SCREW_CSK_D = 9.8
 SCREW_CSK_DEPTH = 2.4
-CENTER_HOLE_D = 5.5  # optional M5 into a stud, hidden by the wheel
-CENTER_CSK_D = 11.0
-CENTER_CSK_DEPTH = 3.0
+CENTER_HOLE_D = 8.4  # M8 through the stub (one bolt into a T-nut or a stud)
+CENTER_CSK_D = 13.8  # socket-cap counterbore at the stub tip
+CENTER_CSK_DEPTH = 8.5
 
 # Product bezel — raised ring so the plate looks finished, not like a raw disc
 BEZEL_W = 4.2
@@ -80,11 +80,8 @@ BEZEL_H = 1.6
 TAB_W = 54.0
 TAB_BOTTOM = -114.0
 TAB_CORNER_R = 14.0
-PROFILE_HOLE_D = 8.4  # M8 clearance
+PROFILE_HOLE_D = 8.4  # M8 clearance (accessories)
 PROFILE_HOLE_CSK_D = 14.0
-# M8 at 12 o'clock and 6 o'clock on the round plate.
-# Outboard of the stub opening so the Ø14 CSK does not kiss the centre cut.
-PROFILE_HOLE_R = 39.0
 
 SEGMENTS = 96  # circle resolution
 FILLET_SEGS = 10
@@ -518,13 +515,14 @@ def qr_stub_profile(fit: Fit, z_base: float, inner_r: float) -> List[Vec2]:
 
     z_shaft0 = z_base + FILLET_R
     chamfer_z = z_tip - CHAMFER
-    csk_z = z_tip - CENTER_CSK_DEPTH
-    csk_r = CENTER_CSK_D / 2.0
+    bore_z = z_tip - CENTER_CSK_DEPTH
+    bore_r = CENTER_CSK_D / 2.0
 
     pts: List[Vec2] = [
         (inner_r, z_base),
-        (inner_r, csk_z),
-        (csk_r, z_tip),
+        (inner_r, bore_z),
+        (bore_r, bore_z),
+        (bore_r, z_tip),
         (shaft_r - CHAMFER, z_tip),
         (shaft_r, chamfer_z),
         (shaft_r, z_g3),
@@ -582,24 +580,18 @@ def circle_tab_outline(
 
 
 def wall_plate_tris(fit: Fit) -> List[Tri]:
-    """Round plate: #8 left/right for a wall, M8 top/bottom for 4040 / 2020."""
+    """Round plate: 4× #8 around the rim. The M8 is the hole through the stub."""
     hole_n = 32
     cut = _center_cut_d(fit)
     centres: List[Vec2] = [
+        (0.0, SCREW_R),
         (SCREW_R, 0.0),
+        (0.0, -SCREW_R),
         (-SCREW_R, 0.0),
-        (0.0, PROFILE_HOLE_R),
-        (0.0, -PROFILE_HOLE_R),
         (0.0, 0.0),
     ]
-    small_ds = [SCREW_D, SCREW_D, PROFILE_HOLE_D, PROFILE_HOLE_D, cut]
-    csk_ds = [
-        SCREW_CSK_D,
-        SCREW_CSK_D,
-        PROFILE_HOLE_CSK_D,
-        PROFILE_HOLE_CSK_D,
-        cut,
-    ]
+    small_ds = [SCREW_D, SCREW_D, SCREW_D, SCREW_D, cut]
+    csk_ds = [SCREW_CSK_D, SCREW_CSK_D, SCREW_CSK_D, SCREW_CSK_D, cut]
     holes_small = [
         circle_pts(c[0], c[1], d / 2.0, hole_n, ccw=False)
         for c, d in zip(centres, small_ds)
@@ -680,7 +672,7 @@ def svg_preview(path: str, fit: Fit) -> None:
         '<rect width="100%" height="100%" fill="#111"/>',
         '<text x="170" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Top</text>',
         '<text x="470" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Side</text>',
-        f'<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">Round plate  ·  M8 top & bottom  ·  6 anti-spin pockets</text>',
+        f'<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">Round plate  ·  M8 through the stub  ·  6 anti-spin pockets</text>',
     ]
     parts.append(
         f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{plate_r * scale}" fill="#2a2a2a" stroke="#f5a623" stroke-width="2"/>'
@@ -700,17 +692,21 @@ def svg_preview(path: str, fit: Fit) -> None:
         parts.append(
             f'<line x1="{top_c[0] + x0:.1f}" y1="{top_c[1] - y0:.1f}" x2="{top_c[0] + x1:.1f}" y2="{top_c[1] - y1:.1f}" stroke="#6cf" stroke-width="2"/>'
         )
-    for x, y, csk, d in (
-        (SCREW_R, 0.0, SCREW_CSK_D, SCREW_D),
-        (-SCREW_R, 0.0, SCREW_CSK_D, SCREW_D),
-        (0.0, PROFILE_HOLE_R, PROFILE_HOLE_CSK_D, PROFILE_HOLE_D),
-        (0.0, -PROFILE_HOLE_R, PROFILE_HOLE_CSK_D, PROFILE_HOLE_D),
-    ):
+    parts.append(
+        f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{CENTER_CSK_D / 2 * scale}" fill="none" stroke="#6cf" stroke-width="1.4"/>'
+    )
+    parts.append(
+        f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{CENTER_HOLE_D / 2 * scale}" fill="#111" stroke="#6cf"/>'
+    )
+    for ang in (0, 90, 180, 270):
+        a = math.radians(ang)
+        x = SCREW_R * math.cos(a)
+        y = SCREW_R * math.sin(a)
         parts.append(
-            f'<circle cx="{top_c[0] + x * scale:.1f}" cy="{top_c[1] - y * scale:.1f}" r="{csk / 2 * scale}" fill="none" stroke="#6cf" stroke-width="1.2"/>'
+            f'<circle cx="{top_c[0] + x * scale:.1f}" cy="{top_c[1] - y * scale:.1f}" r="{SCREW_CSK_D / 2 * scale}" fill="none" stroke="#6cf" stroke-width="1.2"/>'
         )
         parts.append(
-            f'<circle cx="{top_c[0] + x * scale:.1f}" cy="{top_c[1] - y * scale:.1f}" r="{d / 2 * scale}" fill="#111" stroke="#6cf"/>'
+            f'<circle cx="{top_c[0] + x * scale:.1f}" cy="{top_c[1] - y * scale:.1f}" r="{SCREW_D / 2 * scale}" fill="#111" stroke="#6cf"/>'
         )
     # side
     # plate

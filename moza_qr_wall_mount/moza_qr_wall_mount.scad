@@ -17,9 +17,9 @@ chamfer = 2.4;
 fillet_r = 4.5;
 groove_flat = 1.4;
 groove_from_tip = 8.8;
-center_hole_d = 5.5;
-center_csk_d = 11.0;
-center_csk_depth = 3.0;
+center_hole_d = 8.4;
+center_csk_d = 13.8;
+center_csk_depth = 8.5;
 
 /* [Plate] */
 plate_d = 98.0;
@@ -47,6 +47,7 @@ module qr_stub() {
     pts = [
         [inner_r, 0],
         [inner_r, z_tip - center_csk_depth],
+        [center_csk_d / 2, z_tip - center_csk_depth],
         [center_csk_d / 2, z_tip],
         [shaft_r - chamfer, z_tip],
         [shaft_r, z_tip - chamfer],
@@ -79,16 +80,10 @@ module wall_plate() {
                 cylinder(h = plate_t, d = plate_d - rim_chamfer * 0.8);
             cylinder(h = 0.2, d = plate_d - rim_chamfer * 2);
         }
-        // #8 left / right (wall)
-        for (a = [0, 180])
+        for (a = [0, 90, 180, 270])
             rotate([0, 0, a])
                 translate([screw_r, 0, 0])
                     csk_hole(screw_d, screw_csk_d, screw_csk_depth, plate_t);
-        // M8 top / bottom (4040 / 2020) — no tab; r=39 so CSK clears the stub opening
-        for (a = [90, 270])
-            rotate([0, 0, a])
-                translate([39, 0, 0])
-                    csk_hole(8.4, 14, 4, plate_t);
         // opening the stub sits in
         translate([0, 0, -0.2])
             cylinder(h = plate_t + 0.4, d = shaft_d + 2 * fillet_r - 0.4);
