@@ -7,7 +7,7 @@ sim racing, steering wheel mount, wheel hanger, wall mount, QR mount, 8020, gara
 DESCRIPTION
 Hang your sim-racing wheel on the wall (or your rig) instead of leaving it on a chair.
 
-This is a 3D-printed quick-release hanger. Press the wheel onto the stub the same way you mount it on the base — the balls click into a full ring groove, so you do not have to line up slots. Pull the QR collar to take it off.
+This is a 3D-printed quick-release hanger. Line up the wheel the same way you do on the base and press on — six ball seats stop it spinning if you bump it. Pull the QR collar to take it off.
 
 Fits:
 • MOZA Racing wheels with the stock ball-lock QR (ES, RS, CS, GS, FSR, and others)

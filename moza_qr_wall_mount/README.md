@@ -2,7 +2,9 @@
 
 3D-printable hanger for **MOZA** wheels (ES, RS, CS, GS, FSR — anything with the stock ball-lock QR) and other **D1-spec / Simagic-style** 50 mm ball QRs.
 
-Snap the wheel onto the stub the same way you clip it onto the base. A **continuous locking groove** means you do not have to line up the six balls.
+Snap the wheel onto the stub the same way you clip it onto the base. **Six ball pockets** lock rotation so the wheel should not spin when bumped. Line up the balls with the seats, then press on (six possible orientations — one of them is upright).
+
+A ring-groove version with no pockets is also in `stl/` if you ever want free rotation.
 
 This is an original product design, not a MOZA part and not a copy of a commercial listing.
 
@@ -16,8 +18,9 @@ This is an original product design, not a MOZA part and not a copy of a commerci
 | --- | --- |
 | [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Tiny coupon, ~15 minutes. |
 | [`stl/fit_test_tight.stl`](stl/fit_test_tight.stl) / [`stl/fit_test_loose.stl`](stl/fit_test_loose.stl) | Same coupon, ±0.4 mm on the shaft if nominal is off. |
-| [`stl/moza_qr_wall_mount.stl`](stl/moza_qr_wall_mount.stl) | Round wall plate, 4× countersunk #8 / 4.5 mm holes on a plus pattern. |
-| [`stl/moza_qr_8020_mount.stl`](stl/moza_qr_8020_mount.stl) | Tab mount for 4040 / 2020 extrusion, 2× M8 at 40 mm spacing. |
+| [`stl/moza_qr_wall_mount.stl`](stl/moza_qr_wall_mount.stl) | Round wall plate, **6 anti-spin pockets**, 4× countersunk #8 holes. |
+| [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same plate, ring groove, wheel can rotate (no pockets). |
+| [`stl/moza_qr_8020_mount.stl`](stl/moza_qr_8020_mount.stl) | Tab mount for 4040 / 2020, with anti-spin pockets. |
 
 Regenerate STLs after editing dimensions:
 
@@ -75,9 +78,11 @@ Do not hang this on a single drywall anchor. A wheel plus a yank while unclippin
 
 ## Use
 
-1. Screw the plate to the wall (or T-nut it to the rig). Stub points into the room.
-2. Offer the wheel up and press on. You do **not** need to clock the six balls.
+1. Screw the plate to the wall (or T-nut it to the rig). Stub points into the room. Put the top screw at 12 o'clock.
+2. Line up the six balls on the wheel with the six seats on the stub (same idea as the base). Press on until it clicks.
 3. To remove: pull the QR collar with both hands and take the wheel off, same as on the base.
+
+If the wheel sits a little rotated, try the next click (there are six). To shift the seats, change `POCKET_OFFSET_DEG` in `generate.py` and regenerate.
 
 Paddle clearance: the plate is 98 mm across. That clears ES / RS / CS / GS paddles on a typical hang. If a deep formula wheel’s paddles kiss the plate, print the 8020 variant and use it as a standoff on a short piece of 2020, or increase `SHAFT_LEN` in `generate.py`.
 
@@ -89,7 +94,7 @@ Paddle clearance: the plate is 98 mm across. That clears ES / RS / CS / GS paddl
 | `FITS["nominal"].groove_d` | 45.4 | Groove floor Ø (balls lock here) |
 | `SHAFT_LEN` | 26 | How far the stub sticks out |
 | `PLATE_D` / `PLATE_T` | 98 / 8 | Wall plate size |
-| `SCREW_R` | 36 | Screw circle |
+| `POCKET_OFFSET_DEG` | 90 | Rotate the six seats (90 = one at 12 o'clock) |
 
 ## License
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Generate 3D-printable Moza / D1-spec QR steering-wheel wall mounts.
 
-The wheel-side quick release uses six spring-loaded balls. This mount is a
-male-side stand-in with a continuous locking groove so you can hang the wheel
-in any rotation — no lining up slots.
+The wheel-side quick release uses six spring-loaded balls. The default stub has
+six ball pockets so the wheel cannot spin when bumped (same idea as the metal
+QR on the base). A free-spin ring-groove variant is also generated.
 
 Units: millimetres.
 """
@@ -49,6 +49,13 @@ CHAMFER = 2.4
 FILLET_R = 4.5
 GROOVE_FLAT = 1.4  # mm of constant-depth groove between 45° walls
 GROOVE_FROM_TIP = 8.8  # centre of groove, measured from the free end
+
+# Six ball pockets — anti-rotation stops (Moza QR has 6 balls at 60°)
+POCKET_COUNT = 6
+POCKET_WIDTH_DEG = 24.0  # seat width; lands between them block spin
+POCKET_BLEND_DEG = 5.0
+POCKET_OFFSET_DEG = 90.0  # first pocket at 12 o'clock when the top screw is up
+STUB_SEGMENTS = 144  # finer around the pockets
 
 # Wall plate
 PLATE_D = 98.0
@@ -391,16 +398,68 @@ def extrude_with_holes(
     )
 
 
-def lathe(profile: Sequence[Vec2], n: int = SEGMENTS) -> List[Tri]:
-    """Revolve an (r, z) polyline around Z. Open profiles stay open (no end cap)."""
+def _angle_diff(a: float, b: float) -> float:
+    d = abs(a - b) % (2 * math.pi)
+    return min(d, 2 * math.pi - d)
+
+
+def pocket_t(theta: float) -> float:
+    """1 inside a ball seat, 0 on the land between seats."""
+    half = math.radians(POCKET_WIDTH_DEG / 2.0)
+    blend = math.radians(POCKET_BLEND_DEG)
+    best = min(
+        _angle_diff(
+            theta, math.radians(POCKET_OFFSET_DEG) + k * (2 * math.pi / POCKET_COUNT)
+        )
+        for k in range(POCKET_COUNT)
+    )
+    if best <= max(0.0, half - blend):
+        return 1.0
+    if best >= half + blend:
+        return 0.0
+    x = (half + blend - best) / (2 * blend)
+    return x * x * (3.0 - 2.0 * x)
+
+
+def _groove_z_band(z_base: float, fit: Fit) -> Tuple[float, float]:
+    shaft_r = fit.shaft_d / 2.0
+    groove_r = fit.groove_d / 2.0
+    taper = shaft_r - groove_r
+    z_tip = z_base + FILLET_R + SHAFT_LEN
+    g_mid = z_tip - GROOVE_FROM_TIP
+    z0 = g_mid - GROOVE_FLAT / 2.0 - taper
+    z3 = g_mid + GROOVE_FLAT / 2.0 + taper
+    return z0, z3
+
+
+def lathe(
+    profile: Sequence[Vec2],
+    n: int = SEGMENTS,
+    *,
+    fit: Fit | None = None,
+    z_base: float | None = None,
+    indexed: bool = False,
+) -> List[Tri]:
+    """Revolve an (r, z) polyline around Z. Open profiles stay open (no end cap).
+
+    indexed=True cuts six ball pockets into the groove so the wheel cannot spin.
+    """
     prof = list(profile)
     thetas = [2 * math.pi * i / n for i in range(n)]
+    shaft_r = fit.shaft_d / 2.0 if fit is not None else 0.0
+    z0 = z3 = 0.0
+    if indexed and fit is not None and z_base is not None:
+        z0, z3 = _groove_z_band(z_base, fit)
     rings: List[List[Vec3]] = []
     for r, z in prof:
         r = max(r, 0.0)
-        rings.append(
-            [(r * math.cos(t), r * math.sin(t), z) for t in thetas]
-        )
+        ring: List[Vec3] = []
+        for t in thetas:
+            rr = r
+            if indexed and z0 - 0.05 <= z <= z3 + 0.05 and r > 12.0:
+                rr = shaft_r + (r - shaft_r) * pocket_t(t)
+            ring.append((rr * math.cos(t), rr * math.sin(t), z))
+        rings.append(ring)
     tris: List[Tri] = []
     for i in range(len(rings) - 1):
         a = rings[i]
@@ -562,28 +621,34 @@ def profile_plate_tris(fit: Fit) -> List[Tri]:
     )
 
 
-def stub_tris(fit: Fit, z_front: float) -> List[Tri]:
+def stub_tris(fit: Fit, z_front: float, indexed: bool = True) -> List[Tri]:
     inner_r = CENTER_HOLE_D / 2.0
-    return lathe(qr_stub_profile(fit, z_front, inner_r), SEGMENTS)
+    return lathe(
+        qr_stub_profile(fit, z_front, inner_r),
+        STUB_SEGMENTS,
+        fit=fit,
+        z_base=z_front,
+        indexed=indexed,
+    )
 
 
-def fit_test_tris(fit: Fit) -> List[Tri]:
+def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
     """Short QR coupon with a small finger flange — ~15 min print."""
     flange_d = 62.0
     flange_t = 5.0
     outer = circle_pts(0.0, 0.0, flange_d / 2.0, SEGMENTS, True)
     inner = [circle_pts(0.0, 0.0, CENTER_HOLE_D / 2.0, 32, False)]
     tris = extrude_with_holes(outer, inner, inner, 0.0, flange_t)
-    tris.extend(stub_tris(fit, flange_t))
+    tris.extend(stub_tris(fit, flange_t, indexed=indexed))
     return tris
 
 
-def wall_mount_tris(fit: Fit) -> List[Tri]:
-    return wall_plate_tris(fit) + stub_tris(fit, PLATE_T)
+def wall_mount_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
+    return wall_plate_tris(fit) + stub_tris(fit, PLATE_T, indexed=indexed)
 
 
-def profile_mount_tris(fit: Fit) -> List[Tri]:
-    return profile_plate_tris(fit) + stub_tris(fit, PLATE_T)
+def profile_mount_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
+    return profile_plate_tris(fit) + stub_tris(fit, PLATE_T, indexed=indexed)
 
 
 def svg_preview(path: str, fit: Fit) -> None:
@@ -613,7 +678,7 @@ def svg_preview(path: str, fit: Fit) -> None:
         '<rect width="100%" height="100%" fill="#111"/>',
         '<text x="170" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Top</text>',
         '<text x="470" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Side</text>',
-        f'<text x="320" y="340" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">Moza / D1-spec QR wall mount  ·  {fit.name} fit  ·  shaft {fit.shaft_d:.1f} mm</text>',
+        f'<text x="320" y="340" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">D1 QR wall mount  ·  6 anti-spin pockets  ·  {fit.name} fit  ·  shaft {fit.shaft_d:.1f} mm</text>',
     ]
     # top: plate + screws + shaft
     parts.append(
@@ -625,6 +690,15 @@ def svg_preview(path: str, fit: Fit) -> None:
     parts.append(
         f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{groove_r * scale}" fill="none" stroke="#888" stroke-dasharray="4 3"/>'
     )
+    for k in range(POCKET_COUNT):
+        a = math.radians(POCKET_OFFSET_DEG + k * 360.0 / POCKET_COUNT)
+        x0 = (groove_r + 0.4) * math.cos(a) * scale
+        y0 = (groove_r + 0.4) * math.sin(a) * scale
+        x1 = (shaft_r + 2.5) * math.cos(a) * scale
+        y1 = (shaft_r + 2.5) * math.sin(a) * scale
+        parts.append(
+            f'<line x1="{top_c[0] + x0:.1f}" y1="{top_c[1] - y0:.1f}" x2="{top_c[0] + x1:.1f}" y2="{top_c[1] - y1:.1f}" stroke="#6cf" stroke-width="2"/>'
+        )
     for ang in (0, 90, 180, 270):
         a = math.radians(ang)
         x = SCREW_R * math.cos(a)
@@ -696,8 +770,13 @@ def generate_all(out_dir: str, fit_name: str = DEFAULT_FIT) -> None:
     fit = FITS[fit_name]
     os.makedirs(out_dir, exist_ok=True)
     jobs = [
-        ("stl/moza_qr_wall_mount.stl", wall_mount_tris(fit), f"moza_qr_wall_{fit.name}"),
-        ("stl/moza_qr_8020_mount.stl", profile_mount_tris(fit), f"moza_qr_8020_{fit.name}"),
+        ("stl/moza_qr_wall_mount.stl", wall_mount_tris(fit, True), f"moza_qr_wall_{fit.name}"),
+        (
+            "stl/moza_qr_wall_mount_free.stl",
+            wall_mount_tris(fit, False),
+            f"moza_qr_wall_free_{fit.name}",
+        ),
+        ("stl/moza_qr_8020_mount.stl", profile_mount_tris(fit, True), f"moza_qr_8020_{fit.name}"),
     ]
     for key, f in FITS.items():
         jobs.append((f"stl/fit_test_{key}.stl", fit_test_tris(f), f"fit_test_{key}"))
