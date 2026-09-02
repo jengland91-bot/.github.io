@@ -93,10 +93,11 @@ The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the pho
 4. If it goes on but will not lock → print `fit_test_tight.stl`, or make sure you are pushing until the balls drop into the groove.
 5. When the coupon feels right, print the matching full mount (`generate.py --fit …` if you changed it).
 
-Nominal numbers (plastic, a little under the ~50 mm metal male QR):
+Nominal numbers (sized to the user's wheel: sleeve ID **40.9 mm**, centre opening **22.4 mm**):
 
-- Shaft Ø **49.4 mm**
-- Groove Ø **45.4 mm**, 45° walls, ~8.8 mm from the tip
+- Shaft Ø **40.4 mm** (0.5 mm under the sleeve so PETG can slide in)
+- Groove Ø **36.4 mm**, 45° walls, ~8.8 mm from the tip
+- Hollow Ø **26 mm** through the stub (open in the middle; M8 counterbore stays at the tip)
 
 ## Hardware
 
@@ -104,7 +105,7 @@ One print. Pick how you hang it:
 
 **On a wall**
 
-- 1× **M8 × 50–60 mm** socket-cap through the hole in the **middle of the stub**, into a **stud** (30 mm of that length is the printed part; the rest bites wood).
+- 1× **M8 × 50–60 mm** socket-cap through the hole in the **tip of the stub**, into a **stud** (~25 mm of that length is the printed part; the rest bites wood).
 - 4× **#8 × 1¼″** wood screws around the rim (anchors if they miss a stud).
 
 **On a sim rig (4040 / 2020)**
@@ -113,7 +114,7 @@ One print. Pick how you hang it:
 - Drop it in from the stub opening. The head sits in a counterbore at the tip and is hidden once the wheel is on.
 - Leave the four #8 holes empty. Snug the M8 so the plate cannot rotate on the bolt.
 
-Why 40 mm: the head seats 30 mm from the back of the plate, then you want ~8–10 mm of thread in the T-nut. The phone / cup / hook / clip still take short **M8 × 16–20 mm** bolts.
+Why 40 mm: the head seats ~25 mm from the back of the plate, then you want ~8–10 mm of thread in the T-nut. The phone / cup / hook / clip still take short **M8 × 16–20 mm** bolts.
 
 Do not hang this on a single drywall anchor.
 
@@ -131,11 +132,12 @@ Paddle clearance: the plate is 98 mm across. If paddles kiss the plate, increase
 
 | Constant | Default | What it does |
 | --- | --- | --- |
-| `FITS["nominal"].shaft_d` | 49.4 | Outer Ø the QR slides over |
-| `FITS["nominal"].groove_d` | 45.4 | Groove floor Ø (balls lock here) |
+| `FITS["nominal"].shaft_d` | 40.4 | Outer Ø the QR slides over (wheel sleeve measured 40.9) |
+| `FITS["nominal"].groove_d` | 36.4 | Groove floor Ø (balls lock here) |
 | `SHAFT_LEN` | 26 | How far the stub sticks out |
 | `PLATE_D` / `PLATE_T` | 98 / 8 | Wall plate size |
-| `CENTER_HOLE_D` | 8.4 | M8 through the middle of the stub |
+| `STUB_BORE_D` | 26 | Hollow through the stub |
+| `CENTER_HOLE_D` | 8.4 | M8 at the tip of the stub |
 | `POCKET_OFFSET_DEG` | 90 | Rotate the six seats (90 = one at 12 o'clock) |
 
 Accessories (`accessories.py`): `PHONE_INNER_W` / `PHONE_INNER_H` / `PHONE_DEPTH`, `CUP_ID`, `HOOK_INNER`.

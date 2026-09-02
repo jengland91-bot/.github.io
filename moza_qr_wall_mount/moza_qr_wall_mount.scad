@@ -8,15 +8,16 @@ $fn = 96;
 
 /* [Fit] */
 // Shaft / groove diameters. If a test print is tight, drop these by 0.4 mm.
-shaft_d = 49.4;
-groove_d = 45.4;
+shaft_d = 40.4;
+groove_d = 36.4;
 
 /* [Stub] */
 shaft_len = 26.0;
 chamfer = 2.4;
-fillet_r = 4.5;
+fillet_r = 0.0;
 groove_flat = 1.4;
 groove_from_tip = 8.8;
+stub_bore_d = 26.0;
 center_hole_d = 8.4;
 center_csk_d = 13.8;
 center_csk_depth = 8.5;
@@ -42,23 +43,24 @@ module qr_stub() {
     z_g1 = g_mid - groove_flat / 2;
     z_g2 = g_mid + groove_flat / 2;
     z_g3 = g_mid + groove_flat / 2 + depth;
-    inner_r = center_hole_d / 2;
+    inner_r = stub_bore_d / 2;
+    m8_r = center_hole_d / 2;
+    csk_r = center_csk_d / 2;
+    bore_z = z_tip - center_csk_depth;
 
     pts = [
         [inner_r, 0],
-        [inner_r, z_tip - center_csk_depth],
-        [center_csk_d / 2, z_tip - center_csk_depth],
-        [center_csk_d / 2, z_tip],
+        [inner_r, bore_z],
+        [m8_r, bore_z],
+        [csk_r, bore_z],
+        [csk_r, z_tip],
         [shaft_r - chamfer, z_tip],
         [shaft_r, z_tip - chamfer],
         [shaft_r, z_g3],
         [groove_r, z_g2],
         [groove_r, z_g1],
         [shaft_r, z_g0],
-        [shaft_r, fillet_r],
-        for (i = [0 : 10])
-            let (a = 90 * (1 - i / 10))
-            [shaft_r + fillet_r * cos(a), fillet_r * sin(a)],
+        [shaft_r, 0],
         [inner_r, 0]
     ];
     rotate_extrude()

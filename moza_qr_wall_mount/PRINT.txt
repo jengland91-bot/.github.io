@@ -6,7 +6,7 @@ WHEEL MOUNT  (stl/moza_qr_universal_mount.stl)
   6 walls, 40% gyroid, stub pointing up
   Bolt: M8 x 40 mm socket-cap into a 4040 T-nut (M8 x 35 mm on 2020)
   Wall: M8 x 50–60 mm into a stud, plus 4x #8 around the rim
-  Line up the six balls with the six grooves, press on
+  Hollow 26 mm through the stub (saves filament). Print the fit test first.
 
 PHONE / CUP / HOOK / CLIP / MOUSE TRAY
   4 walls, 25% gyroid (hook: 6 walls, 40%)

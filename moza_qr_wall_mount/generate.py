@@ -39,10 +39,12 @@ class Fit:
     groove_d: float
 
 
+# Sleeve ID measured on the user's wheel: 40.9 mm. Shaft sits inside that.
+# Groove stays 4 mm smaller than the shaft (same 2 mm radial seat as before).
 FITS = {
-    "tight": Fit("tight", shaft_d=49.8, groove_d=45.8),
-    "nominal": Fit("nominal", shaft_d=49.4, groove_d=45.4),
-    "loose": Fit("loose", shaft_d=49.0, groove_d=45.0),
+    "tight": Fit("tight", shaft_d=40.7, groove_d=36.7),
+    "nominal": Fit("nominal", shaft_d=40.4, groove_d=36.4),
+    "loose": Fit("loose", shaft_d=40.0, groove_d=36.0),
 }
 
 DEFAULT_FIT = "nominal"
@@ -50,9 +52,10 @@ DEFAULT_FIT = "nominal"
 # Stub
 SHAFT_LEN = 26.0  # plate front -> tip, including chamfer
 CHAMFER = 2.4
-FILLET_R = 4.5
+FILLET_R = 0.0  # no extra OD at the root — a fillet was jamming in the 40.9 mm sleeve
 GROOVE_FLAT = 1.4  # mm of constant-depth groove between 45° walls
 GROOVE_FROM_TIP = 8.8  # centre of groove, measured from the free end
+STUB_BORE_D = 26.0  # hollow through the stub (wheel centre opening measured 22.4 mm)
 
 # Six ball pockets — anti-rotation stops (Moza QR has 6 balls at 60°)
 POCKET_COUNT = 6
@@ -457,7 +460,7 @@ def lathe(
         ring: List[Vec3] = []
         for t in thetas:
             rr = r
-            if indexed and z0 - 0.05 <= z <= z3 + 0.05 and r > 12.0:
+            if indexed and z0 - 0.05 <= z <= z3 + 0.05 and r > STUB_BORE_D / 2.0 + 0.8:
                 rr = shaft_r + (r - shaft_r) * pocket_t(t)
             ring.append((rr * math.cos(t), rr * math.sin(t), z))
         rings.append(ring)
@@ -514,16 +517,18 @@ def qr_stub_profile(fit: Fit, z_base: float, inner_r: float) -> List[Vec2]:
     z_g2 = g_mid + g_half_flat
     z_g3 = g_mid + g_half_flat + taper  # closer to tip
 
-    z_shaft0 = z_base + FILLET_R
+    z_shaft0 = z_base + max(FILLET_R, 0.2)
     chamfer_z = z_tip - CHAMFER
     bore_z = z_tip - CENTER_CSK_DEPTH
-    bore_r = CENTER_CSK_D / 2.0
+    csk_r = CENTER_CSK_D / 2.0
+    m8_r = CENTER_HOLE_D / 2.0
 
     pts: List[Vec2] = [
         (inner_r, z_base),
         (inner_r, bore_z),
-        (bore_r, bore_z),
-        (bore_r, z_tip),
+        (m8_r, bore_z),
+        (csk_r, bore_z),
+        (csk_r, z_tip),
         (shaft_r - CHAMFER, z_tip),
         (shaft_r, chamfer_z),
         (shaft_r, z_g3),
@@ -532,10 +537,13 @@ def qr_stub_profile(fit: Fit, z_base: float, inner_r: float) -> List[Vec2]:
         (shaft_r, z_g0),
         (shaft_r, z_shaft0),
     ]
-    # fillet: centre (shaft_r, z_base), from (shaft_r, z_base+R) to (shaft_r+R, z_base)
-    for i in range(FILLET_SEGS + 1):
-        a = math.pi / 2 * (1.0 - i / FILLET_SEGS)  # pi/2 -> 0
-        pts.append((shaft_r + FILLET_R * math.cos(a), z_base + FILLET_R * math.sin(a)))
+    if FILLET_R > 0.15:
+        # fillet: centre (shaft_r, z_base), from (shaft_r, z_base+R) to (shaft_r+R, z_base)
+        for i in range(FILLET_SEGS + 1):
+            a = math.pi / 2 * (1.0 - i / FILLET_SEGS)  # pi/2 -> 0
+            pts.append((shaft_r + FILLET_R * math.cos(a), z_base + FILLET_R * math.sin(a)))
+    else:
+        pts.append((shaft_r, z_base))
     return pts
 
 
@@ -544,7 +552,7 @@ def qr_stub_profile(fit: Fit, z_base: float, inner_r: float) -> List[Vec2]:
 # ---------------------------------------------------------------------------
 
 def _center_cut_d(fit: Fit) -> float:
-    """Plate opening the stub sits in — slightly smaller than the fillet so they overlap."""
+    """Plate opening the stub sits in — slightly smaller than the stub root so they overlap."""
     return 2.0 * (fit.shaft_d / 2.0 + FILLET_R) - 0.4
 
 
@@ -617,7 +625,7 @@ def profile_plate_tris(fit: Fit) -> List[Tri]:
 
 
 def stub_tris(fit: Fit, z_front: float, indexed: bool = True) -> List[Tri]:
-    inner_r = CENTER_HOLE_D / 2.0
+    inner_r = STUB_BORE_D / 2.0
     return lathe(
         qr_stub_profile(fit, z_front, inner_r),
         STUB_SEGMENTS,
@@ -632,7 +640,7 @@ def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
     flange_d = 62.0
     flange_t = 5.0
     outer = circle_pts(0.0, 0.0, flange_d / 2.0, SEGMENTS, True)
-    inner = [circle_pts(0.0, 0.0, CENTER_HOLE_D / 2.0, 32, False)]
+    inner = [circle_pts(0.0, 0.0, STUB_BORE_D / 2.0, 32, False)]
     tris = extrude_with_holes(outer, inner, inner, 0.0, flange_t)
     tris.extend(stub_tris(fit, flange_t, indexed=indexed))
     return tris
@@ -666,7 +674,7 @@ def svg_preview(path: str, fit: Fit) -> None:
     z_tip = PLATE_T + FILLET_R + SHAFT_LEN
 
     # side profile outline (upper half, mirrored)
-    prof = qr_stub_profile(fit, PLATE_T, CENTER_HOLE_D / 2)
+    prof = qr_stub_profile(fit, PLATE_T, STUB_BORE_D / 2)
     # only the outer envelope for a readable sketch
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
@@ -693,6 +701,9 @@ def svg_preview(path: str, fit: Fit) -> None:
         parts.append(
             f'<line x1="{top_c[0] + x0:.1f}" y1="{top_c[1] - y0:.1f}" x2="{top_c[0] + x1:.1f}" y2="{top_c[1] - y1:.1f}" stroke="#6cf" stroke-width="2"/>'
         )
+    parts.append(
+        f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{STUB_BORE_D / 2 * scale}" fill="#111" stroke="#6cf" stroke-dasharray="4 3"/>'
+    )
     parts.append(
         f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{CENTER_CSK_D / 2 * scale}" fill="none" stroke="#6cf" stroke-width="1.4"/>'
     )
@@ -722,14 +733,15 @@ def svg_preview(path: str, fit: Fit) -> None:
         pts.append(sx(0, sign * plate_r))
         pts.append(sx(z0, sign * plate_r))
         pts.append(sx(z0, sign * (shaft_r + FILLET_R)))
-        for i in range(FILLET_SEGS + 1):
-            a = math.pi / 2 * (1 - i / FILLET_SEGS)
-            pts.append(
-                sx(
-                    z0 + FILLET_R * math.sin(a),
-                    sign * (shaft_r + FILLET_R * math.cos(a)),
+        if FILLET_R > 0.15:
+            for i in range(FILLET_SEGS + 1):
+                a = math.pi / 2 * (1 - i / FILLET_SEGS)
+                pts.append(
+                    sx(
+                        z0 + FILLET_R * math.sin(a),
+                        sign * (shaft_r + FILLET_R * math.cos(a)),
+                    )
                 )
-            )
         depth = shaft_r - groove_r
         z_tip_l = z0 + FILLET_R + SHAFT_LEN
         g_mid = z_tip_l - GROOVE_FROM_TIP
