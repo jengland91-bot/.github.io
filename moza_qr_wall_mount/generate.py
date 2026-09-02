@@ -809,6 +809,7 @@ KIT_ZIP_FILES = (
     "stl/8020_cup_holder.stl",
     "stl/8020_headphone_hook.stl",
     "stl/8020_cable_clip.stl",
+    "stl/8020_mouse_tray.stl",
 )
 
 

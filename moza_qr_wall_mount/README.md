@@ -12,7 +12,7 @@ This is an original product design, not a MOZA part and not a copy of a commerci
 
 ## Download
 
-**[sim-rig-kit.zip](sim-rig-kit.zip)** — wheel mount, fit tests, phone holder, cup holder, headphone hook, cable clip.
+**[sim-rig-kit.zip](sim-rig-kit.zip)** — wheel mount, fit tests, phone, cup, hook, clip, mouse tray.
 
 | File | Download |
 | --- | --- |
@@ -22,6 +22,7 @@ This is an original product design, not a MOZA part and not a copy of a commerci
 | Cup holder | [8020_cup_holder.stl](stl/8020_cup_holder.stl) |
 | Headphone hook | [8020_headphone_hook.stl](stl/8020_headphone_hook.stl) |
 | Cable clip | [8020_cable_clip.stl](stl/8020_cable_clip.stl) |
+| Mouse tray | [8020_mouse_tray.stl](stl/8020_mouse_tray.stl) |
 
 Drag the STL into **Bambu Studio**. If GitHub shows a file page instead of downloading, click **Download raw file**.
 
@@ -42,7 +43,7 @@ Drag the STL into **Bambu Studio**. If GitHub shows a file page instead of downl
 
 ![Kit outlines](accessories.svg)
 
-All four use **M8 × 16–20 mm** bolts and T-nuts. The wheel mount uses **one M8 through the centre of the stub** (a longer bolt — see Hardware). Print in PETG, no supports.
+All of these use **M8 × 16–20 mm** bolts and T-nuts. The wheel mount uses **one M8 through the centre of the stub** (a longer bolt — see Hardware). Print in PETG, no supports.
 
 | File | What it is | On the bed |
 | --- | --- | --- |
@@ -50,6 +51,7 @@ All four use **M8 × 16–20 mm** bolts and T-nuts. The wheel mount uses **one M
 | [`stl/8020_cup_holder.stl`](stl/8020_cup_holder.stl) | 86 mm ID cup / tumbler, 52 mm deep, drain hole. **Bolt to the top of a 4040 / 2020 beam** so the cup sits upright. | Floor down, opening up |
 | [`stl/8020_headphone_hook.stl`](stl/8020_headphone_hook.stl) | J-hook for a headset. 2× M8, 20 mm thick. Side upright, hook into the room. | Flat |
 | [`stl/8020_cable_clip.stl`](stl/8020_cable_clip.stl) | One M8, two snap slots for USB / power leads. | Flat |
+| [`stl/8020_mouse_tray.stl`](stl/8020_mouse_tray.stl) | Side-mount mouse tray. **210 × 300 mm** deck (8.3 × 11.8 in) — fits a **9 in** sim-to-wall gap with a little clearance. 2× M8 on a vertical plate. Stick a cut cloth pad on the deck (PETG is a poor mouse surface). Mouse cable hole in the back corner. | Deck on the bed, bolt plate up |
 
 Phone too tight / too loose: edit `PHONE_INNER_W` / `PHONE_INNER_H` / `PHONE_DEPTH` in `accessories.py`. Cup too snug: raise `CUP_ID`.
 

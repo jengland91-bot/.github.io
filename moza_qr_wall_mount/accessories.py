@@ -149,8 +149,89 @@ def u_channel_pts(
 
 
 # ---------------------------------------------------------------------------
-# Phone holder — landscape tray, open top, M8 tab above the phone
+# Side-mount mouse tray — 210 mm toward the wall (fits a 9 in / 229 mm gap)
 # ---------------------------------------------------------------------------
+
+MOUSE_DEPTH = 210.0  # toward the wall; ~19 mm clearance in a 9 in gap
+MOUSE_LENGTH = 300.0  # along the rig
+MOUSE_FLOOR = 6.0
+MOUSE_LIP = 8.0
+MOUSE_LIP_W = 3.2
+MOUSE_PLATE_H = 100.0  # up the 4040
+MOUSE_GUSSET = 16.0
+
+
+def map_tris(tris: Sequence[Tri], fn) -> List[Tri]:
+    return [(fn(a), fn(b), fn(c)) for a, b, c in tris]
+
+
+def rot_y_90(p: Vec3) -> Vec3:
+    x, y, z = p
+    return (z, y, -x)
+
+
+def mouse_floor_pts(depth: float, length: float, r: float) -> List[Vec2]:
+    r = min(r, depth / 3.0, length / 3.0)
+    n = 8
+    pts: List[Vec2] = [(0.0, -length / 2.0)]
+    pts += arc_pts(depth - r, -length / 2.0 + r, r, 1.5 * math.pi, 2.0 * math.pi, n)
+    pts += arc_pts(depth - r, length / 2.0 - r, r, 0.0, 0.5 * math.pi, n)
+    pts.append((0.0, length / 2.0))
+    return cad.ensure_winding(pts, True)
+
+
+def mouse_lip_pts(depth: float, length: float, wall: float) -> List[Vec2]:
+    """U-lip open on the 8020 side (x = 0)."""
+    d, l, w = depth, length, wall
+    pts: List[Vec2] = [
+        (0.0, -l / 2.0),
+        (d, -l / 2.0),
+        (d, l / 2.0),
+        (0.0, l / 2.0),
+        (0.0, l / 2.0 - w),
+        (d - w, l / 2.0 - w),
+        (d - w, -l / 2.0 + w),
+        (0.0, -l / 2.0 + w),
+    ]
+    return cad.ensure_winding(pts, True)
+
+
+def mouse_tray_tris() -> List[Tri]:
+    """Tray on the bed, bolt plate standing up. Side-mount to a vertical 4040."""
+    d, l = MOUSE_DEPTH, MOUSE_LENGTH
+    floor_outer = mouse_floor_pts(d, l, 14.0)
+    cable = [
+        cad.circle_pts(18.0, l / 2.0 - 28.0, 6.0, 24, False),
+    ]
+    tris = cad.loft_layers(
+        [
+            {"z": 0.0, "outer": floor_outer, "holes": cable},
+            {"z": MOUSE_FLOOR, "outer": floor_outer, "holes": cable},
+        ]
+    )
+    lip = mouse_lip_pts(d, l, MOUSE_LIP_W)
+    tris.extend(
+        cad.loft_layers(
+            [
+                {"z": MOUSE_FLOOR, "outer": lip, "holes": []},
+                {"z": MOUSE_FLOOR + MOUSE_LIP, "outer": lip, "holes": []},
+            ]
+        )
+    )
+    gusset = cad.rounded_rect_pts(MOUSE_GUSSET, l - 8.0, 4.0, 6)
+    gusset = cad._shift(gusset, MOUSE_GUSSET / 2.0, 0.0)
+    tris.extend(cad.extrude_with_holes(gusset, [], [], 0.0, MOUSE_GUSSET))
+
+    plate_outer = cad.rounded_rect_pts(MOUSE_PLATE_H, TAB_W, 10.0, 8)
+    centres: List[Vec2] = [(-PITCH / 2.0, 0.0), (PITCH / 2.0, 0.0)]
+    plate = plate_csk(plate_outer, centres, 0.0, PLATE_T)
+    plate = map_tris(plate, rot_y_90)
+
+    def park(p: Vec3) -> Vec3:
+        return (p[0] - PLATE_T, p[1], p[2] + MOUSE_PLATE_H / 2.0)
+
+    tris.extend(map_tris(plate, park))
+    return tris
 
 PHONE_INNER_W = 174.0  # Pro Max + thick case
 PHONE_INNER_H = 88.0
@@ -393,6 +474,7 @@ def generate_accessories(out_dir: str) -> None:
         ("stl/8020_cup_holder.stl", cup_holder_tris(), "cup_holder"),
         ("stl/8020_headphone_hook.stl", headphone_hook_tris(), "headphone_hook"),
         ("stl/8020_cable_clip.stl", cable_clip_tris(), "cable_clip"),
+        ("stl/8020_mouse_tray.stl", mouse_tray_tris(), "mouse_tray"),
     ]
     for rel, tris, name in jobs:
         path = os.path.join(out_dir, rel)
