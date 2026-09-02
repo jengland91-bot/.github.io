@@ -32,7 +32,7 @@ Drag the STL into **Bambu Studio**. If GitHub shows a file page instead of downl
 
 | File | What it is |
 | --- | --- |
-| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Hollow stub, no thick bottom. M8 at the **tip**, four #8 lugs to screw it to a board or the rig. **3 walls / 15% infill**, stub up. |
+| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Hollow stub, no thick bottom. M8 at the **tip**, four short #8 flaps. **3 walls / 15% infill**, stub up. |
 | [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. **M8 through the middle of the stub** (one T-nut or a stud) + 4× #8 around the rim. 6 anti-spin pockets. |
 | [`stl/fit_test_tight.stl`](stl/fit_test_tight.stl) / [`stl/fit_test_loose.stl`](stl/fit_test_loose.stl) | Same coupon, ±0.4 mm on the shaft if nominal is off. |
 | [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same universal plate, ring groove, wheel can rotate. |

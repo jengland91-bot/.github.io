@@ -75,6 +75,8 @@ SCREW_CSK_DEPTH = 2.4
 CENTER_HOLE_D = 8.4  # M8 through the stub (one bolt into a T-nut or a stud)
 CENTER_CSK_D = 13.8  # socket-cap counterbore at the stub tip
 CENTER_CSK_DEPTH = 8.5
+FIT_SCREW_R = 25.5  # fit-test lugs tucked in (full mount still uses SCREW_R = 36)
+FIT_LUG_PAD_R = 7.5
 
 # Product bezel — raised ring so the plate looks finished, not like a raw disc
 BEZEL_W = 4.2
@@ -641,23 +643,23 @@ def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
     No thick bottom disc. Print 3 walls / 15% infill, stub up.
     """
     lug_t = 2.8
-    pad_r = 9.0
+    pad_r = FIT_LUG_PAD_R
     hole_n = 24
     shaft_r = fit.shaft_d / 2.0
-    # Lugs start on the stub wall and reach past the #8 holes. They do not
-    # cover the hollow (so the bottom stays open).
-    x0 = shaft_r - 1.5
-    x1 = SCREW_R + pad_r
+    screw_r = FIT_SCREW_R
+    # Short lugs: start on the stub wall, holes close in. Bottom stays open.
+    x0 = shaft_r - 1.0
+    x1 = screw_r + pad_r
     lug_len = x1 - x0
     lug_cx = (x0 + x1) / 2.0
 
     def one_lug(cx: float, cy: float, along_x: bool) -> List[Tri]:
         if along_x:
-            outer = _shift(rounded_rect_pts(lug_len, 2.0 * pad_r, 7.0, 6), cx, 0.0)
-            hole_c = (math.copysign(SCREW_R, cx), 0.0)
+            outer = _shift(rounded_rect_pts(lug_len, 2.0 * pad_r, 6.0, 6), cx, 0.0)
+            hole_c = (math.copysign(screw_r, cx), 0.0)
         else:
-            outer = _shift(rounded_rect_pts(2.0 * pad_r, lug_len, 7.0, 6), 0.0, cy)
-            hole_c = (0.0, math.copysign(SCREW_R, cy))
+            outer = _shift(rounded_rect_pts(2.0 * pad_r, lug_len, 6.0, 6), 0.0, cy)
+            hole_c = (0.0, math.copysign(screw_r, cy))
         small = [circle_pts(hole_c[0], hole_c[1], SCREW_D / 2.0, hole_n, False)]
         csk = [circle_pts(hole_c[0], hole_c[1], SCREW_CSK_D / 2.0, hole_n, False)]
         outer_ccw = ensure_winding(outer, True)
