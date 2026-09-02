@@ -20,6 +20,8 @@ Do **not** put “MOZA” in the product name as if you make MOZA gear. Do **not
 **Product name (yours):** `D1 QR Steering Wheel Wall Mount`  
 **Subtitle:** Compatible with MOZA R3 / R5 / R9 / R12 / R16 / R21 and stock MOZA wheels (ES, RS, CS, GS, FSR)
 
+8020 add-ons (no brand in the name): `Sim Rig Phone Holder`, `Sim Rig Cup Holder`, `Sim Rig Headphone Hook`, `Sim Rig Cable Clip`.
+
 That “compatible with” wording is the normal, allowed way to say what it fits.
 
 Every listing and the packing slip should include:
@@ -70,12 +72,17 @@ Not affiliated with, endorsed by, or sponsored by MOZA Racing.
 2. Colour of the month  
 3. Add-on: 4× wall screws + anchors  
 4. Add-on: 2× M8 bolts + T-nuts  
+5. 8020 phone holder / cup holder / headphone hook / cable clip  
+6. Full rig kit (mount + the four accessories)  
 
 **What to charge (US, 2026 ballpark)**
 
 - Printed universal mount: **$18–28** + shipping  
 - Hardware add-on: **+$4–6**  
-- Digital STL only: **$8–12** if you go that route  
+- Phone holder / cup / hook: **$12–20** each printed  
+- Cable clip: **$6–10**  
+- Rig kit (wheel mount + phone + cup + hook + clip): **$55–75**  
+- Digital STL only: **$8–12** if you go that route (kit zip **$18–24**)  
 
 Filament for one wall mount is a few dollars of PETG and well under two hours on a Bambu. The margin is in finishing, photos, and not having failed parts.
 
@@ -95,7 +102,7 @@ Reject a part rather than ship a weak one. A dropped carbon wheel costs more tha
 | Infill | 40% gyroid |
 | Supports | None |
 | Brim | 5 mm, then knife it off clean |
-| Orientation | Plate on the bed, stub up |
+| Orientation | Plate on the bed, stub up (wheel mount). Accessories: see README. |
 
 **QC before it goes in the box**
 
@@ -106,6 +113,8 @@ Reject a part rather than ship a weak one. A dropped carbon wheel costs more tha
 5. Collar still releases. If it welds on, that unit is scrap.  
 6. Wipe, bag, include the care card.
 
+**Accessories QC:** holes take an M8 without cracking the CSK; phone tray inner is ~174×88; cup ID is ~86 mm; hook has no layer splits on the bend.
+
 If a customer’s wheel is unusually tight, reprint that order on the **loose** fit (`python3 generate.py --fit loose`) rather than arguing.
 
 ---
@@ -115,9 +124,17 @@ If a customer’s wheel is unusually tight, reprint that order on the **loose** 
 ```
 D1 QR WHEEL MOUNT
 
-1. Screw the plate to a stud or use rated anchors. Four screws. Stub points into the room.
-2. Press the wheel on until it clicks. No need to line up the balls.
+1. Wall: four screws into a stud or rated anchors.
+   Rig: two M8 bolts + T-nuts through the tab (40 mm apart).
+   Stub points into the room.
+2. Line up the six balls with the six seats on the stub, then press on until it clicks.
 3. To remove: pull the QR collar with both hands and take the wheel off.
+
+8020 ADD-ONS (same M8 / 40 mm T-nuts)
+• Phone: two of the four plus-pattern holes. Slide the phone in from the top.
+• Cup: bolt the tab to the TOP of a 4040/2020 beam so the cup sits upright.
+• Headset hook: side upright, hook into the room.
+• Cable clip: press USB/power leads into the two slots.
 
 PETG printed part. Do not yank the rim. Do not hang on a single drywall screw.
 Questions? (your email / Etsy messages)
@@ -133,7 +150,8 @@ Not affiliated with MOZA Racing.
 2. Detail: QR collar seated on the stub, groove visible.  
 3. Install: back of the plate and the four screw holes.  
 4. Scale: in a hand, next to a tape or a screw.  
-5. Rig shot if you sell the 8020 version.
+5. Rig shot if you sell the 8020 version.  
+6. Kit: phone in the tray, cup on a 4040 beam, headset on the hook.
 
 Buyers of the Etsy listings you sent are shopping “MOZA wheel storage.” Your photos should answer: it clicks on, it looks clean, it will not drop the wheel.
 
@@ -144,6 +162,10 @@ Buyers of the Etsy listings you sent are shopping “MOZA wheel storage.” Your
 | Sell this | File |
 | --- | --- |
 | Universal (wall + rig) | `stl/moza_qr_universal_mount.stl` |
-| Digital download zip | that STL + care card + “compatible with MOZA…” one-pager |
+| Phone holder | `stl/8020_phone_holder.stl` |
+| Cup holder | `stl/8020_cup_holder.stl` |
+| Headphone hook | `stl/8020_headphone_hook.stl` |
+| Cable clip | `stl/8020_cable_clip.stl` |
+| Digital download zip | those STLs + care card + “compatible with MOZA…” one-pager |
 
-Do not include `generate.py` in a cheap digital listing unless you want people cloning your shop.
+Do not include `generate.py` or `accessories.py` in a cheap digital listing unless you want people cloning your shop.

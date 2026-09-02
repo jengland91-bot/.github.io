@@ -23,14 +23,30 @@ This is an original product design, not a MOZA part and not a copy of a commerci
 
 `moza_qr_wall_mount.stl` and `moza_qr_8020_mount.stl` are copies of the universal file so old links still work.
 
+### 8020 sim-rig kit (same M8 hardware)
+
+![Kit outlines](accessories.svg)
+
+All four use **M8 × 16–20 mm** bolts and T-nuts at **40 mm** spacing, same as the wheel-mount tab. Print in PETG, no supports.
+
+| File | What it is | On the bed |
+| --- | --- | --- |
+| [`stl/8020_phone_holder.stl`](stl/8020_phone_holder.stl) | Landscape tray for a phone + case up to **174 × 88 × 16 mm**. Open top (cable out the top). 4× M8 in a plus — vertical pair on an upright, horizontal pair on a dash bar. | Flat back down, walls up |
+| [`stl/8020_cup_holder.stl`](stl/8020_cup_holder.stl) | 86 mm ID cup / tumbler, 52 mm deep, drain hole. **Bolt to the top of a 4040 / 2020 beam** so the cup sits upright. | Floor down, opening up |
+| [`stl/8020_headphone_hook.stl`](stl/8020_headphone_hook.stl) | J-hook for a headset. 2× M8, 20 mm thick. Side upright, hook into the room. | Flat |
+| [`stl/8020_cable_clip.stl`](stl/8020_cable_clip.stl) | One M8, two snap slots for USB / power leads. | Flat |
+
+Phone too tight / too loose: edit `PHONE_INNER_W` / `PHONE_INNER_H` / `PHONE_DEPTH` in `accessories.py`. Cup too snug: raise `CUP_ID`.
+
 Regenerate STLs after editing dimensions:
 
 ```bash
-python3 generate.py            # default: nominal fit
+python3 generate.py            # wheel mount + accessories, nominal QR fit
 python3 generate.py --fit loose
+python3 accessories.py         # accessories only
 ```
 
-Or open `moza_qr_wall_mount.scad` in OpenSCAD and export.
+Or open `moza_qr_wall_mount.scad` in OpenSCAD and export the wheel mount.
 
 ## Bambu Lab print settings
 
@@ -49,6 +65,8 @@ Print **plate on the bed, stub pointing up**. No supports. The groove walls are 
 | Outer wall speed | ~40–60 mm/s so the shaft stays round |
 
 A CS/GS wheel is ~1–1.5 kg hanging on a plastic stub. PETG + 6 walls is the conservative choice. After the first print, snap the wheel on **without** hanging it on the wall and tug it — it should click and not slide off under its own weight.
+
+The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the phone tray, cup, and cable clip. Use **6 walls / 40%** on the headphone hook (it is a cantilever).
 
 ## Fit check
 
@@ -79,6 +97,8 @@ One print. Pick how you hang it:
 - 40 mm spacing on the tab below the round plate.
 - Leave the four small wall-screw holes empty.
 
+The phone / cup / hook / clip take the same M8 T-nuts. Phone holder: two of the four plus-pattern holes, matching whether the extrusion is vertical or horizontal. Cup holder: two holes through the tab, into the **top** slot of a beam.
+
 Do not hang this on a single drywall anchor.
 
 ## Use
@@ -100,6 +120,8 @@ Paddle clearance: the round part is 98 mm across. The tab hides behind the wheel
 | `SHAFT_LEN` | 26 | How far the stub sticks out |
 | `PLATE_D` / `PLATE_T` | 98 / 8 | Wall plate size |
 | `POCKET_OFFSET_DEG` | 90 | Rotate the six seats (90 = one at 12 o'clock) |
+
+Accessories (`accessories.py`): `PHONE_INNER_W` / `PHONE_INNER_H` / `PHONE_DEPTH`, `CUP_ID`, `HOOK_INNER`.
 
 ## License
 

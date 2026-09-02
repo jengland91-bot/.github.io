@@ -5,6 +5,9 @@ The wheel-side quick release uses six spring-loaded balls. The default stub has
 six ball pockets so the wheel cannot spin when bumped (same idea as the metal
 QR on the base). A free-spin ring-groove variant is also generated.
 
+Also writes the 8020 accessory kit (phone holder, cup, headphone hook, cable
+clip) via accessories.py.
+
 Units: millimetres.
 """
 
@@ -799,6 +802,9 @@ def generate_all(out_dir: str, fit_name: str = DEFAULT_FIT) -> None:
         )
     svg_preview(os.path.join(out_dir, "preview.svg"), fit)
     print("wrote preview.svg")
+    from accessories import generate_accessories
+
+    generate_accessories(out_dir)
 
 
 def main() -> None:
