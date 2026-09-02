@@ -62,6 +62,10 @@ CENTER_HOLE_D = 5.5  # optional M5 into a stud, hidden by the wheel
 CENTER_CSK_D = 11.0
 CENTER_CSK_DEPTH = 3.0
 
+# Product bezel — raised ring so the plate looks finished, not like a raw disc
+BEZEL_W = 4.2
+BEZEL_H = 1.6
+
 # 8020 / 4040 variant (lollipop tab hanging below the QR stub)
 PROFILE_PLATE_W = 70.0
 PROFILE_PLATE_H = 136.0
@@ -507,7 +511,7 @@ def wall_plate_tris(fit: Fit) -> List[Tri]:
     outer_back = circle_pts(0.0, 0.0, PLATE_D / 2.0 - RIM_CHAMFER, SEGMENTS, True)
     outer_front = circle_pts(0.0, 0.0, PLATE_D / 2.0 - RIM_CHAMFER * 0.4, SEGMENTS, True)
     z_mid = PLATE_T - SCREW_CSK_DEPTH
-    return loft_layers(
+    tris = loft_layers(
         [
             {"z": 0.0, "outer": outer_back, "holes": holes_small},
             {"z": RIM_CHAMFER, "outer": outer, "holes": holes_small},
@@ -515,6 +519,20 @@ def wall_plate_tris(fit: Fit) -> List[Tri]:
             {"z": PLATE_T, "outer": outer_front, "holes": holes_csk},
         ]
     )
+    # Raised bezel on the front face (outside the screw CSKs)
+    r_out = PLATE_D / 2.0 - RIM_CHAMFER * 0.4
+    r_in = r_out - BEZEL_W
+    bezel_outer = circle_pts(0.0, 0.0, r_out, SEGMENTS, True)
+    bezel_hole = [circle_pts(0.0, 0.0, r_in, SEGMENTS, False)]
+    tris.extend(
+        loft_layers(
+            [
+                {"z": PLATE_T, "outer": bezel_outer, "holes": bezel_hole},
+                {"z": PLATE_T + BEZEL_H, "outer": bezel_outer, "holes": bezel_hole},
+            ]
+        )
+    )
+    return tris
 
 
 def profile_plate_tris(fit: Fit) -> List[Tri]:

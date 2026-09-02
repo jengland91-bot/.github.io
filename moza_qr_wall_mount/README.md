@@ -1,10 +1,12 @@
-# Moza QR steering-wheel wall mount
+# D1 QR steering-wheel wall mount
 
-3D-printable hanger for **MOZA** wheels (ES, RS, CS, GS, FSR, R3/R5/R9/R12/R16/R21 — anything with the stock ball-lock QR). It also fits other **D1-spec / Simagic-style** 50 mm ball QRs.
+3D-printable hanger for **MOZA** wheels (ES, RS, CS, GS, FSR — anything with the stock ball-lock QR) and other **D1-spec / Simagic-style** 50 mm ball QRs.
 
-Snap the wheel onto the stub the same way you clip it onto the base. A **continuous locking groove** means you do not have to line up the six balls with slots — hang it at any rotation.
+Snap the wheel onto the stub the same way you clip it onto the base. A **continuous locking groove** means you do not have to line up the six balls.
 
-This is an original design inspired by the common Etsy hangers, not a copy of a commercial model. MOZA also publishes a free official bracket on [Printables](https://www.printables.com/model/1471728-moza-wheel-wall-mount-bracket) if you would rather use theirs (it uses discrete ball slots and needs to be clocked 6-up / 4-down).
+This is an original product design, not a MOZA part and not a copy of a commercial listing.
+
+**Want to sell prints?** Read [`SELLING.md`](SELLING.md) (Etsy title, compatible-with wording, PETG QC, photos).
 
 ![Top and side view](preview.svg)
 
@@ -91,4 +93,4 @@ Paddle clearance: the plate is 98 mm across. That clears ES / RS / CS / GS paddl
 
 ## License
 
-MIT. Not affiliated with MOZA Racing.
+All rights reserved — see `LICENSE`. You may sell physical prints and digital files of this design. Do not publish the STLs on a public site if you are charging for them. Not affiliated with MOZA Racing.

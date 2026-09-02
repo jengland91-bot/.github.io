@@ -1,0 +1,23 @@
+TITLE
+Steering Wheel Wall Mount compatible with MOZA R3 R5 R9 R12 | QR Hanger for Sim Racing Wheel Storage
+
+TAGS
+sim racing, steering wheel mount, wheel hanger, wall mount, QR mount, 8020, garage storage, racing wheel, sim rig, PETG
+
+DESCRIPTION
+Hang your sim-racing wheel on the wall (or your rig) instead of leaving it on a chair.
+
+This is a 3D-printed quick-release hanger. Press the wheel onto the stub the same way you mount it on the base — the balls click into a full ring groove, so you do not have to line up slots. Pull the QR collar to take it off.
+
+Fits:
+• MOZA Racing wheels with the stock ball-lock QR (ES, RS, CS, GS, FSR, and others)
+• This hangs the WHEEL, not the wheelbase
+• Other D1-spec / 50 mm ball-lock QRs (including many Simagic wheels)
+
+You get:
+• 1× wall mount, printed in PETG
+• Countersunk holes for #8 / 4.5 mm screws (screws not included)
+
+Install into a wall stud or use rated anchors. Do not hang a wheel on a single drywall screw.
+
+Not affiliated with, endorsed by, or sponsored by MOZA Racing.
