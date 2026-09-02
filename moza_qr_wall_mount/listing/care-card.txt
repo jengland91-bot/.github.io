@@ -1,7 +1,7 @@
 D1 QR WHEEL MOUNT
 
-1. Wall: four screws into a stud or rated anchors.
-   Rig: two M8 bolts + T-nuts through the tab (40 mm apart).
+1. Wall: two M8 into a stud (top and bottom), #8 left/right.
+   Rig: two M8 bolts + T-nuts through the top and bottom holes.
    Stub points into the room.
 2. Line up the six balls with the six seats on the stub, then press on until it clicks.
 3. To remove: pull the QR collar with both hands and take the wheel off.

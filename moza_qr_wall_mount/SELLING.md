@@ -55,8 +55,8 @@ Fits:
 • Other D1-spec / 50 mm ball-lock QRs (including many Simagic wheels)
 
 You get:
-• 1× universal mount, printed in PETG
-• Countersunk holes for wall screws *and* M8 rig T-nuts (see listing)
+• 1× round mount, printed in PETG
+• Countersunk M8 holes at 12 and 6 o’clock (rig or a wall stud) plus #8 left/right
 • Optional: hardware pack (choose at checkout)
 
 Print: PETG, 6 walls, 40% infill, made on a Bambu Lab printer.
@@ -68,7 +68,7 @@ Not affiliated with, endorsed by, or sponsored by MOZA Racing.
 
 **Variations to offer**
 
-1. Universal mount — black PETG (wall *or* rig)  
+1. Universal mount — black PETG (round plate, wall *or* rig)  
 2. Colour of the month  
 3. Add-on: 4× wall screws + anchors  
 4. Add-on: 2× M8 bolts + T-nuts  
@@ -124,8 +124,8 @@ If a customer’s wheel is unusually tight, reprint that order on the **loose** 
 ```
 D1 QR WHEEL MOUNT
 
-1. Wall: four screws into a stud or rated anchors.
-   Rig: two M8 bolts + T-nuts through the tab (40 mm apart).
+1. Wall: two M8 into a stud (top and bottom), #8 left/right.
+   Rig: two M8 bolts + T-nuts through the top and bottom holes.
    Stub points into the room.
 2. Line up the six balls with the six seats on the stub, then press on until it clicks.
 3. To remove: pull the QR collar with both hands and take the wheel off.

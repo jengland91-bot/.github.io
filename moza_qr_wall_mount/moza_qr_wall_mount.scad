@@ -79,10 +79,16 @@ module wall_plate() {
                 cylinder(h = plate_t, d = plate_d - rim_chamfer * 0.8);
             cylinder(h = 0.2, d = plate_d - rim_chamfer * 2);
         }
-        for (a = [0, 90, 180, 270])
+        // #8 left / right (wall)
+        for (a = [0, 180])
             rotate([0, 0, a])
                 translate([screw_r, 0, 0])
                     csk_hole(screw_d, screw_csk_d, screw_csk_depth, plate_t);
+        // M8 top / bottom (4040 / 2020) — no tab; r=39 so CSK clears the stub opening
+        for (a = [90, 270])
+            rotate([0, 0, a])
+                translate([39, 0, 0])
+                    csk_hole(8.4, 14, 4, plate_t);
         // opening the stub sits in
         translate([0, 0, -0.2])
             cylinder(h = plate_t + 0.4, d = shaft_d + 2 * fillet_r - 0.4);
@@ -90,18 +96,7 @@ module wall_plate() {
 }
 
 module profile_plate() {
-    w = 70; h = 136; y = -30;
-    difference() {
-        translate([0, y, 0])
-            linear_extrude(plate_t)
-                offset(r = 12)
-                    square([w - 24, h - 24], center = true);
-        for (yy = [-46, -86])
-            translate([0, yy, 0])
-                csk_hole(8.4, 14, 4, plate_t);
-        translate([0, 0, -0.2])
-            cylinder(h = plate_t + 0.4, d = shaft_d + 2 * fillet_r - 0.4);
-    }
+    wall_plate();
 }
 
 module wall_mount() {

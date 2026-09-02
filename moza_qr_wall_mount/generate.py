@@ -76,13 +76,15 @@ CENTER_CSK_DEPTH = 3.0
 BEZEL_W = 4.2
 BEZEL_H = 1.6
 
-# Universal plate: round wall disc + downward tab for 4040 / 2020
+# Accessories still use a tab outline; the wheel mount itself is a round disc.
 TAB_W = 54.0
 TAB_BOTTOM = -114.0
 TAB_CORNER_R = 14.0
 PROFILE_HOLE_D = 8.4  # M8 clearance
 PROFILE_HOLE_CSK_D = 14.0
-PROFILE_HOLE_Y = (-58.0, -98.0)  # 40 mm spacing, below the south wall screw
+# M8 at 12 o'clock and 6 o'clock on the round plate.
+# Outboard of the stub opening so the Ø14 CSK does not kiss the centre cut.
+PROFILE_HOLE_R = 39.0
 
 SEGMENTS = 96  # circle resolution
 FILLET_SEGS = 10
@@ -580,22 +582,18 @@ def circle_tab_outline(
 
 
 def wall_plate_tris(fit: Fit) -> List[Tri]:
-    """Universal plate: #8 wall screws plus M8 rig holes on the tab."""
+    """Round plate: #8 left/right for a wall, M8 top/bottom for 4040 / 2020."""
     hole_n = 32
     cut = _center_cut_d(fit)
     centres: List[Vec2] = [
-        (0.0, SCREW_R),
         (SCREW_R, 0.0),
-        (0.0, -SCREW_R),
         (-SCREW_R, 0.0),
-        (0.0, PROFILE_HOLE_Y[0]),
-        (0.0, PROFILE_HOLE_Y[1]),
+        (0.0, PROFILE_HOLE_R),
+        (0.0, -PROFILE_HOLE_R),
         (0.0, 0.0),
     ]
-    small_ds = [SCREW_D, SCREW_D, SCREW_D, SCREW_D, PROFILE_HOLE_D, PROFILE_HOLE_D, cut]
+    small_ds = [SCREW_D, SCREW_D, PROFILE_HOLE_D, PROFILE_HOLE_D, cut]
     csk_ds = [
-        SCREW_CSK_D,
-        SCREW_CSK_D,
         SCREW_CSK_D,
         SCREW_CSK_D,
         PROFILE_HOLE_CSK_D,
@@ -610,7 +608,7 @@ def wall_plate_tris(fit: Fit) -> List[Tri]:
         circle_pts(c[0], c[1], d / 2.0, hole_n, ccw=False)
         for c, d in zip(centres, csk_ds)
     ]
-    outer = circle_tab_outline(PLATE_D / 2.0, TAB_W, TAB_BOTTOM, TAB_CORNER_R)
+    outer = circle_pts(0.0, 0.0, PLATE_D / 2.0, SEGMENTS, True)
     z_mid = PLATE_T - 4.0
     return loft_layers(
         [
@@ -682,15 +680,8 @@ def svg_preview(path: str, fit: Fit) -> None:
         '<rect width="100%" height="100%" fill="#111"/>',
         '<text x="170" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Top</text>',
         '<text x="470" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Side</text>',
-        f'<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">Universal: wall screws + M8 rig tab  ·  6 anti-spin pockets</text>',
+        f'<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">Round plate  ·  M8 top & bottom  ·  6 anti-spin pockets</text>',
     ]
-    # tab (top view)
-    tw = TAB_W * scale / 2
-    ty0 = top_c[1] + 40 * scale  # roughly join
-    ty1 = top_c[1] - TAB_BOTTOM * scale
-    parts.append(
-        f'<rect x="{top_c[0] - tw:.1f}" y="{top_c[1] + 38 * scale:.1f}" width="{TAB_W * scale:.1f}" height="{(-TAB_BOTTOM - 38) * scale:.1f}" rx="{TAB_CORNER_R * scale:.1f}" fill="#2a2a2a" stroke="#f5a623" stroke-width="2"/>'
-    )
     parts.append(
         f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{plate_r * scale}" fill="#2a2a2a" stroke="#f5a623" stroke-width="2"/>'
     )
@@ -709,15 +700,17 @@ def svg_preview(path: str, fit: Fit) -> None:
         parts.append(
             f'<line x1="{top_c[0] + x0:.1f}" y1="{top_c[1] - y0:.1f}" x2="{top_c[0] + x1:.1f}" y2="{top_c[1] - y1:.1f}" stroke="#6cf" stroke-width="2"/>'
         )
-    for ang in (0, 90, 180, 270):
-        a = math.radians(ang)
-        x = SCREW_R * math.cos(a)
-        y = SCREW_R * math.sin(a)
+    for x, y, csk, d in (
+        (SCREW_R, 0.0, SCREW_CSK_D, SCREW_D),
+        (-SCREW_R, 0.0, SCREW_CSK_D, SCREW_D),
+        (0.0, PROFILE_HOLE_R, PROFILE_HOLE_CSK_D, PROFILE_HOLE_D),
+        (0.0, -PROFILE_HOLE_R, PROFILE_HOLE_CSK_D, PROFILE_HOLE_D),
+    ):
         parts.append(
-            f'<circle cx="{top_c[0] + x * scale:.1f}" cy="{top_c[1] - y * scale:.1f}" r="{SCREW_CSK_D / 2 * scale}" fill="none" stroke="#6cf" stroke-width="1.2"/>'
+            f'<circle cx="{top_c[0] + x * scale:.1f}" cy="{top_c[1] - y * scale:.1f}" r="{csk / 2 * scale}" fill="none" stroke="#6cf" stroke-width="1.2"/>'
         )
         parts.append(
-            f'<circle cx="{top_c[0] + x * scale:.1f}" cy="{top_c[1] - y * scale:.1f}" r="{SCREW_D / 2 * scale}" fill="#111" stroke="#6cf"/>'
+            f'<circle cx="{top_c[0] + x * scale:.1f}" cy="{top_c[1] - y * scale:.1f}" r="{d / 2 * scale}" fill="#111" stroke="#6cf"/>'
         )
     # side
     # plate
