@@ -3,6 +3,7 @@ PETG, 0.20 mm, no supports. Plate / back / floor on the bed.
 
 WHEEL MOUNT  (stl/moza_qr_universal_mount.stl)
   Print the fit test first: stl/fit_test_nominal.stl (~15 min)
+  M8 through the coupon (tip CSK, 8.4 mm hole in the flange) so you can bolt it to 4040
   6 walls, 40% gyroid, stub pointing up
   Bolt: M8 x 40 mm socket-cap into a 4040 T-nut (M8 x 35 mm on 2020)
   Wall: M8 x 50–60 mm into a stud, plus 4x #8 around the rim

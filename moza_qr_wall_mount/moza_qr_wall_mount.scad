@@ -108,11 +108,11 @@ module profile_mount() {
 
 module fit_test() {
     difference() {
-        cylinder(h = 5, d = 62);
+        cylinder(h = 6, d = 62);
         translate([0, 0, -0.2])
-            cylinder(h = 5.4, d = center_hole_d);
+            cylinder(h = 6.4, d = center_hole_d);
     }
-    translate([0, 0, 5]) qr_stub();
+    translate([0, 0, 6]) qr_stub();
 }
 
 if (part == "wall") wall_mount();

@@ -636,12 +636,16 @@ def stub_tris(fit: Fit, z_front: float, indexed: bool = True) -> List[Tri]:
 
 
 def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
-    """Short QR coupon with a small finger flange — ~15 min print."""
+    """Short QR coupon with a small finger flange — ~15 min print.
+
+    Same M8 as the full mount: socket-cap in the stub tip, 8.4 mm through the
+    flange so you can bolt the coupon to a 4040 T-nut and try the wheel on the rig.
+    """
     flange_d = 62.0
-    flange_t = 5.0
+    flange_t = 6.0
     outer = circle_pts(0.0, 0.0, flange_d / 2.0, SEGMENTS, True)
-    inner = [circle_pts(0.0, 0.0, STUB_BORE_D / 2.0, 32, False)]
-    tris = extrude_with_holes(outer, inner, inner, 0.0, flange_t)
+    m8 = [circle_pts(0.0, 0.0, CENTER_HOLE_D / 2.0, 32, False)]
+    tris = extrude_with_holes(outer, m8, m8, 0.0, flange_t)
     tris.extend(stub_tris(fit, flange_t, indexed=indexed))
     return tris
 

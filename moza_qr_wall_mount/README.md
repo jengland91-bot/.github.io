@@ -32,7 +32,7 @@ Drag the STL into **Bambu Studio**. If GitHub shows a file page instead of downl
 
 | File | What it is |
 | --- | --- |
-| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Tiny coupon, ~15 minutes. |
+| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Tiny coupon, ~15 minutes. Same M8 through-hole as the full mount — bolt it to a 4040 to try the wheel on the rig. |
 | [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. **M8 through the middle of the stub** (one T-nut or a stud) + 4× #8 around the rim. 6 anti-spin pockets. |
 | [`stl/fit_test_tight.stl`](stl/fit_test_tight.stl) / [`stl/fit_test_loose.stl`](stl/fit_test_loose.stl) | Same coupon, ±0.4 mm on the shaft if nominal is off. |
 | [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same universal plate, ring groove, wheel can rotate. |
@@ -88,7 +88,7 @@ The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the pho
 ## Fit check
 
 1. Print `fit_test_nominal.stl`.
-2. Pull the gold/black QR collar and push the wheel on. It should snap. Pull the collar to release.
+2. Drop an **M8 × 35–40 mm** socket-cap in from the stub tip, through the flange, into a 4040 T-nut (or a nut on the back). Pull the gold/black QR collar and push the wheel on. It should snap. Pull the collar to release.
 3. If it will not go on → print `fit_test_loose.stl` (or in `generate.py` drop `shaft_d` / `groove_d` by 0.4).
 4. If it goes on but will not lock → print `fit_test_tight.stl`, or make sure you are pushing until the balls drop into the groove.
 5. When the coupon feels right, print the matching full mount (`generate.py --fit …` if you changed it).
