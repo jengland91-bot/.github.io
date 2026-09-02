@@ -3,91 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Links</title>
+    <title>Stream Deck Plus cockpit faceplate</title>
     <style>
         :root {
-            --bg-color: #0d0d0d;
-            --text-color: #ffffff;
-            --accent-color: #ff4500; /* Change to your brand color */
-            --button-bg: #1a1a1a;
+            --bg: #0d0d0d;
+            --text: #f2f2f2;
+            --muted: #9a9a9a;
+            --accent: #ff4500;
+            --card: #161616;
+            --line: #2a2a2a;
         }
-
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-            margin: 0;
+            line-height: 1.55;
         }
-
-        .profile {
-            text-align: center;
-            margin-bottom: 30px;
+        header {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 56px 24px 24px;
         }
-
-        .profile img {
-            width: 96px;
-            height: 96px;
-            border-radius: 50%;
-            border: 2px solid var(--accent-color);
-            object-fit: cover;
+        header p.kicker {
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin: 0 0 12px;
         }
-
-        .profile h1 {
-            font-size: 1.5rem;
-            margin: 10px 0 5px 0;
+        h1 { font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.15; margin: 0 0 16px; }
+        .lede { font-size: 1.15rem; color: #c8c8c8; max-width: 40rem; }
+        main { max-width: 880px; margin: 0 auto; padding: 0 24px 80px; }
+        h2 { margin-top: 48px; font-size: 1.35rem; }
+        h3 { margin-top: 28px; font-size: 1.05rem; }
+        a { color: var(--accent); }
+        .row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 20px 0 8px;
         }
-
-        .profile p {
-            color: #888;
-            margin: 0;
-            font-size: 0.9rem;
-        }
-
-        .links-container {
-            width: 100%;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .link-card {
-            background-color: var(--button-bg);
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 16px;
-            text-align: center;
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
             border-radius: 12px;
-            border: 1px solid #2a2a2a;
-            font-weight: 600;
-            transition: all 0.2s ease-in-out;
+            padding: 16px 18px;
+            color: var(--text);
+            text-decoration: none;
+            display: block;
         }
-
-        /* Hover animation effect */
-        .link-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-color);
-            background-color: #222;
+        a.card:hover { border-color: var(--accent); }
+        .card strong { display: block; margin-bottom: 4px; }
+        .card span { color: var(--muted); font-size: 0.9rem; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        th, td {
+            text-align: left;
+            padding: 10px 8px;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        th { color: var(--muted); font-weight: 600; }
+        ol { padding-left: 1.2rem; }
+        li { margin: 8px 0; }
+        .diagram {
+            width: 100%;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0 8px;
+        }
+        .diagram svg { width: 100%; height: auto; display: block; }
+        .muted { color: var(--muted); }
+        code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.88em;
+            background: #1f1f1f;
+            padding: 0.1em 0.35em;
+            border-radius: 4px;
+        }
+        pre {
+            background: #1f1f1f;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 14px 16px;
+            overflow-x: auto;
+        }
+        img.preview {
+            width: 100%;
+            max-width: 420px;
+            background: #f5f3ee;
+            border-radius: 12px;
+            display: block;
+            margin: 12px 0;
+        }
+        footer {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 0 24px 48px;
+            color: var(--muted);
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
+    <header>
+        <p class="kicker">3D print · Stream Deck Plus · 6 Sigma</p>
+        <h1>Faceplate that bolts to the cockpit</h1>
+        <p class="lede">
+            A printed bezel for the Elgato Stream Deck Plus, plus a tray and a 40-series clamp
+            so it mounts on a 6 Sigma rig like a proper button box — shifter arm, wheel-deck
+            upright, or any spare 4040.
+        </p>
+    </header>
 
-    <div class="profile">
-        <img src="your-avatar.jpg" alt="Profile Picture">
-        <h1>Your Name</h1>
-        <p>Photographer & Creator</p>
-    </div>
+    <main>
+        <div class="diagram" aria-hidden="true">
+            <svg viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="36" width="210" height="148" rx="14" fill="#1a1a1a" stroke="#ff4500" stroke-width="2"/>
+                <rect x="42" y="52" width="28" height="28" rx="4" fill="#2c2c2c"/>
+                <rect x="78" y="52" width="28" height="28" rx="4" fill="#2c2c2c"/>
+                <rect x="114" y="52" width="28" height="28" rx="4" fill="#2c2c2c"/>
+                <rect x="150" y="52" width="28" height="28" rx="4" fill="#2c2c2c"/>
+                <rect x="42" y="88" width="28" height="28" rx="4" fill="#2c2c2c"/>
+                <rect x="78" y="88" width="28" height="28" rx="4" fill="#2c2c2c"/>
+                <rect x="114" y="88" width="28" height="28" rx="4" fill="#2c2c2c"/>
+                <rect x="150" y="88" width="28" height="28" rx="4" fill="#2c2c2c"/>
+                <rect x="42" y="124" width="136" height="14" rx="3" fill="#333"/>
+                <circle cx="59" cy="160" r="10" fill="#444"/>
+                <circle cx="95" cy="160" r="10" fill="#444"/>
+                <circle cx="131" cy="160" r="10" fill="#444"/>
+                <circle cx="167" cy="160" r="10" fill="#444"/>
+                <text x="125" y="28" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">faceplate</text>
 
-    <div class="links-container">
-        <a href="https://yourwebsite.com" class="link-card" target="_blank">Main Website</a>
-        <a href="https://youtube.com" class="link-card" target="_blank">Latest Video</a>
-        <a href="https://instagram.com" class="link-card" target="_blank">Instagram Portfolio</a>
-    </div>
+                <rect x="250" y="58" width="150" height="104" rx="10" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"/>
+                <text x="325" y="48" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">cradle</text>
+                <text x="325" y="114" text-anchor="middle" fill="#666" font-size="11" font-family="sans-serif">Plus + M3</text>
 
+                <line x1="400" y1="110" x2="458" y2="110" stroke="#ff4500" stroke-width="2"/>
+                <circle cx="458" cy="110" r="8" fill="none" stroke="#ff4500" stroke-width="2"/>
+                <text x="429" y="98" text-anchor="middle" fill="#9a9a9a" font-size="11" font-family="sans-serif">M5 hinge</text>
+
+                <path d="M500 70 h70 v80 h-70" fill="none" stroke="#888" stroke-width="10" stroke-linejoin="round"/>
+                <rect x="575" y="78" width="36" height="64" fill="#2a2a2a" stroke="#555" stroke-width="2"/>
+                <text x="555" y="48" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">4040 clamp</text>
+                <text x="712" y="48" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">6 Sigma rail</text>
+                <rect x="630" y="58" width="28" height="104" fill="#3a3a3a"/>
+                <rect x="668" y="58" width="28" height="104" fill="#3a3a3a"/>
+                <text x="712" y="120" text-anchor="middle" fill="#888" font-size="11" font-family="sans-serif">40-series</text>
+            </svg>
+        </div>
+
+        <h2>Download the parts</h2>
+        <div class="row">
+            <a class="card" href="stls/fit_gauge.stl"><strong>fit_gauge.stl</strong><span>Print this first. 1.2 mm 1:1 cutout check.</span></a>
+            <a class="card" href="templates/faceplate-1to1.svg"><strong>faceplate-1to1.svg</strong><span>Paper template. Print at 100% scale, no fit-to-page.</span></a>
+            <a class="card" href="stls/faceplate.stl"><strong>faceplate.stl</strong><span>Bezel overlay. Dial caps hold it on.</span></a>
+            <a class="card" href="stls/cradle.stl"><strong>cradle.stl</strong><span>Tray. USB slot, M3 slots, zip-tie eyes, hinge ear.</span></a>
+            <a class="card" href="stls/clamp_4040.stl"><strong>clamp_4040.stl</strong><span>U-clamp for 40-series. Two M8 into T-nuts.</span></a>
+            <a class="card" href="cad/params.py"><strong>params.py</strong><span>Every millimetre is a named number. Edit and regenerate.</span></a>
+        </div>
+
+        <h2>Why this layout</h2>
+        <p>
+            The Plus is a great sim button box — eight LCD keys, a touch strip, four encoders —
+            but it ships as a desk wedge. This kit does two things at once: a faceplate that
+            covers the Elgato bezel so it reads as a panel, and a mount that uses the same
+            <strong>M8 T-nuts</strong> 6 Sigma already puts in the chassis.
+        </p>
+        <p>
+            The clamp is a U-channel around a 40&nbsp;mm section, so it fits 4040, a 40&nbsp;mm
+            face of 4080 / 40120, the shifter arm, or a wheel-deck upright. On a vertical bar
+            the hinge <em>swings</em> the deck toward you. On a horizontal bar it <em>nods</em>
+            the viewing angle. Mirror the cradle and clamp in the slicer for the left side.
+        </p>
+        <img class="preview" src="docs/previews/faceplate-layout.png" alt="Faceplate cutout layout: 8 keys, touch strip, 4 dials">
+
+        <h2>Hardware</h2>
+        <table>
+            <thead><tr><th>Qty</th><th>Part</th><th>Notes</th></tr></thead>
+            <tbody>
+                <tr><td>2</td><td>M8 × 16 (or 20) button or socket cap</td><td>Clamp into the extrusion. 6 Sigma kits already include these.</td></tr>
+                <tr><td>2</td><td>M8 drop-in T-nuts, 8 mm slot</td><td>40-series. Spring T-nuts are easiest on a finished chassis.</td></tr>
+                <tr><td>1</td><td>M5 × 25 + nylock + 2 washers</td><td>Hinge. Tighten to lock the angle.</td></tr>
+                <tr><td>2</td><td>Original M3 × 8 from the Plus stand</td><td>Optional. Slotted holes in the cradle floor.</td></tr>
+                <tr><td>1–2</td><td>4 mm zip ties</td><td>Optional belt through the side slots.</td></tr>
+            </tbody>
+        </table>
+
+        <h2>Print</h2>
+        <p>PETG on the rig. PLA is fine for the gauge.</p>
+        <table>
+            <thead><tr><th></th><th>Faceplate / gauge</th><th>Cradle / clamp</th></tr></thead>
+            <tbody>
+                <tr><td>Layer</td><td>0.16 mm</td><td>0.20 mm</td></tr>
+                <tr><td>Walls</td><td>4</td><td>4</td></tr>
+                <tr><td>Infill</td><td>25% gyroid</td><td>40% gyroid</td></tr>
+                <tr><td>Supports</td><td>None</td><td>None in the exported orientation</td></tr>
+            </tbody>
+        </table>
+        <p class="muted">Faceplate: visible face on the bed. Cradle: floor down. Clamp: back wall on the bed, or on its side so layers cross the M8 bosses.</p>
+
+        <h2>Put it together</h2>
+        <ol>
+            <li>Print the SVG at 100% or print <code>fit_gauge.stl</code>. Lay it on the Plus. Openings should clear the keys, strip, and dials.</li>
+            <li>Pull the four dial caps straight off — they are designed to come off.</li>
+            <li>Remove the two Phillips screws in the stand. Keep them.</li>
+            <li>Drop the faceplate on, then press the caps back. The caps retain the plate.</li>
+            <li>Seat the Plus in the cradle with USB-C toward the hinge slot. Optionally run the M3 screws through the floor slots. Zip-tie if you want a belt.</li>
+            <li>Slide the clamp onto a 40 mm face of the chassis. Two T-nuts, two M8s.</li>
+            <li>Bolt cradle to clamp with the M5. Aim the face at your hand, snug the nylock.</li>
+        </ol>
+
+        <h3>Good spots on a 6 Sigma</h3>
+        <ul>
+            <li>Shifter / handbrake arm — the usual button-box place, right of the wheel.</li>
+            <li>Wheel-deck side upright, inboard face, so the Plus looks at you.</li>
+            <li>A spare 4040 you add as an accessory rail.</li>
+        </ul>
+
+        <h2>If a hole is tight</h2>
+        <p>
+            Cutouts are based on Elgato’s published 140 × 138 × 110 mm body (with stand),
+            the 108 × 14 mm touch strip, and M3 × 8 stand screws. Key pitch, dial diameter,
+            housing depth, and M3 spacing are estimated on purpose, then given clearance.
+            If the gauge is off, edit <code>cad/params.py</code> and regenerate:
+        </p>
+        <pre>python3 cad/generate.py</pre>
+        <p class="muted">Needs Python 3 and numpy. See <a href="README.md">README.md</a> for the full write-up.</p>
+    </main>
+    <footer>
+        Not an Elgato or 6 Sigma product. STLs and source are MIT-licensed.
+    </footer>
 </body>
 </html>

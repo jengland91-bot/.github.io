@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210.0mm" height="297.0mm" viewBox="0 0 210.0 297.0">
+<style>text{font-family:ui-sans-serif,system-ui,sans-serif;fill:#111} .dim{font-size:3.2px;fill:#333}</style>
+<rect width="100%" height="100%" fill="#fff"/>
+<text x="12" y="14" font-size="5.5" font-weight="700">Stream Deck Plus faceplate — print at 100% scale</text>
+<text x="12" y="21" font-size="3.4">Do not “fit to page”. Cut the outline, lay it on the Plus, and check every opening before you print plastic.</text>
+<text x="12" y="27" class="dim">Face 140.0 × 124.7 mm  ·  key pitch 27.0 × 26.2  ·  dial Ø 24.2  ·  touch 108 × 14</text>
+<rect x="32.000" y="67.000" width="146.000" height="130.700" rx="7.0" fill="none" stroke="#111" stroke-width="0.4"/>
+<rect x="35.000" y="70.000" width="140.000" height="124.700" rx="8.0" fill="none" stroke="#888" stroke-width="0.2" stroke-dasharray="2 1.2"/>
+<rect x="53.750" y="81.650" width="21.500" height="21.500" rx="1.6" fill="#e8e8e8" stroke="#111" stroke-width="0.25"/>
+<rect x="53.750" y="107.850" width="21.500" height="21.500" rx="1.6" fill="#e8e8e8" stroke="#111" stroke-width="0.25"/>
+<rect x="80.750" y="81.650" width="21.500" height="21.500" rx="1.6" fill="#e8e8e8" stroke="#111" stroke-width="0.25"/>
+<rect x="80.750" y="107.850" width="21.500" height="21.500" rx="1.6" fill="#e8e8e8" stroke="#111" stroke-width="0.25"/>
+<rect x="107.750" y="81.650" width="21.500" height="21.500" rx="1.6" fill="#e8e8e8" stroke="#111" stroke-width="0.25"/>
+<rect x="107.750" y="107.850" width="21.500" height="21.500" rx="1.6" fill="#e8e8e8" stroke="#111" stroke-width="0.25"/>
+<rect x="134.750" y="81.650" width="21.500" height="21.500" rx="1.6" fill="#e8e8e8" stroke="#111" stroke-width="0.25"/>
+<rect x="134.750" y="107.850" width="21.500" height="21.500" rx="1.6" fill="#e8e8e8" stroke="#111" stroke-width="0.25"/>
+<rect x="49.800" y="133.800" width="110.400" height="16.400" rx="1.2" fill="#d9d9d9" stroke="#111" stroke-width="0.25"/>
+<circle cx="64.500" cy="172.600" r="13.300" fill="#e8e8e8" stroke="#111" stroke-width="0.25"/>
+<circle cx="64.500" cy="172.600" r="12.100" fill="none" stroke="#888" stroke-width="0.2" stroke-dasharray="1 0.8"/>
+<circle cx="91.500" cy="172.600" r="13.300" fill="#e8e8e8" stroke="#111" stroke-width="0.25"/>
+<circle cx="91.500" cy="172.600" r="12.100" fill="none" stroke="#888" stroke-width="0.2" stroke-dasharray="1 0.8"/>
+<circle cx="118.500" cy="172.600" r="13.300" fill="#e8e8e8" stroke="#111" stroke-width="0.25"/>
+<circle cx="118.500" cy="172.600" r="12.100" fill="none" stroke="#888" stroke-width="0.2" stroke-dasharray="1 0.8"/>
+<circle cx="145.500" cy="172.600" r="13.300" fill="#e8e8e8" stroke="#111" stroke-width="0.25"/>
+<circle cx="145.500" cy="172.600" r="12.100" fill="none" stroke="#888" stroke-width="0.2" stroke-dasharray="1 0.8"/>
+<text x="105.000" y="66.000" text-anchor="middle" class="dim">logo edge</text>
+<text x="105.000" y="200.700" text-anchor="middle" class="dim">dial edge</text>
+</svg>
