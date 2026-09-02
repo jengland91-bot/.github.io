@@ -53,9 +53,9 @@ Fits:
 • Other D1-spec / 50 mm ball-lock QRs (including many Simagic wheels)
 
 You get:
-• 1× wall mount, printed in PETG
-• Countersunk holes for #8 / 4.5 mm screws (screws not included unless you add the hardware option)
-• Optional: 8020/4040 rig version (choose at checkout)
+• 1× universal mount, printed in PETG
+• Countersunk holes for wall screws *and* M8 rig T-nuts (see listing)
+• Optional: hardware pack (choose at checkout)
 
 Print: PETG, 6 walls, 40% infill, made on a Bambu Lab printer.
 
@@ -66,15 +66,14 @@ Not affiliated with, endorsed by, or sponsored by MOZA Racing.
 
 **Variations to offer**
 
-1. Wall mount — black PETG  
-2. Wall mount — colour of the month (red / white)  
-3. 8020 rig mount — black PETG  
-4. Add-on: 4× screws + drywall anchors in a small bag  
+1. Universal mount — black PETG (wall *or* rig)  
+2. Colour of the month  
+3. Add-on: 4× wall screws + anchors  
+4. Add-on: 2× M8 bolts + T-nuts  
 
 **What to charge (US, 2026 ballpark)**
 
-- Printed wall mount: **$18–28** + shipping (those Etsy listings sit in this band)  
-- Rig mount: same  
+- Printed universal mount: **$18–28** + shipping  
 - Hardware add-on: **+$4–6**  
 - Digital STL only: **$8–12** if you go that route  
 
@@ -144,8 +143,7 @@ Buyers of the Etsy listings you sent are shopping “MOZA wheel storage.” Your
 
 | Sell this | File |
 | --- | --- |
-| Wall mount | `stl/moza_qr_wall_mount.stl` |
-| Rig / 8020 | `stl/moza_qr_8020_mount.stl` |
-| Digital download zip | both STLs + this care card + “compatible with MOZA…” one-pager |
+| Universal (wall + rig) | `stl/moza_qr_universal_mount.stl` |
+| Digital download zip | that STL + care card + “compatible with MOZA…” one-pager |
 
 Do not include `generate.py` in a cheap digital listing unless you want people cloning your shop.

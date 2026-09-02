@@ -73,15 +73,13 @@ CENTER_CSK_DEPTH = 3.0
 BEZEL_W = 4.2
 BEZEL_H = 1.6
 
-# 8020 / 4040 variant (lollipop tab hanging below the QR stub)
-PROFILE_PLATE_W = 70.0
-PROFILE_PLATE_H = 136.0
-PROFILE_PLATE_Y = -30.0  # rectangle centre, so the tab hangs downward
+# Universal plate: round wall disc + downward tab for 4040 / 2020
+TAB_W = 54.0
+TAB_BOTTOM = -114.0
+TAB_CORNER_R = 14.0
 PROFILE_HOLE_D = 8.4  # M8 clearance
 PROFILE_HOLE_CSK_D = 14.0
-PROFILE_HOLE_CSK_DEPTH = 4.0
-PROFILE_HOLE_SPACING = 40.0  # 4040 T-nut spacing
-PROFILE_HOLE_Y = (-46.0, -86.0)  # both below the ~29 mm fillet
+PROFILE_HOLE_Y = (-58.0, -98.0)  # 40 mm spacing, below the south wall screw
 
 SEGMENTS = 96  # circle resolution
 FILLET_SEGS = 10
@@ -546,18 +544,61 @@ def _center_cut_d(fit: Fit) -> float:
     return 2.0 * (fit.shaft_d / 2.0 + FILLET_R) - 0.4
 
 
+def circle_tab_outline(
+    circle_r: float,
+    tab_w: float,
+    tab_bottom: float,
+    corner_r: float,
+    n_circle: int = SEGMENTS,
+    n_corner: int = 10,
+) -> List[Vec2]:
+    """CCW outline: circle through the top, tab hanging down."""
+    tw = tab_w / 2.0
+    join_y = -math.sqrt(max(circle_r * circle_r - tw * tw, 1.0))
+    a_right = math.atan2(join_y, tw)
+    a_left = math.atan2(join_y, -tw)
+    start = a_right
+    end = a_left
+    if end <= start:
+        end += 2 * math.pi
+    pts: List[Vec2] = []
+    for i in range(n_circle + 1):
+        a = start + (end - start) * i / n_circle
+        pts.append((circle_r * math.cos(a), circle_r * math.sin(a)))
+    cx_l, cy = -tw + corner_r, tab_bottom + corner_r
+    for i in range(n_corner):
+        a = math.pi + (math.pi / 2) * i / max(n_corner - 1, 1)
+        pts.append((cx_l + corner_r * math.cos(a), cy + corner_r * math.sin(a)))
+    cx_r = tw - corner_r
+    for i in range(1, n_corner):
+        a = 1.5 * math.pi + (math.pi / 2) * i / max(n_corner - 1, 1)
+        pts.append((cx_r + corner_r * math.cos(a), cy + corner_r * math.sin(a)))
+    return ensure_winding(pts, True)
+
+
 def wall_plate_tris(fit: Fit) -> List[Tri]:
+    """Universal plate: #8 wall screws plus M8 rig holes on the tab."""
     hole_n = 32
+    cut = _center_cut_d(fit)
     centres: List[Vec2] = [
         (0.0, SCREW_R),
         (SCREW_R, 0.0),
         (0.0, -SCREW_R),
         (-SCREW_R, 0.0),
+        (0.0, PROFILE_HOLE_Y[0]),
+        (0.0, PROFILE_HOLE_Y[1]),
         (0.0, 0.0),
     ]
-    cut = _center_cut_d(fit)
-    small_ds = [SCREW_D, SCREW_D, SCREW_D, SCREW_D, cut]
-    csk_ds = [SCREW_CSK_D, SCREW_CSK_D, SCREW_CSK_D, SCREW_CSK_D, cut]
+    small_ds = [SCREW_D, SCREW_D, SCREW_D, SCREW_D, PROFILE_HOLE_D, PROFILE_HOLE_D, cut]
+    csk_ds = [
+        SCREW_CSK_D,
+        SCREW_CSK_D,
+        SCREW_CSK_D,
+        SCREW_CSK_D,
+        PROFILE_HOLE_CSK_D,
+        PROFILE_HOLE_CSK_D,
+        cut,
+    ]
     holes_small = [
         circle_pts(c[0], c[1], d / 2.0, hole_n, ccw=False)
         for c, d in zip(centres, small_ds)
@@ -566,59 +607,19 @@ def wall_plate_tris(fit: Fit) -> List[Tri]:
         circle_pts(c[0], c[1], d / 2.0, hole_n, ccw=False)
         for c, d in zip(centres, csk_ds)
     ]
-    outer = circle_pts(0.0, 0.0, PLATE_D / 2.0, SEGMENTS, ccw=True)
-    outer_back = circle_pts(0.0, 0.0, PLATE_D / 2.0 - RIM_CHAMFER, SEGMENTS, True)
-    outer_front = circle_pts(0.0, 0.0, PLATE_D / 2.0 - RIM_CHAMFER * 0.4, SEGMENTS, True)
-    z_mid = PLATE_T - SCREW_CSK_DEPTH
-    tris = loft_layers(
+    outer = circle_tab_outline(PLATE_D / 2.0, TAB_W, TAB_BOTTOM, TAB_CORNER_R)
+    z_mid = PLATE_T - 4.0
+    return loft_layers(
         [
-            {"z": 0.0, "outer": outer_back, "holes": holes_small},
-            {"z": RIM_CHAMFER, "outer": outer, "holes": holes_small},
+            {"z": 0.0, "outer": outer, "holes": holes_small},
             {"z": z_mid, "outer": outer, "holes": holes_small},
-            {"z": PLATE_T, "outer": outer_front, "holes": holes_csk},
+            {"z": PLATE_T, "outer": outer, "holes": holes_csk},
         ]
     )
-    # Raised bezel on the front face (outside the screw CSKs)
-    r_out = PLATE_D / 2.0 - RIM_CHAMFER * 0.4
-    r_in = r_out - BEZEL_W
-    bezel_outer = circle_pts(0.0, 0.0, r_out, SEGMENTS, True)
-    bezel_hole = [circle_pts(0.0, 0.0, r_in, SEGMENTS, False)]
-    tris.extend(
-        loft_layers(
-            [
-                {"z": PLATE_T, "outer": bezel_outer, "holes": bezel_hole},
-                {"z": PLATE_T + BEZEL_H, "outer": bezel_outer, "holes": bezel_hole},
-            ]
-        )
-    )
-    return tris
 
 
 def profile_plate_tris(fit: Fit) -> List[Tri]:
-    outer = _shift(
-        rounded_rect_pts(PROFILE_PLATE_W, PROFILE_PLATE_H, 12.0, n_each=10),
-        0.0,
-        PROFILE_PLATE_Y,
-    )
-    cut = _center_cut_d(fit)
-    centres = [(0.0, y) for y in PROFILE_HOLE_Y] + [(0.0, 0.0)]
-    ds = [PROFILE_HOLE_D, PROFILE_HOLE_D, cut]
-    csk = [PROFILE_HOLE_CSK_D, PROFILE_HOLE_CSK_D, cut]
-    hole_n = 32
-    holes_s = [
-        circle_pts(c[0], c[1], d / 2.0, hole_n, False) for c, d in zip(centres, ds)
-    ]
-    holes_c = [
-        circle_pts(c[0], c[1], d / 2.0, hole_n, False) for c, d in zip(centres, csk)
-    ]
-    z_mid = PLATE_T - PROFILE_HOLE_CSK_DEPTH
-    return loft_layers(
-        [
-            {"z": 0.0, "outer": outer, "holes": holes_s},
-            {"z": z_mid, "outer": outer, "holes": holes_s},
-            {"z": PLATE_T, "outer": outer, "holes": holes_c},
-        ]
-    )
+    return wall_plate_tris(fit)
 
 
 def stub_tris(fit: Fit, z_front: float, indexed: bool = True) -> List[Tri]:
@@ -678,9 +679,15 @@ def svg_preview(path: str, fit: Fit) -> None:
         '<rect width="100%" height="100%" fill="#111"/>',
         '<text x="170" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Top</text>',
         '<text x="470" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Side</text>',
-        f'<text x="320" y="340" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">D1 QR wall mount  ·  6 anti-spin pockets  ·  {fit.name} fit  ·  shaft {fit.shaft_d:.1f} mm</text>',
+        f'<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">Universal: wall screws + M8 rig tab  ·  6 anti-spin pockets</text>',
     ]
-    # top: plate + screws + shaft
+    # tab (top view)
+    tw = TAB_W * scale / 2
+    ty0 = top_c[1] + 40 * scale  # roughly join
+    ty1 = top_c[1] - TAB_BOTTOM * scale
+    parts.append(
+        f'<rect x="{top_c[0] - tw:.1f}" y="{top_c[1] + 38 * scale:.1f}" width="{TAB_W * scale:.1f}" height="{(-TAB_BOTTOM - 38) * scale:.1f}" rx="{TAB_CORNER_R * scale:.1f}" fill="#2a2a2a" stroke="#f5a623" stroke-width="2"/>'
+    )
     parts.append(
         f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{plate_r * scale}" fill="#2a2a2a" stroke="#f5a623" stroke-width="2"/>'
     )
@@ -770,13 +777,14 @@ def generate_all(out_dir: str, fit_name: str = DEFAULT_FIT) -> None:
     fit = FITS[fit_name]
     os.makedirs(out_dir, exist_ok=True)
     jobs = [
+        ("stl/moza_qr_universal_mount.stl", wall_mount_tris(fit, True), f"moza_qr_uni_{fit.name}"),
         ("stl/moza_qr_wall_mount.stl", wall_mount_tris(fit, True), f"moza_qr_wall_{fit.name}"),
         (
             "stl/moza_qr_wall_mount_free.stl",
             wall_mount_tris(fit, False),
             f"moza_qr_wall_free_{fit.name}",
         ),
-        ("stl/moza_qr_8020_mount.stl", profile_mount_tris(fit, True), f"moza_qr_8020_{fit.name}"),
+        ("stl/moza_qr_8020_mount.stl", wall_mount_tris(fit, True), f"moza_qr_8020_{fit.name}"),
     ]
     for key, f in FITS.items():
         jobs.append((f"stl/fit_test_{key}.stl", fit_test_tris(f), f"fit_test_{key}"))

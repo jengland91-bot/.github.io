@@ -17,10 +17,11 @@ This is an original product design, not a MOZA part and not a copy of a commerci
 | File | What it is |
 | --- | --- |
 | [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Tiny coupon, ~15 minutes. |
+| [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Wall *and* sim rig. 4× #8 holes + 2× M8 on a tab, 6 anti-spin pockets. |
 | [`stl/fit_test_tight.stl`](stl/fit_test_tight.stl) / [`stl/fit_test_loose.stl`](stl/fit_test_loose.stl) | Same coupon, ±0.4 mm on the shaft if nominal is off. |
-| [`stl/moza_qr_wall_mount.stl`](stl/moza_qr_wall_mount.stl) | Round wall plate, **6 anti-spin pockets**, 4× countersunk #8 holes. |
-| [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same plate, ring groove, wheel can rotate (no pockets). |
-| [`stl/moza_qr_8020_mount.stl`](stl/moza_qr_8020_mount.stl) | Tab mount for 4040 / 2020, with anti-spin pockets. |
+| [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same universal plate, ring groove, wheel can rotate. |
+
+`moza_qr_wall_mount.stl` and `moza_qr_8020_mount.stl` are copies of the universal file so old links still work.
 
 Regenerate STLs after editing dimensions:
 
@@ -64,27 +65,31 @@ Nominal numbers (plastic, a little under the ~50 mm metal male QR):
 
 ## Hardware
 
-**Wall mount**
+One print. Pick how you hang it:
 
-- 4× **#8 × 1¼″** wood screws (4.5 mm shank) with countersunk heads, **or** M4 / M5 CSK.
-- The holes are on a **plus** (+): north / south / east / west at 36 mm from centre. Put the north–south pair into a **stud** if you can; use rated drywall anchors for the other two.
-- Optional: **M5 × 50 mm** through the centre of the stub into a stud. The head sits in a countersink on the tip and is hidden by the wheel.
+**On a wall**
 
-**8020 / sim rig**
+- 4× **#8 × 1¼″** wood screws (4.5 mm) with countersunk heads.
+- Plus-pattern holes (N/E/S/W). Put north–south into a **stud** if you can; anchors for the other two.
+- Leave the two large M8 holes on the tab empty.
 
-- 2× **M8 × 16–20 mm** socket-cap screws + T-nuts, 40 mm apart on the tab below the stub.
+**On a sim rig (4040 / 2020)**
 
-Do not hang this on a single drywall anchor. A wheel plus a yank while unclipping is a real load.
+- 2× **M8 × 16–20 mm** socket-cap bolts + T-nuts.
+- 40 mm spacing on the tab below the round plate.
+- Leave the four small wall-screw holes empty.
+
+Do not hang this on a single drywall anchor.
 
 ## Use
 
-1. Screw the plate to the wall (or T-nut it to the rig). Stub points into the room. Put the top screw at 12 o'clock.
+1. Wall: four #8 screws, top screw at 12 o'clock. Rig: two M8 T-nuts through the tab. Stub points into the room.
 2. Line up the six balls on the wheel with the six seats on the stub (same idea as the base). Press on until it clicks.
 3. To remove: pull the QR collar with both hands and take the wheel off, same as on the base.
 
 If the wheel sits a little rotated, try the next click (there are six). To shift the seats, change `POCKET_OFFSET_DEG` in `generate.py` and regenerate.
 
-Paddle clearance: the plate is 98 mm across. That clears ES / RS / CS / GS paddles on a typical hang. If a deep formula wheel’s paddles kiss the plate, print the 8020 variant and use it as a standoff on a short piece of 2020, or increase `SHAFT_LEN` in `generate.py`.
+Paddle clearance: the round part is 98 mm across. The tab hides behind the wheel. If paddles kiss the plate, increase `SHAFT_LEN` in `generate.py`.
 
 ## Tuning (`generate.py`)
 
