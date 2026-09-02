@@ -12,6 +12,6 @@ PHONE / CUP / HOOK / CLIP / MOUSE TRAY
   4 walls, 25% gyroid (hook: 6 walls, 40%)
   M8 x 16–20 mm + T-nuts
   Cup: bolt to the TOP of a 4040 beam
-  Mouse tray: 5 x 5 in deck, bolt plate at one corner. Stick a cloth pad on it.
+  Mouse tray: 5 x 5 in, right-side corner mount, hex deck. 3 walls, 15% infill. Stick a cloth pad on it.
 
 Not affiliated with MOZA Racing.

@@ -154,12 +154,14 @@ def u_channel_pts(
 
 MOUSE_DEPTH = 127.0  # 5 in toward the wall
 MOUSE_LENGTH = 127.0  # 5 in along the rig
-MOUSE_FLOOR = 6.0
+MOUSE_FLOOR = 4.0
 MOUSE_LIP = 8.0
 MOUSE_LIP_W = 3.2
 MOUSE_PLATE_H = 100.0  # up the 4040
 MOUSE_GUSSET = 16.0
-MOUSE_PLATE_INSET = 4.0  # plate at the -Y corner so the pad sticks out +Y and +X
+MOUSE_PLATE_INSET = 4.0  # right-side: plate at the +Y corner, pad sticks toward the wall and forward
+MOUSE_HEX_R = 10.5
+MOUSE_HEX_GAP = 3.6
 
 
 def map_tris(tris: Sequence[Tri], fn) -> List[Tri]:
@@ -197,18 +199,48 @@ def mouse_lip_pts(depth: float, length: float, wall: float) -> List[Vec2]:
     return cad.ensure_winding(pts, True)
 
 
-def mouse_tray_tris() -> List[Tri]:
-    """Tray on the bed, bolt plate at one end standing up. Fits a 256 mm bed."""
-    d, l = MOUSE_DEPTH, MOUSE_LENGTH
-    y_plate = -l / 2.0 + TAB_W / 2.0 + MOUSE_PLATE_INSET
-    floor_outer = mouse_floor_pts(d, l, 14.0)
-    cable = [
-        cad.circle_pts(18.0, y_plate, 6.0, 24, False),
+def hex_pts(cx: float, cy: float, r: float) -> List[Vec2]:
+    """CW hex hole (pointy-top)."""
+    return [
+        (
+            cx + r * math.cos(math.pi / 6.0 + i * math.pi / 3.0),
+            cy + r * math.sin(math.pi / 6.0 + i * math.pi / 3.0),
+        )
+        for i in range(6)
     ]
+
+
+def mouse_hex_holes(depth: float, length: float, y_plate: float) -> List[List[Vec2]]:
+    """Lightening hexes. Keep a solid rim, gusset, and cable area."""
+    r = MOUSE_HEX_R
+    dx = r * math.sqrt(3.0) + MOUSE_HEX_GAP
+    dy = 1.5 * r + MOUSE_HEX_GAP * 0.5
+    x0, x1 = 28.0, depth - 16.0
+    y0, y1 = -length / 2.0 + 16.0, y_plate - TAB_W / 2.0 - 10.0
+    holes: List[List[Vec2]] = []
+    row = 0
+    y = y0 + r
+    while y < y1 - r:
+        x = x0 + r + (dx / 2.0 if row % 2 else 0.0)
+        while x < x1 - r:
+            holes.append(cad.ensure_winding(hex_pts(x, y, r), False))
+            x += dx
+        y += dy
+        row += 1
+    return holes
+
+
+def mouse_tray_tris() -> List[Tri]:
+    """5x5 in tray, right-side corner mount, hex-lightened deck."""
+    d, l = MOUSE_DEPTH, MOUSE_LENGTH
+    y_plate = l / 2.0 - TAB_W / 2.0 - MOUSE_PLATE_INSET
+    floor_outer = mouse_floor_pts(d, l, 14.0)
+    cable = cad.ensure_winding(cad.circle_pts(18.0, y_plate, 6.0, 24, False), False)
+    holes = [cable] + mouse_hex_holes(d, l, y_plate)
     tris = cad.loft_layers(
         [
-            {"z": 0.0, "outer": floor_outer, "holes": cable},
-            {"z": MOUSE_FLOOR, "outer": floor_outer, "holes": cable},
+            {"z": 0.0, "outer": floor_outer, "holes": holes},
+            {"z": MOUSE_FLOOR, "outer": floor_outer, "holes": holes},
         ]
     )
     lip = mouse_lip_pts(d, l, MOUSE_LIP_W)
