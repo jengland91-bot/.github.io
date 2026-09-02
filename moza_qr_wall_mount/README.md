@@ -87,21 +87,22 @@ One print. Pick how you hang it:
 
 **On a wall**
 
-- 1× **M8 × 45–50 mm** socket-cap through the hole in the **middle of the stub**, into a **stud**.
+- 1× **M8 × 50–60 mm** socket-cap through the hole in the **middle of the stub**, into a **stud** (30 mm of that length is the printed part; the rest bites wood).
 - 4× **#8 × 1¼″** wood screws around the rim (anchors if they miss a stud).
 
 **On a sim rig (4040 / 2020)**
 
-- 1× **M8 × 45–50 mm** socket-cap + T-nut, dropped in from the stub opening (the head sits in a counterbore at the tip). Hidden once the wheel is on.
-- Leave the four #8 holes empty, or snug the M8 so the plate cannot rotate on the bolt.
+- 1× **M8 × 40 mm** socket-cap + T-nut for **4040**. Use **M8 × 35 mm** on **2020** so it does not bottom out in the slot.
+- Drop it in from the stub opening. The head sits in a counterbore at the tip and is hidden once the wheel is on.
+- Leave the four #8 holes empty. Snug the M8 so the plate cannot rotate on the bolt.
 
-The phone / cup / hook / clip take shorter **M8 × 16–20 mm** T-nut bolts. Phone holder: two of the four plus-pattern holes. Cup holder: two holes through the tab, into the **top** slot of a beam.
+Why 40 mm: the head seats 30 mm from the back of the plate, then you want ~8–10 mm of thread in the T-nut. The phone / cup / hook / clip still take short **M8 × 16–20 mm** bolts.
 
 Do not hang this on a single drywall anchor.
 
 ## Use
 
-1. Wall: one M8 through the stub into a stud, plus four #8 around the rim. Rig: one M8 × 45–50 mm through the stub into a T-nut. Stub points into the room.
+1. Wall: one M8 through the stub into a stud, plus four #8 around the rim. Rig: one **M8 × 40 mm** through the stub into a 4040 T-nut (**× 35 mm** on 2020). Stub points into the room.
 2. Line up the six balls on the wheel with the six seats on the stub (same idea as the base). Press on until it clicks.
 3. To remove: pull the QR collar with both hands and take the wheel off, same as on the base.
 
