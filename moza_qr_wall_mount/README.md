@@ -2,7 +2,7 @@
 
 3D-printable hanger for **MOZA** wheels (ES, RS, CS, GS, FSR — anything with the stock ball-lock QR) and other **D1-spec / Simagic-style** 50 mm ball QRs.
 
-Snap the wheel onto the stub the same way you clip it onto the base. **Six ball pockets** lock rotation so the wheel should not spin when bumped. Line up the balls with the seats, then press on (six possible orientations — one of them is upright).
+Snap the wheel onto the stub the same way you clip it onto the base. A shallow ring takes **all six balls**, and **six deeper seats** lock rotation so the wheel should not spin when bumped. Pull the QR collar, line up a ball with a seat (one seat is at 12 o'clock), then press on.
 
 A ring-groove version with no pockets is also in `stl/` if you ever want free rotation.
 
@@ -33,7 +33,7 @@ Drag the STL into **Bambu Studio**. If GitHub shows a file page instead of downl
 | File | What it is |
 | --- | --- |
 | [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Hollow stub, no thick bottom. M8 at the **tip**, two short #8 flaps (12 and 6 o'clock). **3 walls / 15% infill**, stub up. |
-| [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. **M8 through the middle of the stub** (one T-nut or a stud) + 4× #8 around the rim. 6 anti-spin pockets. |
+| [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. **M8 through the middle of the stub** (one T-nut or a stud) + 4× #8 around the rim. Ring + 6 ball seats. |
 | [`stl/fit_test_tight.stl`](stl/fit_test_tight.stl) / [`stl/fit_test_loose.stl`](stl/fit_test_loose.stl) | Same coupon, ±0.4 mm on the shaft if nominal is off. |
 | [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same universal plate, ring groove, wheel can rotate. |
 
@@ -88,15 +88,17 @@ The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the pho
 ## Fit check
 
 1. Print `fit_test_nominal.stl` with **3 walls / 15% infill**, stub pointing up.
-2. Drop an **M8** socket-cap in from the **stub tip** (the middle is hollow). Bolt into a 4040 T-nut, or use the two #8 flaps on a scrap board. Pull the gold/black QR collar and push the wheel on. It should snap. Pull the collar to release.
-3. If it will not go on → print `fit_test_loose.stl` (or in `generate.py` drop `shaft_d` / `groove_d` by 0.4).
-4. If it goes on but will not lock → print `fit_test_tight.stl`, or make sure you are pushing until the balls drop into the groove.
-5. When the coupon feels right, print the matching full mount (`generate.py --fit …` if you changed it).
+2. Drop an **M8** socket-cap in from the **stub tip** (the middle is hollow). Bolt into a 4040 T-nut, or use the two #8 flaps on a scrap board.
+3. **Pull the gold/black QR collar**, line up one ball with a flap (12 o'clock — that is also a seat), and press on. All six balls should drop into the ring; twisting a few degrees drops them into the six deeper spots and it clicks.
+4. If it will not go on at all → print `fit_test_loose.stl` (or in `generate.py` drop `shaft_d` / `groove_d` by 0.4).
+5. If it goes on but will not lock → you are not lining the balls up with the seats, or print `fit_test_tight.stl`.
+6. When the coupon feels right, print the matching full mount (`generate.py --fit …` if you changed it).
 
 Nominal numbers (sized to the user's wheel: sleeve ID **40.9 mm**, centre opening **22.4 mm**):
 
-- Shaft Ø **40.4 mm** (0.5 mm under the sleeve so PETG can slide in)
-- Groove Ø **36.4 mm**, 45° walls, ~8.8 mm from the tip
+- Shaft Ø **39.8 mm** (~1.1 mm under the sleeve so PETG can slide in)
+- Shallow ring + **six deep ball seats** at 60° (groove floor Ø **34.8 mm**), 45° walls, ~8.8 mm from the tip
+- Lead-in channels from the tip so the balls find the seats. One seat lines up with each flap (12 / 6 o'clock).
 - Hollow Ø **26 mm** through the stub (open in the middle; M8 counterbore stays at the tip)
 
 ## Hardware
@@ -121,7 +123,7 @@ Do not hang this on a single drywall anchor.
 ## Use
 
 1. Wall: one M8 through the stub into a stud, plus four #8 around the rim. Rig: one **M8 × 40 mm** through the stub into a 4040 T-nut (**× 35 mm** on 2020). Stub points into the room.
-2. Line up the six balls on the wheel with the six seats on the stub (same idea as the base). Press on until it clicks.
+2. Pull the QR collar. Line up one ball with a 12 o'clock seat (a flap on the fit test). Press on until all six balls drop in and it clicks.
 3. To remove: pull the QR collar with both hands and take the wheel off, same as on the base.
 
 If the wheel sits a little rotated, try the next click (there are six). To shift the seats, change `POCKET_OFFSET_DEG` in `generate.py` and regenerate.
@@ -132,8 +134,9 @@ Paddle clearance: the plate is 98 mm across. If paddles kiss the plate, increase
 
 | Constant | Default | What it does |
 | --- | --- | --- |
-| `FITS["nominal"].shaft_d` | 40.4 | Outer Ø the QR slides over (wheel sleeve measured 40.9) |
-| `FITS["nominal"].groove_d` | 36.4 | Groove floor Ø (balls lock here) |
+| `FITS["nominal"].shaft_d` | 39.8 | Outer Ø the QR slides over (wheel sleeve measured 40.9) |
+| `FITS["nominal"].groove_d` | 34.8 | Deep seat floor Ø (six ball pockets) |
+| `LAND_RECESS` | 1.4 | Shallow ring between the six seats so all balls can drop in |
 | `SHAFT_LEN` | 26 | How far the stub sticks out |
 | `PLATE_D` / `PLATE_T` | 98 / 8 | Wall plate size |
 | `STUB_BORE_D` | 26 | Hollow through the stub |

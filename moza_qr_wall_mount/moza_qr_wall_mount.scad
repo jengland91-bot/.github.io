@@ -8,19 +8,23 @@ $fn = 96;
 
 /* [Fit] */
 // Shaft / groove diameters. If a test print is tight, drop these by 0.4 mm.
-shaft_d = 40.4;
-groove_d = 36.4;
+shaft_d = 39.8;
+groove_d = 34.8;
 
 /* [Stub] */
 shaft_len = 26.0;
-chamfer = 2.4;
+chamfer = 2.8;
 fillet_r = 0.0;
-groove_flat = 1.4;
+groove_flat = 2.2;
 groove_from_tip = 8.8;
 stub_bore_d = 26.0;
 center_hole_d = 8.4;
 center_csk_d = 13.8;
 center_csk_depth = 8.5;
+land_recess = 1.4;       // shallow ring so all six balls can drop in
+pocket_width_deg = 40;
+pocket_offset_deg = 90;  // one seat at 12 o'clock
+indexed = true;
 
 /* [Plate] */
 plate_d = 98.0;
@@ -36,7 +40,9 @@ part = "wall"; // [wall, profile, fit_test]
 module qr_stub() {
     shaft_r = shaft_d / 2;
     groove_r = groove_d / 2;
-    depth = shaft_r - groove_r;
+    land_r = shaft_r - land_recess;
+    ring_r = indexed ? land_r : groove_r;
+    depth = shaft_r - ring_r;
     z_tip = fillet_r + shaft_len;
     g_mid = z_tip - groove_from_tip;
     z_g0 = g_mid - groove_flat / 2 - depth;
@@ -47,6 +53,7 @@ module qr_stub() {
     m8_r = center_hole_d / 2;
     csk_r = center_csk_d / 2;
     bore_z = z_tip - center_csk_depth;
+    pocket_depth = shaft_r - groove_r;
 
     pts = [
         [inner_r, 0],
@@ -57,14 +64,27 @@ module qr_stub() {
         [shaft_r - chamfer, z_tip],
         [shaft_r, z_tip - chamfer],
         [shaft_r, z_g3],
-        [groove_r, z_g2],
-        [groove_r, z_g1],
+        [ring_r, z_g2],
+        [ring_r, z_g1],
         [shaft_r, z_g0],
         [shaft_r, 0],
         [inner_r, 0]
     ];
-    rotate_extrude()
-        polygon(pts);
+    difference() {
+        rotate_extrude()
+            polygon(pts);
+        if (indexed) {
+            for (k = [0:5])
+                rotate([0, 0, pocket_offset_deg + k * 60 - pocket_width_deg / 2])
+                    rotate_extrude(angle = pocket_width_deg)
+                        polygon([
+                            [groove_r - 0.2, g_mid - groove_flat / 2],
+                            [groove_r - 0.2, g_mid + groove_flat / 2],
+                            [shaft_r + 0.8, g_mid + groove_flat / 2 + pocket_depth + 0.6],
+                            [shaft_r + 0.8, g_mid - groove_flat / 2 - pocket_depth - 0.6]
+                        ]);
+        }
+    }
 }
 
 module csk_hole(d, csk_d, csk_h, through_h) {

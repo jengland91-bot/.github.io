@@ -39,30 +39,35 @@ class Fit:
     groove_d: float
 
 
-# Sleeve ID measured on the user's wheel: 40.9 mm. Shaft sits inside that.
-# Groove stays 4 mm smaller than the shaft (same 2 mm radial seat as before).
+# Sleeve ID measured on the user's wheel: 40.9 mm. PETG prints a hair large.
+# Shaft is undersized so the collar can slide on; the six balls sit in a ring
+# plus six deeper spots (one per ball) so it actually clicks.
 FITS = {
-    "tight": Fit("tight", shaft_d=40.7, groove_d=36.7),
-    "nominal": Fit("nominal", shaft_d=40.4, groove_d=36.4),
-    "loose": Fit("loose", shaft_d=40.0, groove_d=36.0),
+    "tight": Fit("tight", shaft_d=40.2, groove_d=35.2),
+    "nominal": Fit("nominal", shaft_d=39.8, groove_d=34.8),
+    "loose": Fit("loose", shaft_d=39.4, groove_d=34.4),
 }
 
 DEFAULT_FIT = "nominal"
 
 # Stub
 SHAFT_LEN = 26.0  # plate front -> tip, including chamfer
-CHAMFER = 2.4
+CHAMFER = 2.8  # a bit longer so the balls can start onto the seats
 FILLET_R = 0.0  # no extra OD at the root — a fillet was jamming in the 40.9 mm sleeve
-GROOVE_FLAT = 1.4  # mm of constant-depth groove between 45° walls
+GROOVE_FLAT = 2.2  # longer seat so all six balls can sit
 GROOVE_FROM_TIP = 8.8  # centre of groove, measured from the free end
 STUB_BORE_D = 26.0  # hollow through the stub (wheel centre opening measured 22.4 mm)
 
 # Six ball pockets — anti-rotation stops (Moza QR has 6 balls at 60°)
+# Indexed stubs keep a shallow RING so every ball can drop in, then six deeper
+# seats so the wheel clocks and stays put.
 POCKET_COUNT = 6
-POCKET_WIDTH_DEG = 24.0  # seat width; lands between them block spin
-POCKET_BLEND_DEG = 5.0
+POCKET_WIDTH_DEG = 40.0  # wide seats, one for each ball
+POCKET_BLEND_DEG = 6.0
 POCKET_OFFSET_DEG = 90.0  # first pocket at 12 o'clock when the top screw is up
-STUB_SEGMENTS = 144  # finer around the pockets
+POCKET_LEAD_MM = 1.4  # channels from the tip into each seat (also visible nicks)
+LAND_RECESS = 1.4  # mm of ring groove between the six deep seats
+STUB_SEGMENTS = 180  # finer around the pockets
 
 # Wall plate
 PLATE_D = 98.0
@@ -454,16 +459,26 @@ def lathe(
     thetas = [2 * math.pi * i / n for i in range(n)]
     shaft_r = fit.shaft_d / 2.0 if fit is not None else 0.0
     z0 = z3 = 0.0
+    z_tip = 0.0
     if indexed and fit is not None and z_base is not None:
         z0, z3 = _groove_z_band(z_base, fit)
+        z_tip = z_base + FILLET_R + SHAFT_LEN
     rings: List[List[Vec3]] = []
     for r, z in prof:
         r = max(r, 0.0)
         ring: List[Vec3] = []
         for t in thetas:
             rr = r
-            if indexed and z0 - 0.05 <= z <= z3 + 0.05 and r > STUB_BORE_D / 2.0 + 0.8:
-                rr = shaft_r + (r - shaft_r) * pocket_t(t)
+            if indexed and r > STUB_BORE_D / 2.0 + 0.8:
+                pt = pocket_t(t)
+                if z0 - 0.05 <= z <= z3 + 0.05:
+                    # Hybrid: shallow ring for all six balls + deeper seats.
+                    cut = max(0.0, shaft_r - r)
+                    land_cut = min(cut, LAND_RECESS)
+                    rr = shaft_r - (land_cut + (cut - land_cut) * pt)
+                elif z3 < z <= z_tip + 0.05 and pt > 0.12:
+                    # Lead-in channels (and nicks on the tip) so balls find seats.
+                    rr = r - POCKET_LEAD_MM * pt
             ring.append((rr * math.cos(t), rr * math.sin(t), z))
         rings.append(ring)
     tris: List[Tri] = []
@@ -647,7 +662,7 @@ def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
     hole_n = 24
     shaft_r = fit.shaft_d / 2.0
     screw_r = FIT_SCREW_R
-    x0 = shaft_r - 1.0
+    x0 = min(shaft_r - 1.0, screw_r - pad_r)
     x1 = screw_r + pad_r
     lug_len = x1 - x0
     lug_cy = (x0 + x1) / 2.0
