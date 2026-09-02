@@ -4,7 +4,9 @@ PETG, 0.20 mm, no supports. Plate / back / floor on the bed.
 WHEEL MOUNT  (stl/moza_qr_universal_mount.stl)
   Print the fit test first: stl/fit_test_nominal.stl
   FIT TEST ONLY: 3 walls, 15% infill (not 6/40 — that is why it was 52 min)
-  Hollow stub, M8 at the tip, 2x #8 flaps with extra meat around the holes
+  Racetrack pad all around the stub (stronger #8 holes)
+  Six windows in the skirt to save filament
+  M8 sits down in a 22 mm well at the tip
   Deeper ring + six seats + a real lip so it clicks and stays
   Press on until it clicks (pull the collar if it fights). Should not shoot back off
   Stub pointing up, no supports

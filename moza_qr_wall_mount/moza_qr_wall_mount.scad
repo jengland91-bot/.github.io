@@ -20,8 +20,8 @@ groove_from_tip = 10.2;
 groove_plate_axial = 1.2;
 stub_bore_d = 26.0;
 center_hole_d = 8.4;
-center_csk_d = 13.8;
-center_csk_depth = 8.5;
+center_csk_d = 22.0;
+center_csk_depth = 11.0;
 land_recess = 2.4;       // ring so all six balls catch
 pocket_width_deg = 40;
 pocket_offset_deg = 90;  // one seat at 12 o'clock
@@ -130,26 +130,35 @@ module profile_mount() {
 }
 
 module fit_test() {
-    lug_t = 4.6;
-    pad_r = 8.6;
+    lug_t = 5.2;
+    extra = 7.0;
+    pad_r = 9.2;
     fit_screw_r = 22.0;
-    x0 = min(shaft_d / 2 - 1.0, fit_screw_r - pad_r);
-    x1 = fit_screw_r + pad_r;
+    shaft_r = shaft_d / 2;
+    z_tip = fillet_r + shaft_len;
+    g_mid = z_tip - groove_from_tip;
+    z_g0 = g_mid - groove_flat / 2 - groove_plate_axial;
     difference() {
-        union() {
-            for (a = [90, 270])
-                rotate([0, 0, a])
-                    hull() {
-                        translate([x0 + pad_r, 0, 0]) cylinder(h = lug_t, r = pad_r);
-                        translate([x1 - pad_r, 0, 0]) cylinder(h = lug_t, r = pad_r);
-                    }
+        hull() {
+            cylinder(h = lug_t, d = shaft_d + 2 * extra);
+            translate([0, fit_screw_r, 0]) cylinder(h = lug_t, r = pad_r);
+            translate([0, -fit_screw_r, 0]) cylinder(h = lug_t, r = pad_r);
         }
+        translate([0, 0, -0.2])
+            cylinder(h = lug_t + 0.4, d = stub_bore_d);
         for (a = [90, 270])
             rotate([0, 0, a])
                 translate([fit_screw_r, 0, 0])
                     csk_hole(screw_d, screw_csk_d, screw_csk_depth, lug_t);
     }
-    qr_stub();
+    difference() {
+        qr_stub();
+        for (k = [0:5])
+            rotate([0, 0, 120 + k * 60])
+                translate([shaft_r, 0, (lug_t + z_g0) / 2])
+                    rotate([0, 90, 0])
+                        cylinder(h = 16, d = 8, center = true);
+    }
 }
 
 if (part == "wall") wall_mount();

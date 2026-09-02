@@ -79,11 +79,14 @@ SCREW_D = 4.8  # clearance for #8 wood screw / 4.5 mm / M4
 SCREW_CSK_D = 9.8
 SCREW_CSK_DEPTH = 2.4
 CENTER_HOLE_D = 8.4  # M8 through the stub (one bolt into a T-nut or a stud)
-CENTER_CSK_D = 13.8  # socket-cap counterbore at the stub tip
-CENTER_CSK_DEPTH = 8.5
+CENTER_CSK_D = 22.0  # large well so the socket-cap sits down in the stub, not proud
+CENTER_CSK_DEPTH = 11.0  # M8 head is ~8 mm; extra so it is clearly recessed
 FIT_SCREW_R = 22.0  # two flaps, holes tucked against the stub
-FIT_LUG_PAD_R = 8.6  # extra meat on the sides of the #8 holes
-FIT_LUG_T = 4.6  # thick enough that the CSK does not eat through
+FIT_LUG_PAD_R = 9.2  # meat around the #8 holes
+FIT_LUG_T = 5.2  # thick enough that the CSK does not eat through
+FIT_FLANGE_EXTRA = 7.0  # extra ring all around the stub (green)
+SKIRT_WINDOW_COUNT = 6  # filament-saver holes around the stub (red)
+SKIRT_WINDOW_W = 8.0  # mm of opening at the outer wall
 
 # Product bezel — raised ring so the plate looks finished, not like a raw disc
 BEZEL_W = 4.2
@@ -173,6 +176,20 @@ def circle_pts(cx: float, cy: float, r: float, n: int, ccw: bool = True) -> List
         )
         for i in range(n)
     ]
+
+
+def annular_sector_pts(
+    inner_r: float, outer_r: float, a0: float, a1: float, n: int = 14
+) -> List[Vec2]:
+    """CCW outline of a wall segment (outer arc, then inner arc back)."""
+    pts: List[Vec2] = []
+    for i in range(n + 1):
+        a = a0 + (a1 - a0) * i / n
+        pts.append((outer_r * math.cos(a), outer_r * math.sin(a)))
+    for i in range(n + 1):
+        a = a1 + (a0 - a1) * i / n
+        pts.append((inner_r * math.cos(a), inner_r * math.sin(a)))
+    return ensure_winding(pts, True)
 
 
 def rounded_rect_pts(w: float, h: float, r: float, n_each: int = 8) -> List[Vec2]:
@@ -524,8 +541,13 @@ def lathe(
     return tris
 
 
-def qr_stub_profile(fit: Fit, z_base: float, inner_r: float) -> List[Vec2]:
-    """Closed (r, z) loop for the tubular QR stub, including fillet and groove."""
+def qr_stub_profile(
+    fit: Fit, z_base: float, inner_r: float, z_from: float | None = None
+) -> List[Vec2]:
+    """Closed (r, z) loop for the tubular QR stub, including fillet and groove.
+
+    z_from starts the solid above the plate (fit-test skirt is built separately).
+    """
     shaft_r = fit.shaft_d / 2.0
     groove_r = fit.groove_d / 2.0
     plate_axial, tip_axial, _ = _groove_tapers(fit)
@@ -536,15 +558,15 @@ def qr_stub_profile(fit: Fit, z_base: float, inner_r: float) -> List[Vec2]:
     z_g1 = g_mid - g_half_flat
     z_g2 = g_mid + g_half_flat
     z_g3 = g_mid + g_half_flat + tip_axial  # closer to tip (45° overhang)
+    z_start = z_base if z_from is None else z_from
 
-    z_shaft0 = z_base + max(FILLET_R, 0.2)
     chamfer_z = z_tip - CHAMFER
     bore_z = z_tip - CENTER_CSK_DEPTH
     csk_r = CENTER_CSK_D / 2.0
     m8_r = CENTER_HOLE_D / 2.0
 
     pts: List[Vec2] = [
-        (inner_r, z_base),
+        (inner_r, z_start),
         (inner_r, bore_z),
         (m8_r, bore_z),
         (csk_r, bore_z),
@@ -555,15 +577,19 @@ def qr_stub_profile(fit: Fit, z_base: float, inner_r: float) -> List[Vec2]:
         (groove_r, z_g2),
         (groove_r, z_g1),
         (shaft_r, z_g0),
-        (shaft_r, z_shaft0),
     ]
-    if FILLET_R > 0.15:
-        # fillet: centre (shaft_r, z_base), from (shaft_r, z_base+R) to (shaft_r+R, z_base)
-        for i in range(FILLET_SEGS + 1):
-            a = math.pi / 2 * (1.0 - i / FILLET_SEGS)  # pi/2 -> 0
-            pts.append((shaft_r + FILLET_R * math.cos(a), z_base + FILLET_R * math.sin(a)))
-    else:
-        pts.append((shaft_r, z_base))
+    if z_start < z_g0 - 0.05:
+        if FILLET_R > 0.15 and z_start <= z_base + 0.05:
+            for i in range(FILLET_SEGS + 1):
+                a = math.pi / 2 * (1.0 - i / FILLET_SEGS)  # pi/2 -> 0
+                pts.append(
+                    (
+                        shaft_r + FILLET_R * math.cos(a),
+                        z_base + FILLET_R * math.sin(a),
+                    )
+                )
+        else:
+            pts.append((shaft_r, z_start))
     return pts
 
 
@@ -644,10 +670,12 @@ def profile_plate_tris(fit: Fit) -> List[Tri]:
     return wall_plate_tris(fit)
 
 
-def stub_tris(fit: Fit, z_front: float, indexed: bool = True) -> List[Tri]:
+def stub_tris(
+    fit: Fit, z_front: float, indexed: bool = True, z_from: float | None = None
+) -> List[Tri]:
     inner_r = STUB_BORE_D / 2.0
     return lathe(
-        qr_stub_profile(fit, z_front, inner_r),
+        qr_stub_profile(fit, z_front, inner_r, z_from=z_from),
         STUB_SEGMENTS,
         fit=fit,
         z_base=z_front,
@@ -655,40 +683,73 @@ def stub_tris(fit: Fit, z_front: float, indexed: bool = True) -> List[Tri]:
     )
 
 
-def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
-    """Fast QR coupon: hollow stub, M8 at the tip, two short #8 flaps (12 and 6 o'clock).
-
-    No left/right flaps. Print 3 walls / 15% infill, stub up.
-    """
-    lug_t = FIT_LUG_T
-    pad_r = FIT_LUG_PAD_R
-    hole_n = 24
+def fit_flange_tris(fit: Fit) -> List[Tri]:
+    """Racetrack pad around the stub — extra meat all around the #8 holes."""
     shaft_r = fit.shaft_d / 2.0
-    screw_r = FIT_SCREW_R
-    x0 = min(shaft_r - 1.0, screw_r - pad_r)
-    x1 = screw_r + pad_r
-    lug_len = x1 - x0
-    lug_cy = (x0 + x1) / 2.0
+    half_w = shaft_r + FIT_FLANGE_EXTRA
+    half_l = FIT_SCREW_R + FIT_LUG_PAD_R
+    outer = ensure_winding(
+        rounded_rect_pts(2.0 * half_w, 2.0 * half_l, min(half_w, half_l) - 0.2, 12),
+        True,
+    )
+    hole_n = 24
+    bore = circle_pts(0.0, 0.0, STUB_BORE_D / 2.0, 48, False)
+    screws = [
+        circle_pts(0.0, FIT_SCREW_R, SCREW_D / 2.0, hole_n, False),
+        circle_pts(0.0, -FIT_SCREW_R, SCREW_D / 2.0, hole_n, False),
+    ]
+    csks = [
+        circle_pts(0.0, FIT_SCREW_R, SCREW_CSK_D / 2.0, hole_n, False),
+        circle_pts(0.0, -FIT_SCREW_R, SCREW_CSK_D / 2.0, hole_n, False),
+    ]
+    z_mid = max(0.6, FIT_LUG_T - SCREW_CSK_DEPTH)
+    return loft_layers(
+        [
+            {"z": 0.0, "outer": outer, "holes": [bore] + screws},
+            {"z": z_mid, "outer": outer, "holes": [bore] + screws},
+            {"z": FIT_LUG_T, "outer": outer, "holes": [bore] + csks},
+        ]
+    )
 
-    def one_lug(cy: float) -> List[Tri]:
-        outer = _shift(rounded_rect_pts(2.0 * pad_r, lug_len, 5.5, 6), 0.0, cy)
-        hole_c = (0.0, math.copysign(screw_r, cy))
-        small = [circle_pts(hole_c[0], hole_c[1], SCREW_D / 2.0, hole_n, False)]
-        csk = [circle_pts(hole_c[0], hole_c[1], SCREW_CSK_D / 2.0, hole_n, False)]
-        outer_ccw = ensure_winding(outer, True)
-        z_mid = max(0.4, lug_t - SCREW_CSK_DEPTH)
-        return loft_layers(
-            [
-                {"z": 0.0, "outer": outer_ccw, "holes": small},
-                {"z": z_mid, "outer": outer_ccw, "holes": small},
-                {"z": lug_t, "outer": outer_ccw, "holes": csk},
-            ]
-        )
 
+def fit_skirt_tris(fit: Fit, z0: float, z1: float) -> List[Tri]:
+    """Six pillars with windows between them (filament savers around the stub)."""
+    shaft_r = fit.shaft_d / 2.0
+    inner_r = STUB_BORE_D / 2.0
+    gap_a = SKIRT_WINDOW_W / max(shaft_r, 1.0)
+    pitch = 2.0 * math.pi / SKIRT_WINDOW_COUNT
+    pillar_a = pitch - gap_a
+    if pillar_a < math.radians(12.0):
+        pillar_a = math.radians(12.0)
     tris: List[Tri] = []
-    tris.extend(one_lug(lug_cy))
-    tris.extend(one_lug(-lug_cy))
-    tris.extend(stub_tris(fit, 0.0, indexed=indexed))
+    # Windows sit between the 12/6 o'clock screw pads.
+    a_off = math.radians(POCKET_OFFSET_DEG) + pitch / 2.0
+    for k in range(SKIRT_WINDOW_COUNT):
+        mid = a_off + k * pitch
+        a0 = mid - pillar_a / 2.0
+        a1 = mid + pillar_a / 2.0
+        poly = annular_sector_pts(inner_r, shaft_r, a0, a1, 12)
+        tris.extend(
+            loft_layers(
+                [
+                    {"z": z0, "outer": poly, "holes": []},
+                    {"z": z1, "outer": poly, "holes": []},
+                ]
+            )
+        )
+    return tris
+
+
+def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
+    """Fast QR coupon: hollow stub, recessed M8 at the tip, racetrack #8 pad.
+
+    Six windows around the skirt save filament. Print 3 walls / 15% infill, stub up.
+    """
+    z_g0, _z_g3 = _groove_z_band(0.0, fit)
+    tris: List[Tri] = []
+    tris.extend(fit_flange_tris(fit))
+    tris.extend(fit_skirt_tris(fit, FIT_LUG_T - 0.2, z_g0 + 0.25))
+    tris.extend(stub_tris(fit, 0.0, indexed=indexed, z_from=z_g0))
     return tris
 
 
