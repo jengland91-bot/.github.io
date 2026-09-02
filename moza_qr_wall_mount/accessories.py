@@ -149,16 +149,18 @@ def u_channel_pts(
 
 
 # ---------------------------------------------------------------------------
-# Side-mount mouse tray — 210 mm toward the wall (fits a 9 in / 229 mm gap)
+# Side-mount mouse tray — fits a 256 mm Bambu bed, 9 in sim-to-wall gap
+# Mount sits at one end so the rest of the deck is clear.
 # ---------------------------------------------------------------------------
 
 MOUSE_DEPTH = 210.0  # toward the wall; ~19 mm clearance in a 9 in gap
-MOUSE_LENGTH = 300.0  # along the rig
+MOUSE_LENGTH = 240.0  # along the rig; 218 × 240 mm footprint, fits 256 mm bed with brim
 MOUSE_FLOOR = 6.0
 MOUSE_LIP = 8.0
 MOUSE_LIP_W = 3.2
 MOUSE_PLATE_H = 100.0  # up the 4040
 MOUSE_GUSSET = 16.0
+MOUSE_PLATE_INSET = 4.0  # plate inset from the -Y end
 
 
 def map_tris(tris: Sequence[Tri], fn) -> List[Tri]:
@@ -197,11 +199,12 @@ def mouse_lip_pts(depth: float, length: float, wall: float) -> List[Vec2]:
 
 
 def mouse_tray_tris() -> List[Tri]:
-    """Tray on the bed, bolt plate standing up. Side-mount to a vertical 4040."""
+    """Tray on the bed, bolt plate at one end standing up. Fits a 256 mm bed."""
     d, l = MOUSE_DEPTH, MOUSE_LENGTH
+    y_plate = -l / 2.0 + TAB_W / 2.0 + MOUSE_PLATE_INSET
     floor_outer = mouse_floor_pts(d, l, 14.0)
     cable = [
-        cad.circle_pts(18.0, l / 2.0 - 28.0, 6.0, 24, False),
+        cad.circle_pts(18.0, y_plate, 6.0, 24, False),
     ]
     tris = cad.loft_layers(
         [
@@ -218,8 +221,8 @@ def mouse_tray_tris() -> List[Tri]:
             ]
         )
     )
-    gusset = cad.rounded_rect_pts(MOUSE_GUSSET, l - 8.0, 4.0, 6)
-    gusset = cad._shift(gusset, MOUSE_GUSSET / 2.0, 0.0)
+    gusset = cad.rounded_rect_pts(MOUSE_GUSSET, TAB_W + 8.0, 4.0, 6)
+    gusset = cad._shift(gusset, MOUSE_GUSSET / 2.0, y_plate)
     tris.extend(cad.extrude_with_holes(gusset, [], [], 0.0, MOUSE_GUSSET))
 
     plate_outer = cad.rounded_rect_pts(MOUSE_PLATE_H, TAB_W, 10.0, 8)
@@ -228,7 +231,7 @@ def mouse_tray_tris() -> List[Tri]:
     plate = map_tris(plate, rot_y_90)
 
     def park(p: Vec3) -> Vec3:
-        return (p[0] - PLATE_T, p[1], p[2] + MOUSE_PLATE_H / 2.0)
+        return (p[0] - PLATE_T, p[1] + y_plate, p[2] + MOUSE_PLATE_H / 2.0)
 
     tris.extend(map_tris(plate, park))
     return tris

@@ -12,6 +12,6 @@ PHONE / CUP / HOOK / CLIP / MOUSE TRAY
   4 walls, 25% gyroid (hook: 6 walls, 40%)
   M8 x 16–20 mm + T-nuts
   Cup: bolt to the TOP of a 4040 beam
-  Mouse tray: deck on the bed. 210 mm toward the wall (9 in gap). Stick a cloth pad on it.
+  Mouse tray: deck on the bed (fits 256 mm Bambu). Bolt plate at one end. Stick a cloth pad on it.
 
 Not affiliated with MOZA Racing.
