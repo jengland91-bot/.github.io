@@ -51,7 +51,7 @@ All of these use **M8 × 16–20 mm** bolts and T-nuts. The wheel mount uses **o
 | [`stl/8020_cup_holder.stl`](stl/8020_cup_holder.stl) | 86 mm ID cup / tumbler, 52 mm deep, drain hole. **Bolt to the top of a 4040 / 2020 beam** so the cup sits upright. | Floor down, opening up |
 | [`stl/8020_headphone_hook.stl`](stl/8020_headphone_hook.stl) | J-hook for a headset. 2× M8, 20 mm thick. Side upright, hook into the room. | Flat |
 | [`stl/8020_cable_clip.stl`](stl/8020_cable_clip.stl) | One M8, two snap slots for USB / power leads. | Flat |
-| [`stl/8020_mouse_tray.stl`](stl/8020_mouse_tray.stl) | Right-side **5 × 5 in** mouse tray. Bolts to the **right face** of a 4040 upright; pad sticks out to your right, mostly toward your hand. Six windows in the deck (8 mm ribs), 3.2 mm floor, triangle gusset, slot in the plate. Stick a cloth pad on the deck. **3 walls / 15% infill.** Mirror in the slicer for the left side. | Deck on the bed, bolt plate up |
+| [`stl/8020_mouse_tray.stl`](stl/8020_mouse_tray.stl) | Right-side **5 × 5 in** mouse tray. Bolts to the **right face** of a 4040 upright; pad sticks out to your right. Solid deck (no cutouts), no side bumpers, 6 mm bolt plate, triangle gusset. Stick a cloth pad on the deck. **3 walls / 15% infill.** Mirror in the slicer for the left side. | Deck on the bed, bolt plate up |
 
 Phone too tight / too loose: edit `PHONE_INNER_W` / `PHONE_INNER_H` / `PHONE_DEPTH` in `accessories.py`. Cup too snug: raise `CUP_ID`.
 
@@ -83,7 +83,7 @@ Print **plate on the bed, stub pointing up**. No supports. The groove walls are 
 
 A CS/GS wheel is ~1–1.5 kg hanging on a plastic stub. PETG + 6 walls is the conservative choice. After the first print, snap the wheel on **without** hanging it on the wall and tug it — it should click and not slide off under its own weight.
 
-The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the phone tray, cup, and cable clip. Use **6 walls / 40%** on the headphone hook (it is a cantilever). The mouse tray is windowed with a thin floor: **3 walls / 15% gyroid** is plenty — the rim and ribs carry the load.
+The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the phone tray, cup, and cable clip. Use **6 walls / 40%** on the headphone hook (it is a cantilever). The mouse tray is a solid 3.2 mm deck on a 6 mm plate: **3 walls / 15% gyroid**.
 
 ## Fit check
 
