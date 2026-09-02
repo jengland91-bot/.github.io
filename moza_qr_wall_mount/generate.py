@@ -43,30 +43,31 @@ class Fit:
 # Shaft is undersized so the collar can slide on; the six balls sit in a ring
 # plus six deeper spots (one per ball) so it actually clicks.
 FITS = {
-    "tight": Fit("tight", shaft_d=40.2, groove_d=35.2),
-    "nominal": Fit("nominal", shaft_d=39.8, groove_d=34.8),
-    "loose": Fit("loose", shaft_d=39.4, groove_d=34.4),
+    "tight": Fit("tight", shaft_d=40.2, groove_d=34.2),
+    "nominal": Fit("nominal", shaft_d=39.8, groove_d=33.8),
+    "loose": Fit("loose", shaft_d=39.4, groove_d=33.4),
 }
 
 DEFAULT_FIT = "nominal"
 
 # Stub
 SHAFT_LEN = 26.0  # plate front -> tip, including chamfer
-CHAMFER = 2.8  # a bit longer so the balls can start onto the seats
+CHAMFER = 2.2  # keep this short so the tip still has a full-diameter lip
 FILLET_R = 0.0  # no extra OD at the root — a fillet was jamming in the 40.9 mm sleeve
-GROOVE_FLAT = 2.2  # longer seat so all six balls can sit
-GROOVE_FROM_TIP = 8.8  # centre of groove, measured from the free end
+GROOVE_FLAT = 3.8  # balls sit on a floor, not on the 45° ramps
+GROOVE_FROM_TIP = 10.2  # extra cylinder between groove and tip so it cannot spit the wheel off
+GROOVE_PLATE_AXIAL = 1.2  # steep backstop on the plate side (supported when printing stub-up)
 STUB_BORE_D = 26.0  # hollow through the stub (wheel centre opening measured 22.4 mm)
 
 # Six ball pockets — anti-rotation stops (Moza QR has 6 balls at 60°)
-# Indexed stubs keep a shallow RING so every ball can drop in, then six deeper
-# seats so the wheel clocks and stays put.
+# Indexed stubs keep a RING so every ball can drop in, then six deeper seats
+# so the wheel clocks and stays put. No lead-in channels — those turned the
+# catch into a ramp and launched the wheel back off.
 POCKET_COUNT = 6
 POCKET_WIDTH_DEG = 40.0  # wide seats, one for each ball
 POCKET_BLEND_DEG = 6.0
 POCKET_OFFSET_DEG = 90.0  # first pocket at 12 o'clock when the top screw is up
-POCKET_LEAD_MM = 1.4  # channels from the tip into each seat (also visible nicks)
-LAND_RECESS = 1.4  # mm of ring groove between the six deep seats
+LAND_RECESS = 2.4  # mm of ring groove between the six deep seats (must actually catch)
 STUB_SEGMENTS = 180  # finer around the pockets
 
 # Wall plate
@@ -80,8 +81,9 @@ SCREW_CSK_DEPTH = 2.4
 CENTER_HOLE_D = 8.4  # M8 through the stub (one bolt into a T-nut or a stud)
 CENTER_CSK_D = 13.8  # socket-cap counterbore at the stub tip
 CENTER_CSK_DEPTH = 8.5
-FIT_SCREW_R = 22.0  # two short flaps, holes tucked against the stub
-FIT_LUG_PAD_R = 6.8
+FIT_SCREW_R = 22.0  # two flaps, holes tucked against the stub
+FIT_LUG_PAD_R = 8.6  # extra meat on the sides of the #8 holes
+FIT_LUG_T = 4.6  # thick enough that the CSK does not eat through
 
 # Product bezel — raised ring so the plate looks finished, not like a raw disc
 BEZEL_W = 4.2
@@ -432,14 +434,20 @@ def pocket_t(theta: float) -> float:
     return x * x * (3.0 - 2.0 * x)
 
 
+def _groove_tapers(fit: Fit) -> Tuple[float, float, float]:
+    """Plate-side axial, tip-side axial, radial depth of the full groove."""
+    depth = fit.shaft_d / 2.0 - fit.groove_d / 2.0
+    tip_axial = depth  # 45° overhang toward the tip
+    plate_axial = min(depth, GROOVE_PLATE_AXIAL)  # steep backstop
+    return plate_axial, tip_axial, depth
+
+
 def _groove_z_band(z_base: float, fit: Fit) -> Tuple[float, float]:
-    shaft_r = fit.shaft_d / 2.0
-    groove_r = fit.groove_d / 2.0
-    taper = shaft_r - groove_r
+    plate_axial, tip_axial, _ = _groove_tapers(fit)
     z_tip = z_base + FILLET_R + SHAFT_LEN
     g_mid = z_tip - GROOVE_FROM_TIP
-    z0 = g_mid - GROOVE_FLAT / 2.0 - taper
-    z3 = g_mid + GROOVE_FLAT / 2.0 + taper
+    z0 = g_mid - GROOVE_FLAT / 2.0 - plate_axial
+    z3 = g_mid + GROOVE_FLAT / 2.0 + tip_axial
     return z0, z3
 
 
@@ -459,26 +467,22 @@ def lathe(
     thetas = [2 * math.pi * i / n for i in range(n)]
     shaft_r = fit.shaft_d / 2.0 if fit is not None else 0.0
     z0 = z3 = 0.0
-    z_tip = 0.0
     if indexed and fit is not None and z_base is not None:
         z0, z3 = _groove_z_band(z_base, fit)
-        z_tip = z_base + FILLET_R + SHAFT_LEN
     rings: List[List[Vec3]] = []
     for r, z in prof:
         r = max(r, 0.0)
         ring: List[Vec3] = []
         for t in thetas:
             rr = r
-            if indexed and r > STUB_BORE_D / 2.0 + 0.8:
+            if indexed and r > STUB_BORE_D / 2.0 + 0.8 and z0 - 0.05 <= z <= z3 + 0.05:
                 pt = pocket_t(t)
-                if z0 - 0.05 <= z <= z3 + 0.05:
-                    # Hybrid: shallow ring for all six balls + deeper seats.
-                    cut = max(0.0, shaft_r - r)
-                    land_cut = min(cut, LAND_RECESS)
-                    rr = shaft_r - (land_cut + (cut - land_cut) * pt)
-                elif z3 < z <= z_tip + 0.05 and pt > 0.12:
-                    # Lead-in channels (and nicks on the tip) so balls find seats.
-                    rr = r - POCKET_LEAD_MM * pt
+                # Hybrid: ring for all six balls + deeper seats. Leave the
+                # cylinder between groove and tip untouched — that lip is
+                # what stops the wheel shooting back off.
+                cut = max(0.0, shaft_r - r)
+                land_cut = min(cut, LAND_RECESS)
+                rr = shaft_r - (land_cut + (cut - land_cut) * pt)
             ring.append((rr * math.cos(t), rr * math.sin(t), z))
         rings.append(ring)
     tris: List[Tri] = []
@@ -524,15 +528,14 @@ def qr_stub_profile(fit: Fit, z_base: float, inner_r: float) -> List[Vec2]:
     """Closed (r, z) loop for the tubular QR stub, including fillet and groove."""
     shaft_r = fit.shaft_d / 2.0
     groove_r = fit.groove_d / 2.0
-    depth = shaft_r - groove_r
-    taper = depth  # 45° print-friendly walls
+    plate_axial, tip_axial, _ = _groove_tapers(fit)
     z_tip = z_base + FILLET_R + SHAFT_LEN
     g_mid = z_tip - GROOVE_FROM_TIP
     g_half_flat = GROOVE_FLAT / 2.0
-    z_g0 = g_mid - g_half_flat - taper  # closer to plate
+    z_g0 = g_mid - g_half_flat - plate_axial  # closer to plate (steep backstop)
     z_g1 = g_mid - g_half_flat
     z_g2 = g_mid + g_half_flat
-    z_g3 = g_mid + g_half_flat + taper  # closer to tip
+    z_g3 = g_mid + g_half_flat + tip_axial  # closer to tip (45° overhang)
 
     z_shaft0 = z_base + max(FILLET_R, 0.2)
     chamfer_z = z_tip - CHAMFER
@@ -657,7 +660,7 @@ def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
 
     No left/right flaps. Print 3 walls / 15% infill, stub up.
     """
-    lug_t = 2.8
+    lug_t = FIT_LUG_T
     pad_r = FIT_LUG_PAD_R
     hole_n = 24
     shaft_r = fit.shaft_d / 2.0
@@ -785,13 +788,13 @@ def svg_preview(path: str, fit: Fit) -> None:
                         sign * (shaft_r + FILLET_R * math.cos(a)),
                     )
                 )
-        depth = shaft_r - groove_r
+        plate_axial, tip_axial, _ = _groove_tapers(fit)
         z_tip_l = z0 + FILLET_R + SHAFT_LEN
         g_mid = z_tip_l - GROOVE_FROM_TIP
-        z_g0 = g_mid - GROOVE_FLAT / 2 - depth
+        z_g0 = g_mid - GROOVE_FLAT / 2 - plate_axial
         z_g1 = g_mid - GROOVE_FLAT / 2
         z_g2 = g_mid + GROOVE_FLAT / 2
-        z_g3 = g_mid + GROOVE_FLAT / 2 + depth
+        z_g3 = g_mid + GROOVE_FLAT / 2 + tip_axial
         pts.append(sx(z_g0, sign * shaft_r))
         pts.append(sx(z_g1, sign * groove_r))
         pts.append(sx(z_g2, sign * groove_r))

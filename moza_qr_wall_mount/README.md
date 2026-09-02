@@ -32,7 +32,7 @@ Drag the STL into **Bambu Studio**. If GitHub shows a file page instead of downl
 
 | File | What it is |
 | --- | --- |
-| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Hollow stub, no thick bottom. M8 at the **tip**, two short #8 flaps (12 and 6 o'clock). **3 walls / 15% infill**, stub up. |
+| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Hollow stub, no thick bottom. M8 at the **tip**, two #8 flaps with extra meat around the holes. **3 walls / 15% infill**, stub up. |
 | [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. **M8 through the middle of the stub** (one T-nut or a stud) + 4× #8 around the rim. Ring + 6 ball seats. |
 | [`stl/fit_test_tight.stl`](stl/fit_test_tight.stl) / [`stl/fit_test_loose.stl`](stl/fit_test_loose.stl) | Same coupon, ±0.4 mm on the shaft if nominal is off. |
 | [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same universal plate, ring groove, wheel can rotate. |
@@ -89,7 +89,7 @@ The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the pho
 
 1. Print `fit_test_nominal.stl` with **3 walls / 15% infill**, stub pointing up.
 2. Drop an **M8** socket-cap in from the **stub tip** (the middle is hollow). Bolt into a 4040 T-nut, or use the two #8 flaps on a scrap board.
-3. **Pull the gold/black QR collar**, line up one ball with a flap (12 o'clock — that is also a seat), and press on. All six balls should drop into the ring; twisting a few degrees drops them into the six deeper spots and it clicks.
+3. Press on (pull the collar if it fights you). It should click **and stay** — if it pops the collar then shoots back off, the lip is not holding. Line one ball with a flap (12 o'clock).
 4. If it will not go on at all → print `fit_test_loose.stl` (or in `generate.py` drop `shaft_d` / `groove_d` by 0.4).
 5. If it goes on but will not lock → you are not lining the balls up with the seats, or print `fit_test_tight.stl`.
 6. When the coupon feels right, print the matching full mount (`generate.py --fit …` if you changed it).
@@ -97,8 +97,8 @@ The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the pho
 Nominal numbers (sized to the user's wheel: sleeve ID **40.9 mm**, centre opening **22.4 mm**):
 
 - Shaft Ø **39.8 mm** (~1.1 mm under the sleeve so PETG can slide in)
-- Shallow ring + **six deep ball seats** at 60° (groove floor Ø **34.8 mm**), 45° walls, ~8.8 mm from the tip
-- Lead-in channels from the tip so the balls find the seats. One seat lines up with each flap (12 / 6 o'clock).
+- Ring + **six deep ball seats** (groove floor Ø **33.8 mm**), long flat so the balls sit, steep backstop, 45° lip toward the tip (~10 mm from the tip)
+- Full-diameter cylinder between the groove and the tip so it clicks **and stays**. One seat lines up with each flap (12 / 6 o'clock).
 - Hollow Ø **26 mm** through the stub (open in the middle; M8 counterbore stays at the tip)
 
 ## Hardware
@@ -135,8 +135,9 @@ Paddle clearance: the plate is 98 mm across. If paddles kiss the plate, increase
 | Constant | Default | What it does |
 | --- | --- | --- |
 | `FITS["nominal"].shaft_d` | 39.8 | Outer Ø the QR slides over (wheel sleeve measured 40.9) |
-| `FITS["nominal"].groove_d` | 34.8 | Deep seat floor Ø (six ball pockets) |
-| `LAND_RECESS` | 1.4 | Shallow ring between the six seats so all balls can drop in |
+| `FITS["nominal"].groove_d` | 33.8 | Deep seat floor Ø (six ball pockets) |
+| `LAND_RECESS` | 2.4 | Ring between the six seats so all balls catch |
+| `GROOVE_FLAT` | 3.8 | How wide the ball floor is (stops the wheel shooting back off) |
 | `SHAFT_LEN` | 26 | How far the stub sticks out |
 | `PLATE_D` / `PLATE_T` | 98 / 8 | Wall plate size |
 | `STUB_BORE_D` | 26 | Hollow through the stub |

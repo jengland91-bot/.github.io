@@ -9,19 +9,20 @@ $fn = 96;
 /* [Fit] */
 // Shaft / groove diameters. If a test print is tight, drop these by 0.4 mm.
 shaft_d = 39.8;
-groove_d = 34.8;
+groove_d = 33.8;
 
 /* [Stub] */
 shaft_len = 26.0;
-chamfer = 2.8;
+chamfer = 2.2;
 fillet_r = 0.0;
-groove_flat = 2.2;
-groove_from_tip = 8.8;
+groove_flat = 3.8;
+groove_from_tip = 10.2;
+groove_plate_axial = 1.2;
 stub_bore_d = 26.0;
 center_hole_d = 8.4;
 center_csk_d = 13.8;
 center_csk_depth = 8.5;
-land_recess = 1.4;       // shallow ring so all six balls can drop in
+land_recess = 2.4;       // ring so all six balls catch
 pocket_width_deg = 40;
 pocket_offset_deg = 90;  // one seat at 12 o'clock
 indexed = true;
@@ -43,12 +44,14 @@ module qr_stub() {
     land_r = shaft_r - land_recess;
     ring_r = indexed ? land_r : groove_r;
     depth = shaft_r - ring_r;
+    tip_axial = shaft_r - groove_r; // 45° toward the tip
+    plate_axial = min(depth, groove_plate_axial);
     z_tip = fillet_r + shaft_len;
     g_mid = z_tip - groove_from_tip;
-    z_g0 = g_mid - groove_flat / 2 - depth;
+    z_g0 = g_mid - groove_flat / 2 - plate_axial;
     z_g1 = g_mid - groove_flat / 2;
     z_g2 = g_mid + groove_flat / 2;
-    z_g3 = g_mid + groove_flat / 2 + depth;
+    z_g3 = g_mid + groove_flat / 2 + tip_axial;
     inner_r = stub_bore_d / 2;
     m8_r = center_hole_d / 2;
     csk_r = center_csk_d / 2;
@@ -127,10 +130,10 @@ module profile_mount() {
 }
 
 module fit_test() {
-    lug_t = 2.8;
-    pad_r = 6.8;
+    lug_t = 4.6;
+    pad_r = 8.6;
     fit_screw_r = 22.0;
-    x0 = shaft_d / 2 - 1.0;
+    x0 = min(shaft_d / 2 - 1.0, fit_screw_r - pad_r);
     x1 = fit_screw_r + pad_r;
     difference() {
         union() {
