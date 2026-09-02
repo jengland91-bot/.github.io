@@ -75,8 +75,8 @@ SCREW_CSK_DEPTH = 2.4
 CENTER_HOLE_D = 8.4  # M8 through the stub (one bolt into a T-nut or a stud)
 CENTER_CSK_D = 13.8  # socket-cap counterbore at the stub tip
 CENTER_CSK_DEPTH = 8.5
-FIT_SCREW_R = 25.5  # fit-test lugs tucked in (full mount still uses SCREW_R = 36)
-FIT_LUG_PAD_R = 7.5
+FIT_SCREW_R = 22.0  # two short flaps, holes tucked against the stub
+FIT_LUG_PAD_R = 6.8
 
 # Product bezel — raised ring so the plate looks finished, not like a raw disc
 BEZEL_W = 4.2
@@ -638,28 +638,23 @@ def stub_tris(fit: Fit, z_front: float, indexed: bool = True) -> List[Tri]:
 
 
 def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
-    """Fast QR coupon: hollow stub on the bed, M8 at the tip, four #8 lugs.
+    """Fast QR coupon: hollow stub, M8 at the tip, two short #8 flaps (12 and 6 o'clock).
 
-    No thick bottom disc. Print 3 walls / 15% infill, stub up.
+    No left/right flaps. Print 3 walls / 15% infill, stub up.
     """
     lug_t = 2.8
     pad_r = FIT_LUG_PAD_R
     hole_n = 24
     shaft_r = fit.shaft_d / 2.0
     screw_r = FIT_SCREW_R
-    # Short lugs: start on the stub wall, holes close in. Bottom stays open.
     x0 = shaft_r - 1.0
     x1 = screw_r + pad_r
     lug_len = x1 - x0
-    lug_cx = (x0 + x1) / 2.0
+    lug_cy = (x0 + x1) / 2.0
 
-    def one_lug(cx: float, cy: float, along_x: bool) -> List[Tri]:
-        if along_x:
-            outer = _shift(rounded_rect_pts(lug_len, 2.0 * pad_r, 6.0, 6), cx, 0.0)
-            hole_c = (math.copysign(screw_r, cx), 0.0)
-        else:
-            outer = _shift(rounded_rect_pts(2.0 * pad_r, lug_len, 6.0, 6), 0.0, cy)
-            hole_c = (0.0, math.copysign(screw_r, cy))
+    def one_lug(cy: float) -> List[Tri]:
+        outer = _shift(rounded_rect_pts(2.0 * pad_r, lug_len, 5.5, 6), 0.0, cy)
+        hole_c = (0.0, math.copysign(screw_r, cy))
         small = [circle_pts(hole_c[0], hole_c[1], SCREW_D / 2.0, hole_n, False)]
         csk = [circle_pts(hole_c[0], hole_c[1], SCREW_CSK_D / 2.0, hole_n, False)]
         outer_ccw = ensure_winding(outer, True)
@@ -673,10 +668,8 @@ def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
         )
 
     tris: List[Tri] = []
-    tris.extend(one_lug(lug_cx, 0.0, True))
-    tris.extend(one_lug(-lug_cx, 0.0, True))
-    tris.extend(one_lug(0.0, lug_cx, False))
-    tris.extend(one_lug(0.0, -lug_cx, False))
+    tris.extend(one_lug(lug_cy))
+    tris.extend(one_lug(-lug_cy))
     tris.extend(stub_tris(fit, 0.0, indexed=indexed))
     return tris
 

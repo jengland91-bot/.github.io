@@ -108,20 +108,20 @@ module profile_mount() {
 
 module fit_test() {
     lug_t = 2.8;
-    pad_r = 7.5;
-    fit_screw_r = 25.5;
+    pad_r = 6.8;
+    fit_screw_r = 22.0;
     x0 = shaft_d / 2 - 1.0;
     x1 = fit_screw_r + pad_r;
     difference() {
         union() {
-            for (a = [0, 90, 180, 270])
+            for (a = [90, 270])
                 rotate([0, 0, a])
                     hull() {
                         translate([x0 + pad_r, 0, 0]) cylinder(h = lug_t, r = pad_r);
                         translate([x1 - pad_r, 0, 0]) cylinder(h = lug_t, r = pad_r);
                     }
         }
-        for (a = [0, 90, 180, 270])
+        for (a = [90, 270])
             rotate([0, 0, a])
                 translate([fit_screw_r, 0, 0])
                     csk_hole(screw_d, screw_csk_d, screw_csk_depth, lug_t);
