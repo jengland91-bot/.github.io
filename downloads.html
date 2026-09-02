@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sim rig prints</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --text-color: #ffffff;
+            --accent-color: #ff4500;
+            --button-bg: #1a1a1a;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        h1 { font-size: 1.5rem; margin: 0 0 8px; }
+        p { color: #888; margin: 0 0 24px; text-align: center; max-width: 420px; }
+        .links-container {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        a {
+            background-color: var(--button-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 16px;
+            text-align: center;
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+            font-weight: 600;
+        }
+        a.primary { border-color: var(--accent-color); }
+        a:hover { border-color: var(--accent-color); background: #222; }
+        .note { font-size: 0.85rem; font-weight: 400; color: #888; display: block; margin-top: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Sim rig STLs</h1>
+    <p>Drag into Bambu Studio. PETG, no supports. Print the fit test before the wheel mount.</p>
+    <div class="links-container">
+        <a class="primary" href="moza_qr_wall_mount/sim-rig-kit.zip" download>
+            Download all (zip)
+            <span class="note">Wheel mount + fit tests + phone, cup, hook, clip</span>
+        </a>
+        <a href="moza_qr_wall_mount/stl/fit_test_nominal.stl" download>Fit test (print this first)</a>
+        <a href="moza_qr_wall_mount/stl/moza_qr_universal_mount.stl" download>Wheel mount</a>
+        <a href="moza_qr_wall_mount/stl/8020_phone_holder.stl" download>Phone holder</a>
+        <a href="moza_qr_wall_mount/stl/8020_cup_holder.stl" download>Cup holder</a>
+        <a href="moza_qr_wall_mount/stl/8020_headphone_hook.stl" download>Headphone hook</a>
+        <a href="moza_qr_wall_mount/stl/8020_cable_clip.stl" download>Cable clip</a>
+        <a href="moza_qr_wall_mount/stl/fit_test_loose.stl" download>Fit test — looser</a>
+        <a href="moza_qr_wall_mount/stl/fit_test_tight.stl" download>Fit test — tighter</a>
+        <a href="index.html">← Back</a>
+    </div>
+</body>
+</html>

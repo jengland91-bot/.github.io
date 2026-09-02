@@ -10,6 +10,21 @@ This is an original product design, not a MOZA part and not a copy of a commerci
 
 **Want to sell prints?** Read [`SELLING.md`](SELLING.md) (Etsy title, compatible-with wording, PETG QC, photos).
 
+## Download
+
+**[sim-rig-kit.zip](sim-rig-kit.zip)** — wheel mount, fit tests, phone holder, cup holder, headphone hook, cable clip.
+
+| File | Download |
+| --- | --- |
+| Fit test (print first) | [fit_test_nominal.stl](stl/fit_test_nominal.stl) |
+| Wheel mount | [moza_qr_universal_mount.stl](stl/moza_qr_universal_mount.stl) |
+| Phone holder | [8020_phone_holder.stl](stl/8020_phone_holder.stl) |
+| Cup holder | [8020_cup_holder.stl](stl/8020_cup_holder.stl) |
+| Headphone hook | [8020_headphone_hook.stl](stl/8020_headphone_hook.stl) |
+| Cable clip | [8020_cable_clip.stl](stl/8020_cable_clip.stl) |
+
+Drag the STL into **Bambu Studio**. If GitHub shows a file page instead of downloading, click **Download raw file**.
+
 ![Top and side view](preview.svg)
 
 ## Print these files

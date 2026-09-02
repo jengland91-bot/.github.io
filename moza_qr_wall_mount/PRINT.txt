@@ -1,0 +1,16 @@
+SIM RIG PRINT KIT
+PETG, 0.20 mm, no supports. Plate / back / floor on the bed.
+
+WHEEL MOUNT  (stl/moza_qr_universal_mount.stl)
+  Print the fit test first: stl/fit_test_nominal.stl (~15 min)
+  6 walls, 40% gyroid, stub pointing up
+  Bolt: M8 x 40 mm socket-cap into a 4040 T-nut (M8 x 35 mm on 2020)
+  Wall: M8 x 50–60 mm into a stud, plus 4x #8 around the rim
+  Line up the six balls with the six grooves, press on
+
+PHONE / CUP / HOOK / CLIP
+  4 walls, 25% gyroid (hook: 6 walls, 40%)
+  M8 x 16–20 mm + T-nuts
+  Cup: bolt to the TOP of a 4040 beam
+
+Not affiliated with MOZA Racing.

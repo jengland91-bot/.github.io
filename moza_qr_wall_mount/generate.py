@@ -17,6 +17,7 @@ import argparse
 import math
 import os
 import struct
+import zipfile
 from dataclasses import dataclass
 from typing import Dict, List, Sequence, Tuple
 
@@ -794,6 +795,30 @@ def generate_all(out_dir: str, fit_name: str = DEFAULT_FIT) -> None:
     from accessories import generate_accessories
 
     generate_accessories(out_dir)
+    write_kit_zip(out_dir)
+
+
+KIT_ZIP_FILES = (
+    "PRINT.txt",
+    "stl/fit_test_nominal.stl",
+    "stl/fit_test_tight.stl",
+    "stl/fit_test_loose.stl",
+    "stl/moza_qr_universal_mount.stl",
+    "stl/moza_qr_wall_mount_free.stl",
+    "stl/8020_phone_holder.stl",
+    "stl/8020_cup_holder.stl",
+    "stl/8020_headphone_hook.stl",
+    "stl/8020_cable_clip.stl",
+)
+
+
+def write_kit_zip(out_dir: str) -> None:
+    zip_path = os.path.join(out_dir, "sim-rig-kit.zip")
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        for rel in KIT_ZIP_FILES:
+            src = os.path.join(out_dir, rel)
+            zf.write(src, arcname=os.path.basename(rel))
+    print(f"wrote sim-rig-kit.zip  ({os.path.getsize(zip_path) // 1024} KB)")
 
 
 def main() -> None:
