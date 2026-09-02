@@ -636,17 +636,46 @@ def stub_tris(fit: Fit, z_front: float, indexed: bool = True) -> List[Tri]:
 
 
 def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
-    """Short QR coupon with a small finger flange — ~15 min print.
+    """Fast QR coupon: hollow stub on the bed, M8 at the tip, four #8 lugs.
 
-    Same M8 as the full mount: socket-cap in the stub tip, 8.4 mm through the
-    flange so you can bolt the coupon to a 4040 T-nut and try the wheel on the rig.
+    No thick bottom disc. Print 3 walls / 15% infill, stub up.
     """
-    flange_d = 62.0
-    flange_t = 6.0
-    outer = circle_pts(0.0, 0.0, flange_d / 2.0, SEGMENTS, True)
-    m8 = [circle_pts(0.0, 0.0, CENTER_HOLE_D / 2.0, 32, False)]
-    tris = extrude_with_holes(outer, m8, m8, 0.0, flange_t)
-    tris.extend(stub_tris(fit, flange_t, indexed=indexed))
+    lug_t = 2.8
+    pad_r = 9.0
+    hole_n = 24
+    shaft_r = fit.shaft_d / 2.0
+    # Lugs start on the stub wall and reach past the #8 holes. They do not
+    # cover the hollow (so the bottom stays open).
+    x0 = shaft_r - 1.5
+    x1 = SCREW_R + pad_r
+    lug_len = x1 - x0
+    lug_cx = (x0 + x1) / 2.0
+
+    def one_lug(cx: float, cy: float, along_x: bool) -> List[Tri]:
+        if along_x:
+            outer = _shift(rounded_rect_pts(lug_len, 2.0 * pad_r, 7.0, 6), cx, 0.0)
+            hole_c = (math.copysign(SCREW_R, cx), 0.0)
+        else:
+            outer = _shift(rounded_rect_pts(2.0 * pad_r, lug_len, 7.0, 6), 0.0, cy)
+            hole_c = (0.0, math.copysign(SCREW_R, cy))
+        small = [circle_pts(hole_c[0], hole_c[1], SCREW_D / 2.0, hole_n, False)]
+        csk = [circle_pts(hole_c[0], hole_c[1], SCREW_CSK_D / 2.0, hole_n, False)]
+        outer_ccw = ensure_winding(outer, True)
+        z_mid = max(0.4, lug_t - SCREW_CSK_DEPTH)
+        return loft_layers(
+            [
+                {"z": 0.0, "outer": outer_ccw, "holes": small},
+                {"z": z_mid, "outer": outer_ccw, "holes": small},
+                {"z": lug_t, "outer": outer_ccw, "holes": csk},
+            ]
+        )
+
+    tris: List[Tri] = []
+    tris.extend(one_lug(lug_cx, 0.0, True))
+    tris.extend(one_lug(-lug_cx, 0.0, True))
+    tris.extend(one_lug(0.0, lug_cx, False))
+    tris.extend(one_lug(0.0, -lug_cx, False))
+    tris.extend(stub_tris(fit, 0.0, indexed=indexed))
     return tris
 
 

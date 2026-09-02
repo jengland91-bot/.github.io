@@ -107,12 +107,25 @@ module profile_mount() {
 }
 
 module fit_test() {
+    lug_t = 2.8;
+    pad_r = 9.0;
+    x0 = shaft_d / 2 - 1.5;
+    x1 = screw_r + pad_r;
     difference() {
-        cylinder(h = 6, d = 62);
-        translate([0, 0, -0.2])
-            cylinder(h = 6.4, d = center_hole_d);
+        union() {
+            for (a = [0, 90, 180, 270])
+                rotate([0, 0, a])
+                    hull() {
+                        translate([x0 + pad_r, 0, 0]) cylinder(h = lug_t, r = pad_r);
+                        translate([x1 - pad_r, 0, 0]) cylinder(h = lug_t, r = pad_r);
+                    }
+        }
+        for (a = [0, 90, 180, 270])
+            rotate([0, 0, a])
+                translate([screw_r, 0, 0])
+                    csk_hole(screw_d, screw_csk_d, screw_csk_depth, lug_t);
     }
-    translate([0, 0, 6]) qr_stub();
+    qr_stub();
 }
 
 if (part == "wall") wall_mount();

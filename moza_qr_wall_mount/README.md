@@ -32,7 +32,7 @@ Drag the STL into **Bambu Studio**. If GitHub shows a file page instead of downl
 
 | File | What it is |
 | --- | --- |
-| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Tiny coupon, ~15 minutes. Same M8 through-hole as the full mount — bolt it to a 4040 to try the wheel on the rig. |
+| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Hollow stub, no thick bottom. M8 at the **tip**, four #8 lugs to screw it to a board or the rig. **3 walls / 15% infill**, stub up. |
 | [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. **M8 through the middle of the stub** (one T-nut or a stud) + 4× #8 around the rim. 6 anti-spin pockets. |
 | [`stl/fit_test_tight.stl`](stl/fit_test_tight.stl) / [`stl/fit_test_loose.stl`](stl/fit_test_loose.stl) | Same coupon, ±0.4 mm on the shaft if nominal is off. |
 | [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same universal plate, ring groove, wheel can rotate. |
@@ -83,12 +83,12 @@ Print **plate on the bed, stub pointing up**. No supports. The groove walls are 
 
 A CS/GS wheel is ~1–1.5 kg hanging on a plastic stub. PETG + 6 walls is the conservative choice. After the first print, snap the wheel on **without** hanging it on the wall and tug it — it should click and not slide off under its own weight.
 
-The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the phone tray, cup, and cable clip. Use **6 walls / 40%** on the headphone hook (it is a cantilever). The mouse tray is a solid 3.2 mm deck on a 6 mm plate: **3 walls / 15% gyroid**.
+The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the phone tray, cup, and cable clip. Use **6 walls / 40%** on the headphone hook (it is a cantilever). The mouse tray is a solid 3.2 mm deck on a 6 mm plate: **3 walls / 15% gyroid**. The **fit test** is also **3 walls / 15%** — do not use the wheel-mount 6-wall profile on it or it will take ~50 minutes.
 
 ## Fit check
 
-1. Print `fit_test_nominal.stl`.
-2. Drop an **M8 × 35–40 mm** socket-cap in from the stub tip, through the flange, into a 4040 T-nut (or a nut on the back). Pull the gold/black QR collar and push the wheel on. It should snap. Pull the collar to release.
+1. Print `fit_test_nominal.stl` with **3 walls / 15% infill**, stub pointing up.
+2. Drop an **M8** socket-cap in from the **stub tip** (the middle is hollow). Bolt into a 4040 T-nut, or use the four #8 lugs on a scrap board. Pull the gold/black QR collar and push the wheel on. It should snap. Pull the collar to release.
 3. If it will not go on → print `fit_test_loose.stl` (or in `generate.py` drop `shaft_d` / `groove_d` by 0.4).
 4. If it goes on but will not lock → print `fit_test_tight.stl`, or make sure you are pushing until the balls drop into the groove.
 5. When the coupon feels right, print the matching full mount (`generate.py --fit …` if you changed it).
