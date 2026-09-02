@@ -149,18 +149,17 @@ def u_channel_pts(
 
 
 # ---------------------------------------------------------------------------
-# Side-mount mouse tray — fits a 256 mm Bambu bed, 9 in sim-to-wall gap
-# Mount sits at one end so the rest of the deck is clear.
+# Side-mount mouse tray — 5 x 5 in deck, mount at one corner
 # ---------------------------------------------------------------------------
 
-MOUSE_DEPTH = 210.0  # toward the wall; ~19 mm clearance in a 9 in gap
-MOUSE_LENGTH = 240.0  # along the rig; 218 × 240 mm footprint, fits 256 mm bed with brim
+MOUSE_DEPTH = 127.0  # 5 in toward the wall
+MOUSE_LENGTH = 127.0  # 5 in along the rig
 MOUSE_FLOOR = 6.0
 MOUSE_LIP = 8.0
 MOUSE_LIP_W = 3.2
 MOUSE_PLATE_H = 100.0  # up the 4040
 MOUSE_GUSSET = 16.0
-MOUSE_PLATE_INSET = 4.0  # plate inset from the -Y end
+MOUSE_PLATE_INSET = 4.0  # plate at the -Y corner so the pad sticks out +Y and +X
 
 
 def map_tris(tris: Sequence[Tri], fn) -> List[Tri]:

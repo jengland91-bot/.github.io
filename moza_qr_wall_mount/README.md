@@ -51,7 +51,7 @@ All of these use **M8 × 16–20 mm** bolts and T-nuts. The wheel mount uses **o
 | [`stl/8020_cup_holder.stl`](stl/8020_cup_holder.stl) | 86 mm ID cup / tumbler, 52 mm deep, drain hole. **Bolt to the top of a 4040 / 2020 beam** so the cup sits upright. | Floor down, opening up |
 | [`stl/8020_headphone_hook.stl`](stl/8020_headphone_hook.stl) | J-hook for a headset. 2× M8, 20 mm thick. Side upright, hook into the room. | Flat |
 | [`stl/8020_cable_clip.stl`](stl/8020_cable_clip.stl) | One M8, two snap slots for USB / power leads. | Flat |
-| [`stl/8020_mouse_tray.stl`](stl/8020_mouse_tray.stl) | Side-mount mouse tray. **210 × 240 mm** deck — fits a **256 mm Bambu bed** (P1S / X1C / A1) and a **9 in** sim-to-wall gap. Bolt plate is at **one end** so the rest of the pad is clear. Stick a cut cloth pad on the deck. | Deck on the bed, bolt plate up |
+| [`stl/8020_mouse_tray.stl`](stl/8020_mouse_tray.stl) | Side-mount **5 × 5 in** (127 × 127 mm) mouse tray. Bolt plate at one corner; the pad sticks out from there. Fits a 9 in sim-to-wall gap. Stick a cut cloth pad on the deck. | Deck on the bed, bolt plate up |
 
 Phone too tight / too loose: edit `PHONE_INNER_W` / `PHONE_INNER_H` / `PHONE_DEPTH` in `accessories.py`. Cup too snug: raise `CUP_ID`.
 
