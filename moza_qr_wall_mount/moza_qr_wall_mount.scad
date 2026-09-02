@@ -135,16 +135,12 @@ module fit_test() {
     pad_r = 9.2;
     fit_screw_r = 22.0;
     strip_w = 40.0;
-    strip_len = 34.0;
+    strip_len = 64.0;
     strip_t = 8.0;
-    strip_overlap = 10.0;
     shaft_r = shaft_d / 2;
     z_tip = fillet_r + shaft_len;
     g_mid = z_tip - groove_from_tip;
     z_g0 = g_mid - groove_flat / 2 - groove_plate_axial;
-    y_join = -(fit_screw_r + pad_r) + strip_overlap;
-    y_tip = y_join - strip_len;
-    hole_y = y_tip + 16.0;
     difference() {
         hull() {
             cylinder(h = lug_t, d = shaft_d + 2 * extra);
@@ -159,19 +155,18 @@ module fit_test() {
                     csk_hole(screw_d, screw_csk_d, screw_csk_depth, lug_t);
     }
     difference() {
-        translate([0, (y_join + y_tip) / 2, 0])
-            hull() {
-                translate([-strip_w / 2 + 8, -strip_len / 2 + 8, 0])
-                    cylinder(h = strip_t, r = 8);
-                translate([strip_w / 2 - 8, -strip_len / 2 + 8, 0])
-                    cylinder(h = strip_t, r = 8);
-                translate([-strip_w / 2 + 8, strip_len / 2 - 8, 0])
-                    cylinder(h = strip_t, r = 8);
-                translate([strip_w / 2 - 8, strip_len / 2 - 8, 0])
-                    cylinder(h = strip_t, r = 8);
-            }
-        translate([0, hole_y, 0])
-            csk_hole(center_hole_d, 14.0, 3.5, strip_t);
+        hull() {
+            translate([-strip_w / 2 + 8, -strip_len / 2 + 8, 0])
+                cylinder(h = strip_t, r = 8);
+            translate([strip_w / 2 - 8, -strip_len / 2 + 8, 0])
+                cylinder(h = strip_t, r = 8);
+            translate([-strip_w / 2 + 8, strip_len / 2 - 8, 0])
+                cylinder(h = strip_t, r = 8);
+            translate([strip_w / 2 - 8, strip_len / 2 - 8, 0])
+                cylinder(h = strip_t, r = 8);
+        }
+        translate([0, 0, -0.2])
+            cylinder(h = strip_t + 0.4, d = center_hole_d);
     }
     difference() {
         qr_stub();
