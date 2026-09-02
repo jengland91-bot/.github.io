@@ -72,8 +72,8 @@ Not affiliated with, endorsed by, or sponsored by MOZA Racing.
 2. Colour of the month  
 3. Add-on: 4× wall screws + anchors  
 4. Add-on: 1× M8 × 40 mm + T-nut (and 4× wall screws)  
-5. 8020 phone holder / cup holder / headphone hook / cable clip  
-6. Full rig kit (mount + the four accessories)  
+5. 8020 phone holder / cup holder / headphone hook / cable clip / mouse tray  
+6. Full rig kit (mount + the accessories)  
 
 **What to charge (US, 2026 ballpark)**
 

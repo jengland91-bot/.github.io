@@ -149,101 +149,109 @@ def u_channel_pts(
 
 
 # ---------------------------------------------------------------------------
-# Side-mount mouse tray — 5 x 5 in deck, mount at one corner
+# Right-side mouse tray — 5 x 5 in deck, bolts to the RIGHT face of a 4040
 # ---------------------------------------------------------------------------
+# Print = installed XY for the deck:
+#   +X = forward along the rig (toward you)
+#   +Y = outboard, to your right (pad sticks this way)
+#   +Z = up the 4040
+# Bolt plate sits at y = -PLATE_T..0 against the right face of the upright.
+# Plate is at the rear of the 5 in edge so most of the pad is toward your hand.
 
-MOUSE_DEPTH = 127.0  # 5 in toward the wall
+MOUSE_DEPTH = 127.0  # 5 in sticking out to the right
 MOUSE_LENGTH = 127.0  # 5 in along the rig
-MOUSE_FLOOR = 4.0
-MOUSE_LIP = 8.0
-MOUSE_LIP_W = 3.2
-MOUSE_PLATE_H = 100.0  # up the 4040
-MOUSE_GUSSET = 16.0
-MOUSE_PLATE_INSET = 4.0  # right-side: plate at the +Y corner, pad sticks toward the wall and forward
-MOUSE_HEX_R = 10.5
-MOUSE_HEX_GAP = 3.6
+MOUSE_FLOOR = 3.2
+MOUSE_LIP = 6.0
+MOUSE_LIP_W = 2.8
+MOUSE_PLATE_W = TAB_W
+MOUSE_PLATE_H = 88.0
+MOUSE_GUSSET = 20.0
+MOUSE_PLATE_INSET = 3.0
+MOUSE_CABLE_R = 6.0
+MOUSE_HOLE_Z0 = 34.0  # lower M8, clears the gusset
+MOUSE_HOLE_Z1 = MOUSE_HOLE_Z0 + PITCH
+MOUSE_RIM = 12.0
+MOUSE_RIB = 8.0
 
 
 def map_tris(tris: Sequence[Tri], fn) -> List[Tri]:
     return [(fn(a), fn(b), fn(c)) for a, b, c in tris]
 
 
-def rot_y_90(p: Vec3) -> Vec3:
-    x, y, z = p
-    return (z, y, -x)
+def mouse_plate_x() -> float:
+    """Centre of the bolt plate along X (rear of the deck)."""
+    return -MOUSE_LENGTH / 2.0 + MOUSE_PLATE_W / 2.0 + MOUSE_PLATE_INSET
 
 
-def mouse_floor_pts(depth: float, length: float, r: float) -> List[Vec2]:
-    r = min(r, depth / 3.0, length / 3.0)
+def mouse_floor_pts(length: float, depth: float, r_in: float, r_out: float) -> List[Vec2]:
     n = 8
-    pts: List[Vec2] = [(0.0, -length / 2.0)]
-    pts += arc_pts(depth - r, -length / 2.0 + r, r, 1.5 * math.pi, 2.0 * math.pi, n)
-    pts += arc_pts(depth - r, length / 2.0 - r, r, 0.0, 0.5 * math.pi, n)
-    pts.append((0.0, length / 2.0))
+    hl = length / 2.0
+    r_in = min(r_in, length / 4.0, depth / 4.0)
+    r_out = min(r_out, length / 4.0, depth / 4.0)
+    pts: List[Vec2] = []
+    pts += arc_pts(-hl + r_in, r_in, r_in, math.pi, 1.5 * math.pi, n)
+    pts += arc_pts(hl - r_in, r_in, r_in, 1.5 * math.pi, 2.0 * math.pi, n)
+    pts += arc_pts(hl - r_out, depth - r_out, r_out, 0.0, 0.5 * math.pi, n)
+    pts += arc_pts(-hl + r_out, depth - r_out, r_out, 0.5 * math.pi, math.pi, n)
     return cad.ensure_winding(pts, True)
 
 
-def mouse_lip_pts(depth: float, length: float, wall: float) -> List[Vec2]:
-    """U-lip open on the 8020 side (x = 0)."""
-    d, l, w = depth, length, wall
+def mouse_lip_pts(length: float, depth: float, wall: float) -> List[Vec2]:
+    """U-lip open on the 8020 side (y = 0)."""
+    hl, d, w = length / 2.0, depth, wall
     pts: List[Vec2] = [
-        (0.0, -l / 2.0),
-        (d, -l / 2.0),
-        (d, l / 2.0),
-        (0.0, l / 2.0),
-        (0.0, l / 2.0 - w),
-        (d - w, l / 2.0 - w),
-        (d - w, -l / 2.0 + w),
-        (0.0, -l / 2.0 + w),
+        (-hl, 0.0),
+        (-hl, d),
+        (hl, d),
+        (hl, 0.0),
+        (hl - w, 0.0),
+        (hl - w, d - w),
+        (-hl + w, d - w),
+        (-hl + w, 0.0),
     ]
     return cad.ensure_winding(pts, True)
 
 
-def hex_pts(cx: float, cy: float, r: float) -> List[Vec2]:
-    """CW hex hole (pointy-top)."""
-    return [
-        (
-            cx + r * math.cos(math.pi / 6.0 + i * math.pi / 3.0),
-            cy + r * math.sin(math.pi / 6.0 + i * math.pi / 3.0),
-        )
-        for i in range(6)
-    ]
-
-
-def mouse_hex_holes(depth: float, length: float, y_plate: float) -> List[List[Vec2]]:
-    """Lightening hexes. Keep a solid rim, gusset, and cable area."""
-    r = MOUSE_HEX_R
-    dx = r * math.sqrt(3.0) + MOUSE_HEX_GAP
-    dy = 1.5 * r + MOUSE_HEX_GAP * 0.5
-    x0, x1 = 28.0, depth - 16.0
-    y0, y1 = -length / 2.0 + 16.0, y_plate - TAB_W / 2.0 - 10.0
+def mouse_window_holes(length: float, depth: float) -> List[List[Vec2]]:
+    """Large rounded windows. Ribs stay solid so the cantilever stays stiff."""
+    rim, rib = MOUSE_RIM, MOUSE_RIB
+    y0 = MOUSE_GUSSET + 6.0
+    y1 = depth - rim
+    x0 = -length / 2.0 + rim
+    x1 = length / 2.0 - rim
+    cols, rows = 2, 3
+    usable_w = (x1 - x0) - rib * (cols - 1)
+    usable_h = (y1 - y0) - rib * (rows - 1)
+    ww = usable_w / cols
+    hh = usable_h / rows
+    rr = min(7.0, ww / 3.0, hh / 3.0)
     holes: List[List[Vec2]] = []
-    row = 0
-    y = y0 + r
-    while y < y1 - r:
-        x = x0 + r + (dx / 2.0 if row % 2 else 0.0)
-        while x < x1 - r:
-            holes.append(cad.ensure_winding(hex_pts(x, y, r), False))
-            x += dx
-        y += dy
-        row += 1
+    for j in range(rows):
+        for i in range(cols):
+            cx = x0 + ww / 2.0 + i * (ww + rib)
+            cy = y0 + hh / 2.0 + j * (hh + rib)
+            hole = cad._shift(cad.rounded_rect_pts(ww, hh, rr, 6), cx, cy)
+            holes.append(cad.ensure_winding(hole, False))
     return holes
 
 
 def mouse_tray_tris() -> List[Tri]:
-    """5x5 in tray, right-side corner mount, hex-lightened deck."""
+    """5x5 in tray for the right side of the sim. Windowed deck, pad sticks outboard."""
     d, l = MOUSE_DEPTH, MOUSE_LENGTH
-    y_plate = l / 2.0 - TAB_W / 2.0 - MOUSE_PLATE_INSET
-    floor_outer = mouse_floor_pts(d, l, 14.0)
-    cable = cad.ensure_winding(cad.circle_pts(18.0, y_plate, 6.0, 24, False), False)
-    holes = [cable] + mouse_hex_holes(d, l, y_plate)
+    x_plate = mouse_plate_x()
+    floor_outer = mouse_floor_pts(l, d, 6.0, 16.0)
+    cable_c = (x_plate + 10.0, 16.0)
+    cable = cad.ensure_winding(
+        cad.circle_pts(cable_c[0], cable_c[1], MOUSE_CABLE_R, 24, False), False
+    )
+    holes = [cable] + mouse_window_holes(l, d)
     tris = cad.loft_layers(
         [
             {"z": 0.0, "outer": floor_outer, "holes": holes},
             {"z": MOUSE_FLOOR, "outer": floor_outer, "holes": holes},
         ]
     )
-    lip = mouse_lip_pts(d, l, MOUSE_LIP_W)
+    lip = mouse_lip_pts(l, d, MOUSE_LIP_W)
     tris.extend(
         cad.loft_layers(
             [
@@ -252,19 +260,45 @@ def mouse_tray_tris() -> List[Tri]:
             ]
         )
     )
-    gusset = cad.rounded_rect_pts(MOUSE_GUSSET, TAB_W + 8.0, 4.0, 6)
-    gusset = cad._shift(gusset, MOUSE_GUSSET / 2.0, y_plate)
-    tris.extend(cad.extrude_with_holes(gusset, [], [], 0.0, MOUSE_GUSSET))
 
-    plate_outer = cad.rounded_rect_pts(MOUSE_PLATE_H, TAB_W, 10.0, 8)
-    centres: List[Vec2] = [(-PITCH / 2.0, 0.0), (PITCH / 2.0, 0.0)]
-    plate = plate_csk(plate_outer, centres, 0.0, PLATE_T)
-    plate = map_tris(plate, rot_y_90)
+    # Triangle gusset in YZ, extruded along the plate width (less plastic than a block).
+    g = MOUSE_GUSSET
+    gusset_xy = cad.ensure_winding([(0.0, 0.0), (g, 0.0), (0.0, g)], True)
+    gw = MOUSE_PLATE_W - 8.0
+    gusset = cad.extrude_with_holes(gusset_xy, [], [], -gw / 2.0, gw / 2.0)
 
-    def park(p: Vec3) -> Vec3:
-        return (p[0] - PLATE_T, p[1] + y_plate, p[2] + MOUSE_PLATE_H / 2.0)
+    def gusset_to_world(p: Vec3) -> Vec3:
+        # local (outboard, up, along) -> world (along + x_plate, outboard, up)
+        return (p[2] + x_plate, p[0], p[1])
 
-    tris.extend(map_tris(plate, park))
+    tris.extend(map_tris(gusset, gusset_to_world))
+
+    def z_to_local_y(z: float) -> float:
+        return z - MOUSE_PLATE_H / 2.0
+
+    plate_outer = cad.rounded_rect_pts(MOUSE_PLATE_W, MOUSE_PLATE_H, 10.0, 8)
+    centres: List[Vec2] = [
+        (0.0, z_to_local_y(MOUSE_HOLE_Z0)),
+        (0.0, z_to_local_y(MOUSE_HOLE_Z1)),
+    ]
+    slot = cad.ensure_winding(
+        cad._shift(
+            cad.rounded_rect_pts(16.0, 18.0, 5.0, 6),
+            0.0,
+            z_to_local_y((MOUSE_HOLE_Z0 + MOUSE_HOLE_Z1) / 2.0),
+        ),
+        False,
+    )
+    plate = plate_csk(
+        plate_outer, centres, 0.0, PLATE_T, extra_small=[slot], extra_top=[slot]
+    )
+
+    def park_plate(p: Vec3) -> Vec3:
+        # local XY plate, +Z thickness/CSK -> world XZ plate, +Y CSK (pad side)
+        x, y, z = p
+        return (x + x_plate, z - PLATE_T, y + MOUSE_PLATE_H / 2.0)
+
+    tris.extend(map_tris(plate, park_plate))
     return tris
 
 PHONE_INNER_W = 174.0  # Pro Max + thick case
@@ -433,7 +467,7 @@ def cable_clip_tris() -> List[Tri]:
 # ---------------------------------------------------------------------------
 
 def svg_preview(path: str) -> None:
-    w, h = 880, 400
+    w, h = 880, 560
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
         '<rect width="100%" height="100%" fill="#111"/>',
@@ -465,36 +499,45 @@ def svg_preview(path: str) -> None:
             -PHONE_WALL / 2,
         ),
         120,
-        230,
-        1.0,
+        200,
+        0.85,
         [cad.circle_pts(0, PHONE_INNER_H / 2 + 13 + i * PITCH, 4.2, 16, False) for i in (0, 1)],
     )
     parts.append(
-        '<text x="120" y="378" fill="#6cf" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">Phone holder</text>'
+        '<text x="120" y="318" fill="#6cf" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">Phone holder</text>'
     )
     draw_poly(
         cad.circle_tab_outline(CUP_ID / 2 + CUP_WALL, TAB_W, -118, 12),
         355,
-        185,
-        1.0,
+        165,
+        0.85,
         [cad.circle_pts(0, 0, CUP_ID / 2, 48, False)],
     )
     parts.append(
-        '<text x="355" y="378" fill="#6cf" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">Cup holder</text>'
+        '<text x="355" y="318" fill="#6cf" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">Cup holder</text>'
     )
-    draw_poly(headphone_hook_pts(), 560, 200, 1.1)
+    draw_poly(headphone_hook_pts(), 560, 175, 0.95)
     parts.append(
-        '<text x="560" y="378" fill="#6cf" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">Headphone hook</text>'
+        '<text x="560" y="318" fill="#6cf" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">Headphone hook</text>'
     )
     draw_poly(
         cable_clip_pts(),
         760,
-        200,
-        1.8,
+        175,
+        1.6,
         [cad.circle_pts(0, 8, HOLE_D / 2, 16, False)],
     )
     parts.append(
-        '<text x="760" y="378" fill="#6cf" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">Cable clip</text>'
+        '<text x="760" y="318" fill="#6cf" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">Cable clip</text>'
+    )
+
+    x_plate = mouse_plate_x()
+    cable_c = (x_plate + 10.0, 16.0)
+    tray_holes = [cad.circle_pts(cable_c[0], cable_c[1], MOUSE_CABLE_R, 24, False)]
+    tray_holes += mouse_window_holes(MOUSE_LENGTH, MOUSE_DEPTH)
+    draw_poly(mouse_floor_pts(MOUSE_LENGTH, MOUSE_DEPTH, 6.0, 16.0), 320, 510, 1.2, tray_holes)
+    parts.append(
+        '<text x="320" y="545" fill="#6cf" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">Mouse tray (right side, lightened deck, sticks out)</text>'
     )
     parts.append("</svg>")
     with open(path, "w", encoding="utf-8") as f:
