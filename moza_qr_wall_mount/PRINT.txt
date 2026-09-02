@@ -5,6 +5,7 @@ WHEEL MOUNT  (stl/moza_qr_universal_mount.stl)
   Print the fit test first: stl/fit_test_nominal.stl
   FIT TEST ONLY: 3 walls, 15% infill (not 6/40 — that is why it was 52 min)
   Racetrack pad all around the stub (stronger #8 holes)
+  40 mm strip on the bottom with one M8 for a 4040 T-nut (M8 x 16–20 mm)
   Six windows in the skirt to save filament
   M8 sits down in a 22 mm well at the tip
   Deeper ring + six seats + a real lip so it clicks and stays

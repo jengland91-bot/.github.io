@@ -32,7 +32,7 @@ Drag the STL into **Bambu Studio**. If GitHub shows a file page instead of downl
 
 | File | What it is |
 | --- | --- |
-| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Racetrack pad around the stub (stronger #8 holes), six windows in the skirt, M8 recessed in a well at the **tip**. **3 walls / 15% infill**, stub up. |
+| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Same QR stub, plus a **40 mm strip on the bottom with an M8** so it bolts to a 4040 T-nut. **3 walls / 15%** to test the snap; **4 walls / 25%** (or 6/40) if you hang the wheel on it. |
 | [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. **M8 through the middle of the stub** (one T-nut or a stud) + 4× #8 around the rim. Ring + 6 ball seats. |
 | [`stl/fit_test_tight.stl`](stl/fit_test_tight.stl) / [`stl/fit_test_loose.stl`](stl/fit_test_loose.stl) | Same coupon, ±0.4 mm on the shaft if nominal is off. |
 | [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same universal plate, ring groove, wheel can rotate. |
@@ -88,7 +88,7 @@ The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the pho
 ## Fit check
 
 1. Print `fit_test_nominal.stl` with **3 walls / 15% infill**, stub pointing up.
-2. Drop an **M8** socket-cap in from the **stub tip** — the head sits down in a 22 mm well. Bolt into a 4040 T-nut, or use the two #8 holes on a scrap board.
+2. Drop an **M8** socket-cap in from the **stub tip** — the head sits down in a 22 mm well. To hang it on the rig: one **M8 × 16–20 mm** through the **bottom strip** into a 4040 T-nut (back of the pad against the extrusion, stub into the room). The two #8 holes are optional.
 3. Press on (pull the collar if it fights you). It should click **and stay** — if it pops the collar then shoots back off, the lip is not holding. Line one ball with a flap (12 o'clock).
 4. If it will not go on at all → print `fit_test_loose.stl` (or in `generate.py` drop `shaft_d` / `groove_d` by 0.4).
 5. If it goes on but will not lock → you are not lining the balls up with the seats, or print `fit_test_tight.stl`.
@@ -141,7 +141,8 @@ Paddle clearance: the plate is 98 mm across. If paddles kiss the plate, increase
 | `SHAFT_LEN` | 26 | How far the stub sticks out |
 | `PLATE_D` / `PLATE_T` | 98 / 8 | Wall plate size |
 | `STUB_BORE_D` | 26 | Hollow through the stub |
-| `CENTER_HOLE_D` | 8.4 | M8 at the tip of the stub |
+| `CENTER_HOLE_D` | 8.4 | M8 through the washer in the stub |
+| `CENTER_CSK_D` / `DEPTH` | 22 / 11 | Well at the tip; socket-cap sits recessed |
 | `POCKET_OFFSET_DEG` | 90 | Rotate the six seats (90 = one at 12 o'clock) |
 
 Accessories (`accessories.py`): `PHONE_INNER_W` / `PHONE_INNER_H` / `PHONE_DEPTH`, `CUP_ID`, `HOOK_INNER`.

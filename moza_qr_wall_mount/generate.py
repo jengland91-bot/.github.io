@@ -87,6 +87,11 @@ FIT_LUG_T = 5.2  # thick enough that the CSK does not eat through
 FIT_FLANGE_EXTRA = 7.0  # extra ring all around the stub (green)
 SKIRT_WINDOW_COUNT = 6  # filament-saver holes around the stub (red)
 SKIRT_WINDOW_W = 8.0  # mm of opening at the outer wall
+FIT_STRIP_W = 40.0  # matches a 4040 face
+FIT_STRIP_LEN = 34.0  # hangs below the pad
+FIT_STRIP_T = 8.0  # same as the other 8020 plates
+FIT_STRIP_OVERLAP = 10.0
+FIT_STRIP_HOLE_FROM_TIP = 16.0  # M8 centre, measured from the strip end
 
 # Product bezel — raised ring so the plate looks finished, not like a raw disc
 BEZEL_W = 4.2
@@ -740,14 +745,39 @@ def fit_skirt_tris(fit: Fit, z0: float, z1: float) -> List[Tri]:
     return tris
 
 
-def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
-    """Fast QR coupon: hollow stub, recessed M8 at the tip, racetrack #8 pad.
+def fit_strip_tris(fit: Fit) -> List[Tri]:
+    """40 mm 8020 strip on the bottom with one M8 for a T-nut."""
+    half_l = FIT_SCREW_R + FIT_LUG_PAD_R
+    y_join = -half_l + FIT_STRIP_OVERLAP
+    y_tip = y_join - FIT_STRIP_LEN
+    cy = (y_join + y_tip) / 2.0
+    outer = ensure_winding(
+        _shift(rounded_rect_pts(FIT_STRIP_W, FIT_STRIP_LEN, 8.0, 8), 0.0, cy),
+        True,
+    )
+    hole_y = y_tip + FIT_STRIP_HOLE_FROM_TIP
+    hole_n = 32
+    small = [circle_pts(0.0, hole_y, PROFILE_HOLE_D / 2.0, hole_n, False)]
+    csk = [circle_pts(0.0, hole_y, PROFILE_HOLE_CSK_D / 2.0, hole_n, False)]
+    z_mid = max(0.8, FIT_STRIP_T - 3.5)
+    return loft_layers(
+        [
+            {"z": 0.0, "outer": outer, "holes": small},
+            {"z": z_mid, "outer": outer, "holes": small},
+            {"z": FIT_STRIP_T, "outer": outer, "holes": csk},
+        ]
+    )
 
-    Six windows around the skirt save filament. Print 3 walls / 15% infill, stub up.
+
+def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
+    """QR coupon that also bolts to 4040: recessed M8 in the stub, strip + M8 below.
+
+    Print 3 walls / 15% to test the snap. If you hang the wheel on it, use 4/25 or 6/40.
     """
     z_g0, _z_g3 = _groove_z_band(0.0, fit)
     tris: List[Tri] = []
     tris.extend(fit_flange_tris(fit))
+    tris.extend(fit_strip_tris(fit))
     tris.extend(fit_skirt_tris(fit, FIT_LUG_T - 0.2, z_g0 + 0.25))
     tris.extend(stub_tris(fit, 0.0, indexed=indexed, z_from=z_g0))
     return tris
