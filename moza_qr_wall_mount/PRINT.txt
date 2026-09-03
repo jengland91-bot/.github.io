@@ -8,7 +8,7 @@ WHEEL MOUNT  (stl/moza_qr_universal_mount.stl)
   Middle of the pad is OPEN (26 mm) — bolt head sits in the 14 mm step at the stub tip
   4x #8 at the corners
   Six wide windows in the skirt to save filament
-  M8 sits down in a 14 mm step at the tip
+  M8 sits down in a 14 mm x 12 mm step at the tip (head ~8 mm, so ~4 mm below the rim)
   Deeper ring + six seats + a real lip so it clicks and stays
   Press on until it clicks (pull the collar if it fights). Should not shoot back off
   Stub pointing up, no supports

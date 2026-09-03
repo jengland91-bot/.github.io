@@ -79,9 +79,9 @@ SCREW_D = 4.8  # clearance for #8 wood screw / 4.5 mm / M4
 SCREW_CSK_D = 9.8
 SCREW_CSK_DEPTH = 2.4
 CENTER_HOLE_D = 8.4  # M8 through the stub (one bolt into a T-nut or a stud)
-CENTER_CSK_D = 14.0  # M8 socket-cap head is ~13 mm; 22 mm was too sloppy
-CENTER_CSK_DEPTH = 8.5  # head is ~8 mm; a hair extra so it sits down
-CENTER_WASHER_T = 3.0  # plastic under the head (real step, not a zero-thickness face)
+CENTER_CSK_D = 14.0  # M8 socket-cap head is ~13 mm
+CENTER_CSK_DEPTH = 12.0  # 8 mm head + 4 mm so it sits down, not flush
+CENTER_WASHER_T = 2.5  # plastic under the head
 FIT_SCREW_X = 15.0  # four #8 at the corners of the pad
 FIT_SCREW_Y = 26.0
 FIT_LUG_PAD_R = 11.0  # meat around each #8
@@ -517,6 +517,14 @@ def _groove_z_band(z_base: float, fit: Fit) -> Tuple[float, float]:
     return z0, z3
 
 
+def _bolt_well_zs(z_base: float) -> Tuple[float, float, float]:
+    """z_tip, floor of the 14 mm pocket, bore-side of the 8.4 mm web."""
+    z_tip = z_base + FILLET_R + SHAFT_LEN
+    z_well = z_tip - CENTER_CSK_DEPTH
+    z_washer = z_well - CENTER_WASHER_T
+    return z_tip, z_well, z_washer
+
+
 def lathe(
     profile: Sequence[Vec2],
     n: int = SEGMENTS,
@@ -612,16 +620,21 @@ def qr_stub_profile(
     chamfer_z = z_tip - CHAMFER
     csk_r = CENTER_CSK_D / 2.0
     m8_r = CENTER_HOLE_D / 2.0
-    z_well = z_tip - CENTER_CSK_DEPTH  # floor of the 14 mm pocket
-    z_washer = z_well - CENTER_WASHER_T  # 3 mm of plastic under the head
-    if z_washer < z_start + 0.4:
-        z_washer = z_start + 0.4
-        z_well = z_washer + CENTER_WASHER_T
+    _, z_well, z_washer = _bolt_well_zs(z_base)
 
-    pts: List[Vec2] = [
-        (inner_r, z_start),
-        (inner_r, z_washer),
-        (m8_r, z_washer),
+    if z_washer > z_start + 0.2:
+        bore_pts: List[Vec2] = [
+            (inner_r, z_start),
+            (inner_r, z_washer),
+            (m8_r, z_washer),
+        ]
+    else:
+        # Stub piece starts at/above the washer — keep the 12 mm pocket.
+        bore_pts = [
+            (m8_r, z_start),
+        ]
+
+    pts: List[Vec2] = bore_pts + [
         (m8_r, z_well),
         (csk_r, z_well),
         (csk_r, z_tip),
@@ -819,10 +832,14 @@ def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
     Print 3 walls / 15% to test the snap. If you hang the wheel on it, use 4/25 or 6/40.
     """
     z_g0, _z_g3 = _groove_z_band(0.0, fit)
+    _, _z_well, z_washer = _bolt_well_zs(0.0)
+    # Start the stub below the washer so the 12 mm pocket is not clipped.
+    z_from = min(z_g0, z_washer - 0.5)
+    z_from = max(z_from, FIT_LUG_T + 0.6)
     tris: List[Tri] = []
     tris.extend(fit_flange_tris(fit))
-    tris.extend(fit_skirt_tris(fit, FIT_LUG_T - 0.2, z_g0 + 0.25))
-    tris.extend(stub_tris(fit, 0.0, indexed=indexed, z_from=z_g0))
+    tris.extend(fit_skirt_tris(fit, FIT_LUG_T - 0.2, z_from + 0.2))
+    tris.extend(stub_tris(fit, 0.0, indexed=indexed, z_from=z_from))
     return tris
 
 
