@@ -32,7 +32,7 @@ Drag the STL into **Bambu Studio**. If GitHub shows a file page instead of downl
 
 | File | What it is |
 | --- | --- |
-| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** M8 in the **middle** (4040 T-nut), **4× #8** at the corners, four lightening holes. **3 walls / 15%** to test the snap; **4 walls / 25%** if you hang the wheel on it. |
+| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Stepped **M8** in the **middle** (14 mm pocket for the socket-cap head, then 8.4 mm into a 4040 T-nut), **4× #8** at the corners, extra cutouts to save filament. **3 walls / 15%** to test the snap; **4 walls / 25%** if you hang the wheel on it. |
 | [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. **M8 through the middle of the stub** (one T-nut or a stud) + 4× #8 around the rim. Ring + 6 ball seats. |
 | [`stl/fit_test_tight.stl`](stl/fit_test_tight.stl) / [`stl/fit_test_loose.stl`](stl/fit_test_loose.stl) | Same coupon, ±0.4 mm on the shaft if nominal is off. |
 | [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same universal plate, ring groove, wheel can rotate. |
@@ -88,7 +88,7 @@ The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the pho
 ## Fit check
 
 1. Print `fit_test_nominal.stl` with **3 walls / 15% infill**, stub pointing up.
-2. Hang it on the rig: drop an **M8 × 40 mm** socket-cap in from the **stub tip** (the head sits in the 22 mm well) into a 4040 T-nut. Optional **4× #8** at the corners of the pad. Back of the pad against the extrusion, stub into the room.
+2. Hang it on the rig: drop an **M8 × 40 mm** socket-cap in from the **stub tip**. The head sits in a **14 mm step** (M8 cap is ~13 mm across / ~8 mm tall) so it does not rattle. Optional **4× #8** at the corners of the pad. Back of the pad against the extrusion, stub into the room.
 3. Press on (pull the collar if it fights you). It should click **and stay** — if it pops the collar then shoots back off, the lip is not holding. Line one ball with a flap (12 o'clock).
 4. If it will not go on at all → print `fit_test_loose.stl` (or in `generate.py` drop `shaft_d` / `groove_d` by 0.4).
 5. If it goes on but will not lock → you are not lining the balls up with the seats, or print `fit_test_tight.stl`.
@@ -99,7 +99,7 @@ Nominal numbers (sized to the user's wheel: sleeve ID **40.9 mm**, centre openin
 - Shaft Ø **39.8 mm** (~1.1 mm under the sleeve so PETG can slide in)
 - Ring + **six deep ball seats** (groove floor Ø **33.8 mm**), long flat so the balls sit, steep backstop, 45° lip toward the tip (~10 mm from the tip)
 - Full-diameter cylinder between the groove and the tip so it clicks **and stays**. One seat lines up with each flap (12 / 6 o'clock).
-- Hollow Ø **26 mm** through the stub. **22 mm well at the tip** so the M8 socket-cap sits recessed (head ~8 mm, well 11 mm).
+- Hollow Ø **26 mm** through the stub. **14 mm × 8.5 mm step at the tip** (3 mm of plastic under the head) so an M8 socket-cap sits recessed without rattling. Same 14 mm pocket on the fit-test pad.
 
 ## Hardware
 
@@ -113,7 +113,7 @@ One print. Pick how you hang it:
 **On a sim rig (4040 / 2020)**
 
 - 1× **M8 × 40 mm** socket-cap + T-nut for **4040**. Use **M8 × 35 mm** on **2020** so it does not bottom out in the slot.
-- Drop it in from the stub opening. The head sits in a counterbore at the tip and is hidden once the wheel is on.
+- Drop it in from the stub opening. The head sits in a **14 mm step** at the tip and is hidden once the wheel is on.
 - Leave the four #8 holes empty. Snug the M8 so the plate cannot rotate on the bolt.
 
 Why 40 mm: the head seats ~25 mm from the back of the plate, then you want ~8–10 mm of thread in the T-nut. The phone / cup / hook / clip still take short **M8 × 16–20 mm** bolts.
@@ -142,7 +142,8 @@ Paddle clearance: the plate is 98 mm across. If paddles kiss the plate, increase
 | `PLATE_D` / `PLATE_T` | 98 / 8 | Wall plate size |
 | `STUB_BORE_D` | 26 | Hollow through the stub |
 | `CENTER_HOLE_D` | 8.4 | M8 through the washer in the stub |
-| `CENTER_CSK_D` / `DEPTH` | 22 / 11 | Well at the tip; socket-cap sits recessed |
+| `CENTER_CSK_D` / `DEPTH` | 14 / 8.5 | Step at the tip for an M8 socket-cap (~13 × 8 mm) |
+| `CENTER_WASHER_T` | 3 | Plastic under the bolt head |
 | `POCKET_OFFSET_DEG` | 90 | Rotate the six seats (90 = one at 12 o'clock) |
 
 Accessories (`accessories.py`): `PHONE_INNER_W` / `PHONE_INNER_H` / `PHONE_DEPTH`, `CUP_ID`, `HOOK_INNER`.

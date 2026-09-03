@@ -6,9 +6,10 @@ WHEEL MOUNT  (stl/moza_qr_universal_mount.stl)
   FIT TEST ONLY: 3 walls, 15% infill (not 6/40 — that is why it was 52 min)
   Racetrack pad all around the stub (stronger #8 holes)
   M8 in the MIDDLE of the pad (bolt from the stub well into a T-nut, M8 x 40 mm)
-  4x #8 at the corners, four holes around the middle to save filament
+  14 mm step for the socket-cap head, then 8.4 mm through (head sits down, no rattle)
+  4x #8 at the corners, extra cutouts around the hub to save filament
   Six windows in the skirt to save filament
-  M8 sits down in a 22 mm well at the tip
+  M8 sits down in a 14 mm step at the tip (not a sloppy 22 mm well)
   Deeper ring + six seats + a real lip so it clicks and stays
   Press on until it clicks (pull the collar if it fights). Should not shoot back off
   Stub pointing up, no supports

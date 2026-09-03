@@ -20,8 +20,9 @@ groove_from_tip = 10.2;
 groove_plate_axial = 1.2;
 stub_bore_d = 26.0;
 center_hole_d = 8.4;
-center_csk_d = 22.0;
-center_csk_depth = 11.0;
+center_csk_d = 14.0;     // M8 socket-cap head is ~13 mm
+center_csk_depth = 8.5;  // head is ~8 mm
+center_washer_t = 3.0;   // plastic under the head
 land_recess = 2.4;       // ring so all six balls catch
 pocket_width_deg = 40;
 pocket_offset_deg = 90;  // one seat at 12 o'clock
@@ -55,14 +56,16 @@ module qr_stub() {
     inner_r = stub_bore_d / 2;
     m8_r = center_hole_d / 2;
     csk_r = center_csk_d / 2;
-    bore_z = z_tip - center_csk_depth;
+    z_well = z_tip - center_csk_depth;
+    z_washer = z_well - center_washer_t;
     pocket_depth = shaft_r - groove_r;
 
     pts = [
         [inner_r, 0],
-        [inner_r, bore_z],
-        [m8_r, bore_z],
-        [csk_r, bore_z],
+        [inner_r, z_washer],
+        [m8_r, z_washer],
+        [m8_r, z_well],
+        [csk_r, z_well],
         [csk_r, z_tip],
         [shaft_r - chamfer, z_tip],
         [shaft_r, z_tip - chamfer],
@@ -139,6 +142,12 @@ module fit_test() {
     light_d = 9.0;
     lx = 10.0;
     ly = 18.0;
+    ring_n = 6;
+    ring_r = 22.0;
+    ring_d = 6.8;
+    ring_phase = 30;
+    end_d = 6.5;
+    end_y = 31.0;
     half_w = max(shaft_d / 2 + extra, sx + pad_r);
     half_l = sy + pad_r;
     shaft_r = shaft_d / 2;
@@ -156,8 +165,11 @@ module fit_test() {
             translate([-half_w + corner_r, -half_l + corner_r, 0])
                 cylinder(h = lug_t, r = corner_r);
         }
+        // M8 through, then a 14 mm pocket from the stub side for the cap head.
         translate([0, 0, -0.2])
             cylinder(h = lug_t + 0.4, d = center_hole_d);
+        translate([0, 0, center_washer_t])
+            cylinder(h = lug_t, d = center_csk_d);
         for (x = [sx, -sx])
             for (y = [sy, -sy])
                 translate([x, y, 0])
@@ -166,6 +178,14 @@ module fit_test() {
             for (y = [ly, -ly])
                 translate([x, y, -0.2])
                     cylinder(h = lug_t + 0.4, d = light_d);
+        for (i = [0 : ring_n - 1]) {
+            a = ring_phase + i * 360 / ring_n;
+            translate([ring_r * cos(a), ring_r * sin(a), -0.2])
+                cylinder(h = lug_t + 0.4, d = ring_d);
+        }
+        for (y = [end_y, -end_y])
+            translate([0, y, -0.2])
+                cylinder(h = lug_t + 0.4, d = end_d);
     }
     difference() {
         qr_stub();
