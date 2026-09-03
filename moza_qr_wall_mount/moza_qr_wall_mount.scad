@@ -7,25 +7,23 @@
 $fn = 96;
 
 /* [Fit] */
-// Shaft / groove diameters. If a test print is tight, drop these by 0.4 mm.
 shaft_d = 39.8;
-groove_d = 33.8;
+groove_d = 31.4;  // 4.2 mm radial seats for 6.5 mm balls
 
 /* [Stub] */
-// Full Ø through the balls, then a Ø21 nose into the pin well
-ball_ring_from_face = 12.3;
-groove_flat = 3.8;
+ball_d = 6.5;
+ball_cutout_top = 22.7;           // tip-side of the ball floor
+groove_flat = ball_d;
+ball_ring_from_face = ball_cutout_top - groove_flat / 2;
 groove_plate_axial = 1.2;
-lip_flat = 1.2;
-nose_d = 21.0;
-nose_len = 6.0;
-nose_bore_d = 14.0;
-stub_bore_d = 16.0;
+groove_tip_axial = 2.0;
+lip_flat = 1.5;
+stub_bore_d = 22.0;
 chamfer = 1.2;
 fillet_r = 0.0;
-land_recess = 2.4;
-pocket_width_deg = 22;
-pocket_angles = [15, 45, 75, 105, 135, 165, 225, 255, 285, 315]; // 6-up / 4-down
+land_recess = 3.0;
+pocket_width_deg = 18.7;          // 6.5 mm at Ø39.8
+pocket_angles = [15, 45, 75, 105, 135, 165, 225, 255, 285, 315];
 indexed = true;
 center_hole_d = 8.4;
 center_csk_d = 14.0;
@@ -45,38 +43,31 @@ part = "wall"; // [wall, profile, fit_test]
 module qr_stub() {
     shaft_r = shaft_d / 2;
     groove_r = groove_d / 2;
-    nose_r = nose_d / 2;
     land_r = shaft_r - land_recess;
     ring_r = indexed ? land_r : groove_r;
-    depth = shaft_r - ring_r;
-    tip_axial = shaft_r - groove_r; // 45° toward the tip
+    depth = shaft_r - groove_r;
+    tip_axial = min(depth, groove_tip_axial);
     plate_axial = min(depth, groove_plate_axial);
     g_mid = fillet_r + ball_ring_from_face;
     z_g0 = g_mid - groove_flat / 2 - plate_axial;
     z_g1 = g_mid - groove_flat / 2;
     z_g2 = g_mid + groove_flat / 2;
     z_g3 = g_mid + groove_flat / 2 + tip_axial;
-    z_step = z_g3 + lip_flat;
-    z_tip = z_step + nose_len;
-    large_inner = stub_bore_d / 2;
-    nose_inner = nose_bore_d / 2;
-    pocket_depth = shaft_r - groove_r;
+    z_tip = z_g3 + lip_flat;
+    inner_r = stub_bore_d / 2;
+    pocket_depth = depth;
 
     pts = [
-        [large_inner, 0],
-        [large_inner, z_step],
-        [nose_inner, z_step],
-        [nose_inner, z_tip],
-        [nose_r - chamfer, z_tip],
-        [nose_r, z_tip - chamfer],
-        [nose_r, z_step],
-        [shaft_r, z_step],
+        [inner_r, 0],
+        [inner_r, z_tip],
+        [shaft_r - chamfer, z_tip],
+        [shaft_r, z_tip - chamfer],
         [shaft_r, z_g3],
         [ring_r, z_g2],
         [ring_r, z_g1],
         [shaft_r, z_g0],
         [shaft_r, 0],
-        [large_inner, 0]
+        [inner_r, 0]
     ];
     difference() {
         rotate_extrude()

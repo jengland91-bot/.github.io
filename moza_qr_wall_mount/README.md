@@ -32,8 +32,8 @@ Drag the STL into **Bambu Studio**. If GitHub shows a file page instead of downl
 
 | File | What it is |
 | --- | --- |
-| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Stepped stub: Ø39.8 for **18.4 mm**, then a Ø21 mm nose. Groove at **12.3 mm**, **6-up / 4-down** seats. **M8 × 20 mm** in the pad. **3 walls / 15%**. |
-| [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. **M8 × 20 mm** in the plate + 4× #8 around the rim. Same stepped stub and 6+4 seats. |
+| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** **6.5 mm** ball cutouts, **4.2 mm** deep, top of each pocket at **22.7 mm**. 6-up / 4-down. **M8 × 20 mm** in the pad. **3 walls / 15%**. |
+| [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. Same stub. **M8 × 20 mm** in the plate + 4× #8 around the rim. |
 | [`stl/fit_test_tight.stl`](stl/fit_test_tight.stl) / [`stl/fit_test_loose.stl`](stl/fit_test_loose.stl) | Same coupon, ±0.4 mm on the shaft if nominal is off. |
 | [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same universal plate, ring groove, wheel can rotate. |
 
@@ -94,13 +94,13 @@ The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the pho
 5. If it goes on but will not lock → you are not lining the balls up with the seats, or print `fit_test_tight.stl`.
 6. When the coupon feels right, print the matching full mount (`generate.py --fit …` if you changed it).
 
-Nominal numbers (sized to the user's wheel: sleeve ID **40.9 mm**, centre well **22.4 mm**, ball ring **12.3 mm** in, pogo-pin plate **28.8 mm** deep):
+Nominal numbers (sized to the user's wheel: sleeve ID **40.9 mm**, **6.5 mm** balls, cutout top **22.7 mm** in, pogo-pin plate **28.8 mm** deep):
 
-- Shaft Ø **39.8 mm** for the first **18.4 mm** (sleeve + groove + lip)
-- Then a **Ø21 mm nose** for **6 mm** so it can enter the 22.4 mm pin well instead of hitting the shoulder
-- Ball groove centred **12.3 mm** from the pad face, **6 seats on top / 4 on the bottom**
-- Nose stops **~4 mm short** of the pin plate. **M8 × 20 mm** sits in a 14 mm pocket in the pad / plate
-- Fit-test pad has U-bites at top / sides / bottom
+- Shaft Ø **39.8 mm**
+- Ball floor **6.5 mm** wide and **4.2 mm** deep; the **top** of each cutout is **22.7 mm** from the pad (centre at 19.45 mm)
+- **6 seats on top / 4 on the bottom** (Moza clock)
+- Stub **~26 mm** long, open **22 mm** bore so the gold pins stay clear
+- **M8 × 20 mm** sits in a 14 mm pocket in the pad / plate
 
 ## Hardware
 
@@ -129,22 +129,22 @@ Do not hang this on a single drywall anchor.
 
 If the wheel sits a little rotated, it is not on the 6-up / 4-down clock. Rotate until the six-ball cluster is on top. To shift the seats, change `POCKET_ANGLES_DEG` in `generate.py` and regenerate.
 
-Paddle clearance: the plate is 98 mm across. If paddles kiss the plate, increase `NOSE_LEN` in `generate.py`.
+Paddle clearance: the plate is 98 mm across. If paddles kiss the plate, increase `SHAFT_LEN` in `generate.py`.
 
 ## Tuning (`generate.py`)
 
 | Constant | Default | What it does |
 | --- | --- | --- |
 | `FITS["nominal"].shaft_d` | 39.8 | Outer Ø the QR slides over (wheel sleeve measured 40.9) |
-| `FITS["nominal"].groove_d` | 33.8 | Deep seat floor Ø |
-| `LAND_RECESS` | 2.4 | Ring between the seats so balls still catch off-angle |
-| `GROOVE_FLAT` | 3.8 | How wide the ball floor is (stops the wheel shooting back off) |
-| `LARGE_LEN` | 18.4 | Full-Ø length (groove at 12.3 plus lip) |
-| `NOSE_D` / `NOSE_LEN` | 21 / 6 | Thin nose into the 22.4 mm pin well |
-| `BALL_RING_FROM_FACE` | 12.3 | Pad face to the ball groove |
+| `FITS["nominal"].groove_d` | 31.4 | Deep seat floor Ø (4.2 mm radial for 6.5 mm balls) |
+| `LAND_RECESS` | 3.0 | Ring between the seats so balls still catch off-angle |
+| `GROOVE_FLAT` / `BALL_D` | 6.5 | Axial width of each ball cutout |
+| `BALL_CUTOUT_TOP` | 22.7 | Tip-side of the ball floor, from the pad face |
+| `BALL_RING_FROM_FACE` | 19.45 | Centre of the ball floor |
+| `SHAFT_LEN` | 26.2 | Stub length — stays short of the 28.8 mm pin plate |
 | `PIN_PLATE_DEPTH` | 28.8 | Electronics plate — stub must stay shorter than this |
 | `PLATE_D` / `PLATE_T` | 98 / 8 | Wall plate size |
-| `STUB_BORE_D` | 16 | Bore through the full-Ø section |
+| `STUB_BORE_D` | 22 | Open bore so the pogo pins cannot get mashed |
 | `CENTER_HOLE_D` | 8.4 | M8 through the pad / plate |
 | `CENTER_CSK_D` | 14 | Pocket in the pad for an M8 socket-cap |
 | `PAD_BOLT_WEB` | 3 | Plastic under the bolt head |
