@@ -31,7 +31,7 @@ import { site } from '../data/site';
       On a post, list gear filenames under <code>gear:</code> and the Amazon cards show up at the bottom automatically. Push to GitHub, Netlify rebuilds <a href={site.url}>{site.url.replace('https://', '')}</a>.
     </p>
     <p>
-      Paste your real Amazon storefront URL into <code>amazonStorefront</code> in <code>src/data/site.ts</code> (it still says YOUR_STOREFRONT_USERNAME from the old hub). Same file if the Discord invite or email changes.
+      Full Amazon shop: <a href={site.amazonStorefront} target="_blank" rel="nofollow sponsored noopener">{site.amazonStorefront.replace('https://', '')}</a>. Associate tag is <code>{site.amazonTag}</code>. Socials and email live in <code>src/data/site.ts</code>.
     </p>
   </div>
 </Base>

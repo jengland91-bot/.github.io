@@ -57,7 +57,7 @@ New file in `src/content/partners/` with `name`, `offer`, `url`, and `code`.
 
 ### Site-wide stuff (name, socials, storefront)
 
-Edit `src/data/site.ts`. Paste your real Amazon storefront URL over `YOUR_STOREFRONT_USERNAME`.
+Edit `src/data/site.ts`. Storefront is already set to [amazon.com/shop/jengland91](https://www.amazon.com/shop/jengland91) with Associates tag `joshrengland-20`.
 
 ## Local preview
 

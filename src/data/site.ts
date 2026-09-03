@@ -20,7 +20,8 @@ export const site = {
     portfolio: 'https://riseabovephoto.com',
     coffee: 'https://www.buymeacoffee.com/jengland91',
   },
-  amazonStorefront: 'https://www.amazon.com/shop/YOUR_STOREFRONT_USERNAME',
+  amazonStorefront: 'https://www.amazon.com/shop/jengland91',
+  amazonTag: 'joshrengland-20',
   disclosure:
     'As an Amazon Associate, I earn from qualifying purchases at no extra cost to you. Partner links and discount codes may also earn a commission.',
 };

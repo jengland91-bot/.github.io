@@ -24,6 +24,17 @@ const partners = await getCollection('partners');
     <p class="kicker">{site.author}</p>
     <h1>Photographer. Sim racer. The gear I actually use.</h1>
     <p class="lede">{site.tagline} Write-ups live next to the Amazon links and partner codes so nobody — including me — has to hunt for them.</p>
+    <div class="hero-actions">
+      <a
+        class="btn btn-amazon"
+        href={site.amazonStorefront}
+        target="_blank"
+        rel="nofollow sponsored noopener"
+      >
+        Shop my Amazon storefront
+      </a>
+      <a class="btn btn-ghost" href="/gear">Gear I use</a>
+    </div>
   </section>
 
   <Disclosure />
