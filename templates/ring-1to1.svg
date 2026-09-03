@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210.0mm" height="297.0mm" viewBox="0 0 210.0 297.0">
+<style>text{font-family:ui-sans-serif,system-ui,sans-serif;fill:#111} .dim{font-size:3.2px;fill:#333}</style>
+<rect width="100%" height="100%" fill="#fff"/>
+<text x="12" y="14" font-size="5.5" font-weight="700">Stream Deck Plus outer ring — print at 100% scale</text>
+<text x="12" y="21" font-size="3.4">Measured 139.6 × 135.0 × 29.9 mm. Skeletal frame — corners + thin straps. Logo end is the cable gate.</text>
+<text x="12" y="27" class="dim">Outer 151.6 × 147.0 mm  ·  window 130.6 × 126.0 mm  ·  lip 4.5 mm  ·  pocket 140.1 × 135.5</text>
+<rect x="29.200" y="48.000" width="151.600" height="147.000" rx="14.0" fill="#e8e8e8" stroke="#111" stroke-width="0.35"/>
+<rect x="39.700" y="58.500" width="130.600" height="126.000" rx="3.5" fill="#fff" stroke="#111" stroke-width="0.35"/>
+<rect x="35.200" y="54.000" width="139.600" height="135.000" rx="8.0" fill="none" stroke="#888" stroke-width="0.25" stroke-dasharray="2 1.2"/>
+<text x="105.000" y="44.000" text-anchor="middle" class="dim">logo / USB edge</text>
+<text x="105.000" y="201.000" text-anchor="middle" class="dim">dial edge</text>
+</svg>
