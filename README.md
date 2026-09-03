@@ -9,9 +9,9 @@ Three printed parts, kept light. The **front ring** is four screw corners plus t
           │ 4× M3
    [ back plate ]     Plus sits here
           │ M5 hinge — set the angle, tighten
-   [ 4040 clamp ]
-          │ 2× M8 T-nuts
-     6 Sigma rail
+   [ 4040 clamp ]     short clip, 34 mm along the bar
+          │ 1× M8 T-nut
+     vertical 6 Sigma upright
 ```
 
 Yes, the hinge needs its own part. That’s what lets it move.
@@ -22,7 +22,7 @@ Yes, the hinge needs its own part. That’s what lets it move.
 |---|---|
 | [`stls/front_ring.stl`](stls/front_ring.stl) | Outer frame. Rim on the bed. |
 | [`stls/back_plate.stl`](stls/back_plate.stl) | Plate + one hinge ear. Plus-face on the bed. |
-| [`stls/clamp_4040.stl`](stls/clamp_4040.stl) | U-clamp + two hinge ears. |
+| [`stls/clamp_4040.stl`](stls/clamp_4040.stl) | Short clip for a **vertical** 4040 + two hinge ears. |
 | [`templates/ring-1to1.svg`](templates/ring-1to1.svg) | Paper check at **100% scale**. |
 
 ## Hardware
@@ -31,7 +31,7 @@ Yes, the hinge needs its own part. That’s what lets it move.
 |---|---|
 | 4 | M3 × 20 — back plate into the ring posts |
 | 1 | M5 × 25 + nylock + 2 washers — hinge. Snug to lock the angle |
-| 2 | M8 × 16 + M8 drop-in T-nuts (8 mm slot) — 6 Sigma already has these |
+| 1 | M8 × 16 + M8 drop-in T-nut (8 mm slot) — front/far face of the upright |
 
 ## Print
 
@@ -47,7 +47,7 @@ PETG, 0.20 mm, 4 walls, 40% gyroid, no supports.
 2. Take the stand off the Plus.
 3. Sit the Plus on the back plate. Drop the USB-C cable through the open gate on the logo end (no threading).
 4. Drop the ring over the outside — same gate lines up. Four M3s from the back.
-5. Slide the clamp onto a 40 mm face (shifter arm, wheel-deck upright, spare 4040). Two M8s into T-nuts.
+5. Clip the short U onto the **vertical** 4040 upright. One M8 into a T-nut on the far face.
 6. One M5 through the three hinge ears. Point the face where you want it, tighten the nylock.
 
 On a vertical bar the hinge nods the face up and down. Loosen, tilt, retighten.

@@ -173,74 +173,58 @@ def build_back_plate(pitch=0.24) -> Voxels:
     return v
 
 
-def build_clamp(pitch=0.25) -> Voxels:
+def build_clamp(pitch=0.22) -> Voxels:
     """
-    40-series U-clamp with two hinge ears. Extrusion runs along Y.
-    Hinge axis is X — same as the back plate — so the deck nods.
-
-    Print with the U opening up, or on the back wall.
+    Short 4040 clip for a vertical upright. The U sits in +Z, flush with
+    the ears, and opens toward the hinge so it slides onto the bar from
+    the deck side. One M8 through the far wall into the T-slot.
     """
     inner = P.EXT + P.EXT_CLEAR
     wall = P.CLAMP_WALL
     length = P.CLAMP_LEN
     lip = P.CLAMP_LIP
     stack = hinge_stack()
-    pivot_z = 0.0
+    r = P.HINGE_EAR_R
 
-    # 4040 sits past the ears in +Z.
-    u_z0 = P.HINGE_EAR_R + 3
-    bounds = (
-        -stack - 2,
-        stack + inner + wall + 2,
-        -length / 2 - 2,
-        length / 2 + 2,
-        -P.HINGE_EAR_R - wall - 2,
-        u_z0 + inner + wall + 2,
-    )
-    v = Voxels(bounds, pitch=pitch)
-
-    # Two outer ears, gap in the middle for the back-plate ear.
-    inner_half = P.HINGE_INNER_T / 2 + P.HINGE_GAP
-    for sign in (-1, 1):
-        x0 = sign * inner_half
-        x1 = sign * stack
-        if x0 > x1:
-            x0, x1 = x1, x0
-        v.add_box(x0, x1, -P.HINGE_EAR_R, P.HINGE_EAR_R, -P.HINGE_EAR_R, P.HINGE_EAR_R)
-        v.add_cyl_x(0, pivot_z, P.HINGE_EAR_R, x0, x1)
-        v.sub_cyl_x(0, pivot_z, P.HINGE_HOLE / 2, x0 - 0.2, x1 + 0.2)
-
-    # Bridge behind the ears into the U back wall (lightened).
-    v.add_box(-stack, stack, -length / 2, length / 2, P.HINGE_EAR_R - 4, u_z0 + wall)
-    v.sub_box(-stack + 3, stack - 3, -length / 2 + 8, length / 2 - 8, P.HINGE_EAR_R - 1, u_z0 + wall + 0.2)
-
-    # U-channel, extrusion along Y, opens +X so it slides onto a 40 mm face.
-    # Inner: x stack..stack+inner, z u_z0..u_z0+inner
+    # Flush with the ear tops — no long bridge. Extrusion along Y.
+    u_z0 = r
     x0 = stack
     x1 = stack + inner
     z0 = u_z0
     z1 = u_z0 + inner
-    v.add_box(x0, x1 + wall, -length / 2, length / 2, z0 - wall, z0)  # floor
-    v.add_box(x0, x1 + wall, -length / 2, length / 2, z1, z1 + wall)  # ceiling
-    v.add_box(x1, x1 + wall, -length / 2, length / 2, z0, z1)  # back wall
-    v.add_box(x0 - lip, x0, -length / 2, length / 2, z0 - wall, z0)  # lips
+
+    bounds = (
+        -stack - 2,
+        x1 + wall + 2,
+        -length / 2 - 2,
+        length / 2 + 2,
+        -r - 2,
+        z1 + wall + 2,
+    )
+    v = Voxels(bounds, pitch=pitch)
+
+    inner_half = P.HINGE_INNER_T / 2 + P.HINGE_GAP
+    for sign in (-1, 1):
+        xa, xb = sign * inner_half, sign * stack
+        if xa > xb:
+            xa, xb = xb, xa
+        v.add_box(xa, xb, -r, r, -r, r)
+        v.add_cyl_x(0, 0, r, xa, xb)
+        v.sub_cyl_x(0, 0, P.HINGE_HOLE / 2, xa - 0.2, xb + 0.2)
+
+    # Short neck from the ears into the U floor.
+    v.add_box(-stack, stack, -length / 2, length / 2, r - wall, z0 + wall)
+
+    v.add_box(x0, x1 + wall, -length / 2, length / 2, z0 - wall, z0)
+    v.add_box(x0, x1 + wall, -length / 2, length / 2, z1, z1 + wall)
+    v.add_box(x1, x1 + wall, -length / 2, length / 2, z0, z1)
+    v.add_box(x0 - lip, x0, -length / 2, length / 2, z0 - wall, z0)
     v.add_box(x0 - lip, x0, -length / 2, length / 2, z1, z1 + wall)
 
-    for sign in (-1, 1):
-        v.sub_cyl_x(
-            sign * P.M8_SPACING / 2,
-            (z0 + z1) / 2,
-            P.M8_HOLE / 2,
-            x1 - 0.2,
-            x1 + wall + 0.2,
-        )
-        v.sub_cyl_x(
-            sign * P.M8_SPACING / 2,
-            (z0 + z1) / 2,
-            7.2,
-            x1 + wall - 1.6,
-            x1 + wall + 0.2,
-        )
+    # One M8 through the far wall, on the 4040 T-slot centre-line.
+    mid_z = (z0 + z1) / 2
+    v.sub_cyl_x(0, mid_z, P.M8_HOLE / 2, x1 - 0.2, x1 + wall + 0.2)
+    v.sub_cyl_x(0, mid_z, 6.8, x1 + wall - 1.6, x1 + wall + 0.2)
     return v
 
 

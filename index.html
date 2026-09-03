@@ -98,7 +98,8 @@
             Built around your measured Plus: <strong>139.6 × 135.0 × 29.9 mm</strong>.
             Four screw corners and thin straps on the front, pockets cut out of
             the back, and a cable gate so the USB-C charger drops through. The
-            back plate hinges on a 4040 clamp so you can tilt it and lock the angle.
+            back plate hinges on a short 4040 clip so you can hang it on a
+            vertical upright, tilt it, and lock the angle.
         </p>
     </header>
     <main>
@@ -115,12 +116,12 @@
                 <text x="330" y="40" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">back plate</text>
                 <text x="400" y="178" fill="#9a9a9a" font-size="11" font-family="sans-serif">M5 hinge</text>
                 <line x1="430" y1="104" x2="500" y2="104" stroke="#ff4500" stroke-width="2"/>
-                <path d="M500 64 h64 v80 h-64" fill="none" stroke="#888" stroke-width="9" stroke-linejoin="round"/>
+                <path d="M508 80 h48 v48 h-48" fill="none" stroke="#888" stroke-width="8" stroke-linejoin="round"/>
                 <circle cx="500" cy="104" r="14" fill="none" stroke="#ff4500" stroke-width="2"/>
-                <text x="548" y="40" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">4040 clamp</text>
-                <rect x="590" y="56" width="26" height="96" fill="#3a3a3a"/>
-                <rect x="624" y="56" width="26" height="96" fill="#3a3a3a"/>
-                <text x="633" y="40" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">6 Sigma</text>
+                <text x="540" y="40" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">short clamp</text>
+                <rect x="590" y="28" width="22" height="152" fill="#3a3a3a"/>
+                <rect x="620" y="28" width="22" height="152" fill="#3a3a3a"/>
+                <text x="627" y="18" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">vertical 4040</text>
             </svg>
         </div>
 
@@ -128,11 +129,12 @@
         <div class="row">
             <a class="card" href="stls/front_ring.stl"><strong>front_ring.stl</strong><span>Four corners + thin straps. Cable gate on the logo end.</span></a>
             <a class="card" href="stls/back_plate.stl"><strong>back_plate.stl</strong><span>Pocketed plate, cable gate, hinge ear.</span></a>
-            <a class="card" href="stls/clamp_4040.stl"><strong>clamp_4040.stl</strong><span>U-clamp for the rail. Two hinge ears.</span></a>
+            <a class="card" href="stls/clamp_4040.stl"><strong>clamp_4040.stl</strong><span>Short clip for a vertical 4040. Two hinge ears, one M8.</span></a>
             <a class="card" href="templates/ring-1to1.svg"><strong>ring-1to1.svg</strong><span>Paper template at 100% scale.</span></a>
         </div>
         <img class="preview" src="docs/previews/ring_rim.png" alt="Front ring: open frame around the outside">
         <img class="preview" src="docs/previews/back_hinge.png" alt="Back plate side view with hinge ear and pivot hole">
+        <img class="preview" src="docs/previews/clamp_y.png" alt="Short 4040 clamp around a vertical upright, one M8 on the far face">
 
         <h2>Hardware</h2>
         <table>
@@ -140,7 +142,7 @@
             <tbody>
                 <tr><td>4</td><td>M3 × 20 — through the back plate into the ring</td></tr>
                 <tr><td>1</td><td>M5 × 25 + nylock + 2 washers — hinge. Loosen, tilt, tighten</td></tr>
-                <tr><td>2</td><td>M8 × 16 + M8 T-nuts — already in the 6 Sigma kit</td></tr>
+                <tr><td>1</td><td>M8 × 16 + M8 T-nut — far face of the vertical upright</td></tr>
             </tbody>
         </table>
 
@@ -152,7 +154,7 @@
             <li>Print the SVG at 100%. Window must clear the keys and dials.</li>
             <li>Stand off the Plus. Sit it on the back plate. USB-C drops in through the logo-end gate.</li>
             <li>Ring over the outside. Four M3s from the back.</li>
-            <li>Clamp onto a 40 mm face — shifter arm or wheel-deck upright. Two M8s.</li>
+            <li>Clip the short U onto the vertical 4040 upright. One M8 into a T-nut on the far face.</li>
             <li>M5 through the three ears. Aim the face, snug the nylock. That’s the adjustable angle.</li>
         </ol>
         <p class="muted">Sizes live in <code>cad/params.py</code> (<code>BODY_W</code> 139.6, <code>FACE_H</code> 135.0, <code>BODY_THICK</code> 29.9). <a href="README.md">README</a></p>

@@ -58,20 +58,20 @@ SCREW_INSET = 5.5
 # ---------------------------------------------------------------------------
 # Hinge (back plate <-> 4040 clamp). M5 + nylock, tighten to lock angle.
 # ---------------------------------------------------------------------------
-HINGE_EAR_T = 8.0  # each outer clamp ear
-HINGE_INNER_T = 10.0  # back-plate ear
-HINGE_GAP = 0.5  # clearance each side of the inner ear
-HINGE_EAR_R = 14.0
+HINGE_EAR_T = 6.0  # each outer clamp ear
+HINGE_INNER_T = 8.0  # back-plate ear
+HINGE_GAP = 0.4  # clearance each side of the inner ear
+HINGE_EAR_R = 10.0
 HINGE_HOLE = 5.3  # M5 clearance
-HINGE_STANDOFF = 16.0
+HINGE_STANDOFF = 12.0
 
 # ---------------------------------------------------------------------------
-# 40-series clamp (6 Sigma 4040 / 4080 face)
+# Compact 4040 clamp — sized for a vertical 6 Sigma upright
 # ---------------------------------------------------------------------------
 EXT = 40.0
 EXT_CLEAR = 0.5
-CLAMP_WALL = 5.5
-CLAMP_LEN = 56.0
-CLAMP_LIP = 10.0
+CLAMP_WALL = 4.2
+CLAMP_LEN = 34.0  # short along the bar
+CLAMP_LIP = 6.0
 M8_HOLE = 8.5
-M8_SPACING = 28.0
+# Single M8 through the back wall is enough for this weight on a vertical.
