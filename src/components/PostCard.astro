@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const date = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<a class="card" href={`/blog/${post.id}`}>
+  <span class="meta">{date}{post.data.featured ? ' · Featured' : ''}</span>
+  <h3>{post.data.title}</h3>
+  <p>{post.data.description}</p>
+  {post.data.tags.length > 0 && (
+    <span class="chip">{post.data.tags[0]}</span>
+  )}
+</a>

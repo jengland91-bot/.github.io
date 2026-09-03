@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const posts = (await getCollection('posts'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base title="Blog" description="Write-ups on sim racing, cameras, off-road, and the kit behind the work." path="/blog">
+  <header class="hero">
+    <p class="kicker">Blog</p>
+    <h1 class="page-title">Notes from the shop, the rig, and the desert.</h1>
+    <p class="page-lede">Write-ups from the shop, the rig, and the desert. Gear named in a post shows up as Amazon cards at the bottom of the article.</p>
+  </header>
+  <Disclosure />
+  <div class="grid posts-grid" style="margin-top: 28px;">
+    {posts.map((post) => (
+      <PostCard post={post} />
+    ))}
+  </div>
+</Base>

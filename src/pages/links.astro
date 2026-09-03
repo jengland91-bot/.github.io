@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Disclosure from '../components/Disclosure.astro';
+import PartnerCard from '../components/PartnerCard.astro';
+import { site } from '../data/site';
+
+const gear = (await getCollection('gear')).sort((a, b) => a.data.title.localeCompare(b.data.title));
+const sim = gear.filter((item) => item.data.category === 'sim-racing');
+const content = gear.filter((item) => item.data.category === 'content');
+const partners = await getCollection('partners');
+---
+
+<Base title="Links" description="Josh England link hub — socials, Amazon gear, and partner codes." path="/links">
+  <div class="hub">
+    <header class="hub-profile">
+      <div class="avatar">JE</div>
+      <h1>{site.author}</h1>
+      <p class="kicker">Welcome to the hub</p>
+      <p class="page-lede" style="text-align:center;">Photographer, content creator, sim racer, and trophy truck co-driver. This is the bio link that points at everything else on this site.</p>
+    </header>
+
+    <Disclosure />
+
+    <div class="social-row">
+      <a class="social-box" href={site.socials.tiktok} target="_blank" rel="noopener">TikTok</a>
+      <a class="social-box" href={site.socials.instagram} target="_blank" rel="noopener">Instagram</a>
+      <a class="social-box" href={site.socials.youtube} target="_blank" rel="noopener">YouTube</a>
+    </div>
+
+    <a class="block-link primary" href={site.socials.portfolio} target="_blank" rel="noopener">
+      <span>View portfolio</span>
+      <span>→</span>
+    </a>
+    <a class="block-link" href="/blog">
+      <span>Read the blog</span>
+      <span>→</span>
+    </a>
+    <a class="block-link" href="/gear">
+      <span>Gear I use</span>
+      <span>→</span>
+    </a>
+    <a class="block-link" href={site.socials.coffee} target="_blank" rel="noopener">
+      <span>Support the work</span>
+      <span>→</span>
+    </a>
+    <a
+      class="block-link"
+      href={site.amazonStorefront}
+      target="_blank"
+      rel="nofollow sponsored noopener"
+    >
+      <span>Amazon storefront</span>
+      <span>→</span>
+    </a>
+
+    <p class="kicker" style="margin-top:12px;">Sim racing</p>
+    <div class="hub-list">
+      {sim.map((item, index) => (
+        <a class="hub-row" href={item.data.amazonUrl} target="_blank" rel="nofollow sponsored noopener">
+          <span class="num">{String(index + 1).padStart(2, '0')}</span>
+          <span>{item.data.title}</span>
+        </a>
+      ))}
+    </div>
+
+    <p class="kicker" style="margin-top:12px;">Content kit</p>
+    <div class="hub-list">
+      {content.map((item, index) => (
+        <a class="hub-row" href={item.data.amazonUrl} target="_blank" rel="nofollow sponsored noopener">
+          <span class="num">{String(index + 1).padStart(2, '0')}</span>
+          <span>{item.data.title}</span>
+        </a>
+      ))}
+    </div>
+
+    <p class="kicker" style="margin-top:12px;">Partner codes</p>
+    {partners.map((partner) => (
+      <PartnerCard partner={partner} />
+    ))}
+
+    <a class="block-link" href={`mailto:${site.email}`}>
+      <span>Business inquiries</span>
+      <span>→</span>
+    </a>
+  </div>
+</Base>

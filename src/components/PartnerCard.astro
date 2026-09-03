@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  partner: CollectionEntry<'partners'>;
+}
+
+const { partner } = Astro.props;
+---
+
+<a class="partner-card" href={partner.data.url} target="_blank" rel="noopener">
+  <div>
+    <div class="partner-name">{partner.data.name}</div>
+    <p>{partner.data.offer}</p>
+  </div>
+  <div class="code-badge">
+    <span>Code</span>
+    <strong>{partner.data.code}</strong>
+  </div>
+</a>
