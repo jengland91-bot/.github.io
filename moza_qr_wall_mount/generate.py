@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 """Generate 3D-printable Moza / D1-spec QR steering-wheel wall mounts.
 
-The wheel-side quick release uses ten spring-loaded balls around a ~40.9 mm
-sleeve, with a deeper ~22.4 mm well that holds the pogo-pin plate. The default
-stub has a ring plus ten ball seats so the wheel cannot spin when bumped. A
-free-spin ring-groove variant is also generated.
-
-The stub is sized to lock at the balls and stop short of the pin plate — it
-must not be as deep as the QR cavity or it will mash the gold pins.
+The wheel-side quick release is a 6-up / 4-down ball lock (same as the Moza
+base) around a ~40.9 mm sleeve, with a deeper ~22.4 mm well for the pogo-pin
+plate. The stub is stepped: full diameter only through the sleeve and groove,
+then a thinner nose into the pin well so it cannot bottom on the shoulder
+before the balls drop. A free-spin ring-groove variant is also generated.
 
 Also writes the 8020 accessory kit (phone holder, cup, headphone hook, cable
 clip) via accessories.py.
@@ -44,8 +42,7 @@ class Fit:
 
 
 # Sleeve ID measured on the user's wheel: 40.9 mm. PETG prints a hair large.
-# Shaft is undersized so the collar can slide on; the ten balls sit in a ring
-# plus ten deeper spots (one per ball) so it actually clicks.
+# Shaft is undersized so the collar can slide on.
 FITS = {
     "tight": Fit("tight", shaft_d=40.2, groove_d=34.2),
     "nominal": Fit("nominal", shaft_d=39.8, groove_d=33.8),
@@ -54,39 +51,46 @@ FITS = {
 
 DEFAULT_FIT = "nominal"
 
-# Stub — lengths from the user's calipers + photos of the wheel QR
+# Stub — the last full-Ø 22.5 mm tube could not enter the 22.4 mm pin well, so
+# it hit the inner shoulder and the balls never sat in the groove.
 #
 #   z = 0      pad face = QR opening
-#   z = 12.3   ten spring balls drop into the ring + seats
-#   z = 22.5   stub tip (open 26 mm bore) — ~6 mm short of the pin plate
-#   z = 28.8   pogo-pin plate at the bottom of the 22.4 mm centre well
-#
-# A 39.8 mm OD stub that is 28.8 mm long would mash the gold pins. The stub
-# only needs to reach the balls plus a retaining lip; the hollow centre
-# clears the T of pogo pins if the tip ever gets close.
+#   z = 12.3   6-up / 4-down balls drop into the ring + seats
+#   z ≈ 18.4   full Ø 39.8 ends (retaining lip). Then a Ø21 mm nose
+#   z ≈ 24.4   nose tip — still ~4 mm short of the pin plate
+#   z = 28.8   pogo-pin plate
 BALL_RING_FROM_FACE = 12.3  # opening of the QR to the ball ring
-PIN_PLATE_DEPTH = 28.8  # opening of the QR to the electronics plate — do not reach
-GROOVE_FROM_TIP = 10.2  # lip past the balls so it clicks and stays
-SHAFT_LEN = BALL_RING_FROM_FACE + GROOVE_FROM_TIP  # 22.5 mm
-CHAMFER = 2.2  # keep this short so the tip still has a full-diameter lip
-FILLET_R = 0.0  # no extra OD at the root — a fillet was jamming in the 40.9 mm sleeve
+PIN_PLATE_DEPTH = 28.8  # electronics plate — do not reach
 GROOVE_FLAT = 3.8  # balls sit on a floor, not on the 45° ramps
-GROOVE_PLATE_AXIAL = 1.2  # steep backstop on the plate side (supported when printing stub-up)
-STUB_BORE_D = 26.0  # hollow through the stub — larger than the 22.4 mm pin well
+GROOVE_PLATE_AXIAL = 1.2  # steep backstop on the plate side
+LIP_FLAT = 1.2  # full-Ø after the 45° groove return so it actually catches
+NOSE_D = 21.0  # under the 22.4 mm pin well
+NOSE_LEN = 6.0
+NOSE_BORE_D = 14.0
+STUB_BORE_D = 16.0  # must stay under NOSE_D so the wall can step down
+CHAMFER = 1.2  # nose tip
+FILLET_R = 0.0  # no extra OD at the root — a fillet was jamming in the 40.9 mm sleeve
 
-if SHAFT_LEN >= PIN_PLATE_DEPTH - 4.0:
+_NOMINAL_TIP_AXIAL = (FITS["nominal"].shaft_d - FITS["nominal"].groove_d) / 2.0
+LARGE_LEN = BALL_RING_FROM_FACE + GROOVE_FLAT / 2.0 + _NOMINAL_TIP_AXIAL + LIP_FLAT
+SHAFT_LEN = LARGE_LEN + NOSE_LEN
+GROOVE_FROM_TIP = SHAFT_LEN - BALL_RING_FROM_FACE
+
+if SHAFT_LEN >= PIN_PLATE_DEPTH - 3.0:
     raise RuntimeError(
         f"SHAFT_LEN={SHAFT_LEN} would reach the pogo-pin plate at {PIN_PLATE_DEPTH} mm"
     )
+if STUB_BORE_D >= NOSE_D:
+    raise RuntimeError("STUB_BORE_D must be smaller than NOSE_D")
 
-# Ten ball pockets — anti-rotation stops (wheel QR has 10 balls at 36°)
-# Indexed stubs keep a RING so every ball can drop in, then ten deeper seats
-# so the wheel clocks and stays put. No lead-in channels — those turned the
-# catch into a ramp and launched the wheel back off.
-POCKET_COUNT = 10
-POCKET_WIDTH_DEG = 22.0  # seats at 36° spacing; 40° would overlap
+# Moza / Simagic male QR: six seats on top, four on the bottom, gaps at 3 and 9.
+# 0° = +X = 3 o'clock, 90° = 12 o'clock. 30° pitch inside each group.
+# A shallow RING still catches if the wheel is a few degrees off.
+POCKET_ANGLES_DEG = (15, 45, 75, 105, 135, 165, 225, 255, 285, 315)
+POCKET_COUNT = len(POCKET_ANGLES_DEG)
+POCKET_WIDTH_DEG = 22.0
 POCKET_BLEND_DEG = 5.0
-POCKET_OFFSET_DEG = 90.0  # first pocket at 12 o'clock when the top screw is up
+POCKET_OFFSET_DEG = 90.0  # 12 o'clock — used by the fit-test skirt, not the seats
 LAND_RECESS = 2.4  # mm of ring groove between the deep seats (must actually catch)
 STUB_SEGMENTS = 180  # finer around the pockets
 
@@ -504,12 +508,7 @@ def pocket_t(theta: float) -> float:
     """1 inside a ball seat, 0 on the land between seats."""
     half = math.radians(POCKET_WIDTH_DEG / 2.0)
     blend = math.radians(POCKET_BLEND_DEG)
-    best = min(
-        _angle_diff(
-            theta, math.radians(POCKET_OFFSET_DEG) + k * (2 * math.pi / POCKET_COUNT)
-        )
-        for k in range(POCKET_COUNT)
-    )
+    best = min(_angle_diff(theta, math.radians(a)) for a in POCKET_ANGLES_DEG)
     if best <= max(0.0, half - blend):
         return 1.0
     if best >= half + blend:
@@ -528,8 +527,7 @@ def _groove_tapers(fit: Fit) -> Tuple[float, float, float]:
 
 def _groove_z_band(z_base: float, fit: Fit) -> Tuple[float, float]:
     plate_axial, tip_axial, _ = _groove_tapers(fit)
-    z_tip = z_base + FILLET_R + SHAFT_LEN
-    g_mid = z_tip - GROOVE_FROM_TIP
+    g_mid = z_base + FILLET_R + BALL_RING_FROM_FACE
     z0 = g_mid - GROOVE_FLAT / 2.0 - plate_axial
     z3 = g_mid + GROOVE_FLAT / 2.0 + tip_axial
     return z0, z3
@@ -559,7 +557,7 @@ def lathe(
         ring: List[Vec3] = []
         for t in thetas:
             rr = r
-            if indexed and r > STUB_BORE_D / 2.0 + 0.8 and z0 - 0.05 <= z <= z3 + 0.05:
+            if indexed and r > NOSE_D / 2.0 + 0.5 and z0 - 0.05 <= z <= z3 + 0.05:
                 pt = pocket_t(t)
                 # Hybrid: ring for every ball + deeper seats. Leave the
                 # cylinder between groove and tip untouched — that lip is
@@ -609,32 +607,38 @@ def lathe(
 
 
 def qr_stub_profile(
-    fit: Fit, z_base: float, inner_r: float, z_from: float | None = None
+    fit: Fit, z_base: float, inner_r: float | None = None, z_from: float | None = None
 ) -> List[Vec2]:
-    """Closed (r, z) loop for the tubular QR stub, including fillet and groove.
+    """Closed (r, z) loop for the stepped QR stub: full Ø through the groove, Ø21 nose.
 
     z_from starts the solid above the plate (fit-test skirt is built separately).
     """
     shaft_r = fit.shaft_d / 2.0
     groove_r = fit.groove_d / 2.0
+    nose_r = NOSE_D / 2.0
+    large_inner = STUB_BORE_D / 2.0
+    nose_inner = NOSE_BORE_D / 2.0
     plate_axial, tip_axial, _ = _groove_tapers(fit)
-    z_tip = z_base + FILLET_R + SHAFT_LEN
-    g_mid = z_tip - GROOVE_FROM_TIP
+    z_start = z_base if z_from is None else z_from
+    g_mid = z_base + FILLET_R + BALL_RING_FROM_FACE
     g_half_flat = GROOVE_FLAT / 2.0
-    z_g0 = g_mid - g_half_flat - plate_axial  # closer to plate (steep backstop)
+    z_g0 = g_mid - g_half_flat - plate_axial
     z_g1 = g_mid - g_half_flat
     z_g2 = g_mid + g_half_flat
-    z_g3 = g_mid + g_half_flat + tip_axial  # closer to tip (45° overhang)
-    z_start = z_base if z_from is None else z_from
-
+    z_g3 = g_mid + g_half_flat + tip_axial
+    z_step = z_g3 + LIP_FLAT
+    z_tip = z_step + NOSE_LEN
     chamfer_z = z_tip - CHAMFER
-    # Tip is fully open (26 mm bore). The M8 lives in the pad / plate.
 
     pts: List[Vec2] = [
-        (inner_r, z_start),
-        (inner_r, z_tip),
-        (shaft_r - CHAMFER, z_tip),
-        (shaft_r, chamfer_z),
+        (large_inner, z_start),
+        (large_inner, z_step),
+        (nose_inner, z_step),
+        (nose_inner, z_tip),
+        (nose_r - CHAMFER, z_tip),
+        (nose_r, chamfer_z),
+        (nose_r, z_step),
+        (shaft_r, z_step),
         (shaft_r, z_g3),
         (groove_r, z_g2),
         (groove_r, z_g1),
@@ -814,7 +818,7 @@ def fit_skirt_tris(fit: Fit, z0: float, z1: float) -> List[Tri]:
 
 
 def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
-    """QR coupon: 22.5 mm stub, groove at 12.3 mm, M8 in the pad, tip open."""
+    """QR coupon: stepped stub, groove at 12.3 mm, 6-up/4-down seats, M8 in the pad."""
     z_front = FIT_LUG_T
     z_g0, _z_g3 = _groove_z_band(z_front, fit)
     z_from = max(z_g0, z_front + 0.6)
@@ -860,7 +864,7 @@ def svg_preview(path: str, fit: Fit) -> None:
         '<rect width="100%" height="100%" fill="#111"/>',
         '<text x="170" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Top</text>',
         '<text x="470" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Side</text>',
-        f'<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">Round plate  ·  M8 in the pad  ·  open stub  ·  10 anti-spin pockets</text>',
+        f'<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">Round plate  ·  M8 in the pad  ·  6-up/4-down seats  ·  stepped nose</text>',
     ]
     parts.append(
         f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{plate_r * scale}" fill="#2a2a2a" stroke="#f5a623" stroke-width="2"/>'
@@ -871,8 +875,8 @@ def svg_preview(path: str, fit: Fit) -> None:
     parts.append(
         f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{groove_r * scale}" fill="none" stroke="#888" stroke-dasharray="4 3"/>'
     )
-    for k in range(POCKET_COUNT):
-        a = math.radians(POCKET_OFFSET_DEG + k * 360.0 / POCKET_COUNT)
+    for a_deg in POCKET_ANGLES_DEG:
+        a = math.radians(a_deg)
         x0 = (groove_r + 0.4) * math.cos(a) * scale
         y0 = (groove_r + 0.4) * math.sin(a) * scale
         x1 = (shaft_r + 2.5) * math.cos(a) * scale
@@ -922,18 +926,22 @@ def svg_preview(path: str, fit: Fit) -> None:
                     )
                 )
         plate_axial, tip_axial, _ = _groove_tapers(fit)
-        z_tip_l = z0 + FILLET_R + SHAFT_LEN
-        g_mid = z_tip_l - GROOVE_FROM_TIP
+        g_mid = z0 + FILLET_R + BALL_RING_FROM_FACE
         z_g0 = g_mid - GROOVE_FLAT / 2 - plate_axial
         z_g1 = g_mid - GROOVE_FLAT / 2
         z_g2 = g_mid + GROOVE_FLAT / 2
         z_g3 = g_mid + GROOVE_FLAT / 2 + tip_axial
+        z_step = z_g3 + LIP_FLAT
+        z_tip_l = z_step + NOSE_LEN
+        nose_r = NOSE_D / 2
         pts.append(sx(z_g0, sign * shaft_r))
         pts.append(sx(z_g1, sign * groove_r))
         pts.append(sx(z_g2, sign * groove_r))
         pts.append(sx(z_g3, sign * shaft_r))
-        pts.append(sx(z_tip_l - CHAMFER, sign * shaft_r))
-        pts.append(sx(z_tip_l, sign * (shaft_r - CHAMFER)))
+        pts.append(sx(z_step, sign * shaft_r))
+        pts.append(sx(z_step, sign * nose_r))
+        pts.append(sx(z_tip_l - CHAMFER, sign * nose_r))
+        pts.append(sx(z_tip_l, sign * (nose_r - CHAMFER)))
         return " ".join(pts)
 
     parts.append(
@@ -943,7 +951,7 @@ def svg_preview(path: str, fit: Fit) -> None:
         f'<polyline points="{poly_side(-1)}" fill="none" stroke="#f5a623" stroke-width="2"/>'
     )
     parts.append(
-        f'<line x1="{side_c[0] + z_tip * scale:.1f}" y1="{side_c[1] - (shaft_r - CHAMFER) * scale:.1f}" x2="{side_c[0] + z_tip * scale:.1f}" y2="{side_c[1] + (shaft_r - CHAMFER) * scale:.1f}" stroke="#f5a623"/>'
+        f'<line x1="{side_c[0] + z_tip * scale:.1f}" y1="{side_c[1] - (NOSE_D / 2 - CHAMFER) * scale:.1f}" x2="{side_c[0] + z_tip * scale:.1f}" y2="{side_c[1] + (NOSE_D / 2 - CHAMFER) * scale:.1f}" stroke="#f5a623"/>'
     )
     # dimensions
     parts.append(
@@ -961,9 +969,9 @@ def generate_all(out_dir: str, fit_name: str = DEFAULT_FIT) -> None:
     fit = FITS[fit_name]
     os.makedirs(out_dir, exist_ok=True)
     print(
-        f"QR stub {SHAFT_LEN:.1f} mm  ·  groove at {BALL_RING_FROM_FACE:.1f} mm  ·  "
-        f"{PIN_PLATE_DEPTH - SHAFT_LEN:.1f} mm short of pin plate  ·  "
-        f"{POCKET_COUNT} seats"
+        f"QR stub {SHAFT_LEN:.1f} mm  ·  Ø{FITS[fit_name].shaft_d:.1f} for {LARGE_LEN:.1f} mm  ·  "
+        f"Ø{NOSE_D:.0f} nose  ·  groove at {BALL_RING_FROM_FACE:.1f} mm  ·  "
+        f"6-up/4-down  ·  {PIN_PLATE_DEPTH - SHAFT_LEN:.1f} mm short of pins"
     )
     jobs = [
         ("stl/moza_qr_universal_mount.stl", wall_mount_tris(fit, True), f"moza_qr_uni_{fit.name}"),

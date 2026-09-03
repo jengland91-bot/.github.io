@@ -47,7 +47,7 @@ Steering Wheel Wall Mount compatible with MOZA R3 R5 R9 R12 | QR Hanger for Sim 
 ```
 Hang your sim-racing wheel on the wall (or your rig) instead of leaving it on a chair.
 
-This is a 3D-printed quick-release hanger. Line up the wheel the same way you do on the base and press on — ten ball seats stop it spinning if you bump it. Pull the QR collar to take it off.
+This is a 3D-printed quick-release hanger. Line up the wheel the same way you do on the base (six balls on top, four on the bottom) and press on. Pull the QR collar to take it off.
 
 Fits:
 • MOZA Racing wheels with the stock ball-lock QR (ES, RS, CS, GS, FSR, and others)
@@ -127,7 +127,7 @@ D1 QR WHEEL MOUNT
 1. Wall: one M8 × 40–50 mm through the pad into a stud, four #8 around the rim.
    Rig: one M8 × 20 mm through the pad into a 4040 T-nut.
    Stub points into the room.
-2. Line up the ten balls with the ten seats on the stub, then press on until it clicks.
+2. Line up six balls on top and four on the bottom, then press on until it clicks.
 3. To remove: pull the QR collar with both hands and take the wheel off.
 
 8020 ADD-ONS (same M8 / 40 mm T-nuts)

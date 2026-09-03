@@ -12,23 +12,24 @@ shaft_d = 39.8;
 groove_d = 33.8;
 
 /* [Stub] */
-// 22.5 mm: lock at the 12.3 mm ball ring, stop ~6 mm short of the pogo pins
-shaft_len = 22.5;
-chamfer = 2.2;
-fillet_r = 0.0;
+// Full Ø through the balls, then a Ø21 nose into the pin well
+ball_ring_from_face = 12.3;
 groove_flat = 3.8;
-ball_ring_from_face = 12.3;  // opening of the QR to the ball ring
-groove_from_tip = 10.2;      // lip past the balls (do not set shaft_len to 28.8)
 groove_plate_axial = 1.2;
-stub_bore_d = 26.0;  // tip left open — clears the 22.4 mm pin well
-center_hole_d = 8.4;
-center_csk_d = 14.0;     // M8 socket-cap in the pad
-pad_bolt_web = 3.0;      // plastic under the head
-land_recess = 2.4;       // ring so every ball catches
-pocket_count = 10;
+lip_flat = 1.2;
+nose_d = 21.0;
+nose_len = 6.0;
+nose_bore_d = 14.0;
+stub_bore_d = 16.0;
+chamfer = 1.2;
+fillet_r = 0.0;
+land_recess = 2.4;
 pocket_width_deg = 22;
-pocket_offset_deg = 90;  // one seat at 12 o'clock
+pocket_angles = [15, 45, 75, 105, 135, 165, 225, 255, 285, 315]; // 6-up / 4-down
 indexed = true;
+center_hole_d = 8.4;
+center_csk_d = 14.0;
+pad_bolt_web = 3.0;
 
 /* [Plate] */
 plate_d = 98.0;
@@ -44,38 +45,45 @@ part = "wall"; // [wall, profile, fit_test]
 module qr_stub() {
     shaft_r = shaft_d / 2;
     groove_r = groove_d / 2;
+    nose_r = nose_d / 2;
     land_r = shaft_r - land_recess;
     ring_r = indexed ? land_r : groove_r;
     depth = shaft_r - ring_r;
     tip_axial = shaft_r - groove_r; // 45° toward the tip
     plate_axial = min(depth, groove_plate_axial);
-    z_tip = fillet_r + shaft_len;
-    g_mid = z_tip - groove_from_tip;
+    g_mid = fillet_r + ball_ring_from_face;
     z_g0 = g_mid - groove_flat / 2 - plate_axial;
     z_g1 = g_mid - groove_flat / 2;
     z_g2 = g_mid + groove_flat / 2;
     z_g3 = g_mid + groove_flat / 2 + tip_axial;
-    inner_r = stub_bore_d / 2;
+    z_step = z_g3 + lip_flat;
+    z_tip = z_step + nose_len;
+    large_inner = stub_bore_d / 2;
+    nose_inner = nose_bore_d / 2;
     pocket_depth = shaft_r - groove_r;
 
     pts = [
-        [inner_r, 0],
-        [inner_r, z_tip],
-        [shaft_r - chamfer, z_tip],
-        [shaft_r, z_tip - chamfer],
+        [large_inner, 0],
+        [large_inner, z_step],
+        [nose_inner, z_step],
+        [nose_inner, z_tip],
+        [nose_r - chamfer, z_tip],
+        [nose_r, z_tip - chamfer],
+        [nose_r, z_step],
+        [shaft_r, z_step],
         [shaft_r, z_g3],
         [ring_r, z_g2],
         [ring_r, z_g1],
         [shaft_r, z_g0],
         [shaft_r, 0],
-        [inner_r, 0]
+        [large_inner, 0]
     ];
     difference() {
         rotate_extrude()
             polygon(pts);
         if (indexed) {
-            for (k = [0:pocket_count - 1])
-                rotate([0, 0, pocket_offset_deg + k * (360 / pocket_count) - pocket_width_deg / 2])
+            for (a = pocket_angles)
+                rotate([0, 0, a - pocket_width_deg / 2])
                     rotate_extrude(angle = pocket_width_deg)
                         polygon([
                             [groove_r - 0.2, g_mid - groove_flat / 2],
@@ -140,8 +148,7 @@ module fit_test() {
     half_w = max(shaft_d / 2 + extra, sx + pad_r);
     half_l = sy + pad_r;
     shaft_r = shaft_d / 2;
-    z_tip = lug_t + fillet_r + shaft_len;
-    g_mid = z_tip - groove_from_tip;
+    g_mid = lug_t + fillet_r + ball_ring_from_face;
     z_g0 = g_mid - groove_flat / 2 - groove_plate_axial;
     difference() {
         hull() {

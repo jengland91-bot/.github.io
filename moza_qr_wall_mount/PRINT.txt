@@ -5,8 +5,8 @@ WHEEL MOUNT  (stl/moza_qr_universal_mount.stl)
   Print the fit test first: stl/fit_test_nominal.stl
   FIT TEST ONLY: 3 walls, 15% infill (not 6/40 — that is why it was 52 min)
   Racetrack pad with U-bites at top / sides / bottom (saves filament)
-  Stub 22.5 mm into the wheel (locks at the balls, stops short of the pogo pins)
-  Ball groove at 12.3 mm from the pad (the ten-ball ring in the wheel)
+  Stub: Ø39.8 for 18.4 mm (groove at 12.3), then a Ø21 mm nose
+  6 seats on top, 4 on the bottom — same clock as the wheelbase
   Tip is OPEN — drop an M8 x 20 mm through it into the pad pocket
   4x #8 at the corners
   Six wide windows in the skirt to save filament
