@@ -139,15 +139,8 @@ module fit_test() {
     sy = 26.0;
     pad_r = 11.0;
     corner_r = 10.0;
-    light_d = 9.0;
-    lx = 10.0;
-    ly = 18.0;
-    ring_n = 6;
-    ring_r = 22.0;
-    ring_d = 6.8;
-    ring_phase = 30;
-    end_d = 6.5;
-    end_y = 31.0;
+    ns_r = 11.0;
+    ew_r = 10.0;
     half_w = max(shaft_d / 2 + extra, sx + pad_r);
     half_l = sy + pad_r;
     shaft_r = shaft_d / 2;
@@ -165,27 +158,22 @@ module fit_test() {
             translate([-half_w + corner_r, -half_l + corner_r, 0])
                 cylinder(h = lug_t, r = corner_r);
         }
-        // M8 through, then a 14 mm pocket from the stub side for the cap head.
+        // Whole middle open — bolt head sits in the 14 mm step at the stub tip.
         translate([0, 0, -0.2])
-            cylinder(h = lug_t + 0.4, d = center_hole_d);
-        translate([0, 0, center_washer_t])
-            cylinder(h = lug_t, d = center_csk_d);
+            cylinder(h = lug_t + 0.4, d = stub_bore_d);
+        // U-bites at top / bottom / sides
+        translate([0, half_l, -0.2])
+            cylinder(h = lug_t + 0.4, r = ns_r);
+        translate([0, -half_l, -0.2])
+            cylinder(h = lug_t + 0.4, r = ns_r);
+        translate([half_w, 0, -0.2])
+            cylinder(h = lug_t + 0.4, r = ew_r);
+        translate([-half_w, 0, -0.2])
+            cylinder(h = lug_t + 0.4, r = ew_r);
         for (x = [sx, -sx])
             for (y = [sy, -sy])
                 translate([x, y, 0])
                     csk_hole(screw_d, screw_csk_d, screw_csk_depth, lug_t);
-        for (x = [lx, -lx])
-            for (y = [ly, -ly])
-                translate([x, y, -0.2])
-                    cylinder(h = lug_t + 0.4, d = light_d);
-        for (i = [0 : ring_n - 1]) {
-            a = ring_phase + i * 360 / ring_n;
-            translate([ring_r * cos(a), ring_r * sin(a), -0.2])
-                cylinder(h = lug_t + 0.4, d = ring_d);
-        }
-        for (y = [end_y, -end_y])
-            translate([0, y, -0.2])
-                cylinder(h = lug_t + 0.4, d = end_d);
     }
     difference() {
         qr_stub();
@@ -193,7 +181,7 @@ module fit_test() {
             rotate([0, 0, 120 + k * 60])
                 translate([shaft_r, 0, (lug_t + z_g0) / 2])
                     rotate([0, 90, 0])
-                        cylinder(h = 16, d = 8, center = true);
+                        cylinder(h = 16, d = 14, center = true);
     }
 }
 

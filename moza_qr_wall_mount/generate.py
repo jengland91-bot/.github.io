@@ -89,16 +89,11 @@ FIT_LUG_T = 8.0  # same as the 4040 strip so the screws have meat
 FIT_FLANGE_EXTRA = 7.0  # extra ring all around the stub (green)
 FIT_CORNER_R = 10.0  # flattened top/bottom ears
 SKIRT_WINDOW_COUNT = 6  # filament-saver holes around the stub (red)
-SKIRT_WINDOW_W = 8.0  # mm of opening at the outer wall
-FIT_LIGHTEN_D = 9.0  # four holes around the centre M8 (plus a ring and two end holes)
-FIT_LIGHTEN_X = 10.0
-FIT_LIGHTEN_Y = 18.0
-FIT_RING_N = 6  # extra ring of cutouts around the hub
-FIT_RING_R = 22.0
-FIT_RING_D = 6.8
-FIT_RING_PHASE_DEG = 30.0  # sits between the four existing holes
-FIT_END_D = 6.5  # two more along the long axis
-FIT_END_Y = 31.0
+SKIRT_WINDOW_W = 14.0  # mm of opening at the outer wall (wide, since the bolt head is at the tip)
+FIT_CENTER_OPEN_D = STUB_BORE_D  # pad is open through the middle — bolt head sits at the stub tip
+FIT_SCALLOP_NS_R = 11.0  # top / bottom edge bites (leave ~2.7 mm at the #8 CSK)
+FIT_SCALLOP_EW_R = 10.0  # left / right edge bites
+FIT_SCALLOP_SEGS = 16
 
 # Product bezel — raised ring so the plate looks finished, not like a raw disc
 BEZEL_W = 4.2
@@ -217,6 +212,48 @@ def rounded_rect_pts(w: float, h: float, r: float, n_each: int = 8) -> List[Vec2
         for i in range(n_each):
             a = a0 + (math.pi / 2) * i / (n_each - 1 if n_each > 1 else 1)
             pts.append((cx + r * math.cos(a), cy + r * math.sin(a)))
+    return pts
+
+
+def _arc_pts(cx: float, cy: float, r: float, a0: float, a1: float, n: int) -> List[Vec2]:
+    """Arc including both endpoints. a0 -> a1, n segments (n+1 points)."""
+    return [
+        (cx + r * math.cos(a0 + (a1 - a0) * i / n), cy + r * math.sin(a0 + (a1 - a0) * i / n))
+        for i in range(n + 1)
+    ]
+
+
+def _corner_pts(cx: float, cy: float, r: float, a0: float, n: int) -> List[Vec2]:
+    return [
+        (cx + r * math.cos(a0 + (math.pi / 2) * i / max(n - 1, 1)),
+         cy + r * math.sin(a0 + (math.pi / 2) * i / max(n - 1, 1)))
+        for i in range(n)
+    ]
+
+
+def scalloped_rect_pts(
+    half_w: float,
+    half_l: float,
+    corner_r: float,
+    ns_r: float,
+    ew_r: float,
+    n_corner: int = 10,
+    n_scallop: int = FIT_SCALLOP_SEGS,
+) -> List[Vec2]:
+    """Rounded rectangle with U-bites at N/E/S/W. CCW, starting at the TR corner."""
+    cr = min(corner_r, half_w - 0.4, half_l - 0.4)
+    ns_r = min(ns_r, half_w - cr - 1.0)
+    ew_r = min(ew_r, half_l - cr - 1.0)
+    pts: List[Vec2] = []
+    # TR corner (0 -> 90), then top scallop, TL, left scallop, BL, bottom, BR, right.
+    pts.extend(_corner_pts(half_w - cr, half_l - cr, cr, 0.0, n_corner))
+    pts.extend(_arc_pts(0.0, half_l, ns_r, 0.0, -math.pi, n_scallop))
+    pts.extend(_corner_pts(-half_w + cr, half_l - cr, cr, math.pi / 2, n_corner))
+    pts.extend(_arc_pts(-half_w, 0.0, ew_r, math.pi / 2, -math.pi / 2, n_scallop))
+    pts.extend(_corner_pts(-half_w + cr, -half_l + cr, cr, math.pi, n_corner))
+    pts.extend(_arc_pts(0.0, -half_l, ns_r, math.pi, 0.0, n_scallop))
+    pts.extend(_corner_pts(half_w - cr, -half_l + cr, cr, 3 * math.pi / 2, n_corner))
+    pts.extend(_arc_pts(half_w, 0.0, ew_r, 3 * math.pi / 2, math.pi / 2, n_scallop))
     return pts
 
 
@@ -717,71 +754,33 @@ def fit_screw_centres() -> List[Vec2]:
     ]
 
 
-def fit_lighten_centres() -> List[Vec2]:
-    return [
-        (FIT_LIGHTEN_X, FIT_LIGHTEN_Y),
-        (-FIT_LIGHTEN_X, FIT_LIGHTEN_Y),
-        (FIT_LIGHTEN_X, -FIT_LIGHTEN_Y),
-        (-FIT_LIGHTEN_X, -FIT_LIGHTEN_Y),
-    ]
-
-
-def fit_ring_centres() -> List[Vec2]:
-    """Six extra cutouts around the hub, rotated to sit between the four existing holes."""
-    out: List[Vec2] = []
-    for i in range(FIT_RING_N):
-        a = math.radians(FIT_RING_PHASE_DEG + i * 360.0 / FIT_RING_N)
-        out.append((FIT_RING_R * math.cos(a), FIT_RING_R * math.sin(a)))
-    return out
-
-
-def fit_end_centres() -> List[Vec2]:
-    return [(0.0, FIT_END_Y), (0.0, -FIT_END_Y)]
-
-
 def fit_flange_tris(fit: Fit) -> List[Tri]:
-    """8 mm pad: stepped M8 in the middle, 4× #8 at the corners, lightening holes.
+    """8 mm pad with the middle open and U-bites at top / sides / bottom.
 
-    M8 is 8.4 mm through the bottom 3 mm (into the T-nut), then a 14 mm pocket
-    from the stub side so a socket-cap head can sit down if it lands on the pad.
-    The stub tip has the same 14 mm step — that is where the M8 × 40 mm head sits.
+    The M8 socket-cap sits in the 14 mm step at the stub tip, so the pad only
+    needs a 26 mm hole for the shaft to reach the T-nut — no solid hub.
+    Four #8 CSK stay at the corners.
     """
     half_w, half_l = fit_pad_half(fit)
     outer = ensure_winding(
-        rounded_rect_pts(2.0 * half_w, 2.0 * half_l, FIT_CORNER_R, 12),
+        scalloped_rect_pts(half_w, half_l, FIT_CORNER_R, FIT_SCALLOP_NS_R, FIT_SCALLOP_EW_R),
         True,
     )
     hole_n = 24
-    save_n = 16
-    m8_n = 32
-    m8 = circle_pts(0.0, 0.0, CENTER_HOLE_D / 2.0, m8_n, False)
-    m8_pocket = circle_pts(0.0, 0.0, CENTER_CSK_D / 2.0, m8_n, False)
+    open_n = 48
+    centre = circle_pts(0.0, 0.0, FIT_CENTER_OPEN_D / 2.0, open_n, False)
     screws = [
         circle_pts(c[0], c[1], SCREW_D / 2.0, hole_n, False) for c in fit_screw_centres()
     ]
     csks = [
         circle_pts(c[0], c[1], SCREW_CSK_D / 2.0, hole_n, False) for c in fit_screw_centres()
     ]
-    light = [
-        circle_pts(c[0], c[1], FIT_LIGHTEN_D / 2.0, hole_n, False)
-        for c in fit_lighten_centres()
-    ]
-    ring = [
-        circle_pts(c[0], c[1], FIT_RING_D / 2.0, save_n, False) for c in fit_ring_centres()
-    ]
-    ends = [
-        circle_pts(c[0], c[1], FIT_END_D / 2.0, save_n, False) for c in fit_end_centres()
-    ]
-    extras = light + ring + ends
-    z_web = CENTER_WASHER_T  # 3 mm of plastic under a head that sits on the pad
-    z_csk = max(z_web + 0.4, FIT_LUG_T - SCREW_CSK_DEPTH)
+    z_csk = max(0.6, FIT_LUG_T - SCREW_CSK_DEPTH)
     return loft_layers(
         [
-            {"z": 0.0, "outer": outer, "holes": [m8] + screws + extras},
-            {"z": z_web, "outer": outer, "holes": [m8] + screws + extras},
-            {"z": z_web, "outer": outer, "holes": [m8_pocket] + screws + extras},
-            {"z": z_csk, "outer": outer, "holes": [m8_pocket] + screws + extras},
-            {"z": FIT_LUG_T, "outer": outer, "holes": [m8_pocket] + csks + extras},
+            {"z": 0.0, "outer": outer, "holes": [centre] + screws},
+            {"z": z_csk, "outer": outer, "holes": [centre] + screws},
+            {"z": FIT_LUG_T, "outer": outer, "holes": [centre] + csks},
         ]
     )
 
@@ -815,7 +814,7 @@ def fit_skirt_tris(fit: Fit, z0: float, z1: float) -> List[Tri]:
 
 
 def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
-    """QR coupon: stepped M8 in the middle for 4040, 4× #8, extra cutouts.
+    """QR coupon: open middle, edge scallops, 4× #8. Bolt head sits at the stub tip.
 
     Print 3 walls / 15% to test the snap. If you hang the wheel on it, use 4/25 or 6/40.
     """
