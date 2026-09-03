@@ -1,31 +1,32 @@
 """
-Stream Deck Plus outer ring + back plate for a 6 Sigma / 40-series rig.
+Stream Deck Plus outer ring + hinged 6 Sigma mount.
 
-The ring is only a frame around the outside. It does not cover keys, dials,
-or the touch strip. Four M3 screws hold the ring to the back plate and the
-Plus sits in the pocket between them. The back plate bolts to the cockpit
-with two M8 T-nuts.
+Measured on the user's unit (stand removed):
+  width  139.6 mm
+  height 135.0 mm
+  thick   29.9 mm
 
-Official Elgato numbers: 140 x 138 x 110 mm with stand, stand screws M3 x 8.
-FACE_H and BODY_THICK are estimates — if the ring is tight, raise CLEAR.
+The ring is only a frame around the outside. Four M3s hold it to the
+back plate with the Plus in between. The back plate hinges on a 4040
+clamp so you can set the angle, then tighten the M5 nylock.
 
     python3 cad/generate.py
 """
 
 # ---------------------------------------------------------------------------
-# Stream Deck Plus (stand removed)
+# Stream Deck Plus — measured
 # ---------------------------------------------------------------------------
-BODY_W = 140.0
-FACE_H = 122.0  # face top-to-bottom (logo edge to dial edge)
-BODY_THICK = 30.0  # stand-face to control-face, generous
+BODY_W = 139.6
+FACE_H = 135.0
+BODY_THICK = 29.9
 BODY_CORNER_R = 8.0
-CLEAR = 0.8
+CLEAR = 0.5  # extra pocket around the measured body
 
-# USB-C lives on the back edge, logo end. Notch is oversized.
+# USB-C on the back edge, logo end.
 USB_W = 16.0
 USB_H = 12.0
 
-# Optional original stand screws into the back plate (slots).
+# Optional original stand screws into the back plate.
 M3_STAND_SPACING = 52.0
 M3_STAND_SLOT = 16.0
 M3_STAND_HOLE = 3.4
@@ -34,21 +35,37 @@ M3_STAND_FROM_USB_EDGE = 38.0
 # ---------------------------------------------------------------------------
 # Front ring — picture frame only
 # ---------------------------------------------------------------------------
-LIP = 4.5  # how far the ring sits on the bezel. Keys start ~12 mm in.
-RIM_T = 3.2  # thickness of the visible frame on the face
-WALL = 6.0  # side walls down to the back plate (needs meat for corner screws)
+LIP = 4.5
+RIM_T = 3.2
+WALL = 6.0
+WALL_EXTRA = 0.4  # walls slightly taller than 29.9 so the screws can clamp
 
 # ---------------------------------------------------------------------------
-# Back plate + 40-series mount (6 Sigma 4040 / 4080 face)
+# Back plate
 # ---------------------------------------------------------------------------
-PLATE_T = 5.0
-M3_SCREW = 3.3  # clearance through the plate
-M3_TAP = 2.7  # self-tap into the ring posts
+PLATE_T = 5.5
+M3_SCREW = 3.3
+M3_TAP = 2.7
 M3_HEAD = 6.2
-SCREW_INSET = 5.5  # from the outer corner toward the centre
+SCREW_INSET = 5.5
 
+# ---------------------------------------------------------------------------
+# Hinge (back plate <-> 4040 clamp). M5 + nylock, tighten to lock angle.
+# ---------------------------------------------------------------------------
+HINGE_EAR_T = 8.0  # each outer clamp ear
+HINGE_INNER_T = 10.0  # back-plate ear
+HINGE_GAP = 0.5  # clearance each side of the inner ear
+HINGE_EAR_R = 14.0
+HINGE_HOLE = 5.3  # M5 clearance
+HINGE_STANDOFF = 16.0
+
+# ---------------------------------------------------------------------------
+# 40-series clamp (6 Sigma 4040 / 4080 face)
+# ---------------------------------------------------------------------------
 EXT = 40.0
+EXT_CLEAR = 0.5
+CLAMP_WALL = 5.5
+CLAMP_LEN = 56.0
+CLAMP_LIP = 10.0
 M8_HOLE = 8.5
-M8_SLOT = 14.0  # slotted so the plate can slide on the rail
-M8_SPACING = 30.0
-M8_PAD_T = 6.0  # extra pad on the extrusion side
+M8_SPACING = 28.0

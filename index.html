@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stream Deck Plus ring + 6 Sigma back plate</title>
+    <title>Stream Deck Plus ring + hinged 6 Sigma mount</title>
     <style>
         :root {
             --bg: #0d0d0d;
@@ -21,11 +21,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             line-height: 1.55;
         }
-        header, main, footer {
-            max-width: 840px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        header, main, footer { max-width: 840px; margin: 0 auto; padding: 0 24px; }
         header { padding-top: 56px; }
         header .kicker {
             color: var(--accent);
@@ -36,12 +32,12 @@
             margin: 0 0 12px;
         }
         h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.15; margin: 0 0 14px; }
-        .lede { font-size: 1.12rem; color: #c8c8c8; max-width: 40rem; }
+        .lede { font-size: 1.12rem; color: #c8c8c8; max-width: 42rem; }
         h2 { margin-top: 44px; font-size: 1.3rem; }
         a { color: var(--accent); }
         .row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
             gap: 12px;
             margin: 18px 0;
         }
@@ -84,7 +80,7 @@
         }
         img.preview {
             width: 100%;
-            max-width: 360px;
+            max-width: 420px;
             background: #f5f3ee;
             border-radius: 12px;
             display: block;
@@ -97,69 +93,68 @@
 <body>
     <header>
         <p class="kicker">3D print · Stream Deck Plus · 6 Sigma</p>
-        <h1>Ring on the outside. Back plate on the rig.</h1>
+        <h1>Ring, back plate, hinge.</h1>
         <p class="lede">
-            A picture-frame ring that only wraps the outside of the Stream Deck Plus —
-            nothing over the keys or dials — screwed to a back plate that bolts onto
-            your 6 Sigma rail with the same M8 T-nuts the chassis already uses.
+            Built around your measured Plus: <strong>139.6 × 135.0 × 29.9 mm</strong>.
+            A frame around the outside only, a back plate the deck sits on, and a
+            separate 4040 clamp so you can tilt it and lock the angle.
         </p>
     </header>
     <main>
         <div class="diagram" aria-hidden="true">
-            <svg viewBox="0 0 820 200" xmlns="http://www.w3.org/2000/svg">
-                <rect x="24" y="40" width="200" height="128" rx="16" fill="none" stroke="#ff4500" stroke-width="10"/>
-                <text x="124" y="28" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">front ring</text>
-                <text x="124" y="110" text-anchor="middle" fill="#666" font-size="12" font-family="sans-serif">Plus sits here</text>
-                <rect x="36" y="52" width="18" height="18" rx="3" fill="#2a2a2a"/>
-                <rect x="62" y="52" width="18" height="18" rx="3" fill="#2a2a2a"/>
-                <rect x="88" y="52" width="18" height="18" rx="3" fill="#2a2a2a"/>
-                <rect x="114" y="52" width="18" height="18" rx="3" fill="#2a2a2a"/>
-                <line x1="224" y1="104" x2="300" y2="104" stroke="#ff4500" stroke-width="2"/>
-                <text x="262" y="94" text-anchor="middle" fill="#9a9a9a" font-size="11" font-family="sans-serif">4× M3</text>
-                <rect x="300" y="48" width="200" height="112" rx="12" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"/>
-                <rect x="372" y="78" width="56" height="52" rx="6" fill="#2a2a2a"/>
-                <rect x="390" y="86" width="8" height="16" rx="3" fill="#111"/>
-                <rect x="390" y="108" width="8" height="16" rx="3" fill="#111"/>
-                <text x="400" y="36" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">back plate</text>
-                <line x1="500" y1="104" x2="580" y2="104" stroke="#ff4500" stroke-width="2"/>
-                <text x="540" y="94" text-anchor="middle" fill="#9a9a9a" font-size="11" font-family="sans-serif">2× M8</text>
-                <rect x="580" y="52" width="28" height="104" fill="#3a3a3a"/>
-                <rect x="616" y="52" width="28" height="104" fill="#3a3a3a"/>
-                <text x="622" y="36" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">6 Sigma 4040</text>
+            <svg viewBox="0 0 860 200" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="44" width="170" height="120" rx="16" fill="none" stroke="#ff4500" stroke-width="9"/>
+                <text x="105" y="32" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">front ring</text>
+                <text x="105" y="110" text-anchor="middle" fill="#555" font-size="11" font-family="sans-serif">139.6 × 135</text>
+                <line x1="190" y1="104" x2="250" y2="104" stroke="#ff4500" stroke-width="2"/>
+                <text x="220" y="94" text-anchor="middle" fill="#9a9a9a" font-size="11" font-family="sans-serif">M3</text>
+                <rect x="250" y="52" width="160" height="104" rx="10" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"/>
+                <circle cx="330" cy="160" r="14" fill="none" stroke="#ff4500" stroke-width="2"/>
+                <circle cx="330" cy="160" r="3" fill="#ff4500"/>
+                <text x="330" y="40" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">back plate</text>
+                <text x="400" y="178" fill="#9a9a9a" font-size="11" font-family="sans-serif">M5 hinge</text>
+                <line x1="430" y1="104" x2="500" y2="104" stroke="#ff4500" stroke-width="2"/>
+                <path d="M500 64 h64 v80 h-64" fill="none" stroke="#888" stroke-width="9" stroke-linejoin="round"/>
+                <circle cx="500" cy="104" r="14" fill="none" stroke="#ff4500" stroke-width="2"/>
+                <text x="548" y="40" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">4040 clamp</text>
+                <rect x="590" y="56" width="26" height="96" fill="#3a3a3a"/>
+                <rect x="624" y="56" width="26" height="96" fill="#3a3a3a"/>
+                <text x="633" y="40" text-anchor="middle" fill="#9a9a9a" font-size="12" font-family="sans-serif">6 Sigma</text>
             </svg>
         </div>
 
         <h2>Download</h2>
         <div class="row">
-            <a class="card" href="stls/front_ring.stl"><strong>front_ring.stl</strong><span>Outer frame only. Open window for the whole face.</span></a>
-            <a class="card" href="stls/back_plate.stl"><strong>back_plate.stl</strong><span>Plate + two slotted M8 holes for T-nuts.</span></a>
-            <a class="card" href="templates/ring-1to1.svg"><strong>ring-1to1.svg</strong><span>Paper template. Print at 100% scale.</span></a>
-            <a class="card" href="cad/params.py"><strong>params.py</strong><span>Lip, size, hole spacing — edit and regenerate.</span></a>
+            <a class="card" href="stls/front_ring.stl"><strong>front_ring.stl</strong><span>Outside frame only. Open window.</span></a>
+            <a class="card" href="stls/back_plate.stl"><strong>back_plate.stl</strong><span>Plus sits here. One hinge ear on the back.</span></a>
+            <a class="card" href="stls/clamp_4040.stl"><strong>clamp_4040.stl</strong><span>U-clamp for the rail. Two hinge ears.</span></a>
+            <a class="card" href="templates/ring-1to1.svg"><strong>ring-1to1.svg</strong><span>Paper template at 100% scale.</span></a>
         </div>
-        <img class="preview" src="docs/previews/ring_rim.png" alt="Top view of the front ring: a frame with an open window and four corner posts">
+        <img class="preview" src="docs/previews/ring_rim.png" alt="Front ring: open frame around the outside">
+        <img class="preview" src="docs/previews/back_hinge.png" alt="Back plate side view with hinge ear and pivot hole">
 
         <h2>Hardware</h2>
         <table>
             <thead><tr><th>Qty</th><th>Part</th></tr></thead>
             <tbody>
-                <tr><td>4</td><td>M3 × 20 socket cap — through the back plate into the ring posts</td></tr>
-                <tr><td>2</td><td>M8 × 16 + M8 drop-in T-nuts (8 mm slot) — already in a 6 Sigma kit</td></tr>
+                <tr><td>4</td><td>M3 × 20 — through the back plate into the ring</td></tr>
+                <tr><td>1</td><td>M5 × 25 + nylock + 2 washers — hinge. Loosen, tilt, tighten</td></tr>
+                <tr><td>2</td><td>M8 × 16 + M8 T-nuts — already in the 6 Sigma kit</td></tr>
             </tbody>
         </table>
 
         <h2>Print</h2>
-        <p>PETG, 0.20 mm layers, 4 walls, 30–40% gyroid, no supports. Ring: frame on the bed. Back plate: M8 pad on the bed.</p>
+        <p>PETG, 0.20 mm, 4 walls, 40% gyroid, no supports. Ring: frame on the bed. Back plate: Plus-face on the bed (hinge sticks up). Clamp: back wall on the bed.</p>
 
         <h2>Put it together</h2>
         <ol>
-            <li>Print the SVG at 100%. The white window must leave every key and dial uncovered.</li>
-            <li>Remove the Plus stand (two Phillips screws).</li>
-            <li>Sit the Plus on the back plate, USB-C in the notch.</li>
-            <li>Drop the ring over the outside of the face.</li>
-            <li>Four M3s from the back into the ring corners.</li>
-            <li>Two M8s through the pad into T-nuts on a 40 mm face — shifter arm, wheel-deck upright, or a spare 4040.</li>
+            <li>Print the SVG at 100%. Window must clear the keys and dials.</li>
+            <li>Stand off the Plus. Sit it on the back plate, USB in the notch.</li>
+            <li>Ring over the outside. Four M3s from the back.</li>
+            <li>Clamp onto a 40 mm face — shifter arm or wheel-deck upright. Two M8s.</li>
+            <li>M5 through the three ears. Aim the face, snug the nylock. That’s the adjustable angle.</li>
         </ol>
-        <p class="muted">If the ring is tight, raise <code>CLEAR</code> or <code>FACE_H</code> in <code>cad/params.py</code> and run <code>python3 cad/generate.py</code>. Full notes in the <a href="README.md">README</a>.</p>
+        <p class="muted">Sizes live in <code>cad/params.py</code> (<code>BODY_W</code> 139.6, <code>FACE_H</code> 135.0, <code>BODY_THICK</code> 29.9). <a href="README.md">README</a></p>
     </main>
     <footer>Not an Elgato or 6 Sigma product. MIT licensed.</footer>
 </body>

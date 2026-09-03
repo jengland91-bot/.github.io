@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the Stream Deck Plus outer ring and 6 Sigma back plate."""
+"""Generate the Stream Deck Plus ring, back plate, and hinged 4040 clamp."""
 
 from __future__ import annotations
 
@@ -48,109 +48,159 @@ def screw_xy():
     return [(-x, -y), (x, -y), (-x, y), (x, y)]
 
 
-def build_front_ring(pitch=0.22) -> Voxels:
-    """
-    Picture-frame ring. Big open window — nothing over the keys or dials.
-    Walls go back and meet the back plate. Four posts take M3 from the back.
+def hinge_stack():
+    """Half-width of the three-ear stack (outer face from centre)."""
+    return P.HINGE_INNER_T / 2 + P.HINGE_GAP + P.HINGE_EAR_T
 
-    Print: visible rim on the bed, walls growing in +Z.
-    +Y is the dial edge, -Y is the logo / USB edge.
-    """
+
+def build_front_ring(pitch=0.22) -> Voxels:
+    """Picture-frame ring. Window is open — nothing over keys or dials."""
     ow, oh = outer_size()
     iw, ih = inner_window()
     pw, ph = pocket_size()
     z_rim = P.RIM_T
-    z_wall = z_rim + P.BODY_THICK
+    z_wall = z_rim + P.BODY_THICK + P.WALL_EXTRA
     r_out = P.BODY_CORNER_R + P.WALL
     r_win = max(P.BODY_CORNER_R - P.LIP, 2.0)
-    r_pocket = P.BODY_CORNER_R
 
     v = Voxels(
         (-ow / 2 - 2, ow / 2 + 2, -oh / 2 - 2, oh / 2 + 2, -0.4, z_wall + 2),
         pitch=pitch,
     )
-
-    # Rim on the face, then walls around the body.
     v.add_rounded_box_z(0, 0, ow, oh, r_out, 0, z_rim)
     v.add_rounded_box_z(0, 0, ow, oh, r_out, z_rim, z_wall)
     v.sub_rounded_box_z(0, 0, iw, ih, r_win, -0.2, z_rim + 0.2)
-    v.sub_rounded_box_z(0, 0, pw, ph, r_pocket, z_rim - 0.05, z_wall + 0.3)
-
-    # USB notch through the logo-end wall.
+    v.sub_rounded_box_z(0, 0, pw, ph, P.BODY_CORNER_R, z_rim - 0.05, z_wall + 0.3)
     v.sub_box(-P.USB_W / 2, P.USB_W / 2, -oh / 2 - 1, -ph / 2 + 2, z_rim + 4, z_wall + 0.3)
-
-    # M3 tap holes in the four corner posts. Stop before the visible rim
-    # so the front of the frame stays clean. Screws come from the back.
     for x, y in screw_xy():
         v.sub_cyl_z(x, y, P.M3_TAP / 2, z_rim + 0.3, z_wall + 0.3)
-
     return v
 
 
-def build_back_plate(pitch=0.25) -> Voxels:
+def build_back_plate(pitch=0.24) -> Voxels:
     """
-    Back plate the Plus sits on. Four M3 clearance holes match the ring.
-    Two slotted M8 holes on a pad bolt into 40-series T-nuts on the rig.
+    Plate the Plus sits on, plus one hinge ear on the back.
 
-    Print: extrusion pad on the bed (M8 holes up), Plus-facing side up.
+    Print plus-face on the bed (z=0). Hinge grows in +Z toward the clamp.
+    Hinge axis is X (left-right) so the face nods up and down.
     """
     ow, oh = outer_size()
     pw, ph = pocket_size()
     r_out = P.BODY_CORNER_R + P.WALL
-    z0 = 0
-    z_pad = P.M8_PAD_T
-    z_top = z_pad + P.PLATE_T
+    z_top = P.PLATE_T
+    pivot_z = z_top + P.HINGE_STANDOFF
+    half_inner = P.HINGE_INNER_T / 2
 
     v = Voxels(
-        (-ow / 2 - 2, ow / 2 + 2, -oh / 2 - 2, oh / 2 + 2, -0.4, z_top + 2),
+        (
+            -ow / 2 - 2,
+            ow / 2 + 2,
+            -max(oh / 2, P.HINGE_EAR_R) - 2,
+            max(oh / 2, P.HINGE_EAR_R) + 2,
+            -0.4,
+            pivot_z + P.HINGE_EAR_R + 2,
+        ),
         pitch=pitch,
     )
 
-    v.add_rounded_box_z(0, 0, ow, oh, r_out, z_pad, z_top)
-    # Shallow recess so the Plus locates on the plate.
-    v.sub_rounded_box_z(0, 0, pw, ph, P.BODY_CORNER_R, z_top - 1.2, z_top + 0.3)
+    v.add_rounded_box_z(0, 0, ow, oh, r_out, 0, z_top)
+    v.sub_rounded_box_z(0, 0, pw, ph, P.BODY_CORNER_R, -0.2, 1.2)
+    v.sub_box(-P.USB_W / 2, P.USB_W / 2, -oh / 2 - 1, -ph / 2 + 3, -0.2, z_top + 0.3)
 
-    # USB notch, logo end.
-    v.sub_box(-P.USB_W / 2, P.USB_W / 2, -oh / 2 - 1, -ph / 2 + 3, z_pad - 0.1, z_top + 0.3)
-
-    # Corner screws: clearance + head pocket on the extrusion side (bed).
     for x, y in screw_xy():
         v.sub_cyl_z(x, y, P.M3_SCREW / 2, -0.2, z_top + 0.3)
-        v.sub_cyl_z(x, y, P.M3_HEAD / 2, -0.2, z_pad + 1.8)
+        v.sub_cyl_z(x, y, P.M3_HEAD / 2, z_top - 2.0, z_top + 0.3)
 
-    # Optional original stand-screw slots, in the recess.
     for sign in (-1, 1):
         cx = sign * P.M3_STAND_SPACING / 2
         cy = -ph / 2 + P.M3_STAND_FROM_USB_EDGE
         v.sub_rounded_box_z(
             cx, cy, P.M3_STAND_HOLE, P.M3_STAND_SLOT, P.M3_STAND_HOLE / 2 - 0.05,
-            z_pad - 0.1, z_top + 0.3,
+            -0.2, z_top + 0.3,
         )
 
-    # 40-series pad on the extrusion side, two slotted M8s in one T-slot.
-    pad_w = 28.0
-    pad_h = P.M8_SPACING + P.M8_SLOT + 12.0
-    v.add_rounded_box_z(0, 0, pad_w, pad_h, 3.0, 0, z_pad + 0.2)
+    # Neck + round ear on the back. Hole along X.
+    v.add_box(-half_inner, half_inner, -P.HINGE_EAR_R, P.HINGE_EAR_R, z_top - 0.2, pivot_z)
+    v.add_cyl_x(0, pivot_z, P.HINGE_EAR_R, -half_inner, half_inner)
+    v.sub_cyl_x(0, pivot_z, P.HINGE_HOLE / 2, -half_inner - 0.2, half_inner + 0.2)
+    return v
+
+
+def build_clamp(pitch=0.25) -> Voxels:
+    """
+    40-series U-clamp with two hinge ears. Extrusion runs along Y.
+    Hinge axis is X — same as the back plate — so the deck nods.
+
+    Print with the U opening up, or on the back wall.
+    """
+    inner = P.EXT + P.EXT_CLEAR
+    wall = P.CLAMP_WALL
+    length = P.CLAMP_LEN
+    lip = P.CLAMP_LIP
+    stack = hinge_stack()
+    pivot_z = 0.0
+
+    # 4040 sits past the ears in +Z.
+    u_z0 = P.HINGE_EAR_R + 3
+    bounds = (
+        -stack - 2,
+        stack + inner + wall + 2,
+        -length / 2 - 2,
+        length / 2 + 2,
+        -P.HINGE_EAR_R - wall - 2,
+        u_z0 + inner + wall + 2,
+    )
+    v = Voxels(bounds, pitch=pitch)
+
+    # Two outer ears, gap in the middle for the back-plate ear.
+    inner_half = P.HINGE_INNER_T / 2 + P.HINGE_GAP
     for sign in (-1, 1):
-        v.sub_rounded_box_z(
-            0,
-            sign * P.M8_SPACING / 2,
-            P.M8_HOLE,
-            P.M8_SLOT,
-            P.M8_HOLE / 2 - 0.05,
-            -0.2,
-            z_top + 0.3,
-        )
+        x0 = sign * inner_half
+        x1 = sign * stack
+        if x0 > x1:
+            x0, x1 = x1, x0
+        v.add_box(x0, x1, -P.HINGE_EAR_R, P.HINGE_EAR_R, -P.HINGE_EAR_R, P.HINGE_EAR_R)
+        v.add_cyl_x(0, pivot_z, P.HINGE_EAR_R, x0, x1)
+        v.sub_cyl_x(0, pivot_z, P.HINGE_HOLE / 2, x0 - 0.2, x1 + 0.2)
 
+    # Bridge behind the ears into the U back wall.
+    v.add_box(-stack, stack, -length / 2, length / 2, P.HINGE_EAR_R - 4, u_z0 + wall)
+
+    # U-channel, extrusion along Y, opens +X so it slides onto a 40 mm face.
+    # Inner: x stack..stack+inner, z u_z0..u_z0+inner
+    x0 = stack
+    x1 = stack + inner
+    z0 = u_z0
+    z1 = u_z0 + inner
+    v.add_box(x0, x1 + wall, -length / 2, length / 2, z0 - wall, z0)  # floor
+    v.add_box(x0, x1 + wall, -length / 2, length / 2, z1, z1 + wall)  # ceiling
+    v.add_box(x1, x1 + wall, -length / 2, length / 2, z0, z1)  # back wall
+    v.add_box(x0 - lip, x0, -length / 2, length / 2, z0 - wall, z0)  # lips
+    v.add_box(x0 - lip, x0, -length / 2, length / 2, z1, z1 + wall)
+
+    for sign in (-1, 1):
+        v.sub_cyl_x(
+            sign * P.M8_SPACING / 2,
+            (z0 + z1) / 2,
+            P.M8_HOLE / 2,
+            x1 - 0.2,
+            x1 + wall + 0.2,
+        )
+        v.sub_cyl_x(
+            sign * P.M8_SPACING / 2,
+            (z0 + z1) / 2,
+            7.2,
+            x1 + wall - 1.6,
+            x1 + wall + 0.2,
+        )
     return v
 
 
 def write_template():
-    """1:1 SVG of the ring. Print at 100% and lay it on the Plus."""
     page_w, page_h = 210.0, 297.0
     ow, oh = outer_size()
     iw, ih = inner_window()
-    ox, oy = page_w / 2, 55 + oh / 2
+    ox, oy = page_w / 2, 48 + oh / 2
 
     def sx(x):
         return ox + x
@@ -163,8 +213,8 @@ def write_template():
         "<style>text{font-family:ui-sans-serif,system-ui,sans-serif;fill:#111} .dim{font-size:3.2px;fill:#333}</style>",
         '<rect width="100%" height="100%" fill="#fff"/>',
         '<text x="12" y="14" font-size="5.5" font-weight="700">Stream Deck Plus outer ring — print at 100% scale</text>',
-        '<text x="12" y="21" font-size="3.4">Do not “fit to page”. Grey band is the frame. White window must leave every key and dial uncovered.</text>',
-        f'<text x="12" y="27" class="dim">Outer {ow:.1f} × {oh:.1f} mm  ·  window {iw:.1f} × {ih:.1f} mm  ·  lip {P.LIP:.1f} mm</text>',
+        '<text x="12" y="21" font-size="3.4">Measured unit 139.6 × 135.0 × 29.9 mm. Grey band is the frame. White window must stay clear of keys and dials.</text>',
+        f'<text x="12" y="27" class="dim">Outer {ow:.1f} × {oh:.1f} mm  ·  window {iw:.1f} × {ih:.1f} mm  ·  lip {P.LIP:.1f} mm  ·  pocket {P.BODY_W + P.CLEAR:.1f} × {P.FACE_H + P.CLEAR:.1f}</text>',
         f'<rect x="{sx(-ow/2):.3f}" y="{sy(-oh/2):.3f}" width="{ow:.3f}" height="{oh:.3f}" rx="{P.BODY_CORNER_R + P.WALL}" fill="#e8e8e8" stroke="#111" stroke-width="0.35"/>',
         f'<rect x="{sx(-iw/2):.3f}" y="{sy(-ih/2):.3f}" width="{iw:.3f}" height="{ih:.3f}" rx="{max(P.BODY_CORNER_R - P.LIP, 2)}" fill="#fff" stroke="#111" stroke-width="0.35"/>',
         f'<rect x="{sx(-P.BODY_W/2):.3f}" y="{sy(-P.FACE_H/2):.3f}" width="{P.BODY_W:.3f}" height="{P.FACE_H:.3f}" rx="{P.BODY_CORNER_R}" fill="none" stroke="#888" stroke-width="0.25" stroke-dasharray="2 1.2"/>',
@@ -182,7 +232,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--part",
-        choices=["all", "ring", "back", "template"],
+        choices=["all", "ring", "back", "clamp", "template"],
         default="all",
     )
     args = parser.parse_args()
@@ -190,7 +240,10 @@ def main():
 
     ow, oh = outer_size()
     iw, ih = inner_window()
-    print(f"Ring outer {ow:.1f} x {oh:.1f} mm  window {iw:.1f} x {ih:.1f} mm  lip {P.LIP} mm")
+    print(
+        f"Measured  {P.BODY_W} x {P.FACE_H} x {P.BODY_THICK} mm  "
+        f"ring outer {ow:.1f} x {oh:.1f}  window {iw:.1f} x {ih:.1f}"
+    )
 
     if args.part in ("all", "template"):
         write_template()
@@ -198,6 +251,8 @@ def main():
         export(build_front_ring(), STL_DIR / "front_ring.stl", "front_ring")
     if args.part in ("all", "back"):
         export(build_back_plate(), STL_DIR / "back_plate.stl", "back_plate")
+    if args.part in ("all", "clamp"):
+        export(build_clamp(), STL_DIR / "clamp_4040.stl", "clamp_4040")
 
 
 if __name__ == "__main__":
