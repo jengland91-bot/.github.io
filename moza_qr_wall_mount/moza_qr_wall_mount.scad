@@ -12,17 +12,17 @@ shaft_d = 39.8;
 groove_d = 33.8;
 
 /* [Stub] */
-shaft_len = 28.8;  // user's wheel: how far the stub must go into the QR
+shaft_len = 28.8;  // QR depth to the bottom
 chamfer = 2.2;
 fillet_r = 0.0;
 groove_flat = 3.8;
-groove_from_tip = 10.2;
+ball_ring_from_face = 12.3;  // opening of the QR to the ball ring
+groove_from_tip = shaft_len - ball_ring_from_face;
 groove_plate_axial = 1.2;
-stub_bore_d = 26.0;
+stub_bore_d = 26.0;  // tip left open
 center_hole_d = 8.4;
-center_csk_d = 14.0;     // M8 socket-cap head is ~13 mm
-center_csk_depth = 12.0; // 8 mm head + 4 mm so it sits down
-center_washer_t = 2.5;   // plastic under the head
+center_csk_d = 14.0;     // M8 socket-cap in the pad
+pad_bolt_web = 3.0;      // plastic under the head
 land_recess = 2.4;       // ring so all six balls catch
 pocket_width_deg = 40;
 pocket_offset_deg = 90;  // one seat at 12 o'clock
@@ -54,19 +54,11 @@ module qr_stub() {
     z_g2 = g_mid + groove_flat / 2;
     z_g3 = g_mid + groove_flat / 2 + tip_axial;
     inner_r = stub_bore_d / 2;
-    m8_r = center_hole_d / 2;
-    csk_r = center_csk_d / 2;
-    z_well = z_tip - center_csk_depth;
-    z_washer = z_well - center_washer_t;
     pocket_depth = shaft_r - groove_r;
 
     pts = [
         [inner_r, 0],
-        [inner_r, z_washer],
-        [m8_r, z_washer],
-        [m8_r, z_well],
-        [csk_r, z_well],
-        [csk_r, z_tip],
+        [inner_r, z_tip],
         [shaft_r - chamfer, z_tip],
         [shaft_r, z_tip - chamfer],
         [shaft_r, z_g3],
@@ -112,9 +104,11 @@ module wall_plate() {
             rotate([0, 0, a])
                 translate([screw_r, 0, 0])
                     csk_hole(screw_d, screw_csk_d, screw_csk_depth, plate_t);
-        // opening the stub sits in
+        // M8 in the plate — drop it in through the open stub.
         translate([0, 0, -0.2])
-            cylinder(h = plate_t + 0.4, d = shaft_d + 2 * fillet_r - 0.4);
+            cylinder(h = plate_t + 0.4, d = center_hole_d);
+        translate([0, 0, pad_bolt_web])
+            cylinder(h = plate_t, d = center_csk_d);
     }
 }
 
@@ -158,9 +152,11 @@ module fit_test() {
             translate([-half_w + corner_r, -half_l + corner_r, 0])
                 cylinder(h = lug_t, r = corner_r);
         }
-        // Whole middle open — bolt head sits in the 14 mm step at the stub tip.
+        // Stepped M8 in the pad — short bolt, cap sits here, stub tip is open.
         translate([0, 0, -0.2])
-            cylinder(h = lug_t + 0.4, d = stub_bore_d);
+            cylinder(h = lug_t + 0.4, d = center_hole_d);
+        translate([0, 0, pad_bolt_web])
+            cylinder(h = lug_t, d = center_csk_d);
         // U-bites at top / bottom / sides
         translate([0, half_l, -0.2])
             cylinder(h = lug_t + 0.4, r = ns_r);

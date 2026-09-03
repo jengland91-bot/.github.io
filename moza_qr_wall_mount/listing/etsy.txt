@@ -16,7 +16,7 @@ Fits:
 
 You get:
 • 1× round mount, printed in PETG
-• 1× M8 through the middle of the stub (drop the bolt in from the front; hidden by the wheel)
+• 1× M8 × 20 mm through the pad (drop the bolt in through the open stub; hidden by the wheel)
 • 4× countersunk #8 holes around the rim for a wall
 • Screws / T-nuts not included unless you add the hardware option
 

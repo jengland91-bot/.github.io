@@ -50,14 +50,16 @@ FITS = {
 
 DEFAULT_FIT = "nominal"
 
-# Stub
-SHAFT_LEN = 28.8  # user's caliper: how far the stub must go into the wheel QR
+# Stub — lengths from the user's calipers on the wheel QR
+BALL_RING_FROM_FACE = 12.3  # opening of the QR to the ball ring
+QR_BORE_DEPTH = 28.8  # opening of the QR to the bottom
+SHAFT_LEN = QR_BORE_DEPTH  # stub goes all the way to the bottom
 CHAMFER = 2.2  # keep this short so the tip still has a full-diameter lip
 FILLET_R = 0.0  # no extra OD at the root — a fillet was jamming in the 40.9 mm sleeve
 GROOVE_FLAT = 3.8  # balls sit on a floor, not on the 45° ramps
-GROOVE_FROM_TIP = 10.2  # extra cylinder between groove and tip so it cannot spit the wheel off
+GROOVE_FROM_TIP = QR_BORE_DEPTH - BALL_RING_FROM_FACE  # 16.5 mm lip past the balls
 GROOVE_PLATE_AXIAL = 1.2  # steep backstop on the plate side (supported when printing stub-up)
-STUB_BORE_D = 26.0  # hollow through the stub (wheel centre opening measured 22.4 mm)
+STUB_BORE_D = 26.0  # hollow through the stub, tip left open
 
 # Six ball pockets — anti-rotation stops (Moza QR has 6 balls at 60°)
 # Indexed stubs keep a RING so every ball can drop in, then six deeper seats
@@ -78,10 +80,9 @@ SCREW_R = 36.0  # plus-pattern: N/E/S/W, so two screws can hit a stud
 SCREW_D = 4.8  # clearance for #8 wood screw / 4.5 mm / M4
 SCREW_CSK_D = 9.8
 SCREW_CSK_DEPTH = 2.4
-CENTER_HOLE_D = 8.4  # M8 through the stub (one bolt into a T-nut or a stud)
+CENTER_HOLE_D = 8.4  # M8 through the pad / plate (short bolt into a T-nut)
 CENTER_CSK_D = 14.0  # M8 socket-cap head is ~13 mm
-CENTER_CSK_DEPTH = 12.0  # 8 mm head + 4 mm so it sits down, not flush
-CENTER_WASHER_T = 2.5  # plastic under the head
+PAD_BOLT_WEB = 3.0  # plastic under the head in the pad (pocket is the rest of the 8 mm)
 FIT_SCREW_X = 15.0  # four #8 at the corners of the pad
 FIT_SCREW_Y = 26.0
 FIT_LUG_PAD_R = 11.0  # meat around each #8
@@ -89,8 +90,7 @@ FIT_LUG_T = 8.0  # same as the 4040 strip so the screws have meat
 FIT_FLANGE_EXTRA = 7.0  # extra ring all around the stub (green)
 FIT_CORNER_R = 10.0  # flattened top/bottom ears
 SKIRT_WINDOW_COUNT = 6  # filament-saver holes around the stub (red)
-SKIRT_WINDOW_W = 14.0  # mm of opening at the outer wall (wide, since the bolt head is at the tip)
-FIT_CENTER_OPEN_D = STUB_BORE_D  # pad is open through the middle — bolt head sits at the stub tip
+SKIRT_WINDOW_W = 14.0  # mm of opening at the outer wall
 FIT_SCALLOP_NS_R = 11.0  # top / bottom edge bites (leave ~2.7 mm at the #8 CSK)
 FIT_SCALLOP_EW_R = 10.0  # left / right edge bites
 FIT_SCALLOP_SEGS = 16
@@ -517,14 +517,6 @@ def _groove_z_band(z_base: float, fit: Fit) -> Tuple[float, float]:
     return z0, z3
 
 
-def _bolt_well_zs(z_base: float) -> Tuple[float, float, float]:
-    """z_tip, floor of the 14 mm pocket, bore-side of the 8.4 mm web."""
-    z_tip = z_base + FILLET_R + SHAFT_LEN
-    z_well = z_tip - CENTER_CSK_DEPTH
-    z_washer = z_well - CENTER_WASHER_T
-    return z_tip, z_well, z_washer
-
-
 def lathe(
     profile: Sequence[Vec2],
     n: int = SEGMENTS,
@@ -618,26 +610,11 @@ def qr_stub_profile(
     z_start = z_base if z_from is None else z_from
 
     chamfer_z = z_tip - CHAMFER
-    csk_r = CENTER_CSK_D / 2.0
-    m8_r = CENTER_HOLE_D / 2.0
-    _, z_well, z_washer = _bolt_well_zs(z_base)
+    # Tip is fully open (26 mm bore). The M8 lives in the pad / plate.
 
-    if z_washer > z_start + 0.2:
-        bore_pts: List[Vec2] = [
-            (inner_r, z_start),
-            (inner_r, z_washer),
-            (m8_r, z_washer),
-        ]
-    else:
-        # Stub piece starts at/above the washer — keep the 12 mm pocket.
-        bore_pts = [
-            (m8_r, z_start),
-        ]
-
-    pts: List[Vec2] = bore_pts + [
-        (m8_r, z_well),
-        (csk_r, z_well),
-        (csk_r, z_tip),
+    pts: List[Vec2] = [
+        (inner_r, z_start),
+        (inner_r, z_tip),
         (shaft_r - CHAMFER, z_tip),
         (shaft_r, chamfer_z),
         (shaft_r, z_g3),
@@ -701,36 +678,49 @@ def circle_tab_outline(
     return ensure_winding(pts, True)
 
 
-def wall_plate_tris(fit: Fit) -> List[Tri]:
-    """Round plate: 4× #8 around the rim. The M8 is the hole through the stub."""
-    hole_n = 32
-    cut = _center_cut_d(fit)
-    centres: List[Vec2] = [
+def wall_screw_centres() -> List[Vec2]:
+    return [
         (0.0, SCREW_R),
         (SCREW_R, 0.0),
         (0.0, -SCREW_R),
         (-SCREW_R, 0.0),
-        (0.0, 0.0),
     ]
-    small_ds = [SCREW_D, SCREW_D, SCREW_D, SCREW_D, cut]
-    csk_ds = [SCREW_CSK_D, SCREW_CSK_D, SCREW_CSK_D, SCREW_CSK_D, cut]
-    holes_small = [
-        circle_pts(c[0], c[1], d / 2.0, hole_n, ccw=False)
-        for c, d in zip(centres, small_ds)
+
+
+def loft_stepped_m8(
+    outer: Sequence[Vec2],
+    thickness: float,
+    screw_centres: Sequence[Vec2],
+) -> List[Tri]:
+    """Plate/pad with a 14 mm pocket from the stub side, 8.4 mm through, plus #8 CSK."""
+    hole_n = 32
+    screw_n = 24
+    z_web = PAD_BOLT_WEB
+    z_csk = max(z_web + 0.4, thickness - SCREW_CSK_DEPTH)
+    outer = ensure_winding(outer, True)
+    m8 = circle_pts(0.0, 0.0, CENTER_HOLE_D / 2.0, hole_n, False)
+    pocket = circle_pts(0.0, 0.0, CENTER_CSK_D / 2.0, hole_n, False)
+    screws = [
+        circle_pts(c[0], c[1], SCREW_D / 2.0, screw_n, False) for c in screw_centres
     ]
-    holes_csk = [
-        circle_pts(c[0], c[1], d / 2.0, hole_n, ccw=False)
-        for c, d in zip(centres, csk_ds)
+    csks = [
+        circle_pts(c[0], c[1], SCREW_CSK_D / 2.0, screw_n, False) for c in screw_centres
     ]
-    outer = circle_pts(0.0, 0.0, PLATE_D / 2.0, SEGMENTS, True)
-    z_mid = PLATE_T - 4.0
     return loft_layers(
         [
-            {"z": 0.0, "outer": outer, "holes": holes_small},
-            {"z": z_mid, "outer": outer, "holes": holes_small},
-            {"z": PLATE_T, "outer": outer, "holes": holes_csk},
+            {"z": 0.0, "outer": outer, "holes": [m8] + screws},
+            {"z": z_web, "outer": outer, "holes": [m8] + screws},
+            {"z": z_web, "outer": outer, "holes": [pocket] + screws},
+            {"z": z_csk, "outer": outer, "holes": [pocket] + screws},
+            {"z": thickness, "outer": outer, "holes": [pocket] + csks},
         ]
     )
+
+
+def wall_plate_tris(fit: Fit) -> List[Tri]:
+    """Round plate: 4× #8 around the rim, stepped M8 in the middle (short bolt)."""
+    outer = circle_pts(0.0, 0.0, PLATE_D / 2.0, SEGMENTS, True)
+    return loft_stepped_m8(outer, PLATE_T, wall_screw_centres())
 
 
 def profile_plate_tris(fit: Fit) -> List[Tri]:
@@ -768,34 +758,13 @@ def fit_screw_centres() -> List[Vec2]:
 
 
 def fit_flange_tris(fit: Fit) -> List[Tri]:
-    """8 mm pad with the middle open and U-bites at top / sides / bottom.
+    """8 mm pad: stepped M8 in the middle, U-bites at the edges, 4× #8 at the corners.
 
-    The M8 socket-cap sits in the 14 mm step at the stub tip, so the pad only
-    needs a 26 mm hole for the shaft to reach the T-nut — no solid hub.
-    Four #8 CSK stay at the corners.
+    Drop an M8 × 20 mm in from the open stub; the cap sits in the pad, not at the tip.
     """
     half_w, half_l = fit_pad_half(fit)
-    outer = ensure_winding(
-        scalloped_rect_pts(half_w, half_l, FIT_CORNER_R, FIT_SCALLOP_NS_R, FIT_SCALLOP_EW_R),
-        True,
-    )
-    hole_n = 24
-    open_n = 48
-    centre = circle_pts(0.0, 0.0, FIT_CENTER_OPEN_D / 2.0, open_n, False)
-    screws = [
-        circle_pts(c[0], c[1], SCREW_D / 2.0, hole_n, False) for c in fit_screw_centres()
-    ]
-    csks = [
-        circle_pts(c[0], c[1], SCREW_CSK_D / 2.0, hole_n, False) for c in fit_screw_centres()
-    ]
-    z_csk = max(0.6, FIT_LUG_T - SCREW_CSK_DEPTH)
-    return loft_layers(
-        [
-            {"z": 0.0, "outer": outer, "holes": [centre] + screws},
-            {"z": z_csk, "outer": outer, "holes": [centre] + screws},
-            {"z": FIT_LUG_T, "outer": outer, "holes": [centre] + csks},
-        ]
-    )
+    outer = scalloped_rect_pts(half_w, half_l, FIT_CORNER_R, FIT_SCALLOP_NS_R, FIT_SCALLOP_EW_R)
+    return loft_stepped_m8(outer, FIT_LUG_T, fit_screw_centres())
 
 
 def fit_skirt_tris(fit: Fit, z0: float, z1: float) -> List[Tri]:
@@ -827,16 +796,10 @@ def fit_skirt_tris(fit: Fit, z0: float, z1: float) -> List[Tri]:
 
 
 def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
-    """QR coupon: same stub length as the full mount, from the pad face.
-
-    The wheel QR is 28.8 mm deep; the last print only stuck in ~18.5 mm because
-    the stub was measured from the back of the pad. z_front is the pad face.
-    """
+    """QR coupon: 28.8 mm stub, groove at 12.3 mm, M8 in the pad, tip open."""
     z_front = FIT_LUG_T
     z_g0, _z_g3 = _groove_z_band(z_front, fit)
-    _, _z_well, z_washer = _bolt_well_zs(z_front)
-    z_from = min(z_g0, z_washer - 0.5)
-    z_from = max(z_from, z_front + 0.6)
+    z_from = max(z_g0, z_front + 0.6)
     tris: List[Tri] = []
     tris.extend(fit_flange_tris(fit))
     tris.extend(fit_skirt_tris(fit, z_front - 0.2, z_from + 0.2))
@@ -879,7 +842,7 @@ def svg_preview(path: str, fit: Fit) -> None:
         '<rect width="100%" height="100%" fill="#111"/>',
         '<text x="170" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Top</text>',
         '<text x="470" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Side</text>',
-        f'<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">Round plate  ·  M8 through the stub  ·  6 anti-spin pockets</text>',
+        f'<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">Round plate  ·  M8 in the pad  ·  open stub  ·  6 anti-spin pockets</text>',
     ]
     parts.append(
         f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{plate_r * scale}" fill="#2a2a2a" stroke="#f5a623" stroke-width="2"/>'
