@@ -81,15 +81,20 @@ SCREW_CSK_DEPTH = 2.4
 CENTER_HOLE_D = 8.4  # M8 through the stub (one bolt into a T-nut or a stud)
 CENTER_CSK_D = 22.0  # large well so the socket-cap sits down in the stub, not proud
 CENTER_CSK_DEPTH = 11.0  # M8 head is ~8 mm; extra so it is clearly recessed
-FIT_SCREW_R = 22.0  # two flaps, holes tucked against the stub
-FIT_LUG_PAD_R = 9.2  # meat around the #8 holes
-FIT_LUG_T = 5.2  # thick enough that the CSK does not eat through
+FIT_SCREW_R = 22.0  # leftover: used only as a fallback pad size
+FIT_SCREW_X = 15.0  # four #8 at the corners of the pad
+FIT_SCREW_Y = 26.0
+FIT_LUG_PAD_R = 11.0  # meat around each #8
+FIT_LUG_T = 8.0  # same as the 4040 strip so the screws have meat
 FIT_FLANGE_EXTRA = 7.0  # extra ring all around the stub (green)
+FIT_CORNER_R = 10.0  # flattened top/bottom ears
 SKIRT_WINDOW_COUNT = 6  # filament-saver holes around the stub (red)
 SKIRT_WINDOW_W = 8.0  # mm of opening at the outer wall
 FIT_STRIP_W = 40.0  # matches a 4040 face
-FIT_STRIP_LEN = 64.0  # strip across the pad, hole in the middle
-FIT_STRIP_T = 8.0  # same as the other 8020 plates
+FIT_STRIP_T = 8.0
+FIT_LIGHTEN_D = 9.0  # four holes around the centre M8
+FIT_LIGHTEN_X = 10.0
+FIT_LIGHTEN_Y = 18.0
 
 # Product bezel — raised ring so the plate looks finished, not like a raw disc
 BEZEL_W = 4.2
@@ -686,31 +691,57 @@ def stub_tris(
     )
 
 
-def fit_flange_tris(fit: Fit) -> List[Tri]:
-    """Racetrack pad around the stub — extra meat all around the #8 holes."""
+def fit_pad_half(fit: Fit) -> Tuple[float, float]:
+    """Half-width (X) and half-length (Y) of the racetrack pad."""
     shaft_r = fit.shaft_d / 2.0
-    half_w = shaft_r + FIT_FLANGE_EXTRA
-    half_l = FIT_SCREW_R + FIT_LUG_PAD_R
+    half_w = max(shaft_r + FIT_FLANGE_EXTRA, FIT_SCREW_X + FIT_LUG_PAD_R)
+    half_l = FIT_SCREW_Y + FIT_LUG_PAD_R
+    return half_w, half_l
+
+
+def fit_screw_centres() -> List[Vec2]:
+    return [
+        (FIT_SCREW_X, FIT_SCREW_Y),
+        (-FIT_SCREW_X, FIT_SCREW_Y),
+        (FIT_SCREW_X, -FIT_SCREW_Y),
+        (-FIT_SCREW_X, -FIT_SCREW_Y),
+    ]
+
+
+def fit_lighten_centres() -> List[Vec2]:
+    return [
+        (FIT_LIGHTEN_X, FIT_LIGHTEN_Y),
+        (-FIT_LIGHTEN_X, FIT_LIGHTEN_Y),
+        (FIT_LIGHTEN_X, -FIT_LIGHTEN_Y),
+        (-FIT_LIGHTEN_X, -FIT_LIGHTEN_Y),
+    ]
+
+
+def fit_flange_tris(fit: Fit) -> List[Tri]:
+    """One 8 mm pad: M8 in the middle, 4× #8 at the corners, 4 lightening holes."""
+    half_w, half_l = fit_pad_half(fit)
     outer = ensure_winding(
-        rounded_rect_pts(2.0 * half_w, 2.0 * half_l, min(half_w, half_l) - 0.2, 12),
+        rounded_rect_pts(2.0 * half_w, 2.0 * half_l, FIT_CORNER_R, 12),
         True,
     )
     hole_n = 24
-    bore = circle_pts(0.0, 0.0, STUB_BORE_D / 2.0, 48, False)
+    m8 = circle_pts(0.0, 0.0, PROFILE_HOLE_D / 2.0, 32, False)
     screws = [
-        circle_pts(0.0, FIT_SCREW_R, SCREW_D / 2.0, hole_n, False),
-        circle_pts(0.0, -FIT_SCREW_R, SCREW_D / 2.0, hole_n, False),
+        circle_pts(c[0], c[1], SCREW_D / 2.0, hole_n, False) for c in fit_screw_centres()
     ]
     csks = [
-        circle_pts(0.0, FIT_SCREW_R, SCREW_CSK_D / 2.0, hole_n, False),
-        circle_pts(0.0, -FIT_SCREW_R, SCREW_CSK_D / 2.0, hole_n, False),
+        circle_pts(c[0], c[1], SCREW_CSK_D / 2.0, hole_n, False) for c in fit_screw_centres()
+    ]
+    light = [
+        circle_pts(c[0], c[1], FIT_LIGHTEN_D / 2.0, hole_n, False)
+        for c in fit_lighten_centres()
     ]
     z_mid = max(0.6, FIT_LUG_T - SCREW_CSK_DEPTH)
     return loft_layers(
         [
-            {"z": 0.0, "outer": outer, "holes": [bore] + screws},
-            {"z": z_mid, "outer": outer, "holes": [bore] + screws},
-            {"z": FIT_LUG_T, "outer": outer, "holes": [bore] + csks},
+            {"z": 0.0, "outer": outer, "holes": [m8] + screws + light},
+            {"z": z_mid, "outer": outer, "holes": [m8] + screws + light},
+            {"z": FIT_LUG_T, "outer": outer, "holes": [m8] + csks + light},
         ]
     )
 
@@ -743,31 +774,14 @@ def fit_skirt_tris(fit: Fit, z0: float, z1: float) -> List[Tri]:
     return tris
 
 
-def fit_strip_tris(fit: Fit) -> List[Tri]:
-    """40 mm 8020 strip across the bottom. M8 is in the middle, under the stub."""
-    outer = ensure_winding(
-        rounded_rect_pts(FIT_STRIP_W, FIT_STRIP_LEN, 8.0, 8),
-        True,
-    )
-    hole_n = 32
-    small = [circle_pts(0.0, 0.0, PROFILE_HOLE_D / 2.0, hole_n, False)]
-    return loft_layers(
-        [
-            {"z": 0.0, "outer": outer, "holes": small},
-            {"z": FIT_STRIP_T, "outer": outer, "holes": small},
-        ]
-    )
-
-
 def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
-    """QR coupon that bolts to 4040 through the middle: 40 mm strip, M8 under the stub.
+    """QR coupon: M8 in the middle for 4040, 4× #8, lightening holes.
 
     Print 3 walls / 15% to test the snap. If you hang the wheel on it, use 4/25 or 6/40.
     """
     z_g0, _z_g3 = _groove_z_band(0.0, fit)
     tris: List[Tri] = []
     tris.extend(fit_flange_tris(fit))
-    tris.extend(fit_strip_tris(fit))
     tris.extend(fit_skirt_tris(fit, FIT_LUG_T - 0.2, z_g0 + 0.25))
     tris.extend(stub_tris(fit, 0.0, indexed=indexed, z_from=z_g0))
     return tris

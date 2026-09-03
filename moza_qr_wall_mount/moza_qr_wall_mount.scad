@@ -130,43 +130,42 @@ module profile_mount() {
 }
 
 module fit_test() {
-    lug_t = 5.2;
+    lug_t = 8.0;
     extra = 7.0;
-    pad_r = 9.2;
-    fit_screw_r = 22.0;
-    strip_w = 40.0;
-    strip_len = 64.0;
-    strip_t = 8.0;
+    sx = 15.0;
+    sy = 26.0;
+    pad_r = 11.0;
+    corner_r = 10.0;
+    light_d = 9.0;
+    lx = 10.0;
+    ly = 18.0;
+    half_w = max(shaft_d / 2 + extra, sx + pad_r);
+    half_l = sy + pad_r;
     shaft_r = shaft_d / 2;
     z_tip = fillet_r + shaft_len;
     g_mid = z_tip - groove_from_tip;
     z_g0 = g_mid - groove_flat / 2 - groove_plate_axial;
     difference() {
         hull() {
-            cylinder(h = lug_t, d = shaft_d + 2 * extra);
-            translate([0, fit_screw_r, 0]) cylinder(h = lug_t, r = pad_r);
-            translate([0, -fit_screw_r, 0]) cylinder(h = lug_t, r = pad_r);
+            translate([half_w - corner_r, half_l - corner_r, 0])
+                cylinder(h = lug_t, r = corner_r);
+            translate([-half_w + corner_r, half_l - corner_r, 0])
+                cylinder(h = lug_t, r = corner_r);
+            translate([half_w - corner_r, -half_l + corner_r, 0])
+                cylinder(h = lug_t, r = corner_r);
+            translate([-half_w + corner_r, -half_l + corner_r, 0])
+                cylinder(h = lug_t, r = corner_r);
         }
         translate([0, 0, -0.2])
-            cylinder(h = lug_t + 0.4, d = stub_bore_d);
-        for (a = [90, 270])
-            rotate([0, 0, a])
-                translate([fit_screw_r, 0, 0])
+            cylinder(h = lug_t + 0.4, d = center_hole_d);
+        for (x = [sx, -sx])
+            for (y = [sy, -sy])
+                translate([x, y, 0])
                     csk_hole(screw_d, screw_csk_d, screw_csk_depth, lug_t);
-    }
-    difference() {
-        hull() {
-            translate([-strip_w / 2 + 8, -strip_len / 2 + 8, 0])
-                cylinder(h = strip_t, r = 8);
-            translate([strip_w / 2 - 8, -strip_len / 2 + 8, 0])
-                cylinder(h = strip_t, r = 8);
-            translate([-strip_w / 2 + 8, strip_len / 2 - 8, 0])
-                cylinder(h = strip_t, r = 8);
-            translate([strip_w / 2 - 8, strip_len / 2 - 8, 0])
-                cylinder(h = strip_t, r = 8);
-        }
-        translate([0, 0, -0.2])
-            cylinder(h = strip_t + 0.4, d = center_hole_d);
+        for (x = [lx, -lx])
+            for (y = [ly, -ly])
+                translate([x, y, -0.2])
+                    cylinder(h = lug_t + 0.4, d = light_d);
     }
     difference() {
         qr_stub();
