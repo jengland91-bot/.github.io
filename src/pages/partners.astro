@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Disclosure from '../components/Disclosure.astro';
+import PartnerCard from '../components/PartnerCard.astro';
+
+const partners = await getCollection('partners');
+---
+
+<Base title="Partner codes" description="Moza, Insta360, and other non-Amazon partner links and discount codes." path="/partners">
+  <header class="hero">
+    <p class="kicker">Codes</p>
+    <h1 class="page-title">Partner links that are not Amazon.</h1>
+    <p class="page-lede">Add a file in src/content/partners when a brand gives you a code. Amazon products stay on the Gear page.</p>
+  </header>
+  <Disclosure />
+  <div class="grid" style="margin-top: 28px; max-width: 720px;">
+    {partners.map((partner) => (
+      <PartnerCard partner={partner} />
+    ))}
+  </div>
+</Base>

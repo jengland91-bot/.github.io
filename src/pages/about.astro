@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Disclosure from '../components/Disclosure.astro';
+import { site } from '../data/site';
+---
+
+<Base title="About" description="Josh England — photographer, content creator, sim racer, and trophy truck co-driver." path="/about">
+  <header class="hero">
+    <p class="kicker">About</p>
+    <h1 class="page-title">Josh England.</h1>
+    <p class="page-lede">I shoot, I drive, and I build the kit around both. This blog is the public notebook for what I use and why — not a dumping ground of every product on the internet.</p>
+  </header>
+  <Disclosure />
+
+  <div class="prose article" style="margin-top: 28px;">
+    <p>
+      Day job energy lives at <a href={site.socials.portfolio}>Rise Above Photo</a>. The rest of it — sim racing, off-road, cameras, streaming — lives here so the Amazon links, partner codes, and write-ups stay in one repo.
+    </p>
+    <p>
+      Socials: <a href={site.socials.instagram}>Instagram</a>, <a href={site.socials.tiktok}>TikTok</a>, <a href={site.socials.youtube}>YouTube</a>. Business: <a href={`mailto:${site.email}`}>{site.email}</a>.
+    </p>
+    <h2>How this site stays simple</h2>
+    <p>There is no admin panel and no hoop-jumping CMS. Content is files:</p>
+    <ul>
+      <li><code>src/content/posts/</code> — a new <code>.md</code> file is a new blog post.</li>
+      <li><code>src/content/gear/</code> — a new <code>.md</code> file is a new Amazon product. Put the affiliate URL in <code>amazonUrl</code>.</li>
+      <li><code>src/content/partners/</code> — brand codes that are not Amazon.</li>
+      <li><code>src/data/site.ts</code> — name, socials, storefront URL, disclosure text.</li>
+    </ul>
+    <p>
+      On a post, list gear filenames under <code>gear:</code> and the Amazon cards show up at the bottom automatically. Push to GitHub, Netlify rebuilds <a href={site.url}>{site.url.replace('https://', '')}</a>.
+    </p>
+    <p>
+      Paste your real Amazon storefront URL into <code>amazonStorefront</code> in <code>src/data/site.ts</code> (it still says YOUR_STOREFRONT_USERNAME from the old hub). Same file if the Discord invite or email changes.
+    </p>
+  </div>
+</Base>

@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  item: CollectionEntry<'gear'>;
+  compact?: boolean;
+}
+
+const { item, compact = false } = Astro.props;
+const labels: Record<string, string> = {
+  'sim-racing': 'Sim racing',
+  content: 'Content',
+  photography: 'Photography',
+  'off-road': 'Off-road',
+};
+---
+
+<article class="card">
+  <span class:list={['chip', item.data.category]}>{labels[item.data.category]}</span>
+  <h3><a href={`/gear/${item.id}`}>{item.data.title}</a></h3>
+  {!compact && <p>{item.data.description}</p>}
+  {item.data.usedFor && <p class="meta">Used for: {item.data.usedFor}</p>}
+  <a
+    class="btn btn-amazon"
+    href={item.data.amazonUrl}
+    target="_blank"
+    rel="nofollow sponsored noopener"
+  >
+    View on Amazon
+  </a>
+</article>

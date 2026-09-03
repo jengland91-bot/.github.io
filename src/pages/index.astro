@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Disclosure from '../components/Disclosure.astro';
+import PostCard from '../components/PostCard.astro';
+import GearCard from '../components/GearCard.astro';
+import PartnerCard from '../components/PartnerCard.astro';
+import { site } from '../data/site';
+
+const posts = (await getCollection('posts'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const featuredPosts = posts.filter((post) => post.data.featured).slice(0, 3);
+const latestPosts = posts.slice(0, 6);
+
+const gear = (await getCollection('gear')).sort((a, b) => a.data.title.localeCompare(b.data.title));
+const featuredGear = gear.filter((item) => item.data.featured);
+const partners = await getCollection('partners');
+---
+
+<Base path="/">
+  <section class="hero">
+    <p class="kicker">{site.author}</p>
+    <h1>Photographer. Sim racer. The gear I actually use.</h1>
+    <p class="lede">{site.tagline} Write-ups live next to the Amazon links and partner codes so nobody — including me — has to hunt for them.</p>
+  </section>
+
+  <Disclosure />
+
+  <div class="section-head">
+    <h2>Latest writing</h2>
+    <a href="/blog">All posts</a>
+  </div>
+  <div class="grid posts-grid">
+    {(featuredPosts.length ? featuredPosts : latestPosts).map((post) => (
+      <PostCard post={post} />
+    ))}
+  </div>
+
+  <div class="section-head">
+    <h2>Featured gear</h2>
+    <a href="/gear">Full kit</a>
+  </div>
+  <div class="grid gear-grid">
+    {featuredGear.map((item) => (
+      <GearCard item={item} />
+    ))}
+  </div>
+
+  <div class="section-head">
+    <h2>Partner codes</h2>
+    <a href="/partners">All codes</a>
+  </div>
+  <div class="grid">
+    {partners.map((partner) => (
+      <PartnerCard partner={partner} />
+    ))}
+  </div>
+</Base>

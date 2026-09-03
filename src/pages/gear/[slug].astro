@@ -1,0 +1,63 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const gear = await getCollection('gear');
+  return gear.map((item) => ({
+    params: { slug: item.id },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+const posts = (await getCollection('posts')).filter(
+  (post) => !post.data.draft && post.data.gear.includes(item.id),
+);
+const labels: Record<string, string> = {
+  'sim-racing': 'Sim racing',
+  content: 'Content',
+  photography: 'Photography',
+  'off-road': 'Off-road',
+};
+---
+
+<Base title={item.data.title} description={item.data.description} path={`/gear/${item.id}`}>
+  <article class="article">
+    <header>
+      <p class="kicker">{labels[item.data.category]}</p>
+      <h1 class="page-title">{item.data.title}</h1>
+      <p class="page-lede">{item.data.description}</p>
+      {item.data.usedFor && <p class="meta">Used for: {item.data.usedFor}</p>}
+      <a
+        class="btn btn-amazon"
+        href={item.data.amazonUrl}
+        target="_blank"
+        rel="nofollow sponsored noopener"
+      >
+        View on Amazon
+      </a>
+    </header>
+    <Disclosure />
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  {posts.length > 0 && (
+    <section class="related">
+      <div class="section-head">
+        <h2>Mentioned in</h2>
+        <a href="/blog">All posts</a>
+      </div>
+      <div class="grid posts-grid">
+        {posts.map((post) => (
+          <PostCard post={post} />
+        ))}
+      </div>
+    </section>
+  )}
+</Base>

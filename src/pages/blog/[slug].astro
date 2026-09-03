@@ -1,0 +1,52 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import GearCard from '../../components/GearCard.astro';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('posts')).filter((post) => !post.data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const allGear = await getCollection('gear');
+const related = allGear.filter((item) => post.data.gear.includes(item.id));
+const date = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Base title={post.data.title} description={post.data.description} path={`/blog/${post.id}`}>
+  <article class="article">
+    <header>
+      <p class="kicker">{date}</p>
+      <h1 class="page-title">{post.data.title}</h1>
+      <p class="page-lede">{post.data.description}</p>
+    </header>
+    <Disclosure />
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  {related.length > 0 && (
+    <section class="related">
+      <div class="section-head">
+        <h2>Gear in this post</h2>
+        <a href="/gear">All gear</a>
+      </div>
+      <div class="grid gear-grid">
+        {related.map((item) => (
+          <GearCard item={item} />
+        ))}
+      </div>
+    </section>
+  )}
+</Base>

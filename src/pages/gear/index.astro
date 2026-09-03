@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import GearCard from '../../components/GearCard.astro';
+
+const gear = (await getCollection('gear')).sort((a, b) => a.data.title.localeCompare(b.data.title));
+const counts = {
+  all: gear.length,
+  'sim-racing': gear.filter((item) => item.data.category === 'sim-racing').length,
+  content: gear.filter((item) => item.data.category === 'content').length,
+  photography: gear.filter((item) => item.data.category === 'photography').length,
+  'off-road': gear.filter((item) => item.data.category === 'off-road').length,
+};
+---
+
+<Base title="Gear I use" description="Amazon affiliate picks from the sim rig, camera bag, and shop." path="/gear">
+  <header class="hero">
+    <p class="kicker">Gear I use</p>
+    <h1 class="page-title">The kit on the rig, in the bag, and on the desk.</h1>
+    <p class="page-lede">Every card is an Amazon associate link. To add a product, drop a markdown file in src/content/gear with the affiliate URL. No extra pages to wire up.</p>
+  </header>
+  <Disclosure />
+
+  <div class="filters" data-filters>
+    <button class="filter-btn active" type="button" data-filter="all">All ({counts.all})</button>
+    <button class="filter-btn" type="button" data-filter="sim-racing">Sim racing ({counts['sim-racing']})</button>
+    <button class="filter-btn" type="button" data-filter="content">Content ({counts.content})</button>
+    <button class="filter-btn" type="button" data-filter="photography">Photography ({counts.photography})</button>
+    <button class="filter-btn" type="button" data-filter="off-road">Off-road ({counts['off-road']})</button>
+  </div>
+
+  <div class="grid gear-grid" data-gear-grid>
+    {gear.map((item) => (
+      <div data-item data-category={item.data.category}>
+        <GearCard item={item} />
+      </div>
+    ))}
+  </div>
+</Base>
+
+<script>
+  const buttons = document.querySelectorAll('[data-filter]');
+  const items = document.querySelectorAll('[data-item]');
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+      buttons.forEach((other) => other.classList.toggle('active', other === button));
+      items.forEach((item) => {
+        const show = filter === 'all' || item.getAttribute('data-category') === filter;
+        item.toggleAttribute('hidden', !show);
+      });
+    });
+  });
+</script>
