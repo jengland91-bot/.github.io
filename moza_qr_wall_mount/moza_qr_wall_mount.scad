@@ -12,19 +12,21 @@ shaft_d = 39.8;
 groove_d = 33.8;
 
 /* [Stub] */
-shaft_len = 28.8;  // QR depth to the bottom
+// 22.5 mm: lock at the 12.3 mm ball ring, stop ~6 mm short of the pogo pins
+shaft_len = 22.5;
 chamfer = 2.2;
 fillet_r = 0.0;
 groove_flat = 3.8;
 ball_ring_from_face = 12.3;  // opening of the QR to the ball ring
-groove_from_tip = shaft_len - ball_ring_from_face;
+groove_from_tip = 10.2;      // lip past the balls (do not set shaft_len to 28.8)
 groove_plate_axial = 1.2;
-stub_bore_d = 26.0;  // tip left open
+stub_bore_d = 26.0;  // tip left open — clears the 22.4 mm pin well
 center_hole_d = 8.4;
 center_csk_d = 14.0;     // M8 socket-cap in the pad
 pad_bolt_web = 3.0;      // plastic under the head
-land_recess = 2.4;       // ring so all six balls catch
-pocket_width_deg = 40;
+land_recess = 2.4;       // ring so every ball catches
+pocket_count = 10;
+pocket_width_deg = 22;
 pocket_offset_deg = 90;  // one seat at 12 o'clock
 indexed = true;
 
@@ -72,8 +74,8 @@ module qr_stub() {
         rotate_extrude()
             polygon(pts);
         if (indexed) {
-            for (k = [0:5])
-                rotate([0, 0, pocket_offset_deg + k * 60 - pocket_width_deg / 2])
+            for (k = [0:pocket_count - 1])
+                rotate([0, 0, pocket_offset_deg + k * (360 / pocket_count) - pocket_width_deg / 2])
                     rotate_extrude(angle = pocket_width_deg)
                         polygon([
                             [groove_r - 0.2, g_mid - groove_flat / 2],

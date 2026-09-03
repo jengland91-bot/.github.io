@@ -2,7 +2,7 @@
 
 3D-printable hanger for **MOZA** wheels (ES, RS, CS, GS, FSR — anything with the stock ball-lock QR) and other **D1-spec / Simagic-style** 50 mm ball QRs.
 
-Snap the wheel onto the stub the same way you clip it onto the base. A shallow ring takes **all six balls**, and **six deeper seats** lock rotation so the wheel should not spin when bumped. Pull the QR collar, line up a ball with a seat (one seat is at 12 o'clock), then press on.
+Snap the wheel onto the stub the same way you clip it onto the base. A shallow ring takes **all ten balls**, and **ten deeper seats** lock rotation so the wheel should not spin when bumped. Pull the QR collar, line up a ball with a seat (one seat is at 12 o'clock), then press on.
 
 A ring-groove version with no pockets is also in `stl/` if you ever want free rotation.
 
@@ -32,8 +32,8 @@ Drag the STL into **Bambu Studio**. If GitHub shows a file page instead of downl
 
 | File | What it is |
 | --- | --- |
-| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Stub **28.8 mm** into the wheel, ball groove at **12.3 mm**. Tip is open. **M8 × 20 mm** sits in the pad. U-bites + **4× #8**. **3 walls / 15%**. |
-| [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. **M8 × 20 mm** in the plate (drop it through the open stub) + 4× #8 around the rim. Ring + 6 ball seats. |
+| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Stub **22.5 mm** into the wheel, ball groove at **12.3 mm**, open tip stops ~6 mm short of the pogo pins. **M8 × 20 mm** sits in the pad. U-bites + **4× #8**. **3 walls / 15%**. |
+| [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. **M8 × 20 mm** in the plate (drop it through the open stub) + 4× #8 around the rim. Ring + 10 ball seats. |
 | [`stl/fit_test_tight.stl`](stl/fit_test_tight.stl) / [`stl/fit_test_loose.stl`](stl/fit_test_loose.stl) | Same coupon, ±0.4 mm on the shaft if nominal is off. |
 | [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same universal plate, ring groove, wheel can rotate. |
 
@@ -94,12 +94,12 @@ The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the pho
 5. If it goes on but will not lock → you are not lining the balls up with the seats, or print `fit_test_tight.stl`.
 6. When the coupon feels right, print the matching full mount (`generate.py --fit …` if you changed it).
 
-Nominal numbers (sized to the user's wheel: sleeve ID **40.9 mm**, centre opening **22.4 mm**, ball ring **12.3 mm** in, QR **28.8 mm** to the bottom):
+Nominal numbers (sized to the user's wheel: sleeve ID **40.9 mm**, centre well **22.4 mm**, ball ring **12.3 mm** in, pogo-pin plate **28.8 mm** deep):
 
 - Shaft Ø **39.8 mm** (~1.1 mm under the sleeve so PETG can slide in)
-- Stub sticks into the wheel **28.8 mm** (to the bottom of the QR)
-- Ball groove centred **12.3 mm** from the pad face (where the ring is in the wheel), then a **16.5 mm** full-diameter lip to the tip so it clicks and stays
-- Tip is **open** (26 mm bore). **M8 × 20 mm** sits in a 14 mm pocket in the pad / plate
+- Stub sticks into the wheel **22.5 mm** — long enough to lock on the balls, **~6 mm short of the pin plate** so it cannot mash the gold contacts
+- Ball groove centred **12.3 mm** from the pad face (where the ten balls sit), then a **10.2 mm** full-diameter lip to the tip so it clicks and stays
+- Tip is **open** (26 mm bore, larger than the 22.4 mm pin well). **M8 × 20 mm** sits in a 14 mm pocket in the pad / plate
 - Fit-test pad has U-bites at top / sides / bottom
 
 ## Hardware
@@ -124,10 +124,10 @@ Do not hang this on a single drywall anchor.
 ## Use
 
 1. Wall: one **M8 × 40–50 mm** through the pad into a stud, plus four #8 around the rim. Rig: one **M8 × 20 mm** through the pad into a 4040 T-nut. Stub points into the room.
-2. Pull the QR collar. Line up one ball with a 12 o'clock seat (a flap on the fit test). Press on until all six balls drop in and it clicks.
+2. Pull the QR collar. Line up one ball with a 12 o'clock seat (a flap on the fit test). Press on until all ten balls drop in and it clicks.
 3. To remove: pull the QR collar with both hands and take the wheel off, same as on the base.
 
-If the wheel sits a little rotated, try the next click (there are six). To shift the seats, change `POCKET_OFFSET_DEG` in `generate.py` and regenerate.
+If the wheel sits a little rotated, try the next click (there are ten). To shift the seats, change `POCKET_OFFSET_DEG` in `generate.py` and regenerate.
 
 Paddle clearance: the plate is 98 mm across. If paddles kiss the plate, increase `SHAFT_LEN` in `generate.py`.
 
@@ -136,19 +136,21 @@ Paddle clearance: the plate is 98 mm across. If paddles kiss the plate, increase
 | Constant | Default | What it does |
 | --- | --- | --- |
 | `FITS["nominal"].shaft_d` | 39.8 | Outer Ø the QR slides over (wheel sleeve measured 40.9) |
-| `FITS["nominal"].groove_d` | 33.8 | Deep seat floor Ø (six ball pockets) |
-| `LAND_RECESS` | 2.4 | Ring between the six seats so all balls catch |
+| `FITS["nominal"].groove_d` | 33.8 | Deep seat floor Ø (ten ball pockets) |
+| `LAND_RECESS` | 2.4 | Ring between the ten seats so all balls catch |
 | `GROOVE_FLAT` | 3.8 | How wide the ball floor is (stops the wheel shooting back off) |
-| `SHAFT_LEN` | 28.8 | Stub length — QR depth to the bottom |
+| `SHAFT_LEN` | 22.5 | Stub length — balls at 12.3 mm plus a 10.2 mm lip (stops short of the pins) |
 | `BALL_RING_FROM_FACE` | 12.3 | Pad face to the ball groove (ring in the wheel) |
-| `GROOVE_FROM_TIP` | 16.5 | Lip past the balls (`SHAFT_LEN − 12.3`) |
+| `GROOVE_FROM_TIP` | 10.2 | Lip past the balls |
+| `PIN_PLATE_DEPTH` | 28.8 | Electronics plate — stub must stay shorter than this |
 | `PLATE_D` / `PLATE_T` | 98 / 8 | Wall plate size |
 | `STUB_BORE_D` | 26 | Open bore through the stub (tip is open) |
 | `CENTER_HOLE_D` | 8.4 | M8 through the pad / plate |
 | `CENTER_CSK_D` | 14 | Pocket in the pad for an M8 socket-cap |
 | `PAD_BOLT_WEB` | 3 | Plastic under the bolt head |
 | `FIT_SCALLOP_NS_R` / `EW_R` | 11 / 10 | Fit-test U-bites at top-bottom / left-right |
-| `POCKET_OFFSET_DEG` | 90 | Rotate the six seats (90 = one at 12 o'clock) |
+| `POCKET_COUNT` | 10 | Seats matching the ten balls in the wheel QR |
+| `POCKET_OFFSET_DEG` | 90 | Rotate the seats (90 = one at 12 o'clock) |
 
 Accessories (`accessories.py`): `PHONE_INNER_W` / `PHONE_INNER_H` / `PHONE_DEPTH`, `CUP_ID`, `HOOK_INNER`.
 

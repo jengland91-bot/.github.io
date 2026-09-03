@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """Generate 3D-printable Moza / D1-spec QR steering-wheel wall mounts.
 
-The wheel-side quick release uses six spring-loaded balls. The default stub has
-six ball pockets so the wheel cannot spin when bumped (same idea as the metal
-QR on the base). A free-spin ring-groove variant is also generated.
+The wheel-side quick release uses ten spring-loaded balls around a ~40.9 mm
+sleeve, with a deeper ~22.4 mm well that holds the pogo-pin plate. The default
+stub has a ring plus ten ball seats so the wheel cannot spin when bumped. A
+free-spin ring-groove variant is also generated.
+
+The stub is sized to lock at the balls and stop short of the pin plate — it
+must not be as deep as the QR cavity or it will mash the gold pins.
 
 Also writes the 8020 accessory kit (phone holder, cup, headphone hook, cable
 clip) via accessories.py.
@@ -40,8 +44,8 @@ class Fit:
 
 
 # Sleeve ID measured on the user's wheel: 40.9 mm. PETG prints a hair large.
-# Shaft is undersized so the collar can slide on; the six balls sit in a ring
-# plus six deeper spots (one per ball) so it actually clicks.
+# Shaft is undersized so the collar can slide on; the ten balls sit in a ring
+# plus ten deeper spots (one per ball) so it actually clicks.
 FITS = {
     "tight": Fit("tight", shaft_d=40.2, groove_d=34.2),
     "nominal": Fit("nominal", shaft_d=39.8, groove_d=33.8),
@@ -50,26 +54,40 @@ FITS = {
 
 DEFAULT_FIT = "nominal"
 
-# Stub — lengths from the user's calipers on the wheel QR
+# Stub — lengths from the user's calipers + photos of the wheel QR
+#
+#   z = 0      pad face = QR opening
+#   z = 12.3   ten spring balls drop into the ring + seats
+#   z = 22.5   stub tip (open 26 mm bore) — ~6 mm short of the pin plate
+#   z = 28.8   pogo-pin plate at the bottom of the 22.4 mm centre well
+#
+# A 39.8 mm OD stub that is 28.8 mm long would mash the gold pins. The stub
+# only needs to reach the balls plus a retaining lip; the hollow centre
+# clears the T of pogo pins if the tip ever gets close.
 BALL_RING_FROM_FACE = 12.3  # opening of the QR to the ball ring
-QR_BORE_DEPTH = 28.8  # opening of the QR to the bottom
-SHAFT_LEN = QR_BORE_DEPTH  # stub goes all the way to the bottom
+PIN_PLATE_DEPTH = 28.8  # opening of the QR to the electronics plate — do not reach
+GROOVE_FROM_TIP = 10.2  # lip past the balls so it clicks and stays
+SHAFT_LEN = BALL_RING_FROM_FACE + GROOVE_FROM_TIP  # 22.5 mm
 CHAMFER = 2.2  # keep this short so the tip still has a full-diameter lip
 FILLET_R = 0.0  # no extra OD at the root — a fillet was jamming in the 40.9 mm sleeve
 GROOVE_FLAT = 3.8  # balls sit on a floor, not on the 45° ramps
-GROOVE_FROM_TIP = QR_BORE_DEPTH - BALL_RING_FROM_FACE  # 16.5 mm lip past the balls
 GROOVE_PLATE_AXIAL = 1.2  # steep backstop on the plate side (supported when printing stub-up)
-STUB_BORE_D = 26.0  # hollow through the stub, tip left open
+STUB_BORE_D = 26.0  # hollow through the stub — larger than the 22.4 mm pin well
 
-# Six ball pockets — anti-rotation stops (Moza QR has 6 balls at 60°)
-# Indexed stubs keep a RING so every ball can drop in, then six deeper seats
+if SHAFT_LEN >= PIN_PLATE_DEPTH - 4.0:
+    raise RuntimeError(
+        f"SHAFT_LEN={SHAFT_LEN} would reach the pogo-pin plate at {PIN_PLATE_DEPTH} mm"
+    )
+
+# Ten ball pockets — anti-rotation stops (wheel QR has 10 balls at 36°)
+# Indexed stubs keep a RING so every ball can drop in, then ten deeper seats
 # so the wheel clocks and stays put. No lead-in channels — those turned the
 # catch into a ramp and launched the wheel back off.
-POCKET_COUNT = 6
-POCKET_WIDTH_DEG = 40.0  # wide seats, one for each ball
-POCKET_BLEND_DEG = 6.0
+POCKET_COUNT = 10
+POCKET_WIDTH_DEG = 22.0  # seats at 36° spacing; 40° would overlap
+POCKET_BLEND_DEG = 5.0
 POCKET_OFFSET_DEG = 90.0  # first pocket at 12 o'clock when the top screw is up
-LAND_RECESS = 2.4  # mm of ring groove between the six deep seats (must actually catch)
+LAND_RECESS = 2.4  # mm of ring groove between the deep seats (must actually catch)
 STUB_SEGMENTS = 180  # finer around the pockets
 
 # Wall plate
@@ -527,7 +545,7 @@ def lathe(
 ) -> List[Tri]:
     """Revolve an (r, z) polyline around Z. Open profiles stay open (no end cap).
 
-    indexed=True cuts six ball pockets into the groove so the wheel cannot spin.
+    indexed=True cuts ball pockets into the groove so the wheel cannot spin.
     """
     prof = list(profile)
     thetas = [2 * math.pi * i / n for i in range(n)]
@@ -543,7 +561,7 @@ def lathe(
             rr = r
             if indexed and r > STUB_BORE_D / 2.0 + 0.8 and z0 - 0.05 <= z <= z3 + 0.05:
                 pt = pocket_t(t)
-                # Hybrid: ring for all six balls + deeper seats. Leave the
+                # Hybrid: ring for every ball + deeper seats. Leave the
                 # cylinder between groove and tip untouched — that lip is
                 # what stops the wheel shooting back off.
                 cut = max(0.0, shaft_r - r)
@@ -796,7 +814,7 @@ def fit_skirt_tris(fit: Fit, z0: float, z1: float) -> List[Tri]:
 
 
 def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
-    """QR coupon: 28.8 mm stub, groove at 12.3 mm, M8 in the pad, tip open."""
+    """QR coupon: 22.5 mm stub, groove at 12.3 mm, M8 in the pad, tip open."""
     z_front = FIT_LUG_T
     z_g0, _z_g3 = _groove_z_band(z_front, fit)
     z_from = max(z_g0, z_front + 0.6)
@@ -842,7 +860,7 @@ def svg_preview(path: str, fit: Fit) -> None:
         '<rect width="100%" height="100%" fill="#111"/>',
         '<text x="170" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Top</text>',
         '<text x="470" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Side</text>',
-        f'<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">Round plate  ·  M8 in the pad  ·  open stub  ·  6 anti-spin pockets</text>',
+        f'<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">Round plate  ·  M8 in the pad  ·  open stub  ·  10 anti-spin pockets</text>',
     ]
     parts.append(
         f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{plate_r * scale}" fill="#2a2a2a" stroke="#f5a623" stroke-width="2"/>'
@@ -942,6 +960,11 @@ def svg_preview(path: str, fit: Fit) -> None:
 def generate_all(out_dir: str, fit_name: str = DEFAULT_FIT) -> None:
     fit = FITS[fit_name]
     os.makedirs(out_dir, exist_ok=True)
+    print(
+        f"QR stub {SHAFT_LEN:.1f} mm  ·  groove at {BALL_RING_FROM_FACE:.1f} mm  ·  "
+        f"{PIN_PLATE_DEPTH - SHAFT_LEN:.1f} mm short of pin plate  ·  "
+        f"{POCKET_COUNT} seats"
+    )
     jobs = [
         ("stl/moza_qr_universal_mount.stl", wall_mount_tris(fit, True), f"moza_qr_uni_{fit.name}"),
         ("stl/moza_qr_wall_mount.stl", wall_mount_tris(fit, True), f"moza_qr_wall_{fit.name}"),
