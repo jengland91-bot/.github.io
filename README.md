@@ -2,7 +2,7 @@
 
 Measured on the Plus (stand off): **139.6 × 135.0 × 29.9 mm**.
 
-Three printed parts. The **front ring** is only a frame around the outside — keys and dials stay open. It screws to a **back plate**. The back plate **hinges** on a **4040 clamp** so you can tilt the deck, then lock it with an M5 nylock.
+Three printed parts, kept light. The **front ring** is four screw corners plus thin straps — keys and dials stay open. The logo end is a **cable gate** so the USB-C plug drops in. The **back plate** is a + rib with four pockets cut out. It **hinges** on a **4040 clamp** so you can tilt the deck, then lock it with an M5 nylock.
 
 ```
    [ front ring ]     picture frame around the outside
@@ -45,8 +45,8 @@ PETG, 0.20 mm, 4 walls, 40% gyroid, no supports.
 
 1. Print the SVG at 100%. The white window must miss every key and dial.
 2. Take the stand off the Plus.
-3. Sit the Plus on the back plate, USB-C in the notch.
-4. Drop the ring over the outside. Four M3s from the back.
+3. Sit the Plus on the back plate. Drop the USB-C cable through the open gate on the logo end (no threading).
+4. Drop the ring over the outside — same gate lines up. Four M3s from the back.
 5. Slide the clamp onto a 40 mm face (shifter arm, wheel-deck upright, spare 4040). Two M8s into T-nuts.
 6. One M5 through the three hinge ears. Point the face where you want it, tighten the nylock.
 
