@@ -2,7 +2,7 @@
 
 3D-printable hanger for **MOZA** wheels (ES, RS, CS, GS, FSR — anything with the stock ball-lock QR) and other **D1-spec / Simagic-style** 50 mm ball QRs.
 
-Snap the wheel onto the stub the same way you clip it onto the base. Hold it so **six seats are on top and four on the bottom** (same as the wheelbase). A shallow ring still catches if you are a few degrees off; the deep seats lock rotation. Pull the QR collar, line it up, then press on.
+Snap the wheel onto the stub the same way you clip it onto the base. Hold it so **six seats are on top and four on the bottom** (same as the wheelbase). The stub is a slimmer lead-in, then a collar with **round 6.5 mm dimples** like the working hangers. Pull the QR collar, line it up, then press on.
 
 A ring-groove version with no pockets is also in `stl/` if you ever want free rotation.
 
@@ -32,7 +32,7 @@ Drag the STL into **Bambu Studio**. If GitHub shows a file page instead of downl
 
 | File | What it is |
 | --- | --- |
-| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** **6.5 mm** ball cutouts, **4.2 mm** deep, top of each pocket at **22.7 mm**. 6-up / 4-down. **M8 × 20 mm** in the pad. **3 walls / 15%**. |
+| [`stl/fit_test_nominal.stl`](stl/fit_test_nominal.stl) | **Print this first.** Round **6.5 mm** dimples like the working hangers. Top of each cup at **22.7 mm**. 6-up / 4-down. **3 walls / 15%**. |
 | [`stl/moza_qr_universal_mount.stl`](stl/moza_qr_universal_mount.stl) | **The one print.** Round plate. Same stub. **M8 × 20 mm** in the plate + 4× #8 around the rim. |
 | [`stl/fit_test_tight.stl`](stl/fit_test_tight.stl) / [`stl/fit_test_loose.stl`](stl/fit_test_loose.stl) | Same coupon, ±0.4 mm on the shaft if nominal is off. |
 | [`stl/moza_qr_wall_mount_free.stl`](stl/moza_qr_wall_mount_free.stl) | Same universal plate, ring groove, wheel can rotate. |
@@ -67,7 +67,7 @@ Or open `moza_qr_wall_mount.scad` in OpenSCAD and export the wheel mount.
 
 ## Bambu Lab print settings
 
-Print **plate on the bed, stub pointing up**. No supports. The groove walls are 45° so a P1S / X1C / A1 will handle them.
+Print **plate on the bed, stub pointing up**. No supports. Bambu may warn about overhangs on the dimples — leave supports off.
 
 | Setting | Value |
 | --- | --- |
@@ -96,10 +96,10 @@ The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the pho
 
 Nominal numbers (sized to the user's wheel: sleeve ID **40.9 mm**, **6.5 mm** balls, cutout top **22.7 mm** in, pogo-pin plate **28.8 mm** deep):
 
-- Shaft Ø **39.8 mm**
-- Ball floor **6.5 mm** wide and **4.2 mm** deep; the **top** of each cutout is **22.7 mm** from the pad (centre at 19.45 mm)
-- **6 seats on top / 4 on the bottom** (Moza clock)
-- Stub **~26 mm** long, open **22 mm** bore so the gold pins stay clear
+- Slimmer lead-in, then a collar with **round 6.5 mm dimples** (same idea as the working green/black hangers)
+- Dimple **centres at 19.45 mm**, **top of each cup at 22.7 mm**
+- **6 seats on top / 4 on the bottom**
+- Stub **25.7 mm**, open **22 mm** bore
 - **M8 × 20 mm** sits in a 14 mm pocket in the pad / plate
 
 ## Hardware
@@ -135,13 +135,13 @@ Paddle clearance: the plate is 98 mm across. If paddles kiss the plate, increase
 
 | Constant | Default | What it does |
 | --- | --- | --- |
-| `FITS["nominal"].shaft_d` | 39.8 | Outer Ø the QR slides over (wheel sleeve measured 40.9) |
-| `FITS["nominal"].groove_d` | 31.4 | Deep seat floor Ø (4.2 mm radial for 6.5 mm balls) |
-| `LAND_RECESS` | 3.0 | Ring between the seats so balls still catch off-angle |
-| `GROOVE_FLAT` / `BALL_D` | 6.5 | Axial width of each ball cutout |
-| `BALL_CUTOUT_TOP` | 22.7 | Tip-side of the ball floor, from the pad face |
-| `BALL_RING_FROM_FACE` | 19.45 | Centre of the ball floor |
-| `SHAFT_LEN` | 26.2 | Stub length — stays short of the 28.8 mm pin plate |
+| `FITS["nominal"].shaft_d` | 39.8 | Collar Ø at the dimples |
+| `LEAD_D_DELTA` | 2.0 | Lead-in is this much slimmer so it slides on |
+| `BALL_D` | 6.5 | Ball / dimple width |
+| `DIMPLE_INSET` | 0.75 | How deep the cup is (~4.2 mm) |
+| `BALL_CUTOUT_TOP` | 22.7 | Top of each dimple, from the pad face |
+| `BALL_RING_FROM_FACE` | 19.45 | Dimple centre |
+| `SHAFT_LEN` | 25.7 | Stub length — stays short of the 28.8 mm pin plate |
 | `PIN_PLATE_DEPTH` | 28.8 | Electronics plate — stub must stay shorter than this |
 | `PLATE_D` / `PLATE_T` | 98 / 8 | Wall plate size |
 | `STUB_BORE_D` | 22 | Open bore so the pogo pins cannot get mashed |

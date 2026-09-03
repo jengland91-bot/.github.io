@@ -2,20 +2,20 @@
 <rect width="100%" height="100%" fill="#111"/>
 <text x="170" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Top</text>
 <text x="470" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Side</text>
-<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">6-up/4-down  ·  6.5 mm balls  ·  cutout top at 22.7 mm  ·  4.2 mm deep</text>
+<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">6.5 mm round dimples  ·  6-up/4-down  ·  top of cup at 22.7 mm</text>
 <circle cx="170" cy="180" r="117.6" fill="#2a2a2a" stroke="#f5a623" stroke-width="2"/>
 <circle cx="170" cy="180" r="47.76" fill="#3d3d3d" stroke="#f5a623" stroke-width="1.5"/>
-<circle cx="170" cy="180" r="37.68" fill="none" stroke="#888" stroke-dasharray="4 3"/>
-<line x1="207.3" y1="170.0" x2="221.9" y2="166.1" stroke="#6cf" stroke-width="2"/>
-<line x1="197.3" y1="152.7" x2="208.0" y2="142.0" stroke="#6cf" stroke-width="2"/>
-<line x1="180.0" y1="142.7" x2="183.9" y2="128.1" stroke="#6cf" stroke-width="2"/>
-<line x1="160.0" y1="142.7" x2="156.1" y2="128.1" stroke="#6cf" stroke-width="2"/>
-<line x1="142.7" y1="152.7" x2="132.0" y2="142.0" stroke="#6cf" stroke-width="2"/>
-<line x1="132.7" y1="170.0" x2="118.1" y2="166.1" stroke="#6cf" stroke-width="2"/>
-<line x1="142.7" y1="207.3" x2="132.0" y2="218.0" stroke="#6cf" stroke-width="2"/>
-<line x1="160.0" y1="217.3" x2="156.1" y2="231.9" stroke="#6cf" stroke-width="2"/>
-<line x1="180.0" y1="217.3" x2="183.9" y2="231.9" stroke="#6cf" stroke-width="2"/>
-<line x1="197.3" y1="207.3" x2="208.0" y2="218.0" stroke="#6cf" stroke-width="2"/>
+<circle cx="170" cy="180" r="45.4" fill="none" stroke="#888" stroke-dasharray="4 3"/>
+<circle cx="214.4" cy="168.1" r="8.3" fill="#111" stroke="#9d6" stroke-width="1.6"/>
+<circle cx="202.5" cy="147.5" r="8.3" fill="#111" stroke="#9d6" stroke-width="1.6"/>
+<circle cx="181.9" cy="135.6" r="8.3" fill="#111" stroke="#9d6" stroke-width="1.6"/>
+<circle cx="158.1" cy="135.6" r="8.3" fill="#111" stroke="#9d6" stroke-width="1.6"/>
+<circle cx="137.5" cy="147.5" r="8.3" fill="#111" stroke="#9d6" stroke-width="1.6"/>
+<circle cx="125.6" cy="168.1" r="8.3" fill="#111" stroke="#9d6" stroke-width="1.6"/>
+<circle cx="137.5" cy="212.5" r="8.3" fill="#111" stroke="#9d6" stroke-width="1.6"/>
+<circle cx="158.1" cy="224.4" r="8.3" fill="#111" stroke="#9d6" stroke-width="1.6"/>
+<circle cx="181.9" cy="224.4" r="8.3" fill="#111" stroke="#9d6" stroke-width="1.6"/>
+<circle cx="202.5" cy="212.5" r="8.3" fill="#111" stroke="#9d6" stroke-width="1.6"/>
 <circle cx="170" cy="180" r="26.4" fill="#111" stroke="#6cf" stroke-dasharray="4 3"/>
 <circle cx="170" cy="180" r="16.8" fill="none" stroke="#6cf" stroke-width="1.4"/>
 <circle cx="170" cy="180" r="10.08" fill="#111" stroke="#6cf"/>
@@ -28,9 +28,11 @@
 <circle cx="170.0" cy="266.4" r="11.76" fill="none" stroke="#6cf" stroke-width="1.2"/>
 <circle cx="170.0" cy="266.4" r="5.76" fill="#111" stroke="#6cf"/>
 <rect x="430.0" y="62.4" width="19.2" height="235.2" fill="#2a2a2a" stroke="#f5a623"/>
-<polyline points="430.0,62.4 449.2,62.4 449.2,132.2 485.2,132.2 488.1,142.3 503.7,142.3 508.5,132.2 509.2,132.2 512.1,135.1" fill="none" stroke="#f5a623" stroke-width="2"/>
-<polyline points="430.0,297.6 449.2,297.6 449.2,227.8 485.2,227.8 488.1,217.7 503.7,217.7 508.5,227.8 509.2,227.8 512.1,224.9" fill="none" stroke="#f5a623" stroke-width="2"/>
-<line x1="512.1" y1="135.1" x2="512.1" y2="224.9" stroke="#f5a623"/>
+<polyline points="430.0,62.4 449.2,62.4 449.2,134.6 482.8,134.6 487.6,132.2 506.1,132.2 510.9,137.0" fill="none" stroke="#f5a623" stroke-width="2"/>
+<polyline points="430.0,297.6 449.2,297.6 449.2,225.4 482.8,225.4 487.6,227.8 506.1,227.8 510.9,223.0" fill="none" stroke="#f5a623" stroke-width="2"/>
+<line x1="510.9" y1="137.0" x2="510.9" y2="223.0" stroke="#f5a623"/>
+<circle cx="495.9" cy="134.0" r="8.3" fill="#111" stroke="#9d6" stroke-width="1.6"/>
+<circle cx="495.9" cy="226.0" r="8.3" fill="#111" stroke="#9d6" stroke-width="1.6"/>
 <text x="170" y="319.6" fill="#6cf" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">98 mm plate</text>
-<text x="471.0" y="319.6" fill="#6cf" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">~34 mm stand-off</text>
+<text x="470.4" y="319.6" fill="#6cf" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">~34 mm stand-off</text>
 </svg>

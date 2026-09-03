@@ -4,25 +4,23 @@
 // The Python generator (generate.py) is what produced the STLs in ./stl.
 // This file is the same geometry, for people who prefer to edit OpenSCAD.
 
-$fn = 96;
+$fn = 120;
 
 /* [Fit] */
 shaft_d = 39.8;
-groove_d = 31.4;  // 4.2 mm radial seats for 6.5 mm balls
+lead_d_delta = 2.0;
 
 /* [Stub] */
 ball_d = 6.5;
-ball_cutout_top = 22.7;           // tip-side of the ball floor
-groove_flat = ball_d;
-ball_ring_from_face = ball_cutout_top - groove_flat / 2;
-groove_plate_axial = 1.2;
-groove_tip_axial = 2.0;
-lip_flat = 1.5;
+ball_cutout_top = 22.7;
+ball_ring_from_face = ball_cutout_top - ball_d / 2;
+dimple_r = ball_d / 2 + 0.2;
+dimple_inset = 0.75;
+collar_blend = 2.0;
+lip_flat = 3.0;
 stub_bore_d = 22.0;
-chamfer = 1.2;
+chamfer = 2.0;
 fillet_r = 0.0;
-land_recess = 3.0;
-pocket_width_deg = 18.7;          // 6.5 mm at Ø39.8
 pocket_angles = [15, 45, 75, 105, 135, 165, 225, 255, 285, 315];
 indexed = true;
 center_hole_d = 8.4;
@@ -42,31 +40,20 @@ part = "wall"; // [wall, profile, fit_test]
 
 module qr_stub() {
     shaft_r = shaft_d / 2;
-    groove_r = groove_d / 2;
-    land_r = shaft_r - land_recess;
-    ring_r = indexed ? land_r : groove_r;
-    depth = shaft_r - groove_r;
-    tip_axial = min(depth, groove_tip_axial);
-    plate_axial = min(depth, groove_plate_axial);
-    g_mid = fillet_r + ball_ring_from_face;
-    z_g0 = g_mid - groove_flat / 2 - plate_axial;
-    z_g1 = g_mid - groove_flat / 2;
-    z_g2 = g_mid + groove_flat / 2;
-    z_g3 = g_mid + groove_flat / 2 + tip_axial;
-    z_tip = z_g3 + lip_flat;
+    lead_r = (shaft_d - lead_d_delta) / 2;
     inner_r = stub_bore_d / 2;
-    pocket_depth = depth;
-
+    g_mid = fillet_r + ball_ring_from_face;
+    z_collar = g_mid - dimple_r - collar_blend;
+    z_full = z_collar + collar_blend;
+    z_tip = ball_cutout_top + lip_flat;
     pts = [
         [inner_r, 0],
         [inner_r, z_tip],
         [shaft_r - chamfer, z_tip],
         [shaft_r, z_tip - chamfer],
-        [shaft_r, z_g3],
-        [ring_r, z_g2],
-        [ring_r, z_g1],
-        [shaft_r, z_g0],
-        [shaft_r, 0],
+        [shaft_r, z_full],
+        [lead_r, z_collar],
+        [lead_r, 0],
         [inner_r, 0]
     ];
     difference() {
@@ -74,14 +61,9 @@ module qr_stub() {
             polygon(pts);
         if (indexed) {
             for (a = pocket_angles)
-                rotate([0, 0, a - pocket_width_deg / 2])
-                    rotate_extrude(angle = pocket_width_deg)
-                        polygon([
-                            [groove_r - 0.2, g_mid - groove_flat / 2],
-                            [groove_r - 0.2, g_mid + groove_flat / 2],
-                            [shaft_r + 0.8, g_mid + groove_flat / 2 + pocket_depth + 0.6],
-                            [shaft_r + 0.8, g_mid - groove_flat / 2 - pocket_depth - 0.6]
-                        ]);
+                rotate([0, 0, a])
+                    translate([shaft_r - dimple_inset, 0, g_mid])
+                        sphere(r = dimple_r);
         }
     }
 }
@@ -140,7 +122,7 @@ module fit_test() {
     half_l = sy + pad_r;
     shaft_r = shaft_d / 2;
     g_mid = lug_t + fillet_r + ball_ring_from_face;
-    z_g0 = g_mid - groove_flat / 2 - groove_plate_axial;
+    z_g0 = g_mid - dimple_r;
     difference() {
         hull() {
             translate([half_w - corner_r, half_l - corner_r, 0])

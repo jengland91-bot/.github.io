@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """Generate 3D-printable Moza / D1-spec QR steering-wheel wall mounts.
 
-The wheel-side quick release is a 6-up / 4-down ball lock (same as the Moza
-base). Ball cutouts are 6.5 mm wide and 4.2 mm deep; the top of each cutout
-sits 22.7 mm in from the pad face. A free-spin ring-groove variant is also
-generated.
+The stub copies the working hangers: a slimmer lead-in, then a collar with
+round 6.5 mm ball dimples in Moza's 6-up / 4-down clock. Dimple centres sit
+so the top of each cup is 22.7 mm from the pad face. A free-spin ring-groove
+variant is also generated.
 
-Also writes the 8020 accessory kit (phone holder, cup, headphone hook, cable
-clip) via accessories.py.
+Also writes the 8020 accessory kit via accessories.py.
 
 Units: millimetres.
 """
@@ -40,10 +39,9 @@ class Fit:
     groove_d: float
 
 
-# Sleeve ID measured on the user's wheel: 40.9 mm. PETG prints a hair large.
-# Shaft is undersized so the collar can slide on. Seats are 4.2 mm deep for
-# the 6.5 mm balls (was 3.0 mm — too shallow to click).
-_SEAT_DEPTH = 4.2
+# Sleeve ID 40.9 mm. Lead-in is extra-undersize so it slides; the collar
+# carries the dimples at the working hangers' diameter.
+_SEAT_DEPTH = 4.2  # free-spin ring only
 FITS = {
     "tight": Fit("tight", shaft_d=40.2, groove_d=40.2 - 2 * _SEAT_DEPTH),
     "nominal": Fit("nominal", shaft_d=39.8, groove_d=39.8 - 2 * _SEAT_DEPTH),
@@ -52,34 +50,35 @@ FITS = {
 
 DEFAULT_FIT = "nominal"
 
-# Ball cutouts — Josh's calipers on the wheel QR:
-#   balls are 6.5 mm wide
-#   the TOP of each cutout (tip-side of the floor) sits 22.7 mm in
-#   12.3 mm was the visible ring, not where the balls actually drop
+# Working hangers (green Moza-style + black dimple hub) use round cups, not a
+# lathed ring. Josh: balls 6.5 mm, top of the cutout 22.7 mm in.
 #
-#   z = 0       pad face = QR opening
-#   z = 16.2    pad-side of the 6.5 mm ball floor
-#   z = 19.45   ball centre
-#   z = 22.7    top of the cutout
-#   z ≈ 25.5    stub tip (open bore, short of the 28.8 mm pin plate)
+#   z = 0       pad face
+#   z = 0–15    slimmer lead-in (slides through the 40.9 mm sleeve)
+#   z = 19.45   dimple centres (6.5 mm cups, 6-up / 4-down)
+#   z = 22.7    top of each dimple
+#   z ≈ 25.7    stub tip, open 22 mm bore, short of the 28.8 mm pin plate
 BALL_D = 6.5
 BALL_CUTOUT_TOP = 22.7
-GROOVE_FLAT = BALL_D
-BALL_RING_FROM_FACE = BALL_CUTOUT_TOP - GROOVE_FLAT / 2.0  # 19.45 mm centre
+BALL_RING_FROM_FACE = BALL_CUTOUT_TOP - BALL_D / 2.0  # 19.45 mm
 PIN_PLATE_DEPTH = 28.8
-GROOVE_PLATE_AXIAL = 1.2
-GROOVE_TIP_AXIAL = 2.0  # cap the return so the stub stays off the pins
-LIP_FLAT = 1.5  # full-Ø after the groove return
-NOSE_D = 21.0
-NOSE_LEN = 0.0  # sleeve is deep enough for the 22.7 mm cutouts — no thin nose
-NOSE_BORE_D = 14.0
-STUB_BORE_D = 22.0  # open through the stub so the pogo pins cannot get mashed
-CHAMFER = 1.2
+DIMPLE_R = BALL_D / 2.0 + 0.2  # slight oversize so 6.5 mm balls sit down
+DIMPLE_INSET = 0.75  # centre inside the collar → ~4.2 mm deep cups
+LEAD_D_DELTA = 2.0  # lead-in is this much smaller than shaft_d
+COLLAR_BLEND = 2.0  # taper from lead-in up to the dimple collar
+CHAMFER = 2.0
 FILLET_R = 0.0
+STUB_BORE_D = 22.0
+# Keep these names so the free-spin ring path still compiles
+GROOVE_FLAT = BALL_D
+GROOVE_PLATE_AXIAL = 1.2
+GROOVE_TIP_AXIAL = 2.0
+LIP_FLAT = 3.0  # rim past the top of the dimple
+NOSE_D = 21.0
+NOSE_LEN = 0.0
+NOSE_BORE_D = 14.0
 
-_NOMINAL_TIP_AXIAL = min(_SEAT_DEPTH, GROOVE_TIP_AXIAL)
-LARGE_LEN = BALL_CUTOUT_TOP + _NOMINAL_TIP_AXIAL + LIP_FLAT
-SHAFT_LEN = LARGE_LEN + NOSE_LEN
+SHAFT_LEN = BALL_CUTOUT_TOP + LIP_FLAT  # 25.7 mm
 GROOVE_FROM_TIP = SHAFT_LEN - BALL_RING_FROM_FACE
 
 if SHAFT_LEN >= PIN_PLATE_DEPTH - 2.5:
@@ -87,16 +86,15 @@ if SHAFT_LEN >= PIN_PLATE_DEPTH - 2.5:
         f"SHAFT_LEN={SHAFT_LEN} would reach the pogo-pin plate at {PIN_PLATE_DEPTH} mm"
     )
 
-# Moza official hanger: six seats on top, four on the bottom, gaps at 3 and 9.
-# 0° = +X = 3 o'clock, 90° = 12 o'clock. 30° pitch inside each group.
-# Pocket width is the 6.5 mm ball at the shaft surface.
+# Moza official hanger: six dimples on top, four on the bottom.
 POCKET_ANGLES_DEG = (15, 45, 75, 105, 135, 165, 225, 255, 285, 315)
 POCKET_COUNT = len(POCKET_ANGLES_DEG)
 POCKET_WIDTH_DEG = math.degrees(BALL_D / (FITS["nominal"].shaft_d / 2.0))
 POCKET_BLEND_DEG = 3.0
 POCKET_OFFSET_DEG = 90.0
-LAND_RECESS = 3.0  # deeper ring so 6.5 mm balls still catch off-angle
-STUB_SEGMENTS = 180
+LAND_RECESS = 2.4  # free-spin ring depth
+STUB_SEGMENTS = 240
+DIMPLE_Z_SLICES = 18
 
 # Wall plate
 PLATE_D = 98.0
@@ -521,8 +519,50 @@ def pocket_t(theta: float) -> float:
     return x * x * (3.0 - 2.0 * x)
 
 
+def _dimple_centers_xy(shaft_r: float) -> List[Tuple[float, float]]:
+    cr = shaft_r - DIMPLE_INSET
+    return [
+        (cr * math.cos(math.radians(a)), cr * math.sin(math.radians(a)))
+        for a in POCKET_ANGLES_DEG
+    ]
+
+
+def _cut_dimples(
+    r: float, theta: float, z: float, z_base: float, shaft_r: float
+) -> float:
+    """Pull this (r, theta, z) onto any 6.5 mm spherical cup it sits inside."""
+    z_c = z_base + FILLET_R + BALL_RING_FROM_FACE
+    if abs(z - z_c) > DIMPLE_R + 0.15:
+        return r
+    xh, yh = math.cos(theta), math.sin(theta)
+    out = r
+    r2 = DIMPLE_R * DIMPLE_R
+    for cx, cy in _dimple_centers_xy(shaft_r):
+        b_lin = cx * xh + cy * yh
+        c0 = cx * cx + cy * cy + (z - z_c) ** 2 - r2
+        disc = b_lin * b_lin - c0
+        if disc < 0.0:
+            continue
+        r_hit = b_lin - math.sqrt(disc)
+        if 0.8 < r_hit < out:
+            out = r_hit
+    return out
+
+
+def _ring_cut(r: float, z: float, z_base: float, shaft_r: float) -> float:
+    """Shallow free-spin ring at the same height as the dimples."""
+    z_c = z_base + FILLET_R + BALL_RING_FROM_FACE
+    half = BALL_D / 2.0
+    dz = abs(z - z_c)
+    if dz >= half:
+        return r
+    t = 1.0 - dz / half
+    t = t * t * (3.0 - 2.0 * t)
+    return min(r, shaft_r - LAND_RECESS * t)
+
+
 def _groove_tapers(fit: Fit) -> Tuple[float, float, float]:
-    """Plate-side axial, tip-side axial, radial depth of the full groove."""
+    """Plate-side axial, tip-side axial, radial depth of the free-spin ring."""
     depth = fit.shaft_d / 2.0 - fit.groove_d / 2.0
     tip_axial = min(depth, GROOVE_TIP_AXIAL)
     plate_axial = min(depth, GROOVE_PLATE_AXIAL)
@@ -530,11 +570,8 @@ def _groove_tapers(fit: Fit) -> Tuple[float, float, float]:
 
 
 def _groove_z_band(z_base: float, fit: Fit) -> Tuple[float, float]:
-    plate_axial, tip_axial, _ = _groove_tapers(fit)
     g_mid = z_base + FILLET_R + BALL_RING_FROM_FACE
-    z0 = g_mid - GROOVE_FLAT / 2.0 - plate_axial
-    z3 = g_mid + GROOVE_FLAT / 2.0 + tip_axial
-    return z0, z3
+    return g_mid - DIMPLE_R, g_mid + DIMPLE_R
 
 
 def lathe(
@@ -547,28 +584,26 @@ def lathe(
 ) -> List[Tri]:
     """Revolve an (r, z) polyline around Z. Open profiles stay open (no end cap).
 
-    indexed=True cuts ball pockets into the groove so the wheel cannot spin.
+    indexed=True cuts round 6.5 mm dimples (working-hanger style).
     """
     prof = list(profile)
     thetas = [2 * math.pi * i / n for i in range(n)]
     shaft_r = fit.shaft_d / 2.0 if fit is not None else 0.0
-    z0 = z3 = 0.0
-    if indexed and fit is not None and z_base is not None:
-        z0, z3 = _groove_z_band(z_base, fit)
     rings: List[List[Vec3]] = []
     for r, z in prof:
         r = max(r, 0.0)
         ring: List[Vec3] = []
         for t in thetas:
             rr = r
-            if indexed and r > STUB_BORE_D / 2.0 + 0.5 and z0 - 0.05 <= z <= z3 + 0.05:
-                pt = pocket_t(t)
-                # Hybrid: ring for every ball + deeper seats. Leave the
-                # cylinder between groove and tip untouched — that lip is
-                # what stops the wheel shooting back off.
-                cut = max(0.0, shaft_r - r)
-                land_cut = min(cut, LAND_RECESS)
-                rr = shaft_r - (land_cut + (cut - land_cut) * pt)
+            if (
+                fit is not None
+                and z_base is not None
+                and r > STUB_BORE_D / 2.0 + 0.5
+            ):
+                if indexed:
+                    rr = _cut_dimples(r, t, z, z_base, shaft_r)
+                else:
+                    rr = _ring_cut(r, z, z_base, shaft_r)
             ring.append((rr * math.cos(t), rr * math.sin(t), z))
         rings.append(ring)
     tris: List[Tri] = []
@@ -613,65 +648,45 @@ def lathe(
 def qr_stub_profile(
     fit: Fit, z_base: float, inner_r: float | None = None, z_from: float | None = None
 ) -> List[Vec2]:
-    """Closed (r, z) loop for the QR stub: 6.5 mm ball floor ending at 22.7 mm.
-
-    z_from starts the solid above the plate (fit-test skirt is built separately).
-    """
+    """Lead-in + dimple collar. Extra Z rings tessellate the spherical cups."""
     shaft_r = fit.shaft_d / 2.0
-    groove_r = fit.groove_d / 2.0
-    large_inner = STUB_BORE_D / 2.0
-    plate_axial, tip_axial, _ = _groove_tapers(fit)
+    lead_r = (fit.shaft_d - LEAD_D_DELTA) / 2.0
+    inner = STUB_BORE_D / 2.0
     z_start = z_base if z_from is None else z_from
-    g_mid = z_base + FILLET_R + BALL_RING_FROM_FACE
-    g_half_flat = GROOVE_FLAT / 2.0
-    z_g0 = g_mid - g_half_flat - plate_axial
-    z_g1 = g_mid - g_half_flat
-    z_g2 = g_mid + g_half_flat
-    z_g3 = g_mid + g_half_flat + tip_axial
-    z_step = z_g3 + LIP_FLAT
-    z_tip = z_step + NOSE_LEN
+    z_tip = z_base + FILLET_R + SHAFT_LEN
+    z_c = z_base + FILLET_R + BALL_RING_FROM_FACE
+    z_collar = z_c - DIMPLE_R - COLLAR_BLEND
     chamfer_z = z_tip - CHAMFER
 
-    if NOSE_LEN > 0.05:
-        nose_r = NOSE_D / 2.0
-        nose_inner = NOSE_BORE_D / 2.0
-        pts: List[Vec2] = [
-            (large_inner, z_start),
-            (large_inner, z_step),
-            (nose_inner, z_step),
-            (nose_inner, z_tip),
-            (nose_r - CHAMFER, z_tip),
-            (nose_r, chamfer_z),
-            (nose_r, z_step),
-            (shaft_r, z_step),
-            (shaft_r, z_g3),
-            (groove_r, z_g2),
-            (groove_r, z_g1),
-            (shaft_r, z_g0),
-        ]
-    else:
-        pts = [
-            (large_inner, z_start),
-            (large_inner, z_tip),
-            (shaft_r - CHAMFER, z_tip),
-            (shaft_r, chamfer_z),
-            (shaft_r, z_g3),
-            (groove_r, z_g2),
-            (groove_r, z_g1),
-            (shaft_r, z_g0),
-        ]
-    if z_start < z_g0 - 0.05:
-        if FILLET_R > 0.15 and z_start <= z_base + 0.05:
-            for i in range(FILLET_SEGS + 1):
-                a = math.pi / 2 * (1.0 - i / FILLET_SEGS)
-                pts.append(
-                    (
-                        shaft_r + FILLET_R * math.cos(a),
-                        z_base + FILLET_R * math.sin(a),
-                    )
-                )
-        else:
-            pts.append((shaft_r, z_start))
+    def r_at(z: float) -> float:
+        if z >= z_collar + COLLAR_BLEND:
+            return shaft_r
+        if z <= z_collar:
+            return lead_r
+        t = (z - z_collar) / COLLAR_BLEND
+        return lead_r + (shaft_r - lead_r) * t
+
+    pts: List[Vec2] = [
+        (inner, z_start),
+        (inner, z_tip),
+        (shaft_r - CHAMFER, z_tip),
+    ]
+    zs = [chamfer_z, z_collar + COLLAR_BLEND, z_collar, z_start]
+    z_lo = z_c - DIMPLE_R - 0.2
+    z_hi = min(chamfer_z - 0.05, z_c + DIMPLE_R + 0.2)
+    for i in range(DIMPLE_Z_SLICES + 1):
+        zs.append(z_lo + (z_hi - z_lo) * i / DIMPLE_Z_SLICES)
+    seen = set()
+    outer_z: List[float] = []
+    for z in sorted(zs, reverse=True):
+        z = min(max(z, z_start), chamfer_z)
+        key = round(z, 4)
+        if key in seen:
+            continue
+        seen.add(key)
+        outer_z.append(z)
+    for z in outer_z:
+        pts.append((r_at(z), z))
     return pts
 
 
@@ -834,10 +849,9 @@ def fit_skirt_tris(fit: Fit, z0: float, z1: float) -> List[Tri]:
 
 
 def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
-    """QR coupon: 6.5 mm ball cutouts, top at 22.7 mm, 6-up/4-down, M8 in the pad."""
+    """QR coupon: 6.5 mm spherical dimples, top at 22.7 mm, 6-up/4-down."""
     z_front = FIT_LUG_T
-    z_g0, _z_g3 = _groove_z_band(z_front, fit)
-    z_from = max(z_g0, z_front + 0.6)
+    z_from = z_front + 0.8
     tris: List[Tri] = []
     tris.extend(fit_flange_tris(fit))
     tris.extend(fit_skirt_tris(fit, z_front - 0.2, z_from + 0.2))
@@ -868,7 +882,6 @@ def svg_preview(path: str, fit: Fit) -> None:
         return f"{side_c[0] + z * scale:.1f},{side_c[1] - r * scale:.1f}"
 
     shaft_r = fit.shaft_d / 2
-    groove_r = fit.groove_d / 2
     plate_r = PLATE_D / 2
     z_tip = PLATE_T + FILLET_R + SHAFT_LEN
 
@@ -880,7 +893,7 @@ def svg_preview(path: str, fit: Fit) -> None:
         '<rect width="100%" height="100%" fill="#111"/>',
         '<text x="170" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Top</text>',
         '<text x="470" y="28" fill="#eee" font-family="system-ui,sans-serif" font-size="16" text-anchor="middle">Side</text>',
-        f'<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">6-up/4-down  ·  6.5 mm balls  ·  cutout top at 22.7 mm  ·  4.2 mm deep</text>',
+        f'<text x="320" y="348" fill="#bbb" font-family="system-ui,sans-serif" font-size="13" text-anchor="middle">6.5 mm round dimples  ·  6-up/4-down  ·  top of cup at 22.7 mm</text>',
     ]
     parts.append(
         f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{plate_r * scale}" fill="#2a2a2a" stroke="#f5a623" stroke-width="2"/>'
@@ -888,17 +901,17 @@ def svg_preview(path: str, fit: Fit) -> None:
     parts.append(
         f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{shaft_r * scale}" fill="#3d3d3d" stroke="#f5a623" stroke-width="1.5"/>'
     )
+    lead_r = (fit.shaft_d - LEAD_D_DELTA) / 2
     parts.append(
-        f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{groove_r * scale}" fill="none" stroke="#888" stroke-dasharray="4 3"/>'
+        f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{lead_r * scale:.1f}" fill="none" stroke="#888" stroke-dasharray="4 3"/>'
     )
+    dimple_cr = shaft_r - DIMPLE_INSET
     for a_deg in POCKET_ANGLES_DEG:
         a = math.radians(a_deg)
-        x0 = (groove_r + 0.4) * math.cos(a) * scale
-        y0 = (groove_r + 0.4) * math.sin(a) * scale
-        x1 = (shaft_r + 2.5) * math.cos(a) * scale
-        y1 = (shaft_r + 2.5) * math.sin(a) * scale
+        cx = top_c[0] + dimple_cr * math.cos(a) * scale
+        cy = top_c[1] - dimple_cr * math.sin(a) * scale
         parts.append(
-            f'<line x1="{top_c[0] + x0:.1f}" y1="{top_c[1] - y0:.1f}" x2="{top_c[0] + x1:.1f}" y2="{top_c[1] - y1:.1f}" stroke="#6cf" stroke-width="2"/>'
+            f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{DIMPLE_R * scale:.1f}" fill="#111" stroke="#9d6" stroke-width="1.6"/>'
         )
     parts.append(
         f'<circle cx="{top_c[0]}" cy="{top_c[1]}" r="{STUB_BORE_D / 2 * scale}" fill="#111" stroke="#6cf" stroke-dasharray="4 3"/>'
@@ -927,31 +940,17 @@ def svg_preview(path: str, fit: Fit) -> None:
     # shaft as two lines (upper/lower)
     def poly_side(sign: float) -> str:
         pts = []
-        # plate front to tip along outer
         z0 = PLATE_T
+        lead_r = (fit.shaft_d - LEAD_D_DELTA) / 2
+        g_mid = z0 + FILLET_R + BALL_RING_FROM_FACE
+        z_collar = g_mid - DIMPLE_R - COLLAR_BLEND
+        z_full = z_collar + COLLAR_BLEND
+        z_tip_l = z0 + FILLET_R + SHAFT_LEN
         pts.append(sx(0, sign * plate_r))
         pts.append(sx(z0, sign * plate_r))
-        pts.append(sx(z0, sign * (shaft_r + FILLET_R)))
-        if FILLET_R > 0.15:
-            for i in range(FILLET_SEGS + 1):
-                a = math.pi / 2 * (1 - i / FILLET_SEGS)
-                pts.append(
-                    sx(
-                        z0 + FILLET_R * math.sin(a),
-                        sign * (shaft_r + FILLET_R * math.cos(a)),
-                    )
-                )
-        plate_axial, tip_axial, _ = _groove_tapers(fit)
-        g_mid = z0 + FILLET_R + BALL_RING_FROM_FACE
-        z_g0 = g_mid - GROOVE_FLAT / 2 - plate_axial
-        z_g1 = g_mid - GROOVE_FLAT / 2
-        z_g2 = g_mid + GROOVE_FLAT / 2
-        z_g3 = g_mid + GROOVE_FLAT / 2 + tip_axial
-        z_tip_l = z_g3 + LIP_FLAT
-        pts.append(sx(z_g0, sign * shaft_r))
-        pts.append(sx(z_g1, sign * groove_r))
-        pts.append(sx(z_g2, sign * groove_r))
-        pts.append(sx(z_g3, sign * shaft_r))
+        pts.append(sx(z0, sign * lead_r))
+        pts.append(sx(z_collar, sign * lead_r))
+        pts.append(sx(z_full, sign * shaft_r))
         pts.append(sx(z_tip_l - CHAMFER, sign * shaft_r))
         pts.append(sx(z_tip_l, sign * (shaft_r - CHAMFER)))
         return " ".join(pts)
@@ -965,6 +964,13 @@ def svg_preview(path: str, fit: Fit) -> None:
     parts.append(
         f'<line x1="{side_c[0] + z_tip * scale:.1f}" y1="{side_c[1] - (shaft_r - CHAMFER) * scale:.1f}" x2="{side_c[0] + z_tip * scale:.1f}" y2="{side_c[1] + (shaft_r - CHAMFER) * scale:.1f}" stroke="#f5a623"/>'
     )
+    g_mid = PLATE_T + FILLET_R + BALL_RING_FROM_FACE
+    for sign in (1.0, -1.0):
+        cx = side_c[0] + g_mid * scale
+        cy = side_c[1] - sign * dimple_cr * scale
+        parts.append(
+            f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{DIMPLE_R * scale:.1f}" fill="#111" stroke="#9d6" stroke-width="1.6"/>'
+        )
     # dimensions
     parts.append(
         f'<text x="{top_c[0]}" y="{top_c[1] + plate_r * scale + 22}" fill="#6cf" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">{PLATE_D:.0f} mm plate</text>'
@@ -981,8 +987,8 @@ def generate_all(out_dir: str, fit_name: str = DEFAULT_FIT) -> None:
     fit = FITS[fit_name]
     os.makedirs(out_dir, exist_ok=True)
     print(
-        f"QR stub {SHAFT_LEN:.1f} mm  ·  6.5 mm balls  ·  cutout top {BALL_CUTOUT_TOP:.1f} mm  ·  "
-        f"seats {_SEAT_DEPTH:.1f} mm deep  ·  6-up/4-down  ·  "
+        f"QR stub {SHAFT_LEN:.1f} mm  ·  6.5 mm spherical dimples  ·  "
+        f"top {BALL_CUTOUT_TOP:.1f} mm  ·  6-up/4-down  ·  "
         f"{PIN_PLATE_DEPTH - SHAFT_LEN:.1f} mm short of pins"
     )
     jobs = [

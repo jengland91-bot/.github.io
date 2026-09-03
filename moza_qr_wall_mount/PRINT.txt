@@ -5,13 +5,13 @@ WHEEL MOUNT  (stl/moza_qr_universal_mount.stl)
   Print the fit test first: stl/fit_test_nominal.stl
   FIT TEST ONLY: 3 walls, 15% infill (not 6/40 — that is why it was 52 min)
   Racetrack pad with U-bites at top / sides / bottom (saves filament)
-  Stub ~26 mm. 6.5 mm ball cutouts, 4.2 mm deep, top of pocket at 22.7 mm
-  6 seats on top, 4 on the bottom — same clock as the wheelbase
+  Slim lead-in, then a collar with round 6.5 mm dimples (top of cup at 22.7 mm)
+  6 seats on top, 4 on the bottom — same clock as the working hangers
   Tip is OPEN — drop an M8 x 20 mm through it into the pad pocket
   4x #8 at the corners
   Six wide windows in the skirt to save filament
   Press on until it clicks (pull the collar if it fights). Should not shoot back off
-  Stub pointing up, no supports
+  Stub pointing up, no supports (ignore Bambu overhang warnings on the dimples)
   Full mount: 6 walls, 40% gyroid, stub pointing up
   Bolt: M8 x 20 mm socket-cap into a 4040 T-nut (same as the phone / cup)
   Wall: M8 x 40–50 mm into a stud, plus 4x #8 around the rim
