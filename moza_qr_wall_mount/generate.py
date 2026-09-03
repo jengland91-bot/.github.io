@@ -51,7 +51,7 @@ FITS = {
 DEFAULT_FIT = "nominal"
 
 # Stub
-SHAFT_LEN = 26.0  # plate front -> tip, including chamfer
+SHAFT_LEN = 28.8  # user's caliper: how far the stub must go into the wheel QR
 CHAMFER = 2.2  # keep this short so the tip still has a full-diameter lip
 FILLET_R = 0.0  # no extra OD at the root — a fillet was jamming in the 40.9 mm sleeve
 GROOVE_FLAT = 3.8  # balls sit on a floor, not on the 45° ramps
@@ -827,19 +827,20 @@ def fit_skirt_tris(fit: Fit, z0: float, z1: float) -> List[Tri]:
 
 
 def fit_test_tris(fit: Fit, indexed: bool = True) -> List[Tri]:
-    """QR coupon: open middle, edge scallops, 4× #8. Bolt head sits at the stub tip.
+    """QR coupon: same stub length as the full mount, from the pad face.
 
-    Print 3 walls / 15% to test the snap. If you hang the wheel on it, use 4/25 or 6/40.
+    The wheel QR is 28.8 mm deep; the last print only stuck in ~18.5 mm because
+    the stub was measured from the back of the pad. z_front is the pad face.
     """
-    z_g0, _z_g3 = _groove_z_band(0.0, fit)
-    _, _z_well, z_washer = _bolt_well_zs(0.0)
-    # Start the stub below the washer so the 12 mm pocket is not clipped.
+    z_front = FIT_LUG_T
+    z_g0, _z_g3 = _groove_z_band(z_front, fit)
+    _, _z_well, z_washer = _bolt_well_zs(z_front)
     z_from = min(z_g0, z_washer - 0.5)
-    z_from = max(z_from, FIT_LUG_T + 0.6)
+    z_from = max(z_from, z_front + 0.6)
     tris: List[Tri] = []
     tris.extend(fit_flange_tris(fit))
-    tris.extend(fit_skirt_tris(fit, FIT_LUG_T - 0.2, z_from + 0.2))
-    tris.extend(stub_tris(fit, 0.0, indexed=indexed, z_from=z_from))
+    tris.extend(fit_skirt_tris(fit, z_front - 0.2, z_from + 0.2))
+    tris.extend(stub_tris(fit, z_front, indexed=indexed, z_from=z_from))
     return tris
 
 

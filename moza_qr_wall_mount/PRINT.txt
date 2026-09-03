@@ -8,12 +8,13 @@ WHEEL MOUNT  (stl/moza_qr_universal_mount.stl)
   Middle of the pad is OPEN (26 mm) — bolt head sits in the 14 mm step at the stub tip
   4x #8 at the corners
   Six wide windows in the skirt to save filament
+  Stub sticks into the wheel 28.8 mm (same as the QR on the wheel)
   M8 sits down in a 14 mm x 12 mm step at the tip (head ~8 mm, so ~4 mm below the rim)
   Deeper ring + six seats + a real lip so it clicks and stays
   Press on until it clicks (pull the collar if it fights). Should not shoot back off
   Stub pointing up, no supports
   Full mount: 6 walls, 40% gyroid, stub pointing up
-  Bolt: M8 x 40 mm socket-cap into a 4040 T-nut (M8 x 35 mm on 2020)
+  Bolt: M8 x 45 mm socket-cap into a 4040 T-nut (M8 x 40 mm on 2020)
   Wall: M8 x 50–60 mm into a stud, plus 4x #8 around the rim
   Hollow 26 mm through the stub (saves filament). Print the fit test first.
 

@@ -88,15 +88,16 @@ The 8020 accessories are lighter. **4 walls / 25% gyroid** is enough for the pho
 ## Fit check
 
 1. Print `fit_test_nominal.stl` with **3 walls / 15% infill**, stub pointing up.
-2. Hang it on the rig: drop an **M8 × 40 mm** socket-cap in from the **stub tip**. The head sits in a **14 mm × 12 mm step** at the tip (M8 cap is ~13 mm across / ~8 mm tall), about 4 mm below the rim. The pad under it is open so you are not printing a solid hub. Optional **4× #8** at the corners of the pad. Back of the pad against the extrusion, stub into the room.
+2. Hang it on the rig: drop an **M8 × 45 mm** socket-cap in from the **stub tip**. The head sits in a **14 mm × 12 mm step** at the tip (M8 cap is ~13 mm across / ~8 mm tall), about 4 mm below the rim. The pad under it is open so you are not printing a solid hub. Optional **4× #8** at the corners of the pad. Back of the pad against the extrusion, stub into the room.
 3. Press on (pull the collar if it fights you). It should click **and stay** — if it pops the collar then shoots back off, the lip is not holding. Line one ball with a flap (12 o'clock).
 4. If it will not go on at all → print `fit_test_loose.stl` (or in `generate.py` drop `shaft_d` / `groove_d` by 0.4).
 5. If it goes on but will not lock → you are not lining the balls up with the seats, or print `fit_test_tight.stl`.
 6. When the coupon feels right, print the matching full mount (`generate.py --fit …` if you changed it).
 
-Nominal numbers (sized to the user's wheel: sleeve ID **40.9 mm**, centre opening **22.4 mm**):
+Nominal numbers (sized to the user's wheel: sleeve ID **40.9 mm**, centre opening **22.4 mm**, QR depth **28.8 mm**):
 
 - Shaft Ø **39.8 mm** (~1.1 mm under the sleeve so PETG can slide in)
+- Stub sticks into the wheel **28.8 mm** (the last fit test was only ~18.5 mm — length was counted from the back of the pad)
 - Ring + **six deep ball seats** (groove floor Ø **33.8 mm**), long flat so the balls sit, steep backstop, 45° lip toward the tip (~10 mm from the tip)
 - Full-diameter cylinder between the groove and the tip so it clicks **and stays**. One seat lines up with each flap (12 / 6 o'clock).
 - Hollow Ø **26 mm** through the stub **and the pad**. **14 mm × 12 mm step at the tip** (2.5 mm of plastic under the head) so an M8 socket-cap (~8 mm tall) sits about 4 mm below the tip. Fit-test pad has U-bites at top / sides / bottom.
@@ -112,17 +113,17 @@ One print. Pick how you hang it:
 
 **On a sim rig (4040 / 2020)**
 
-- 1× **M8 × 40 mm** socket-cap + T-nut for **4040**. Use **M8 × 35 mm** on **2020** so it does not bottom out in the slot.
+- 1× **M8 × 45 mm** socket-cap + T-nut for **4040**. Use **M8 × 40 mm** on **2020** so it does not bottom out in the slot.
 - Drop it in from the stub opening. The head sits in a **14 mm step** at the tip and is hidden once the wheel is on.
 - Leave the four #8 holes empty. Snug the M8 so the plate cannot rotate on the bolt.
 
-Why 40 mm: the head seats ~22 mm from the back of the plate, then you want ~8–10 mm of thread in the T-nut. The phone / cup / hook / clip still take short **M8 × 16–20 mm** bolts.
+Why 45 mm: the head seats ~25 mm from the back of the plate, then you want ~8–10 mm of thread in the T-nut. The phone / cup / hook / clip still take short **M8 × 16–20 mm** bolts.
 
 Do not hang this on a single drywall anchor.
 
 ## Use
 
-1. Wall: one M8 through the stub into a stud, plus four #8 around the rim. Rig: one **M8 × 40 mm** through the stub into a 4040 T-nut (**× 35 mm** on 2020). Stub points into the room.
+1. Wall: one M8 through the stub into a stud, plus four #8 around the rim. Rig: one **M8 × 45 mm** through the stub into a 4040 T-nut (**× 40 mm** on 2020). Stub points into the room.
 2. Pull the QR collar. Line up one ball with a 12 o'clock seat (a flap on the fit test). Press on until all six balls drop in and it clicks.
 3. To remove: pull the QR collar with both hands and take the wheel off, same as on the base.
 
@@ -138,7 +139,7 @@ Paddle clearance: the plate is 98 mm across. If paddles kiss the plate, increase
 | `FITS["nominal"].groove_d` | 33.8 | Deep seat floor Ø (six ball pockets) |
 | `LAND_RECESS` | 2.4 | Ring between the six seats so all balls catch |
 | `GROOVE_FLAT` | 3.8 | How wide the ball floor is (stops the wheel shooting back off) |
-| `SHAFT_LEN` | 26 | How far the stub sticks out |
+| `SHAFT_LEN` | 28.8 | How far the stub sticks into the wheel (user measured the QR 28.8 mm deep) |
 | `PLATE_D` / `PLATE_T` | 98 / 8 | Wall plate size |
 | `STUB_BORE_D` | 26 | Hollow through the stub (and the fit-test pad) |
 | `CENTER_HOLE_D` | 8.4 | M8 through the washer at the stub tip |

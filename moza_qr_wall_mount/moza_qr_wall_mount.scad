@@ -12,7 +12,7 @@ shaft_d = 39.8;
 groove_d = 33.8;
 
 /* [Stub] */
-shaft_len = 26.0;
+shaft_len = 28.8;  // user's wheel: how far the stub must go into the QR
 chamfer = 2.2;
 fillet_r = 0.0;
 groove_flat = 3.8;
@@ -144,7 +144,7 @@ module fit_test() {
     half_w = max(shaft_d / 2 + extra, sx + pad_r);
     half_l = sy + pad_r;
     shaft_r = shaft_d / 2;
-    z_tip = fillet_r + shaft_len;
+    z_tip = lug_t + fillet_r + shaft_len;
     g_mid = z_tip - groove_from_tip;
     z_g0 = g_mid - groove_flat / 2 - groove_plate_axial;
     difference() {
@@ -176,7 +176,8 @@ module fit_test() {
                     csk_hole(screw_d, screw_csk_d, screw_csk_depth, lug_t);
     }
     difference() {
-        qr_stub();
+        translate([0, 0, lug_t])
+            qr_stub();
         for (k = [0:5])
             rotate([0, 0, 120 + k * 60])
                 translate([shaft_r, 0, (lug_t + z_g0) / 2])

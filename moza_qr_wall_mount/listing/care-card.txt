@@ -1,7 +1,7 @@
 D1 QR WHEEL MOUNT
 
 1. Wall: one M8 through the stub into a stud, four #8 around the rim.
-   Rig: one M8 × 40 mm through the stub into a 4040 T-nut (× 35 mm on 2020).
+   Rig: one M8 × 45 mm through the stub into a 4040 T-nut (× 40 mm on 2020).
    Stub points into the room.
 2. Line up the six balls with the six seats on the stub, then press on until it clicks.
 3. To remove: pull the QR collar with both hands and take the wheel off.

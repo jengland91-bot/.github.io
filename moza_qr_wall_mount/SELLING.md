@@ -71,7 +71,7 @@ Not affiliated with, endorsed by, or sponsored by MOZA Racing.
 1. Universal mount — black PETG (round plate, wall *or* rig)  
 2. Colour of the month  
 3. Add-on: 4× wall screws + anchors  
-4. Add-on: 1× M8 × 40 mm + T-nut (and 4× wall screws)  
+4. Add-on: 1× M8 × 45 mm + T-nut (and 4× wall screws)  
 5. 8020 phone holder / cup holder / headphone hook / cable clip / mouse tray  
 6. Full rig kit (mount + the accessories)  
 
@@ -125,7 +125,7 @@ If a customer’s wheel is unusually tight, reprint that order on the **loose** 
 D1 QR WHEEL MOUNT
 
 1. Wall: one M8 through the stub into a stud, four #8 around the rim.
-   Rig: one M8 × 40 mm through the stub into a 4040 T-nut (× 35 mm on 2020).
+   Rig: one M8 × 45 mm through the stub into a 4040 T-nut (× 40 mm on 2020).
    Stub points into the room.
 2. Line up the six balls with the six seats on the stub, then press on until it clicks.
 3. To remove: pull the QR collar with both hands and take the wheel off.
