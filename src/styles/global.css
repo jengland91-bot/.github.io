@@ -320,6 +320,15 @@ main {
   color: var(--text);
 }
 
+.btn-primary {
+  background: var(--cyan);
+  color: #041018;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.06);
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;

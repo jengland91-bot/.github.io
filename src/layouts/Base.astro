@@ -46,6 +46,7 @@ const canonical = new URL(path, site.url).toString();
             <a href="/gear" aria-current={path.startsWith('/gear') ? 'page' : undefined}>Gear I Use</a>
             <a href="/partners" aria-current={path.startsWith('/partners') ? 'page' : undefined}>Codes</a>
             <a href="/links" aria-current={path.startsWith('/links') ? 'page' : undefined}>Links</a>
+            <a href="/streaming" aria-current={path.startsWith('/streaming') ? 'page' : undefined}>Streaming</a>
             <a href="/about" aria-current={path.startsWith('/about') ? 'page' : undefined}>About</a>
           </nav>
         </div>
@@ -60,6 +61,10 @@ const canonical = new URL(path, site.url).toString();
           <p>© {new Date().getFullYear()} {site.author}. {site.disclosure}</p>
           <p>
             <a class="text-link" href={site.socials.youtube}>YouTube</a>
+            ·
+            <a class="text-link" href={site.socials.twitch}>Twitch</a>
+            ·
+            <a class="text-link" href={site.socials.kick}>Kick</a>
             ·
             <a class="text-link" href={site.socials.instagram}>Instagram</a>
             ·
