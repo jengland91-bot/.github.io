@@ -3,6 +3,8 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Disclosure from '../../components/Disclosure.astro';
 import GearCard from '../../components/GearCard.astro';
+import Stars from '../../components/Stars.astro';
+import ShopBanner from '../../components/ShopBanner.astro';
 
 export async function getStaticPaths() {
   const posts = (await getCollection('posts')).filter((post) => !post.data.draft);
@@ -21,16 +23,24 @@ const date = post.data.date.toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
 });
+const kindLabel = post.data.kind === 'review' ? 'Review' : 'Journal';
 ---
 
 <Base title={post.data.title} description={post.data.description} path={`/blog/${post.id}`}>
   <article class="article">
     <header>
-      <p class="kicker">{date}</p>
+      <p class="kicker">{kindLabel} · {date}</p>
       <h1 class="page-title">{post.data.title}</h1>
       <p class="page-lede">{post.data.description}</p>
+      <Stars rating={post.data.rating} />
     </header>
     <Disclosure />
+    {post.data.verdict && (
+      <aside class="verdict">
+        <strong>Verdict</strong>
+        {post.data.verdict}
+      </aside>
+    )}
     <div class="prose">
       <Content />
     </div>
@@ -39,8 +49,8 @@ const date = post.data.date.toLocaleDateString('en-US', {
   {related.length > 0 && (
     <section class="related">
       <div class="section-head">
-        <h2>Gear in this post</h2>
-        <a href="/gear">All gear</a>
+        <h2>{post.data.kind === 'review' ? 'Buy the kit from this review' : 'Gear in this post'}</h2>
+        <a href="/shop">Shop</a>
       </div>
       <div class="grid gear-grid">
         {related.map((item) => (
@@ -49,4 +59,5 @@ const date = post.data.date.toLocaleDateString('en-US', {
       </div>
     </section>
   )}
+  <ShopBanner />
 </Base>

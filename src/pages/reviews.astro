@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Disclosure from '../components/Disclosure.astro';
+import PostCard from '../components/PostCard.astro';
+import ShopBanner from '../components/ShopBanner.astro';
+
+const reviews = (await getCollection('posts'))
+  .filter((post) => !post.data.draft && post.data.kind === 'review')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base title="Tech reviews" description="Independent reviews of sim racing, cameras, and creator gear — with Amazon links for the kit I actually use." path="/reviews">
+  <header class="hero-copy" style="padding-bottom: 12px; gap: 12px;">
+    <p class="kicker">Reviews</p>
+    <h1 class="page-title">Tech reviews with a verdict.</h1>
+    <p class="page-lede">Ratings, what I’d buy again, and the Amazon cards for every product named. Written from the shop, the rig, and the desert — not a roundup mill.</p>
+  </header>
+  <Disclosure />
+  <div class="grid posts-grid" style="margin-top: 28px;">
+    {reviews.map((post) => (
+      <PostCard post={post} />
+    ))}
+  </div>
+  <ShopBanner />
+</Base>

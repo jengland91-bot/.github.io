@@ -3,6 +3,9 @@ title: The Moza gear on my sim rig
 description: What is actually bolted to the cockpit right now — base, rims, dash, handbrake, shifter — and which bundle I tell people to buy first.
 date: 2026-09-02
 featured: true
+kind: review
+rating: 4.6
+verdict: Buy the R5 bundle if you can. The R3 is the honest budget step. Everything else on this page is how the cockpit is actually specced, not a wishlist.
 tags:
   - sim-racing
 gear:

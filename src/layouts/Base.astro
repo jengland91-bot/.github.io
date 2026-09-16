@@ -9,8 +9,16 @@ interface Props {
 }
 
 const { title, description = site.description, path = '/' } = Astro.props;
-const pageTitle = title ? `${title} · ${site.title}` : `${site.title} | ${site.tagline}`;
+const pageTitle = title ? `${title} · ${site.title}` : `${site.title} · ${site.tagline}`;
 const canonical = new URL(path, site.url).toString();
+const nav = [
+  { href: '/', label: 'Home', match: (p: string) => p === '/' },
+  { href: '/reviews', label: 'Reviews', match: (p: string) => p.startsWith('/reviews') || p.startsWith('/blog') },
+  { href: '/shop', label: 'Shop', match: (p: string) => p.startsWith('/shop') || p.startsWith('/gear') },
+  { href: '/journal', label: 'Journal', match: (p: string) => p.startsWith('/journal') },
+  { href: '/partners', label: 'Codes', match: (p: string) => p.startsWith('/partners') },
+  { href: '/about', label: 'About', match: (p: string) => p.startsWith('/about') },
+];
 ---
 
 <!DOCTYPE html>
@@ -34,48 +42,76 @@ const canonical = new URL(path, site.url).toString();
   <body>
     <div class="ambient"></div>
     <div class="site">
-      <header class="site-header">
+      <header class="site-header" data-header>
         <div class="wrap header-inner">
           <a class="logo" href="/">
             <strong>J ENGLAND</strong>
-            <span>Blog · Gear · Links</span>
+            <span>Reviews · Shop · Field notes</span>
           </a>
-          <nav>
-            <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
-            <a href="/blog" aria-current={path.startsWith('/blog') ? 'page' : undefined}>Blog</a>
-            <a href="/gear" aria-current={path.startsWith('/gear') ? 'page' : undefined}>Gear I Use</a>
-            <a href="/partners" aria-current={path.startsWith('/partners') ? 'page' : undefined}>Codes</a>
-            <a href="/links" aria-current={path.startsWith('/links') ? 'page' : undefined}>Links</a>
-            <a href="/about" aria-current={path.startsWith('/about') ? 'page' : undefined}>About</a>
-          </nav>
-        </div>
-      </header>
-      <main>
-        <div class="wrap">
-          <slot />
-        </div>
-      </main>
-      <footer class="site-footer">
-        <div class="wrap footer-inner">
-          <p>© {new Date().getFullYear()} {site.author}. {site.disclosure}</p>
-          <p>
-            <a class="text-link" href={site.socials.youtube}>YouTube</a>
-            ·
-            <a class="text-link" href={site.socials.instagram}>Instagram</a>
-            ·
+          <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false">Menu</button>
+          <div class="nav-row">
+            <nav>
+              {nav.map((item) => (
+                <a href={item.href} aria-current={item.match(path) ? 'page' : undefined}>{item.label}</a>
+              ))}
+            </nav>
             <a
-              class="text-link"
+              class="btn btn-amazon header-shop"
               href={site.amazonStorefront}
               target="_blank"
               rel="nofollow sponsored noopener"
             >
               Amazon shop
             </a>
-            ·
-            <a class="text-link" href="/rss.xml">RSS</a>
-          </p>
+          </div>
+        </div>
+      </header>
+      <main>
+        <div class="wrap page-pad">
+          <slot />
+        </div>
+      </main>
+      <footer class="site-footer">
+        <div class="wrap">
+          <div class="footer-grid">
+            <div class="footer-brand">
+              <strong>J ENGLAND</strong>
+              <p>Independent reviews and the kit I actually use — photography, sim racing, cameras, and off-road.</p>
+            </div>
+            <div>
+              <h3>Explore</h3>
+              <a href="/reviews">Tech reviews</a>
+              <a href="/journal">Journal</a>
+              <a href="/about">About Josh</a>
+              <a href="/links">Link hub</a>
+            </div>
+            <div>
+              <h3>Shop</h3>
+              <a href="/shop">Gear I use</a>
+              <a href={site.amazonStorefront} target="_blank" rel="nofollow sponsored noopener">Amazon storefront</a>
+              <a href="/partners">Partner codes</a>
+              <a href="/shop#sim-racing">Sim racing</a>
+            </div>
+            <div>
+              <h3>Connect</h3>
+              <a href={site.socials.youtube}>YouTube</a>
+              <a href={site.socials.instagram}>Instagram</a>
+              <a href={site.socials.tiktok}>TikTok</a>
+              <a href={`mailto:${site.email}`}>Email</a>
+            </div>
+          </div>
+          <p class="footer-legal">© {new Date().getFullYear()} {site.author}. {site.disclosure}</p>
         </div>
       </footer>
     </div>
+    <script>
+      const header = document.querySelector('[data-header]');
+      const toggle = document.querySelector('[data-menu-toggle]');
+      toggle?.addEventListener('click', () => {
+        const open = header?.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.textContent = open ? 'Close' : 'Menu';
+      });
+    </script>
   </body>
 </html>

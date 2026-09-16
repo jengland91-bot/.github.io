@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import GearCard from '../../components/GearCard.astro';
+import ShopBanner from '../../components/ShopBanner.astro';
+import { site } from '../../data/site';
+
+const gear = (await getCollection('gear')).sort((a, b) => a.data.title.localeCompare(b.data.title));
+const counts = {
+  all: gear.length,
+  'sim-racing': gear.filter((item) => item.data.category === 'sim-racing').length,
+  content: gear.filter((item) => item.data.category === 'content').length,
+  photography: gear.filter((item) => item.data.category === 'photography').length,
+  'off-road': gear.filter((item) => item.data.category === 'off-road').length,
+};
+---
+
+<Base title="Shop" description="Amazon affiliate shop — sim racing, cameras, mics, and the kit Josh England actually uses." path="/shop">
+  <header class="hero-copy" style="padding-bottom: 12px; gap: 12px;">
+    <p class="kicker">Shop</p>
+    <h1 class="page-title">The kit on the rig, in the bag, and on the desk.</h1>
+    <p class="page-lede">Every card is an Amazon associate link. Filter a category, open a product for the note, or go straight to the full storefront.</p>
+    <div class="hero-actions">
+      <a class="btn btn-amazon" href={site.amazonStorefront} target="_blank" rel="nofollow sponsored noopener">
+        Open Amazon storefront
+      </a>
+    </div>
+  </header>
+  <Disclosure />
+
+  <div class="filters" data-filters>
+    <button class="filter-btn active" type="button" data-filter="all">All ({counts.all})</button>
+    <button class="filter-btn" type="button" data-filter="sim-racing">Sim racing ({counts['sim-racing']})</button>
+    <button class="filter-btn" type="button" data-filter="content">Cameras ({counts.content})</button>
+    <button class="filter-btn" type="button" data-filter="photography">Photography ({counts.photography})</button>
+    <button class="filter-btn" type="button" data-filter="off-road">Off-road ({counts['off-road']})</button>
+  </div>
+
+  <div class="grid gear-grid" data-gear-grid>
+    {gear.map((item) => (
+      <div data-item data-category={item.data.category}>
+        <GearCard item={item} />
+      </div>
+    ))}
+  </div>
+  <p class="page-lede" data-empty hidden>Nothing listed in this category yet. Reviews still cover what I run in the field.</p>
+  <ShopBanner />
+</Base>
+
+<script>
+  const buttons = document.querySelectorAll('[data-filter]');
+  const items = document.querySelectorAll('[data-item]');
+  const empty = document.querySelector('[data-empty]');
+
+  function applyFilter(filter) {
+    buttons.forEach((button) => button.classList.toggle('active', button.getAttribute('data-filter') === filter));
+    let visible = 0;
+    items.forEach((item) => {
+      const show = filter === 'all' || item.getAttribute('data-category') === filter;
+      item.toggleAttribute('hidden', !show);
+      if (show) visible += 1;
+    });
+    empty?.toggleAttribute('hidden', visible > 0);
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter') || 'all';
+      applyFilter(filter);
+      history.replaceState(null, '', filter === 'all' ? '/shop' : `/shop#${filter}`);
+    });
+  });
+
+  const hash = window.location.hash.replace('#', '');
+  if (hash) applyFilter(hash);
+</script>
