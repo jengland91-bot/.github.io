@@ -10,6 +10,7 @@ export const site = {
   handle: 'jengland91',
   brand: {
     cyan: '#00f2fe',
+    green: '#10b981',
     violet: '#a855f7',
     amazon: '#ffd814',
   },

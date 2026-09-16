@@ -9,17 +9,17 @@ export const streamingKit = {
       'Avoid Streamlabs as the main encoder if you care about performance and control. It is heavier than OBS/Meld and adds little once you already multistream from Meld.',
   },
   brand: {
-    colors: ['#0b0d12', '#00f2fe', '#a855f7', '#f4f7fb'],
+    colors: ['#0b0d12', '#00f2fe', '#10b981', '#f4f7fb'],
     voice: 'Real-world creator who races sims, shoots photos, and goes IRL — not a neon esports clone.',
     sameEverywhere:
       'Same clean banner + avatar on Twitch and Kick. Keep YouTube parked until you decide the long-form mix.',
   },
   bios: {
     twitch: `Sim racing | games | IRL
-Josh England — photographer, creator, Moza sim rig.
+Josh England — photographer & creator.
 Links + gear → jenglandblog.netlify.app/links`,
     kick: `Sim racing | games | IRL
-Josh England — photographer, creator, Moza sim rig.
+Josh England — photographer & creator.
 Links + gear → jenglandblog.netlify.app/links`,
     youtube: `Josh England — photographer, sim racer, off-road / trophy truck co-driver, and streamer.
 
@@ -32,7 +32,7 @@ Links: jenglandblog.netlify.app/links`,
   starter: {
     focus: 'Twitch + Kick first. Same banner energy, same short bio. Build panels and clip highlights later.',
     bio: `Sim racing | games | IRL
-Josh England — photographer, creator, Moza sim rig.
+Josh England — photographer & creator.
 Links + gear → jenglandblog.netlify.app/links`,
     doToday: [
       'Upload the clean banner on Twitch (1200×480) and Kick (1280×700).',
@@ -64,13 +64,13 @@ Links + gear → jenglandblog.netlify.app/links`,
       title: 'Gear I use',
       image: '/branding/panel-gear.svg',
       link: 'https://www.amazon.com/shop/jengland91',
-      body: 'Moza rig, cams, mic — the kit from stream and the truck. Amazon storefront (affiliate).',
+      body: 'Sim rig, cams, mic — the kit from stream and the truck. Amazon storefront (affiliate).',
     },
     {
       title: 'Codes + support',
       image: '/branding/panel-discord.svg',
       link: 'https://jenglandblog.netlify.app/partners',
-      body: 'Moza / Insta360 codes and Buy Me a Coffee: jenglandblog.netlify.app/partners',
+      body: 'Partner codes and Buy Me a Coffee: jenglandblog.netlify.app/partners',
     },
   ],
   scenes: [
