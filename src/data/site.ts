@@ -17,6 +17,8 @@ export const site = {
     tiktok: 'https://www.tiktok.com/@jengland91',
     instagram: 'https://www.instagram.com/jengland91/',
     youtube: 'https://www.youtube.com/@Joshengland91',
+    twitch: 'https://www.twitch.tv/jengland91',
+    kick: 'https://kick.com/jengland91',
     portfolio: 'https://riseabovephoto.com',
     coffee: 'https://www.buymeacoffee.com/jengland91',
   },

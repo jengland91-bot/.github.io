@@ -17,18 +17,24 @@ const partners = await getCollection('partners');
       <div class="avatar">JE</div>
       <h1>{site.author}</h1>
       <p class="kicker">Welcome to the hub</p>
-      <p class="page-lede" style="text-align:center;">Photographer, content creator, sim racer, and trophy truck co-driver. This is the bio link that points at everything else on this site.</p>
+      <p class="page-lede" style="text-align:center;">Photographer, content creator, sim racer, and trophy truck co-driver. Live on Twitch + Kick, longer videos on YouTube — this hub points at everything else.</p>
     </header>
 
     <Disclosure />
 
     <div class="social-row">
+      <a class="social-box" href={site.socials.twitch} target="_blank" rel="noopener">Twitch</a>
+      <a class="social-box" href={site.socials.kick} target="_blank" rel="noopener">Kick</a>
+      <a class="social-box" href={site.socials.youtube} target="_blank" rel="noopener">YouTube</a>
       <a class="social-box" href={site.socials.tiktok} target="_blank" rel="noopener">TikTok</a>
       <a class="social-box" href={site.socials.instagram} target="_blank" rel="noopener">Instagram</a>
-      <a class="social-box" href={site.socials.youtube} target="_blank" rel="noopener">YouTube</a>
     </div>
 
-    <a class="block-link primary" href={site.socials.portfolio} target="_blank" rel="noopener">
+    <a class="block-link primary" href="/streaming">
+      <span>Streaming brand kit</span>
+      <span>→</span>
+    </a>
+    <a class="block-link" href={site.socials.portfolio} target="_blank" rel="noopener">
       <span>View portfolio</span>
       <span>→</span>
     </a>

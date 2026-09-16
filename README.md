@@ -86,5 +86,6 @@ The empty `my-affiliate-blog` repo can stay unused. This repo is the source of t
 | `/blog` | All posts |
 | `/gear` | All Amazon products, filterable |
 | `/partners` | Moza / Insta360 codes |
-| `/links` | Bio hub for Instagram / TikTok |
+| `/links` | Bio hub for Instagram / TikTok / Twitch / Kick |
+| `/streaming` | Brand kit — banners, bios, Meld scenes |
 | `/about` | Who you are + how to add files |
