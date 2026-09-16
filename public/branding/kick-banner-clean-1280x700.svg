@@ -2,21 +2,21 @@
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0b0d12"/>
-      <stop offset="50%" stop-color="#0e1514"/>
+      <stop offset="45%" stop-color="#0c1614"/>
       <stop offset="100%" stop-color="#0b0d12"/>
     </linearGradient>
     <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0%" stop-color="#00f2fe" stop-opacity="0"/>
-      <stop offset="35%" stop-color="#00f2fe"/>
-      <stop offset="65%" stop-color="#10b981"/>
+      <stop offset="30%" stop-color="#00f2fe"/>
+      <stop offset="55%" stop-color="#10b981"/>
       <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
     </linearGradient>
-    <radialGradient id="glowCyan" cx="42%" cy="40%" r="42%">
-      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.11"/>
+    <radialGradient id="glowCyan" cx="38%" cy="38%" r="38%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.10"/>
       <stop offset="100%" stop-color="#00f2fe" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowGreen" cx="62%" cy="52%" r="40%">
-      <stop offset="0%" stop-color="#10b981" stop-opacity="0.15"/>
+    <radialGradient id="glowGreen" cx="68%" cy="55%" r="44%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.24"/>
       <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
     </radialGradient>
   </defs>
