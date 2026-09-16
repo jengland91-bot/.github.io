@@ -9,10 +9,10 @@
 // =============================================================================
 
 /* [Phone slot] */
-phone_width     = 88;   // mm — modern phones + slim case
-phone_thickness = 16;   // mm — increase to 20 for thick cases
-phone_depth     = 55;   // how far phone sits into the seat pocket
-lip_height      = 8;    // front retention lip
+phone_width     = 92;   // iPhone 18 Pro Max 78mm + thick case
+phone_thickness = 18;
+phone_depth     = 62;
+lip_height      = 8;
 
 /* [Seat proportions] */
 seat_width      = 110;
