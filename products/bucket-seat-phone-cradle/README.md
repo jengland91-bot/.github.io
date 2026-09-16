@@ -1,51 +1,66 @@
-# Open-Shoulder Bucket Phone Cradle
+# EVO-Style Bucket Phone Cradle (modular)
 
-Original 3D-printable phone holder shaped like an **open-shoulder racing bucket seat**.
+Original product family for Etsy / physical sales. Shaped after an **open-shoulder EVO III–class bucket** (the seat style used in many race trucks) — **not** a remix of MakerWorld / Recaro free STLs.
 
-Designed to sell as your own product (Etsy / Shopify / MakerWorld paid, etc.) — **not** a remix of the MakerWorld sim-rig seat holder, and **not** branded as Sparco or Recaro.
+## Phone fit
 
-## Why this design (vs the MakerWorld link)
+Sized for **iPhone 18 Pro Max** (78.0 × 8.75 mm) **plus a thick case**:
 
-| | MakerWorld #1669652 | This product |
-|---|---|---|
-| Look | Racing-seat phone cradle | Original open-shoulder bucket (EVO III *silhouette cue*: no tall head wings) |
-| Mount | Twist-fit into aluminum T-slot | **40 mm tube clamp** for Evolve-style steel frames + optional **4040 adapter** + desk base |
-| Rights | Someone else's model | **Your original geometry** (generated here) |
+| Pocket | Spec |
+|--------|------|
+| Width | 92 mm |
+| Thickness | 18 mm |
+| Charge | Bottom notch + cable drop |
 
-Your Sparco **Evolve 3.0** uses **40 mm steel tubing**, so aluminum-profile clips from most free models will not fit cleanly. The clamp is the product advantage.
+Smaller phones sit fine; Pro Max + chunky case is the design target.
 
-## Files
+## How the modular system works
 
-```
-products/bucket-seat-phone-cradle/
-  stl/
-    seat_cradle.stl          # main phone cradle
-    clamp_40mm_front.stl     # tube clamp half (dovetail receiver)
-    clamp_40mm_rear.stl      # tube clamp half (nut side)
-    adapter_4040.stl         # optional — M8 plate for 4040/4080 aluminum
-    desk_stand_base.stl      # optional — desk / shelf stand
-  scad/                      # parametric OpenSCAD sources (edit & re-export)
-  scripts/generate_stl_v2.py # regenerates STLs (numpy only)
-  docs/                      # print guide + Etsy listing draft
-```
+One cradle. Swap the **back plate** with 4× M3 screws (30 mm square pattern):
 
-## Hardware (tube clamp kit)
+| STL | What it does |
+|-----|----------------|
+| `01_cradle_evo.stl` | Main seat + phone pocket + charge hole + M3 boss |
+| `02_back_rail_vertical.stl` | Twist-lock for **vertical** aluminum profile (4040-class) |
+| `03_back_rail_horizontal.stl` | Twist-lock for **horizontal** aluminum rail |
+| `04_back_leg_plate.stl` | Tripod bosses for desk legs |
+| `05_desk_leg.stl` | Print **×3** — bolts into leg plate |
+| `06_back_kickout_m3.stl` | Kick-out tab with **M3** (also works with M2 + sleeve) |
+| `07_clamp_desk_m3.stl` | Desk-edge C-clamp → bolts to kick-out |
+| `08_clamp_tube40_m3.stl` | Half-clamp for **40 mm** tube (print ×2) → kick-out |
+| `09_back_blank_diy.stl` | Flat plate with extra M3 holes — add your own legs |
 
-- 2× M5 × 30 mm socket-cap screws  
-- 2× M5 nylon-insert locknuts (or heat-set inserts in the rear half)  
-- Optional: thin rubber strip inside the bore so it does not mark powder coat  
+### Kits to sell
 
-## Trademark / selling notes
+1. **Rail Vertical** — cradle + `02`  
+2. **Rail Horizontal** — cradle + `03`  
+3. **Desk Tripod** — cradle + `04` + 3× `05`  
+4. **Desk Clamp** — cradle + `06` + `07`  
+5. **Tube Clamp (Evolve-style)** — cradle + `06` + 2× `08`  
+6. **DIY / blank** — cradle + `09`  
+7. **Ultimate bundle** — cradle + all backs + legs + both clamps  
 
-- **Do use:** “open-shoulder bucket seat phone holder”, “fits 40 mm tubular sim cockpits”, “compatible with Evolve-style 40 mm frames”.
-- **Do not use in titles/branding:** Sparco logos, Recaro name, or “official” claims.
-- Compatibility language (“fits 40 mm tube / Evolve-style chassis”) is normally fine; copying another STL is not.
-- Re-measure your phone (with case) and tube OD before listing “fits all phones”.
+## Hardware
 
-## Regenerate meshes
+- **Back attach:** 4× M3 × 10–12 mm screws (+ heat-set inserts in cradle optional)  
+- **Desk legs:** 3× M3 × 16–20 mm  
+- **Kick-out pivot:** 1× M3 × 16–20 mm + locknut  
+- **Tube clamp ears:** 2× M5 × 30 mm + locknuts  
+- **Desk clamp screw:** 1× M5 thumb screw (or printed knob later)
+
+## Regenerate
 
 ```bash
-python3 products/bucket-seat-phone-cradle/scripts/generate_stl_v2.py
+python3 products/bucket-seat-phone-cradle/scripts/generate_stl_v3.py
 ```
 
-For cleaner CAD edits later, install OpenSCAD locally and open the files in `scad/`.
+## Trademark
+
+Sell as original “EVO-style / open-shoulder bucket” phone cradle.  
+Do **not** brand as Sparco or Recaro. Compatibility language for 40 mm tubular / 4040 rails is fine.
+
+## Docs
+
+- `docs/PRINT_GUIDE_P2S.md` — Bambu P2S settings  
+- `docs/ETSY_LISTING_DRAFT.md` — listing copy for multi-variant SKUs  
+- `docs/NEXT_STEPS.md` — prototype → photo → list  
