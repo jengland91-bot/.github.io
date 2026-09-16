@@ -870,6 +870,10 @@ a.card:hover,
     min-height: 220px;
   }
 
+  .visual-plane span {
+    display: none;
+  }
+
   .shop-banner .btn { width: 100%; }
 }
 
