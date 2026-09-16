@@ -51,8 +51,10 @@ One cradle. Swap the **back plate** with 4× M3 screws (30 mm square pattern):
 ## Regenerate
 
 ```bash
-python3 products/bucket-seat-phone-cradle/scripts/generate_stl_v3.py
+python3 products/bucket-seat-phone-cradle/scripts/generate_evo_cradle.py
 ```
+
+Reference photos used for proportions: `docs/reference/`
 
 ## Trademark
 
