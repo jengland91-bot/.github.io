@@ -4,11 +4,22 @@ Professional site for tech reviews, the Amazon shop, field notes, and partner co
 
 Live: [jenglandblog.netlify.app](https://jenglandblog.netlify.app)
 
-## Add content
+## Add content (easy way)
 
-No admin panel. Edit a file, push, Netlify rebuilds.
+Day to day, use the web form — no coding:
 
-### New review or journal note
+1. Open [jenglandblog.netlify.app/admin](https://jenglandblog.netlify.app/admin/)
+2. Log in
+3. Add a **Review**, **Shop product**, **Journal note**, or **Partner code**
+4. Click **Publish** — Netlify rebuilds the live site in about a minute
+
+Full setup steps (one-time Netlify Identity + Git Gateway): see [/edit](https://jenglandblog.netlify.app/edit)
+
+### Optional: edit files by hand
+
+You can still add markdown under `src/content/` if you prefer.
+
+### New review or journal note (file method)
 
 1. Copy any file in `src/content/posts/`.
 2. Rename it. The filename becomes the URL (`my-post.md` → `/blog/my-post`).
@@ -93,3 +104,5 @@ The empty `my-affiliate-blog` repo can stay unused. This repo is the source of t
 | `/partners` | Moza / Insta360 codes |
 | `/links` | Bio hub for Instagram / TikTok |
 | `/about` | Who you are |
+| `/edit` | How to add content (owner guide) |
+| `/admin` | Form-based editor (login required) |

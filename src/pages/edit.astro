@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="How to edit" description="Add reviews, shop products, and partner codes without writing code." path="/edit">
+  <header class="hero-copy" style="gap: 12px; padding-bottom: 8px;">
+    <p class="kicker">For you</p>
+    <h1 class="page-title">Add stuff without coding.</h1>
+    <p class="page-lede">Use the admin form at <a class="text-link" href="/admin/">/admin</a>. Fill in fields, hit Publish, and Netlify rebuilds the live site in about a minute.</p>
+  </header>
+
+  <div class="about-split">
+    <aside class="about-panel">
+      <p class="kicker">Editor</p>
+      <h2 style="font-family: var(--display); font-size: 1.5rem; margin: 8px 0 12px;">Open the form</h2>
+      <p class="page-lede">Log in once, then you can add reviews, shop products, journal notes, and partner codes from your phone or laptop.</p>
+      <div class="hero-actions" style="margin-top: 16px;">
+        <a class="btn btn-amazon" href="/admin/">Open /admin</a>
+      </div>
+    </aside>
+    <div class="prose">
+      <h2>One-time setup (Netlify Identity)</h2>
+      <p>You only do this once so login works:</p>
+      <ol>
+        <li>Open your Netlify project → <strong>Project configuration → Identity</strong>.</li>
+        <li>Click <strong>Enable Identity</strong>.</li>
+        <li>Under Registration: set to <strong>Invite only</strong> (so strangers cannot edit).</li>
+        <li>Open <strong>Services → Git Gateway → Enable Git Gateway</strong>.</li>
+        <li>In Identity → Invite users, invite your email (<code>riseabovephoto@gmail.com</code> or whichever you use).</li>
+        <li>Accept the invite email, set a password, then go to <a href="/admin/">/admin</a> and log in.</li>
+      </ol>
+
+      <h2>Day-to-day editing</h2>
+      <ul>
+        <li><strong>Reviews</strong> — title, stars, verdict, Amazon-linked gear, body text.</li>
+        <li><strong>Shop products</strong> — name, category, Amazon link, short note.</li>
+        <li><strong>Journal notes</strong> — longer posts that are not reviews.</li>
+        <li><strong>Partner codes</strong> — Moza, Insta360, etc.</li>
+      </ul>
+      <p>Click <strong>Publish</strong>. That saves to GitHub and Netlify rebuilds <a href="https://jenglandblog.netlify.app">jenglandblog.netlify.app</a> automatically.</p>
+
+      <h2>Tip for reviews</h2>
+      <p>In “Gear in this review,” type the product filename without <code>.md</code> — for example <code>dji-osmo-pocket-3</code> or <code>moza-r5-bundle</code>. Those products show as Amazon cards at the bottom of the review.</p>
+    </div>
+  </div>
+</Base>

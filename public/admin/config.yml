@@ -1,0 +1,110 @@
+backend:
+  name: git-gateway
+  branch: main
+
+site_url: https://jenglandblog.netlify.app
+logo_url: /favicon.svg
+display_url: https://jenglandblog.netlify.app
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: reviews
+    label: Reviews
+    label_singular: Review
+    folder: src/content/posts
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    filter:
+      field: kind
+      value: review
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Short description, name: description, widget: text }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Featured on home, name: featured, widget: boolean, default: false }
+      - { label: Kind, name: kind, widget: hidden, default: review }
+      - { label: Star rating (1–5), name: rating, widget: number, value_type: float, min: 1, max: 5, step: 0.1, required: false }
+      - { label: Verdict (one sentence), name: verdict, widget: text, required: false }
+      - { label: Tags, name: tags, widget: list, default: [] }
+      - {
+          label: Gear in this review,
+          name: gear,
+          widget: list,
+          required: false,
+          hint: "Use gear filenames without .md — e.g. moza-r5-bundle, dji-osmo-pocket-3"
+        }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: journal
+    label: Journal notes
+    label_singular: Journal note
+    folder: src/content/posts
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    filter:
+      field: kind
+      value: journal
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Short description, name: description, widget: text }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Featured on home, name: featured, widget: boolean, default: false }
+      - { label: Kind, name: kind, widget: hidden, default: journal }
+      - { label: Tags, name: tags, widget: list, default: [] }
+      - {
+          label: Related gear,
+          name: gear,
+          widget: list,
+          required: false,
+          hint: "Optional gear filenames without .md"
+        }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: gear
+    label: Shop products
+    label_singular: Product
+    folder: src/content/gear
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Product name, name: title, widget: string }
+      - { label: Short description, name: description, widget: text }
+      - {
+          label: Category,
+          name: category,
+          widget: select,
+          options:
+            - { label: Sim racing, value: sim-racing }
+            - { label: Cameras & content, value: content }
+            - { label: Photography, value: photography }
+            - { label: Off-road, value: off-road }
+        }
+      - { label: Amazon link (amzn.to or full URL), name: amazonUrl, widget: string }
+      - { label: Featured on home, name: featured, widget: boolean, default: false }
+      - { label: Used for, name: usedFor, widget: string, required: false }
+      - { label: Longer notes, name: body, widget: markdown, required: false }
+
+  - name: partners
+    label: Partner codes
+    label_singular: Partner code
+    folder: src/content/partners
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Brand name, name: name, widget: string }
+      - { label: Offer text, name: offer, widget: string }
+      - { label: Store / link URL, name: url, widget: string }
+      - { label: Discount code, name: code, widget: string }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - { label: Notes, name: body, widget: markdown, required: false }
