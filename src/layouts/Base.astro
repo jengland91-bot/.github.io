@@ -38,6 +38,7 @@ const nav = [
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <link rel="alternate" type="application/rss+xml" title={site.title} href="/rss.xml" />
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <div class="ambient"></div>
@@ -84,6 +85,7 @@ const nav = [
               <a href="/journal">Journal</a>
               <a href="/about">About Josh</a>
               <a href="/links">Link hub</a>
+              <a href="/edit">How to edit</a>
             </div>
             <div>
               <h3>Shop</h3>
@@ -112,6 +114,16 @@ const nav = [
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         toggle.textContent = open ? 'Close' : 'Menu';
       });
+
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', (user) => {
+          if (!user) {
+            window.netlifyIdentity.on('login', () => {
+              document.location.href = '/admin/';
+            });
+          }
+        });
+      }
     </script>
   </body>
 </html>
