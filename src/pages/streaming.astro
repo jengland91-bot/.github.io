@@ -3,40 +3,47 @@ import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
 import { streamingKit } from '../data/streaming';
 
-const { verdict, brand, bios, panels, scenes, assets, checklist } = streamingKit;
+const { verdict, brand, bios, panels, scenes, assets, checklist, starter } = streamingKit;
 ---
 
 <Base
   title="Streaming kit"
-  description="Josh England streaming brand kit — Meld scenes, Twitch/Kick/YouTube bios, and downloadable banners."
+  description="Josh England streaming starter kit — clean Twitch/Kick banners, matching bios, Meld scenes."
   path="/streaming"
 >
   <section class="hero">
-    <p class="kicker">Streaming brand kit</p>
-    <h1>Step up the stream without rebuilding from zero.</h1>
+    <p class="kicker">Start simple</p>
+    <h1>Twitch + Kick first. YouTube when you're ready.</h1>
     <p class="lede">
-      Keep <strong>{verdict.software}</strong> for Twitch + Kick + YouTube. Use one look on Kick and Twitch, a broader creator look on YouTube, and the scene set below so every go-live feels intentional.
+      {starter.focus} Keep <strong>{verdict.software}</strong>. Upload the clean banner + short bio today, then layer clips and panels as you grow.
     </p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#assets">Download assets</a>
-      <a class="btn btn-ghost" href="#bios">Copy bios</a>
+      <a class="btn btn-primary" href="#starter">Do this today</a>
+      <a class="btn btn-ghost" href="#bios">Copy bio</a>
     </div>
+  </section>
+
+  <section class="stream-block" id="starter">
+    <p class="kicker">Next step</p>
+    <h2>Upload these on Twitch and Kick</h2>
+    <ol class="stream-olist">
+      {starter.doToday.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ol>
+    <p class="page-lede" style="margin-top:12px;">Later (after clips): {starter.later.join(' ')}</p>
   </section>
 
   <section class="stream-block" id="software">
     <p class="kicker">Software</p>
     <h2 class="page-title" style="font-size:clamp(1.6rem,3vw,2.2rem);">Stay on Meld Studio</h2>
     <p class="page-lede">{verdict.why}</p>
-    <ul class="stream-list">
-      <li><strong>OBS:</strong> {verdict.whenObs}</li>
-      <li><strong>Streamlabs:</strong> {verdict.whenStreamlabs}</li>
-    </ul>
   </section>
 
   <section class="stream-block" id="brand">
     <p class="kicker">Brand</p>
-    <h2>One system, three platforms</h2>
-    <p class="page-lede">{brand.sameEverywhere} Voice: {brand.voice}</p>
+    <h2>One clean look for live</h2>
+    <p class="page-lede">{brand.sameEverywhere}</p>
     <div class="swatch-row">
       {brand.colors.map((color) => (
         <div class="swatch">
@@ -48,25 +55,25 @@ const { verdict, brand, bios, panels, scenes, assets, checklist } = streamingKit
   </section>
 
   <section class="stream-block" id="assets">
-    <p class="kicker">Assets</p>
-    <h2>Banners, avatar, offline screens</h2>
-    <p class="page-lede">Sized for upload. Preview below, then download the exact files.</p>
+    <p class="kicker">Starter assets</p>
+    <h2>Clean banner + avatar</h2>
+    <p class="page-lede">Use these on Twitch and Kick. YouTube files can wait.</p>
     <div class="asset-preview-grid">
       <figure>
         <img src="/branding/avatar-800x800.png" alt="JE monogram avatar" width="220" height="220" />
         <figcaption>Avatar</figcaption>
       </figure>
       <figure>
-        <img src="/branding/twitch-banner-1200x480.png" alt="Twitch profile banner" />
-        <figcaption>Twitch banner</figcaption>
+        <img src="/branding/twitch-banner-clean-1200x480.png" alt="Clean Twitch banner" />
+        <figcaption>Twitch banner (clean)</figcaption>
       </figure>
       <figure>
-        <img src="/branding/kick-banner-1280x700.png" alt="Kick channel banner" />
-        <figcaption>Kick banner</figcaption>
+        <img src="/branding/kick-banner-clean-1280x700.png" alt="Clean Kick banner" />
+        <figcaption>Kick banner (clean)</figcaption>
       </figure>
       <figure>
-        <img src="/branding/youtube-banner-2560x1440.png" alt="YouTube channel banner" />
-        <figcaption>YouTube banner</figcaption>
+        <img src="/branding/offline-screen-clean-1920x1080.png" alt="Clean offline screen" />
+        <figcaption>Offline / starting screen</figcaption>
       </figure>
     </div>
     <div class="hub-list" style="margin-top:18px;">
@@ -80,29 +87,22 @@ const { verdict, brand, bios, panels, scenes, assets, checklist } = streamingKit
   </section>
 
   <section class="stream-block" id="bios">
-    <p class="kicker">Profiles</p>
-    <h2>Kick + Twitch (matched) · YouTube (broader)</h2>
+    <p class="kicker">Starter bio</p>
+    <h2>Same text on Twitch and Kick</h2>
     <div class="bio-grid">
-      <article class="bio-card">
-        <h3>Twitch about</h3>
-        <pre class="copy-block">{bios.twitch}</pre>
+      <article class="bio-card bio-wide">
+        <h3>Copy / paste</h3>
+        <pre class="copy-block">{starter.bio}</pre>
         <p class="hint">
-          Channel:
-          <a class="text-link" href={site.socials.twitch} target="_blank" rel="noopener">{site.socials.twitch}</a>
-        </p>
-      </article>
-      <article class="bio-card">
-        <h3>Kick bio</h3>
-        <pre class="copy-block">{bios.kick}</pre>
-        <p class="hint">
-          Channel:
-          <a class="text-link" href={site.socials.kick} target="_blank" rel="noopener">{site.socials.kick}</a>
+          <a class="text-link" href={site.socials.twitch} target="_blank" rel="noopener">Twitch</a>
+          ·
+          <a class="text-link" href={site.socials.kick} target="_blank" rel="noopener">Kick</a>
         </p>
       </article>
       <article class="bio-card bio-wide">
-        <h3>YouTube About</h3>
+        <h3>YouTube (park for now)</h3>
         <pre class="copy-block">{bios.youtube}</pre>
-        <p class="hint">Short channel description line: <em>{bios.youtubeHandleShort}</em></p>
+        <p class="hint">Optional placeholder only — build the real YouTube brand when long-form is clearer.</p>
       </article>
     </div>
   </section>

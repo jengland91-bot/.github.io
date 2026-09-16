@@ -11,28 +11,41 @@ export const streamingKit = {
   brand: {
     colors: ['#0b0d12', '#00f2fe', '#a855f7', '#f4f7fb'],
     voice: 'Real-world creator who races sims, shoots photos, and goes IRL — not a neon esports clone.',
-    sameEverywhere: 'Same avatar + same cyan accent on Twitch and Kick. YouTube can feel broader (photo + off-road + long-form).',
+    sameEverywhere:
+      'Same clean banner + avatar on Twitch and Kick. Keep YouTube parked until you decide the long-form mix.',
   },
   bios: {
-    twitch: `Sim racing · games · IRL
-Photographer / content creator / trophy truck co-driver.
-Gear I actually use + partner codes → jenglandblog.netlify.app/links
-Business: jengland9191@yahoo.com`,
-    kick: `Live sim racing, games, and IRL.
-Josh England — photographer, creator, Moza sim rig, real dirt when I can.
-Links, Amazon gear, codes → jenglandblog.netlify.app/links
-@jengland91 everywhere`,
+    twitch: `Sim racing | games | IRL
+Josh England — photographer, creator, Moza sim rig.
+Links + gear → jenglandblog.netlify.app/links`,
+    kick: `Sim racing | games | IRL
+Josh England — photographer, creator, Moza sim rig.
+Links + gear → jenglandblog.netlify.app/links`,
     youtube: `Josh England — photographer, sim racer, off-road / trophy truck co-driver, and streamer.
 
-Here you'll find longer videos: gear walkthroughs, sim racing sessions, camera kits, desert runs, and behind-the-scenes from the work — not just live VODs.
+(Coming soon: longer videos — gear, sim sessions, desert runs, behind the scenes.)
 
-Live streams also land here. For go-live alerts catch me on Twitch + Kick (@jengland91).
-
-Portfolio: riseabovephoto.com
-Gear + codes: jenglandblog.netlify.app
-Amazon: amazon.com/shop/jengland91
-Business: jengland9191@yahoo.com`,
-    youtubeHandleShort: `Photo · sim racing · off-road · streams. Real gear, real dirt, real laps.`,
+Live alerts: Twitch + Kick @jengland91
+Links: jenglandblog.netlify.app/links`,
+    youtubeHandleShort: `Photo · sim racing · off-road · streams.`,
+  },
+  starter: {
+    focus: 'Twitch + Kick first. Same banner energy, same short bio. Build panels and clip highlights later.',
+    bio: `Sim racing | games | IRL
+Josh England — photographer, creator, Moza sim rig.
+Links + gear → jenglandblog.netlify.app/links`,
+    doToday: [
+      'Upload the clean banner on Twitch (1200×480) and Kick (1280×700).',
+      'Upload the JE avatar on both.',
+      'Paste the starter bio on both (they match on purpose).',
+      'Add one panel that links to jenglandblog.netlify.app/links.',
+      'Go live with Meld as you already do — polish overlays later.',
+    ],
+    later: [
+      'Add clip panels / highlight reels once you have VODs.',
+      'Expand schedule + socials panels.',
+      'Build YouTube when long-form direction is clear.',
+    ],
   },
   panels: [
     {
@@ -115,23 +128,21 @@ Business: jengland9191@yahoo.com`,
     },
   ],
   assets: [
-    { label: 'Avatar 800×800', href: '/branding/avatar-800x800.png' },
-    { label: 'Twitch banner 1200×480', href: '/branding/twitch-banner-1200x480.png' },
-    { label: 'Kick banner 1280×700', href: '/branding/kick-banner-1280x700.png' },
-    { label: 'YouTube banner 2560×1440', href: '/branding/youtube-banner-2560x1440.png' },
-    { label: 'Offline / stream screen 1920×1080', href: '/branding/offline-screen-1920x1080.png' },
+    { label: 'Avatar 800×800 (use this)', href: '/branding/avatar-800x800.png' },
+    { label: 'Twitch clean banner 1200×480 (use this)', href: '/branding/twitch-banner-clean-1200x480.png' },
+    { label: 'Kick clean banner 1280×700 (use this)', href: '/branding/kick-banner-clean-1280x700.png' },
+    { label: 'Offline clean screen 1920×1080', href: '/branding/offline-screen-clean-1920x1080.png' },
     { label: 'Starting Soon SVG', href: '/branding/starting-soon-1920x1080.svg' },
     { label: 'BRB SVG', href: '/branding/brb-1920x1080.svg' },
     { label: 'Ending SVG', href: '/branding/ending-soon-1920x1080.svg' },
+    { label: 'Links panel graphic', href: '/branding/panel-socials.svg' },
   ],
   checklist: [
-    'Same avatar on Twitch + Kick (+ YouTube profile photo).',
-    'Paste bios from this page — keep under character limits.',
-    'Twitch: Brand tab → profile banner + offline screen.',
-    'Kick: Profile picture + channel banner.',
-    'YouTube: Channel banner (safe-center text) + About + Featured channels / links.',
-    'Meld: build the 6 scenes above; multistream as you already do.',
-    'Audio first: mic louder than game; noise gate / EQ if available.',
-    'One CTA per stream: follow, Discord/links, or gear — not all at once.',
+    'Upload clean banner + JE avatar on Twitch and Kick today.',
+    'Paste the same short starter bio on both.',
+    'Add one panel linking to jenglandblog.netlify.app/links.',
+    'Keep streaming in Meld — scenes can stay simple (STARTING / SIM / BRB / ENDING).',
+    'Park YouTube branding until long-form direction is clear.',
+    'When you have clips, add highlight panels and swap banner photography later.',
   ],
 };
