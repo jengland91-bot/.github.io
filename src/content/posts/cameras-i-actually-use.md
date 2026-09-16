@@ -3,6 +3,9 @@ title: Cameras I actually take out of the bag
 description: Pocket 3 for walking shots, Action 5 Pro on the truck, Insta360 when I need to reframe later. The content kit without the fluff.
 date: 2026-09-01
 featured: true
+kind: review
+rating: 4.7
+verdict: Pocket 3 for people and walking shots. Action 5 Pro when it might get dirty. Insta360 X5 when I do not know the crop yet.
 tags:
   - content
   - photography

@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import Stars from './Stars.astro';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -11,13 +12,13 @@ const date = post.data.date.toLocaleDateString('en-US', {
   month: 'short',
   day: 'numeric',
 });
+const kindLabel = post.data.kind === 'review' ? 'Review' : 'Journal';
 ---
 
 <a class="card" href={`/blog/${post.id}`}>
-  <span class="meta">{date}{post.data.featured ? ' · Featured' : ''}</span>
+  <span class="meta">{date} · {kindLabel}</span>
   <h3>{post.data.title}</h3>
   <p>{post.data.description}</p>
-  {post.data.tags.length > 0 && (
-    <span class="chip">{post.data.tags[0]}</span>
-  )}
+  <Stars rating={post.data.rating} />
+  <span class:list={['chip', post.data.kind === 'review' ? 'review' : undefined]}>{post.data.tags[0] ?? kindLabel}</span>
 </a>

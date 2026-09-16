@@ -1,0 +1,15 @@
+---
+interface Props {
+  rating?: number;
+}
+
+const { rating = 0 } = Astro.props;
+const full = Math.round(rating * 2) / 2;
+const stars = [1, 2, 3, 4, 5].map((n) => (n <= Math.floor(full) ? '★' : n - 0.5 === full ? '★' : '☆')).join(' ');
+---
+
+{rating > 0 && (
+  <p class="stars" aria-label={`${rating} out of 5`}>
+    {stars} <span class="meta">{rating.toFixed(1)}</span>
+  </p>
+)}

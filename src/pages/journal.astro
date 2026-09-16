@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Disclosure from '../components/Disclosure.astro';
+import PostCard from '../components/PostCard.astro';
+
+const notes = (await getCollection('posts'))
+  .filter((post) => !post.data.draft && post.data.kind === 'journal')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base title="Journal" description="Field notes from Josh England — photography, sim racing, off-road, and building the kit." path="/journal">
+  <header class="hero-copy" style="padding-bottom: 12px; gap: 12px;">
+    <p class="kicker">Journal</p>
+    <h1 class="page-title">Field notes.</h1>
+    <p class="page-lede">Longer writing that is not a product review. The shop, the desert, the cockpit, and how this site stays in one place.</p>
+  </header>
+  <Disclosure />
+  <div class="grid posts-grid" style="margin-top: 28px;">
+    {notes.map((post) => (
+      <PostCard post={post} />
+    ))}
+  </div>
+</Base>

@@ -1,18 +1,13 @@
 export const site = {
   name: 'J England',
-  title: 'J England Blog',
-  tagline: 'Photography, sim racing, off-road, and the gear I actually use.',
+  title: 'J England',
+  tagline: 'Tech reviews, field notes, and the gear I actually run.',
   description:
-    'Honest write-ups from Josh England — photographer, content creator, sim racer, and trophy truck co-driver. Amazon affiliate picks, partner codes, and the kit behind the work.',
+    'Josh England — photographer, content creator, sim racer, and trophy truck co-driver. Independent tech reviews, Amazon picks, and partner codes for the kit behind the work.',
   url: 'https://jenglandblog.netlify.app',
   email: 'jengland9191@yahoo.com',
   author: 'Josh England',
   handle: 'jengland91',
-  brand: {
-    cyan: '#00f2fe',
-    violet: '#a855f7',
-    amazon: '#ffd814',
-  },
   socials: {
     tiktok: 'https://www.tiktok.com/@jengland91',
     instagram: 'https://www.instagram.com/jengland91/',
@@ -24,4 +19,11 @@ export const site = {
   amazonTag: 'joshrengland-20',
   disclosure:
     'As an Amazon Associate, I earn from qualifying purchases at no extra cost to you. Partner links and discount codes may also earn a commission.',
+};
+
+export const categoryLabels: Record<string, string> = {
+  'sim-racing': 'Sim racing',
+  content: 'Cameras & content',
+  photography: 'Photography',
+  'off-road': 'Off-road',
 };

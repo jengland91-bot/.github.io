@@ -9,11 +9,11 @@ const posts = (await getCollection('posts'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<Base title="Blog" description="Write-ups on sim racing, cameras, off-road, and the kit behind the work." path="/blog">
-  <header class="hero">
-    <p class="kicker">Blog</p>
-    <h1 class="page-title">Notes from the shop, the rig, and the desert.</h1>
-    <p class="page-lede">Write-ups from the shop, the rig, and the desert. Gear named in a post shows up as Amazon cards at the bottom of the article.</p>
+<Base title="Writing" description="Reviews and journal notes from Josh England." path="/blog">
+  <header class="hero-copy" style="padding-bottom: 12px; gap: 12px;">
+    <p class="kicker">Writing</p>
+    <h1 class="page-title">Reviews and field notes.</h1>
+    <p class="page-lede">Tech reviews live under Reviews. Longer notes live in the Journal. This is everything in one list.</p>
   </header>
   <Disclosure />
   <div class="grid posts-grid" style="margin-top: 28px;">

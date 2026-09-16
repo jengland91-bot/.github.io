@@ -1,0 +1,12 @@
+---
+interface Props {
+  href: string;
+  label?: string;
+}
+
+const { href, label = 'Check price on Amazon' } = Astro.props;
+---
+
+<a class="btn btn-amazon" href={href} target="_blank" rel="nofollow sponsored noopener">
+  {label}
+</a>

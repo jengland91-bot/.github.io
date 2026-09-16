@@ -3,15 +3,16 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Disclosure from '../components/Disclosure.astro';
 import PartnerCard from '../components/PartnerCard.astro';
+import ShopBanner from '../components/ShopBanner.astro';
 
 const partners = await getCollection('partners');
 ---
 
 <Base title="Partner codes" description="Moza, Insta360, and other non-Amazon partner links and discount codes." path="/partners">
-  <header class="hero">
+  <header class="hero-copy" style="padding-bottom: 12px; gap: 12px;">
     <p class="kicker">Codes</p>
     <h1 class="page-title">Partner links that are not Amazon.</h1>
-    <p class="page-lede">Brand links and discount codes that are not Amazon. Product links live on the Gear page.</p>
+    <p class="page-lede">Brand discounts and store links. Amazon products stay on the Shop page and in my Amazon storefront.</p>
   </header>
   <Disclosure />
   <div class="grid" style="margin-top: 28px; max-width: 720px;">
@@ -19,4 +20,5 @@ const partners = await getCollection('partners');
       <PartnerCard partner={partner} />
     ))}
   </div>
+  <ShopBanner />
 </Base>

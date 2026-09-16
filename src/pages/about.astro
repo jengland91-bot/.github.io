@@ -1,37 +1,47 @@
 ---
 import Base from '../layouts/Base.astro';
 import Disclosure from '../components/Disclosure.astro';
+import ShopBanner from '../components/ShopBanner.astro';
 import { site } from '../data/site';
 ---
 
 <Base title="About" description="Josh England — photographer, content creator, sim racer, and trophy truck co-driver." path="/about">
-  <header class="hero">
+  <header class="hero-copy" style="gap: 12px; padding-bottom: 8px;">
     <p class="kicker">About</p>
     <h1 class="page-title">Josh England.</h1>
-    <p class="page-lede">I shoot, I drive, and I build the kit around both. This blog is the public notebook for what I use and why — not a dumping ground of every product on the internet.</p>
+    <p class="page-lede">I shoot, I drive, and I build the kit around both. This site is the public notebook for what I use and why — reviews, a shop, and the Amazon storefront in one place.</p>
   </header>
   <Disclosure />
 
-  <div class="prose article" style="margin-top: 28px;">
-    <p>
-      Day job energy lives at <a href={site.socials.portfolio}>Rise Above Photo</a>. The rest of it — sim racing, off-road, cameras, streaming — lives here so the Amazon links, partner codes, and write-ups stay in one repo.
-    </p>
-    <p>
-      Socials: <a href={site.socials.instagram}>Instagram</a>, <a href={site.socials.tiktok}>TikTok</a>, <a href={site.socials.youtube}>YouTube</a>. Business: <a href={`mailto:${site.email}`}>{site.email}</a>.
-    </p>
-    <h2>How this site stays simple</h2>
-    <p>There is no admin panel and no hoop-jumping CMS. Content is files:</p>
-    <ul>
-      <li><code>src/content/posts/</code> — a new <code>.md</code> file is a new blog post.</li>
-      <li><code>src/content/gear/</code> — a new <code>.md</code> file is a new Amazon product. Put the affiliate URL in <code>amazonUrl</code>.</li>
-      <li><code>src/content/partners/</code> — brand codes that are not Amazon.</li>
-      <li><code>src/data/site.ts</code> — name, socials, storefront URL, disclosure text.</li>
-    </ul>
-    <p>
-      On a post, list gear filenames under <code>gear:</code> and the Amazon cards show up at the bottom automatically. Push to GitHub, Netlify rebuilds <a href={site.url}>{site.url.replace('https://', '')}</a>.
-    </p>
-    <p>
-      Full Amazon shop: <a href={site.amazonStorefront} target="_blank" rel="nofollow sponsored noopener">{site.amazonStorefront.replace('https://', '')}</a>. Associate tag is <code>{site.amazonTag}</code>. Socials and email live in <code>src/data/site.ts</code>.
-    </p>
+  <div class="about-split">
+    <aside class="about-panel">
+      <p class="kicker">Work</p>
+      <h2 style="font-family: var(--display); font-size: 1.6rem; margin: 8px 0 12px;">In the field</h2>
+      <p class="page-lede">Photographer at Rise Above Photo. Content creator. Sim racer. Trophy truck co-driver. The reviews here are the overlap: cameras that survive dust, a rig that feels like a tool, audio that works when the garage fans are on.</p>
+      <div class="hero-actions" style="margin-top: 16px;">
+        <a class="btn btn-ghost" href={site.socials.portfolio} target="_blank" rel="noopener">Portfolio</a>
+        <a class="btn btn-amazon" href={site.amazonStorefront} target="_blank" rel="nofollow sponsored noopener">Amazon shop</a>
+      </div>
+    </aside>
+    <div class="prose">
+      <p>
+        Day-job photography lives at <a href={site.socials.portfolio}>Rise Above Photo</a>. This site is everything else people ask for in DMs: what wheel base, what pocket camera, what mic, which partner code.
+      </p>
+      <p>
+        Socials: <a href={site.socials.instagram}>Instagram</a>, <a href={site.socials.tiktok}>TikTok</a>, <a href={site.socials.youtube}>YouTube</a>. Business: <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+      <p>
+        Full Amazon storefront: <a href={site.amazonStorefront} target="_blank" rel="nofollow sponsored noopener">amazon.com/shop/jengland91</a>.
+      </p>
+      <h2>How to use this site</h2>
+      <ul>
+        <li><a href="/reviews">Reviews</a> — ratings and verdicts, with buy links at the bottom.</li>
+        <li><a href="/shop">Shop</a> — every Amazon product I list, filterable.</li>
+        <li><a href="/journal">Journal</a> — notes that are not a review.</li>
+        <li><a href="/partners">Codes</a> — Moza, Insta360, and other non-Amazon partners.</li>
+        <li><a href="/links">Links</a> — the bio hub for Instagram and TikTok.</li>
+      </ul>
+    </div>
   </div>
+  <ShopBanner />
 </Base>
