@@ -81,6 +81,19 @@ Point the Netlify site (`jenglandblog.netlify.app`) at **this** GitHub repo.
 
 The empty `my-affiliate-blog` repo can stay unused. This repo is the source of truth so you are not maintaining two sites.
 
+## OBS stream kit
+
+Overlays and the setup page live on this site so OBS can load them as browser sources.
+
+| URL | What it is |
+| --- | --- |
+| `/stream` | Plugin list, Aitum destinations, Lumia commands, scene map |
+| `/overlays/` | Preview board (16:9 + 9:16 of the same files) |
+| `/overlays/install.html` | Pushes `J England Live` + `J England Vertical` into OBS over WebSocket |
+| `/overlays/live.html` | Main sim HUD (`?v=1` for vertical, `?setup=1` for wells) |
+
+OBS Stream = Twitch. Aitum Main Outputs = YouTube + Kick (+ X if Premium). Aitum Vertical = YouTube Shorts. Stay off Meld for this kit.
+
 ## Pages
 
 | URL | What it is |
