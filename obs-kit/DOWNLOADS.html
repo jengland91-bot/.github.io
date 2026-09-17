@@ -8,9 +8,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    :root { --bg:#08090d; --elev:#11141b; --line:#232833; --text:#f3f1ec; --muted:#9aa3b2; --cyan:#3ee0ea; }
+    :root { --bg:#070c09; --elev:#0d1511; --line:#1d2a22; --text:#f3f1ec; --muted:#9aa3b2; --cyan:#3eea86; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); color: var(--text); font-family: Outfit, system-ui, sans-serif; }
+    body {
+      background:
+        radial-gradient(ellipse 80% 50% at 8% -10%, rgba(62,234,134,.14), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      font-family: Outfit, system-ui, sans-serif;
+    }
     main { max-width: 820px; margin: 0 auto; padding: 36px 20px 80px; }
     h1 { font-family: Fraunces, Georgia, serif; font-size: 2.4rem; margin: 8px 0 12px; }
     .kicker { color: var(--cyan); font-size: .72rem; font-weight: 800; letter-spacing: .2em; }
@@ -33,7 +39,8 @@
   <p class="kicker">STREAMING PC</p>
   <h1>Install these, then come back to DOUBLE-CLICK-ME.</h1>
   <p>Close OBS before plugin installers. You already have OBS — still grab 32.2+ if you are behind. Aitum Stream Suite is the multi-stream plugin (Kick / Twitch / YouTube / Shorts / X). Skip StreamFX. Skip Restream. Skip Meld.</p>
-  <p>Faster: run <code>GET-PLUGINS.bat</code> in this folder. It pulls the .exe files that have a direct link, and opens the rest in your browser.</p>
+  <p>Faster: run <code>GET-PLUGINS.bat</code> in this folder. It pulls the .exe files that have a direct link into <code>installers\</code>, and opens the rest in your browser. Forum plugins (Source Record, Clone, Keyer, Replay, Directory Watch, AdvSS, blur/stroke/masks/shaderfilter) do not have a direct file URL — those pages have to be saved by you.</p>
+  <p>This kit cannot see the Windows OBS plugin folder from the cloud. After you install, confirm in OBS: Tools shows Aitum / Move / Source Record / etc. Close OBS before running plugin .exe files.</p>
 
   <article>
     <span class="tag">REQUIRED</span>

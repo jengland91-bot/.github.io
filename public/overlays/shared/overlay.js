@@ -31,10 +31,7 @@
   function taglineText() {
     const custom = String(STREAM.tagline || "").trim();
     if (custom) return custom;
-    const parts = [STREAM.style, STREAM.liveWord]
-      .map((p) => String(p || "").trim())
-      .filter(Boolean);
-    return parts.length ? parts.join(" · ") : "";
+    return String(STREAM.style || "").trim();
   }
 
   function applyIdentity() {
@@ -46,7 +43,11 @@
     document.querySelectorAll("[data-game]").forEach((el) => {
       el.hidden = !currentGame();
     });
-    fill("[data-tagline]", taglineText());
+    const tagline = taglineText();
+    fill("[data-tagline]", tagline);
+    document.querySelectorAll("[data-tagline]").forEach((el) => {
+      el.hidden = !tagline;
+    });
     fill("[data-brb]", STREAM.brbMessage);
     fill("[data-ending]", STREAM.endingMessage);
     fill("[data-chatting-title]", STREAM.chattingTitle);
@@ -231,7 +232,8 @@
       const data = await res.json();
       const prevGo = STREAM.goLiveAt;
       Object.keys(data).forEach((key) => {
-        if (data[key] != null && data[key] !== "") STREAM[key] = data[key];
+        if (data[key] == null) return;
+        STREAM[key] = data[key];
       });
       applyIdentity();
       socials();
@@ -278,6 +280,18 @@
     canvas.width = W;
     canvas.height = H;
 
+    function hexRgb(hex, fallback) {
+      const h = String(hex || "").replace("#", "");
+      if (h.length !== 6) return fallback;
+      return {
+        r: parseInt(h.slice(0, 2), 16),
+        g: parseInt(h.slice(2, 4), 16),
+        b: parseInt(h.slice(4, 6), 16),
+      };
+    }
+    const mint = hexRgb((STREAM.colors || {}).cyan, { r: 62, g: 234, b: 134 });
+    const teal = hexRgb((STREAM.colors || {}).violet, { r: 20, g: 184, b: 166 });
+
     for (let i = 0; i < 42; i += 1) {
       particles.push({
         x: Math.random() * W,
@@ -285,7 +299,7 @@
         r: Math.random() * 1.8 + 0.3,
         s: Math.random() * 0.35 + 0.05,
         a: Math.random() * 0.35 + 0.05,
-        violet: Math.random() > 0.62,
+        teal: Math.random() > 0.62,
       });
     }
 
@@ -298,8 +312,9 @@
           p.y = H + 4;
           p.x = Math.random() * W;
         }
+        const c = p.teal ? teal : mint;
         ctx.beginPath();
-        ctx.fillStyle = p.violet ? `rgba(167, 139, 250, ${p.a})` : `rgba(62, 224, 234, ${p.a})`;
+        ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${p.a})`;
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       });

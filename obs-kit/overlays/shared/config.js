@@ -2,6 +2,7 @@
  * J England live kit — edit this file, save, then in OBS right-click the overlay → Refresh.
  * Hosted copy: https://jenglandblog.netlify.app/overlays/shared/config.js
  *
+ * Easier: use the control panel. Leave `game` blank until you want a specific title.
  * URL overrides still work: starting.html?m=5&game=iRacing
  */
 window.STREAM = {
@@ -10,10 +11,10 @@ window.STREAM = {
   handle: "@jengland91",
   site: "jenglandblog.netlify.app",
 
-  game: "Sim racing",
-  style: "Photo · sim · off-road",
+  game: "",
+  style: "",
   liveWord: "Live",
-  tagline: "",
+  tagline: "Sim racing · Gaming · IRL",
 
   startingKicker: "GOING LIVE",
   startingLine1: "STARTING",
@@ -40,11 +41,11 @@ window.STREAM = {
   checkeredPill: "END",
 
   colors: {
-    cyan: "#3ee0ea",
-    violet: "#a78bfa",
+    cyan: "#3eea86",
+    violet: "#14b8a6",
     paper: "#f3f1ec",
     muted: "#9aa3b2",
-    ink: "#08090d",
+    ink: "#070c09",
   },
 
   socials: {

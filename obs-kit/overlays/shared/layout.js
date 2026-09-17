@@ -7,6 +7,8 @@ window.STREAM_LAYOUT = {
   collectionVertical: "J England Vertical",
   fps: 60,
   overlayCss: "body { background-color: rgba(0,0,0,0); margin: 0; overflow: hidden; }",
+  /* OBS color_source ABGR for #07140e forest */
+  backdropColor: 4279170055,
   canvas: {
     wide: { w: 1920, h: 1080 },
     vertical: { w: 1080, h: 1920 },

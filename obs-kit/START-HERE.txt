@@ -13,8 +13,9 @@ streaming PC Desktop, then:
 7. OBS Stream = Twitch. Aitum outputs = YouTube + Kick (+ X if Premium).
    Vertical outputs = YouTube Shorts key.
 
-Change the game title, BRB text, and countdown from the control panel
-while you are live. Scene buttons switch OBS if you connected WebSocket.
+Starting Soon is generic on purpose: STARTING SOON + “Sim racing · Gaming · IRL”.
+Leave the title blank until you know what you're playing. Type it in the
+control panel and every overlay updates in a couple of seconds.
 
 Hotkeys after install: Numpad 1–9 through the scene list.
 

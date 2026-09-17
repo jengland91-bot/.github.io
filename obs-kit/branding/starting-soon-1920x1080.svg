@@ -1,20 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="Starting soon">
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="Starting soon backdrop">
   <defs>
-    <radialGradient id="glow" cx="50%" cy="35%" r="55%">
-      <stop offset="0%" stop-color="#12303a"/>
-      <stop offset="55%" stop-color="#0b0d12"/>
-      <stop offset="100%" stop-color="#07080c"/>
+    <radialGradient id="wash" cx="42%" cy="32%" r="62%">
+      <stop offset="0%" stop-color="#164a32"/>
+      <stop offset="42%" stop-color="#0b1f16"/>
+      <stop offset="100%" stop-color="#070c09"/>
+    </radialGradient>
+    <radialGradient id="mint" cx="18%" cy="8%" r="38%">
+      <stop offset="0%" stop-color="#3eea86" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#3eea86" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="teal" cx="88%" cy="78%" r="42%">
+      <stop offset="0%" stop-color="#14b8a6" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#00f2fe"/>
-      <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#3eea86" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#3eea86"/>
+      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0"/>
     </linearGradient>
   </defs>
-  <rect width="1920" height="1080" fill="url(#glow)"/>
-  <rect x="120" y="540" width="1680" height="2" fill="url(#line)"/>
-  <text x="960" y="430" text-anchor="middle" fill="#f4f7fb" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="800" letter-spacing="10">J ENGLAND</text>
-  <text x="960" y="500" text-anchor="middle" fill="#00f2fe" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="8">STARTING SOON</text>
-  <text x="960" y="620" text-anchor="middle" fill="#94a3b8" font-family="Arial, Helvetica, sans-serif" font-size="26">Sim racing · Games · IRL</text>
-  <text x="960" y="680" text-anchor="middle" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="22">Grab a drink  we're about to go live</text>
+  <rect width="1920" height="1080" fill="url(#wash)"/>
+  <rect width="1920" height="1080" fill="url(#mint)"/>
+  <rect width="1920" height="1080" fill="url(#teal)"/>
+  <rect x="120" y="540" width="1680" height="2" fill="url(#line)" opacity="0.55"/>
+  <text x="1760" y="980" text-anchor="end" fill="#3eea86" fill-opacity="0.18" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="800" letter-spacing="6">JE</text>
 </svg>

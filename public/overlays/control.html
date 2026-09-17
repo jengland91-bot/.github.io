@@ -9,14 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #08090d; --elev: #11141b; --line: #232833; --text: #f3f1ec;
-      --muted: #9aa3b2; --cyan: #3ee0ea; --violet: #a78bfa; --ink: #08090d;
+      --bg: #070c09; --elev: #0d1511; --line: #1d2a22; --text: #f3f1ec;
+      --muted: #9aa3b2; --cyan: #3eea86; --violet: #14b8a6; --ink: #070c09;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       min-height: 100vh;
       background:
-        radial-gradient(ellipse 80% 50% at 8% -10%, rgba(62,224,234,.14), transparent 50%),
+        radial-gradient(ellipse 80% 50% at 8% -10%, rgba(62,234,134,.16), transparent 50%),
         var(--bg);
       color: var(--text);
       font-family: Outfit, system-ui, sans-serif;
@@ -107,10 +107,10 @@
 
   <fieldset>
     <legend>What viewers see right now</legend>
-    <label>Game / session title (Starting Soon + HUD chip)</label>
-    <input id="game" placeholder="iRacing · night laps" />
-    <label>Tagline under the title</label>
-    <input id="tagline" placeholder="Photo · sim · off-road" />
+    <label>Tonight's title (optional — leave blank until you know)</label>
+    <input id="game" placeholder="Leave blank for a generic Starting Soon" />
+    <label>Line under STARTING SOON</label>
+    <input id="tagline" placeholder="Sim racing · Gaming · IRL" />
     <label>BRB message</label>
     <input id="brbMessage" />
     <label>Ending message</label>
@@ -121,7 +121,7 @@
       <button class="btn" type="button" id="btnSave">Save to overlays</button>
       <button class="btn ghost" type="button" id="btnCountdown">Restart countdown</button>
     </div>
-    <p class="hint">Overlays pick this up within a couple of seconds. No OBS refresh needed.</p>
+    <p class="hint">Leave the title empty and Starting Soon just says STARTING SOON plus that line. Type a game later and it shows on the countdown and the live HUD in a couple of seconds — no overlay files to edit.</p>
   </fieldset>
 
   <div id="log"></div>

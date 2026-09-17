@@ -1,9 +1,9 @@
 :root {
-  --cyan: #3ee0ea;
-  --violet: #a78bfa;
+  --cyan: #3eea86;
+  --violet: #14b8a6;
   --paper: #f3f1ec;
   --muted: #9aa3b2;
-  --ink: #08090d;
+  --ink: #070c09;
   --line: rgba(243, 241, 236, 0.14);
   --glow: 0 0 28px color-mix(in srgb, var(--cyan) 42%, transparent);
   --font: "Outfit", system-ui, sans-serif;
@@ -11,6 +11,7 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
 
 html,
 body {
@@ -29,9 +30,9 @@ body.scene-ending,
 body.scene-intermission,
 body.preview {
   background:
-    radial-gradient(ellipse 80% 50% at 10% -10%, rgba(62, 224, 234, 0.16), transparent 50%),
-    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(167, 139, 250, 0.14), transparent 46%),
-    linear-gradient(180deg, #0c1018 0%, var(--ink) 42%, #07080c 100%);
+    radial-gradient(ellipse 80% 50% at 10% -10%, rgba(62, 234, 134, 0.22), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(20, 184, 166, 0.16), transparent 46%),
+    linear-gradient(180deg, #0c1812 0%, var(--ink) 42%, #050806 100%);
 }
 
 .backdrop-photo {
@@ -43,7 +44,7 @@ body.preview {
   display: none;
   pointer-events: none;
   z-index: 0;
-  filter: brightness(0.38) saturate(0.85);
+  filter: brightness(0.55) saturate(1.08);
 }
 
 body.has-backdrop .backdrop-photo { display: block; }
@@ -51,7 +52,7 @@ body.has-backdrop .backdrop-photo { display: block; }
 body.has-backdrop.scene-starting,
 body.has-backdrop.scene-brb,
 body.has-backdrop.scene-ending {
-  background: #07080c;
+  background: #050806;
 }
 
 #dust {
@@ -343,14 +344,14 @@ body.has-backdrop.scene-ending {
   height: 420px;
   left: -80px;
   top: -60px;
-  background: rgba(62, 224, 234, 0.22);
+  background: rgba(62, 234, 134, 0.28);
 }
 .orb-b {
   width: 520px;
   height: 520px;
   right: -120px;
   bottom: -80px;
-  background: rgba(167, 139, 250, 0.18);
+  background: rgba(20, 184, 166, 0.2);
   animation-delay: -7s;
 }
 
@@ -432,7 +433,7 @@ body:not(.setup) .well-game.placed {
 }
 
 body.setup .well {
-  background: rgba(62, 224, 234, 0.1);
+  background: rgba(62, 234, 134, 0.1);
 }
 
 body.setup .well-tag { display: block; }

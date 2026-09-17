@@ -1,13 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="Be right back">
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="Be right back backdrop">
   <defs>
-    <radialGradient id="glow" cx="50%" cy="40%" r="55%">
-      <stop offset="0%" stop-color="#1a1430"/>
-      <stop offset="60%" stop-color="#0b0d12"/>
-      <stop offset="100%" stop-color="#07080c"/>
+    <radialGradient id="wash" cx="50%" cy="40%" r="58%">
+      <stop offset="0%" stop-color="#12382a"/>
+      <stop offset="55%" stop-color="#0a1a14"/>
+      <stop offset="100%" stop-color="#070c09"/>
+    </radialGradient>
+    <radialGradient id="mint" cx="70%" cy="18%" r="36%">
+      <stop offset="0%" stop-color="#3eea86" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#3eea86" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="teal" cx="12%" cy="86%" r="40%">
+      <stop offset="0%" stop-color="#14b8a6" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <rect width="1920" height="1080" fill="url(#glow)"/>
-  <text x="960" y="470" text-anchor="middle" fill="#f4f7fb" font-family="Arial, Helvetica, sans-serif" font-size="96" font-weight="800" letter-spacing="8">BRB</text>
-  <text x="960" y="550" text-anchor="middle" fill="#a855f7" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="6">BE RIGHT BACK</text>
-  <text x="960" y="640" text-anchor="middle" fill="#94a3b8" font-family="Arial, Helvetica, sans-serif" font-size="24">Quick break  chat stays open</text>
+  <rect width="1920" height="1080" fill="url(#wash)"/>
+  <rect width="1920" height="1080" fill="url(#mint)"/>
+  <rect width="1920" height="1080" fill="url(#teal)"/>
+  <text x="160" y="980" fill="#3eea86" fill-opacity="0.16" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="800" letter-spacing="6">JE</text>
 </svg>

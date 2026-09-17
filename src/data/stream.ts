@@ -3,7 +3,7 @@ export const streamKit = {
   collectionVertical: 'J England Vertical',
   overlayOrigin: 'https://jenglandblog.netlify.app',
   scenes: [
-    { name: 'STARTING SOON', overlay: '/overlays/starting.html', job: 'Countdown while chat joins. Optional ?m=5&game=iRacing' },
+    { name: 'STARTING SOON', overlay: '/overlays/starting.html', job: 'Countdown while chat joins. Generic “Sim racing · Gaming · IRL” until you type a title in the control panel.' },
     { name: 'JUST CHATTING', overlay: '/overlays/chatting.html', job: 'Big face + room + wheel + pedals. No game.' },
     { name: 'DESK', overlay: '/overlays/desk.html', job: 'Full game/desktop + larger face and room. No wheel/pedals.' },
     { name: 'SIM', overlay: '/overlays/live.html', job: 'Main 16:9 gameplay with four cams along the bottom.' },

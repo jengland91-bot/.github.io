@@ -9,17 +9,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #08090d;
-      --elev: #11141b;
-      --line: #232833;
+      --bg: #070c09;
+      --elev: #0d1511;
+      --line: #1d2a22;
       --text: #f3f1ec;
       --muted: #9aa3b2;
-      --cyan: #3ee0ea;
-      --ink: #08090d;
+      --cyan: #3eea86;
+      --ink: #070c09;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: radial-gradient(ellipse 80% 50% at 10% -10%, rgba(62,224,234,.12), transparent 50%), var(--bg);
+      background: radial-gradient(ellipse 80% 50% at 10% -10%, rgba(62,234,134,.14), transparent 50%), var(--bg);
       color: var(--text);
       font-family: Outfit, system-ui, sans-serif;
       line-height: 1.55;
@@ -384,7 +384,7 @@
 
     await ensureScene(LAYOUT.scenes[0].name);
 
-    const colorSettings = { color: 4278190080, width: canvas.w, height: canvas.h };
+    const colorSettings = { color: LAYOUT.backdropColor || 4279170055, width: canvas.w, height: canvas.h };
     if (colorKind) await ensureInput("Color / Backdrop", colorKind, colorSettings);
 
     if (cameraKind) {
