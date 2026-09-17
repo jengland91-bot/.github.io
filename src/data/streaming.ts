@@ -128,6 +128,7 @@ Links + gear → jenglandblog.netlify.app/links`,
     },
   ],
   assets: [
+    { label: 'Full brand pack ZIP (recommended)', href: '/branding/jengland-streaming-brand-pack.zip' },
     { label: 'Avatar 800×800 (use this)', href: '/branding/avatar-800x800.png' },
     { label: 'Twitch clean banner 1200×480 (use this)', href: '/branding/twitch-banner-clean-1200x480.png' },
     { label: 'Kick clean banner 1280×700 (use this)', href: '/branding/kick-banner-clean-1280x700.png' },
