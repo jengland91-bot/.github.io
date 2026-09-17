@@ -1,0 +1,210 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import {
+  aitumSteps,
+  audioTracks,
+  bitrates,
+  lumiaSteps,
+  overlayScenes,
+  overlayUrl,
+  platforms,
+  plugins,
+  show,
+} from '../data/obs';
+
+const required = plugins.filter((p) => p.required);
+const recommended = plugins.filter((p) => !p.required);
+---
+
+<Base
+  title="OBS pack"
+  description="J England OBS multi-stream pack — Kick, Twitch, YouTube, Shorts, and X."
+  path="/obs"
+  noindex
+>
+  <header class="hero-copy" style="gap: 12px; padding-bottom: 8px;">
+    <p class="kicker">OBS · Aitum · Lumia</p>
+    <h1 class="page-title">Leave Meld. This is the show file.</h1>
+    <p class="page-lede">
+      Horizontal 16:9 for Kick, Twitch, YouTube, and X. Vertical 9:16 for YouTube Shorts (and any other phone-shaped destination).
+      Overlays are hosted on this site so OBS just loads a browser source. Nested scenes mean you replace each camera once.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/obs-pack/J-England.json" download>Download scene collection</a>
+      <a class="btn btn-ghost" href="/overlays">Preview overlays</a>
+      <a class="btn btn-ghost" href="/obs-pack/J-England.json">JSON file</a>
+    </div>
+  </header>
+
+  <section class="obs-block" id="import">
+    <p class="kicker">10-minute import</p>
+    <h2>Do this on the streaming PC</h2>
+    <ol class="stream-olist">
+      <li>Install / update <strong>OBS Studio 31+</strong>. Close Meld when you go live from OBS so they are not fighting the GPU.</li>
+      <li>Scene Collection menu (top, next to Profile) → <strong>Import</strong> → pick <code>J-England.json</code> from the download. Switch to the collection named <strong>J England</strong>.</li>
+      <li>Settings → Video: Base and Output <strong>1920×1080</strong>, 60 fps. Downscale filter Lanczos if you ever output 720p.</li>
+      <li>Settings → Output → Advanced. Encoder NVENC H.264 (or AMD AMF / x264 if that is your box). Rate control CBR, keyframe 2s, preset P5 / quality.</li>
+      <li>Settings → Stream: Service <strong>Twitch</strong>, connect the {site.handle} account. This is the built-in encode. Everything else goes through Aitum.</li>
+      <li>Replace the four nested sources whose names start with <code>•</code> — Game, Face Cam, Desktop, IRL Cam — with your real capture devices. Do not delete the nested scene; edit inside it.</li>
+      <li>Paste Lumia overlay URLs into the four <code>Lumia ·</code> browser sources. Enable WebSocket (Tools → WebSocket Server Settings) and connect Lumia.</li>
+      <li>Aitum: Twitch already streaming via OBS. Add Kick + YouTube on Main Outputs. Add a 1080×1920 vertical canvas, duplicate scene names, paste the <code>/overlays/v/…</code> URLs, scene-link them, add the Shorts YouTube key on Vertical Outputs.</li>
+    </ol>
+  </section>
+
+  <section class="obs-block" id="kick">
+    <p class="kicker">Platforms</p>
+    <h2>Kick, Twitch, YouTube, Shorts, and X</h2>
+    <p class="page-lede">
+      You already have Kick at <a class="text-link" href={site.socials.kick} target="_blank" rel="noopener">kick.com/jengland91</a> — that is the live site (not Kik the messenger).
+      X is allowed if the account is Premium; add it last because it costs another encode.
+    </p>
+    <div class="obs-table-wrap">
+      <table class="obs-table">
+        <thead>
+          <tr>
+            <th>Where</th>
+            <th>Canvas</th>
+            <th>How</th>
+            <th>Encode</th>
+          </tr>
+        </thead>
+        <tbody>
+          {platforms.map((p) => (
+            <tr>
+              <td>
+                <strong>{p.name}</strong>
+                <div class="hint">{p.note}</div>
+              </td>
+              <td>{p.canvas}</td>
+              <td>{p.where}</td>
+              <td>
+                {p.bitrate}
+                <div class="hint">Keyframe {p.keyframe}</div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <div class="obs-cards">
+      {Object.values(bitrates).map((tier) => (
+        <article class="obs-card">
+          <p class="kicker">{tier.label}</p>
+          <h3>Upload {tier.upload}</h3>
+          <ul class="stream-list">
+            {tier.outputs.map((line) => <li>{line}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="obs-block" id="aitum">
+    <p class="kicker">Aitum multi</p>
+    <h2>Multistream + vertical canvas</h2>
+    <p class="page-lede">
+      If you already have Aitum Multistream, keep it and add <a class="text-link" href="https://aitum.tv/products/vertical" target="_blank" rel="noopener">Aitum Vertical</a>.
+      If you are installing fresh, get <a class="text-link" href="https://aitum.tv/products/stream-suite" target="_blank" rel="noopener">Aitum Stream Suite</a> instead — it is Multistream + Vertical in one plugin. Do not stack Suite on top of the old pair.
+    </p>
+    <ol class="stream-olist">
+      {aitumSteps.map((step) => <li>{step}</li>)}
+    </ol>
+    <p class="page-lede" style="margin-top:14px;">
+      Vertical scene names must match the main collection exactly so linking works: {overlayScenes.map((s) => s.name).join(', ')}.
+      Overlay URLs for the vertical canvas are the same files under <code>/overlays/v/</code>. Example LIVE: <code>{overlayUrl('live', true)}</code>
+    </p>
+  </section>
+
+  <section class="obs-block" id="scenes">
+    <p class="kicker">Scenes</p>
+    <h2>One horizontal set you duplicate vertical</h2>
+    <p class="page-lede">
+      Current game title baked into overlays: <strong>{show.game}</strong>. Change it in <code>src/data/obs.ts</code> or append <code>?game=YourTitle</code> on the browser source URL. Countdown: <code>?minutes=8</code>.
+    </p>
+    <div class="scene-grid">
+      {overlayScenes.map((scene) => (
+        <article class="scene-card">
+          <h3>{scene.name}</h3>
+          <p class="scene-job">{scene.job}</p>
+          <p class="hint"><a class="text-link" href={`/overlays/${scene.id}`}>16:9 overlay</a> · <a class="text-link" href={`/overlays/v/${scene.id}`}>9:16 overlay</a></p>
+        </article>
+      ))}
+    </div>
+    <p class="page-lede" style="margin-top:16px;">
+      Nested sources (edit inside these, used by every scene): <code>• Game</code>, <code>• Face Cam</code>, <code>• Desktop</code>, <code>• IRL Cam</code>.
+      Lumia sources: <code>Lumia · Alerts</code>, <code>Lumia · Chat</code>, <code>Lumia · Labels</code>, <code>Lumia · Now Playing</code>.
+    </p>
+  </section>
+
+  <section class="obs-block" id="plugins">
+    <p class="kicker">Plugins</p>
+    <h2>What to install — and what to skip</h2>
+    <p class="page-lede">Match plugin builds to your OBS version. WebSocket is already inside OBS. StreamFX is optional and often broken on new OBS; Shaderfilter is the effects plugin that still tracks current releases.</p>
+    <h3 class="obs-sub">Required</h3>
+    <div class="obs-table-wrap">
+      <table class="obs-table">
+        <thead><tr><th>Plugin</th><th>Why</th><th></th></tr></thead>
+        <tbody>
+          {required.map((p) => (
+            <tr>
+              <td><strong>{p.name}</strong>{p.note && <div class="hint">{p.note}</div>}</td>
+              <td>{p.why}</td>
+              <td><a class="text-link" href={p.href} target="_blank" rel="noopener">Get it</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <h3 class="obs-sub">Recommended + storage</h3>
+    <div class="obs-table-wrap">
+      <table class="obs-table">
+        <thead><tr><th>Plugin</th><th>Why</th><th></th></tr></thead>
+        <tbody>
+          {recommended.map((p) => (
+            <tr>
+              <td><strong>{p.name}</strong>{p.note && <div class="hint">{p.note}</div>}</td>
+              <td>{p.why}</td>
+              <td><a class="text-link" href={p.href} target="_blank" rel="noopener">Get it</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="obs-block" id="lumia">
+    <p class="kicker">Lumia Stream</p>
+    <h2>One alert box for every platform</h2>
+    <ol class="stream-olist">
+      {lumiaSteps.map((step) => <li>{step}</li>)}
+    </ol>
+    <p class="page-lede" style="margin-top:12px;">
+      Alert well is 860×200 at 530,36. Chat is 380×520 at 48,360 (CHATTING / DESK). Labels 420×72 at 48,104. Now playing 400×64 at 48,900.
+      After Lumia URLs are in, you can hide the dashed wells — they only show with <code>?guides=1</code> on the overlay URL.
+    </p>
+  </section>
+
+  <section class="obs-block" id="audio">
+    <p class="kicker">Audio + recording</p>
+    <h2>Six tracks so YouTube is not a headache</h2>
+    <ul class="stream-list">
+      {audioTracks.map((t) => <li><strong>Track {t.track}</strong> — {t.use}</li>)}
+    </ul>
+    <p class="page-lede" style="margin-top:12px;">
+      Source Record on <code>• Game</code> and <code>• Face Cam</code> dumps clean files into a folder. Directory Watch Media can auto-play the newest clip on the REPLAY scene.
+      Main recording stays Settings → Output → Recording (MKV, then remux to MP4).
+    </p>
+  </section>
+
+  <section class="obs-block" id="move">
+    <p class="kicker">Look</p>
+    <h2>Move, effects, and the stinger</h2>
+    <ul class="stream-list">
+      <li>Install Move. Set the studio transition to Move at ~280ms so the cam and game ease between LIVE / DESK / CHATTING.</li>
+      <li>Shaderfilter on Face Cam if you want a light background blur. Skip StreamFX unless you already have a matching build.</li>
+      <li>Stinger overlay: <a class="text-link" href="/overlays/stinger">{overlayUrl('stinger')}</a>. Play it as a scene or Source Record it to a WebM with alpha and set it as an OBS Stinger transition (transition point ~700ms).</li>
+      <li>Channel offline image: <a class="text-link" href="/branding/offline-screen-clean-1920x1080.png">offline-screen-clean-1920x1080.png</a>. Banners and avatar are in <code>/branding/</code>.</li>
+    </ul>
+  </section>
+</Base>

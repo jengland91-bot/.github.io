@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /overlays
+Disallow: /obs
 
 Sitemap: https://jenglandblog.netlify.app/sitemap-index.xml

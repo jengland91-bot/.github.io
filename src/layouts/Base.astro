@@ -6,9 +6,10 @@ interface Props {
   title?: string;
   description?: string;
   path?: string;
+  noindex?: boolean;
 }
 
-const { title, description = site.description, path = '/' } = Astro.props;
+const { title, description = site.description, path = '/', noindex = false } = Astro.props;
 const pageTitle = title ? `${title} · ${site.title}` : `${site.title} · ${site.tagline}`;
 const canonical = new URL(path, site.url).toString();
 const nav = [
@@ -32,6 +33,7 @@ const nav = [
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -95,6 +97,8 @@ const nav = [
             <div>
               <h3>Connect</h3>
               <a href={site.socials.youtube}>YouTube</a>
+              <a href={site.socials.twitch}>Twitch</a>
+              <a href={site.socials.kick}>Kick</a>
               <a href={site.socials.instagram}>Instagram</a>
               <a href={site.socials.tiktok}>TikTok</a>
               <a href={`mailto:${site.email}`}>Email</a>
