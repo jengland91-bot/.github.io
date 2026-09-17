@@ -71,6 +71,22 @@ npm run dev
 
 Then open the URL it prints (usually `http://localhost:4321`).
 
+## OBS pack (Kick, Twitch, YouTube, Shorts, X)
+
+This repo now hosts the live overlays and an importable OBS scene collection.
+
+- Setup guide: `/obs`
+- Overlay wall: `/overlays`
+- Scene collection: `/obs-pack/J-England.json`
+
+On the streaming PC: OBS 31+ → Scene Collection → Import the JSON. Built-in stream = Twitch. Aitum Multistream (or Stream Suite) adds Kick + YouTube. Aitum Vertical is the 9:16 canvas for YouTube Shorts. Lumia Stream talks to OBS over the built-in WebSocket.
+
+Regenerate the JSON after URL changes:
+
+```bash
+npm run obs:scenes
+```
+
 ## Deploy on Netlify
 
 Point the Netlify site (`jenglandblog.netlify.app`) at **this** GitHub repo.

@@ -1,0 +1,116 @@
+---
+import { extraOverlays, overlayScenes, show } from '../../data/obs';
+
+interface Props {
+  scene: string;
+  vertical?: boolean;
+}
+
+const { scene } = Astro.props;
+const hold = overlayScenes.find((item) => item.id === scene);
+const isHold = hold?.kind === 'hold';
+const isHud = hold?.kind === 'hud';
+const showChat = scene === 'chatting' || scene === 'desk';
+const largeCam = scene === 'chatting';
+const showReplay = scene === 'replay';
+const showFace = isHud && scene !== 'irl' && scene !== 'chatting';
+const lowerUsesGame = scene === 'live' || scene === 'desk' || scene === 'replay';
+---
+
+<div class:list={['stage', isHold && 'hold', isHud && 'hud', scene === 'stinger' && 'stinger']}>
+  {isHold && (
+    <>
+      <div class="orbs"></div>
+      <div class="grain"></div>
+      <div class="vignette"></div>
+    </>
+  )}
+
+  {scene !== 'stinger' && scene !== 'well' && (
+    <div class="ticks">
+      <span class="tl"></span><span class="tr"></span><span class="bl"></span><span class="br"></span>
+    </div>
+  )}
+
+  {scene !== 'stinger' && scene !== 'well' && scene !== 'lower-third' && scene !== 'webcam-frame' && (
+    <header class="top-bar">
+      <div class:list={['pill', isHold && 'hold']}>
+        <i></i>
+        <span>{isHold ? hold?.kicker : 'Live'}</span>
+      </div>
+      <div class="brand">
+        <small data-handle>{show.handle}</small>
+        <strong>{show.short}</strong>
+      </div>
+      <div class="spacer"></div>
+      <div class="clock" data-clock></div>
+    </header>
+  )}
+
+  {isHold && hold && (
+    <section class="hero">
+      <p class="kicker">{hold.kicker}</p>
+      <h1>{hold.title}</h1>
+      <div class="rule"></div>
+      <p class="game" data-game>{show.game}</p>
+      <p class="message">{hold.message}</p>
+      {scene === 'starting' && <div class="countdown" data-countdown>05:00</div>}
+    </section>
+  )}
+
+  {isHud && (
+    <>
+      {largeCam && <div class="well well-cam-large"></div>}
+      {showFace && <div class="well well-face"></div>}
+      {showChat && <div class="well well-chat ghost"></div>}
+      {scene !== 'irl' && <div class="well well-alerts ghost"></div>}
+      {showReplay && <div class="replay-mark">Replay</div>}
+      <div class="lower-third">
+        <small data-line>{show.line}</small>
+        {lowerUsesGame ? (
+          <strong data-game>{show.game}</strong>
+        ) : (
+          <strong data-name>{show.name}</strong>
+        )}
+      </div>
+    </>
+  )}
+
+  {scene === 'lower-third' && (
+    <div class="lower-third">
+      <small data-handle>{show.handle}</small>
+      <strong data-name>{show.name}</strong>
+    </div>
+  )}
+
+  {scene === 'webcam-frame' && <div class="well well-face"></div>}
+
+  {scene === 'well' && <div class="well-only" data-well-label>Paste Lumia URL</div>}
+
+  {scene === 'stinger' && (
+    <>
+      <div class="wipe"></div>
+      <div class="stinger-mark"><div class="mono">JE</div></div>
+    </>
+  )}
+
+  {isHold && (
+    <footer class="bottom-bar">
+      <div class="socials">
+        <b>Twitch</b> jengland91
+        <span>·</span>
+        <b>Kick</b> jengland91
+        <span>·</span>
+        <b>YouTube</b> @Joshengland91
+      </div>
+      <div class="spacer"></div>
+      <div class="socials"><span data-line>{show.line}</span></div>
+    </footer>
+  )}
+</div>
+
+<style is:global>
+  body:not([data-guides="1"]) .ghost {
+    display: none;
+  }
+</style>

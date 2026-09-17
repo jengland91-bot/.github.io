@@ -293,6 +293,15 @@ main {
 
 .text-link:hover { text-decoration: underline; }
 
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.86em;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+}
+
 .grid { display: grid; gap: 16px; }
 
 .posts-grid { grid-template-columns: repeat(3, 1fr); }
@@ -405,6 +414,113 @@ a.card:hover,
 }
 
 .btn-ghost:hover { background: var(--bg-elev); }
+
+.btn-primary {
+  background: var(--cyan);
+  color: #081016;
+}
+
+.btn-primary:hover { filter: brightness(1.06); }
+
+.obs-block {
+  margin: 42px 0;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+}
+
+.obs-block h2 {
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin: 8px 0 12px;
+}
+
+.obs-sub {
+  margin: 22px 0 10px;
+  font-size: 1.05rem;
+}
+
+.stream-olist {
+  margin: 12px 0 0 18px;
+  display: grid;
+  gap: 10px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.stream-olist li::marker { color: var(--cyan); }
+
+.stream-list {
+  margin: 8px 0 0 18px;
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.obs-table-wrap {
+  overflow-x: auto;
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.obs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.obs-table th,
+.obs-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.obs-table th {
+  color: var(--faint);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.obs-table tr:last-child td { border-bottom: 0; }
+
+.hint {
+  color: var(--faint);
+  font-size: 0.82rem;
+  margin-top: 6px;
+  line-height: 1.45;
+}
+
+.obs-cards,
+.scene-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.obs-card,
+.scene-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  background: var(--bg-elev);
+}
+
+.scene-card h3,
+.obs-card h3 {
+  font-family: var(--display);
+  margin: 4px 0 8px;
+}
+
+.scene-job { color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
+
+@media (max-width: 960px) {
+  .obs-cards,
+  .scene-grid { grid-template-columns: 1fr; }
+}
 
 .filters {
   display: flex;

@@ -3,7 +3,11 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://jenglandblog.netlify.app',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/overlays') && !page.includes('/obs'),
+    }),
+  ],
   redirects: {
     '/gear': '/shop',
   },

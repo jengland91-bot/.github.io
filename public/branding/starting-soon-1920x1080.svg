@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="Starting soon">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#10221c"/>
+      <stop offset="40%" stop-color="#0d1820"/>
+      <stop offset="100%" stop-color="#07080c"/>
+    </radialGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#00f2fe"/>
+      <stop offset="70%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#glow)"/>
+  <rect x="120" y="540" width="1680" height="2" fill="url(#line)"/>
+  <text x="960" y="430" text-anchor="middle" fill="#f4f7fb" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="800" letter-spacing="10">J ENGLAND</text>
+  <text x="960" y="500" text-anchor="middle" fill="#10b981" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="8">STARTING SOON</text>
+  <text x="960" y="620" text-anchor="middle" fill="#94a3b8" font-family="Arial, Helvetica, sans-serif" font-size="26">Sim racing | Games | IRL</text>
+  <text x="960" y="680" text-anchor="middle" fill="#64748b" font-family="Arial, Helvetica, sans-serif" font-size="22">Grab a drink — we're about to go live</text>
+</svg>

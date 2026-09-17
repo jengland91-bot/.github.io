@@ -1,0 +1,19 @@
+---
+import Overlay from '../../../layouts/Overlay.astro';
+import SceneView from '../../../components/overlays/SceneView.astro';
+import { extraOverlays, overlayScenes } from '../../../data/obs';
+
+export function getStaticPaths() {
+  const all = [...overlayScenes.map((s) => s.id), ...extraOverlays.map((s) => s.id)];
+  return all.map((scene) => ({ params: { scene } }));
+}
+
+const scene = Astro.params.scene ?? 'live';
+const meta = overlayScenes.find((item) => item.id === scene) ?? extraOverlays.find((item) => item.id === scene);
+const hold = overlayScenes.find((item) => item.id === scene);
+const transparent = hold?.kind !== 'hold' && scene !== 'stinger';
+---
+
+<Overlay scene={scene} title={`${meta?.name ?? scene} vertical · J England`} vertical transparent={transparent}>
+  <SceneView scene={scene} vertical />
+</Overlay>

@@ -1,0 +1,77 @@
+---
+import '../styles/overlay.css';
+import { show } from '../data/obs';
+
+interface Props {
+  scene: string;
+  title: string;
+  vertical?: boolean;
+  transparent?: boolean;
+}
+
+const { scene, title, vertical = false, transparent = false } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class={vertical ? 'vertical' : 'horizontal'} data-scene={scene}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body data-transparent={transparent ? '1' : '0'}>
+    <slot />
+    <script define:vars={{ show, scene }}>
+      const params = new URLSearchParams(location.search);
+      const game = params.get('game') || show.game;
+      const handle = params.get('handle') || show.handle;
+      const minutes = Number(params.get('minutes') || show.startingMinutes);
+      const preview = params.get('preview') === '1' || params.get('guides') === '1';
+
+      document.querySelectorAll('[data-game]').forEach((el) => { el.textContent = game; });
+      document.querySelectorAll('[data-handle]').forEach((el) => { el.textContent = handle; });
+      document.querySelectorAll('[data-line]').forEach((el) => { el.textContent = params.get('line') || show.line; });
+      document.querySelectorAll('[data-name]').forEach((el) => { el.textContent = params.get('name') || show.name; });
+
+      if (preview) document.querySelectorAll('.stage').forEach((el) => el.classList.add('preview'));
+      const inObs = typeof window.obsstudio !== 'undefined' || /OBS/i.test(navigator.userAgent);
+      if (!inObs) {
+        document.querySelectorAll('.stage.hud').forEach((el) => el.classList.add('preview'));
+      }
+      if (params.get('guides') === '1') document.body.dataset.guides = '1';
+
+      const well = params.get('label');
+      if (well) document.querySelectorAll('[data-well-label]').forEach((el) => { el.textContent = well; });
+
+      const clock = document.querySelector('[data-clock]');
+      const tickClock = () => {
+        if (!clock) return;
+        clock.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      };
+      tickClock();
+      setInterval(tickClock, 1000);
+
+      const cd = document.querySelector('[data-countdown]');
+      if (cd && scene === 'starting') {
+        let left = Math.max(1, minutes) * 60;
+        const render = () => {
+          const m = Math.floor(left / 60).toString().padStart(2, '0');
+          const s = Math.floor(left % 60).toString().padStart(2, '0');
+          cd.textContent = `${m}:${s}`;
+        };
+        render();
+        setInterval(() => {
+          left = Math.max(0, left - 1);
+          render();
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>
