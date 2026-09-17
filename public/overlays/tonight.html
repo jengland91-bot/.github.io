@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tonight — J England live</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #070c09; --elev: #0d1511; --line: #1d2a22; --text: #f3f1ec;
+      --muted: #9aa3b2; --cyan: #3eea86; --ink: #070c09;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(ellipse 80% 50% at 8% -10%, rgba(62,234,134,.16), transparent 50%), var(--bg);
+      color: var(--text);
+      font-family: Outfit, system-ui, sans-serif;
+      line-height: 1.5;
+    }
+    main { max-width: 880px; margin: 0 auto; padding: 32px 20px 96px; }
+    .kicker { color: var(--cyan); font-size: .72rem; font-weight: 800; letter-spacing: .2em; }
+    h1 { font-family: Fraunces, Georgia, serif; font-size: clamp(2rem, 5vw, 3.1rem); margin: 8px 0 12px; }
+    h2 { font-family: Fraunces, Georgia, serif; font-size: 1.45rem; margin: 0 0 8px; }
+    p, li { color: var(--muted); }
+    a { color: var(--cyan); }
+    code, .mono { font-family: ui-monospace, monospace; color: var(--text); }
+    ol.steps { counter-reset: step; list-style: none; margin: 18px 0; }
+    ol.steps > li {
+      position: relative;
+      background: var(--elev);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px 18px 18px 64px;
+      margin: 12px 0;
+    }
+    ol.steps > li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 16px; top: 18px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--cyan);
+      color: var(--ink);
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+    }
+    ol.steps strong { color: var(--text); }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .btn {
+      display: inline-block;
+      background: var(--cyan);
+      color: var(--ink);
+      font-weight: 800;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+    }
+    .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+    .deck {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .deck span {
+      background: #050806;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 8px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      color: var(--text);
+    }
+    .deck span em { display: block; color: var(--cyan); font-style: normal; font-size: 10px; letter-spacing: .14em; margin-bottom: 4px; }
+    .note { font-size: .92rem; margin-top: 8px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); font-size: 14px; }
+    th { color: var(--cyan); font-size: 12px; letter-spacing: .08em; }
+  </style>
+</head>
+<body>
+<main>
+  <p class="kicker">TONIGHT</p>
+  <h1>Load the scenes, then run and gun.</h1>
+  <p>This page is the setup. After step 3 the scenes are inside OBS. Click them in OBS, click them on the control panel, or hit the same names on Stream Deck. Stay on scene collection <code>J England Live</code> the whole night.</p>
+  <div class="actions">
+    <a class="btn" href="install.html">1. Push scenes into OBS</a>
+    <a class="btn ghost" href="control.html">2. Click scenes live</a>
+    <a class="btn ghost" href="../DOWNLOADS.html">Plugins</a>
+  </div>
+
+  <ol class="steps">
+    <li>
+      <h2>OBS + Aitum + WebSocket</h2>
+      <p>Open OBS. Close Meld so it is not holding cameras. Confirm Aitum Stream Suite is installed (you should see a Vertical dock and a Stream Suite / outputs dock). Then:</p>
+      <p class="note"><strong>Tools → WebSocket Server Settings → Enable</strong>. Port <code>4455</code>. Copy the password.</p>
+    </li>
+    <li>
+      <h2>Push the kit into OBS</h2>
+      <p>Keep the black kit-server window open. Open the installer, paste that password, click <strong>Connect OBS</strong>, then <strong>Install scenes + sources</strong>.</p>
+      <p class="note">That creates <code>J England Live</code> (1920×1080) with STARTING SOON, JUST CHATTING, GAMING, SIM, SIM RIG, DUAL, REPLAY, IRL, BRB, ENDING. Leave the overlay base URL alone if you launched this from DOUBLE-CLICK-ME — it already points at this PC.</p>
+      <div class="actions"><a class="btn" href="install.html">Open installer</a></div>
+    </li>
+    <li>
+      <h2>Plug in the four cameras and the game</h2>
+      <p>In the OBS Sources list (any scene is fine), click each source and pick the device:</p>
+      <table>
+        <tr><th>Source</th><th>What to pick</th></tr>
+        <tr><td><code>Cam / Face</code></td><td>Face camera</td></tr>
+        <tr><td><code>Cam / Room</code></td><td>Back camera</td></tr>
+        <tr><td><code>Cam / Wheel</code></td><td>Wheel camera</td></tr>
+        <tr><td><code>Cam / Pedals</code></td><td>Pedals camera</td></tr>
+        <tr><td><code>Game / Main</code></td><td>Your game or desktop window</td></tr>
+        <tr><td><code>Audio / Game</code></td><td>That same game’s audio (not Desktop Audio)</td></tr>
+      </table>
+      <p class="note">Mute <strong>Desktop Audio</strong>. Click through GAMING and SIM once to confirm face/back vs all four cams.</p>
+    </li>
+    <li>
+      <h2>Where each platform gets the picture</h2>
+      <p><strong>Twitch, Kick, and regular YouTube are widescreen.</strong> Vertical is an extra canvas for YouTube Shorts. Do not send the tall canvas to Twitch.</p>
+      <table>
+        <tr><th>Platform</th><th>Tonight</th></tr>
+        <tr><td>Twitch</td><td>OBS <strong>Settings → Stream → Twitch</strong>. Then OBS <strong>Start Streaming</strong>.</td></tr>
+        <tr><td>YouTube (16:9)</td><td>Aitum Stream Suite → add a <strong>Main output</strong> → YouTube. Paste the horizontal stream key from YouTube Studio.</td></tr>
+        <tr><td>Kick</td><td>Aitum Stream Suite → another <strong>Main output</strong> → Kick. Key from Kick → Dashboard → Stream.</td></tr>
+        <tr><td>YouTube Shorts (9:16)</td><td>Aitum <strong>Vertical output</strong>. Second YouTube key (a separate stream in Studio, vertical). Canvas = Vertical.</td></tr>
+      </table>
+      <p class="note">If Aitum offers “use OBS encoder” on YouTube/Kick, turn that on so the GPU is not encoding three full 1080p streams.</p>
+    </li>
+    <li>
+      <h2>Vertical follows Stream Deck / clicks</h2>
+      <p>Stay on <code>J England Live</code>. Do <em>not</em> switch the main collection to J England Vertical while you are multi-streaming — that collection is a backup. Vertical lives in the <strong>Vertical Scenes</strong> dock.</p>
+      <p class="note">Make these five vertical scenes (same names as below). Right-click each one → <strong>Linked Scenes</strong> → check the matching widescreen scene(s). After that, Stream Deck, OBS clicks, and the control panel all move both canvases together.</p>
+      <table>
+        <tr><th>Vertical scene</th><th>Put in it</th><th>Link to</th></tr>
+        <tr><td>STARTING SOON</td><td>Browser <code>starting.html?v=1</code> at 1080×1920</td><td>STARTING SOON</td></tr>
+        <tr><td>JUST CHATTING</td><td>Face + back stacked, overlay <code>chatting.html?v=1</code></td><td>JUST CHATTING, IRL</td></tr>
+        <tr><td>PLAYING</td><td>Game on top (1080×608), face + back under it, overlay <code>live.html?v=1</code></td><td>GAMING, SIM, SIM RIG, DUAL, REPLAY</td></tr>
+        <tr><td>BRB</td><td>Browser <code>brb.html?v=1</code></td><td>BRB</td></tr>
+        <tr><td>ENDING</td><td>Browser <code>ending.html?v=1</code></td><td>ENDING</td></tr>
+      </table>
+      <p class="note">Browser URLs if this kit server is running: <code>http://127.0.0.1:8765/overlays/starting.html?v=1</code> (swap the filename). You can tidy the PLAYING cam boxes later — tonight they just need to be on screen.</p>
+    </li>
+    <li>
+      <h2>Stream Deck or just click</h2>
+      <p><strong>Clicking:</strong> OBS scene list, or <a href="control.html">the control panel</a> after you hit Connect OBS.</p>
+      <p><strong>Stream Deck:</strong> Stream Deck software → Elgato Marketplace → install <strong>OBS Studio</strong> (free). In that plugin, set host <code>127.0.0.1</code>, port <code>4455</code>, same WebSocket password. Then add one <strong>Scene</strong> button per name. Copy the names exactly:</p>
+      <div class="deck">
+        <span><em>1</em>STARTING SOON</span>
+        <span><em>2</em>JUST CHATTING</span>
+        <span><em>3</em>GAMING</span>
+        <span><em>4</em>SIM</span>
+        <span><em>5</em>SIM RIG</span>
+        <span><em>6</em>BRB</span>
+        <span><em>7</em>IRL</span>
+        <span><em>8</em>ENDING</span>
+        <span><em>9</em>REPLAY</span>
+      </div>
+      <p class="note">GAMING = PC game + face + back. SIM = all four cams. SIM RIG = wheel + pedals. You do not need a Stream Deck button for DUAL tonight.</p>
+    </li>
+    <li>
+      <h2>Go live</h2>
+      <p>Put OBS on <strong>STARTING SOON</strong>. Restart the countdown on the control panel if you want five minutes. Then:</p>
+      <p class="note">1. OBS <strong>Start Streaming</strong> (Twitch)<br>
+      2. Aitum: start YouTube Main + Kick Main<br>
+      3. Aitum: start Vertical / Shorts<br>
+      4. When you are ready, hit <strong>GAMING</strong> or <strong>SIM</strong> on the Deck<br>
+      5. BRB / ENDING from the same buttons<br>
+      6. Stop Vertical, then Aitum outputs, then OBS last</p>
+      <p class="note">Lumia chat can wait if it is not ready. The show still works. Optional: paste the Lumia overlay URL into source <code>Lumia / Overlay</code>.</p>
+    </li>
+  </ol>
+
+  <p class="kicker">IF SOMETHING IS DARK</p>
+  <p class="note">Black cameras = device still on Meld, or the wrong device in that source. Black game = Game / Main is not pointed at the window. Widescreen looking tall = Video settings got stuck at 1080×1920; set Base and Output back to 1920×1080 and stay on <code>J England Live</code>.</p>
+</main>
+</body>
+</html>

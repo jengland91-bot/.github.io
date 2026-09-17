@@ -35,6 +35,6 @@ class Handler(SimpleHTTPRequestHandler):
 
 if __name__ == "__main__":
     httpd = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
-    print(f"Kit server http://127.0.0.1:{PORT}/overlays/control.html")
+    print(f"Kit server http://127.0.0.1:{PORT}/overlays/tonight.html")
     print("Keep this process running.")
     httpd.serve_forever()

@@ -1,35 +1,22 @@
 J ENGLAND — OBS kit (this folder is the show)
 
-This Cursor chat is NOT inside OBS. Copy this whole `obs-kit` folder onto the
-streaming PC Desktop, then:
+Copy this whole `obs-kit` folder onto the streaming PC Desktop.
 
-1. Install the downloads (open DOWNLOADS.html, or run tools\Get-Plugins.ps1).
-2. Open OBS. Tools → WebSocket Server Settings → Enable. Copy the password.
-3. Double-click DOUBLE-CLICK-ME.bat  (leave the black window open).
-4. Browser opens the live control panel.
-5. Click "Push scenes into OBS", paste the WebSocket password, install.
-6. In OBS, pick cameras:
-     Cam / Face   = face cam
-     Cam / Room   = back cam
-     Cam / Wheel  = wheel
-     Cam / Pedals = pedals
-   Pick your game on Game / Main. Mute Desktop Audio.
-7. OBS Stream = Twitch. Aitum outputs = YouTube + Kick (+ X if Premium).
-   Vertical outputs = YouTube Shorts key.
+Double-click DOUBLE-CLICK-ME.bat and leave that window open.
+The browser opens tonight.html — that page is the full walkthrough
+for loading scenes, Stream Deck, Twitch, YouTube, Kick, and vertical.
 
-Camera scenes
-  GAMING   PC game + face + back cam
-  SIM      sim + all four cams on the horizontal
-  SIM RIG  sim + wheel and pedals only (switch here from SIM)
-  Vertical copies are a starting point. Move those boxes in the
-  Aitum Vertical dock if you want a different phone layout.
+Short version:
+1. OBS → Tools → WebSocket Server Settings → Enable. Copy the password.
+2. tonight.html → Push scenes into OBS.
+3. Assign Cam / Face, Cam / Room (back), Wheel, Pedals, Game / Main.
+4. OBS Stream = Twitch. Aitum Main = YouTube + Kick. Aitum Vertical = YouTube Shorts.
+5. Link Vertical Scenes so Stream Deck clicks move both canvases.
+6. Stay on scene collection J England Live.
 
-Starting Soon is generic: STARTING SOON + “Sim racing · Gaming · IRL”.
-Leave the title blank until you know what you're playing. Type it in the
-control panel and every overlay updates in a couple of seconds.
+Scene buttons (OBS, control panel, or Stream Deck — same names):
+  STARTING SOON · JUST CHATTING · GAMING · SIM · SIM RIG
+  BRB · IRL · ENDING · REPLAY
 
-Hotkeys after install: Numpad 1–9 through starting → chatting → gaming
-→ sim → sim rig → replay → irl → brb → ending.
-
-Lumia: paste the overlay URL into the Lumia / Overlay source.
-Commands: overlays\lumia-commands.json
+GAMING = PC game + face + back.
+SIM = all four cams. SIM RIG = wheel + pedals.

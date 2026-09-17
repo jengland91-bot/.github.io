@@ -89,7 +89,7 @@
 <main>
   <p class="kicker">OBS INSTALLER</p>
   <h1>Push the J England scenes into OBS.</h1>
-  <p>Open this page on the streaming PC, with OBS already running. Enable <strong>Tools → WebSocket Server Settings</strong> (port 4455, authentication on). This creates two collections: <code>J England Live</code> (1920×1080) and <code>J England Vertical</code> (1080×1920). Same overlay URLs — vertical auto-flips.</p>
+  <p>Open this page on the streaming PC, with OBS already running. Enable <strong>Tools → WebSocket Server Settings</strong> (port 4455, authentication on). This loads <code>J England Live</code> at 1920×1080. Stay on that collection tonight. Aitum Vertical is a second canvas in the same collection — do not switch the main collection to portrait while Twitch/Kick/YouTube 16:9 are live.</p>
   <p class="warn">Do this in Chrome or Edge on the PC that is running OBS. If the browser blocks the websocket, download this file and open it locally.</p>
 
   <fieldset>
@@ -114,13 +114,13 @@
   <fieldset>
     <legend>Install</legend>
     <label><input id="bothCollections" type="checkbox" checked /> Create both the wide and vertical scene collections</label>
-    <p>After it finishes: pick your cameras on <code>Cam / Face</code> etc., pick the game on <code>Game / Main</code>, mute Desktop Audio, and turn on Aitum outputs.</p>
+    <p>After it finishes: pick cameras on <code>Cam / Face</code> (face), <code>Cam / Room</code> (back), wheel, pedals, and the game on <code>Game / Main</code>. Mute Desktop Audio. Then follow <a href="tonight.html">tonight setup</a> for Twitch + YouTube + Kick + Shorts and Stream Deck.</p>
     <button type="button" id="btnInstallObs" disabled>Install scenes + sources</button>
     <button type="button" class="ghost" id="btnDownloadLumia">Download Lumia command list</button>
   </fieldset>
 
   <div id="log"></div>
-  <p style="margin-top:16px"><a href="/stream">Stream setup</a> · <a href="/overlays/">Overlay preview</a> · <a href="/overlays/live.html?setup=1">Live HUD with wells</a></p>
+  <p style="margin-top:16px"><a href="tonight.html">Tonight setup</a> · <a href="control.html">Live control</a> · <a href="index.html">Overlay preview</a></p>
 </main>
 
 <script src="shared/layout.js"></script>
@@ -473,8 +473,11 @@
         await createCollection(LAYOUT.collectionWide);
         await setCanvas("wide");
       }
-      log("Done. Stay on J England Live. Duplicate those scenes into Aitum Vertical (same overlay URLs).", "ok");
-      log("Next: assign cameras, Game / Main, paste Lumia overlay URL, then enable Aitum outputs.");
+      log("Done. Stay on J England Live (1920×1080).", "ok");
+      log("Click scenes in OBS, on the control panel, or put the same names on Stream Deck.");
+      log("Aitum Vertical: stay on this collection. Link Vertical Scenes to the widescreen names (see tonight.html).");
+      log("Twitch = OBS Start Streaming. YouTube + Kick = Aitum Main outputs. Shorts = Aitum Vertical output.");
+      log("Next: assign cameras, Game / Main, then tonight.html");
     } catch (e) {
       log(e.message, "err");
     } finally {
