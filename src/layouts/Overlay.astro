@@ -41,6 +41,10 @@ const { scene, title, vertical = false, transparent = false } = Astro.props;
       document.querySelectorAll('[data-name]').forEach((el) => { el.textContent = params.get('name') || show.name; });
 
       if (preview) document.querySelectorAll('.stage').forEach((el) => el.classList.add('preview'));
+      const inObs = typeof window.obsstudio !== 'undefined' || /OBS/i.test(navigator.userAgent);
+      if (!inObs) {
+        document.querySelectorAll('.stage.hud').forEach((el) => el.classList.add('preview'));
+      }
       if (params.get('guides') === '1') document.body.dataset.guides = '1';
 
       const well = params.get('label');
