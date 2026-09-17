@@ -83,16 +83,14 @@ The empty `my-affiliate-blog` repo can stay unused. This repo is the source of t
 
 ## OBS stream kit
 
-Overlays and the setup page live on this site so OBS can load them as browser sources.
+Do not build this into the blog to go live. Copy **`obs-kit/`** onto the streaming PC Desktop.
 
-| URL | What it is |
-| --- | --- |
-| `/stream` | Plugin list, Aitum destinations, Lumia commands, scene map |
-| `/overlays/` | Preview board (16:9 + 9:16 of the same files) |
-| `/overlays/install.html` | Pushes `J England Live` + `J England Vertical` into OBS over WebSocket |
-| `/overlays/live.html` | Main sim HUD (`?v=1` for vertical, `?setup=1` for wells) |
+1. `GET-PLUGINS.bat` — pulls OBS / Aitum / Move installers (other plugins open in the browser).
+2. Open OBS → enable WebSocket.
+3. `DOUBLE-CLICK-ME.bat` — local control panel + overlay server. Leave it open.
+4. Control panel → **Push scenes into OBS**.
 
-OBS Stream = Twitch. Aitum Main Outputs = YouTube + Kick (+ X if Premium). Aitum Vertical = YouTube Shorts. Stay off Meld for this kit.
+Overlays also stay hosted at `/overlays/` as a backup, but the live show should use `http://127.0.0.1:8765/overlays/`.
 
 ## Pages
 

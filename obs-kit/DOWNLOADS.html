@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Downloads — J England OBS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg:#08090d; --elev:#11141b; --line:#232833; --text:#f3f1ec; --muted:#9aa3b2; --cyan:#3ee0ea; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: Outfit, system-ui, sans-serif; }
+    main { max-width: 820px; margin: 0 auto; padding: 36px 20px 80px; }
+    h1 { font-family: Fraunces, Georgia, serif; font-size: 2.4rem; margin: 8px 0 12px; }
+    .kicker { color: var(--cyan); font-size: .72rem; font-weight: 800; letter-spacing: .2em; }
+    p { color: var(--muted); margin-bottom: 14px; }
+    a { color: var(--cyan); }
+    article {
+      background: var(--elev); border: 1px solid var(--line); border-radius: 16px;
+      padding: 16px 18px; margin: 10px 0;
+    }
+    article strong { display: block; margin-bottom: 6px; }
+    .tag { font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--cyan); }
+    .btn {
+      display: inline-block; margin-top: 10px; background: var(--cyan); color: #08090d;
+      font-weight: 800; padding: 8px 14px; border-radius: 999px; text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <p class="kicker">STREAMING PC</p>
+  <h1>Install these, then come back to DOUBLE-CLICK-ME.</h1>
+  <p>Close OBS before plugin installers. You already have OBS — still grab 32.2+ if you are behind. Aitum Stream Suite is the multi-stream plugin (Kick / Twitch / YouTube / Shorts / X). Skip StreamFX. Skip Restream. Skip Meld.</p>
+  <p>Faster: run <code>GET-PLUGINS.bat</code> in this folder. It pulls the .exe files that have a direct link, and opens the rest in your browser.</p>
+
+  <article>
+    <span class="tag">REQUIRED</span>
+    <strong>OBS Studio 32.2.2</strong>
+    <p>The encoder. Enable Tools → WebSocket after install.</p>
+    <a class="btn" href="https://github.com/obsproject/obs-studio/releases/download/32.2.2/OBS-Studio-32.2.2-Windows-x64-Installer.exe">Download installer</a>
+  </article>
+  <article>
+    <span class="tag">REQUIRED</span>
+    <strong>Aitum Stream Suite</strong>
+    <p>Multistream + vertical canvas in one. This is the Aitum multi plugin.</p>
+    <a class="btn" href="https://github.com/Aitum/obs-aitum-stream-suite/releases/download/1.2.1/aitum-stream-suite-windows-installer.exe">Download installer</a>
+  </article>
+  <article>
+    <span class="tag">REQUIRED</span>
+    <strong>Lumia Stream</strong>
+    <p>Chat, alerts, lights, !sim / !brb. Desktop app, not an OBS plugin.</p>
+    <a class="btn" href="https://lumiastream.com/">Open Lumia</a>
+  </article>
+  <article>
+    <span class="tag">MOTION</span>
+    <strong>Move 3.2.1</strong>
+    <p>Cams slide between chatting and sim instead of popping.</p>
+    <a class="btn" href="https://github.com/exeldro/obs-move-transition/releases/download/3.2.1/move-transition-3.2.1-windows-installer.exe">Download installer</a>
+  </article>
+  <article>
+    <span class="tag">STORAGE</span>
+    <strong>Source Record</strong>
+    <p>Record game and face to separate files while you stream.</p>
+    <a class="btn" href="https://obsproject.com/forum/resources/source-record.1285/">OBS forum download</a>
+  </article>
+  <article>
+    <span class="tag">STORAGE</span>
+    <strong>Replay Source + Directory Watch Media</strong>
+    <p>Instant replay dump onto the REPLAY scene, auto-load newest clip.</p>
+    <a class="btn" href="https://obsproject.com/forum/resources/replay-source.686/">Replay Source</a>
+    <a class="btn" href="https://obsproject.com/forum/resources/directory-watch-media.801/">Directory Watch</a>
+  </article>
+  <article>
+    <span class="tag">PRODUCTION</span>
+    <strong>Source Clone + Downstream Keyer + Advanced Scene Switcher</strong>
+    <p>Second copy of a cam, Lumia on every scene, timed scene changes.</p>
+    <a class="btn" href="https://obsproject.com/forum/resources/source-clone.1632/">Clone</a>
+    <a class="btn" href="https://obsproject.com/forum/resources/downstream-keyer.1254/">Keyer</a>
+    <a class="btn" href="https://obsproject.com/forum/resources/advanced-scene-switcher.395/">Switcher</a>
+  </article>
+  <article>
+    <span class="tag">LOOK</span>
+    <strong>StreamFX replacements</strong>
+    <p>StreamFX is dead. Use these: Composite Blur, Stroke Glow Shadow, Advanced Masks, shaderfilter.</p>
+    <a class="btn" href="https://obsproject.com/forum/resources/composite-blur.1780/">Blur</a>
+    <a class="btn" href="https://obsproject.com/forum/resources/stroke-glow-shadow.1790/">Stroke</a>
+    <a class="btn" href="https://obsproject.com/forum/resources/advanced-masks.1856/">Masks</a>
+    <a class="btn" href="https://obsproject.com/forum/resources/obs-shaderfilter.1736/">Shaders</a>
+  </article>
+
+  <p style="margin-top:24px"><a href="overlays/control.html">Back to live control</a></p>
+</main>
+</body>
+</html>

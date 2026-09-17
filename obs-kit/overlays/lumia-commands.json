@@ -1,0 +1,14 @@
+[
+  { "name": "sim", "message": "Scene → SIM", "cooldownDuration": 3000, "obsScene": "SIM" },
+  { "name": "live", "message": "Scene → SIM", "cooldownDuration": 3000, "obsScene": "SIM" },
+  { "name": "race", "message": "Scene → SIM", "cooldownDuration": 3000, "obsScene": "SIM" },
+  { "name": "dual", "message": "Scene → DUAL", "cooldownDuration": 3000, "obsScene": "DUAL" },
+  { "name": "replay", "message": "Scene → REPLAY", "cooldownDuration": 3000, "obsScene": "REPLAY" },
+  { "name": "chat", "message": "Scene → JUST CHATTING", "cooldownDuration": 3000, "obsScene": "JUST CHATTING" },
+  { "name": "grid", "message": "Scene → JUST CHATTING", "cooldownDuration": 3000, "obsScene": "JUST CHATTING" },
+  { "name": "desk", "message": "Scene → DESK", "cooldownDuration": 3000, "obsScene": "DESK" },
+  { "name": "irl", "message": "Scene → IRL", "cooldownDuration": 3000, "obsScene": "IRL" },
+  { "name": "brb", "message": "Scene → BRB", "cooldownDuration": 8000, "obsScene": "BRB" },
+  { "name": "end", "message": "Scene → ENDING", "cooldownDuration": 8000, "obsScene": "ENDING" },
+  { "name": "start", "message": "Scene → STARTING SOON", "cooldownDuration": 5000, "obsScene": "STARTING SOON" }
+]

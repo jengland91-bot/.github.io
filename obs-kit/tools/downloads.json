@@ -1,0 +1,100 @@
+[
+  {
+    "name": "OBS Studio 32.2.2",
+    "file": "OBS-Studio-32.2.2-Windows-x64-Installer.exe",
+    "url": "https://github.com/obsproject/obs-studio/releases/download/32.2.2/OBS-Studio-32.2.2-Windows-x64-Installer.exe",
+    "page": "https://obsproject.com/download",
+    "need": "required"
+  },
+  {
+    "name": "Aitum Stream Suite (multi + vertical)",
+    "file": "aitum-stream-suite-windows-installer.exe",
+    "url": "https://github.com/Aitum/obs-aitum-stream-suite/releases/download/1.2.1/aitum-stream-suite-windows-installer.exe",
+    "page": "https://aitum.tv/products/stream-suite",
+    "need": "required"
+  },
+  {
+    "name": "Move 3.2.1",
+    "file": "move-transition-3.2.1-windows-installer.exe",
+    "url": "https://github.com/exeldro/obs-move-transition/releases/download/3.2.1/move-transition-3.2.1-windows-installer.exe",
+    "page": "https://obsproject.com/forum/resources/move.913/",
+    "need": "recommended"
+  },
+  {
+    "name": "Source Record",
+    "file": "",
+    "url": "",
+    "page": "https://obsproject.com/forum/resources/source-record.1285/",
+    "need": "recommended"
+  },
+  {
+    "name": "Source Clone",
+    "file": "",
+    "url": "",
+    "page": "https://obsproject.com/forum/resources/source-clone.1632/",
+    "need": "recommended"
+  },
+  {
+    "name": "Downstream Keyer",
+    "file": "",
+    "url": "",
+    "page": "https://obsproject.com/forum/resources/downstream-keyer.1254/",
+    "need": "recommended"
+  },
+  {
+    "name": "Replay Source",
+    "file": "",
+    "url": "",
+    "page": "https://obsproject.com/forum/resources/replay-source.686/",
+    "need": "recommended"
+  },
+  {
+    "name": "Directory Watch Media",
+    "file": "",
+    "url": "",
+    "page": "https://obsproject.com/forum/resources/directory-watch-media.801/",
+    "need": "recommended"
+  },
+  {
+    "name": "Advanced Scene Switcher",
+    "file": "",
+    "url": "",
+    "page": "https://obsproject.com/forum/resources/advanced-scene-switcher.395/",
+    "need": "recommended"
+  },
+  {
+    "name": "Composite Blur (StreamFX replacement)",
+    "file": "",
+    "url": "",
+    "page": "https://obsproject.com/forum/resources/composite-blur.1780/",
+    "need": "look"
+  },
+  {
+    "name": "Stroke Glow Shadow",
+    "file": "",
+    "url": "",
+    "page": "https://obsproject.com/forum/resources/stroke-glow-shadow.1790/",
+    "need": "look"
+  },
+  {
+    "name": "Advanced Masks",
+    "file": "",
+    "url": "",
+    "page": "https://obsproject.com/forum/resources/advanced-masks.1856/",
+    "need": "look"
+  },
+  {
+    "name": "obs-shaderfilter",
+    "file": "",
+    "url": "",
+    "page": "https://obsproject.com/forum/resources/obs-shaderfilter.1736/",
+    "need": "look"
+  },
+  {
+    "name": "Lumia Stream",
+    "file": "",
+    "url": "",
+    "page": "https://lumiastream.com/",
+    "need": "required"
+  }
+]

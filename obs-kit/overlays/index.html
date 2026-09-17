@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overlay preview — J England</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #08090d; --line: #232833; --text: #f3f1ec; --muted: #9aa3b2; --cyan: #3ee0ea; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: Outfit, system-ui, sans-serif; }
+    header { padding: 28px 32px 8px; }
+    h1 { font-family: Fraunces, Georgia, serif; font-size: 2rem; margin: 6px 0; }
+    p { color: var(--muted); max-width: 62ch; }
+    a { color: var(--cyan); }
+    .grid { display: grid; gap: 28px; padding: 16px 32px 64px; }
+    figure { margin: 0; }
+    figcaption { margin: 8px 0 10px; font-weight: 700; letter-spacing: 0.04em; }
+    iframe {
+      width: 960px;
+      height: 540px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #000;
+      transform-origin: top left;
+    }
+    .phone iframe { width: 270px; height: 480px; }
+    .row { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+  </style>
+</head>
+<body>
+  <header>
+    <p style="color:var(--cyan);font-weight:800;letter-spacing:.18em;font-size:.72rem;">OVERLAY BOARD</p>
+    <h1>J England live overlays</h1>
+    <p>Wide iframes are 16:9. Phone iframes are 9:16 of the <strong>same URL</strong>. Add <code>?setup=1</code> to any overlay to see camera / Lumia wells. Back to the <a href="/stream">stream setup page</a>.</p>
+  </header>
+  <div class="grid" id="board"></div>
+  <script>
+    const scenes = [
+      ["starting.html?preview=1", "Starting soon"],
+      ["chatting.html?preview=1", "Just chatting"],
+      ["desk.html?preview=1", "Desk"],
+      ["live.html?preview=1", "Sim / live"],
+      ["dual.html?preview=1", "Dual"],
+      ["replay.html?preview=1", "Replay"],
+      ["irl.html?preview=1", "IRL"],
+      ["brb.html?preview=1", "Be right back"],
+      ["ending.html?preview=1", "Ending"],
+      ["stinger.html", "Stinger"],
+    ];
+    const board = document.getElementById("board");
+    scenes.forEach(([file, label]) => {
+      const fig = document.createElement("figure");
+      fig.innerHTML = `<figcaption>${label}</figcaption>
+        <div class="row">
+          <iframe src="${file}" title="${label} wide"></iframe>
+          <div class="phone"><iframe src="${file}?v=1" title="${label} vertical"></iframe></div>
+        </div>`;
+      board.appendChild(fig);
+    });
+  </script>
+</body>
+</html>

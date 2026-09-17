@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J England — live control</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #08090d; --elev: #11141b; --line: #232833; --text: #f3f1ec;
+      --muted: #9aa3b2; --cyan: #3ee0ea; --violet: #a78bfa; --ink: #08090d;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse 80% 50% at 8% -10%, rgba(62,224,234,.14), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      font-family: Outfit, system-ui, sans-serif;
+    }
+    main { max-width: 980px; margin: 0 auto; padding: 32px 20px 80px; }
+    .kicker { color: var(--cyan); font-size: .72rem; font-weight: 800; letter-spacing: .2em; }
+    h1 { font-family: Fraunces, Georgia, serif; font-size: clamp(2rem, 5vw, 3rem); margin: 8px 0 10px; }
+    p, label { color: var(--muted); }
+    a { color: var(--cyan); }
+    .grid { display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); margin: 18px 0; }
+    @media (max-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } }
+    button.scene {
+      background: var(--elev);
+      border: 1px solid var(--line);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 18px 12px;
+      font: 800 14px/1 Outfit, sans-serif;
+      letter-spacing: .08em;
+      cursor: pointer;
+    }
+    button.scene:hover { border-color: var(--cyan); }
+    button.scene.on { background: var(--cyan); color: var(--ink); }
+    fieldset {
+      border: 1px solid var(--line);
+      background: var(--elev);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 14px 0;
+    }
+    legend { font-weight: 800; padding: 0 8px; }
+    label { display: block; margin: 10px 0 4px; font-size: 13px; }
+    input, textarea {
+      width: 100%;
+      background: #000;
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 9px 10px;
+      border-radius: 8px;
+      font: 14px Outfit, sans-serif;
+    }
+    .row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    @media (max-width: 700px) { .row { grid-template-columns: 1fr; } }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .btn {
+      background: var(--cyan);
+      color: var(--ink);
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+    .ok { color: #34d399; }
+    .err { color: #fb7185; }
+    #log {
+      background: #000; color: #9ee7c0; font: 12px/1.45 ui-monospace, monospace;
+      padding: 12px; height: 140px; overflow: auto; border-radius: 12px; border: 1px solid var(--line);
+      white-space: pre-wrap; margin-top: 12px;
+    }
+    .hint { font-size: .88rem; margin-top: 8px; }
+  </style>
+</head>
+<body>
+<main>
+  <p class="kicker">ON THE GO</p>
+  <h1>Change the show without opening overlay files.</h1>
+  <p>This panel talks to OBS on this PC and updates the overlays live. Keep the black server window open while you stream.</p>
+
+  <fieldset>
+    <legend>OBS</legend>
+    <div class="row">
+      <div><label>Host</label><input id="obsHost" value="127.0.0.1" /></div>
+      <div><label>Port</label><input id="obsPort" value="4455" /></div>
+      <div><label>WebSocket password</label><input id="obsPass" type="password" autocomplete="off" /></div>
+    </div>
+    <div class="actions">
+      <button class="btn" type="button" id="btnConnect">Connect OBS</button>
+      <a class="btn ghost" href="install.html">Push scenes into OBS</a>
+      <a class="btn ghost" href="../DOWNLOADS.html">Downloads</a>
+    </div>
+    <p class="hint" id="obsStatus">OBS → Tools → WebSocket Server Settings → Enable. Copy the password.</p>
+  </fieldset>
+
+  <p class="kicker" style="margin-top:22px">SCENES</p>
+  <div class="grid" id="scenes"></div>
+
+  <fieldset>
+    <legend>What viewers see right now</legend>
+    <label>Game / session title (Starting Soon + HUD chip)</label>
+    <input id="game" placeholder="iRacing · night laps" />
+    <label>Tagline under the title</label>
+    <input id="tagline" placeholder="Photo · sim · off-road" />
+    <label>BRB message</label>
+    <input id="brbMessage" />
+    <label>Ending message</label>
+    <input id="endingMessage" />
+    <label>Starting Soon countdown (minutes)</label>
+    <input id="startingMinutes" type="text" value="5" />
+    <div class="actions">
+      <button class="btn" type="button" id="btnSave">Save to overlays</button>
+      <button class="btn ghost" type="button" id="btnCountdown">Restart countdown</button>
+    </div>
+    <p class="hint">Overlays pick this up within a couple of seconds. No OBS refresh needed.</p>
+  </fieldset>
+
+  <div id="log"></div>
+</main>
+<script>
+(function () {
+  const SCENES = ["STARTING SOON","JUST CHATTING","DESK","SIM","DUAL","REPLAY","IRL","BRB","ENDING"];
+  const logEl = document.getElementById("log");
+  const grid = document.getElementById("scenes");
+  SCENES.forEach((name) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "scene";
+    b.dataset.scene = name;
+    b.textContent = name;
+    grid.appendChild(b);
+  });
+
+  function log(line, cls) {
+    const s = document.createElement("span");
+    if (cls) s.className = cls;
+    s.textContent = line + "\n";
+    logEl.appendChild(s);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  async function sha256Base64(str) {
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+    return btoa(String.fromCharCode(...new Uint8Array(buf)));
+  }
+  async function obsAuth(password, salt, challenge) {
+    const secret = await sha256Base64(password + salt);
+    return sha256Base64(secret + challenge);
+  }
+
+  class Obs {
+    constructor() { this.ws = null; this.pending = new Map(); this.i = 0; }
+    connect(host, port, password) {
+      return new Promise((resolve, reject) => {
+        const ws = new WebSocket("ws://" + host + ":" + port);
+        this.ws = ws;
+        let identified = false;
+        const timer = setTimeout(() => reject(new Error("OBS connection timed out")), 8000);
+        ws.onerror = () => { clearTimeout(timer); if (!identified) reject(new Error("WebSocket error — is OBS open?")); };
+        ws.onclose = (e) => { if (!identified && e.code === 4009) reject(new Error("Auth failed")); };
+        ws.onmessage = async (ev) => {
+          const msg = JSON.parse(ev.data);
+          if (msg.op === 0) {
+            const identify = { rpcVersion: 1 };
+            if (msg.d.authentication) {
+              identify.authentication = await obsAuth(password, msg.d.authentication.salt, msg.d.authentication.challenge);
+            }
+            ws.send(JSON.stringify({ op: 1, d: identify }));
+          } else if (msg.op === 2) {
+            identified = true;
+            clearTimeout(timer);
+            ws.onmessage = (e) => {
+              const m = JSON.parse(e.data);
+              if (m.op !== 7) return;
+              const p = this.pending.get(m.d.requestId);
+              if (!p) return;
+              this.pending.delete(m.d.requestId);
+              if (m.d.requestStatus && !m.d.requestStatus.result) p.reject(new Error(m.d.requestStatus.comment || "OBS error"));
+              else p.resolve(m.d.responseData || {});
+            };
+            resolve(msg.d);
+          }
+        };
+      });
+    }
+    request(requestType, requestData) {
+      const requestId = String(++this.i);
+      return new Promise((resolve, reject) => {
+        this.pending.set(requestId, { resolve, reject });
+        this.ws.send(JSON.stringify({ op: 6, d: { requestType, requestId, requestData: requestData || {} } }));
+        setTimeout(() => { if (this.pending.has(requestId)) { this.pending.delete(requestId); reject(new Error("Timeout")); } }, 8000);
+      });
+    }
+  }
+
+  const obs = new Obs();
+  let connected = false;
+
+  function currentNow() {
+    return {
+      game: document.getElementById("game").value.trim(),
+      tagline: document.getElementById("tagline").value.trim(),
+      brbMessage: document.getElementById("brbMessage").value.trim(),
+      endingMessage: document.getElementById("endingMessage").value.trim(),
+      startingMinutes: Number(document.getElementById("startingMinutes").value || 5),
+      goLiveAt: window._goLiveAt || null,
+    };
+  }
+
+  async function saveNow(extra) {
+    const data = Object.assign(currentNow(), extra || {});
+    if (data.goLiveAt) window._goLiveAt = data.goLiveAt;
+    const res = await fetch("/now", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+    if (!res.ok) throw new Error("Could not save. Is the kit server running?");
+    log("Saved live text.", "ok");
+  }
+
+  async function loadNow() {
+    try {
+      const res = await fetch("shared/now.json?t=" + Date.now());
+      const data = await res.json();
+      document.getElementById("game").value = data.game || "";
+      document.getElementById("tagline").value = data.tagline || "";
+      document.getElementById("brbMessage").value = data.brbMessage || "";
+      document.getElementById("endingMessage").value = data.endingMessage || "";
+      document.getElementById("startingMinutes").value = data.startingMinutes || 5;
+      window._goLiveAt = data.goLiveAt || null;
+    } catch (_) {}
+  }
+
+  document.getElementById("btnConnect").addEventListener("click", async () => {
+    const status = document.getElementById("obsStatus");
+    try {
+      await obs.connect(
+        document.getElementById("obsHost").value.trim(),
+        document.getElementById("obsPort").value.trim(),
+        document.getElementById("obsPass").value
+      );
+      connected = true;
+      status.textContent = "Connected.";
+      status.className = "hint ok";
+      log("OBS connected.", "ok");
+    } catch (e) {
+      status.textContent = e.message;
+      status.className = "hint err";
+      log(e.message, "err");
+    }
+  });
+
+  grid.addEventListener("click", async (ev) => {
+    const btn = ev.target.closest("button.scene");
+    if (!btn) return;
+    document.querySelectorAll("button.scene").forEach((b) => b.classList.toggle("on", b === btn));
+    if (!connected) {
+      log("Connect OBS first, then the scene buttons will switch for real.", "err");
+      return;
+    }
+    try {
+      await obs.request("SetCurrentProgramScene", { sceneName: btn.dataset.scene });
+      log("Scene → " + btn.dataset.scene, "ok");
+    } catch (e) {
+      log(e.message, "err");
+    }
+  });
+
+  document.getElementById("btnSave").addEventListener("click", () => {
+    saveNow().catch((e) => log(e.message, "err"));
+  });
+  document.getElementById("btnCountdown").addEventListener("click", () => {
+    const minutes = Number(document.getElementById("startingMinutes").value || 5);
+    saveNow({ goLiveAt: Date.now() + minutes * 60 * 1000, startingMinutes: minutes }).catch((e) => log(e.message, "err"));
+  });
+
+  loadNow();
+})();
+</script>
+</body>
+</html>

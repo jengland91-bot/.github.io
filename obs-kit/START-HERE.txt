@@ -1,0 +1,22 @@
+J ENGLAND — OBS kit (this folder is the show)
+
+This Cursor chat is NOT inside OBS. Copy this whole `obs-kit` folder onto the
+streaming PC Desktop, then:
+
+1. Install the downloads (open DOWNLOADS.html, or run tools\Get-Plugins.ps1).
+2. Open OBS. Tools → WebSocket Server Settings → Enable. Copy the password.
+3. Double-click DOUBLE-CLICK-ME.bat  (leave the black window open).
+4. Browser opens the live control panel.
+5. Click "Push scenes into OBS", paste the WebSocket password, install.
+6. In OBS, pick cameras on Cam / Face, Room, Wheel, Pedals.
+   Pick your game on Game / Main. Mute Desktop Audio.
+7. OBS Stream = Twitch. Aitum outputs = YouTube + Kick (+ X if Premium).
+   Vertical outputs = YouTube Shorts key.
+
+Change the game title, BRB text, and countdown from the control panel
+while you are live. Scene buttons switch OBS if you connected WebSocket.
+
+Hotkeys after install: Numpad 1–9 through the scene list.
+
+Lumia: paste the overlay URL into the Lumia / Overlay source.
+Commands: overlays\lumia-commands.json
