@@ -31,8 +31,9 @@ window.STREAM = {
   endingMessage: "VODs, gear, and codes → jenglandblog.netlify.app/links",
 
   chattingTitle: "CHAT",
-  deskTitle: "DESK",
-  liveTitle: "LIVE",
+  deskTitle: "GAMING",
+  liveTitle: "SIM",
+  rigTitle: "RIG",
   dualTitle: "DUAL",
   replayTitle: "REPLAY",
   irlTitle: "IRL",

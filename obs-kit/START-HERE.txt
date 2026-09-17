@@ -8,16 +8,28 @@ streaming PC Desktop, then:
 3. Double-click DOUBLE-CLICK-ME.bat  (leave the black window open).
 4. Browser opens the live control panel.
 5. Click "Push scenes into OBS", paste the WebSocket password, install.
-6. In OBS, pick cameras on Cam / Face, Room, Wheel, Pedals.
+6. In OBS, pick cameras:
+     Cam / Face   = face cam
+     Cam / Room   = back cam
+     Cam / Wheel  = wheel
+     Cam / Pedals = pedals
    Pick your game on Game / Main. Mute Desktop Audio.
 7. OBS Stream = Twitch. Aitum outputs = YouTube + Kick (+ X if Premium).
    Vertical outputs = YouTube Shorts key.
 
-Starting Soon is generic on purpose: STARTING SOON + “Sim racing · Gaming · IRL”.
+Camera scenes
+  GAMING   PC game + face + back cam
+  SIM      sim + all four cams on the horizontal
+  SIM RIG  sim + wheel and pedals only (switch here from SIM)
+  Vertical copies are a starting point. Move those boxes in the
+  Aitum Vertical dock if you want a different phone layout.
+
+Starting Soon is generic: STARTING SOON + “Sim racing · Gaming · IRL”.
 Leave the title blank until you know what you're playing. Type it in the
 control panel and every overlay updates in a couple of seconds.
 
-Hotkeys after install: Numpad 1–9 through the scene list.
+Hotkeys after install: Numpad 1–9 through starting → chatting → gaming
+→ sim → sim rig → replay → irl → brb → ending.
 
 Lumia: paste the overlay URL into the Lumia / Overlay source.
 Commands: overlays\lumia-commands.json

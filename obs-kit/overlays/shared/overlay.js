@@ -53,6 +53,7 @@
     fill("[data-chatting-title]", STREAM.chattingTitle);
     fill("[data-desk-title]", STREAM.deskTitle);
     fill("[data-live-title]", STREAM.liveTitle);
+    fill("[data-rig-title]", STREAM.rigTitle);
     fill("[data-dual-title]", STREAM.dualTitle);
     fill("[data-replay-title]", STREAM.replayTitle);
     fill("[data-irl-title]", STREAM.irlTitle);

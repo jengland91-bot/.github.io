@@ -103,6 +103,7 @@
   </fieldset>
 
   <p class="kicker" style="margin-top:22px">SCENES</p>
+  <p class="hint">GAMING = PC game + face + back cam. SIM = all four cams. SIM RIG = wheel + pedals. Switch SIM ↔ SIM RIG while live. Vertical copies are a starting point — move those in the Aitum Vertical dock.</p>
   <div class="grid" id="scenes"></div>
 
   <fieldset>
@@ -126,9 +127,13 @@
 
   <div id="log"></div>
 </main>
+<script src="shared/layout.js"></script>
 <script>
 (function () {
-  const SCENES = ["STARTING SOON","JUST CHATTING","DESK","SIM","DUAL","REPLAY","IRL","BRB","ENDING"];
+  const SCENES = ((window.STREAM_LAYOUT || {}).scenes || []).map((s) => s.name);
+  if (!SCENES.length) {
+    SCENES.push("STARTING SOON","JUST CHATTING","GAMING","SIM","SIM RIG","DUAL","REPLAY","IRL","BRB","ENDING");
+  }
   const logEl = document.getElementById("log");
   const grid = document.getElementById("scenes");
   SCENES.forEach((name) => {
