@@ -90,7 +90,7 @@
   <p class="kicker">LOAD INTO OBS</p>
   <h1>Load the J England scenes into OBS.</h1>
   <p>OBS must be open on this PC. Paste the WebSocket password if Connect fails. This page will try to connect by itself and then build <code>J England Live</code>.</p>
-  <p class="warn">Use Chrome or Edge on the streaming PC. Keep the black kit-server window open.</p>
+  <p class="warn">Use Chrome or Edge on the streaming PC. This builds <strong>horizontal + vertical</strong> scenes in one click. Overlay Base defaults to this kit folder — no black kit window after.</p>
 
   <fieldset>
     <legend>OBS WebSocket</legend>
@@ -113,22 +113,29 @@
 
   <fieldset>
     <legend>Install</legend>
-    <label><input id="bothCollections" type="checkbox" /> Also build the backup 9:16 collection (skip for tonight — Aitum Vertical uses the dock, not this)</label>
-    <p>After it finishes, hang cameras on <code>Cam / Face</code>, <code>Cam / Room</code> (back), wheel, pedals, and the game on <code>Game / Main</code>. Mute Desktop Audio. Vertical linking is next — we can do that together.</p>
-    <button type="button" id="btnInstallObs" disabled>Load scenes into OBS</button>
+    <p>Builds <code>J England Live</code> (16:9) <strong>and</strong> Aitum Vertical scenes (9:16: STARTING SOON, JUST CHATTING, PLAYING, BRB, ENDING), then wires them so scene switches follow on both canvases.</p>
+    <p>After it finishes, hang cameras on <code>Cam / Face</code>, <code>Cam / Room</code> (back), wheel, pedals, and the game on <code>Game / Main</code>. Mute Desktop Audio.</p>
+    <button type="button" id="btnInstallObs" disabled>Load horizontal + vertical into OBS</button>
     <button type="button" class="ghost" id="btnDownloadLumia">Download Lumia command list</button>
   </fieldset>
 
   <div id="log"></div>
-  <p style="margin-top:16px"><a href="tonight.html">Tonight setup</a> · <a href="control.html">Live control</a> · <a href="index.html">Overlay preview</a></p>
+  <p style="margin-top:16px"><a href="go-online.html">Switch overlays online (no kit server)</a> · <a href="tonight.html">Tonight setup</a> · <a href="control.html">Live control</a> · <a href="index.html">Overlay preview</a></p>
 </main>
 
-<script src="shared/layout.js?v=5"></script>
+<script src="shared/layout.js?v=9"></script>
 <script>
 (function () {
   const logEl = document.getElementById("log");
   const overlayBaseInput = document.getElementById("overlayBase");
-  overlayBaseInput.value = location.origin + "/overlays/";
+  // Prefer this kit folder on disk so OBS never depends on 127.0.0.1:8765
+  if (location.protocol === "file:") {
+    overlayBaseInput.value = location.href.replace(/[^/\\]*$/, "");
+  } else if (/127\.0\.0\.1|localhost/i.test(location.hostname || "")) {
+    overlayBaseInput.value = location.href.replace(/[^/\\]*$/, "");
+  } else {
+    overlayBaseInput.value = location.origin.replace(/\/$/, "") + "/overlays/";
+  }
 
   function log(line, cls) {
     const span = document.createElement("span");
@@ -294,39 +301,278 @@
     }
   }
 
-  async function ensureScene(name) {
-    const list = await obs.request("GetSceneList");
+  async function ensureScene(name, canvasUuid) {
+    const list = await obs.request("GetSceneList", canvasUuid ? { canvasUuid } : {});
     if (!(list.scenes || []).some((s) => s.sceneName === name)) {
-      await obs.request("CreateScene", { sceneName: name });
-      log("Created scene " + name, "ok");
+      const data = { sceneName: name };
+      if (canvasUuid) data.canvasUuid = canvasUuid;
+      await obs.request("CreateScene", data);
+      log("Created scene " + name + (canvasUuid ? " (vertical canvas)" : ""), "ok");
     }
   }
 
-  async function clearSceneItems(sceneName) {
-    const items = await obs.request("GetSceneItemList", { sceneName });
+  async function clearSceneItems(sceneName, canvasUuid) {
+    const req = { sceneName };
+    if (canvasUuid) req.canvasUuid = canvasUuid;
+    const items = await obs.request("GetSceneItemList", req);
     for (const item of items.sceneItems || []) {
       try {
-        await obs.request("RemoveSceneItem", { sceneName, sceneItemId: item.sceneItemId });
+        const rem = { sceneName, sceneItemId: item.sceneItemId };
+        if (canvasUuid) rem.canvasUuid = canvasUuid;
+        await obs.request("RemoveSceneItem", rem);
       } catch (e) {
         log("clear " + sceneName + ": " + e.message);
       }
     }
   }
 
-  async function addItem(sceneName, sourceName, item) {
-    const created = await obs.request("CreateSceneItem", {
+  async function addItem(sceneName, sourceName, item, canvasUuid) {
+    const createdReq = {
       sceneName,
       sourceName,
       sceneItemEnabled: item.enabled !== false,
-    });
+    };
+    if (canvasUuid) createdReq.canvasUuid = canvasUuid;
+    const created = await obs.request("CreateSceneItem", createdReq);
     const t = transform(item);
     if (t && created.sceneItemId != null) {
-      await obs.request("SetSceneItemTransform", {
+      const tr = {
         sceneName,
         sceneItemId: created.sceneItemId,
         sceneItemTransform: t,
+      };
+      if (canvasUuid) tr.canvasUuid = canvasUuid;
+      await obs.request("SetSceneItemTransform", tr);
+    }
+  }
+
+  async function listScenes(canvasUuid) {
+    try {
+      const list = await obs.request("GetSceneList", canvasUuid ? { canvasUuid } : {});
+      const names = (list.scenes || []).map((s) => s.sceneName);
+      log((canvasUuid ? "Vertical" : "Main") + " scenes: " + names.join(" | "), "ok");
+      return names;
+    } catch (e) {
+      log("Could not list scenes: " + e.message, "err");
+      return [];
+    }
+  }
+
+  async function findVerticalCanvas() {
+    // Prefer OBS multi-canvas API (OBS 31+ / websocket 5.7+)
+    try {
+      const list = await obs.request("GetCanvasList");
+      for (const c of list.canvases || []) {
+        const name = c.canvasName || c.name || "";
+        const w = Number(c.baseWidth || c.width || 0);
+        const h = Number(c.baseHeight || c.height || 0);
+        const uuid = c.canvasUuid || c.uuid || "";
+        if (uuid && (h > w || /vertical/i.test(name))) {
+          log("Found vertical canvas: " + name + " (" + w + "x" + h + ")", "ok");
+          return { uuid, name, width: w || 1080, height: h || 1920 };
+        }
+      }
+      // If only one non-main tall canvas
+      for (const c of list.canvases || []) {
+        const uuid = c.canvasUuid || c.uuid || "";
+        const name = c.canvasName || c.name || "";
+        if (uuid && !/main/i.test(name) && name) {
+          const w = Number(c.baseWidth || c.width || 1080);
+          const h = Number(c.baseHeight || c.height || 1920);
+          log("Using canvas: " + name, "ok");
+          return { uuid, name, width: w, height: h };
+        }
+      }
+    } catch (e) {
+      log("GetCanvasList: " + e.message + " (will try Aitum vendor)", "warn");
+    }
+
+    try {
+      const v = await obs.request("CallVendorRequest", {
+        vendorName: "aitum-stream-suite",
+        requestType: "get_canvas",
+        requestData: {},
+      });
+      const arr = (v.responseData && v.responseData.canvas) || [];
+      for (const c of arr) {
+        if (Number(c.height) > Number(c.width) || /vertical/i.test(c.name || "")) {
+          log("Aitum canvas: " + c.name, "ok");
+          return { uuid: c.uuid || "", name: c.name || "Vertical", width: c.width || 1080, height: c.height || 1920 };
+        }
+      }
+      if (arr[0]) {
+        return { uuid: arr[0].uuid || "", name: arr[0].name || "Vertical", width: arr[0].width || 1080, height: arr[0].height || 1920 };
+      }
+    } catch (e) {
+      log("Aitum get_canvas: " + e.message, "warn");
+    }
+    return null;
+  }
+
+  async function showUsefulDocks() {
+    try {
+      const docks = await obs.request("CallVendorRequest", {
+        vendorName: "aitum-stream-suite",
+        requestType: "get_docks",
+        requestData: {},
+      });
+      const list = (docks.responseData && docks.responseData.docks) || [];
+      for (const d of list) {
+        const title = (d.title || "") + " " + (d.name || "");
+        if (/vertical|scenes|mixer|audio|aitum|stream suite|output/i.test(title)) {
+          try {
+            await obs.request("CallVendorRequest", {
+              vendorName: "aitum-stream-suite",
+              requestType: "dock_show",
+              requestData: { dock: d.name },
+            });
+            log("Showed dock: " + (d.title || d.name), "ok");
+          } catch (_) {}
+        }
+      }
+    } catch (e) {
+      log("Could not auto-show docks (open Docks menu manually): " + e.message, "warn");
+    }
+  }
+
+  async function applyVerticalLinksViaSettings(canvasInfo) {
+    // Write Aitum Linked Scenes data onto each main scene's settings via a helper input is not possible.
+    // Sync browser source handles runtime switching. Also try vendor switch once as a smoke test.
+    const links = LAYOUT.verticalLinks || {};
+    try {
+      await obs.request("CallVendorRequest", {
+        vendorName: "aitum-stream-suite",
+        requestType: "switch_scene",
+        requestData: {
+          scene: "STARTING SOON",
+          canvas: (canvasInfo && canvasInfo.name) || undefined,
+        },
+      });
+      log("Vertical canvas switch OK (Aitum vendor).", "ok");
+    } catch (e) {
+      log("Vertical switch smoke test: " + e.message, "warn");
+    }
+    return links;
+  }
+
+  async function installVerticalSyncSource(browserKind) {
+    const pass = document.getElementById("obsPass").value || "";
+    const host = document.getElementById("obsHost").value.trim() || "127.0.0.1";
+    const port = document.getElementById("obsPort").value.trim() || "4455";
+    const base = document.getElementById("overlayBase").value.trim();
+    const url = new URL("vertical-sync.html", base.endsWith("/") || base.endsWith("\\") ? base : base + "/");
+    url.searchParams.set("pass", pass);
+    url.searchParams.set("host", host);
+    url.searchParams.set("port", port);
+    await ensureInput("JE / Vertical Sync", browserKind, {
+      url: url.toString(),
+      width: 2,
+      height: 2,
+      fps: 1,
+      css: "body{background:transparent;margin:0}",
+      shutdown: false,
+      restart_when_active: true,
+    });
+    // Hide it on the starting scene if present
+    try {
+      const items = await obs.request("GetSceneItemList", { sceneName: "STARTING SOON" });
+      for (const it of items.sceneItems || []) {
+        if (it.sourceName === "JE / Vertical Sync") {
+          await obs.request("SetSceneItemEnabled", {
+            sceneName: "STARTING SOON",
+            sceneItemId: it.sceneItemId,
+            sceneItemEnabled: false,
+          });
+        }
+      }
+    } catch (_) {}
+    log("Installed JE / Vertical Sync (keeps vertical canvas following main scenes).", "ok");
+  }
+
+  async function buildVerticalCanvas(canvasInfo) {
+    const canvasUuid = canvasInfo.uuid || "";
+    const base = document.getElementById("overlayBase").value.trim();
+    const lumiaUrl = document.getElementById("lumiaUrl").value.trim();
+    const vScenes = LAYOUT.verticalScenes || [];
+    if (!vScenes.length) throw new Error("layout.js missing verticalScenes");
+
+    if (!canvasUuid) {
+      log("No canvasUuid — creating vertical scenes on main list as fallback names with V prefix will not work for Aitum. Open Docks → Vertical first so Aitum creates the canvas, then click Load again.", "err");
+      throw new Error("Aitum Vertical canvas not found. Open the Vertical dock once, then re-run Load.");
+    }
+
+    const kindList = await obs.request("GetInputKindList");
+    kinds = kindList.inputKinds || [];
+    const colorKind = pickKind(["color_source_v3", "color_source"]);
+    const browserKind = pickKind(["browser_source"]);
+    if (!browserKind) throw new Error("No browser_source");
+
+    const vw = canvasInfo.width || 1080;
+    const vh = canvasInfo.height || 1920;
+
+    if (colorKind) {
+      await ensureInput("Color / Backdrop V", colorKind, {
+        color: LAYOUT.backdropColor || 4279170055,
+        width: vw,
+        height: vh,
       });
     }
+
+    await ensureInput("Lumia / Overlay V", browserKind, {
+      url: lumiaUrl || "about:blank",
+      width: vw,
+      height: vh,
+      fps: 30,
+      css: LAYOUT.overlayCss,
+      shutdown: false,
+      restart_when_active: false,
+    });
+
+    for (const [name, meta] of Object.entries(LAYOUT.verticalOverlays || {})) {
+      await ensureInput(name, browserKind, {
+        url: overlayUrl(meta.file, base, true),
+        width: vw,
+        height: vh,
+        fps: 30,
+        css: LAYOUT.overlayCss,
+        shutdown: !!meta.shutdown,
+        restart_when_active: !!meta.restart,
+      });
+    }
+
+    for (const scene of vScenes) {
+      try {
+        await ensureScene(scene.name, canvasUuid);
+      } catch (e) {
+        log("vertical create " + scene.name + ": " + e.message, "err");
+      }
+    }
+    await listScenes(canvasUuid);
+
+    for (const scene of vScenes) {
+      try {
+        await ensureScene(scene.name, canvasUuid);
+        await clearSceneItems(scene.name, canvasUuid);
+        for (const item of scene.items || []) {
+          try {
+            await addItem(scene.name, item.source, item, canvasUuid);
+          } catch (e) {
+            log("skip " + item.source + " on vertical " + scene.name + ": " + e.message);
+          }
+        }
+        log("Filled vertical scene " + scene.name, "ok");
+      } catch (e) {
+        log("vertical scene " + scene.name + " failed: " + e.message, "err");
+      }
+    }
+
+    try {
+      await obs.request("CallVendorRequest", {
+        vendorName: "aitum-stream-suite",
+        requestType: "switch_scene",
+        requestData: { scene: "STARTING SOON", canvas: canvasInfo.name },
+      });
+    } catch (_) {}
   }
 
   async function setCanvas(mode) {
@@ -373,18 +619,6 @@
       await obs.request("SetInputMute", { inputName: "Desktop Audio", inputMuted: true });
     } catch (_) {
       try { await obs.request("SetInputMute", { inputName: "Desktop Audio", inputMuted: true }); } catch (e) {}
-    }
-  }
-
-  async function listScenes() {
-    try {
-      const list = await obs.request("GetSceneList");
-      const names = (list.scenes || []).map((s) => s.sceneName);
-      log("OBS scenes now: " + names.join(" | "), "ok");
-      return names;
-    } catch (e) {
-      log("Could not list scenes: " + e.message, "err");
-      return [];
     }
   }
 
@@ -516,17 +750,42 @@
     const btn = document.getElementById("btnInstallObs");
     btn.disabled = true;
     try {
-      log("Building J England Live...");
+      log("Building horizontal scenes (J England Live)...");
       await buildCollection("wide");
-      if (document.getElementById("bothCollections").checked) {
-        log("Building vertical collection...");
-        await buildCollection("vertical");
-        await createCollection(LAYOUT.collectionWide);
-        await setCanvas("wide");
+
+      const browserKind = pickKind(["browser_source"]);
+      if (browserKind) {
+        try {
+          await installVerticalSyncSource(browserKind);
+        } catch (e) {
+          log("Vertical sync source: " + e.message, "warn");
+        }
       }
-      log("Done. In OBS, open the Scenes list - you should see STARTING SOON, JUST CHATTING, GAMING, SIM, SIM RIG, and more.", "ok");
-      log("Scene Collection dropdown (top of scenes) must say: J England Live");
-      log("Then pick devices on Cam / Face, Cam / Room (back), Wheel, Pedals, Game / Main.");
+
+      log("Looking for Aitum Vertical canvas...");
+      await showUsefulDocks();
+      let canvasInfo = await findVerticalCanvas();
+      if (!canvasInfo || !canvasInfo.uuid) {
+        log("Vertical canvas not ready yet. Showing docks and retrying in 2s...", "warn");
+        await new Promise((r) => setTimeout(r, 2000));
+        canvasInfo = await findVerticalCanvas();
+      }
+
+      if (canvasInfo && canvasInfo.uuid) {
+        log("Building vertical scenes on canvas " + canvasInfo.name + "...");
+        await buildVerticalCanvas(canvasInfo);
+        await applyVerticalLinksViaSettings(canvasInfo);
+      } else {
+        log("Aitum Vertical canvas was not found.", "err");
+        log("Fix: OBS menu Docks → enable Vertical (or Aitum). Click the Vertical dock once, then click Load again.", "err");
+      }
+
+      log("Done.", "ok");
+      log("Main Scenes: STARTING SOON, JUST CHATTING, GAMING, SIM, SIM RIG, DUAL, REPLAY, IRL, BRB, ENDING");
+      log("Vertical Scenes: STARTING SOON, JUST CHATTING, PLAYING, BRB, ENDING");
+      log("YouTube horizontal = Aitum Main output. YouTube Shorts = Aitum Vertical output.");
+      log("Pick devices on Cam / Face, Cam / Room, Wheel, Pedals, Game / Main.");
+      log("Scene Collection must stay: J England Live");
     } catch (e) {
       log(e.message, "err");
     } finally {

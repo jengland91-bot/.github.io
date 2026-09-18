@@ -256,4 +256,65 @@ window.STREAM_LAYOUT = {
     BRB: "Numpad 8",
     ENDING: "Numpad 9",
   },
+  /* Aitum Vertical dock scenes (1080×1920). Built onto the Vertical canvas. */
+  verticalScenes: [
+    {
+      name: "STARTING SOON",
+      items: [
+        { source: "Overlay V / Starting Soon", kind: "browser", x: 0, y: 0, w: 1080, h: 1920 },
+      ],
+    },
+    {
+      name: "JUST CHATTING",
+      items: [
+        { source: "Color / Backdrop V", kind: "color", x: 0, y: 0, w: 1080, h: 1920 },
+        { source: "Cam / Face", kind: "camera", x: 16, y: 88, w: 1048, h: 590 },
+        { source: "Cam / Room", kind: "camera", x: 16, y: 694, w: 1048, h: 320 },
+        { source: "Lumia / Overlay V", kind: "lumia", x: 0, y: 0, w: 1080, h: 1920 },
+        { source: "Overlay V / Chat HUD", kind: "browser", x: 0, y: 0, w: 1080, h: 1920 },
+      ],
+    },
+    {
+      name: "PLAYING",
+      items: [
+        { source: "Game / Main", kind: "game", x: 0, y: 0, w: 1080, h: 608 },
+        { source: "Cam / Face", kind: "camera", x: 16, y: 624, w: 520, h: 292 },
+        { source: "Cam / Room", kind: "camera", x: 544, y: 624, w: 520, h: 292 },
+        { source: "Lumia / Overlay V", kind: "lumia", x: 0, y: 0, w: 1080, h: 1920 },
+        { source: "Overlay V / Live HUD", kind: "browser", x: 0, y: 0, w: 1080, h: 1920 },
+      ],
+    },
+    {
+      name: "BRB",
+      items: [
+        { source: "Overlay V / BRB", kind: "browser", x: 0, y: 0, w: 1080, h: 1920 },
+      ],
+    },
+    {
+      name: "ENDING",
+      items: [
+        { source: "Overlay V / Ending", kind: "browser", x: 0, y: 0, w: 1080, h: 1920 },
+      ],
+    },
+  ],
+  /* Main scene name → Vertical scene name (Linked Scenes / sync) */
+  verticalLinks: {
+    "STARTING SOON": "STARTING SOON",
+    "JUST CHATTING": "JUST CHATTING",
+    IRL: "JUST CHATTING",
+    GAMING: "PLAYING",
+    SIM: "PLAYING",
+    "SIM RIG": "PLAYING",
+    DUAL: "PLAYING",
+    REPLAY: "PLAYING",
+    BRB: "BRB",
+    ENDING: "ENDING",
+  },
+  verticalOverlays: {
+    "Overlay V / Starting Soon": { file: "starting.html", shutdown: true, restart: true },
+    "Overlay V / Chat HUD": { file: "chatting.html" },
+    "Overlay V / Live HUD": { file: "live.html" },
+    "Overlay V / BRB": { file: "brb.html", shutdown: true, restart: true },
+    "Overlay V / Ending": { file: "ending.html", shutdown: true, restart: true },
+  },
 };

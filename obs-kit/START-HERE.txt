@@ -1,26 +1,22 @@
-J ENGLAND - OBS kit (this folder is the show)
+J ENGLAND OBS kit
 
-Copy this whole obs-kit folder onto the streaming PC Desktop.
+FIRST TIME (builds horizontal + vertical):
+1. Open OBS. Docks menu → turn on Vertical + Aitum Stream Suite
+2. Run LOAD-SCENES.bat
+3. Paste WebSocket password if asked → wait for "Done"
+4. Optional but recommended: OBS → Tools → Scripts → + → tools\je-link-vertical.lua
+5. Assign Cam / Face, Cam / Room, Wheel, Pedals, Game / Main
 
-Double-click DOUBLE-CLICK-ME.bat and leave that window open.
-It starts OBS, starts the kit server, and opens the scene loader.
+NORMAL STREAM DAY:
+1. Run OPEN-OBS.bat (or just open OBS)
+2. Stay on scene collection "J England Live"
+3. Click scenes — vertical follows automatically
 
-If the page cannot talk to OBS: Tools -> WebSocket Server Settings -> Enable,
-paste the password, click Connect. With ?load=1 it then builds J England Live.
+YouTube:
+- Horizontal live = Aitum Main output (canvas Main)
+- Shorts / vertical = Aitum Vertical output (canvas Vertical) — separate stream key
 
-Then hang cameras on Cam / Face, Cam / Room (back), Wheel, Pedals, Game / Main.
+Platforms on Main canvas: Twitch, Kick, YouTube 16:9, X
+Platform on Vertical canvas: YouTube Shorts only
 
-Short version:
-1. OBS -> Tools -> WebSocket Server Settings -> Enable. Copy the password.
-2. DOUBLE-CLICK-ME.bat -> paste password -> Connect (loads scenes).
-3. Assign Cam / Face, Cam / Room (back), Wheel, Pedals, Game / Main.
-4. OBS Stream = Twitch. Aitum Main = YouTube + Kick. Aitum Vertical = YouTube Shorts.
-5. Link Vertical Scenes so Stream Deck clicks move both canvases.
-6. Stay on scene collection J England Live.
-
-Scene buttons (OBS, control panel, or Stream Deck - same names):
-  STARTING SOON / JUST CHATTING / GAMING / SIM / SIM RIG
-  BRB / IRL / ENDING / REPLAY
-
-GAMING = PC game + face + back.
-SIM = all four cams. SIM RIG = wheel + pedals.
+If overlays still say :8765, run DOUBLE-CLICK-ME.bat once.
