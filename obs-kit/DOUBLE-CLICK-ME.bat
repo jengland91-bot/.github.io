@@ -15,12 +15,30 @@ if errorlevel 1 (
     echo  Starting OBS...
     start "" /D "%ProgramFiles(x86)%\obs-studio\bin\64bit" obs64.exe
   ) else (
-    echo  OBS not found in Program Files — open OBS yourself, then come back to the browser.
+    echo  OBS not found in Program Files - open OBS yourself, then come back to the browser.
   )
 ) else (
   echo  OBS is already running.
 )
 
 echo  Starting kit server...
+where py >nul 2>&1
+if not errorlevel 1 (
+  py -3 "%~dp0tools\start-server.py"
+  goto :end
+)
+where python >nul 2>&1
+if not errorlevel 1 (
+  python "%~dp0tools\start-server.py"
+  goto :end
+)
+
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\Start-Server.ps1"
+if errorlevel 1 (
+  echo.
+  echo  Server failed to start. Tell Cursor the red text from this window.
+  echo.
+)
+
+:end
 pause

@@ -32,6 +32,6 @@ foreach ($item in $items) {
 Write-Host ""
 Write-Host "Close OBS, then run the .exe files in the installers folder."
 Write-Host "Aitum Stream Suite covers Multistream + Vertical. Do not also install Restream."
-Write-Host "Lumia is a separate app — install it from the page that opened if the file is missing."
+Write-Host "Lumia is a separate app - install it from the page that opened if the file is missing."
 Write-Host ""
 Start-Process $dest

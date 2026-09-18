@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Local kit server — Windows uses Start-Server.ps1; this is for preview/Linux."""
+"""Local kit server for the streaming PC."""
 from __future__ import annotations
 
-import json
+import webbrowser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 NOW = ROOT / "overlays" / "shared" / "now.json"
 PORT = 8765
+LOAD = f"http://127.0.0.1:{PORT}/overlays/install.html?load=1"
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -34,7 +35,13 @@ class Handler(SimpleHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    httpd = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
-    print(f"Kit server http://127.0.0.1:{PORT}/overlays/install.html?load=1")
-    print("Keep this process running.")
+    try:
+        httpd = ThreadingHTTPServer(("127.0.0.1", PORT), Handler)
+    except OSError:
+        print("Port 8765 already in use - opening the scene loader anyway.")
+        webbrowser.open(LOAD)
+        raise SystemExit(0)
+    print("Kit server", LOAD)
+    print("Keep this window open.")
+    webbrowser.open(LOAD)
     httpd.serve_forever()

@@ -443,7 +443,8 @@
     } catch (_) {}
   }
 
-  async function connectObs() {
+  async function connectObs(opts) {
+    const quiet = !!(opts && opts.quiet);
     const host = document.getElementById("obsHost").value.trim();
     const port = document.getElementById("obsPort").value.trim();
     const password = document.getElementById("obsPass").value;
@@ -454,13 +455,14 @@
       status.textContent = " connected";
       status.className = "ok";
       document.getElementById("btnInstallObs").disabled = false;
-      log("Connected to OBS.", "ok");
-      return true;
+      if (!quiet) log("Connected to OBS.", "ok");
+      return { ok: true };
     } catch (e) {
+      const auth = /auth/i.test(String(e.message || ""));
       status.textContent = " " + e.message;
       status.className = "err";
-      log(e.message, "err");
-      return false;
+      if (!quiet) log(e.message, "err");
+      return { ok: false, auth: auth, message: e.message };
     }
   }
 
@@ -487,12 +489,16 @@
     }
   }
 
-  document.getElementById("btnObsConnect").addEventListener("click", async () => {
-    const ok = await connectObs();
-    if (ok && new URLSearchParams(location.search).has("load")) {
+  async function connectAndMaybeLoad() {
+    const result = await connectObs();
+    if (result.ok && new URLSearchParams(location.search).has("load")) {
       log("Connected — loading scenes…", "ok");
       await loadScenes();
     }
+  }
+
+  document.getElementById("btnObsConnect").addEventListener("click", () => {
+    connectAndMaybeLoad();
   });
 
   document.getElementById("obsPass").addEventListener("keydown", (ev) => {
@@ -513,17 +519,25 @@
   } catch (_) {}
 
   (async function boot() {
-    log("Trying OBS on 127.0.0.1:4455…");
-    const ok = await connectObs();
-    if (ok && new URLSearchParams(location.search).has("load")) {
-      log("Connected — loading scenes…", "ok");
-      await loadScenes();
-      return;
+    const wantLoad = new URLSearchParams(location.search).has("load");
+    log("Waiting for OBS on 127.0.0.1:4455…");
+    for (let i = 0; i < 12; i += 1) {
+      const result = await connectObs({ quiet: i > 0 });
+      if (result.ok) {
+        if (wantLoad) {
+          log("Connected — loading scenes…", "ok");
+          await loadScenes();
+        }
+        return;
+      }
+      if (result.auth) {
+        log("WebSocket is on, but it needs the password. Paste it and click Connect.");
+        return;
+      }
+      await new Promise((r) => setTimeout(r, 2000));
     }
-    if (!ok) {
-      log("OBS is not open, WebSocket is off, or it needs the password.");
-      log("OBS → Tools → WebSocket Server Settings → Enable. Paste the password, then Connect.");
-    }
+    log("OBS is not open or WebSocket is off.");
+    log("OBS → Tools → WebSocket Server Settings → Enable. Paste the password, then Connect.");
   })();
 })();
 </script>
