@@ -123,7 +123,7 @@
   <p style="margin-top:16px"><a href="tonight.html">Tonight setup</a> · <a href="control.html">Live control</a> · <a href="index.html">Overlay preview</a></p>
 </main>
 
-<script src="shared/layout.js"></script>
+<script src="shared/layout.js?v=5"></script>
 <script>
 (function () {
   const logEl = document.getElementById("log");
@@ -221,7 +221,7 @@
             this.pending.delete(requestId);
             reject(new Error("Timeout: " + requestType));
           }
-        }, 20000);
+        }, 60000);
       });
     }
   }
@@ -267,33 +267,49 @@
   }
 
   async function ensureInput(name, kind, settings) {
-    const list = await obs.request("GetInputList");
-    const exists = (list.inputs || []).some((i) => i.inputName === name);
-    if (exists) {
-      if (settings) {
-        try { await obs.request("SetInputSettings", { inputName: name, inputSettings: settings, overlay: false }); } catch (e) { log("settings " + name + ": " + e.message); }
-      }
-      return;
+    if (!kind) {
+      log("skip source " + name + " (no kind)", "warn");
+      return false;
     }
-    await obs.request("CreateInput", {
-      sceneName: LAYOUT.scenes[0].name,
-      inputName: name,
-      inputKind: kind,
-      inputSettings: settings || {},
-    });
+    try {
+      const list = await obs.request("GetInputList");
+      const exists = (list.inputs || []).some((i) => i.inputName === name);
+      if (exists) {
+        if (settings) {
+          try { await obs.request("SetInputSettings", { inputName: name, inputSettings: settings, overlay: false }); } catch (e) { log("settings " + name + ": " + e.message); }
+        }
+        return true;
+      }
+      await obs.request("CreateInput", {
+        sceneName: LAYOUT.scenes[0].name,
+        inputName: name,
+        inputKind: kind,
+        inputSettings: settings || {},
+        sceneItemEnabled: false,
+      });
+      return true;
+    } catch (e) {
+      log("source " + name + ": " + e.message, "err");
+      return false;
+    }
   }
 
   async function ensureScene(name) {
     const list = await obs.request("GetSceneList");
     if (!(list.scenes || []).some((s) => s.sceneName === name)) {
       await obs.request("CreateScene", { sceneName: name });
+      log("Created scene " + name, "ok");
     }
   }
 
   async function clearSceneItems(sceneName) {
     const items = await obs.request("GetSceneItemList", { sceneName });
     for (const item of items.sceneItems || []) {
-      await obs.request("RemoveSceneItem", { sceneName, sceneItemId: item.sceneItemId });
+      try {
+        await obs.request("RemoveSceneItem", { sceneName, sceneItemId: item.sceneItemId });
+      } catch (e) {
+        log("clear " + sceneName + ": " + e.message);
+      }
     }
   }
 
@@ -341,7 +357,7 @@
         log("Created collection " + name, "ok");
       }
     } catch (e) {
-      log("collection change: " + e.message + " — reconnecting");
+      log("collection change: " + e.message + " - reconnecting");
     }
     try {
       await obs.reconnect();
@@ -360,12 +376,28 @@
     }
   }
 
+  async function listScenes() {
+    try {
+      const list = await obs.request("GetSceneList");
+      const names = (list.scenes || []).map((s) => s.sceneName);
+      log("OBS scenes now: " + names.join(" | "), "ok");
+      return names;
+    } catch (e) {
+      log("Could not list scenes: " + e.message, "err");
+      return [];
+    }
+  }
+
   async function buildCollection(mode) {
     const vertical = mode === "vertical";
     const collection = vertical ? LAYOUT.collectionVertical : LAYOUT.collectionWide;
     const base = document.getElementById("overlayBase").value.trim();
     const lumiaUrl = document.getElementById("lumiaUrl").value.trim();
     const canvas = LAYOUT.canvas[mode];
+    const scenePlan = LAYOUT.scenes || [];
+
+    if (!scenePlan.length) throw new Error("layout.js did not load scene list");
+    log("Will build " + scenePlan.length + " scenes: " + scenePlan.map((s) => s.name).join(", "));
 
     await createCollection(collection);
     await setCanvas(mode);
@@ -382,7 +414,15 @@
 
     if (!browserKind) throw new Error("This OBS build has no browser_source");
 
-    await ensureScene(LAYOUT.scenes[0].name);
+    // Create every scene name first so the dock fills even if a later source fails.
+    for (const scene of scenePlan) {
+      try {
+        await ensureScene(scene.name);
+      } catch (e) {
+        log("create scene " + scene.name + ": " + e.message, "err");
+      }
+    }
+    await listScenes();
 
     const colorSettings = { color: LAYOUT.backdropColor || 4279170055, width: canvas.w, height: canvas.h };
     if (colorKind) await ensureInput("Color / Backdrop", colorKind, colorSettings);
@@ -392,7 +432,7 @@
         await ensureInput(cam, cameraKind, {});
       }
     } else {
-      log("No camera source type found — add Video Capture Device sources named Cam / Face etc.", "warn");
+      log("No camera source type found - add Video Capture Device sources named Cam / Face etc.", "warn");
     }
 
     if (gameKind) {
@@ -412,7 +452,7 @@
       restart_when_active: false,
     });
 
-    for (const [name, meta] of Object.entries(LAYOUT.overlays)) {
+    for (const [name, meta] of Object.entries(LAYOUT.overlays || {})) {
       await ensureInput(name, browserKind, {
         url: overlayUrl(meta.file, base, vertical),
         width: canvas.w,
@@ -424,23 +464,29 @@
       });
     }
 
-    for (const scene of LAYOUT.scenes) {
-      await ensureScene(scene.name);
-      await clearSceneItems(scene.name);
-      for (const item of scene.items[mode]) {
-        try {
-          await addItem(scene.name, item.source, item);
-        } catch (e) {
-          log("skip " + item.source + " on " + scene.name + ": " + e.message);
+    for (const scene of scenePlan) {
+      try {
+        await ensureScene(scene.name);
+        await clearSceneItems(scene.name);
+        const items = (scene.items && scene.items[mode]) || [];
+        for (const item of items) {
+          try {
+            await addItem(scene.name, item.source, item);
+          } catch (e) {
+            log("skip " + item.source + " on " + scene.name + ": " + e.message);
+          }
         }
+        log("Filled scene " + scene.name + " (" + items.length + " items)", "ok");
+      } catch (e) {
+        log("scene " + scene.name + " failed: " + e.message, "err");
       }
-      log("Scene " + scene.name);
     }
 
     await muteDesktop();
     try {
       await obs.request("SetCurrentProgramScene", { sceneName: "STARTING SOON" });
     } catch (_) {}
+    await listScenes();
   }
 
   async function connectObs(opts) {
@@ -470,18 +516,17 @@
     const btn = document.getElementById("btnInstallObs");
     btn.disabled = true;
     try {
-      log("Building J England Live…");
+      log("Building J England Live...");
       await buildCollection("wide");
       if (document.getElementById("bothCollections").checked) {
-        log("Building vertical collection…");
+        log("Building vertical collection...");
         await buildCollection("vertical");
         await createCollection(LAYOUT.collectionWide);
         await setCanvas("wide");
       }
-      log("Scenes are in OBS. Stay on J England Live.", "ok");
-      log("Now pick devices on Cam / Face, Cam / Room (back), Wheel, Pedals, and Game / Main.");
-      log("Mute Desktop Audio. Then click through STARTING SOON → GAMING → SIM.");
-      log("Vertical linking is next. Leave this kit server running.");
+      log("Done. In OBS, open the Scenes list - you should see STARTING SOON, JUST CHATTING, GAMING, SIM, SIM RIG, and more.", "ok");
+      log("Scene Collection dropdown (top of scenes) must say: J England Live");
+      log("Then pick devices on Cam / Face, Cam / Room (back), Wheel, Pedals, Game / Main.");
     } catch (e) {
       log(e.message, "err");
     } finally {
