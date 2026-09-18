@@ -187,8 +187,9 @@ export const streamKit = {
   checklist: [
     'Install Aitum Stream Suite (Multistream + Vertical). Confirm the Vertical Scenes dock exists.',
     'Enable OBS WebSocket. Copy the password.',
-    'On the streaming PC, OPEN-OBS.bat (daily). One time: DOUBLE-CLICK-ME.bat → Switch overlays to this folder so URLs stop using :8765.',
-    'If scenes are missing: open overlays/install.html from the kit folder (Chrome) → Connect → Load scenes into OBS (J England Live).',
+    'On the streaming PC: Docks → Vertical on, then LOAD-SCENES.bat (builds horizontal + vertical). Optional: Tools → Scripts → je-link-vertical.lua.',
+    'If overlays still use :8765: DOUBLE-CLICK-ME.bat once → Switch overlays to this folder. Daily: OPEN-OBS.bat only.',
+    'If scenes are missing: open overlays/install.html from the kit folder → Connect → Load horizontal + vertical into OBS.',
     'Assign Cam / Face (face), Cam / Room (back cam), Cam / Wheel, Cam / Pedals. Set Game / Main. Mute Desktop Audio.',
     'OBS Settings → Stream = Twitch. Aitum Main outputs = YouTube 16:9 + Kick. Aitum Vertical output = YouTube Shorts key.',
     'In the Vertical Scenes dock, make STARTING SOON / JUST CHATTING / PLAYING / BRB / ENDING and Linked Scenes them to the widescreen names (see tonight.html).',
