@@ -2,7 +2,7 @@
 cd /d "%~dp0"
 echo.
 echo  J ENGLAND LIVE
-echo  Opening OBS only. No kit server.
+echo  Opening OBS + one-time overlay fix (no kit server).
 echo.
 
 tasklist /FI "IMAGENAME eq obs64.exe" | find /I "obs64.exe" >nul
@@ -20,12 +20,12 @@ if errorlevel 1 (
   echo  OBS is already running.
 )
 
-echo  Opening the one-time online-overlay fix page...
+echo  Opening the one-time local-overlay fix page...
 start "" "%~dp0overlays\go-online.html"
 echo.
 echo  1) Paste WebSocket password
 echo  2) Connect OBS
-echo  3) Click "Switch overlays to online"
-echo  4) Close that page - you will not need it every stream
+echo  3) Click "Switch overlays to this folder"
+echo  4) Close that page - after that use OPEN-OBS.bat only
 echo.
 pause

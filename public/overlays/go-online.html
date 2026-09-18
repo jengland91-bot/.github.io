@@ -24,7 +24,7 @@
     .kicker { color: var(--cyan); font-size: .72rem; font-weight: 800; letter-spacing: .2em; }
     h1 { font-family: Fraunces, Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 8px 0 12px; }
     p, li, label { color: var(--muted); }
-    code { color: var(--text); font-family: ui-monospace, monospace; }
+    code { color: var(--text); font-family: ui-monospace, monospace; word-break: break-all; }
     fieldset {
       border: 1px solid var(--line); background: var(--elev);
       border-radius: 16px; padding: 16px; margin: 14px 0;
@@ -56,8 +56,8 @@
 <body>
 <main>
   <p class="kicker">ONE-TIME FIX</p>
-  <h1>Point overlays online so OBS works without the black window.</h1>
-  <p>This rewrites every kit browser source from <code>127.0.0.1:8765</code> to a public CDN URL. After this, daily streams are just <strong>OPEN-OBS.bat</strong> (or open OBS). No kit server.</p>
+  <h1>Point overlays at this folder so OBS works without the black window.</h1>
+  <p>This rewrites every kit browser source from <code>127.0.0.1:8765</code> to local <code>file://</code> paths in this kit. After this, daily streams are just <strong>OPEN-OBS.bat</strong>. No kit server. Do not move the kit folder after you run this (or run this again).</p>
 
   <fieldset>
     <legend>OBS WebSocket</legend>
@@ -67,8 +67,14 @@
       <div><label>Password</label><input id="obsPass" type="password" autocomplete="off" /></div>
     </div>
     <button type="button" id="btnConnect">Connect OBS</button>
-    <button type="button" id="btnFix" disabled>Switch overlays to online</button>
+    <button type="button" id="btnFix" disabled>Switch overlays to this folder</button>
     <span id="obsStatus"></span>
+  </fieldset>
+
+  <fieldset>
+    <legend>Overlay folder (auto-detected)</legend>
+    <label>Base URL written into OBS</label>
+    <input id="overlayBase" type="text" readonly />
   </fieldset>
 
   <fieldset>
@@ -85,11 +91,9 @@
 
   <div id="log"></div>
 </main>
-<script src="shared/layout.js?v=7"></script>
-<script src="https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@cursor/obs-multistream-kit-dbab/public/overlays/shared/layout.js"></script>
+<script src="shared/layout.js?v=8"></script>
 <script>
 (function () {
-  const ONLINE_BASE = "https://cdn.jsdelivr.net/gh/jengland91-bot/.github.io@cursor/obs-no-server-overlays-dbab/public/overlays/";
   const FALLBACK_OVERLAYS = {
     "Overlay / Starting Soon": { file: "starting.html", shutdown: true, restart: true },
     "Overlay / Chat HUD": { file: "chatting.html" },
@@ -106,6 +110,22 @@
   };
 
   const logEl = document.getElementById("log");
+  const baseInput = document.getElementById("overlayBase");
+
+  function detectBase() {
+    // Prefer this folder on disk (file://) so OBS needs no server and no CDN MIME hacks.
+    if (location.protocol === "file:") {
+      return location.href.replace(/[^/\\]*$/, "");
+    }
+    const origin = location.origin.replace(/\/$/, "");
+    if (/\/overlays$/i.test(location.pathname.replace(/\/[^/]*$/, ""))) {
+      return origin + location.pathname.replace(/\/[^/]*$/, "/");
+    }
+    return origin + "/overlays/";
+  }
+
+  const OVERLAY_BASE = detectBase();
+  baseInput.value = OVERLAY_BASE;
 
   function log(line, cls) {
     const s = document.createElement("span");
@@ -183,10 +203,11 @@
     return Object.keys(fromLayout).length ? fromLayout : FALLBACK_OVERLAYS;
   }
 
-  function onlineUrl(file, tall) {
-    const url = new URL(file, ONLINE_BASE);
+  function overlayUrl(file, tall) {
+    const base = baseInput.value || OVERLAY_BASE;
+    const url = new URL(file, base.endsWith("/") || base.endsWith("\\") ? base : base + "/");
     if (tall) url.searchParams.set("v", "1");
-    url.searchParams.set("vcache", "7");
+    url.searchParams.set("vcache", "8");
     return url.toString();
   }
 
@@ -195,7 +216,7 @@
       const u = new URL(url);
       const parts = u.pathname.split("/");
       const last = parts[parts.length - 1] || "";
-      return last.split("?")[0];
+      return decodeURIComponent(last.split("?")[0]);
     } catch (_) {
       return "";
     }
@@ -203,7 +224,7 @@
 
   async function setBrowserUrl(name, file, meta, width, height) {
     const tall = Number(height) > Number(width);
-    const url = onlineUrl(file, tall);
+    const url = overlayUrl(file, tall);
     await obs.request("SetInputSettings", {
       inputName: name,
       inputSettings: {
@@ -213,6 +234,8 @@
         css: "body { background-color: rgba(0,0,0,0); margin: 0; overflow: hidden; }",
         shutdown: !!(meta && meta.shutdown),
         restart_when_active: !!(meta && meta.restart),
+        // Keep local files alive when scene is inactive so switching stays snappy
+        fps_custom: false,
       },
       overlay: true,
     });
@@ -220,8 +243,12 @@
   }
 
   async function fixOverlays() {
+    if (location.protocol !== "file:") {
+      log("Open this page from DOUBLE-CLICK-ME.bat (file://), not from a website.", "err");
+      return;
+    }
     const map = overlayMap();
-    log("Online base: " + ONLINE_BASE);
+    log("Overlay base: " + (baseInput.value || OVERLAY_BASE));
     let updated = 0;
 
     for (const [name, meta] of Object.entries(map)) {
@@ -234,14 +261,14 @@
       } catch (_) {}
       try {
         const url = await setBrowserUrl(name, meta.file, meta, width, height);
-        log("Updated " + name + " → " + url, "ok");
+        log("Updated " + name, "ok");
+        log("  " + url);
         updated++;
       } catch (e) {
         log("skip " + name + ": " + e.message, "warn");
       }
     }
 
-    // Sweep leftover localhost:8765 browser sources (any name)
     try {
       const list = await obs.request("GetInputList");
       for (const input of list.inputs || []) {
@@ -254,13 +281,13 @@
           if (!/127\.0\.0\.1:8765|localhost:8765/i.test(oldUrl)) continue;
           const file = fileFromLocalUrl(oldUrl);
           if (!file || !/\.html?$/i.test(file)) {
-            log("skip " + input.inputName + " (could not parse file from " + oldUrl + ")", "warn");
+            log("skip " + input.inputName + " (could not parse file)", "warn");
             continue;
           }
           const width = (cur.inputSettings && cur.inputSettings.width) || 1920;
           const height = (cur.inputSettings && cur.inputSettings.height) || 1080;
-          const url = await setBrowserUrl(input.inputName, file, null, width, height);
-          log("Rewrote leftover " + input.inputName + " → " + url, "ok");
+          await setBrowserUrl(input.inputName, file, null, width, height);
+          log("Rewrote leftover " + input.inputName, "ok");
           updated++;
         } catch (e) {
           log("skip " + input.inputName + ": " + e.message, "warn");
@@ -275,7 +302,8 @@
       return;
     }
     log("Done. Close this page. You do NOT need the black kit window anymore.", "ok");
-    log("Daily: OPEN-OBS.bat only. If a scene looks blank, right-click the Overlay source → Refresh.");
+    log("Daily: OPEN-OBS.bat only. Keep this obs-kit folder where it is.");
+    log("If a scene looks blank: right-click the Overlay source → Refresh.");
   }
 
   document.getElementById("btnConnect").addEventListener("click", async () => {
@@ -320,7 +348,12 @@
     if (saved) document.getElementById("obsPass").value = saved;
   } catch (_) {}
 
-  log("OBS must be open. Paste WebSocket password, Connect, then Switch overlays to online.");
+  if (location.protocol !== "file:") {
+    log("Wrong open method. Close this tab. Run DOUBLE-CLICK-ME.bat from the kit folder.", "err");
+  } else {
+    log("OBS must be open. Paste WebSocket password, Connect, then Switch overlays to this folder.");
+    log("Detected: " + OVERLAY_BASE, "ok");
+  }
 })();
 </script>
 </body>

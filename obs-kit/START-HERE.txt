@@ -8,8 +8,9 @@ NORMAL STREAM DAY (no black window):
 ONE-TIME (do this once so overlays stop needing :8765):
 1. Open OBS
 2. Double-click DOUBLE-CLICK-ME.bat
-3. Paste WebSocket password -> Connect -> "Switch overlays to online"
-4. Close that browser tab. Done forever with the kit server.
+3. Paste WebSocket password -> Connect -> "Switch overlays to this folder"
+4. Close that browser tab. Done with the kit server forever.
+   Keep this obs-kit folder on the Desktop (do not move it after the fix).
 
 Docks to enable in OBS (Docks menu) — put on the sides:
 - Scenes
