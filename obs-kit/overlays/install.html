@@ -536,8 +536,11 @@
       }
       await new Promise((r) => setTimeout(r, 2000));
     }
-    log("OBS is not open or WebSocket is off.");
-    log("OBS → Tools → WebSocket Server Settings → Enable. Paste the password, then Connect.");
+    log("RED BOX FIX:");
+    log("1) Open OBS");
+    log("2) Tools -> WebSocket Server Settings -> Enable (port 4455)");
+    log("3) Copy the password");
+    log("4) Paste it in the Password box above and click Connect OBS");
   })();
 })();
 </script>
