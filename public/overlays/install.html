@@ -90,7 +90,7 @@
   <p class="kicker">LOAD INTO OBS</p>
   <h1>Load the J England scenes into OBS.</h1>
   <p>OBS must be open on this PC. Paste the WebSocket password if Connect fails. This page will try to connect by itself and then build <code>J England Live</code>.</p>
-  <p class="warn">Use Chrome or Edge on the streaming PC. Keep the black kit-server window open.</p>
+  <p class="warn">Use Chrome or Edge on the streaming PC. Overlay Base defaults to this kit folder on disk — after install you do not need the black kit window.</p>
 
   <fieldset>
     <legend>OBS WebSocket</legend>
@@ -120,15 +120,22 @@
   </fieldset>
 
   <div id="log"></div>
-  <p style="margin-top:16px"><a href="tonight.html">Tonight setup</a> · <a href="control.html">Live control</a> · <a href="index.html">Overlay preview</a></p>
+  <p style="margin-top:16px"><a href="go-online.html">Switch overlays online (no kit server)</a> · <a href="tonight.html">Tonight setup</a> · <a href="control.html">Live control</a> · <a href="index.html">Overlay preview</a></p>
 </main>
 
-<script src="shared/layout.js"></script>
+<script src="shared/layout.js?v=5"></script>
 <script>
 (function () {
   const logEl = document.getElementById("log");
   const overlayBaseInput = document.getElementById("overlayBase");
-  overlayBaseInput.value = location.origin + "/overlays/";
+  // Prefer this kit folder on disk so OBS never depends on 127.0.0.1:8765
+  if (location.protocol === "file:") {
+    overlayBaseInput.value = location.href.replace(/[^/\\]*$/, "");
+  } else if (/127\.0\.0\.1|localhost/i.test(location.hostname || "")) {
+    overlayBaseInput.value = location.href.replace(/[^/\\]*$/, "");
+  } else {
+    overlayBaseInput.value = location.origin.replace(/\/$/, "") + "/overlays/";
+  }
 
   function log(line, cls) {
     const span = document.createElement("span");

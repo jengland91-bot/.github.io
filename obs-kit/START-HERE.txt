@@ -1,26 +1,27 @@
-J ENGLAND - OBS kit (this folder is the show)
+J ENGLAND OBS kit
 
-Copy this whole obs-kit folder onto the streaming PC Desktop.
+NORMAL STREAM DAY (no black window):
+1. Run OPEN-OBS.bat  (or just open OBS)
+2. Stay on scene collection "J England Live"
+3. Click scenes as usual — Starting Soon, Gaming, Sim, etc.
 
-Double-click DOUBLE-CLICK-ME.bat and leave that window open.
-It starts OBS, starts the kit server, and opens the scene loader.
+ONE-TIME (do this once so overlays stop needing :8765):
+1. Open OBS
+2. Double-click DOUBLE-CLICK-ME.bat
+3. Paste WebSocket password -> Connect -> "Switch overlays to this folder"
+4. Close that browser tab. Done with the kit server forever.
+   Keep this obs-kit folder on the Desktop (do not move it after the fix).
 
-If the page cannot talk to OBS: Tools -> WebSocket Server Settings -> Enable,
-paste the password, click Connect. With ?load=1 it then builds J England Live.
+Docks to enable in OBS (Docks menu) — put on the sides:
+- Scenes
+- Audio Mixer
+- Aitum Stream Suite / platforms
+- Vertical (Shorts / vertical cam)
 
-Then hang cameras on Cam / Face, Cam / Room (back), Wheel, Pedals, Game / Main.
+Platforms:
+- Twitch = OBS Start Streaming
+- YouTube 16:9 + Kick = Aitum Main outputs
+- YouTube Shorts = Aitum Vertical output
 
-Short version:
-1. OBS -> Tools -> WebSocket Server Settings -> Enable. Copy the password.
-2. DOUBLE-CLICK-ME.bat -> paste password -> Connect (loads scenes).
-3. Assign Cam / Face, Cam / Room (back), Wheel, Pedals, Game / Main.
-4. OBS Stream = Twitch. Aitum Main = YouTube + Kick. Aitum Vertical = YouTube Shorts.
-5. Link Vertical Scenes so Stream Deck clicks move both canvases.
-6. Stay on scene collection J England Live.
-
-Scene buttons (OBS, control panel, or Stream Deck - same names):
-  STARTING SOON / JUST CHATTING / GAMING / SIM / SIM RIG
-  BRB / IRL / ENDING / REPLAY
-
-GAMING = PC game + face + back.
-SIM = all four cams. SIM RIG = wheel + pedals.
+Vertical cam: right-click each Vertical Scene -> Linked Scenes
+so it follows STARTING SOON / GAMING / SIM / BRB / ENDING.
