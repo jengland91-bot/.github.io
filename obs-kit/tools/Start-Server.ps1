@@ -23,7 +23,7 @@ $listener.Prefixes.Add($prefix)
 try {
   $listener.Start()
 } catch {
-  Write-Host "Port 8765 is already in use — opening the scene loader anyway."
+  Write-Host "Port 8765 is already in use - opening the scene loader anyway."
   Start-Process ($prefix + "overlays/install.html?load=1")
   exit 0
 }
