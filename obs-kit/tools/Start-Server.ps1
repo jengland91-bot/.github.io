@@ -23,18 +23,18 @@ $listener.Prefixes.Add($prefix)
 try {
   $listener.Start()
 } catch {
-  Write-Host "Port 8765 is already in use — opening tonight setup anyway."
-  Start-Process ($prefix + "overlays/tonight.html")
+  Write-Host "Port 8765 is already in use — opening the scene loader anyway."
+  Start-Process ($prefix + "overlays/install.html?load=1")
   exit 0
 }
 
 Write-Host ""
 Write-Host " Kit server: $prefix"
-Write-Host " Tonight:    $($prefix)overlays/tonight.html"
-Write-Host " Control:    $($prefix)overlays/control.html"
+Write-Host " Load scenes: $($prefix)overlays/install.html?load=1"
+Write-Host " Control:     $($prefix)overlays/control.html"
 Write-Host " Keep this window open."
 Write-Host ""
-Start-Process ($prefix + "overlays/tonight.html")
+Start-Process ($prefix + "overlays/install.html?load=1")
 
 while ($listener.IsListening) {
   $ctx = $listener.GetContext()
@@ -51,7 +51,7 @@ while ($listener.IsListening) {
       $res.OutputStream.Write($bytes, 0, $bytes.Length)
     } else {
       $path = [Uri]::UnescapeDataString($req.Url.AbsolutePath.TrimStart("/"))
-      if ([string]::IsNullOrWhiteSpace($path)) { $path = "overlays/tonight.html" }
+      if ([string]::IsNullOrWhiteSpace($path)) { $path = "overlays/install.html" }
       $full = [IO.Path]::GetFullPath((Join-Path $kitRoot $path))
       if (-not $full.StartsWith($kitRoot, [StringComparison]::OrdinalIgnoreCase)) {
         $res.StatusCode = 403

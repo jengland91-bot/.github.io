@@ -3,8 +3,12 @@ J ENGLAND — OBS kit (this folder is the show)
 Copy this whole `obs-kit` folder onto the streaming PC Desktop.
 
 Double-click DOUBLE-CLICK-ME.bat and leave that window open.
-The browser opens tonight.html — that page is the full walkthrough
-for loading scenes, Stream Deck, Twitch, YouTube, Kick, and vertical.
+It starts OBS, starts the kit server, and opens the scene loader.
+
+If the page cannot talk to OBS: Tools → WebSocket Server Settings → Enable,
+paste the password, click Connect. With ?load=1 it then builds J England Live.
+
+Then hang cameras on Cam / Face, Cam / Room (back), Wheel, Pedals, Game / Main.
 
 Short version:
 1. OBS → Tools → WebSocket Server Settings → Enable. Copy the password.

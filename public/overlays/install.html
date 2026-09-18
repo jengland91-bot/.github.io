@@ -87,10 +87,10 @@
 </head>
 <body>
 <main>
-  <p class="kicker">OBS INSTALLER</p>
-  <h1>Push the J England scenes into OBS.</h1>
-  <p>Open this page on the streaming PC, with OBS already running. Enable <strong>Tools → WebSocket Server Settings</strong> (port 4455, authentication on). This loads <code>J England Live</code> at 1920×1080. Stay on that collection tonight. Aitum Vertical is a second canvas in the same collection — do not switch the main collection to portrait while Twitch/Kick/YouTube 16:9 are live.</p>
-  <p class="warn">Do this in Chrome or Edge on the PC that is running OBS. If the browser blocks the websocket, download this file and open it locally.</p>
+  <p class="kicker">LOAD INTO OBS</p>
+  <h1>Load the J England scenes into OBS.</h1>
+  <p>OBS must be open on this PC. Paste the WebSocket password if Connect fails. This page will try to connect by itself and then build <code>J England Live</code>.</p>
+  <p class="warn">Use Chrome or Edge on the streaming PC. Keep the black kit-server window open.</p>
 
   <fieldset>
     <legend>OBS WebSocket</legend>
@@ -113,9 +113,9 @@
 
   <fieldset>
     <legend>Install</legend>
-    <label><input id="bothCollections" type="checkbox" checked /> Create both the wide and vertical scene collections</label>
-    <p>After it finishes: pick cameras on <code>Cam / Face</code> (face), <code>Cam / Room</code> (back), wheel, pedals, and the game on <code>Game / Main</code>. Mute Desktop Audio. Then follow <a href="tonight.html">tonight setup</a> for Twitch + YouTube + Kick + Shorts and Stream Deck.</p>
-    <button type="button" id="btnInstallObs" disabled>Install scenes + sources</button>
+    <label><input id="bothCollections" type="checkbox" /> Also build the backup 9:16 collection (skip for tonight — Aitum Vertical uses the dock, not this)</label>
+    <p>After it finishes, hang cameras on <code>Cam / Face</code>, <code>Cam / Room</code> (back), wheel, pedals, and the game on <code>Game / Main</code>. Mute Desktop Audio. Vertical linking is next — we can do that together.</p>
+    <button type="button" id="btnInstallObs" disabled>Load scenes into OBS</button>
     <button type="button" class="ghost" id="btnDownloadLumia">Download Lumia command list</button>
   </fieldset>
 
@@ -443,29 +443,32 @@
     } catch (_) {}
   }
 
-  document.getElementById("btnObsConnect").addEventListener("click", async () => {
+  async function connectObs() {
     const host = document.getElementById("obsHost").value.trim();
     const port = document.getElementById("obsPort").value.trim();
     const password = document.getElementById("obsPass").value;
     const status = document.getElementById("obsStatus");
     try {
       await obs.connect(host, port, password);
+      try { sessionStorage.setItem("je-obs-pass", password); } catch (_) {}
       status.textContent = " connected";
       status.className = "ok";
       document.getElementById("btnInstallObs").disabled = false;
       log("Connected to OBS.", "ok");
+      return true;
     } catch (e) {
       status.textContent = " " + e.message;
       status.className = "err";
       log(e.message, "err");
+      return false;
     }
-  });
+  }
 
-  document.getElementById("btnInstallObs").addEventListener("click", async () => {
+  async function loadScenes() {
     const btn = document.getElementById("btnInstallObs");
     btn.disabled = true;
     try {
-      log("Building wide collection…");
+      log("Building J England Live…");
       await buildCollection("wide");
       if (document.getElementById("bothCollections").checked) {
         log("Building vertical collection…");
@@ -473,21 +476,55 @@
         await createCollection(LAYOUT.collectionWide);
         await setCanvas("wide");
       }
-      log("Done. Stay on J England Live (1920×1080).", "ok");
-      log("Click scenes in OBS, on the control panel, or put the same names on Stream Deck.");
-      log("Aitum Vertical: stay on this collection. Link Vertical Scenes to the widescreen names (see tonight.html).");
-      log("Twitch = OBS Start Streaming. YouTube + Kick = Aitum Main outputs. Shorts = Aitum Vertical output.");
-      log("Next: assign cameras, Game / Main, then tonight.html");
+      log("Scenes are in OBS. Stay on J England Live.", "ok");
+      log("Now pick devices on Cam / Face, Cam / Room (back), Wheel, Pedals, and Game / Main.");
+      log("Mute Desktop Audio. Then click through STARTING SOON → GAMING → SIM.");
+      log("Vertical linking is next. Leave this kit server running.");
     } catch (e) {
       log(e.message, "err");
     } finally {
       btn.disabled = false;
     }
+  }
+
+  document.getElementById("btnObsConnect").addEventListener("click", async () => {
+    const ok = await connectObs();
+    if (ok && new URLSearchParams(location.search).has("load")) {
+      log("Connected — loading scenes…", "ok");
+      await loadScenes();
+    }
+  });
+
+  document.getElementById("obsPass").addEventListener("keydown", (ev) => {
+    if (ev.key === "Enter") document.getElementById("btnObsConnect").click();
+  });
+
+  document.getElementById("btnInstallObs").addEventListener("click", () => {
+    loadScenes();
   });
 
   document.getElementById("btnDownloadLumia").addEventListener("click", () => {
     location.href = "lumia-commands.json";
   });
+
+  try {
+    const saved = sessionStorage.getItem("je-obs-pass");
+    if (saved) document.getElementById("obsPass").value = saved;
+  } catch (_) {}
+
+  (async function boot() {
+    log("Trying OBS on 127.0.0.1:4455…");
+    const ok = await connectObs();
+    if (ok && new URLSearchParams(location.search).has("load")) {
+      log("Connected — loading scenes…", "ok");
+      await loadScenes();
+      return;
+    }
+    if (!ok) {
+      log("OBS is not open, WebSocket is off, or it needs the password.");
+      log("OBS → Tools → WebSocket Server Settings → Enable. Paste the password, then Connect.");
+    }
+  })();
 })();
 </script>
 </body>
