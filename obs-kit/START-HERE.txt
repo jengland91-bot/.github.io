@@ -1,27 +1,22 @@
 J ENGLAND OBS kit
 
-NORMAL STREAM DAY (no black window):
-1. Run OPEN-OBS.bat  (or just open OBS)
+FIRST TIME (builds horizontal + vertical):
+1. Open OBS. Docks menu → turn on Vertical + Aitum Stream Suite
+2. Run LOAD-SCENES.bat
+3. Paste WebSocket password if asked → wait for "Done"
+4. Optional but recommended: OBS → Tools → Scripts → + → tools\je-link-vertical.lua
+5. Assign Cam / Face, Cam / Room, Wheel, Pedals, Game / Main
+
+NORMAL STREAM DAY:
+1. Run OPEN-OBS.bat (or just open OBS)
 2. Stay on scene collection "J England Live"
-3. Click scenes as usual — Starting Soon, Gaming, Sim, etc.
+3. Click scenes — vertical follows automatically
 
-ONE-TIME (do this once so overlays stop needing :8765):
-1. Open OBS
-2. Double-click DOUBLE-CLICK-ME.bat
-3. Paste WebSocket password -> Connect -> "Switch overlays to this folder"
-4. Close that browser tab. Done with the kit server forever.
-   Keep this obs-kit folder on the Desktop (do not move it after the fix).
+YouTube:
+- Horizontal live = Aitum Main output (canvas Main)
+- Shorts / vertical = Aitum Vertical output (canvas Vertical) — separate stream key
 
-Docks to enable in OBS (Docks menu) — put on the sides:
-- Scenes
-- Audio Mixer
-- Aitum Stream Suite / platforms
-- Vertical (Shorts / vertical cam)
+Platforms on Main canvas: Twitch, Kick, YouTube 16:9, X
+Platform on Vertical canvas: YouTube Shorts only
 
-Platforms:
-- Twitch = OBS Start Streaming
-- YouTube 16:9 + Kick = Aitum Main outputs
-- YouTube Shorts = Aitum Vertical output
-
-Vertical cam: right-click each Vertical Scene -> Linked Scenes
-so it follows STARTING SOON / GAMING / SIM / BRB / ENDING.
+If overlays still say :8765, run DOUBLE-CLICK-ME.bat once.
