@@ -1,0 +1,206 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import { streamKit } from '../data/stream';
+
+const origin = site.url.replace(/\/$/, '');
+---
+
+<Base
+  title="OBS stream kit"
+  description="J England OBS setup — wide + vertical scenes, Aitum multistream, Lumia, and overlays for Kick, Twitch, YouTube, and X."
+  path="/stream"
+>
+  <header class="hero-copy" style="gap: 12px; padding-bottom: 8px;">
+    <p class="kicker">OBS · Aitum · Lumia</p>
+    <h1 class="page-title">Wide and vertical from one OBS show.</h1>
+    <p class="page-lede">
+      This is the OBS kit — not Meld. One scene list at 1920×1080, the same overlay URLs flipped to 1080×1920 for Shorts.
+      Kick, Twitch, and YouTube go out through Aitum. X works if the account is Premium.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/overlays/tonight.html">Tonight setup</a>
+      <a class="btn btn-ghost" href="/overlays/install.html">Install scenes into OBS</a>
+      <a class="btn btn-ghost" href="/overlays/control.html">Live control panel</a>
+      <a class="btn btn-ghost" href="/overlays/">Preview overlays</a>
+    </div>
+  </header>
+
+  <section class="stream-block">
+    <p class="kicker">On the streaming PC</p>
+    <h2>Use the obs-kit folder, not the blog.</h2>
+    <p class="page-lede">
+      Copy the <code>obs-kit</code> folder from this repo onto the Desktop. Double-click <code>DOUBLE-CLICK-ME.bat</code>.
+      That starts a local server and the control panel so you can change the on-screen title, BRB text, countdown, and OBS scenes while you are live.
+      Leave the title blank for a generic Starting Soon. Plugin installers are in <code>DOWNLOADS.html</code> / <code>GET-PLUGINS.bat</code>.
+    </p>
+  </section>
+
+  <section class="stream-block" id="do-this">
+    <p class="kicker">Do this on the streaming PC</p>
+    <h2>Nine steps, then go live from OBS.</h2>
+    <ol class="stream-olist">
+      {streamKit.checklist.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="stream-block" id="scenes">
+    <p class="kicker">Scenes</p>
+    <h2>One list. Duplicate into Aitum Vertical.</h2>
+    <p class="page-lede">
+      <code>{streamKit.collectionWide}</code> is the 16:9 show. <code>{streamKit.collectionVertical}</code> is 9:16 if you ever stream portrait by itself.
+      For simultaneous Shorts, stay on the wide collection and link the same scene names in the Vertical dock. Browser sources keep the same URL — the overlay detects a tall canvas and rearranges.
+    </p>
+    <div class="stream-table">
+      {streamKit.scenes.map((scene) => (
+        <a class="stream-row" href={`${origin}${scene.overlay}?preview=1`} target="_blank" rel="noopener">
+          <strong>{scene.name}</strong>
+          <span>{scene.job}</span>
+          <code>{scene.overlay}</code>
+        </a>
+      ))}
+    </div>
+    <p class="hint">Numpad 1–9 maps starting → chatting → gaming → sim → sim rig → replay → irl → brb → ending. Add <code>?setup=1</code> while lining up Lumia chat/alerts, then take it off before you go live. Add <code>?v=1</code> to force the phone layout. Move vertical cam boxes in the Aitum Vertical dock if you want a different phone layout.</p>
+  </section>
+
+  <section class="stream-block" id="platforms">
+    <p class="kicker">Where it goes</p>
+    <h2>Kick, Twitch, YouTube, Shorts, and X.</h2>
+    <div class="grid plugin-list">
+      {streamKit.destinations.map((group) => (
+        <article class="dest-card stream-card">
+          <span class="chip content">{group.canvas}</span>
+          <h3>{group.via}</h3>
+          <ul>
+            {group.platforms.map((p) => (
+              <li><strong>{p.name}.</strong> {p.note}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+    <p class="hint">Never paste stream keys into this repo or into chat. Keys live in OBS / Aitum only. YouTube needs two keys if you want regular + Shorts at the same time.</p>
+  </section>
+
+  <section class="stream-block" id="plugins">
+    <p class="kicker">Plugins</p>
+    <h2>What you have, what to add, what to skip.</h2>
+    <p class="page-lede">I cannot see the OBS install on this machine. Treat this as the checklist for the streaming PC. Aitum is the multi-stream plugin. WebSocket is already inside OBS. StreamFX is dead — use the look plugins below instead.</p>
+
+    <h3 class="stream-h3">Already in OBS</h3>
+    <div class="plugin-list">
+      {streamKit.plugins.already.map((p) => (
+        <article>
+          <a href={p.url} target="_blank" rel="noopener">{p.name}</a>
+          <p>{p.why}</p>
+        </article>
+      ))}
+    </div>
+
+    <h3 class="stream-h3">Required</h3>
+    <div class="plugin-list">
+      {streamKit.plugins.required.map((p) => (
+        <article>
+          <a href={p.url} target="_blank" rel="noopener">{p.name}</a>
+          <p>{p.why}</p>
+        </article>
+      ))}
+    </div>
+
+    <h3 class="stream-h3">Motion, record, storage</h3>
+    <div class="plugin-list">
+      {streamKit.plugins.recommended.map((p) => (
+        <article>
+          <a href={p.url} target="_blank" rel="noopener">{p.name}</a>
+          <p>{p.why}</p>
+        </article>
+      ))}
+    </div>
+
+    <h3 class="stream-h3">Look (StreamFX replacements)</h3>
+    <div class="plugin-list">
+      {streamKit.plugins.look.map((p) => (
+        <article>
+          <a href={p.url} target="_blank" rel="noopener">{p.name}</a>
+          <p>{p.why}</p>
+        </article>
+      ))}
+    </div>
+
+    <h3 class="stream-h3">Nice to have</h3>
+    <div class="plugin-list">
+      {streamKit.plugins.extra.map((p) => (
+        <article>
+          <a href={p.url} target="_blank" rel="noopener">{p.name}</a>
+          <p>{p.why}</p>
+        </article>
+      ))}
+    </div>
+
+    <h3 class="stream-h3">Skip</h3>
+    <div class="plugin-list">
+      {streamKit.plugins.skip.map((p) => (
+        <article>
+          <strong>{p.name}</strong>
+          <p>{p.why}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="stream-block" id="lumia">
+    <p class="kicker">Lumia Stream</p>
+    <h2>Chat and alerts sit on top. Commands change OBS scenes.</h2>
+    <p class="page-lede">
+      Connect Lumia → OBS via the same WebSocket password. Paste Lumia’s overlay URL into the <code>Lumia / Overlay</code> browser source.
+      Chat and alerts are Lumia layers — park them on the wells you see with <code>?setup=1</code>.
+    </p>
+    <ul class="stream-bullets">
+      {streamKit.lumia.map((line) => (
+        <li>{line}</li>
+      ))}
+    </ul>
+    <p class="hint"><a class="text-link" href="/overlays/lumia-commands.json">Download lumia-commands.json</a> and map each command to Set current scene. Names must match exactly, including JUST CHATTING.</p>
+  </section>
+
+  <section class="stream-block" id="encode">
+    <p class="kicker">Encode + audio</p>
+    <h2>One canvas, extra outputs — don’t stack encoders.</h2>
+    <ul class="stream-bullets">
+      <li>{streamKit.encode.canvas}</li>
+      <li><strong>Twitch:</strong> {streamKit.encode.twitch}</li>
+      <li><strong>YouTube:</strong> {streamKit.encode.youtube}</li>
+      <li><strong>Vertical:</strong> {streamKit.encode.vertical}</li>
+      <li><strong>Audio:</strong> {streamKit.encode.audio}</li>
+    </ul>
+  </section>
+
+  <section class="stream-block" id="brand">
+    <p class="kicker">Channel art</p>
+    <h2>Same JE look on Kick, Twitch, and YouTube.</h2>
+    <div class="asset-preview-grid">
+      <figure>
+        <img src="/branding/avatar-800x800.png" alt="JE monogram avatar" width="220" height="220" />
+        <figcaption>Avatar</figcaption>
+      </figure>
+      <figure>
+        <img src="/branding/twitch-banner-clean-1200x480.png" alt="Twitch banner" />
+        <figcaption>Twitch 1200×480</figcaption>
+      </figure>
+      <figure>
+        <img src="/branding/kick-banner-clean-1280x700.png" alt="Kick banner" />
+        <figcaption>Kick 1280×700</figcaption>
+      </figure>
+      <figure>
+        <img src="/branding/offline-screen-clean-1920x1080.png" alt="Offline screen" />
+        <figcaption>Offline / starting</figcaption>
+      </figure>
+    </div>
+    <p class="hint" style="margin-top:14px;">
+      Upload the avatar + matching banner on each platform. Change the Starting Soon game title in
+      <a class="text-link" href="/overlays/shared/config.js">overlays/shared/config.js</a>, then refresh the browser source.
+    </p>
+  </section>
+</Base>

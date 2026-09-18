@@ -81,6 +81,17 @@ Point the Netlify site (`jenglandblog.netlify.app`) at **this** GitHub repo.
 
 The empty `my-affiliate-blog` repo can stay unused. This repo is the source of truth so you are not maintaining two sites.
 
+## OBS stream kit
+
+Do not build this into the blog to go live. Copy **`obs-kit/`** onto the streaming PC Desktop.
+
+1. `GET-PLUGINS.bat` — pulls OBS / Aitum / Move installers (other plugins open in the browser).
+2. Open OBS → enable WebSocket.
+3. `DOUBLE-CLICK-ME.bat` — local control panel + overlay server. Leave it open.
+4. Control panel → **Push scenes into OBS**.
+
+Overlays also stay hosted at `/overlays/` as a backup, but the live show should use `http://127.0.0.1:8765/overlays/`.
+
 ## Pages
 
 | URL | What it is |

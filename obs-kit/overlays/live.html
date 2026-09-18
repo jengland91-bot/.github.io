@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live HUD — J England</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared/theme.css" />
+</head>
+<body class="scene-live" data-scene="live">
+  <div class="ticks"><span class="tl"></span><span class="tr"></span><span class="bl"></span><span class="br"></span></div>
+  <header class="top-bar">
+    <div class="live-pill"><i></i> <span data-live-title>SIM</span></div>
+    <div class="brand"><strong data-brand>J ENGLAND</strong><small data-handle>@jengland91</small></div>
+    <div class="session" data-game></div>
+    <div class="spacer"></div>
+    <div class="clock" data-clock></div>
+  </header>
+  <div class="mark-je">JE</div>
+  <div class="well well-game" data-slot="game"><span class="well-tag">Game / Main</span></div>
+  <div class="well well-alerts" data-slot="alerts"><span class="well-tag">Lumia alerts</span></div>
+  <div class="well well-face" data-slot="face"><span class="well-tag">Cam / Face</span><span class="cam-name">FACE</span></div>
+  <div class="well well-room" data-slot="room"><span class="well-tag">Cam / Back</span><span class="cam-name">BACK</span></div>
+  <div class="well well-wheel" data-slot="wheel"><span class="well-tag">Cam / Wheel</span><span class="cam-name">WHEEL</span></div>
+  <div class="well well-pedals" data-slot="pedals"><span class="well-tag">Cam / Pedals</span><span class="cam-name">PEDALS</span></div>
+  <div class="well well-chat" data-slot="chat"><span class="well-tag">Lumia chat</span></div>
+  <script src="shared/config.js"></script>
+  <script src="shared/layout.js"></script>
+  <script src="shared/overlay.js"></script>
+</body>
+</html>

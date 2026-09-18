@@ -1,0 +1,519 @@
+:root {
+  --cyan: #3eea86;
+  --violet: #14b8a6;
+  --paper: #f3f1ec;
+  --muted: #9aa3b2;
+  --ink: #070c09;
+  --line: rgba(243, 241, 236, 0.14);
+  --glow: 0 0 28px color-mix(in srgb, var(--cyan) 42%, transparent);
+  --font: "Outfit", system-ui, sans-serif;
+  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  color: var(--paper);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+body.scene-starting,
+body.scene-brb,
+body.scene-ending,
+body.scene-intermission,
+body.preview {
+  background:
+    radial-gradient(ellipse 80% 50% at 10% -10%, rgba(62, 234, 134, 0.22), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(20, 184, 166, 0.16), transparent 46%),
+    linear-gradient(180deg, #0c1812 0%, var(--ink) 42%, #050806 100%);
+}
+
+.backdrop-photo {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  pointer-events: none;
+  z-index: 0;
+  filter: brightness(0.55) saturate(1.08);
+}
+
+body.has-backdrop .backdrop-photo { display: block; }
+
+body.has-backdrop.scene-starting,
+body.has-backdrop.scene-brb,
+body.has-backdrop.scene-ending {
+  background: #050806;
+}
+
+#dust {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ticks {
+  position: absolute;
+  inset: 28px;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.ticks span {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 2px solid color-mix(in srgb, var(--cyan) 80%, white);
+}
+
+.ticks .tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.ticks .tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+.ticks .bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+.ticks .br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+.top-bar {
+  position: absolute;
+  top: 36px;
+  left: 56px;
+  right: 56px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  z-index: 8;
+}
+
+.live-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cyan);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  padding: 8px 14px;
+  border-radius: 999px;
+  box-shadow: var(--glow);
+}
+
+.live-pill i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.brand strong {
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  font-size: 18px;
+}
+
+.brand small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.spacer { flex: 1; }
+
+.clock {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.scene-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 7;
+  gap: 10px;
+  padding: 0 80px;
+}
+
+.scene-title .kicker {
+  color: var(--cyan);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+}
+
+.scene-title h1 {
+  font-family: var(--display);
+  font-weight: 560;
+  font-size: 96px;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+}
+
+.scene-title .game-now {
+  margin-top: 8px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--cyan);
+}
+
+.scene-title p {
+  color: var(--muted);
+  font-size: 22px;
+  max-width: 28ch;
+}
+
+.countdown {
+  margin-top: 18px;
+  font-variant-numeric: tabular-nums;
+  font-size: 72px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--paper);
+  text-shadow: var(--glow);
+}
+
+.countdown.done {
+  color: var(--cyan);
+  font-size: 42px;
+  letter-spacing: 0.2em;
+}
+
+.social-row {
+  position: absolute;
+  left: 56px;
+  right: 56px;
+  bottom: 56px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  z-index: 8;
+}
+
+.social-row span {
+  border: 1px solid var(--line);
+  background: rgba(17, 20, 27, 0.72);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.lower-third {
+  position: absolute;
+  left: 56px;
+  bottom: 64px;
+  display: flex;
+  z-index: 8;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(8, 9, 13, 0.78);
+  backdrop-filter: blur(12px);
+}
+
+.lower-third .bar {
+  width: 7px;
+  background: linear-gradient(180deg, var(--cyan), var(--violet));
+}
+
+.lower-third .copy {
+  padding: 14px 22px 12px 18px;
+}
+
+.lower-third strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 560;
+}
+
+.lower-third span {
+  color: var(--muted);
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+
+.well {
+  position: absolute;
+  display: none;
+  z-index: 5;
+  pointer-events: none;
+  border: 1px solid color-mix(in srgb, var(--cyan) 35%, transparent);
+  box-shadow: inset 0 0 0 1px rgba(8, 9, 13, 0.35);
+}
+
+.well.placed { display: block; }
+
+.well::before,
+.well::after { display: none; }
+
+.well .c {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--cyan);
+  z-index: 3;
+}
+.well .c.tl { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+.well .c.tr { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
+.well .c.bl { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
+.well .c.br { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+
+.session {
+  border: 1px solid var(--line);
+  background: rgba(8, 9, 13, 0.55);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--cyan);
+}
+.session:empty,
+.session[hidden] { display: none; }
+
+.mark-je {
+  position: absolute;
+  right: 56px;
+  bottom: 36px;
+  z-index: 8;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--cyan) 55%, transparent);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  color: var(--cyan);
+  background: rgba(8, 9, 13, 0.55);
+}
+
+.mono {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--cyan) 50%, transparent);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--cyan);
+  margin-bottom: 8px;
+}
+
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+  animation: drift 18s ease-in-out infinite;
+}
+.orb-a {
+  width: 420px;
+  height: 420px;
+  left: -80px;
+  top: -60px;
+  background: rgba(62, 234, 134, 0.28);
+}
+.orb-b {
+  width: 520px;
+  height: 520px;
+  right: -120px;
+  bottom: -80px;
+  background: rgba(20, 184, 166, 0.2);
+  animation-delay: -7s;
+}
+
+.count-wrap {
+  position: relative;
+  width: 168px;
+  height: 168px;
+  margin-top: 18px;
+}
+.count-wrap svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.count-wrap .track,
+.count-wrap .ring {
+  fill: none;
+  stroke-width: 4;
+}
+.count-wrap .track { stroke: rgba(243, 241, 236, 0.12); }
+.count-wrap .ring {
+  stroke: var(--cyan);
+  stroke-linecap: round;
+  stroke-dasharray: 327;
+  stroke-dashoffset: 0;
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--cyan) 70%, transparent));
+  transition: stroke-dashoffset 0.6s linear;
+}
+.count-wrap .countdown {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 0.06em;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(40px, 24px); }
+}
+
+.well-tag {
+  position: absolute;
+  top: -24px;
+  left: -1px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--cyan);
+  color: var(--ink);
+  padding: 3px 8px;
+  display: none;
+}
+
+.cam-name {
+  position: absolute;
+  left: -1px;
+  bottom: -1px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  background: rgba(8, 9, 13, 0.82);
+  color: var(--cyan);
+  padding: 4px 8px;
+}
+
+body:not(.setup) .well-chat.placed,
+body:not(.setup) .well-alerts.placed,
+body:not(.setup) .well-labels.placed,
+body:not(.setup) .well-nowplaying.placed,
+body:not(.setup) .well-goal.placed,
+body:not(.setup) .well-game.placed {
+  display: none;
+}
+
+body.setup .well {
+  background: rgba(62, 234, 134, 0.1);
+}
+
+body.setup .well-tag { display: block; }
+body.setup .cam-name { display: none; }
+
+body.scene-replay .well-face,
+body.scene-replay .well-room,
+body.scene-replay .well-wheel,
+body.scene-replay .well-pedals,
+body.scene-irl .well-face,
+body.scene-irl .well-room,
+body.scene-irl .well-wheel,
+body.scene-irl .well-pedals {
+  display: none;
+}
+
+.stinger {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.stinger .wipe {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, var(--cyan), var(--violet));
+  transform: translateX(-110%);
+  animation: wipe 1.6s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.stinger .mark {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  font-size: 42px;
+  opacity: 0;
+  animation: mark 1.6s ease forwards;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes wipe {
+  0% { transform: translateX(-110%); }
+  40% { transform: translateX(0); }
+  100% { transform: translateX(110%); }
+}
+
+@keyframes mark {
+  0%, 18% { opacity: 0; }
+  32%, 62% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+body.vertical .top-bar {
+  left: 28px;
+  right: 28px;
+  top: 28px;
+}
+
+body.vertical .scene-title h1 { font-size: 84px; }
+body.vertical .countdown { font-size: 64px; }
+body.vertical .social-row {
+  left: 28px;
+  right: 28px;
+  bottom: 48px;
+}
+body.vertical .lower-third {
+  left: 28px;
+  right: 28px;
+  bottom: 48px;
+}
+
+body.vertical .mark-je {
+  right: 28px;
+  bottom: 28px;
+}

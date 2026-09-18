@@ -1,0 +1,26 @@
+J ENGLAND - OBS kit (this folder is the show)
+
+Copy this whole obs-kit folder onto the streaming PC Desktop.
+
+Double-click DOUBLE-CLICK-ME.bat and leave that window open.
+It starts OBS, starts the kit server, and opens the scene loader.
+
+If the page cannot talk to OBS: Tools -> WebSocket Server Settings -> Enable,
+paste the password, click Connect. With ?load=1 it then builds J England Live.
+
+Then hang cameras on Cam / Face, Cam / Room (back), Wheel, Pedals, Game / Main.
+
+Short version:
+1. OBS -> Tools -> WebSocket Server Settings -> Enable. Copy the password.
+2. DOUBLE-CLICK-ME.bat -> paste password -> Connect (loads scenes).
+3. Assign Cam / Face, Cam / Room (back), Wheel, Pedals, Game / Main.
+4. OBS Stream = Twitch. Aitum Main = YouTube + Kick. Aitum Vertical = YouTube Shorts.
+5. Link Vertical Scenes so Stream Deck clicks move both canvases.
+6. Stay on scene collection J England Live.
+
+Scene buttons (OBS, control panel, or Stream Deck - same names):
+  STARTING SOON / JUST CHATTING / GAMING / SIM / SIM RIG
+  BRB / IRL / ENDING / REPLAY
+
+GAMING = PC game + face + back.
+SIM = all four cams. SIM RIG = wheel + pedals.

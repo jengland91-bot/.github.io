@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Install J England scenes into OBS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #070c09;
+      --elev: #0d1511;
+      --line: #1d2a22;
+      --text: #f3f1ec;
+      --muted: #9aa3b2;
+      --cyan: #3eea86;
+      --ink: #070c09;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(ellipse 80% 50% at 10% -10%, rgba(62,234,134,.14), transparent 50%), var(--bg);
+      color: var(--text);
+      font-family: Outfit, system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main { max-width: 840px; margin: 0 auto; padding: 40px 20px 80px; }
+    .kicker { color: var(--cyan); font-size: .72rem; font-weight: 800; letter-spacing: .2em; }
+    h1 { font-family: Fraunces, Georgia, serif; font-size: clamp(2rem, 5vw, 3.2rem); margin: 8px 0 12px; }
+    p, label { color: var(--muted); }
+    a { color: var(--cyan); }
+    code { font-family: ui-monospace, monospace; color: var(--text); }
+    fieldset {
+      border: 1px solid var(--line);
+      background: var(--elev);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    legend { font-weight: 800; letter-spacing: .08em; padding: 0 8px; }
+    label { display: block; margin: 10px 0 4px; font-size: 14px; }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      background: #000;
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 9px 10px;
+      border-radius: 8px;
+      font: 14px ui-monospace, monospace;
+    }
+    .row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    @media (max-width: 700px) { .row { grid-template-columns: 1fr; } }
+    button {
+      font-family: inherit;
+      font-weight: 800;
+      letter-spacing: .06em;
+      background: var(--cyan);
+      color: var(--ink);
+      border: 0;
+      padding: 10px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      margin: 10px 8px 0 0;
+    }
+    button.ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    button:disabled { opacity: .4; cursor: not-allowed; }
+    #log {
+      background: #000;
+      color: #9ee7c0;
+      font: 12px/1.45 ui-monospace, monospace;
+      padding: 14px;
+      height: 280px;
+      overflow: auto;
+      white-space: pre-wrap;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-top: 16px;
+    }
+    .warn { color: #f5b942; margin: 12px 0; }
+    .ok { color: #34d399; }
+    .err { color: #fb7185; }
+  </style>
+</head>
+<body>
+<main>
+  <p class="kicker">LOAD INTO OBS</p>
+  <h1>Load the J England scenes into OBS.</h1>
+  <p>OBS must be open on this PC. Paste the WebSocket password if Connect fails. This page will try to connect by itself and then build <code>J England Live</code>.</p>
+  <p class="warn">Use Chrome or Edge on the streaming PC. Keep the black kit-server window open.</p>
+
+  <fieldset>
+    <legend>OBS WebSocket</legend>
+    <div class="row">
+      <div><label>Host</label><input id="obsHost" type="text" value="127.0.0.1" /></div>
+      <div><label>Port</label><input id="obsPort" type="text" value="4455" /></div>
+      <div><label>Password</label><input id="obsPass" type="password" autocomplete="off" /></div>
+    </div>
+    <button type="button" id="btnObsConnect">Connect OBS</button>
+    <span id="obsStatus"></span>
+  </fieldset>
+
+  <fieldset>
+    <legend>Overlay URLs</legend>
+    <label>Base URL for overlays (leave default after this site is live)</label>
+    <input id="overlayBase" type="text" value="" />
+    <label>Lumia overlay URL (Lumia → overlay room). Blank = still create the source so you can paste later.</label>
+    <input id="lumiaUrl" type="text" placeholder="https://overlays.lumiastream.com/..." />
+  </fieldset>
+
+  <fieldset>
+    <legend>Install</legend>
+    <label><input id="bothCollections" type="checkbox" /> Also build the backup 9:16 collection (skip for tonight — Aitum Vertical uses the dock, not this)</label>
+    <p>After it finishes, hang cameras on <code>Cam / Face</code>, <code>Cam / Room</code> (back), wheel, pedals, and the game on <code>Game / Main</code>. Mute Desktop Audio. Vertical linking is next — we can do that together.</p>
+    <button type="button" id="btnInstallObs" disabled>Load scenes into OBS</button>
+    <button type="button" class="ghost" id="btnDownloadLumia">Download Lumia command list</button>
+  </fieldset>
+
+  <div id="log"></div>
+  <p style="margin-top:16px"><a href="tonight.html">Tonight setup</a> · <a href="control.html">Live control</a> · <a href="index.html">Overlay preview</a></p>
+</main>
+
+<script src="shared/layout.js"></script>
+<script>
+(function () {
+  const logEl = document.getElementById("log");
+  const overlayBaseInput = document.getElementById("overlayBase");
+  overlayBaseInput.value = location.origin + "/overlays/";
+
+  function log(line, cls) {
+    const span = document.createElement("span");
+    if (cls) span.className = cls;
+    span.textContent = line + "\n";
+    logEl.appendChild(span);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  async function sha256Base64(str) {
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+    return btoa(String.fromCharCode(...new Uint8Array(buf)));
+  }
+  async function obsAuth(password, salt, challenge) {
+    const secret = await sha256Base64(password + salt);
+    return sha256Base64(secret + challenge);
+  }
+
+  class Obs {
+    constructor() {
+      this.ws = null;
+      this.pending = new Map();
+      this.i = 0;
+    }
+    connect(host, port, password) {
+      this.host = host;
+      this.port = port;
+      this.password = password;
+      return new Promise((resolve, reject) => {
+        const ws = new WebSocket("ws://" + host + ":" + port);
+        this.ws = ws;
+        let identified = false;
+        const timer = setTimeout(() => reject(new Error("OBS connection timed out")), 8000);
+        ws.onerror = () => {
+          clearTimeout(timer);
+          if (!identified) reject(new Error("WebSocket error — is OBS open with WebSocket enabled?"));
+        };
+        ws.onclose = (e) => {
+          if (!identified && e.code === 4009) reject(new Error("OBS auth failed — check the WebSocket password"));
+        };
+        ws.onmessage = async (ev) => {
+          const msg = JSON.parse(ev.data);
+          if (msg.op === 0) {
+            try {
+              const identify = { rpcVersion: 1 };
+              if (msg.d.authentication) {
+                identify.authentication = await obsAuth(
+                  password,
+                  msg.d.authentication.salt,
+                  msg.d.authentication.challenge
+                );
+              }
+              ws.send(JSON.stringify({ op: 1, d: identify }));
+            } catch (err) {
+              clearTimeout(timer);
+              reject(err);
+            }
+          } else if (msg.op === 2) {
+            identified = true;
+            clearTimeout(timer);
+            ws.onmessage = (e) => this._onMsg(JSON.parse(e.data));
+            resolve(msg.d);
+          }
+        };
+      });
+    }
+    _onMsg(msg) {
+      if (msg.op !== 7) return;
+      const id = msg.d.requestId;
+      const p = this.pending.get(id);
+      if (!p) return;
+      this.pending.delete(id);
+      if (msg.d.requestStatus && !msg.d.requestStatus.result) {
+        p.reject(new Error((msg.d.requestType || "") + ": " + (msg.d.requestStatus.comment || msg.d.requestStatus.code)));
+      } else {
+        p.resolve(msg.d.responseData || {});
+      }
+    }
+    async reconnect() {
+      await new Promise((r) => setTimeout(r, 1200));
+      return this.connect(this.host, this.port, this.password);
+    }
+    request(requestType, requestData) {
+      const requestId = String(++this.i);
+      return new Promise((resolve, reject) => {
+        this.pending.set(requestId, { resolve, reject });
+        this.ws.send(JSON.stringify({ op: 6, d: { requestType, requestId, requestData: requestData || {} } }));
+        setTimeout(() => {
+          if (this.pending.has(requestId)) {
+            this.pending.delete(requestId);
+            reject(new Error("Timeout: " + requestType));
+          }
+        }, 60000);
+      });
+    }
+  }
+
+  const obs = new Obs();
+  let kinds = [];
+  const LAYOUT = window.STREAM_LAYOUT;
+
+  function pickKind(candidates) {
+    for (const name of candidates) {
+      if (kinds.includes(name)) return name;
+      const versioned = kinds.find((k) => k === name || k.startsWith(name + "_v"));
+      if (versioned) return versioned;
+    }
+    return null;
+  }
+
+  function transform(item) {
+    if (item.w == null) return null;
+    return {
+      positionX: item.x,
+      positionY: item.y,
+      rotation: 0,
+      scaleX: 1,
+      scaleY: 1,
+      alignment: 5,
+      boundsType: "OBS_BOUNDS_SCALE_INNER",
+      boundsAlignment: 0,
+      boundsWidth: Math.max(1, item.w),
+      boundsHeight: Math.max(1, item.h),
+      cropLeft: 0,
+      cropRight: 0,
+      cropTop: 0,
+      cropBottom: 0,
+    };
+  }
+
+  function overlayUrl(file, base, vertical) {
+    const clean = base.replace(/\/?$/, "/");
+    const url = new URL(file, clean);
+    if (vertical) url.searchParams.set("v", "1");
+    return url.toString();
+  }
+
+  async function ensureInput(name, kind, settings) {
+    if (!kind) {
+      log("skip source " + name + " (no kind)", "warn");
+      return false;
+    }
+    try {
+      const list = await obs.request("GetInputList");
+      const exists = (list.inputs || []).some((i) => i.inputName === name);
+      if (exists) {
+        if (settings) {
+          try { await obs.request("SetInputSettings", { inputName: name, inputSettings: settings, overlay: false }); } catch (e) { log("settings " + name + ": " + e.message); }
+        }
+        return true;
+      }
+      await obs.request("CreateInput", {
+        sceneName: LAYOUT.scenes[0].name,
+        inputName: name,
+        inputKind: kind,
+        inputSettings: settings || {},
+        sceneItemEnabled: false,
+      });
+      return true;
+    } catch (e) {
+      log("source " + name + ": " + e.message, "err");
+      return false;
+    }
+  }
+
+  async function ensureScene(name) {
+    const list = await obs.request("GetSceneList");
+    if (!(list.scenes || []).some((s) => s.sceneName === name)) {
+      await obs.request("CreateScene", { sceneName: name });
+      log("Created scene " + name, "ok");
+    }
+  }
+
+  async function clearSceneItems(sceneName) {
+    const items = await obs.request("GetSceneItemList", { sceneName });
+    for (const item of items.sceneItems || []) {
+      try {
+        await obs.request("RemoveSceneItem", { sceneName, sceneItemId: item.sceneItemId });
+      } catch (e) {
+        log("clear " + sceneName + ": " + e.message);
+      }
+    }
+  }
+
+  async function addItem(sceneName, sourceName, item) {
+    const created = await obs.request("CreateSceneItem", {
+      sceneName,
+      sourceName,
+      sceneItemEnabled: item.enabled !== false,
+    });
+    const t = transform(item);
+    if (t && created.sceneItemId != null) {
+      await obs.request("SetSceneItemTransform", {
+        sceneName,
+        sceneItemId: created.sceneItemId,
+        sceneItemTransform: t,
+      });
+    }
+  }
+
+  async function setCanvas(mode) {
+    const c = LAYOUT.canvas[mode];
+    try {
+      await obs.request("SetVideoSettings", {
+        baseWidth: c.w,
+        baseHeight: c.h,
+        outputWidth: c.w,
+        outputHeight: c.h,
+        fpsNumerator: LAYOUT.fps,
+        fpsDenominator: 1,
+      });
+    } catch (e) {
+      log("video settings: " + e.message);
+    }
+  }
+
+  async function createCollection(name) {
+    const list = await obs.request("GetSceneCollectionList");
+    const exists = (list.sceneCollections || []).includes(name);
+    try {
+      if (exists) {
+        await obs.request("SetCurrentSceneCollection", { sceneCollectionName: name });
+        log("Switched to existing collection " + name);
+      } else {
+        await obs.request("CreateSceneCollection", { sceneCollectionName: name });
+        log("Created collection " + name, "ok");
+      }
+    } catch (e) {
+      log("collection change: " + e.message + " - reconnecting");
+    }
+    try {
+      await obs.reconnect();
+      log("Reconnected after collection switch.", "ok");
+    } catch (e) {
+      log("reconnect: " + e.message, "err");
+      throw e;
+    }
+  }
+
+  async function muteDesktop() {
+    try {
+      await obs.request("SetInputMute", { inputName: "Desktop Audio", inputMuted: true });
+    } catch (_) {
+      try { await obs.request("SetInputMute", { inputName: "Desktop Audio", inputMuted: true }); } catch (e) {}
+    }
+  }
+
+  async function listScenes() {
+    try {
+      const list = await obs.request("GetSceneList");
+      const names = (list.scenes || []).map((s) => s.sceneName);
+      log("OBS scenes now: " + names.join(" | "), "ok");
+      return names;
+    } catch (e) {
+      log("Could not list scenes: " + e.message, "err");
+      return [];
+    }
+  }
+
+  async function buildCollection(mode) {
+    const vertical = mode === "vertical";
+    const collection = vertical ? LAYOUT.collectionVertical : LAYOUT.collectionWide;
+    const base = document.getElementById("overlayBase").value.trim();
+    const lumiaUrl = document.getElementById("lumiaUrl").value.trim();
+    const canvas = LAYOUT.canvas[mode];
+    const scenePlan = LAYOUT.scenes || [];
+
+    if (!scenePlan.length) throw new Error("layout.js did not load scene list");
+    log("Will build " + scenePlan.length + " scenes: " + scenePlan.map((s) => s.name).join(", "));
+
+    await createCollection(collection);
+    await setCanvas(mode);
+
+    const kindList = await obs.request("GetInputKindList");
+    kinds = kindList.inputKinds || [];
+
+    const cameraKind = pickKind(["dshow_input", "av_capture_input", "v4l2_input"]);
+    const gameKind = pickKind(["game_capture", "window_capture"]);
+    const colorKind = pickKind(["color_source_v3", "color_source"]);
+    const browserKind = pickKind(["browser_source"]);
+    const mediaKind = pickKind(["ffmpeg_source"]);
+    const audioKind = pickKind(["wasapi_process_output_capture", "pulse_process_audio_capture"]);
+
+    if (!browserKind) throw new Error("This OBS build has no browser_source");
+
+    // Create every scene name first so the dock fills even if a later source fails.
+    for (const scene of scenePlan) {
+      try {
+        await ensureScene(scene.name);
+      } catch (e) {
+        log("create scene " + scene.name + ": " + e.message, "err");
+      }
+    }
+    await listScenes();
+
+    const colorSettings = { color: LAYOUT.backdropColor || 4279170055, width: canvas.w, height: canvas.h };
+    if (colorKind) await ensureInput("Color / Backdrop", colorKind, colorSettings);
+
+    if (cameraKind) {
+      for (const cam of ["Cam / Face", "Cam / Room", "Cam / Wheel", "Cam / Pedals"]) {
+        await ensureInput(cam, cameraKind, {});
+      }
+    } else {
+      log("No camera source type found - add Video Capture Device sources named Cam / Face etc.", "warn");
+    }
+
+    if (gameKind) {
+      await ensureInput("Game / Main", gameKind, { capture_mode: "window", capture_cursor: false });
+      await ensureInput("Game / Angle 2", gameKind, { capture_mode: "window", capture_cursor: false });
+    }
+    if (audioKind) await ensureInput("Audio / Game", audioKind, {});
+    if (mediaKind) await ensureInput("Media / Hype Clip", mediaKind, { looping: false, restart_on_activate: true });
+
+    await ensureInput("Lumia / Overlay", browserKind, {
+      url: lumiaUrl || "about:blank",
+      width: canvas.w,
+      height: canvas.h,
+      fps: 30,
+      css: LAYOUT.overlayCss,
+      shutdown: false,
+      restart_when_active: false,
+    });
+
+    for (const [name, meta] of Object.entries(LAYOUT.overlays || {})) {
+      await ensureInput(name, browserKind, {
+        url: overlayUrl(meta.file, base, vertical),
+        width: canvas.w,
+        height: canvas.h,
+        fps: 30,
+        css: LAYOUT.overlayCss,
+        shutdown: !!meta.shutdown,
+        restart_when_active: !!meta.restart,
+      });
+    }
+
+    for (const scene of scenePlan) {
+      try {
+        await ensureScene(scene.name);
+        await clearSceneItems(scene.name);
+        const items = (scene.items && scene.items[mode]) || [];
+        for (const item of items) {
+          try {
+            await addItem(scene.name, item.source, item);
+          } catch (e) {
+            log("skip " + item.source + " on " + scene.name + ": " + e.message);
+          }
+        }
+        log("Filled scene " + scene.name + " (" + items.length + " items)", "ok");
+      } catch (e) {
+        log("scene " + scene.name + " failed: " + e.message, "err");
+      }
+    }
+
+    await muteDesktop();
+    try {
+      await obs.request("SetCurrentProgramScene", { sceneName: "STARTING SOON" });
+    } catch (_) {}
+    await listScenes();
+  }
+
+  async function connectObs(opts) {
+    const quiet = !!(opts && opts.quiet);
+    const host = document.getElementById("obsHost").value.trim();
+    const port = document.getElementById("obsPort").value.trim();
+    const password = document.getElementById("obsPass").value;
+    const status = document.getElementById("obsStatus");
+    try {
+      await obs.connect(host, port, password);
+      try { sessionStorage.setItem("je-obs-pass", password); } catch (_) {}
+      status.textContent = " connected";
+      status.className = "ok";
+      document.getElementById("btnInstallObs").disabled = false;
+      if (!quiet) log("Connected to OBS.", "ok");
+      return { ok: true };
+    } catch (e) {
+      const auth = /auth/i.test(String(e.message || ""));
+      status.textContent = " " + e.message;
+      status.className = "err";
+      if (!quiet) log(e.message, "err");
+      return { ok: false, auth: auth, message: e.message };
+    }
+  }
+
+  async function loadScenes() {
+    const btn = document.getElementById("btnInstallObs");
+    btn.disabled = true;
+    try {
+      log("Building J England Live...");
+      await buildCollection("wide");
+      if (document.getElementById("bothCollections").checked) {
+        log("Building vertical collection...");
+        await buildCollection("vertical");
+        await createCollection(LAYOUT.collectionWide);
+        await setCanvas("wide");
+      }
+      log("Done. In OBS, open the Scenes list - you should see STARTING SOON, JUST CHATTING, GAMING, SIM, SIM RIG, and more.", "ok");
+      log("Scene Collection dropdown (top of scenes) must say: J England Live");
+      log("Then pick devices on Cam / Face, Cam / Room (back), Wheel, Pedals, Game / Main.");
+    } catch (e) {
+      log(e.message, "err");
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  async function connectAndMaybeLoad() {
+    const result = await connectObs();
+    if (result.ok && new URLSearchParams(location.search).has("load")) {
+      log("Connected — loading scenes…", "ok");
+      await loadScenes();
+    }
+  }
+
+  document.getElementById("btnObsConnect").addEventListener("click", () => {
+    connectAndMaybeLoad();
+  });
+
+  document.getElementById("obsPass").addEventListener("keydown", (ev) => {
+    if (ev.key === "Enter") document.getElementById("btnObsConnect").click();
+  });
+
+  document.getElementById("btnInstallObs").addEventListener("click", () => {
+    loadScenes();
+  });
+
+  document.getElementById("btnDownloadLumia").addEventListener("click", () => {
+    location.href = "lumia-commands.json";
+  });
+
+  try {
+    const saved = sessionStorage.getItem("je-obs-pass");
+    if (saved) document.getElementById("obsPass").value = saved;
+  } catch (_) {}
+
+  (async function boot() {
+    const wantLoad = new URLSearchParams(location.search).has("load");
+    log("Waiting for OBS on 127.0.0.1:4455…");
+    for (let i = 0; i < 12; i += 1) {
+      const result = await connectObs({ quiet: i > 0 });
+      if (result.ok) {
+        if (wantLoad) {
+          log("Connected — loading scenes…", "ok");
+          await loadScenes();
+        }
+        return;
+      }
+      if (result.auth) {
+        log("WebSocket is on, but it needs the password. Paste it and click Connect.");
+        return;
+      }
+      await new Promise((r) => setTimeout(r, 2000));
+    }
+    log("RED BOX FIX:");
+    log("1) Open OBS");
+    log("2) Tools -> WebSocket Server Settings -> Enable (port 4455)");
+    log("3) Copy the password");
+    log("4) Paste it in the Password box above and click Connect OBS");
+  })();
+})();
+</script>
+</body>
+</html>
