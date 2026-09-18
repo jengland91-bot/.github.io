@@ -104,8 +104,8 @@
     </li>
     <li>
       <h2>Push the kit into OBS</h2>
-      <p>Keep the black kit-server window open. Open the installer, paste that password, click <strong>Connect OBS</strong>, then <strong>Install scenes + sources</strong>.</p>
-      <p class="note">That creates <code>J England Live</code> (1920×1080) with STARTING SOON, JUST CHATTING, GAMING, SIM, SIM RIG, DUAL, REPLAY, IRL, BRB, ENDING. Leave the overlay base URL alone if you launched this from DOUBLE-CLICK-ME — it already points at this PC.</p>
+      <p>Open <code>overlays/install.html</code> in Chrome (or use DOUBLE-CLICK-ME once for go-online). Paste the WebSocket password, click <strong>Connect OBS</strong>, then <strong>Load scenes into OBS</strong>.</p>
+      <p class="note">That creates <code>J England Live</code> (1920×1080) with STARTING SOON, JUST CHATTING, GAMING, SIM, SIM RIG, DUAL, REPLAY, IRL, BRB, ENDING. Overlay Base should already be the online CDN — leave it. After install, you do not need a kit server.</p>
       <div class="actions"><a class="btn" href="install.html">Open installer</a></div>
     </li>
     <li>
@@ -140,13 +140,13 @@
       <p class="note">Make these five vertical scenes (same names as below). Right-click each one → <strong>Linked Scenes</strong> → check the matching widescreen scene(s). After that, Stream Deck, OBS clicks, and the control panel all move both canvases together.</p>
       <table>
         <tr><th>Vertical scene</th><th>Put in it</th><th>Link to</th></tr>
-        <tr><td>STARTING SOON</td><td>Browser <code>starting.html?v=1</code> at 1080×1920</td><td>STARTING SOON</td></tr>
-        <tr><td>JUST CHATTING</td><td>Face + back stacked, overlay <code>chatting.html?v=1</code></td><td>JUST CHATTING, IRL</td></tr>
-        <tr><td>PLAYING</td><td>Game on top (1080×608), face + back under it, overlay <code>live.html?v=1</code></td><td>GAMING, SIM, SIM RIG, DUAL, REPLAY</td></tr>
-        <tr><td>BRB</td><td>Browser <code>brb.html?v=1</code></td><td>BRB</td></tr>
-        <tr><td>ENDING</td><td>Browser <code>ending.html?v=1</code></td><td>ENDING</td></tr>
+        <tr><td>STARTING SOON</td><td>Browser starting.html (CDN) at 1080×1920 — add <code>?v=1</code></td><td>STARTING SOON</td></tr>
+        <tr><td>JUST CHATTING</td><td>Face + back stacked, overlay chatting.html?v=1</td><td>JUST CHATTING, IRL</td></tr>
+        <tr><td>PLAYING</td><td>Game on top (1080×608), face + back under it, overlay live.html?v=1</td><td>GAMING, SIM, SIM RIG, DUAL, REPLAY</td></tr>
+        <tr><td>BRB</td><td>Browser brb.html?v=1</td><td>BRB</td></tr>
+        <tr><td>ENDING</td><td>Browser ending.html?v=1</td><td>ENDING</td></tr>
       </table>
-      <p class="note">Browser URLs if this kit server is running: <code>http://127.0.0.1:8765/overlays/starting.html?v=1</code> (swap the filename). You can tidy the PLAYING cam boxes later — tonight they just need to be on screen.</p>
+      <p class="note">Overlays load from the public CDN (no <code>:8765</code>). Vertical uses the same URL — the page flips layout when the browser source is tall. You can tidy the PLAYING cam boxes later — tonight they just need to be on screen.</p>
     </li>
     <li>
       <h2>Stream Deck or just click</h2>

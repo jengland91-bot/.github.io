@@ -1,36 +1,31 @@
 @echo off
 cd /d "%~dp0"
 echo.
-echo  J ENGLAND LIVE KIT
-echo  Opening OBS, then loading scenes.
-echo  Keep this window open.
+echo  J ENGLAND LIVE
+echo  Opening OBS only. No kit server.
 echo.
 
 tasklist /FI "IMAGENAME eq obs64.exe" | find /I "obs64.exe" >nul
 if errorlevel 1 (
   if exist "%ProgramFiles%\obs-studio\bin\64bit\obs64.exe" (
-    echo  Starting OBS...
     start "" /D "%ProgramFiles%\obs-studio\bin\64bit" obs64.exe
   ) else if exist "%ProgramFiles(x86)%\obs-studio\bin\64bit\obs64.exe" (
-    echo  Starting OBS...
     start "" /D "%ProgramFiles(x86)%\obs-studio\bin\64bit" obs64.exe
   ) else (
-    echo  OBS not found in Program Files - open OBS yourself first.
+    echo  Open OBS yourself - it was not found in Program Files.
+    pause
+    exit /b 1
   )
 ) else (
   echo  OBS is already running.
 )
 
+echo  Opening the one-time online-overlay fix page...
+start "" "%~dp0overlays\go-online.html"
 echo.
-echo  IMPORTANT: In OBS go to
-echo  Tools - WebSocket Server Settings - Enable
-echo  Copy the password. You will paste it in the browser.
-echo.
-timeout /t 3 /nobreak >nul
-
-echo  Starting kit server...
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\Start-Server.ps1"
-echo.
-echo  If the browser is red, paste the WebSocket password and click Connect.
+echo  1) Paste WebSocket password
+echo  2) Connect OBS
+echo  3) Click "Switch overlays to online"
+echo  4) Close that page - you will not need it every stream
 echo.
 pause
