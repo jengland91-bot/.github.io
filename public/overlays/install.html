@@ -787,7 +787,15 @@
       log("Pick devices on Cam / Face, Cam / Room, Wheel, Pedals, Game / Main.");
       log("Scene Collection must stay: J England Live");
     } catch (e) {
-      log(e.message, "err");
+      const msg = String(e.message || e);
+      log(msg, "err");
+      if (/auth|password|4009/i.test(msg)) {
+        log("FIX: OBS → Tools → WebSocket Server Settings → copy password → paste above → Connect.", "err");
+      } else if (/WebSocket|timed out|is OBS open/i.test(msg)) {
+        log("FIX: Open OBS first. Enable Tools → WebSocket Server Settings (port 4455).", "err");
+      } else if (/Vertical canvas not found|canvasUuid|GetCanvasList/i.test(msg)) {
+        log("FIX: Docks → Vertical (turn it on). Click inside the Vertical dock once, then click Load again.", "err");
+      }
     } finally {
       btn.disabled = false;
     }

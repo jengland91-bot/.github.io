@@ -1,7 +1,7 @@
 @echo off
 cd /d "%~dp0"
 echo.
-echo  J ENGLAND LIVE — load horizontal + vertical scenes into OBS
+echo  J ENGLAND LIVE - load horizontal + vertical scenes into OBS
 echo.
 
 tasklist /FI "IMAGENAME eq obs64.exe" | find /I "obs64.exe" >nul
@@ -16,16 +16,24 @@ if errorlevel 1 (
     exit /b 1
   )
   echo  Waiting for OBS to start...
-  timeout /t 5 /nobreak >nul
+  timeout /t 6 /nobreak >nul
 )
 
-echo  Tip: turn on Docks - Vertical before or during the load.
-echo  Opening installer (auto-load)...
-start "" "%~dp0overlays\install.html?load=1"
+echo  Tip: OBS - Docks - turn on Vertical before or during the load.
+echo  Opening installer...
+if exist "%~dp0overlays\load-now.html" (
+  start "" "%~dp0overlays\load-now.html"
+) else (
+  start "" "%~dp0overlays\install.html"
+)
 echo.
-echo  1) Paste WebSocket password if asked
-echo  2) Wait until the log says Done
-echo  3) Optional: Tools - Scripts - add tools\je-link-vertical.lua
-echo  4) After that use OPEN-OBS.bat only
+echo  IN THE BROWSER PAGE:
+echo  1) Paste WebSocket password  (OBS - Tools - WebSocket Server Settings)
+echo  2) Click Connect OBS if it did not auto-connect
+echo  3) Click "Load horizontal + vertical into OBS" if it did not auto-start
+echo  4) Wait until the log says Done
+echo.
+echo  If you see a red auth error: wrong password - copy it again from OBS.
+echo  If Vertical canvas not found: Docks - Vertical, then click Load again.
 echo.
 pause
