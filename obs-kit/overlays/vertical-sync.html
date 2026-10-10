@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>J England vertical sync</title>
+  <style>html,body{margin:0;background:transparent;width:2px;height:2px;overflow:hidden}</style>
+</head>
+<body>
+<script>
+/**
+ * Tiny in-OBS browser source. Watches main scene changes and switches
+ * the Aitum Vertical canvas to the matching scene — no kit server.
+ * URL params: pass (WebSocket password), port (default 4455), host (default 127.0.0.1)
+ */
+(function () {
+  const params = new URLSearchParams(location.search);
+  const host = params.get("host") || "127.0.0.1";
+  const port = params.get("port") || "4455";
+  const password = params.get("pass") || "";
+  const LINKS = {
+    "STARTING SOON": "STARTING SOON",
+    "JUST CHATTING": "JUST CHATTING",
+    IRL: "JUST CHATTING",
+    GAMING: "PLAYING",
+    SIM: "PLAYING",
+    "SIM RIG": "PLAYING",
+    DUAL: "PLAYING",
+    REPLAY: "PLAYING",
+    BRB: "BRB",
+    ENDING: "ENDING",
+  };
+
+  let ws = null;
+  let i = 0;
+  const pending = new Map();
+  let canvasName = "";
+  let canvasUuid = "";
+  let lastMain = "";
+
+  async function sha256Base64(str) {
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+    return btoa(String.fromCharCode(...new Uint8Array(buf)));
+  }
+  async function obsAuth(password, salt, challenge) {
+    const secret = await sha256Base64(password + salt);
+    return sha256Base64(secret + challenge);
+  }
+
+  function request(requestType, requestData) {
+    const requestId = String(++i);
+    return new Promise((resolve, reject) => {
+      pending.set(requestId, { resolve, reject });
+      ws.send(JSON.stringify({ op: 6, d: { requestType, requestId, requestData: requestData || {} } }));
+      setTimeout(() => {
+        if (pending.has(requestId)) {
+          pending.delete(requestId);
+          reject(new Error("timeout " + requestType));
+        }
+      }, 10000);
+    });
+  }
+
+  async function resolveVerticalCanvas() {
+    try {
+      const list = await request("GetCanvasList");
+      const canvases = list.canvases || [];
+      for (const c of canvases) {
+        const name = c.canvasName || c.name || "";
+        const w = Number(c.baseWidth || c.width || 0);
+        const h = Number(c.baseHeight || c.height || 0);
+        if (h > w || /vertical/i.test(name)) {
+          canvasUuid = c.canvasUuid || c.uuid || "";
+          canvasName = name;
+          return;
+        }
+      }
+    } catch (_) {}
+    try {
+      const v = await request("CallVendorRequest", {
+        vendorName: "aitum-stream-suite",
+        requestType: "get_canvas",
+        requestData: {},
+      });
+      const arr = (v.responseData && v.responseData.canvas) || [];
+      for (const c of arr) {
+        if (Number(c.height) > Number(c.width) || /vertical/i.test(c.name || "")) {
+          canvasName = c.name || "";
+          canvasUuid = c.uuid || "";
+          return;
+        }
+      }
+      if (arr[0]) {
+        canvasName = arr[0].name || "";
+        canvasUuid = arr[0].uuid || "";
+      }
+    } catch (_) {}
+  }
+
+  async function switchVertical(mainName) {
+    const target = LINKS[mainName];
+    if (!target || target === lastMain) return;
+    lastMain = target;
+    try {
+      await request("CallVendorRequest", {
+        vendorName: "aitum-stream-suite",
+        requestType: "switch_scene",
+        requestData: canvasName ? { scene: target, canvas: canvasName } : { scene: target },
+      });
+    } catch (_) {
+      try {
+        await request("CallVendorRequest", {
+          vendorName: "aitum-vertical-canvas",
+          requestType: "switch_scene",
+          requestData: { scene: target },
+        });
+      } catch (__) {}
+    }
+  }
+
+  async function onIdentified() {
+    await request("SetEventFilter", {
+      eventSubscriptions: (1 << 2) | (1 << 10), // Scenes | Vendors — Scenes bit is enough
+    }).catch(() => {});
+    await resolveVerticalCanvas();
+    try {
+      const cur = await request("GetCurrentProgramScene");
+      await switchVertical(cur.currentProgramSceneName || cur.sceneName || "");
+    } catch (_) {}
+  }
+
+  function connect() {
+    ws = new WebSocket("ws://" + host + ":" + port);
+    ws.onclose = () => setTimeout(connect, 3000);
+    ws.onerror = () => {};
+    ws.onmessage = async (ev) => {
+      const msg = JSON.parse(ev.data);
+      if (msg.op === 0) {
+        const identify = { rpcVersion: 1, eventSubscriptions: 4 };
+        if (msg.d.authentication) {
+          identify.authentication = await obsAuth(
+            password,
+            msg.d.authentication.salt,
+            msg.d.authentication.challenge
+          );
+        }
+        ws.send(JSON.stringify({ op: 1, d: identify }));
+      } else if (msg.op === 2) {
+        onIdentified();
+      } else if (msg.op === 5) {
+        if (msg.d.eventType === "CurrentProgramSceneChanged") {
+          const name = (msg.d.eventData && msg.d.eventData.sceneName) || "";
+          switchVertical(name);
+        }
+      } else if (msg.op === 7) {
+        const p = pending.get(msg.d.requestId);
+        if (!p) return;
+        pending.delete(msg.d.requestId);
+        if (msg.d.requestStatus && !msg.d.requestStatus.result) {
+          p.reject(new Error(msg.d.requestStatus.comment || "err"));
+        } else p.resolve(msg.d.responseData || {});
+      }
+    };
+  }
+
+  connect();
+})();
+</script>
+</body>
+</html>
